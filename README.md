@@ -27,7 +27,7 @@ To dev:
 yarn start
 ```
 
-To build:
+To Build:
 ```bash
 yarn build
 ```
