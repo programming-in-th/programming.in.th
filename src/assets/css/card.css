@@ -1,7 +1,7 @@
 .card-former {
     display:flex;
     flex:1;
-    margin: 25px 15px;
+    margin: 5px 15px 10px 10px;
 }
 
 .card-former:hover .card-square, .card-former:focus .card-square {
@@ -12,7 +12,7 @@
     display:flex;
     flex-direction: row;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     width:100%;
     margin:0;
 }
@@ -52,8 +52,8 @@
 }
 
 .card-title {
-    padding:15px 15px 25px 140px;
-    height:90px;
+    padding:15px 15px 15px 140px;
+    min-height:90px;
     display:flex;
     flex-direction: column;
     justify-content: center;
@@ -70,14 +70,12 @@
 
 .card-description {
     padding:15px 25px;
-    font-display: 24px;
     cursor:pointer;
 }
 
 .card-description > p {
     font-size: 28px;
     font-family: Sarabun;
-    border-top: 1px solid var(--fade);
 }
 
 .card-footer {

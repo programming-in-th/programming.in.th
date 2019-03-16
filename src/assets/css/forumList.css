@@ -1,0 +1,19 @@
+#forum-list-wrapper {
+    display:flex;
+    flex-direction: column;
+    width:100%;
+    background-color: #ffffff;
+    border-radius: 5px;
+    box-shadow:0 10px 35px rgba(0,0,0,.125);
+    padding:15px 0;
+    margin:20px 0;
+}
+
+.forum-list {
+    padding-left: 3.75% !important;
+    border-top: 1px solid var(--fade) !important;
+}
+
+#forum-list-wrapper > nav > li:first-child .forum-list {
+    border-top:unset !important;
+}

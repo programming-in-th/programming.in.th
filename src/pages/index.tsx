@@ -3,6 +3,7 @@ import React from "react"
 
 /* React Component */
 import Card from "../components/card"
+import ForumListWrapper from "../components/forumListWrapper"
 
 export default class extends React.Component {
     render(){
@@ -25,7 +26,25 @@ export default class extends React.Component {
                             linkCard
                         />
                         <Card 
+                            title="Exam"
+                            icon="timeline"
+                            to="/me"
+                            color="rgb(255, 59, 48)"
+                            shadow="rgba(255, 59, 48, .625)"
+                            linkCard
+                        />
+                    </div>
+                    <div className="card-wrapper">
+                        <Card 
+                            title="Next Question"
+                            description="มาลุยโจทย์ข้อต่อไปกันดีกว่า~"
+                            icon="next_week"
+                            to="/task"
+                            linkCard
+                        />
+                        <Card 
                             title="Stats"
+                            description="มาดูสถานะของเรากันหน่อย~"
                             icon="timeline"
                             to="/me"
                             color="rgb(88, 86, 214)"
@@ -33,6 +52,7 @@ export default class extends React.Component {
                             linkCard
                         />
                     </div>
+                    <ForumListWrapper />
                 </div>
             </>
         )

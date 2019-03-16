@@ -48,3 +48,7 @@ h1,h2,h3,h4,h5,h6,p,span,b,u,i,div {cursor:default;margin:0;}
     -webkit-text-size-adjust:none !important; 
     -webkit-overflow-scrolling: touch;
 }
+
+.th {
+    font-family: Sarabun;
+}
