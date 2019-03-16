@@ -3,7 +3,7 @@
     "name": "Suku-Grader",
     "builds": [
         { "src": "package.json", "use": "@now/static-build", "config": { "distDir": "build" } },
-        { "src": "server.js", "use": "@now/node" }
+        { "src": "index.js", "use": "@now/node" }
     ],
     "alias": "betabeta.programming.in.th"
 }
