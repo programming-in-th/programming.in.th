@@ -1,0 +1,65 @@
+@media screen and (max-width:567.9px){
+    #root {
+        width:100%;
+    }
+    #navigator-title {
+        display:none !important;
+    }
+    .card-wrapper {
+        flex-direction: column;
+        padding:0 30px;
+    }
+    #forum-list-wrapper {
+        width: calc(100% - 60px);
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .card-former {
+        width:100%;
+    }
+    .card-former {
+        margin: 5px 0;
+    }
+}
+
+@media screen and (min-width:568px) and (max-width:959.9px){
+    #root {
+        width:100%;
+    }
+    .card-former {
+        margin-top: 5px;
+    }
+    .card-wrapper {
+        padding:0 30px;
+    }
+    #forum-list-wrapper {
+        width: calc(100% - 60px);
+        margin-left:auto;
+        margin-right:auto;
+    }
+    .card-square {
+        width:65px;
+        height:65px;
+    }
+    .card-square
+    .card-square > .material-icons {font-size: 28px;}
+    .card-title {
+        padding-top: 50px;
+        padding-left: 30px;
+    }
+}
+
+@media screen and (min-width:960px) and (max-width:1120px){
+    #root {
+        width:100%;
+    }
+}
+
+@media screen and (max-width:360px){
+    #profile-tab {
+        margin-left: 5px;
+    }
+    #navigator-wrapper {
+        padding: 15px 7px;
+    }
+}

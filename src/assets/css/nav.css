@@ -1,0 +1,149 @@
+#navigator-wrapper {
+    position:fixed;
+    z-index:1000;
+    top:0;
+    left:0;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+    width:100%;
+    height:83px;
+    padding:25px 5%;
+}
+
+#navigator-left, #navigator-right {
+    display:inline-flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    height:53px;
+}
+
+#navigator-left {
+    border-radius: 5px;
+    background-color: var(--root);
+    box-shadow: var(--light-shadow);
+    height: 53px;
+}
+
+#navigator-left > button,
+#naviator-right > button {border-radius:3px;}
+
+.icon-link {
+    display:inline-flex;
+    justify-content: center;
+    align-items: center;
+    padding:12px;
+    text-decoration: none;
+    color: var(--fade);
+    height:53px;
+    font-size: 21px;
+    cursor:pointer;
+}
+
+.icon-nav {
+    font-size: 28px;
+    cursor:pointer;
+}
+
+.icon-link {
+    outline:none;
+    border-bottom: 3px solid transparent;
+    transition: border-bottom-color .25s ease-out;
+}
+
+.icon-link:hover p,
+.icon-link:focus p,
+.icon-nav:hover,
+.icon-nav:focus {
+    color:var(--primary);
+}
+
+.icon-link:hover,
+.icon-link:focus,
+.nav-active {
+    border-bottom-color: var(--primary);
+}
+
+.nav-active > p {
+    color:var(--primary);
+}
+
+#account-tab {
+    outline:none;
+    padding:0;
+    text-decoration: none;
+    display:flex;
+    flex-direction: row;
+    background-color: var(--root);
+    border-radius: 5px;
+    box-shadow: var(--light-shadow);
+}
+
+#account-tab:hover #account,
+#account-tab:focus #account {
+    color:var(--primary);
+}
+
+#account {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    font-size: 21px;
+    padding: 15px 25px;
+    cursor:pointer;
+    height: 53px;
+    object-fit: contain;
+    max-width: 225px;
+}
+
+#account-image {
+    width: 43px;
+    height: 43px;
+    margin-right: 15px;
+}
+
+#account-name {
+    font-weight: bold;
+    color:var(--fade);
+}
+
+#profile {
+    height: 53px;
+    background-color: var(--root);
+    width: 53px;
+    padding: 8px;
+    cursor:pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+    border-radius: 5px;
+    box-shadow: var(--light-shadow);
+    transition: border-bottom-color .25s ease-out;
+}
+
+#profile-tab {
+    outline:none;
+    padding:0;
+    margin-left: 15px;
+    text-decoration: none;
+    color:var(--fade);
+}
+
+#profile-tab:hover div,
+#profile-tab:focus div {
+    border-bottom-color: var(--primary);
+}
+
+#profile-tab:hover div > i,
+#profile-tab:focus div > i {
+    color: var(--primary);
+}
+
+#profile > i {
+    font-size: 28px;
+}

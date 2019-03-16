@@ -1,0 +1,54 @@
+/* Init */
+:root {
+    --primary: #007aff;
+    --secondary: #5856d6;
+    --success: #4cd964;
+    --warning: #ffcc00;
+    --danger: #ff3b30;
+    --info: #8e8e93;
+    --snack: #313131;
+    --background: #f1f5fa;
+    --root: #ffffff;
+    --content: #000;
+    --fade: #ceced2;
+
+    --light-shadow: 0 0 25px rgba(0,0,0,.0875);
+}
+
+@font-face {
+    font-family: Roboto;
+    src: url("../fonts/Roboto-Regular.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Sarabun;
+    src: url("../fonts/THSarabunNew.ttf") format("truetype");
+}
+
+body { 
+    margin:0; 
+    width:100%;
+    background-color:var(--background); 
+    padding-top: 83px;
+}
+h1,h2,h3,h4,h5,h6,p,span,b,u,i,div {cursor:default;margin:0;}
+::selection, ::-webkit-selection { background-color:rgba(0,123,255,0.25); }
+
+* {font-family: Roboto; box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent !important;
+}
+
+.untouchable {
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+    user-select: none !important;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-touch-callout: none !important;
+    -webkit-text-size-adjust:none !important; 
+    -webkit-overflow-scrolling: touch;
+}
+
+.th {
+    font-family: Sarabun;
+}
