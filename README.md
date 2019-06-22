@@ -1,7 +1,7 @@
 # Grader
 
 ## Stack
-React.js, Express.js, Node.js, Express.js, MongoDB, TypeScript, Babel, Firebase
+React.js, Node.js, Express.js, MongoDB, TypeScript, Babel, Firebase
 
 ## How to use
 
