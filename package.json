@@ -21,7 +21,7 @@
     "mongodb": "^3.1.13",
     "mongoose": "^5.4.19",
     "nprogress": "^0.2.0",
-    "react": "^16.8.4",
+    "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.8",
