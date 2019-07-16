@@ -13,7 +13,7 @@
     "dexie": "^2.0.4",
     "express": "^4.16.4",
     "express-graphql": "^0.7.1",
-    "firebase": "^5.9.0",
+    "firebase": "^6.3.0",
     "firebase-admin": "^7.1.0",
     "graphql": "^14.1.1",
     "graphql-tools": "^4.0.4",
