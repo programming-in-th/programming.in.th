@@ -38,7 +38,7 @@ class Nav extends Component<{}, {}>   {
                         >
                             <ButtonBase style={{borderRadius: "3px", color:"rgba(0,0,0,.5)"}}>
                                 <div id="account">
-                                    <img id="account-image" src="/assets/img/salt.png" />
+                                    <img id="account-image" src="/assets/img/default-user.png" />
                                     <p id="account-name">
                                         Guest
                                     </p>

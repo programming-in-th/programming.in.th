@@ -1,5 +1,5 @@
 {
-  "name": "suku-grader",
+  "name": "grader",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css?family=DM+Sans&display=swap');
 .card-former {
     display:flex;
     flex:1;
@@ -59,6 +60,7 @@
     justify-content: center;
     align-items: flex-start;
     font-size: 36px;
+    font-family: 'DM Sans', sans-serif;
     cursor:pointer;
 }
 
