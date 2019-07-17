@@ -5,12 +5,12 @@ const app = require('express').express(),
 const port = parseInt(process.env.PORT, 10) || 3000,
       dev = process.env.NODE_ENV !== 'production',
       connectionURI = "mongodb+srv://sukusuku:hakutaku@node-01-6yvh3.mongodb.net/test?retryWrites=true",
-      sukuClient = `${__dirname}/store/suku-firebase.json`;
+      firebaseClient = `${__dirname}/store/firebase_creds.json`;
 
 app.post('/registeration',(req,res,next) => {
     if(!admin.apps.length){
         admin.initializeApp({
-        credential: admin.credential.cert(sukuClient),
+        credential: admin.credential.cert(firebaseClient),
         databaseURL: "https://myth-grader.firebaseio.com"
         })
     }
