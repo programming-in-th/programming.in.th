@@ -15,40 +15,42 @@ export default class extends React.Component {
                             title="Task"
                             icon="functions"
                             to="/task"
+                            color="rgb(61, 90, 254)"
+                            shadow="rgba(61, 90, 254, .625)"
                             linkCard
                         />
                         <Card 
-                            title="Forum"
-                            icon="forum"
-                            to="/forum"
-                            color="rgb(76, 217, 100)"
-                            shadow="rgba(76, 217, 100, .625)"
+                            title="Learn"
+                            icon="school"
+                            to="/learn"
+                            color="rgb(29, 233, 182)"
+                            shadow="rgba(29, 233, 182, .625)"
                             linkCard
                         />
                         <Card 
-                            title="Exam"
-                            icon="timeline"
+                            title="Users"
+                            icon="account_box"
                             to="/me"
-                            color="rgb(255, 59, 48)"
-                            shadow="rgba(255, 59, 48, .625)"
+                            color="rgb(255, 23, 68)"
+                            shadow="rgba(255, 23, 68, .625)"
                             linkCard
                         />
                     </div>
                     <div className="card-wrapper">
                         <Card 
-                            title="Next Question"
-                            description="มาลุยโจทย์ข้อต่อไปกันดีกว่า~"
-                            icon="next_week"
-                            to="/task"
+                            title="Forum"
+                            icon="forum"
+                            to="/forum"
+                            color="rgb(0, 229, 255)"
+                            shadow="rgba(0, 229, 255, .625)"
                             linkCard
                         />
                         <Card 
-                            title="Stats"
-                            description="มาดูสถานะของเรากันหน่อย~"
-                            icon="timeline"
+                            title="Exams"
+                            icon="featured_play_list"
                             to="/me"
-                            color="rgb(88, 86, 214)"
-                            shadow="rgba(88, 86, 214, .625)"
+                            color="rgb(213, 0, 249)"
+                            shadow="rgba(213, 0, 249, .625)"
                             linkCard
                         />
                     </div>

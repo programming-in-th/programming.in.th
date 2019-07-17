@@ -14,7 +14,7 @@ class Nav extends Component<{}, {}>   {
             <>
                 <nav id="navigator-wrapper">
                     <div id="navigator-left">
-                        <ButtonBase style={{borderRadius: "3px", color:"rgba(0,0,0,.5)"}}>
+                        {/* <ButtonBase style={{borderRadius: "3px", color:"rgba(0,0,0,.5)"}}>
                             <NavLink 
                                 activeClassName="nav-active"
                                 to="/" 
@@ -26,7 +26,8 @@ class Nav extends Component<{}, {}>   {
                                     Programming.in.th
                                 </p>
                             </NavLink>
-                        </ButtonBase>
+                        </ButtonBase> */}
+                        <IconNav icon="home" to="/" />
                         <IconNav icon="functions" to="/task" />
                         <IconNav icon="forum" to="/forum" />
                     </div>

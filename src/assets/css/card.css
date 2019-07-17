@@ -25,8 +25,8 @@
     position:absolute;
     z-index:1;
     border-radius: 5px;
-    width:105px;
-    height:105px;
+    width:90px;
+    height:90px;
     margin: 15px 0 0 15px;
     background-color: #007aff;
     box-shadow:0 5px 25px rgba(0,123,255,.625);
@@ -37,7 +37,7 @@
 }
 
 .card-square > .material-icons {
-    font-size: 52px;
+    font-size: 45px;
     color:#fff;
 }
 
@@ -59,7 +59,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    font-size: 36px;
+    font-size: 34px;
     font-family: 'DM Sans', sans-serif;
     cursor:pointer;
 }

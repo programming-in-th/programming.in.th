@@ -92,16 +92,16 @@
     align-items: center;
     flex-direction: row;
     font-size: 21px;
-    padding: 15px 25px;
+    padding: 15px 15px;
     cursor:pointer;
     height: 53px;
     object-fit: contain;
-    max-width: 225px;
+    max-width: 200px;
 }
 
 #account-image {
-    width: 43px;
-    height: 43px;
+    width: 35px;
+    height: 35px;
     margin-right: 15px;
 }
 
