@@ -28,7 +28,7 @@
     "react-scripts": "2.1.8",
     "redux": "^4.0.1",
     "styled-jsx": "3.2.1",
-    "typescript": "3.3.3333"
+    "typescript": "3.5.3"
   },
   "scripts": {
     "start": "react-scripts start",
