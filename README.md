@@ -19,23 +19,12 @@ brew install yarn
 
 Add Environment:
 ```bash
-yarn add now
+yarn global add now
 ```
 
 To dev:
 ```bash
 yarn start
-```
-
-To Build:
-```bash
-yarn build
-```
-
-Run:
-
-```bash
-yarn dev
 ```
 
 To deploy:
