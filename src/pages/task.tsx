@@ -17,7 +17,7 @@ export default () => {
     return(
         <div id="task-list-wrapper">
             <List component="nav">
-                <ForumList title="JOI18 Construction" difficult="hard" date="Too hard" />
+                <ForumList title="JOI18 Constructio" difficult="hard" date="Too hard" />
                 <ForumList title="JOI18 Tents" difficult="medium" date="Too medium" />
                 <ForumList title="JOI17 Amusement Park" difficult="easy" date="Too ez" />
                 <ForumList title="Yag and the Mirror" difficult="hard" date="Ui Kay Thoen" />

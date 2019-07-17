@@ -21,7 +21,7 @@ interface props {
 export default (props: props) => {
     return (
         <ListItem button className="task-list">
-            <Avatar className = {props.difficult == "easy" ? "greenAvatar" : props.difficult == "medium" ? "yellowAvatar" : "redAvatar"}>
+            <Avatar className = {props.difficult === "easy" ? "greenAvatar" : props.difficult === "medium" ? "yellowAvatar" : "redAvatar"}>
                 <i className="material-icons">stars</i>
             </Avatar>
             {props.date ?
