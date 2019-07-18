@@ -8267,10 +8267,10 @@ normalize-url@^3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
 
-now@^15.8.0:
-  version "15.8.0"
-  resolved "https://registry.yarnpkg.com/now/-/now-15.8.0.tgz#0f7c41d76162c6163953a98e0a7e05437357dfc8"
-  integrity sha512-0RfVPAyzI6oR6IN0oxsMrANXXvyVZ34//VDGZ+Z4xW4DxtAxB5bls2m1VXpqmyu2Asc7RrdHOL9XthNE+70OXA==
+now@^15.8.3:
+  version "15.8.3"
+  resolved "https://registry.yarnpkg.com/now/-/now-15.8.3.tgz#38710f811363f153aa4e449f49b2cfc0e8f112c7"
+  integrity sha512-2BzjSIlEcvfz1/zVz+DlMrfjMCUtF46UIxXsQz+1TmbAPdTSTvaAH3TKhtNt/Yfbr8Hh8ccwWmag5uR8o3or0g==
 
 npm-bundled@^1.0.1:
   version "1.0.6"
