@@ -1062,10 +1062,10 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
-"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.2":
-  version "7.5.4"
-  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.4.tgz#cb7d1ad7c6d65676e66b47186577930465b5271b"
-  integrity sha512-Na84uwyImZZc3FKf4aUF1tysApzwf3p2yuFBIyBfbzT5glzKTdvYI4KVW4kcgjrzoGUjC7w3YyCHcJKaRxsr2Q==
+"@babel/runtime@^7.0.0", "@babel/runtime@^7.1.2", "@babel/runtime@^7.2.0", "@babel/runtime@^7.3.4", "@babel/runtime@^7.4.0", "@babel/runtime@^7.4.2", "@babel/runtime@^7.5.4":
+  version "7.5.5"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.5.tgz#74fba56d35efbeca444091c7850ccd494fd2f132"
+  integrity sha512-28QvEGyQyNkB0/m2B4FU7IEZGK2NUrcMtT6BZEFALTguLk+AUT6ofsHtPk5QyjAdUkpMJ+/Em+quwz4HOt30AQ==
   dependencies:
     regenerator-runtime "^0.13.2"
 
@@ -1812,12 +1812,12 @@
     "@svgr/plugin-svgo" "^4.0.3"
     loader-utils "^1.1.0"
 
-"@tanem/react-nprogress@^1.1.4":
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/@tanem/react-nprogress/-/react-nprogress-1.1.4.tgz#caa3425945736323d175fd9823655c2c618e5cba"
-  integrity sha512-kD9vBUF6OszuBvSaSKQuMGOwTmeA1CQBsolBvNZUjnbTETjO8mVR/qnqX0gVrUTAnmVenY7EK98W/sAVSmbnDw==
+"@tanem/react-nprogress@^1.1.31":
+  version "1.1.31"
+  resolved "https://registry.yarnpkg.com/@tanem/react-nprogress/-/react-nprogress-1.1.31.tgz#967bbf0182a1af562f4667fea0c0ee31ea34e078"
+  integrity sha512-v2C4+E9/Od2iGsrEWdbBBLTEYl7TvRos+I7XfnF2W1421F1MoUH0hsDrU7leqoEKQhrimlKDU54hwV09egKhgw==
   dependencies:
-    "@babel/runtime" "^7.3.4"
+    "@babel/runtime" "^7.5.4"
     hoist-non-react-statics "^3.3.0"
     prop-types "^15.7.2"
 
