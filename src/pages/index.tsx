@@ -48,7 +48,7 @@ export default class extends React.Component {
                         <Card 
                             title="Exams"
                             icon="featured_play_list"
-                            to="/me"
+                            to="/exam"
                             color="rgb(213, 0, 249)"
                             shadow="rgba(213, 0, 249, .625)"
                             linkCard
