@@ -20,7 +20,7 @@
     "graphql-tools": "^4.0.4",
     "merge-graphql-schemas": "^1.5.8",
     "mongodb": "^3.1.13",
-    "mongoose": "^5.6.4",
+    "mongoose": "^5.6.5",
     "now": "^15.8.3",
     "nprogress": "^0.2.0",
     "react": "^16.8.6",
