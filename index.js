@@ -8,11 +8,11 @@ dev = process.env.NODE_ENV !== 'production',
 connectionURI = "mongodb+srv://sukusuku:hakutaku@node-01-6yvh3.mongodb.net/test?retryWrites=true",
 firebaseClient = `${__dirname}/store/firebase_creds.json`;
 
-app.post('/registeration',(req,res,next) => {
+app.post('/registration',(req,res,next) => {
 if(!admin.apps.length){
   admin.initializeApp({
   credential: admin.credential.cert(firebaseClient),
-  databaseURL: "https://myth-grader.firebaseio.com"
+  databaseURL: "https://grader-ef0b5.firebaseio.com"
   })
 }
 });
