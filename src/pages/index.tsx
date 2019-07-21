@@ -12,9 +12,9 @@ export default class extends React.Component {
                 <div id="root">
                     <div className="card-wrapper">
                         <Card 
-                            title="Problemset"
+                            title="Tasks"
                             icon="functions"
-                            to="/task"
+                            to="/tasks"
                             color="rgb(61, 90, 254)"
                             shadow="rgba(61, 90, 254, .625)"
                             linkCard

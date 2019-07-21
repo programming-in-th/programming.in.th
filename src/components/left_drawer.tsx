@@ -1,6 +1,7 @@
 import React, {Component, useState} from "react"
 import '../assets/css/nav.css'
 import { List, ListItem, ListItemText, ListItemIcon } from "@material-ui/core";
+import HomeIcon from "@material-ui/icons/Home";
 import FunctionsIcon from "@material-ui/icons/Functions";
 import SchoolIcon from "@material-ui/icons/School";
 import UsersIcon from "@material-ui/icons/AccountBox";
@@ -18,8 +19,12 @@ const LeftDrawer = () => {
         <div id="left-drawer">
 			<div>
 			<List>
-				<ListItem button key="problemset">
-					<ListItemText>Problemset</ListItemText>
+				<ListItem button key="home">
+					<ListItemText>Home</ListItemText>
+					<ListItemIcon><HomeIcon /></ListItemIcon>
+				</ListItem>
+				<ListItem button key="tasks">
+					<ListItemText>Tasks</ListItemText>
 					<ListItemIcon><FunctionsIcon /></ListItemIcon>
 				</ListItem>
 				<ListItem button key="learn">

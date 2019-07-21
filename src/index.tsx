@@ -10,7 +10,7 @@ import { blue } from "@material-ui/core/colors"
 
 /* Pages */
 import Index from "./pages/index"
-import Problemset from "./pages/problemset"
+import Tasks from "./pages/tasks"
 import NotFound from "./pages/notFound"
 
 /* React Component */
@@ -32,6 +32,7 @@ const theme = createMuiTheme({
   },
   typography: {
     // useNextVariants: true,
+    // TODO: fix typography
   }
 });
 
@@ -43,7 +44,7 @@ const Root = () => {
                     <Nav />
                     <Switch>
                         <Route exact path="/" component={Index} />
-                        <Route exact path="/problemset" component={Problemset} />
+                        <Route exact path="/tasks" component={Tasks} />
                         <Route component={NotFound} />
                     </Switch>
                 </>

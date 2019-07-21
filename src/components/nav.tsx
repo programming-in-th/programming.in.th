@@ -215,7 +215,7 @@ export default (props:props) => {
           <div>
             <ActionIcon id="menu-icon" responsive={true} icon="menu" onClick={() => toggleLeftMenu()} />
             <LinkIcon responsive={true} icon="home" to="/" />
-            <LinkIcon responsive={true} icon="functions" to="/problemset" />
+            <LinkIcon responsive={true} icon="functions" to="/tasks" />
           </div>
           <div style={{display:"inline-flex",flexDirection:"row-reverse"}}>
             {/* <ActionIcon icon="apps" onClick={() => openNotify()} /> */}
