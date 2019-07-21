@@ -202,6 +202,7 @@ export default (props:props) => {
         </Head>
         <NProgress spinner={false} /> */}
         <nav id="main-nav">
+        <LeftMenu visible={leftMenu} toggle={toggleLeftMenu} />
           <div>
             <ActionIcon id="menu-icon" responsive={true} icon="menu" onClick={() => toggleLeftMenu()} />
             <LinkIcon responsive={true} icon="home" to="/" />
@@ -215,7 +216,6 @@ export default (props:props) => {
             <AccountControl />
           </div>
         </nav>
-        <LeftMenu visible={leftMenu} toggle={toggleLeftMenu} />
       </>
     )
 }
