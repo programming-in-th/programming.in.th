@@ -13,6 +13,7 @@ import "../assets/css/nav.css"
 /* Data model */
 import firebase from "firebase/app"
 import "firebase/auth"
+import LeftDrawer from "./left_drawer"
 
 if(!firebase.apps.length){
   const config = {
@@ -171,27 +172,11 @@ interface leftMenuProps {
 }
 
 const LeftMenu = (props: leftMenuProps) => {
-  if(props.visible){
-    return(
-      <aside id="left-menu">
-        <div id="left-menu-navigator">
-          <i className="material-icons">settings</i>
-        </div>
-        <div id="left-menu-scroller">
-          <div>
-            <h1>
-              Slider section
-            </h1>
-            <p>
-              Example of creating setting section
-            </p>
-            <input type="range" />
-          </div>
-          <div></div>
-        </div>
-      </aside>
-    )
-    } else return null;
+  if(props.visible) {
+    return LeftDrawer();
+  } else {
+    return null;
+  }
 }
 
 interface props {
@@ -222,7 +207,7 @@ export default (props:props) => {
           <div>
             <ActionIcon id="menu-icon" icon="menu" onClick={() => toggleLeftMenu()} />
             <LinkIcon responsive={true} icon="home" to="/" />
-            <LinkIcon responsive={true} icon="functions" to="/task" />
+            <LinkIcon responsive={true} icon="functions" to="/problemset" />
           </div>
           <div style={{display:"inline-flex",flexDirection:"row-reverse"}}>
             {/* <ActionIcon icon="apps" onClick={() => openNotify()} /> */}

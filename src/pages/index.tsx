@@ -12,7 +12,7 @@ export default class extends React.Component {
                 <div id="root">
                     <div className="card-wrapper">
                         <Card 
-                            title="Task"
+                            title="Problemset"
                             icon="functions"
                             to="/task"
                             color="rgb(61, 90, 254)"
@@ -30,7 +30,7 @@ export default class extends React.Component {
                         <Card 
                             title="Users"
                             icon="account_box"
-                            to="/me"
+                            to="/users"
                             color="rgb(255, 23, 68)"
                             shadow="rgba(255, 23, 68, .625)"
                             linkCard
