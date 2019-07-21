@@ -15,17 +15,6 @@ import firebase from "firebase/app"
 import "firebase/auth"
 import LeftDrawer from "./left_drawer"
 
-if(!firebase.apps.length){
-  const config = {
-    apiKey: "AIzaSyBKv63H5kNyNBoBkltiChTbmYbIpDjgxIk",
-    authDomain: "myth-grader.firebaseapp.com",
-    databaseURL: "https://myth-grader.firebaseio.com",
-    projectId: "myth-grader",
-    storageBucket: "myth-grader.appspot.com",
-    messagingSenderId: "295014283974"
-  };
-  firebase.initializeApp(config);
-}
 
 interface NavProps {
   icon: String,
