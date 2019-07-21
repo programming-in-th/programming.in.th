@@ -9,6 +9,10 @@
     margin:1% auto;
 }
 
+.task-item {
+    margin-left: 15px;
+}
+
 .task-list {
     padding-left: 3.75% !important;
     border-top: 1px solid var(--fade) !important;

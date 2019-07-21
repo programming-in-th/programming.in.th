@@ -25,9 +25,9 @@ export default (props: props) => {
                 <i className="material-icons">stars</i>
             </Avatar>
             {props.date ?
-            <ListItemText primary={props.title} secondary={props.date} />
+            <ListItemText className="task-item" primary={props.title} secondary={props.date} />
             : 
-            <ListItemText primary={props.title} />
+            <ListItemText className="task-item" primary={props.title} />
             }
             <ListItemSecondaryAction>
                 <IconButton aria-label="Delete">
