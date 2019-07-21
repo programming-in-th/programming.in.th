@@ -217,13 +217,13 @@ export default (props:props) => {
             <ActionIcon id="menu-icon" responsive={true} icon="menu" onClick={() => toggleLeftMenu()} />
             <LinkIcon responsive={true} icon="home" to="/" />
             <LinkIcon responsive={true} icon="functions" to="/tasks" />
+            <LinkIcon responsive={true} icon="featured_play_list" to="/exam" />
+            <LinkIcon responsive={true} icon="forum" to="/forum" />
+            <LinkIcon responsive={true} icon="school" to="/learn" />
           </div>
           <div style={{display:"inline-flex",flexDirection:"row-reverse"}}>
             {/* <ActionIcon icon="apps" onClick={() => openNotify()} /> */}
             <AccountControl />
-            <LinkIcon responsive={true} icon="featured_play_list" to="/exam" />
-            <LinkIcon responsive={true} icon="forum" to="/forum" />
-            <LinkIcon responsive={true} icon="school" to="/learn" />
           </div>
         </nav>
         <LeftMenu visible={leftMenu} toggle={toggleLeftMenu} />
