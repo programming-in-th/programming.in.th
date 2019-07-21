@@ -57,9 +57,9 @@
 }
 
 .nav-icon:hover i,
-.nav-icon:focus i,
-.action-icon:hover a > i,
-.action-icon:focus a > i {
+/* .nav-icon:focus i, */
+.action-icon:hover a > i/*,
+.action-icon:focus a > i*/ {
     text-shadow:0 0 3px rgba(0,123,255,.625);
     color: rgb(0,123,255);
     border-bottom-color: #007aff;
@@ -84,8 +84,8 @@
     transition:border-bottom-color .175s ease-out, background-color .175s ease-out;
 }
 
-#user-panel:hover,
-#user-panel:focus {
+#user-panel:hover/*,
+#user-panel:focus*/ {
     border-bottom-color: #007aff;
     background-color:rgba(0,0,0,.0625);
 }

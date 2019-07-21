@@ -21,19 +21,33 @@ import "./assets/css/init.css"
 import "./assets/css/main.css"
 import "./assets/material-icon/material-icons.css"
 import "./assets/css/responsive.css"
+import firebase from "firebase";
 
+if (!firebase.apps.length) {
+    const firebaseConfig = {
+        apiKey: "AIzaSyCjd-glhd1Rl_QJUfLp4w2zxEB94bhIsJE",
+        authDomain: "grader-ef0b5.firebaseapp.com",
+        databaseURL: "https://grader-ef0b5.firebaseio.com",
+        projectId: "grader-ef0b5",
+        storageBucket: "grader-ef0b5.appspot.com",
+        messagingSenderId: "408883593148",
+        appId: "1:408883593148:web:7e080f677cb99238"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+}
 
 const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-    secondary: {
-        main: "#fafafa"
+    palette: {
+        primary: blue,
+        secondary: {
+            main: "#fafafa"
+        }
+    },
+    typography: {
+        // useNextVariants: true,
+        // TODO: fix typography
     }
-  },
-  typography: {
-    // useNextVariants: true,
-    // TODO: fix typography
-  }
 });
 
 const Root = () => {

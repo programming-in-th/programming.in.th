@@ -15,17 +15,6 @@ import firebase from "firebase/app"
 import "firebase/auth"
 import LeftDrawer from "./left_drawer"
 
-if(!firebase.apps.length){
-  const config = {
-    apiKey: "AIzaSyBKv63H5kNyNBoBkltiChTbmYbIpDjgxIk",
-    authDomain: "myth-grader.firebaseapp.com",
-    databaseURL: "https://myth-grader.firebaseio.com",
-    projectId: "myth-grader",
-    storageBucket: "myth-grader.appspot.com",
-    messagingSenderId: "295014283974"
-  };
-  firebase.initializeApp(config);
-}
 
 interface NavProps {
   icon: String,
@@ -176,12 +165,13 @@ class AccountControl extends React.Component<{}, accountState> {
 }
 
 interface leftMenuProps {
-  visible: Boolean
+  visible: Boolean,
+  toggle: Function
 }
 
 const LeftMenu = (props: leftMenuProps) => {
   if(props.visible) {
-    return LeftDrawer();
+    return <LeftDrawer toggle={props.toggle}/>;
   } else {
     return null;
   }
@@ -212,20 +202,20 @@ export default (props:props) => {
         </Head>
         <NProgress spinner={false} /> */}
         <nav id="main-nav">
+        <LeftMenu visible={leftMenu} toggle={toggleLeftMenu} />
           <div>
             <ActionIcon id="menu-icon" responsive={true} icon="menu" onClick={() => toggleLeftMenu()} />
             <LinkIcon responsive={true} icon="home" to="/" />
             <LinkIcon responsive={true} icon="functions" to="/tasks" />
-          </div>
-          <div style={{display:"inline-flex",flexDirection:"row-reverse"}}>
-            {/* <ActionIcon icon="apps" onClick={() => openNotify()} /> */}
-            <AccountControl />
             <LinkIcon responsive={true} icon="featured_play_list" to="/exam" />
             <LinkIcon responsive={true} icon="forum" to="/forum" />
             <LinkIcon responsive={true} icon="school" to="/learn" />
           </div>
+          <div style={{display:"inline-flex",flexDirection:"row-reverse"}}>
+            {/* <ActionIcon icon="apps" onClick={() => openNotify()} /> */}
+            <AccountControl />
+          </div>
         </nav>
-        <LeftMenu visible={leftMenu} />
       </>
     )
 }
