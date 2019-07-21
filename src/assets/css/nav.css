@@ -160,9 +160,9 @@
 #left-menu {
     position:fixed;
     z-index:100;
-    bottom:0;
+    top:55px;
     left:0;
-    width:320px;
+    width: 320px;
     height:calc(100vh - 56px);
     background-color:rgba(0,0,0,0.375);
     display:flex;
