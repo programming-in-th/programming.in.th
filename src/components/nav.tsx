@@ -176,12 +176,13 @@ class AccountControl extends React.Component<{}, accountState> {
 }
 
 interface leftMenuProps {
-  visible: Boolean
+  visible: Boolean,
+  toggle: Function
 }
 
 const LeftMenu = (props: leftMenuProps) => {
   if(props.visible) {
-    return LeftDrawer();
+    return <LeftDrawer toggle={props.toggle}/>;
   } else {
     return null;
   }
@@ -225,7 +226,7 @@ export default (props:props) => {
             <LinkIcon responsive={true} icon="school" to="/learn" />
           </div>
         </nav>
-        <LeftMenu visible={leftMenu} />
+        <LeftMenu visible={leftMenu} toggle={toggleLeftMenu} />
       </>
     )
 }
