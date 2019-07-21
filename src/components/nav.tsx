@@ -102,6 +102,7 @@ class AccountControl extends React.Component<{}, accountState> {
 
   loginWithGmail(){
     let provider = new firebase.auth.GoogleAuthProvider();
+    this.toggleDetail();
     firebase.auth().signInWithPopup(provider).then(function(result:any) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;

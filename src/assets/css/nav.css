@@ -25,7 +25,7 @@
     box-shadow:0 3px 3px rgba(0,0,0,.075);
     backdrop-filter: blur(1.5px);
     -webkit-backdrop-filter: blur(1.5px);
-    z-index: 5;
+    z-index: 7;
 }
 
 .nav-icon {
@@ -160,7 +160,7 @@
 #left-menu {
     position:fixed;
     z-index:100;
-    top:55px;
+    top:59px;
     left:0;
     width: 320px;
     height:calc(100vh - 56px);
@@ -174,7 +174,7 @@
     height: 100vh;
     display:flex;
     flex-direction: column;
-    padding:10px 0;
+    box-shadow:0 3px 8px rgba(0,0,0,.125);
     -webkit-overflow-scrolling: touch;
     overflow-y:scroll;
     background-color: #fff;

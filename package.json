@@ -24,7 +24,7 @@
     "mongoose": "^5.6.5",
     "next": "^9.0.2",
     "next-nprogress": "^1.4.0",
-    "now": "^15.8.3",
+    "now": "^15.8.5",
     "nprogress": "^0.2.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
