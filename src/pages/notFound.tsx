@@ -36,11 +36,11 @@ export default () => {
             <p style={style.h1}>
                 Page not found
             </p>
-            <Button variant="contained" color="primary" style={style.button}>
-                <Link to="/" style={style.a}>
+            <Link to="/" style={style.a}>
+                <Button variant="contained" color="primary" style={style.button}>
                     Return
-                </Link>
-            </Button>
+                </Button>
+            </Link>
         </div>
     )
 }
