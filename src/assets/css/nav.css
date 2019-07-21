@@ -2,6 +2,9 @@
     .link-icon-responsive {
         display:none;
     }
+    .action-icon-responsive {
+        display: inline-block !important;
+    }
     #main-nav {padding:0;}
     #menu-icon {
         margin-right:0;
@@ -47,6 +50,10 @@
     background-color:transparent;
     padding:0;
     outline:none;
+}
+
+.action-icon-responsive {
+    display: none;
 }
 
 .nav-icon:hover i,

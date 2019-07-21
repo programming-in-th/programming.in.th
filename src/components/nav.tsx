@@ -51,15 +51,23 @@ const LinkIcon = (props:NavProps) => {
 interface ActionProps {
   icon: String,
   onClick?: any,
-  id?: String
+  id?: String,
+  responsive: Boolean
 }
 
 const ActionIcon = (props:ActionProps) => {
   return(
     <button id={'props.id'} className="action-icon" onClick={() => props.onClick()}>
-      <a className="nav-icon">
-        <i className="material-icons">{props.icon}</i>
-      </a>
+      {props.responsive ? 
+        <a className="nav-icon action-icon-responsive">
+          <i className="material-icons">{props.icon}</i>
+        </a>
+      :
+        <a className="nav-icon">
+          <i className="material-icons">{props.icon}</i>
+        </a>
+      }
+      
     </button>
   )
 }
@@ -220,7 +228,7 @@ export default (props:props) => {
         <NProgress spinner={false} /> */}
         <nav id="main-nav">
           <div>
-            <ActionIcon id="menu-icon" icon="menu" onClick={() => toggleLeftMenu()} />
+            <ActionIcon id="menu-icon" responsive={true} icon="menu" onClick={() => toggleLeftMenu()} />
             <LinkIcon responsive={true} icon="home" to="/" />
             <LinkIcon responsive={true} icon="functions" to="/task" />
           </div>
