@@ -5,6 +5,9 @@
     .action-icon-responsive {
         display: inline-block !important;
     }
+    #left-menu {
+        display: flex !important;
+    }
     #main-nav {padding:0;}
     #menu-icon {
         margin-right:0;
@@ -165,7 +168,7 @@
     width: 320px;
     height:calc(100vh - 56px);
     background-color:rgba(0,0,0,0.375);
-    display:flex;
+    display:none;
     flex-direction: row;
 }
 
