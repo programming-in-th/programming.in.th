@@ -15,34 +15,32 @@ interface drawerProps {
 	text : String, 
 }
 
-const DrawerIcon = (props: drawerProps )=> {
-	return(
-		<ListItem button key={`${props.key}`} component={Link} to={`${props.to}`} onClick={() => props.onClick()}>
-			<a className="drawer-icon">
-			  <i className="material-icons">{props.icon}</i>
-			</a>
-			<ListItemText>{props.text}</ListItemText>
-		</ListItem>
-	  )
-}
 
-const LeftDrawer = (props: LeftDrawerProps) => {
+
+
+const LeftDrawer = (prop: LeftDrawerProps) => {
 	// TODO: Get these paths from router
-
+	const DrawerIcon = (props: drawerProps )=> {
+		return(
+			<ListItem button key={'props.key'} component={Link} to={`${props.to}`} onClick={() => prop.toggle()}>
+				<a className="drawer-icon">
+				<i className="material-icons">{props.icon}</i>
+				</a>
+				<ListItemText>{props.text}</ListItemText>
+			</ListItem>
+		)
+	}
 	return (
       <aside id="left-menu">
-        {/* <div id="left-menu-navigator">
-          <i className="material-icons">settings</i>
-        </div> */}
         <div id="left-drawer">
 			<div>
 			<List>
-				<DrawerIcon key="home" to="/" text="Home" icon="home" onClick = {() => props.toggle()} />
-				<DrawerIcon key="tasks" to="/tasks" text="Tasks" icon="functions" onClick = {() => props.toggle()} />
-				<DrawerIcon key="learn" to="/learn" text="Learn" icon="school" onClick = {() => props.toggle()} />
-				<DrawerIcon key="users" to="/users" text="Users" icon="account_box" onClick = {() => props.toggle()} />
-				<DrawerIcon key="forum" to="/forum" text="Forum" icon="forum" onClick = {() => props.toggle()} />
-				<DrawerIcon key="exams" to="/exams" text="Exams" icon="featured_playlist" onClick = {() => props.toggle()} />
+				<DrawerIcon key="home" to="/" text="Home" icon="home" />
+				<DrawerIcon key="tasks" to="/tasks" text="Tasks" icon="functions" />
+				<DrawerIcon key="learn" to="/learn" text="Learn" icon="school" />
+				<DrawerIcon key="users" to="/users" text="Users" icon="account_box" />
+				<DrawerIcon key="forum" to="/forum" text="Forum" icon="forum" />
+				<DrawerIcon key="exams" to="/exams" text="Exams" icon="featured_playlist" />
 			</List>
 			</div>
         </div>
