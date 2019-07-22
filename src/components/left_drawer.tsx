@@ -25,33 +25,34 @@ const LeftDrawer = (props: LeftDrawerProps) => {
 			<div>
 			<List>
 				<ListItem button key="home" component={Link} to="/" onClick = {() => props.toggle()}>
-					<ListItemText>Home</ListItemText>
 					<ListItemIcon><HomeIcon /></ListItemIcon>
+					<ListItemText>Home</ListItemText>
 				</ListItem>
 				<ListItem button key="tasks" component={Link} to="/tasks" onClick= {() => props.toggle()}>
-					<ListItemText>Tasks</ListItemText>
 					<ListItemIcon><FunctionsIcon /></ListItemIcon>
+					<ListItemText>Tasks</ListItemText>
 				</ListItem>
 				<ListItem button key="learn" component={Link} to="/learn" onClick= {() => props.toggle()}>
-					<ListItemText>Learn</ListItemText>
 					<ListItemIcon><SchoolIcon /></ListItemIcon>
+					<ListItemText>Learn</ListItemText>
 				</ListItem>
 				<ListItem button key="users" component={Link} to="/users" onClick= {() => props.toggle()}>
-					<ListItemText>Users</ListItemText>
 					<ListItemIcon><UsersIcon /></ListItemIcon>
+					<ListItemText>Users</ListItemText>
 				</ListItem>
 				<ListItem button key="forum" component={Link} to="/forum" onClick= {() => props.toggle()}>
-					<ListItemText>Forum</ListItemText>
 					<ListItemIcon><ForumIcon /></ListItemIcon>
+					<ListItemText>Forum</ListItemText>
 				</ListItem>
 				<ListItem button key="exams" component={Link} to="/exams" onClick= {() => props.toggle()}>
-					<ListItemText>Exams</ListItemText>
 					<ListItemIcon><ExamsIcon /></ListItemIcon>
+					<ListItemText>Exams</ListItemText>
 				</ListItem>
 			</List>
 			</div>
         </div>
       </aside>
+	  
 	);
 }
 
