@@ -1,26 +1,17 @@
+/* React */
 import React from 'react';
-import Icon from '@material-ui/core/Icon'
-import {Link} from "react-router-dom"
-import { makeStyles } from '@material-ui/core/styles';
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 
+/* React Component */
+import {Link} from "react-router-dom"
 import '../assets/css/nav.css'
 
-const useStyles = makeStyles({
-  list: {
-    width: 250,
-  },
-  fullList: {
-	padding: '65px 0 0 0',
-  },
-});
+/* React Util */
+import { 
+	makeStyles, Icon, SwipeableDrawer, List,
+	ListItem, ListItemIcon, ListItemText
+} from '@material-ui/core/';
 
 export default function SwipeableTemporaryDrawer() {
-  const classes = useStyles();
   const [state, setState] = React.useState(false);
   const toggleDrawer = (open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent,
@@ -58,11 +49,11 @@ export default function SwipeableTemporaryDrawer() {
 	  onKeyDown={toggleDrawer(false)}
     >
       <List>
-		  <DrawerIcon icon="home" to="/" text="Home" />
-		  <DrawerIcon icon="functions" to="/tasks" text="Tasks" />
-		  <DrawerIcon icon="school" to="/learn" text="Learn" />
-		  <DrawerIcon icon="forum" to="/forum" text="Forum" />
-		  <DrawerIcon icon="featured_play_list" to="/exams" text="Exams" />
+		<DrawerIcon icon="home" to="/" text="Home" />
+		<DrawerIcon icon="functions" to="/tasks" text="Tasks" />
+		<DrawerIcon icon="school" to="/learn" text="Learn" />
+		<DrawerIcon icon="forum" to="/forum" text="Forum" />
+		<DrawerIcon icon="featured_play_list" to="/exams" text="Exams" />
       </List>
     </div>
   );

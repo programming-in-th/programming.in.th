@@ -1,15 +1,14 @@
 /* React */
-
 import React, {Component, useState} from "react"
 
 /* React Component */
 import { Link } from "react-router-dom"
-
 import "../assets/css/nav.css"
+import SwipeableTemporaryDrawer from "./left_drawer"
+
 /* Data model */
 import firebase from "firebase/app"
 import "firebase/auth"
-import SwipeableTemporaryDrawer from "./left_drawer"
 
 
 interface NavProps {
@@ -87,7 +86,6 @@ class AccountControl extends React.Component<{}, accountState> {
     firebase.auth().signInWithPopup(provider).then(function(result:any) {
         // This gives you a Google Access Token. You can use it to access the Google API.
         var token = result.credential.accessToken;
-
         // The signed-in user info.
         var user = result.user;
       }).catch(function(error:any) {
@@ -95,7 +93,6 @@ class AccountControl extends React.Component<{}, accountState> {
         var errorCode = error.code;
         var errorMessage = error.message;
         console.log(`${errorCode}: ${errorMessage}`);
-
         // The email of the user's account used.
         var email = error.email;
         // The firebase.auth.AuthCredential type that was used.
@@ -146,31 +143,7 @@ class AccountControl extends React.Component<{}, accountState> {
   }
 }
 
-// interface leftMenuProps {
-//   visible: Boolean,
-//   toggle: Function
-// }
-
-// const LeftMenu = (props: leftMenuProps) => {
-//   if(props.visible) {
-//     return <LeftDrawer toggle={props.toggle}/>;
-//   } else {
-//     return null;
-//   }
-// }
-
-interface props {
-  title?: string
-}
-
-export default (props:props) => {
-
-    // const [leftMenu, setLeftMenu] = useState(false);
-
-    // function toggleLeftMenu(){
-    //   setLeftMenu(!leftMenu);
-    // }
-
+export default () => {
     return(
       <>
         <nav id="main-nav">
