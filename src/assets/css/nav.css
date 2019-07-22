@@ -5,9 +5,6 @@
     .action-icon-responsive {
         display: inline-block !important;
     }
-    #left-menu {
-        display: flex !important;
-    }
     #main-nav {padding:0;}
     #menu-icon {
         margin-right:0;
@@ -28,7 +25,7 @@
     box-shadow:0 3px 3px rgba(0,0,0,.075);
     backdrop-filter: blur(1.5px);
     -webkit-backdrop-filter: blur(1.5px);
-    z-index: 7;
+    z-index: 2000;
 }
 
 .nav-icon {
@@ -168,45 +165,10 @@
     padding-top:56px;
 }
 
-#left-menu {
-    position:fixed;
-    z-index:100;
-    top:59px;
-    left:0;
-    width: 220px;
-    height:calc(100vh - 56px);
-    background-color:rgba(0,0,0,0.375);
-    display:none;
-    flex-direction: row;
+.drawer-list {
+    width: 190px;
 }
 
-#left-drawer {
-    flex:1;
-    height: 100vh;
-    display:flex;
-    flex-direction: column;
-    box-shadow:0 3px 8px rgba(0,0,0,.125);
-    -webkit-overflow-scrolling: touch;
-    overflow-y:scroll;
-    background-color: #fff;
-}
-
-#left-drawer::-webkit-scrollbar {
-    width:5px;
-    background-color:transparent
-}
-
-#left-drawer::-webkit-scrollbar-thumb {
-    background-color: #007aff;
-    border-radius: 50%;
-}
-
-#left-drawer > div {
-    padding:15px;
-    color:#aaa;
-    display:flex;
-    flex-direction: column;
-    font-weight: bold;
-    font-size: 16px;
-    /* transition:background-color .125s ease-out; */
+.drawer-list > ul {
+    padding-top: 65px;
 }
