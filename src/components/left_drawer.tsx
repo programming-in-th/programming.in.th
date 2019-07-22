@@ -11,7 +11,7 @@ import {
 	ListItem, ListItemIcon, ListItemText
 } from '@material-ui/core/';
 
-export default function SwipeableTemporaryDrawer() {
+export default function LeftDrawer() {
   const [state, setState] = React.useState(false);
   const toggleDrawer = (open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent,
