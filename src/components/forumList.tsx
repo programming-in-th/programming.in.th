@@ -3,11 +3,9 @@ import React from "react"
 
 /* React Util */
 import {
-  ListItem,
-  ListItemText,
+  ListItem, ListItemText,
   ListItemSecondaryAction,
-  IconButton,
-  Avatar
+  IconButton, Avatar
 } from "@material-ui/core"
 
 interface props {
@@ -22,9 +20,9 @@ export default (props: props) => {
         <i className="material-icons">timeline</i>
       </Avatar>
       {props.date ?
-      <ListItemText className="forum-item" primary={props.title} secondary={props.date} />
+        <ListItemText className="forum-item" primary={props.title} secondary={props.date} />
       : 
-      <ListItemText className="forum-item" primary={props.title} />
+        <ListItemText className="forum-item" primary={props.title} />
       }
       <ListItemSecondaryAction>
         <IconButton aria-label="Delete">

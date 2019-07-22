@@ -112,7 +112,6 @@
   object-fit: fill;
 }
 
-
 #menu-icon {
   margin-right:15px;
 }
@@ -171,4 +170,8 @@
 
 .drawer-list > ul {
   padding-top: 65px;
+}
+
+.grey-color {
+  color: #aaa;
 }

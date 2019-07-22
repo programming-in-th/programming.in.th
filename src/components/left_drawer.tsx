@@ -20,18 +20,18 @@ export default function LeftDrawer() {
   };
 
   interface drawerProps{
-	icon: String,
-	to: String,
-	text: String
+	  icon: String,
+	  to: String,
+	  text: String
   }
-
+  
   const DrawerIcon = (props: drawerProps) => {
-	return (
-	  <ListItem button key={'props.text'} component={Link} to={`${props.to}`}>
-	    <ListItemIcon><Icon>{props.icon}</Icon></ListItemIcon>
-	    <ListItemText primary={props.text}/>
-	  </ListItem>
-	)
+    return (
+      <ListItem button key={'props.text'} component={Link} to={`${props.to}`}>
+        <ListItemIcon><Icon className="grey-color">{props.icon}</Icon></ListItemIcon>
+        <ListItemText primary={props.text} className="grey-color"/>
+      </ListItem>
+    )
   }
 
   const sideList = () => (
@@ -39,13 +39,13 @@ export default function LeftDrawer() {
       role="presentation"
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)} >
-	  <List>
-	    <DrawerIcon icon="home" to="/" text="Home" />
+      <List>
+        <DrawerIcon icon="home" to="/" text="Home" />
         <DrawerIcon icon="functions" to="/tasks" text="Tasks" />
-	    <DrawerIcon icon="school" to="/learn" text="Learn" />
-	    <DrawerIcon icon="forum" to="/forum" text="Forum" />
+        <DrawerIcon icon="school" to="/learn" text="Learn" />
+        <DrawerIcon icon="forum" to="/forum" text="Forum" />
         <DrawerIcon icon="featured_play_list" to="/exams" text="Exams" />
-	  </List>
+      </List>
     </div>
   );
   return (
@@ -59,9 +59,9 @@ export default function LeftDrawer() {
       open={state}
       onClose={toggleDrawer(false)}
       onOpen={toggleDrawer(true)} 
-	> 
+	  > 
       {sideList()}
-	</SwipeableDrawer>
+	  </SwipeableDrawer>
   </div>
   );
 }
