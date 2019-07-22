@@ -7,8 +7,8 @@ import '../assets/css/nav.css'
 
 /* React Util */
 import { 
-	makeStyles, Icon, SwipeableDrawer, List,
-	ListItem, ListItemIcon, ListItemText
+  makeStyles, Icon, SwipeableDrawer, List,
+  ListItem, ListItemIcon, ListItemText
 } from '@material-ui/core/';
 
 export default function LeftDrawer() {
@@ -16,14 +16,6 @@ export default function LeftDrawer() {
   const toggleDrawer = (open: boolean) => (
     event: React.KeyboardEvent | React.MouseEvent,
   ) => {
-    if (
-      event &&
-      event.type === 'keydown' &&
-      ((event as React.KeyboardEvent).key === 'Tab' ||
-        (event as React.KeyboardEvent).key === 'Shift')
-    ) {
-      return;
-    }
     setState(open);
   };
 
@@ -35,10 +27,10 @@ export default function LeftDrawer() {
 
   const DrawerIcon = (props: drawerProps) => {
 	return (
-		<ListItem button key={'props.text'} component={Link} to={`${props.to}`}>
-			<ListItemIcon><Icon>{props.icon}</Icon></ListItemIcon>
-			<ListItemText primary={props.text}/>
-		</ListItem>
+	  <ListItem button key={'props.text'} component={Link} to={`${props.to}`}>
+	    <ListItemIcon><Icon>{props.icon}</Icon></ListItemIcon>
+	    <ListItemText primary={props.text}/>
+	  </ListItem>
 	)
   }
 
@@ -46,30 +38,30 @@ export default function LeftDrawer() {
     <div className="drawer-list"
       role="presentation"
       onClick={toggleDrawer(false)}
-	  onKeyDown={toggleDrawer(false)}
-    >
-      <List>
-		<DrawerIcon icon="home" to="/" text="Home" />
-		<DrawerIcon icon="functions" to="/tasks" text="Tasks" />
-		<DrawerIcon icon="school" to="/learn" text="Learn" />
-		<DrawerIcon icon="forum" to="/forum" text="Forum" />
-		<DrawerIcon icon="featured_play_list" to="/exams" text="Exams" />
-      </List>
+      onKeyDown={toggleDrawer(false)} >
+	  <List>
+	    <DrawerIcon icon="home" to="/" text="Home" />
+        <DrawerIcon icon="functions" to="/tasks" text="Tasks" />
+	    <DrawerIcon icon="school" to="/learn" text="Learn" />
+	    <DrawerIcon icon="forum" to="/forum" text="Forum" />
+        <DrawerIcon icon="featured_play_list" to="/exams" text="Exams" />
+	  </List>
     </div>
   );
   return (
-	<div className="action-icon-responsive"> 
-		<button id="menu-icon" className="action-icon" onClick={toggleDrawer(!state)}>
-		<a className="nav-icon ">
-			<i className="material-icons">menu</i>
-		</a>
-		</button>
-		<SwipeableDrawer
-			open={state}
-			onClose={toggleDrawer(false)}
-			onOpen={toggleDrawer(true)}
-		> {sideList()}
-		</SwipeableDrawer>
-	</div>
+  <div className="action-icon-responsive"> 
+    <button id="menu-icon" className="action-icon" onClick={toggleDrawer(!state)}>
+    <a className="nav-icon ">
+      <i className="material-icons">menu</i>
+    </a>
+    </button>
+    <SwipeableDrawer
+      open={state}
+      onClose={toggleDrawer(false)}
+      onOpen={toggleDrawer(true)} 
+	> 
+      {sideList()}
+	</SwipeableDrawer>
+  </div>
   );
 }

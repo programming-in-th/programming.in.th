@@ -24,47 +24,47 @@ import "./assets/css/responsive.css"
 import firebase from "firebase";
 
 if (!firebase.apps.length) {
-    const firebaseConfig = {
-        apiKey: "AIzaSyCjd-glhd1Rl_QJUfLp4w2zxEB94bhIsJE",
-        authDomain: "grader-ef0b5.firebaseapp.com",
-        databaseURL: "https://grader-ef0b5.firebaseio.com",
-        projectId: "grader-ef0b5",
-        storageBucket: "grader-ef0b5.appspot.com",
-        messagingSenderId: "408883593148",
-        appId: "1:408883593148:web:7e080f677cb99238"
-    };
-    // Initialize Firebase
-    firebase.initializeApp(firebaseConfig);
+  const firebaseConfig = {
+    apiKey: "AIzaSyCjd-glhd1Rl_QJUfLp4w2zxEB94bhIsJE",
+    authDomain: "grader-ef0b5.firebaseapp.com",
+    databaseURL: "https://grader-ef0b5.firebaseio.com",
+    projectId: "grader-ef0b5",
+    storageBucket: "grader-ef0b5.appspot.com",
+    messagingSenderId: "408883593148",
+    appId: "1:408883593148:web:7e080f677cb99238"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
 }
 
 const theme = createMuiTheme({
-    palette: {
-        primary: blue,
-        secondary: {
-            main: "#fafafa"
-        }
-    },
-    typography: {
-        // useNextVariants: true,
-        // TODO: fix typography
+  palette: {
+    primary: blue,
+    secondary: {
+      main: "#fafafa"
     }
+  },
+  typography: {
+    // useNextVariants: true,
+    // TODO: fix typography
+  }
 });
 
 const Root = () => {
-    return (
-        <Router>
-            <MuiThemeProvider theme={theme}>
-                <>
-                    <Nav />
-                    <Switch>
-                        <Route exact path="/" component={Index} />
-                        <Route exact path="/tasks" component={Tasks} />
-                        <Route component={NotFound} />
-                    </Switch>
-                </>
-            </MuiThemeProvider>
-        </Router>
-    );
+  return (
+    <Router>
+      <MuiThemeProvider theme={theme}>
+        <>
+          <Nav />
+          <Switch>
+            <Route exact path="/" component={Index} />
+            <Route exact path="/tasks" component={Tasks} />
+            <Route component={NotFound} />
+          </Switch>
+        </>
+      </MuiThemeProvider>
+    </Router>
+  );
 }
 
 ReactDOM.render(<Root />, document.getElementById("react"));

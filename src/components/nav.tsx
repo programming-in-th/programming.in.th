@@ -32,7 +32,7 @@ export default () => {
       <>
         <nav id="main-nav">
           <div>
-            <LeftDrawer />            
+            <LeftDrawer />
             <LinkIcon icon="home" to="/" />
             <LinkIcon icon="functions" to="/tasks" />
             <LinkIcon icon="school" to="/learn" />
