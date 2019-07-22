@@ -3,13 +3,9 @@
 import React, {Component, useState} from "react"
 
 /* React Component */
-import IconNav from '../components/iconNav'
 import { Link } from "react-router-dom"
 
 import "../assets/css/nav.css"
-// import Head from "next/head"
-// import Link from 'next/link'
-// import NProgress from 'next-nprogress/component'
 /* Data model */
 import firebase from "firebase/app"
 import "firebase/auth"
@@ -192,16 +188,6 @@ export default (props:props) => {
 
     return(
       <>
-        {/* <Head>
-          {(props.title === undefined) ? <title>Programming.in.th</title> : <title>{props.title}</title> }
-          <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1" />
-          <link rel="stylesheet" type="text/css" href="/static/css/init.css" />
-          <link rel="stylesheet" type="text/css" href="/static/css/nav.css" />
-          <link rel="stylesheet" type="text/css" href="/static/css/responsive.css" />
-          <link rel="stylesheet" type="text/css" href="/static/material-icon/material-icons.css" />
-          <link rel="icon" href="/static/img/favicon.ico" />
-        </Head>
-        <NProgress spinner={false} /> */}
         <nav id="main-nav">
         <LeftMenu visible={leftMenu} toggle={toggleLeftMenu} />
           <div>
@@ -213,7 +199,6 @@ export default (props:props) => {
             <LinkIcon responsive={true} icon="school" to="/learn" />
           </div>
           <div style={{display:"inline-flex",flexDirection:"row-reverse"}}>
-            {/* <ActionIcon icon="apps" onClick={() => openNotify()} /> */}
             <AccountControl />
           </div>
         </nav>
