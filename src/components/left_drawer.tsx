@@ -2,15 +2,28 @@ import React, {Component, useState} from "react"
 import '../assets/css/nav.css'
 import {Link} from "react-router-dom"
 import { List, ListItem, ListItemText, ListItemIcon } from "@material-ui/core";
-import HomeIcon from "@material-ui/icons/Home";
-import FunctionsIcon from "@material-ui/icons/Functions";
-import SchoolIcon from "@material-ui/icons/School";
-import UsersIcon from "@material-ui/icons/AccountBox";
-import ForumIcon from "@material-ui/icons/Forum";
-import ExamsIcon from "@material-ui/icons/FeaturedPlayList";
 
 interface LeftDrawerProps {
 	toggle: Function
+}
+
+interface drawerProps {
+	key : String,
+	to : String,
+	icon : String,
+	onClick? : any,
+	text : String, 
+}
+
+const DrawerIcon = (props: drawerProps )=> {
+	return(
+		<ListItem button key={`${props.key}`} component={Link} to={`${props.to}`} onClick={() => props.onClick()}>
+			<a className="drawer-icon">
+			  <i className="material-icons">{props.icon}</i>
+			</a>
+			<ListItemText>{props.text}</ListItemText>
+		</ListItem>
+	  )
 }
 
 const LeftDrawer = (props: LeftDrawerProps) => {
@@ -24,30 +37,12 @@ const LeftDrawer = (props: LeftDrawerProps) => {
         <div id="left-drawer">
 			<div>
 			<List>
-				<ListItem button key="home" component={Link} to="/" onClick = {() => props.toggle()}>
-					<ListItemIcon><HomeIcon /></ListItemIcon>
-					<ListItemText>Home</ListItemText>
-				</ListItem>
-				<ListItem button key="tasks" component={Link} to="/tasks" onClick= {() => props.toggle()}>
-					<ListItemIcon><FunctionsIcon /></ListItemIcon>
-					<ListItemText>Tasks</ListItemText>
-				</ListItem>
-				<ListItem button key="learn" component={Link} to="/learn" onClick= {() => props.toggle()}>
-					<ListItemIcon><SchoolIcon /></ListItemIcon>
-					<ListItemText>Learn</ListItemText>
-				</ListItem>
-				<ListItem button key="users" component={Link} to="/users" onClick= {() => props.toggle()}>
-					<ListItemIcon><UsersIcon /></ListItemIcon>
-					<ListItemText>Users</ListItemText>
-				</ListItem>
-				<ListItem button key="forum" component={Link} to="/forum" onClick= {() => props.toggle()}>
-					<ListItemIcon><ForumIcon /></ListItemIcon>
-					<ListItemText>Forum</ListItemText>
-				</ListItem>
-				<ListItem button key="exams" component={Link} to="/exams" onClick= {() => props.toggle()}>
-					<ListItemIcon><ExamsIcon /></ListItemIcon>
-					<ListItemText>Exams</ListItemText>
-				</ListItem>
+				<DrawerIcon key="home" to="/" text="Home" icon="home" onClick = {() => props.toggle()} />
+				<DrawerIcon key="tasks" to="/tasks" text="Tasks" icon="functions" onClick = {() => props.toggle()} />
+				<DrawerIcon key="learn" to="/learn" text="Learn" icon="school" onClick = {() => props.toggle()} />
+				<DrawerIcon key="users" to="/users" text="Users" icon="account_box" onClick = {() => props.toggle()} />
+				<DrawerIcon key="forum" to="/forum" text="Forum" icon="forum" onClick = {() => props.toggle()} />
+				<DrawerIcon key="exams" to="/exams" text="Exams" icon="featured_playlist" onClick = {() => props.toggle()} />
 			</List>
 			</div>
         </div>

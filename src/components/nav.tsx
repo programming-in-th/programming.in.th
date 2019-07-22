@@ -14,22 +14,15 @@ import LeftDrawer from "./left_drawer"
 
 interface NavProps {
   icon: String,
-  to: String,
-  responsive: Boolean
+  to: String
 }
 
 const LinkIcon = (props:NavProps) => {
     return(
       <Link to={`${props.to}`}>
-        {props.responsive ?
-          <a className="nav-icon link-icon-responsive">
-            <i className="material-icons">{props.icon}</i>
-          </a>
-        :
-          <a className="nav-icon">
-            <i className="material-icons">{props.icon}</i>
-          </a>
-        }
+        <a className="nav-icon link-icon-responsive">
+          <i className="material-icons">{props.icon}</i>
+        </a>
       </Link>
     )
 }
@@ -38,22 +31,14 @@ interface ActionProps {
   icon: String,
   onClick?: any,
   id?: String,
-  responsive: Boolean
 }
 
 const ActionIcon = (props:ActionProps) => {
   return(
     <button id={'props.id'} className="action-icon" onClick={() => props.onClick()}>
-      {props.responsive ? 
-        <a className="nav-icon action-icon-responsive">
-          <i className="material-icons">{props.icon}</i>
-        </a>
-      :
-        <a className="nav-icon">
-          <i className="material-icons">{props.icon}</i>
-        </a>
-      }
-      
+      <a className="nav-icon action-icon-responsive">
+        <i className="material-icons">{props.icon}</i>
+      </a>
     </button>
   )
 }
@@ -191,12 +176,12 @@ export default (props:props) => {
         <nav id="main-nav">
         <LeftMenu visible={leftMenu} toggle={toggleLeftMenu} />
           <div>
-            <ActionIcon id="menu-icon" responsive={true} icon="menu" onClick={() => toggleLeftMenu()} />
-            <LinkIcon responsive={true} icon="home" to="/" />
-            <LinkIcon responsive={true} icon="functions" to="/tasks" />
-            <LinkIcon responsive={true} icon="featured_play_list" to="/exam" />
-            <LinkIcon responsive={true} icon="forum" to="/forum" />
-            <LinkIcon responsive={true} icon="school" to="/learn" />
+            <ActionIcon id="menu-icon" icon="menu" onClick={() => toggleLeftMenu()} />
+            <LinkIcon icon="home" to="/" />
+            <LinkIcon icon="functions" to="/tasks" />
+            <LinkIcon icon="featured_play_list" to="/exam" />
+            <LinkIcon icon="forum" to="/forum" />
+            <LinkIcon icon="school" to="/learn" />
           </div>
           <div style={{display:"inline-flex",flexDirection:"row-reverse"}}>
             <AccountControl />

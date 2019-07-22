@@ -44,6 +44,14 @@
     transition: color .175s ease-out,text-shadow .175s, border-bottom-color .175s;
 }
 
+.drawer-icon {
+    color: #757575;
+    font-size:24px;
+    min-width: 56px;
+    display: inline-flex;
+    flex-shrink: 0;
+}
+
 .action-icon {
     width:auto;
     height:auto;
