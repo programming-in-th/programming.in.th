@@ -31,6 +31,7 @@
     "react-head": "^3.1.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.1",
+    "react-redux": "^7.1.0",
     "redux": "^4.0.4",
     "styled-jsx": "3.2.1",
     "typescript": "3.5.3"
