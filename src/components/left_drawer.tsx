@@ -1,14 +1,14 @@
 import React from 'react';
+import Icon from '@material-ui/core/Icon'
+import {Link} from "react-router-dom"
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import Button from '@material-ui/core/Button';
 
 import '../assets/css/nav.css'
 
@@ -46,6 +46,21 @@ export default function SwipeableTemporaryDrawer() {
     setState({ ...state, [side]: open });
   };
 
+  interface drawerProps{
+	icon: String,
+	to: String,
+	text: String
+  }
+
+  const DrawerIcon = (props: drawerProps) => {
+	return (
+		<ListItem button key={'props.text'} component={Link} to={`${props.to}`}>
+			<ListItemIcon><Icon>{props.icon}</Icon></ListItemIcon>
+			<ListItemText primary={props.text}/>
+		</ListItem>
+	)
+  }
+
   const sideList = (side: DrawerSide) => (
     <div
       className={classes.list}
@@ -54,48 +69,11 @@ export default function SwipeableTemporaryDrawer() {
       onKeyDown={toggleDrawer(side, false)}
     >
       <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
-  const fullList = (side: DrawerSide) => (
-    <div
-      className={classes.fullList}
-      role="presentation"
-      onClick={toggleDrawer(side, false)}
-      onKeyDown={toggleDrawer(side, false)}
-    >
-      <List>
-        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {['All mail', 'Trash', 'Spam'].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
+		  <DrawerIcon icon="home" to="/" text="Home" />
+		  <DrawerIcon icon="functions" to="/tasks" text="Tasks" />
+		  <DrawerIcon icon="school" to="/learn" text="Learn" />
+		  <DrawerIcon icon="forum" to="/forum" text="Forum" />
+		  <DrawerIcon icon="featured_play_list" to="/exams" text="Exams" />
       </List>
     </div>
   );

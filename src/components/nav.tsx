@@ -178,9 +178,9 @@ export default (props:props) => {
             <SwipeableTemporaryDrawer />            
             <LinkIcon icon="home" to="/" />
             <LinkIcon icon="functions" to="/tasks" />
-            <LinkIcon icon="featured_play_list" to="/exam" />
-            <LinkIcon icon="forum" to="/forum" />
             <LinkIcon icon="school" to="/learn" />
+            <LinkIcon icon="forum" to="/forum" />
+            <LinkIcon icon="featured_play_list" to="/exam" />
           </div>
           <div style={{display:"inline-flex",flexDirection:"row-reverse"}}>
             <AccountControl />
