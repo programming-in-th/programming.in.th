@@ -9,7 +9,7 @@ import "../assets/css/nav.css"
 /* Data model */
 import firebase from "firebase/app"
 import "firebase/auth"
-import LeftDrawer from "./left_drawer"
+import SwipeableTemporaryDrawer from "./left_drawer"
 
 
 interface NavProps {
@@ -146,18 +146,18 @@ class AccountControl extends React.Component<{}, accountState> {
   }
 }
 
-interface leftMenuProps {
-  visible: Boolean,
-  toggle: Function
-}
+// interface leftMenuProps {
+//   visible: Boolean,
+//   toggle: Function
+// }
 
-const LeftMenu = (props: leftMenuProps) => {
-  if(props.visible) {
-    return <LeftDrawer toggle={props.toggle}/>;
-  } else {
-    return null;
-  }
-}
+// const LeftMenu = (props: leftMenuProps) => {
+//   if(props.visible) {
+//     return <LeftDrawer toggle={props.toggle}/>;
+//   } else {
+//     return null;
+//   }
+// }
 
 interface props {
   title?: string
@@ -165,18 +165,17 @@ interface props {
 
 export default (props:props) => {
 
-    const [leftMenu, setLeftMenu] = useState(false);
+    // const [leftMenu, setLeftMenu] = useState(false);
 
-    function toggleLeftMenu(){
-      setLeftMenu(!leftMenu);
-    }
+    // function toggleLeftMenu(){
+    //   setLeftMenu(!leftMenu);
+    // }
 
     return(
       <>
         <nav id="main-nav">
-        <LeftMenu visible={leftMenu} toggle={toggleLeftMenu} />
           <div>
-            <ActionIcon id="menu-icon" icon="menu" onClick={() => toggleLeftMenu()} />
+            <SwipeableTemporaryDrawer />            
             <LinkIcon icon="home" to="/" />
             <LinkIcon icon="functions" to="/tasks" />
             <LinkIcon icon="featured_play_list" to="/exam" />
