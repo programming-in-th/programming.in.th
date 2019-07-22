@@ -165,7 +165,7 @@
     z-index:100;
     top:59px;
     left:0;
-    width: 320px;
+    width: 220px;
     height:calc(100vh - 56px);
     background-color:rgba(0,0,0,0.375);
     display:none;
@@ -201,40 +201,4 @@
     font-weight: bold;
     font-size: 16px;
     /* transition:background-color .125s ease-out; */
-}
-
-.icon-link {
-    display:inline-flex;
-    justify-content: center;
-    align-items: center;
-    padding:12px;
-    text-decoration: none;
-    color: var(--fade);
-    height:53px;
-    font-size: 21px;
-    cursor:pointer;
-}
-
-.icon-nav {
-    font-size: 28px;
-    cursor:pointer;
-}
-
-.icon-link {
-    outline:none;
-    border-bottom: 3px solid transparent;
-    transition: border-bottom-color .25s ease-out;
-}
-
-.icon-link:hover p,
-.icon-link:focus p,
-.icon-nav:hover,
-.icon-nav:focus {
-    color:var(--primary);
-}
-
-.icon-link:hover,
-.icon-link:focus,
-.nav-active {
-    border-bottom-color: var(--primary);
 }
