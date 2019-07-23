@@ -31,8 +31,6 @@ class Account extends React.Component<{}, accountState> {
     signInOptions: [
       firebase.auth.GoogleAuthProvider.PROVIDER_ID,
       firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-      firebase.auth.TwitterAuthProvider.PROVIDER_ID,
-      firebase.auth.GithubAuthProvider.PROVIDER_ID,
       firebase.auth.EmailAuthProvider.PROVIDER_ID,
     ],
     callbacks: {
@@ -70,17 +68,8 @@ class Account extends React.Component<{}, accountState> {
     return(
       <>
         <button id="user-panel" onClick={() => this.toggleDetail()}>
-          {this.state.sign ?
-            <>
-              <p>{this.state.displayName}</p>
-              <img src={`${this.state.avatar}`} />
-            </>
-          :
-            <>
-              <p>Guest</p>
-              <img src="/assets/img/default-user.png" />
-            </>
-          }
+          <p>{this.state.displayName == "" ? "Guest" : this.state.displayName}</p>
+          <img src={this.state.avatar == "" ? "/assets/img/default-user.png" : `${this.state.avatar}`} />
         </button>
         {this.state.toggleDetail ?
           <div id="user-control">
@@ -90,11 +79,7 @@ class Account extends React.Component<{}, accountState> {
                 Logout
               </button>
             :
-              <>
-              {/* new future debug */}
-              <i>=> only login with Gmail available</i>
               <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} /> 
-              </>
             }
           </div>
         : null}
