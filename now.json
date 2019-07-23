@@ -5,5 +5,9 @@
     { "src": "package.json", "use": "@now/static-build", "config": { "distDir": "build"} },
     { "src": "index.js", "use": "@now/node", "config": { "maxLambdaSize": "20mb" }}
   ],
-  "alias": "betabeta.programming.in.th"
+  "alias": "betabeta.programming.in.th",
+  "routes": [
+    { "handle": "filesystem" },
+    { "src": "/.*", "status": 404, "dest": "/" }
+  ]
 }
