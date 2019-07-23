@@ -4,6 +4,7 @@ import React from "react"
 /* Data model */
 import firebase from "firebase/app"
 import "firebase/auth"
+import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 
 interface accountState {
   toggleDetail: Boolean,
@@ -12,7 +13,7 @@ interface accountState {
   avatar: String
 }
 
-class AccountControl extends React.Component<{}, accountState> {
+class Account extends React.Component<{}, accountState> {
   constructor(props:any){
     super(props);
     this.state = {
@@ -22,6 +23,23 @@ class AccountControl extends React.Component<{}, accountState> {
       avatar: ""
     }
   }
+
+  uiConfig = {
+    // Popup signin flow rather than redirect flow.
+    signInFlow: 'popup',
+    // We will display Google , Facebook , Etc as auth providers.
+    signInOptions: [
+      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+      firebase.auth.GithubAuthProvider.PROVIDER_ID,
+      firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    ],
+    callbacks: {
+      // Avoid redirects after sign-in.
+      signInSuccess: () => false
+    }
+  } as firebaseui.auth.Config;
 
   componentWillMount(){
     firebase.auth().onAuthStateChanged(account => {
@@ -42,34 +60,12 @@ class AccountControl extends React.Component<{}, accountState> {
     })
   }
 
-  loginWithGmail(){
-    let provider = new firebase.auth.GoogleAuthProvider();
-    this.toggleDetail();
-    firebase.auth().signInWithPopup(provider).then(function(result:any) {
-      // This gives you a Google Access Token. You can use it to access the Google API.
-      var token = result.credential.accessToken;
-      // The signed-in user info.
-      var user = result.user;
-    }).catch(function(error:any) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      console.log(`${errorCode}: ${errorMessage}`);
-      // The email of the user's account used.
-      var email = error.email;
-      // The firebase.auth.AuthCredential type that was used.
-      var credential = error.credential;
-      // ...
-    });
-  }
-
   firebaseLogout(){
     firebase.auth().signOut().then(() => {
       window.location.reload();
     })
   }
-
-
+  
   render(){
     return(
       <>
@@ -94,10 +90,11 @@ class AccountControl extends React.Component<{}, accountState> {
                 Logout
               </button>
             :
-              <button onClick={() => this.loginWithGmail()}>
-                <i className="material-icons">email</i>
-                Login with Gmail
-              </button>
+              <>
+              {/* new future debug */}
+              <i>=> only login with Gmail available</i>
+              <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} /> 
+              </>
             }
           </div>
         : null}
@@ -105,7 +102,6 @@ class AccountControl extends React.Component<{}, accountState> {
     )
   }
 }
-
 export default function AccountRender() {
-  return(<AccountControl/>);
+  return(<Account/>);
 }
