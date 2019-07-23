@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.0.0",
     "@material-ui/icons": "^4.2.1",
-    "@tanem/react-nprogress": "^1.1.31",
+    "@tanem/react-nprogress": "^1.1.32",
     "@types/jest": "24.0.15",
     "@types/node": "12.6.8",
     "@types/react": "16.8.23",
@@ -22,7 +22,7 @@
     "graphql-tools": "^4.0.5",
     "merge-graphql-schemas": "^1.6.1",
     "mongodb": "^3.1.13",
-    "mongoose": "^5.6.5",
+    "mongoose": "^5.6.6",
     "next": "^9.0.2",
     "next-nprogress": "^1.4.0",
     "now": "^15.8.5",
