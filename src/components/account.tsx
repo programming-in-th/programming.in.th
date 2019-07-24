@@ -170,7 +170,7 @@ class Account extends React.Component<{}, accountState> {
                   </Button>
                   <Button variant="contained" style={{backgroundColor:"#ff5722"}} color="primary" onClick={() => this.loginWithGmail()}>
                     <i className="material-icons">email</i>
-                    Login with Gmail
+                    Login with Google
                   </Button>
                   <Button variant="contained" style={{backgroundColor:"#1976d2"}} color="primary" onClick={() => this.loginWithFacebook()}>
                     <i className="material-icons">thumb_up</i>
