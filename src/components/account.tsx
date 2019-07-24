@@ -4,10 +4,11 @@ import React, { useState } from "react"
 /* Data model */
 import firebase from "firebase/app"
 import "firebase/auth"
-import StyledFirebaseAuth from "react-firebaseui/StyledFirebaseAuth"
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { red, teal, blue, pink, indigo, deepOrange } from "@material-ui/core/colors";
 
 
 interface accountState {
@@ -16,6 +17,24 @@ interface accountState {
   sign: Boolean,
   displayName: String,
   avatar: String
+}
+
+interface buttonProps {
+  color: any,
+  icon?: String,
+  text: String,
+  onClick?: any
+}
+
+const AccountButton = (props : buttonProps) => {
+  return (
+    <MuiThemeProvider theme={createMuiTheme({palette: {primary: props.color}})}>
+        <Button variant="contained" color="primary" onClick={() => props.onClick ? props.onClick() : null}>
+          {props.icon ? <i className="material-icons">{props.icon}</i> : null }
+          {props.text}
+        </Button>
+    </MuiThemeProvider>
+  )
 }
 
 class Account extends React.Component<{}, accountState> {
@@ -29,20 +48,6 @@ class Account extends React.Component<{}, accountState> {
       avatar: ""
     }
   }
-
-  uiConfig = {
-    // Popup signin flow rather than redirect flow.
-    signInFlow: 'popup',
-    // We will display Google , Facebook , Etc as auth providers.
-    signInOptions: [
-      firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-      firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-    ],
-    callbacks: {
-      // Avoid redirects after sign-in.
-      signInSuccess: () => false
-    }
-  } as firebaseui.auth.Config;
 
   componentWillMount(){
     firebase.auth().onAuthStateChanged(account => {
@@ -136,46 +141,25 @@ class Account extends React.Component<{}, accountState> {
                   <TextField id="pass-textfield" label="Password" margin="normal" type="password" variant="outlined" /> 
                   <TextField id="confirm-textfield" label="Confirm Password" margin="normal" type="password" variant="outlined" /> 
 
-                  <Button variant="contained" color="primary">
-                    <i className="material-icons">person_add</i>
-                    Sign Up
-                  </Button>
-                  <Button variant="contained" style={{backgroundColor:"#009688"}} color="primary" onClick={() => this.toggleSignUp()}>
-                    <i className="material-icons">keyboard_arrow_left</i>
-                    Back to Login
-                  </Button>
+                  <AccountButton color={blue} icon="person_add" text="Sign Up" />
+                  <AccountButton color={teal} icon="keyboard_arrow_left" text="Back to Login" onClick={() => this.toggleSignUp()} />
                 </div>
               </Fade>
               :
               <>
               { this.state.sign ?
                 <div id="account-container">
-                   <Button variant="contained" style={{backgroundColor:"#d84315"}} color="primary" onClick={() => this.firebaseLogout()}>
-                    <i className="material-icons">vpn_key</i>
-                    Logout
-                  </Button>
+                  <AccountButton color={red} icon="vpn_key" text="Logout" onClick={() => this.firebaseLogout()} />
                 </div>              
               :
                 <div id="account-container">
                   <TextField id="email-textfield" label="Email" margin="normal" variant="outlined" /> 
                   <TextField id="pass-textfield" label="Password" margin="normal" type="password" variant="outlined" /> 
 
-                  <Button variant="contained" color="primary">
-                    <i className="material-icons">account_circle</i>
-                    Login
-                  </Button>
-                  <Button variant="contained" style={{backgroundColor:"#ec407a"}} color="primary" onClick={() => this.toggleSignUp()}>
-                    <i className="material-icons">person_add</i>
-                    Sign Up
-                  </Button>
-                  <Button variant="contained" style={{backgroundColor:"#ff5722"}} color="primary" onClick={() => this.loginWithGmail()}>
-                    <i className="material-icons">email</i>
-                    Login with Google
-                  </Button>
-                  <Button variant="contained" style={{backgroundColor:"#1976d2"}} color="primary" onClick={() => this.loginWithFacebook()}>
-                    <i className="material-icons">thumb_up</i>
-                    Login with Facebook
-                  </Button>
+                  <AccountButton color={blue} icon="account_circle" text="Login" />
+                  <AccountButton color={pink} icon="person_add" text="Sign Up" onClick={() => this.toggleSignUp()} />
+                  <AccountButton color={deepOrange} icon="email" text="Login with Google" onClick={() => this.loginWithGmail()} />
+                  <AccountButton color={indigo} icon="thumb_up" text="Login with Facebook" onClick={() => this.loginWithFacebook()} />
                 </div>
               }
               </>
