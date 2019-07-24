@@ -9,6 +9,14 @@
   #menu-icon {
     margin-right:0;
   }
+  #user-control {
+    left:1% !important;
+    right:1% !important;
+    margin-left:10px;
+    margin-right:10px;
+    width:auto !important;
+    /* height:50% !important; */
+  }
 }
 
 #main-nav {
@@ -118,9 +126,10 @@
 
 #user-control {
   position:fixed;
-  top:66px;
-  right:10px;
-  width:300px;
+  top:30%;
+  left:23%;
+  right:23%;
+  width:auto;
   background-color: #fff;
   border-radius:5px;
   border:1px solid #eee;
@@ -201,4 +210,24 @@
 
 #account-container > div {
   width: 100%;
+}
+
+#user-logout {
+  position:fixed;
+  top:66px;
+  right:10px;
+  width:300px;
+  background-color: #fff;
+  border-radius:5px;
+  border:1px solid #eee;
+  box-shadow:0 3px 8px rgba(0,0,0,.125);
+  padding:6px 12px;
+  display:flex;
+  flex-direction: column;
+  animation: user-control-in .25s ease-out 0s 1;
+}
+
+#account-backdrop > div {
+  top: 55px;
+  z-index: -1;
 }

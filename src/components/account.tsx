@@ -9,7 +9,7 @@ import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { red, teal, blue, pink, indigo, deepOrange } from "@material-ui/core/colors";
-
+import Backdrop from '@material-ui/core/Backdrop';
 
 interface accountState {
   toggleDetail: Boolean,
@@ -108,6 +108,9 @@ class Account extends React.Component<{}, accountState> {
     this.setState({
       toggleDetail: !this.state.toggleDetail
     })
+    this.setState({
+      toggleSignUp: false
+    })
   }
 
   firebaseLogout(){
@@ -130,7 +133,7 @@ class Account extends React.Component<{}, accountState> {
           <img src={this.state.avatar == "" ? "/assets/img/default-user.png" : `${this.state.avatar}`} />
         </button>
         {this.state.toggleDetail ?
-          <div id="user-control">
+          <div id = {this.state.sign ? "user-logout" : "user-control"}>
             {this.state.toggleSignUp ?
               <Fade in={this.state.toggleSignUp ? true : false}>
                 <div id="account-container">
@@ -147,6 +150,7 @@ class Account extends React.Component<{}, accountState> {
               </Fade>
               :
               <>
+              <Fade in={!this.state.toggleSignUp ? true : false}>
               { this.state.sign ?
                 <div id="account-container">
                   <AccountButton color={red} icon="vpn_key" text="Logout" onClick={() => this.firebaseLogout()} />
@@ -162,10 +166,14 @@ class Account extends React.Component<{}, accountState> {
                   <AccountButton color={indigo} icon="thumb_up" text="Login with Facebook" onClick={() => this.loginWithFacebook()} />
                 </div>
               }
+              </Fade>
               </>
             }
           </div>
         : null}
+        <div id="account-backdrop">
+          <Backdrop open={this.state.toggleDetail ? true : false} onClick={() => this.toggleDetail()}></Backdrop>
+        </div>
       </>
     )
   }
