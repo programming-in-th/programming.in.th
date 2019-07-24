@@ -57,6 +57,48 @@ class Account extends React.Component<{}, accountState> {
     })
   }
 
+  loginWithGmail(){
+    let provider = new firebase.auth.GoogleAuthProvider();
+    this.toggleDetail();
+    firebase.auth().signInWithPopup(provider).then(function(result:any) {
+      // This gives you a Google Access Token. You can use it to access the Google API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+    }).catch(function(error:any) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      console.log(`${errorCode}: ${errorMessage}`);
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+  }
+
+  loginWithFacebook() {
+    let provider = new firebase.auth.FacebookAuthProvider();
+    this.toggleDetail();
+    firebase.auth().signInWithPopup(provider).then(function(result:any) {
+      // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+      var token = result.credential.accessToken;
+      // The signed-in user info.
+      var user = result.user;
+      // ...
+    }).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // The email of the user's account used.
+      var email = error.email;
+      // The firebase.auth.AuthCredential type that was used.
+      var credential = error.credential;
+      // ...
+    });
+  }
+
   toggleDetail(){
     this.setState({
       toggleDetail: !this.state.toggleDetail
@@ -87,14 +129,18 @@ class Account extends React.Component<{}, accountState> {
             {this.state.toggleSignUp ?
               <Fade in={this.state.toggleSignUp ? true : false}>
                 <div id="account-container">
+                  {/* TODO : Minimum password characters and password confirmation */}
+
                   <TextField id="user-textfield" label="Username" margin="normal" variant="outlined" /> 
                   <TextField id="email-textfield" label="Email" margin="normal" variant="outlined" /> 
                   <TextField id="pass-textfield" label="Password" margin="normal" type="password" variant="outlined" /> 
+                  <TextField id="confirm-textfield" label="Confirm Password" margin="normal" type="password" variant="outlined" /> 
+
                   <Button variant="contained" color="primary">
                     <i className="material-icons">person_add</i>
                     Sign Up
                   </Button>
-                  <Button variant="contained" color="secondary" onClick={() => this.toggleSignUp()}>
+                  <Button variant="contained" style={{backgroundColor:"#009688"}} color="primary" onClick={() => this.toggleSignUp()}>
                     <i className="material-icons">keyboard_arrow_left</i>
                     Back to Login
                   </Button>
@@ -103,23 +149,33 @@ class Account extends React.Component<{}, accountState> {
               :
               <>
               { this.state.sign ?
-                <button onClick={() => this.firebaseLogout()}>
-                  <i className="material-icons">vpn_key</i>
-                  Logout
-                </button>
+                <div id="account-container">
+                   <Button variant="contained" style={{backgroundColor:"#d84315"}} color="primary" onClick={() => this.firebaseLogout()}>
+                    <i className="material-icons">vpn_key</i>
+                    Logout
+                  </Button>
+                </div>              
               :
                 <div id="account-container">
                   <TextField id="email-textfield" label="Email" margin="normal" variant="outlined" /> 
                   <TextField id="pass-textfield" label="Password" margin="normal" type="password" variant="outlined" /> 
+
                   <Button variant="contained" color="primary">
                     <i className="material-icons">account_circle</i>
-                    Log In
+                    Login
                   </Button>
-                  <Button variant="contained" color="secondary" onClick={() => this.toggleSignUp()}>
+                  <Button variant="contained" style={{backgroundColor:"#ec407a"}} color="primary" onClick={() => this.toggleSignUp()}>
                     <i className="material-icons">person_add</i>
                     Sign Up
                   </Button>
-                  <StyledFirebaseAuth uiConfig={this.uiConfig} firebaseAuth={firebase.auth()} /> 
+                  <Button variant="contained" style={{backgroundColor:"#ff5722"}} color="primary" onClick={() => this.loginWithGmail()}>
+                    <i className="material-icons">email</i>
+                    Login with Gmail
+                  </Button>
+                  <Button variant="contained" style={{backgroundColor:"#1976d2"}} color="primary" onClick={() => this.loginWithFacebook()}>
+                    <i className="material-icons">thumb_up</i>
+                    Login with Facebook
+                  </Button>
                 </div>
               }
               </>
