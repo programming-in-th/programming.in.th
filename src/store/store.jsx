@@ -1,5 +1,5 @@
 import { createStore } from "redux"
-import reducers from "./reducers"
+import reducers from "./reducers_old"
 
 const initState = {
     floatingAction: false,

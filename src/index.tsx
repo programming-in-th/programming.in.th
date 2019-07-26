@@ -23,6 +23,12 @@ import "./assets/material-icon/material-icons.css"
 import "./assets/css/responsive.css"
 import firebase from "firebase";
 
+/* Redux */
+import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
+import thunk from 'redux-thunk';
+import taskListReducer from './store/reducers/task_list';
+import { Provider } from 'react-redux';
+
 if (!firebase.apps.length) {
   const firebaseConfig = {
     apiKey: "AIzaSyCjd-glhd1Rl_QJUfLp4w2zxEB94bhIsJE",
@@ -50,6 +56,14 @@ const theme = createMuiTheme({
   }
 });
 
+const rootReducer = combineReducers(
+  {
+    tasks: taskListReducer,
+  }
+);
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
 const Root = () => {
   return (
     <Router>
@@ -67,4 +81,4 @@ const Root = () => {
   );
 }
 
-ReactDOM.render(<Root />, document.getElementById("react"));
+ReactDOM.render(<Provider store={store}><Root /></Provider>, document.getElementById("react"));

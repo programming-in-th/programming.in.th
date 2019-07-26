@@ -13,19 +13,25 @@ import { pseudoRandomBytes } from "crypto";
 
 interface props {
   title: string,
-  difficult: string, 
-  date?: string
+  difficulty: number, 
+  tags: Array<String>
 }
 
 
 export default (props: props) => {
+  let tags = "";
+  if(props.tags) props.tags.forEach((element,index) => {
+    if(index !== props.tags.length - 1) tags += element + ", ";
+    else tags += element;
+  });
+
   return (
     <ListItem button className="task-list">
-      <Avatar className = {props.difficult === "easy" ? "greenAvatar" : props.difficult === "medium" ? "yellowAvatar" : "redAvatar"}>
+      <Avatar className = {props.difficulty <= 4 ? "greenAvatar" : props.difficulty <= 6 ? "yellowAvatar" : "redAvatar"}>
         <i className="material-icons">stars</i>
       </Avatar>
-      {props.date ?
-      <ListItemText className="task-item" primary={props.title} secondary={props.date} />
+      {props.tags ?
+      <ListItemText className="task-item" primary={props.title} secondary={tags} />
       : 
       <ListItemText className="task-item" primary={props.title} />
       }
