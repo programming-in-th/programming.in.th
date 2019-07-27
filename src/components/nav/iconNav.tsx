@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core"
 
 /* Static */
-import "../assets/css/nav.css"
+import "../../assets/css/nav.css"
 
 interface props {
   to: string,

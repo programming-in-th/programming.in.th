@@ -14,7 +14,7 @@ import Tasks from "./pages/tasks"
 import NotFound from "./pages/notFound"
 
 /* React Component */
-import Nav from "./components/nav"
+import Nav from "./components/nav/nav"
 
 /* Static */
 import "./assets/css/init.css"

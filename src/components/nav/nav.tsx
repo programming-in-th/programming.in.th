@@ -5,12 +5,10 @@ import React, {Component, useState} from "react"
 import { Link } from "react-router-dom"
 import LeftDrawer from "./left_drawer"
 import AccountRender from "./account"
-import "../assets/css/nav.css"
+import "../../assets/css/nav.css"
 
 /* Data model */
-import firebase from "firebase/app"
 import "firebase/auth"
-
 
 interface NavProps {
   icon: String,

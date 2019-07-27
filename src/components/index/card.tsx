@@ -5,12 +5,12 @@ import React from "react"
 import {
   Button,
   Card,
-  CardActionArea,
+  CardActionArea
 } from "@material-ui/core"
 import { Link } from "react-router-dom"
 
 /* Static */
-import "../assets/css/card.css"
+import "../../assets/css/card.css"
 
 interface detailProps {
   title: string,

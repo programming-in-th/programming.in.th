@@ -7,10 +7,10 @@ import {
 } from "@material-ui/core"
 
 /* React Component */
-import ForumList from "../components/forumList"
+import ForumList from "./forumList"
 
 /* Static */
-import "../assets/css/forumList.css"
+import "../../assets/css/forumList.css"
 
 export default () => {
   return(

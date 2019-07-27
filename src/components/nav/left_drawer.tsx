@@ -3,7 +3,7 @@ import React from 'react';
 
 /* React Component */
 import {Link} from "react-router-dom"
-import '../assets/css/nav.css'
+import '../../assets/css/nav.css'
 
 /* React Util */
 import { 

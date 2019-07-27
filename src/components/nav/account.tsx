@@ -1,15 +1,17 @@
 /* React */
 import React, { useState } from "react"
 
-/* Data model */
-import firebase from "firebase/app"
-import "firebase/auth"
+/* React Component */
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { red, teal, blue, pink, indigo, deepOrange } from "@material-ui/core/colors";
 import Backdrop from '@material-ui/core/Backdrop';
+
+/* Data model */
+import firebase from "firebase/app"
+import "firebase/auth"
 
 interface accountState {
   toggleDetail: Boolean,

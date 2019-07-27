@@ -2,8 +2,8 @@
 import React from "react"
 
 /* React Component */
-import Card from "../components/card"
-import ForumListWrapper from "../components/forumListWrapper"
+import Card from "../components/index/card"
+import ForumListWrapper from "../components/index/forumListWrapper"
 
 export default class extends React.Component {
   render(){
