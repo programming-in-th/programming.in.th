@@ -116,11 +116,12 @@
 }
 
 #user-panel > img {
-  margin-left:15px;
+  margin-left: 10px;
   width:36px;
   height:36px;
   border-radius:5px;
   object-fit: fill;
+  object-fit: cover;
 }
 
 #menu-icon {

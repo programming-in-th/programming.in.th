@@ -135,7 +135,7 @@ class Account extends React.Component<{}, accountState> {
       <>
       {firebase.auth().currentUser ?
         <button id="user-panel" onClick={() => this.firebaseLogout()}>
-          <p>{this.state.displayName == "" ? "Guest" : this.state.displayName}</p>
+          <p>{this.state.displayName == "" ? "User" : this.state.displayName}</p>
           <img src={this.state.avatar == "" ? "/assets/img/default-user.png" : `${this.state.avatar}`} />
         </button>
       :

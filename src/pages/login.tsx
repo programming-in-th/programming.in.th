@@ -53,7 +53,14 @@ let LoginPage = (props: any) => {
   const [error, setError] = useState("")
 
   let submitLogin = () => {
-    firebase.auth().signInWithEmailAndPassword(email, pass).catch(function(error) {
+    firebase.auth().signInWithEmailAndPassword(email, pass).then(function(result:any) {
+      let nowUser = firebase.auth().currentUser;
+      if(nowUser) if(!nowUser.emailVerified) {
+        firebase.auth().signOut();
+        setError("Please Verify Your Email");
+      } else window.history.back();
+    }).catch(function(error) {
+      console.log("noob");
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -87,7 +94,18 @@ let RegisterPage = (props: any) => {
       setError("password not match");
       return;
     }
-    firebase.auth().createUserWithEmailAndPassword(email, pass).catch(function(error) {
+    firebase.auth().createUserWithEmailAndPassword(email, pass).then(function(result: any) {
+      let nowUser = firebase.auth().currentUser;
+      console.log("hello");
+      if(nowUser) {
+        console.log("send email");
+        nowUser.sendEmailVerification();
+      } else {
+        console.log("failed");
+      }
+      firebase.auth().signOut();
+      window.history.back();
+    }).catch(function(error) {
       // Handle Errors here.
       var errorCode = error.code;
       var errorMessage = error.message;
@@ -127,7 +145,7 @@ let LoginSession = () => {
     {firebase.auth().currentUser ?
       firebase.auth().signOut().then(() => {
         window.location.reload();
-      })
+      }) 
     :
       <div id="account-container">
         {state == "main" ? 
