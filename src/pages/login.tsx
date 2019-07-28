@@ -40,7 +40,9 @@ const uiConfig = {
   ],
   callbacks: {
     // Avoid redirects after sign-in.
-    signInSuccess: () => false
+    signInSuccess: () => {
+      window.history.back();
+    }
   }
 } as firebaseui.auth.Config;
 
@@ -121,16 +123,24 @@ let OAuthPage = (props: any) => {
 let LoginSession = () => {
   const [state, setState] = useState("main");
   return (
-    <div id="account-container">
-      {state == "main" ? 
-        <LoginPage setState={setState} />
-      :
-        state == "register" ?
-          <RegisterPage setState={setState} />
+    <>
+    {firebase.auth().currentUser ?
+      firebase.auth().signOut().then(() => {
+        window.location.reload();
+      })
+    :
+      <div id="account-container">
+        {state == "main" ? 
+          <LoginPage setState={setState} />
         :
-          <OAuthPage setState={setState} />
-      }
-    </div>
+          state == "register" ?
+            <RegisterPage setState={setState} />
+          :
+            <OAuthPage setState={setState} />
+        }
+      </div>
+    }
+    </>
   )
 }
 
