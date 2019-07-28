@@ -1,0 +1,82 @@
+#main-text {
+  font-size: 24px;
+  width: 100%;
+  text-align: center;
+  margin: 5px 0;
+  font-family: Roboto;
+  display: block ;
+}
+
+div#oauth-text {
+  font-size: 24px;
+  width: 100%;
+  text-align: center;
+  margin: 30px 0;
+  font-family: Roboto;
+  display: block !important;
+}
+
+#grey-button {
+  width: 100%;
+  background: transparent;
+  box-shadow: unset;
+  color: grey;
+  flex:1;
+}
+
+#login-button {
+  text-transform: none;
+  font-size: 16px;
+  margin: 15px auto;
+  padding: 5px 20px;
+  height: 42px;
+  width: 100%;
+  font-weight: bold;
+}
+
+#login-button > span > i {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+#grey-button > span > i {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+#oauth-button {
+  width: 100%;
+  background: transparent;
+  box-shadow: unset;
+  color: grey;
+  flex:1;
+}
+
+#oauth-link {
+  flex: 1;
+  text-decoration: none;
+}
+
+#account-container {
+  padding: 10px;
+  width: 511px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#account-container > button  > span > i {
+  font-size: 18px;
+  margin-right: 8px;
+}
+
+#account-container > form > div {
+  width: 100%;
+  padding: auto;
+  display: flex;
+  flex: 1;
+  /* display: block; */
+}
+

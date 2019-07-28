@@ -20,6 +20,16 @@
   .card-former {
     margin: 5px 0;
   }
+  #account-container {
+    width: 90%;
+  } 
+  #account-container > div {
+    width: 100%;
+    padding: auto;
+    display: flex;
+    flex: unset;
+    flex-direction: column;
+  }
 }
 
 @media screen and (min-width:568px) and (max-width:959.9px){

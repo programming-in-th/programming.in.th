@@ -11,6 +11,7 @@ import { blue } from "@material-ui/core/colors"
 /* Pages */
 import Index from "./pages/index"
 import Tasks from "./pages/tasks"
+import Login from "./pages/login"
 import NotFound from "./pages/notFound"
 
 /* React Component */
@@ -73,6 +74,7 @@ const Root = () => {
           <Switch>
             <Route exact path="/" component={Index} />
             <Route exact path="/tasks" component={Tasks} />
+            <Route exact path="/login" component={Login} />
             <Route component={NotFound} />
           </Switch>
         </>

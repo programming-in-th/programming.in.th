@@ -4,10 +4,8 @@ import React, { useState } from "react"
 /* React Component */
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import Fade from '@material-ui/core/Fade';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { red, teal, blue, pink, indigo, deepOrange } from "@material-ui/core/colors";
-import Backdrop from '@material-ui/core/Backdrop';
+import { Link } from "react-router-dom"
 
 /* Data model */
 import firebase from "firebase/app"
@@ -18,7 +16,7 @@ interface accountState {
   toggleSignUp: Boolean,
   sign: Boolean,
   displayName: String,
-  avatar: String
+  avatar: String,
 }
 
 interface buttonProps {
@@ -47,20 +45,25 @@ class Account extends React.Component<{}, accountState> {
       toggleSignUp: false,
       sign: false,
       displayName: "",
-      avatar: ""
+      avatar: "",
+    }
+  }
+
+  reloadState() {
+    var account = firebase.auth().currentUser;
+    if(account) {
+      console.log("yes");
+      this.setState({
+        sign:true,
+        displayName: account.displayName ? account.displayName : "",
+        avatar: account.photoURL ? account.photoURL : ""
+      })
     }
   }
 
   componentWillMount(){
     firebase.auth().onAuthStateChanged(account => {
-      if(account){
-        // Signed in.
-        this.setState({
-          sign:true,
-          displayName: account.displayName ? account.displayName : "",
-          avatar: account.photoURL ? account.photoURL : ""
-        })
-      }
+      this.reloadState();
     })
   }
 
@@ -130,52 +133,10 @@ class Account extends React.Component<{}, accountState> {
   render(){
     return(
       <>
-        <button id="user-panel" onClick={() => this.toggleDetail()}>
+        <Link to="/login" id="user-panel">
           <p>{this.state.displayName == "" ? "Guest" : this.state.displayName}</p>
           <img src={this.state.avatar == "" ? "/assets/img/default-user.png" : `${this.state.avatar}`} />
-        </button>
-        {this.state.toggleDetail ?
-          <div id = {this.state.sign ? "user-logout" : "user-control"}>
-            {this.state.toggleSignUp ?
-              <Fade in={this.state.toggleSignUp ? true : false}>
-                <div id="account-container">
-                  {/* TODO : Minimum password characters and password confirmation */}
-
-                  <TextField id="user-textfield" label="Username" margin="normal" variant="outlined" /> 
-                  <TextField id="email-textfield" label="Email" margin="normal" variant="outlined" /> 
-                  <TextField id="pass-textfield" label="Password" margin="normal" type="password" variant="outlined" /> 
-                  <TextField id="confirm-textfield" label="Confirm Password" margin="normal" type="password" variant="outlined" /> 
-
-                  <AccountButton color={blue} icon="person_add" text="Sign Up" />
-                  <AccountButton color={teal} icon="keyboard_arrow_left" text="Back to Login" onClick={() => this.toggleSignUp()} />
-                </div>
-              </Fade>
-              :
-              <>
-              <Fade in={!this.state.toggleSignUp ? true : false}>
-              { this.state.sign ?
-                <div id="account-container">
-                  <AccountButton color={red} icon="vpn_key" text="Logout" onClick={() => this.firebaseLogout()} />
-                </div>              
-              :
-                <div id="account-container">
-                  <TextField id="email-textfield" label="Email" margin="normal" variant="outlined" /> 
-                  <TextField id="pass-textfield" label="Password" margin="normal" type="password" variant="outlined" /> 
-
-                  <AccountButton color={blue} icon="account_circle" text="Login" />
-                  <AccountButton color={pink} icon="person_add" text="Sign Up" onClick={() => this.toggleSignUp()} />
-                  <AccountButton color={deepOrange} icon="email" text="Login with Google" onClick={() => this.loginWithGmail()} />
-                  <AccountButton color={indigo} icon="thumb_up" text="Login with Facebook" onClick={() => this.loginWithFacebook()} />
-                </div>
-              }
-              </Fade>
-              </>
-            }
-          </div>
-        : null}
-        <div id="account-backdrop">
-          <Backdrop open={this.state.toggleDetail ? true : false} onClick={() => this.toggleDetail()}></Backdrop>
-        </div>
+        </Link>
       </>
     )
   }
