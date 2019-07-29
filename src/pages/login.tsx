@@ -30,21 +30,47 @@ const AccountButton = (props : buttonProps) => {
   )
 }
 
-const uiConfig = {
-  // Popup signin flow rather than redirect flow.
-  signInFlow: 'popup',
-  // We will display Google , Facebook , Etc as auth providers.
-  signInOptions: [
-    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID,
-  ],
-  callbacks: {
-    // Avoid redirects after sign-in.
-    signInSuccess: () => {
-      window.history.back();
-    }
-  }
-} as firebaseui.auth.Config;
+let loginWithGmail = () => {
+  let provider = new firebase.auth.GoogleAuthProvider();
+  firebase.auth().signInWithPopup(provider).then(function(result:any) {
+    // This gives you a Google Access Token. You can use it to access the Google API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    window.history.back();
+  }).catch(function(error:any) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    console.log(`${errorCode}: ${errorMessage}`);
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+}
+
+let loginWithFacebook = () => {
+  let provider = new firebase.auth.FacebookAuthProvider();
+  firebase.auth().signInWithPopup(provider).then(function(result:any) {
+    // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    var token = result.credential.accessToken;
+    // The signed-in user info.
+    var user = result.user;
+    // ...
+    window.history.back();
+  }).catch(function(error) {
+    // Handle Errors here.
+    var errorCode = error.code;
+    var errorMessage = error.message;
+    // The email of the user's account used.
+    var email = error.email;
+    // The firebase.auth.AuthCredential type that was used.
+    var credential = error.credential;
+    // ...
+  });
+}
 
 let LoginPage = (props: any) => {
 
@@ -74,7 +100,7 @@ let LoginPage = (props: any) => {
       <TextField id="textfield" label="Email" margin="normal" variant="outlined" onChange={(event) => setEmail(event.target.value)} /> 
       <TextField id="textfield" label="Password" margin="normal" type="password" variant="outlined" onChange={(event) => setPass(event.target.value)}/> 
       {error ? <p style={{color: "red"}}>{error}</p> : null}
-      <AccountButton id="login-button" icon="account_circle" text="LOGIN" onClick={() => submitLogin()}/>
+      <AccountButton id="login-button" icon="account_circle" text="Login" onClick={() => submitLogin()}/>
       <div id="account-form">
         <AccountButton id="grey-button" icon="person_add" text="Register account" onClick={() => props.setState("register")}/>
         <AccountButton id="grey-button" icon="apps" text="Different Method" onClick={() => props.setState("oauth")}/>
@@ -132,7 +158,15 @@ let OAuthPage = (props: any) => {
   return(
     <>
       <div id="oauth-text">Use Different Method</div>
-      <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} /> 
+      <Button id="google-button" onClick={() => loginWithGmail()}>
+        <i><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"/></i>
+        Sign in with Google
+      </Button>
+      <Button id="facebook-button" onClick={() => loginWithFacebook()}>
+        <i><img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg"/></i>
+        Sign in with Facebook
+      </Button>
+      {/* <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />  */}
       <AccountButton id="grey-button" icon="apps" text="Back to Main page" onClick={() => props.setState("main")}/>
     </>
   )

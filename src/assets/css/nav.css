@@ -117,7 +117,7 @@
 
 #user-panel > img {
   margin-left: 10px;
-  width:36px;
+  width:36px !important;
   height:36px;
   border-radius:5px;
   object-fit: fill;
