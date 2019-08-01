@@ -22,7 +22,7 @@
     "firebaseui": "^4.1.0",
     "graphql": "^14.1.1",
     "graphql-tools": "^4.0.5",
-    "merge-graphql-schemas": "^1.6.1",
+    "merge-graphql-schemas": "^1.7.0",
     "mongodb": "^3.1.13",
     "mongoose": "^5.6.7",
     "next": "^9.0.3",
