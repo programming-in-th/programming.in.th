@@ -5,7 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.3.0",
     "@material-ui/icons": "^4.2.1",
-    "@tanem/react-nprogress": "^1.1.32",
+    "@tanem/react-nprogress": "^2.0.0",
     "@types/jest": "24.0.16",
     "@types/node": "12.6.8",
     "@types/react": "16.8.23",
