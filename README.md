@@ -26,7 +26,7 @@ yarn
 To start:
 
 ```bash
-yarn start
+firebase serve
 ```
 
 To dev:
