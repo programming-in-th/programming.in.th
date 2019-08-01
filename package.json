@@ -25,7 +25,7 @@
     "merge-graphql-schemas": "^1.6.1",
     "mongodb": "^3.1.13",
     "mongoose": "^5.6.7",
-    "next": "^9.0.2",
+    "next": "^9.0.3",
     "next-nprogress": "^1.4.0",
     "now": "^15.8.7",
     "nprogress": "^0.2.0",
