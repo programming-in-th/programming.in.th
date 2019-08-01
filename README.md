@@ -17,17 +17,26 @@ Install for OSX:
 brew install yarn
 ```
 
-Add Environment:
+Add node_modules:
+
 ```bash
-yarn global add now
+yarn 
 ```
 
-To dev:
+To start:
+
 ```bash
 yarn start
 ```
 
-To deploy:
+To dev:
+
 ```bash
-now
+yarn dev
+```
+
+To deploy:
+
+```bash
+firebase deploy
 ```

@@ -19,6 +19,7 @@
     "express-graphql": "^0.9.0",
     "firebase": "^6.3.3",
     "firebase-admin": "^8.3.0",
+    "firebase-tools": "^7.2.2",
     "firebaseui": "^4.1.0",
     "graphql": "^14.1.1",
     "graphql-tools": "^4.0.5",
@@ -39,7 +40,7 @@
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "styled-jsx": "3.2.1",
-    "typescript": "3.5.3"
+    "typescript": "3.4.5"
   },
   "scripts": {
     "start": "react-scripts start",
