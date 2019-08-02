@@ -55,7 +55,7 @@ class Account extends React.Component<{}, accountState> {
 
   render() {
     return (
-      <>
+      <React.Fragment>
         {firebase.auth().currentUser ? (
           <button id="user-panel" onClick={() => this.firebaseLogout()}>
             <p>
@@ -83,7 +83,7 @@ class Account extends React.Component<{}, accountState> {
             />
           </Link>
         )}
-      </>
+      </React.Fragment>
     )
   }
 }
