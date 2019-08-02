@@ -1,5 +1,6 @@
 /* React */
 import React, { useState } from 'react'
+import { withRouter } from 'react-router';
 
 /* React Component */
 import TextField from '@material-ui/core/TextField'
@@ -10,6 +11,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 import '../assets/css/login.css'
+import { getThemeProps } from '@material-ui/styles';
 
 interface IButtonProps {
   id?: String
@@ -34,13 +36,13 @@ const AccountButton: React.FunctionComponent<IButtonProps> = (
   )
 }
 
-const loginWithGmail = () => {
+const loginWithGmail = (history : any) => {
   const provider = new firebase.auth.GoogleAuthProvider()
   firebase
     .auth()
     .signInWithPopup(provider)
     .then(() => {
-      window.history.back()
+      history.length > 2 ? history.goBack() : history.replace("/")
     })
     .catch((error: any) => {
       const { code, message } = error
@@ -48,13 +50,13 @@ const loginWithGmail = () => {
     })
 }
 
-const loginWithFacebook = () => {
+const loginWithFacebook = (history : any) => {
   const provider = new firebase.auth.FacebookAuthProvider()
   firebase
     .auth()
     .signInWithPopup(provider)
     .then(() => {
-      window.history.back()
+      history.length > 2 ? history.goBack() : history.replace("/")
     })
     .catch(function(error: any) {
       const { code, message } = error
@@ -67,7 +69,7 @@ const LoginPage = (props: any) => {
   const [pass, setPass] = useState('')
   const [error, setError] = useState('')
 
-  const submitLogin = () => {
+  const submitLogin = (history : any) => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, pass)
@@ -77,7 +79,7 @@ const LoginPage = (props: any) => {
           if (!currentUser.emailVerified) {
             firebase.auth().signOut()
             setError('Please Verify Your Email')
-          } else window.history.back()
+          } else history.length > 2 ? history.goBack() : history.replace("/")
       })
       .catch(function(error) {
         setError(error.message)
@@ -85,7 +87,7 @@ const LoginPage = (props: any) => {
   }
 
   return (
-    <form onSubmit={() => submitLogin()} style={{ width: '100%' }}>
+    <form onSubmit={() => submitLogin(props.history)} style={{ width: '100%' }}>
       <div id="main-text">Login</div>
       <TextField
         id="textfield"
@@ -107,7 +109,7 @@ const LoginPage = (props: any) => {
         id="login-button"
         icon="account_circle"
         text="Login"
-        onClick={() => submitLogin()}
+        onClick={() => submitLogin(props.history)}
       />
       <div id="account-form">
         <AccountButton
@@ -133,7 +135,7 @@ const RegisterPage = (props: any) => {
   const [passC, setPassC] = useState('')
   const [error, setError] = useState('')
 
-  let submitRegister = () => {
+  let submitRegister = (history : any) => {
     if (pass != passC) {
       setError('password not match')
       return
@@ -147,7 +149,7 @@ const RegisterPage = (props: any) => {
           currentUser.sendEmailVerification()
         }
         firebase.auth().signOut()
-        window.history.back()
+        history.length > 2 ? history.goBack() : history.replace("/")
       })
       .catch(function(error) {
         setError(error.message)
@@ -155,7 +157,7 @@ const RegisterPage = (props: any) => {
   }
 
   return (
-    <form onSubmit={() => submitRegister()} style={{ width: '100%' }}>
+    <form onSubmit={() => submitRegister(props.history)} style={{ width: '100%' }}>
       <div id="main-text">Register</div>
       <TextField
         id="textfield"
@@ -185,7 +187,7 @@ const RegisterPage = (props: any) => {
         icon="person_add"
         id="login-button"
         text="Sign Up"
-        onClick={() => submitRegister()}
+        onClick={() => submitRegister(props.history)}
       />
       <AccountButton
         id="grey-button"
@@ -201,13 +203,13 @@ let OAuthPage = (props: any) => {
   return (
     <React.Fragment>
       <div id="oauth-text">Use Different Method</div>
-      <Button id="google-button" onClick={() => loginWithGmail()}>
+      <Button id="google-button" onClick={() => loginWithGmail(props.history)}>
         <i>
           <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" />
         </i>
         Sign in with Google
       </Button>
-      <Button id="facebook-button" onClick={() => loginWithFacebook()}>
+      <Button id="facebook-button" onClick={() => loginWithFacebook(props.history)}>
         <i>
           <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg" />
         </i>
@@ -223,7 +225,7 @@ let OAuthPage = (props: any) => {
   )
 }
 
-export const Login = () => {
+export const Login = (props : any) => {
   const [state, setState] = useState('main')
   return (
     <React.Fragment>
@@ -237,14 +239,16 @@ export const Login = () => {
       ) : (
         <div id="account-container">
           {state == 'main' ? (
-            <LoginPage setState={setState} />
+            <LoginPage setState={setState} history={props.history} />
           ) : state == 'register' ? (
-            <RegisterPage setState={setState} />
+            <RegisterPage setState={setState} history={props.history} />
           ) : (
-            <OAuthPage setState={setState} />
+            <OAuthPage setState={setState} history={props.history} />
           )}
         </div>
       )}
     </React.Fragment>
   )
 }
+
+export default withRouter(Login)

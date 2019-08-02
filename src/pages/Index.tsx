@@ -1,5 +1,6 @@
 /* React */
 import React from 'react'
+import { withRouter } from 'react-router';
 
 /* React Component */
 import { CustomCard } from '../components/Card'
@@ -56,3 +57,5 @@ export const Index: React.FunctionComponent = () => (
     </div>
   </React.Fragment>
 )
+
+export default withRouter(Index)

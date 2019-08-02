@@ -15,7 +15,7 @@ import { Login } from './pages/Login'
 import { NotFound } from './pages/404'
 
 /* React Component */
-import { Nav } from './components/Nav/Nav'
+import { Nav } from './components/nav/Nav'
 
 /* Static */
 import './assets/css/init.css'
