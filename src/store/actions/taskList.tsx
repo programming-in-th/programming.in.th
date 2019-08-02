@@ -1,4 +1,4 @@
-import * as actionTypes from './task_list_action_types'
+import * as actionTypes from './taskListActionType'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import axios from 'axios'
