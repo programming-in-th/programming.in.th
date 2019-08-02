@@ -1,17 +1,10 @@
-import * as actionTypes from './taskListActionType'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import axios from 'axios'
 
+export const LOAD_TAGS = 'LOAD_TAGS'
 export const loadTags = () => {
   // TODO: Implement
-}
-
-export const loadTasksSync = (taskList: Array<Object>) => {
-  return {
-    type: actionTypes.LOAD_TASKS,
-    taskList: taskList
-  }
 }
 
 export const loadTasks = (
@@ -20,6 +13,7 @@ export const loadTasks = (
   tags: Array<String>
 ) => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+    dispatch(requestTasks())
     try {
       let url =
         'https://us-central1-grader-ef0b5.cloudfunctions.net/getAllTasksWithFilter?limit=10'
@@ -38,9 +32,24 @@ export const loadTasks = (
         url += tagString
       }
       const response = (await axios.get(url)).data
-      dispatch(loadTasksSync(response))
+      dispatch(receiveTasks(response))
     } catch (error) {
       console.log(error)
     }
+  }
+}
+
+export const REQUEST_TASKS = 'REQUEST_TASKS'
+const requestTasks = () => {
+  return {
+    type: REQUEST_TASKS
+  }
+}
+
+export const RECEIVE_TASKS = 'RECEIVE_TASKS'
+const receiveTasks = (data: any) => {
+  return {
+    type: RECEIVE_TASKS,
+    taskList: data
   }
 }

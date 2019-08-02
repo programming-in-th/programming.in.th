@@ -1,6 +1,6 @@
 /* React */
 import React, { useState } from 'react'
-import { withRouter } from 'react-router';
+import { withRouter } from 'react-router'
 
 /* React Component */
 import TextField from '@material-ui/core/TextField'
@@ -11,7 +11,6 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 import '../assets/css/login.css'
-import { getThemeProps } from '@material-ui/styles';
 
 interface IButtonProps {
   id?: String
@@ -36,13 +35,13 @@ const AccountButton: React.FunctionComponent<IButtonProps> = (
   )
 }
 
-const loginWithGmail = (history : any) => {
+const loginWithGmail = (history: any) => {
   const provider = new firebase.auth.GoogleAuthProvider()
   firebase
     .auth()
     .signInWithPopup(provider)
     .then(() => {
-      history.length > 2 ? history.goBack() : history.replace("/")
+      history.length > 2 ? history.goBack() : history.replace('/')
     })
     .catch((error: any) => {
       const { code, message } = error
@@ -50,13 +49,13 @@ const loginWithGmail = (history : any) => {
     })
 }
 
-const loginWithFacebook = (history : any) => {
+const loginWithFacebook = (history: any) => {
   const provider = new firebase.auth.FacebookAuthProvider()
   firebase
     .auth()
     .signInWithPopup(provider)
     .then(() => {
-      history.length > 2 ? history.goBack() : history.replace("/")
+      history.length > 2 ? history.goBack() : history.replace('/')
     })
     .catch(function(error: any) {
       const { code, message } = error
@@ -69,7 +68,7 @@ const LoginPage = (props: any) => {
   const [pass, setPass] = useState('')
   const [error, setError] = useState('')
 
-  const submitLogin = (history : any) => {
+  const submitLogin = (history: any) => {
     firebase
       .auth()
       .signInWithEmailAndPassword(email, pass)
@@ -79,7 +78,7 @@ const LoginPage = (props: any) => {
           if (!currentUser.emailVerified) {
             firebase.auth().signOut()
             setError('Please Verify Your Email')
-          } else history.length > 2 ? history.goBack() : history.replace("/")
+          } else history.length > 2 ? history.goBack() : history.replace('/')
       })
       .catch(function(error) {
         setError(error.message)
@@ -135,7 +134,7 @@ const RegisterPage = (props: any) => {
   const [passC, setPassC] = useState('')
   const [error, setError] = useState('')
 
-  let submitRegister = (history : any) => {
+  let submitRegister = (history: any) => {
     if (pass != passC) {
       setError('password not match')
       return
@@ -149,7 +148,7 @@ const RegisterPage = (props: any) => {
           currentUser.sendEmailVerification()
         }
         firebase.auth().signOut()
-        history.length > 2 ? history.goBack() : history.replace("/")
+        history.length > 2 ? history.goBack() : history.replace('/')
       })
       .catch(function(error) {
         setError(error.message)
@@ -157,7 +156,10 @@ const RegisterPage = (props: any) => {
   }
 
   return (
-    <form onSubmit={() => submitRegister(props.history)} style={{ width: '100%' }}>
+    <form
+      onSubmit={() => submitRegister(props.history)}
+      style={{ width: '100%' }}
+    >
       <div id="main-text">Register</div>
       <TextField
         id="textfield"
@@ -199,7 +201,7 @@ const RegisterPage = (props: any) => {
   )
 }
 
-let OAuthPage = (props: any) => {
+const OAuthPage = (props: any) => {
   return (
     <React.Fragment>
       <div id="oauth-text">Use Different Method</div>
@@ -209,7 +211,10 @@ let OAuthPage = (props: any) => {
         </i>
         Sign in with Google
       </Button>
-      <Button id="facebook-button" onClick={() => loginWithFacebook(props.history)}>
+      <Button
+        id="facebook-button"
+        onClick={() => loginWithFacebook(props.history)}
+      >
         <i>
           <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg" />
         </i>
@@ -225,7 +230,7 @@ let OAuthPage = (props: any) => {
   )
 }
 
-export const Login = (props : any) => {
+export const Login = (props: any) => {
   const [state, setState] = useState('main')
   return (
     <React.Fragment>

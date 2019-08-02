@@ -1,6 +1,7 @@
 export interface TaskListState {
   taskList: Object[]
   tags: Array<String>
+  status: 'LOADING' | 'SUCCESS'
 }
 
 export interface TaskList {

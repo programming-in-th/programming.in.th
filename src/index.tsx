@@ -15,7 +15,7 @@ import { Login } from './pages/Login'
 import { NotFound } from './pages/404'
 
 /* React Component */
-import { Nav } from './components/nav/Nav'
+import { Nav } from './components/Nav/Nav'
 
 /* Static */
 import './assets/css/init.css'
@@ -29,6 +29,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import taskListReducer from './store/reducers/task_list'
 import { Provider } from 'react-redux'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
 if (!firebase.apps.length) {
   const firebaseConfig = {
@@ -61,7 +62,10 @@ const rootReducer = combineReducers({
   tasks: taskListReducer
 })
 
-const store = createStore(rootReducer, applyMiddleware(thunk))
+const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+)
 
 const Root = () => {
   return (
