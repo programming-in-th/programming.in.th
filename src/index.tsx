@@ -33,6 +33,7 @@ import userReducer from './redux/reducers/user'
 import { Provider, connect } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
+import { firebaseConfig } from './config'
 if (!firebase.apps.length) {
   const firebaseConfig = {
     apiKey: 'AIzaSyCjd-glhd1Rl_QJUfLp4w2zxEB94bhIsJE',
