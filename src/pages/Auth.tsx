@@ -10,6 +10,8 @@ import Button from '@material-ui/core/Button'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
+import H from 'history'
+
 import '../assets/css/login.css'
 
 interface IButtonProps {
@@ -35,7 +37,7 @@ const AccountButton: React.FunctionComponent<IButtonProps> = (
   )
 }
 
-const loginWithGmail = async (history: any) => {
+const loginWithGmail = async (history: H.History) => {
   const provider = new firebase.auth.GoogleAuthProvider()
   try {
     await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -56,8 +58,30 @@ const loginWithGmail = async (history: any) => {
   }
 }
 
-const loginWithFacebook = async (history: any) => {
+const loginWithFacebook = async (history: H.History) => {
   const provider = new firebase.auth.FacebookAuthProvider()
+
+  try {
+    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+
+    return firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(() => {
+        history.length > 2 ? history.goBack() : history.replace('/')
+      })
+      .catch((error: any) => {
+        const { code, message } = error
+        console.log(`${code}: ${message}`)
+      })
+  } catch (error) {
+    const { code, message } = error
+    console.log(`${code}: ${message}`)
+  }
+}
+
+const loginWithGithub = async (history: H.History) => {
+  const provider = new firebase.auth.GithubAuthProvider()
 
   try {
     await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -83,7 +107,7 @@ const LoginPage = (props: any) => {
   const [pass, setPass] = useState('')
   const [error, setError] = useState('')
 
-  const submitLogin = async (history: any) => {
+  const submitLogin = async (history: H.History) => {
     try {
       await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
 
@@ -155,7 +179,7 @@ const RegisterPage = (props: any) => {
   const [passC, setPassC] = useState('')
   const [error, setError] = useState('')
 
-  let submitRegister = (history: any) => {
+  let submitRegister = (history: H.History) => {
     if (pass !== passC) {
       setError('password not match')
       return
@@ -235,6 +259,15 @@ const OAuthPage = (props: any) => {
         </i>
         Sign in with Google
       </Button>
+      <Button id="github-button" onClick={() => loginWithGithub(props.history)}>
+        <i>
+          <img
+            alt="google"
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/github.svg"
+          />
+        </i>
+        Sign in with GitHub
+      </Button>
       <Button
         id="facebook-button"
         onClick={() => loginWithFacebook(props.history)}
@@ -257,7 +290,7 @@ const OAuthPage = (props: any) => {
   )
 }
 
-export const Login = (props: any) => {
+export const Auth = (props: any) => {
   const [state, setState] = useState('main')
   return (
     <React.Fragment>
@@ -283,4 +316,4 @@ export const Login = (props: any) => {
   )
 }
 
-export default withRouter(Login)
+export const AuthPage = withRouter(Auth)

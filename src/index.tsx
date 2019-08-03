@@ -11,7 +11,7 @@ import { blue } from '@material-ui/core/colors'
 /* Pages */
 import { Index } from './pages/Index'
 import { TasksPage } from './pages/Tasks'
-import { Login } from './pages/Login'
+import { AuthPage } from './pages/Auth'
 import { NotFound } from './pages/404'
 
 /* React Component */
@@ -26,25 +26,16 @@ import firebase from 'firebase'
 
 /* Redux */
 import * as actionCreators from './redux/actions/index'
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
+import { createStore, combineReducers, applyMiddleware, AnyAction } from 'redux'
+import thunk, { ThunkDispatch } from 'redux-thunk'
 import taskReducer from './redux/reducers/task'
 import userReducer from './redux/reducers/user'
 import { Provider, connect } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import { firebaseConfig } from './config'
+
 if (!firebase.apps.length) {
-  const firebaseConfig = {
-    apiKey: 'AIzaSyCjd-glhd1Rl_QJUfLp4w2zxEB94bhIsJE',
-    authDomain: 'grader-ef0b5.firebaseapp.com',
-    databaseURL: 'https://grader-ef0b5.firebaseio.com',
-    projectId: 'grader-ef0b5',
-    storageBucket: 'grader-ef0b5.appspot.com',
-    messagingSenderId: '408883593148',
-    appId: '1:408883593148:web:7e080f677cb99238'
-  }
-  // Initialize Firebase
   firebase.initializeApp(firebaseConfig)
 }
 
@@ -88,7 +79,7 @@ class Root extends React.Component<IRootProps> {
             <Switch>
               <Route exact path="/" component={Index} />
               <Route exact path="/tasks" component={TasksPage} />
-              <Route exact path="/login" component={Login} />
+              <Route exact path="/login" component={AuthPage} />
               <Route component={NotFound} />
             </Switch>
           </React.Fragment>
@@ -98,7 +89,9 @@ class Root extends React.Component<IRootProps> {
   }
 }
 
-const mapDispatchToProps: (dispatch: any) => any = dispatch => {
+const mapDispatchToProps: (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) => any = dispatch => {
   return {
     onInitialLoad: () => {
       dispatch(actionCreators.fetchUser())
