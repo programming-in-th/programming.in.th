@@ -8,7 +8,6 @@ import '../../assets/css/nav.css'
 
 /* React Util */
 import {
-  makeStyles,
   Icon,
   SwipeableDrawer,
   List,

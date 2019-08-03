@@ -59,11 +59,12 @@ class Account extends React.Component<{}, accountState> {
         {firebase.auth().currentUser ? (
           <button id="user-panel" onClick={() => this.firebaseLogout()}>
             <p>
-              {this.state.displayName == '' ? 'User' : this.state.displayName}
+              {this.state.displayName === '' ? 'User' : this.state.displayName}
             </p>
             <img
+              alt="avatar"
               src={
-                this.state.avatar == ''
+                this.state.avatar === ''
                   ? '/assets/img/default-user.png'
                   : `${this.state.avatar}`
               }
@@ -72,11 +73,12 @@ class Account extends React.Component<{}, accountState> {
         ) : (
           <Link to="/login" id="user-panel">
             <p>
-              {this.state.displayName == '' ? 'Guest' : this.state.displayName}
+              {this.state.displayName === '' ? 'Guest' : this.state.displayName}
             </p>
             <img
+              alt="avatar"
               src={
-                this.state.avatar == ''
+                this.state.avatar === ''
                   ? '/assets/img/default-user.png'
                   : `${this.state.avatar}`
               }
