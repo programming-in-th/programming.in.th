@@ -10,13 +10,13 @@ export default function(ComposedComponent: React.ElementType) {
   }> {
     componentWillMount() {
       if (this.props.user === null) {
-        this.props.history.push('/')
+        this.props.history.push('/login')
       }
     }
 
     componentWillUpdate(nextProps: { user: firebase.User }) {
       if (!nextProps.user) {
-        this.props.history.push('/')
+        this.props.history.push('/login')
       }
     }
 
