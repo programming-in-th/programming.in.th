@@ -2,7 +2,7 @@
 import React from 'react'
 
 /* React Util */
-import { List } from '@material-ui/core'
+import { List, CircularProgress } from '@material-ui/core'
 
 /* Redux */
 import { connect } from 'react-redux'
@@ -18,6 +18,7 @@ import '../assets/css/avatar.css'
 
 interface ITasksPageProps {
   taskList: TaskList[]
+  status: string
   onInitialLoad: () => void
 }
 
@@ -40,8 +41,16 @@ class Tasks extends React.Component<ITasksPageProps> {
       : []
 
     return (
-      <div id="task-list-wrapper">
-        <List component="nav">{listItems}</List>
+      <div>
+        {this.props.status === 'LOADING' ? (
+          <div style={{ textAlign: 'center' }}>
+            <CircularProgress />
+          </div>
+        ) : (
+          <div id="task-list-wrapper">
+            <List component="nav">{listItems}</List>
+          </div>
+        )}
       </div>
     )
   }
@@ -50,7 +59,8 @@ class Tasks extends React.Component<ITasksPageProps> {
 const mapStateToProps: (state: any) => any = state => {
   return {
     tags: state.tasks.tags,
-    taskList: state.tasks.taskList
+    taskList: state.tasks.taskList,
+    status: state.tasks.status
   }
 }
 
