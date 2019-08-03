@@ -35,32 +35,47 @@ const AccountButton: React.FunctionComponent<IButtonProps> = (
   )
 }
 
-const loginWithGmail = (history: any) => {
+const loginWithGmail = async (history: any) => {
   const provider = new firebase.auth.GoogleAuthProvider()
-  firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then(() => {
-      history.length > 2 ? history.goBack() : history.replace('/')
-    })
-    .catch((error: any) => {
-      const { code, message } = error
-      console.log(`${code}: ${message}`)
-    })
+  try {
+    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+
+    return firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(() => {
+        history.length > 2 ? history.goBack() : history.replace('/')
+      })
+      .catch((error: any) => {
+        const { code, message } = error
+        console.log(`${code}: ${message}`)
+      })
+  } catch (error) {
+    const { code, message } = error
+    console.log(`${code}: ${message}`)
+  }
 }
 
-const loginWithFacebook = (history: any) => {
+const loginWithFacebook = async (history: any) => {
   const provider = new firebase.auth.FacebookAuthProvider()
-  firebase
-    .auth()
-    .signInWithPopup(provider)
-    .then(() => {
-      history.length > 2 ? history.goBack() : history.replace('/')
-    })
-    .catch(function(error: any) {
-      const { code, message } = error
-      console.log(`${code}: ${message}`)
-    })
+
+  try {
+    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+
+    return firebase
+      .auth()
+      .signInWithPopup(provider)
+      .then(() => {
+        history.length > 2 ? history.goBack() : history.replace('/')
+      })
+      .catch((error: any) => {
+        const { code, message } = error
+        console.log(`${code}: ${message}`)
+      })
+  } catch (error) {
+    const { code, message } = error
+    console.log(`${code}: ${message}`)
+  }
 }
 
 const LoginPage = (props: any) => {
@@ -68,21 +83,27 @@ const LoginPage = (props: any) => {
   const [pass, setPass] = useState('')
   const [error, setError] = useState('')
 
-  const submitLogin = (history: any) => {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, pass)
-      .then(() => {
-        const currentUser = firebase.auth().currentUser
-        if (currentUser)
-          if (!currentUser.emailVerified) {
-            firebase.auth().signOut()
-            setError('Please Verify Your Email')
-          } else history.length > 2 ? history.goBack() : history.replace('/')
-      })
-      .catch(function(error) {
-        setError(error.message)
-      })
+  const submitLogin = async (history: any) => {
+    try {
+      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+
+      return firebase
+        .auth()
+        .signInWithEmailAndPassword(email, pass)
+        .then(() => {
+          const currentUser = firebase.auth().currentUser
+          if (currentUser)
+            if (!currentUser.emailVerified) {
+              firebase.auth().signOut()
+              setError('Please Verify Your Email')
+            } else history.length > 2 ? history.goBack() : history.replace('/')
+        })
+        .catch(function(error) {
+          setError(error.message)
+        })
+    } catch (error) {
+      setError(error.message)
+    }
   }
 
   return (
@@ -135,7 +156,7 @@ const RegisterPage = (props: any) => {
   const [error, setError] = useState('')
 
   let submitRegister = (history: any) => {
-    if (pass != passC) {
+    if (pass !== passC) {
       setError('password not match')
       return
     }
@@ -207,7 +228,10 @@ const OAuthPage = (props: any) => {
       <div id="oauth-text">Use Different Method</div>
       <Button id="google-button" onClick={() => loginWithGmail(props.history)}>
         <i>
-          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" />
+          <img
+            alt="google"
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg"
+          />
         </i>
         Sign in with Google
       </Button>
@@ -216,7 +240,10 @@ const OAuthPage = (props: any) => {
         onClick={() => loginWithFacebook(props.history)}
       >
         <i>
-          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg" />
+          <img
+            alt="facebook "
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/facebook.svg"
+          />
         </i>
         Sign in with Facebook
       </Button>
@@ -243,9 +270,9 @@ export const Login = (props: any) => {
           })
       ) : (
         <div id="account-container">
-          {state == 'main' ? (
+          {state === 'main' ? (
             <LoginPage setState={setState} history={props.history} />
-          ) : state == 'register' ? (
+          ) : state === 'register' ? (
             <RegisterPage setState={setState} history={props.history} />
           ) : (
             <OAuthPage setState={setState} history={props.history} />
