@@ -19,7 +19,7 @@ export const ForumListWrapper = () => {
           date="1 Jan"
         />
         <ForumList title="Hello yo yo" date="1 Jan" />
-        <ForumList title="Hello" date="1 Jan" />
+        <ForumList title="Hello firebase" date="1 Jan" />
         <ForumList title="Hello" date="1 Jan" />
       </List>
     </div>
