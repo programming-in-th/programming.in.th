@@ -18,13 +18,12 @@ import '../assets/css/avatar.css'
 
 interface ITasksPageProps {
   taskList: TaskList[]
-  onInitialLoad: any
+  onInitialLoad: () => void
 }
 
 class Tasks extends React.Component<ITasksPageProps> {
-  constructor(props: ITasksPageProps) {
-    super(props)
-    props.onInitialLoad()
+  componentDidMount() {
+    this.props.onInitialLoad()
   }
 
   render() {

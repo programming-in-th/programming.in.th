@@ -25,10 +25,12 @@ import './assets/css/responsive.css'
 import firebase from 'firebase'
 
 /* Redux */
+import * as actionCreators from './redux/actions/index'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import taskListReducer from './redux/reducers/task'
-import { Provider } from 'react-redux'
+import taskReducer from './redux/reducers/task'
+import userReducer from './redux/reducers/user'
+import { Provider, connect } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 if (!firebase.apps.length) {
@@ -59,7 +61,8 @@ const theme = createMuiTheme({
 })
 
 const rootReducer = combineReducers({
-  tasks: taskListReducer
+  tasks: taskReducer,
+  user: userReducer
 })
 
 const store = createStore(
@@ -67,27 +70,49 @@ const store = createStore(
   composeWithDevTools(applyMiddleware(thunk))
 )
 
-const Root = () => {
-  return (
-    <Router>
-      <MuiThemeProvider theme={theme}>
-        <React.Fragment>
-          <Nav />
-          <Switch>
-            <Route exact path="/" component={Index} />
-            <Route exact path="/tasks" component={TasksPage} />
-            <Route exact path="/login" component={Login} />
-            <Route component={NotFound} />
-          </Switch>
-        </React.Fragment>
-      </MuiThemeProvider>
-    </Router>
-  )
+interface IRootProps {
+  onInitialLoad: () => void
 }
+class Root extends React.Component<IRootProps> {
+  componentDidMount() {
+    this.props.onInitialLoad()
+  }
+
+  render() {
+    return (
+      <Router>
+        <MuiThemeProvider theme={theme}>
+          <React.Fragment>
+            <Nav />
+            <Switch>
+              <Route exact path="/" component={Index} />
+              <Route exact path="/tasks" component={TasksPage} />
+              <Route exact path="/login" component={Login} />
+              <Route component={NotFound} />
+            </Switch>
+          </React.Fragment>
+        </MuiThemeProvider>
+      </Router>
+    )
+  }
+}
+
+const mapDispatchToProps: (dispatch: any) => any = dispatch => {
+  return {
+    onInitialLoad: () => {
+      dispatch(actionCreators.fetchUser())
+    }
+  }
+}
+
+const RootPage = connect(
+  null,
+  mapDispatchToProps
+)(Root) as any
 
 ReactDOM.render(
   <Provider store={store}>
-    <Root />
+    <RootPage />
   </Provider>,
   document.getElementById('react')
 )

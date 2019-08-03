@@ -4,46 +4,13 @@ import React from 'react'
 /* React Component */
 import { Link } from 'react-router-dom'
 
+import { connect } from 'react-redux'
+
 /* Data model */
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-interface accountState {
-  toggleDetail: Boolean
-  toggleSignUp: Boolean
-  sign: Boolean
-  displayName: String
-  avatar: String
-}
-
-class Account extends React.Component<{}, accountState> {
-  constructor(props: any) {
-    super(props)
-    this.state = {
-      toggleDetail: false,
-      toggleSignUp: false,
-      sign: false,
-      displayName: '',
-      avatar: ''
-    }
-  }
-
-  reloadState() {
-    const account = firebase.auth().currentUser
-    if (account) {
-      this.setState({
-        displayName: account.displayName ? account.displayName : '',
-        avatar: account.photoURL ? account.photoURL : ''
-      })
-    }
-  }
-
-  componentWillMount() {
-    firebase.auth().onAuthStateChanged(() => {
-      this.reloadState()
-    })
-  }
-
+class Account extends React.Component<{ user: firebase.User }> {
   firebaseLogout() {
     firebase
       .auth()
@@ -54,35 +21,25 @@ class Account extends React.Component<{}, accountState> {
   }
 
   render() {
+    const { user } = this.props
     return (
       <React.Fragment>
-        {firebase.auth().currentUser ? (
+        {this.props.user ? (
           <button id="user-panel" onClick={() => this.firebaseLogout()}>
-            <p>
-              {this.state.displayName === '' ? 'User' : this.state.displayName}
-            </p>
+            <p>{user.displayName === '' ? 'User' : user.displayName}</p>
             <img
               alt="avatar"
               src={
-                this.state.avatar === ''
+                user.photoURL === ''
                   ? '/assets/img/default-user.png'
-                  : `${this.state.avatar}`
+                  : `${user.photoURL}`
               }
             />
           </button>
         ) : (
           <Link to="/login" id="user-panel">
-            <p>
-              {this.state.displayName === '' ? 'Guest' : this.state.displayName}
-            </p>
-            <img
-              alt="avatar"
-              src={
-                this.state.avatar === ''
-                  ? '/assets/img/default-user.png'
-                  : `${this.state.avatar}`
-              }
-            />
+            <p>Guest</p>
+            <img alt="avatar" src="/assets/img/default-user.png" />
           </Link>
         )}
       </React.Fragment>
@@ -90,6 +47,10 @@ class Account extends React.Component<{}, accountState> {
   }
 }
 
-export default function AccountRender() {
-  return <Account />
+const mapStateToProps: (state: any) => any = state => {
+  return {
+    user: state.user.user
+  }
 }
+
+export const AccountRender = connect(mapStateToProps)(Account) as any

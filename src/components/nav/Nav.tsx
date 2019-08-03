@@ -4,7 +4,7 @@ import React from 'react'
 /* React Component */
 import { Link } from 'react-router-dom'
 import LeftDrawer from './LeftDrawer'
-import AccountRender from './Account'
+import { AccountRender } from './Account'
 import '../../assets/css/nav.css'
 
 /* Data model */
