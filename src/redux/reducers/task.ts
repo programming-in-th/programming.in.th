@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux'
-import { TaskListState } from '../types/task_list_types'
-import { LOAD_TAGS, REQUEST_TASKS, RECEIVE_TASKS } from '../actions/taskList'
+import { TaskListState } from '../types/task'
+import { LOAD_TAGS, REQUEST_TASKS, RECEIVE_TASKS } from '../actions/task'
 
 const initialState: TaskListState = {
   taskList: [],

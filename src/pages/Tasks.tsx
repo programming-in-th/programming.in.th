@@ -6,11 +6,11 @@ import { List } from '@material-ui/core'
 
 /* Redux */
 import { connect } from 'react-redux'
-import * as actionCreators from '../store/actions/index'
-import { TaskList } from '../store/types/task_list_types'
+import * as actionCreators from '../redux/actions/index'
+import { TaskList } from '../redux/types/task'
 
 /* React Component */
-import TaskListItem from '../components/Tasks/TaskItem'
+import TaskListItem from '../components/tasks/TaskItem'
 
 /* Static */
 import '../assets/css/taskList.css'

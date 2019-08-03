@@ -15,7 +15,7 @@ import { Login } from './pages/Login'
 import { NotFound } from './pages/404'
 
 /* React Component */
-import { Nav } from './components/Nav/Nav'
+import { Nav } from './components/nav/Nav'
 
 /* Static */
 import './assets/css/init.css'
@@ -27,7 +27,7 @@ import firebase from 'firebase'
 /* Redux */
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import taskListReducer from './store/reducers/task_list'
+import taskListReducer from './redux/reducers/task'
 import { Provider } from 'react-redux'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
