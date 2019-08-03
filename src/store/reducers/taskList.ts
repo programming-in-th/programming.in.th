@@ -11,7 +11,9 @@ const initialState: TaskListState = {
 const reducer = (state = initialState, action: AnyAction): TaskListState => {
   switch (action.type) {
     case LOAD_TAGS:
-      return { ...state, ...{ tags: action.tags } }
+      return Object.assign({}, state, {
+        tags: action.tags
+      })
     case REQUEST_TASKS:
       return Object.assign({}, state, {
         status: 'LOADING'
@@ -21,7 +23,6 @@ const reducer = (state = initialState, action: AnyAction): TaskListState => {
         status: 'SUCCESS',
         taskList: action.taskList
       })
-
     default:
       return state
   }
