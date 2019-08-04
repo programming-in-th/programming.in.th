@@ -9,7 +9,7 @@ export const NotFound = () => {
   const style: { [name: string]: React.CSSProperties } = {
     container: {
       width: '100%',
-      height: 'calc(100vh - 83px)',
+      height: 'calc(100vh - 83px - 83px + 56px)',
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
