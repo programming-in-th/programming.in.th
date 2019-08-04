@@ -42,8 +42,8 @@ class Tasks extends React.Component<ITasksPageProps> {
 
     return (
       <div>
-        {this.props.status === 'LOADING' ? (
-          <div style={{ textAlign: 'center' }}>
+        {this.props.status === 'LOADING'? (
+          <div id="loading">
             <CircularProgress />
           </div>
         ) : (

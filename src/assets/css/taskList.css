@@ -22,3 +22,13 @@
 #task-list-wrapper > nav > li:first-child .task-list {
   border-top:unset !important;
 }
+
+#loading {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 83px - 83px + 56px); 
+  /* screen_height - 2*(body_padding_top) + height_navbar */
+}
