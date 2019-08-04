@@ -259,15 +259,6 @@ const OAuthPage = (props: any) => {
         </i>
         Sign in with Google
       </Button>
-      <Button id="github-button" onClick={() => loginWithGithub(props.history)}>
-        <i>
-          <img
-            alt="google"
-            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/github.svg"
-          />
-        </i>
-        Sign in with GitHub
-      </Button>
       <Button
         id="facebook-button"
         onClick={() => loginWithFacebook(props.history)}
@@ -279,6 +270,18 @@ const OAuthPage = (props: any) => {
           />
         </i>
         Sign in with Facebook
+      </Button>
+      <Button 
+        id="github-button" 
+        onClick={() => loginWithGithub(props.history)}
+      >
+        <i>
+          <img
+            alt="github"
+            src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/github.svg"
+          />
+        </i>
+        Sign in with GitHub
       </Button>
       <AccountButton
         id="grey-button"
