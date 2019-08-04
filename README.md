@@ -1,7 +1,13 @@
 # Grader
 
 ## Stack
+
 React.js, Firebase
+
+## Dev setup
+
+1. Create src/config.ts
+2. Export firebase config
 
 ## How to use
 
@@ -20,7 +26,7 @@ brew install yarn
 Add node_modules:
 
 ```bash
-yarn 
+yarn
 ```
 
 To start:
