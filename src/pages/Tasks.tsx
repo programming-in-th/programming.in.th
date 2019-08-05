@@ -10,7 +10,8 @@ import * as actionCreators from '../redux/actions/index'
 import { TaskList } from '../redux/types/task'
 
 /* React Component */
-import TaskListItem from '../components/tasks/TaskItem'
+import { TaskItem } from '../components/tasks/TaskItem'
+import { Task } from '../components/tasks/Task'
 
 /* Static */
 import '../assets/css/taskList.css'
@@ -22,7 +23,20 @@ interface ITasksPageProps {
   onInitialLoad: () => void
 }
 
-class Tasks extends React.Component<ITasksPageProps> {
+interface ITasksPageState {
+  currentTask: string
+}
+
+class Tasks extends React.Component<ITasksPageProps, ITasksPageState> {
+  state: ITasksPageState = {
+    currentTask: ''
+  }
+
+  handleClick = (task: string): void => {
+    this.setState({ currentTask: task })
+    console.log(task)
+  }
+
   componentDidMount() {
     this.props.onInitialLoad()
   }
@@ -31,10 +45,12 @@ class Tasks extends React.Component<ITasksPageProps> {
     const listItems = this.props.taskList
       ? this.props.taskList.map(task => {
           return (
-            <TaskListItem
+            <TaskItem
+              key={task.title}
               title={task.title}
               difficulty={task.difficulty}
               tags={task.tags}
+              onClick={() => this.handleClick(task.title)}
             />
           )
         })
@@ -42,10 +58,12 @@ class Tasks extends React.Component<ITasksPageProps> {
 
     return (
       <div>
-        {this.props.status === 'LOADING'? (
+        {this.props.status === 'LOADING' ? (
           <div id="loading">
             <CircularProgress />
           </div>
+        ) : this.state.currentTask !== '' ? (
+          <Task></Task>
         ) : (
           <div id="task-list-wrapper">
             <List component="nav">{listItems}</List>

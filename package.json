@@ -34,7 +34,7 @@
     "now-build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\" "
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\" "
   },
   "eslintConfig": {
     "extends": "react-app"

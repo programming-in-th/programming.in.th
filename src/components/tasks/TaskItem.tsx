@@ -10,13 +10,16 @@ import {
   Avatar
 } from '@material-ui/core'
 
-interface props {
+interface ITaskItemProps {
   title: string
   difficulty: number
   tags: Array<String>
+  onClick: () => void
 }
 
-export default (props: props) => {
+export const TaskItem: React.FunctionComponent<ITaskItemProps> = (
+  props: ITaskItemProps
+) => {
   let tags = ''
   if (props.tags)
     props.tags.forEach((element, index) => {
@@ -25,7 +28,7 @@ export default (props: props) => {
     })
 
   return (
-    <ListItem button className="task-list">
+    <ListItem button className="task-list" onClick={props.onClick}>
       <Avatar
         className={
           props.difficulty <= 4

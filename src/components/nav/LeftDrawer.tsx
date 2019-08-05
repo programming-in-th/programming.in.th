@@ -37,7 +37,7 @@ export default function LeftDrawer() {
 
   const DrawerIcon = (props: drawerProps) => {
     return (
-      <>
+      <React.Fragment>
         {props.to ? (
           <ListItem
             button
@@ -64,11 +64,11 @@ export default function LeftDrawer() {
             <ListItemText primary={props.text} className="grey-color" />
           </ListItem>
         )}
-      </>
+      </React.Fragment>
     )
   }
 
-  let firebaseLogout = () => {
+  const firebaseLogout = () => {
     firebase
       .auth()
       .signOut()

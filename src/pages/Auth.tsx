@@ -179,7 +179,7 @@ const RegisterPage = (props: any) => {
   const [passC, setPassC] = useState('')
   const [error, setError] = useState('')
 
-  let submitRegister = (history: H.History) => {
+  const submitRegister = (history: H.History) => {
     if (pass !== passC) {
       setError('password not match')
       return
@@ -271,10 +271,7 @@ const OAuthPage = (props: any) => {
         </i>
         Sign in with Facebook
       </Button>
-      <Button 
-        id="github-button" 
-        onClick={() => loginWithGithub(props.history)}
-      >
+      <Button id="github-button" onClick={() => loginWithGithub(props.history)}>
         <i>
           <img
             alt="github"

@@ -17,7 +17,7 @@ interface detailProps {
 
 const CardDetail = (props: detailProps) => {
   return (
-    <>
+    <React.Fragment>
       <div className="card-title">{props.title}</div>
       <div className="card-body">
         {props.description ? (
@@ -34,7 +34,7 @@ const CardDetail = (props: detailProps) => {
           </div>
         ) : null}
       </div>
-    </>
+    </React.Fragment>
   )
 }
 
