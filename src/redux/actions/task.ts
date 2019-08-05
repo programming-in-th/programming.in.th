@@ -55,10 +55,3 @@ const receiveTasks = (data: any) => {
 }
 
 export const LOAD_DETAILED_TASK = 'LOAD_DETAILED_TASK'
-const loadDetailedTask = (data: any) => {
-  return {
-    type: LOAD_DETAILED_TASK,
-    currentTask: data.id,
-    task: data
-  }
-}
