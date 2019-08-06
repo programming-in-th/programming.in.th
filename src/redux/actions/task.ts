@@ -1,13 +1,14 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import axios from 'axios'
+import { ITask } from '../types/task'
 
 export const LOAD_TAGS = 'LOAD_TAGS'
 export const loadTags = () => {
   // TODO: Implement
 }
 
-export const loadTasks = (
+export const loadTasksList = (
   min_difficulty: number,
   max_difficulty: number,
   tags: Array<String>
@@ -39,19 +40,34 @@ export const loadTasks = (
   }
 }
 
-export const REQUEST_TASKS = 'REQUEST_TASKS'
+export const REQUEST_TASKS_LIST = 'REQUEST_TASKS_LIST'
 const requestTasks = () => {
   return {
-    type: REQUEST_TASKS
+    type: REQUEST_TASKS_LIST
   }
 }
 
-export const RECEIVE_TASKS = 'RECEIVE_TASKS'
+export const RECEIVE_TASKS_LIST = 'RECEIVE_TASKS_LIST'
 const receiveTasks = (data: any) => {
   return {
-    type: RECEIVE_TASKS,
+    type: RECEIVE_TASKS_LIST,
     taskList: data
   }
 }
 
-export const LOAD_DETAILED_TASK = 'LOAD_DETAILED_TASK'
+export const loadTask = (id: string) => {
+  return (dispatch: ThunkDispatch<{}, {}, AnyAction>, getState: any): void => {
+    const task: ITask = getState().tasks.taskList.find(
+      (task: ITask) => task.problem_id === id
+    )
+    dispatch(loadCurrentTask(task))
+  }
+}
+
+export const LOAD_CURRENT_TASK = 'LOAD_CURRENT_TASK'
+const loadCurrentTask = (task: ITask) => {
+  return {
+    type: LOAD_CURRENT_TASK,
+    currentTask: task
+  }
+}

@@ -13,7 +13,7 @@ import {
 interface ITaskItemProps {
   title: string
   difficulty: number
-  tags: Array<String>
+  tags: ReadonlyArray<String>
   onClick: () => void
 }
 

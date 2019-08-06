@@ -26,14 +26,12 @@ import firebase from 'firebase'
 
 /* Redux */
 import * as actionCreators from './redux/actions/index'
-import { createStore, combineReducers, applyMiddleware, AnyAction } from 'redux'
-import thunk, { ThunkDispatch } from 'redux-thunk'
-import taskReducer from './redux/reducers/task'
-import userReducer from './redux/reducers/user'
+import { AnyAction } from 'redux'
+import { ThunkDispatch } from 'redux-thunk'
 import { Provider, connect } from 'react-redux'
-import { composeWithDevTools } from 'redux-devtools-extension'
-
 import { firebaseConfig } from './config'
+
+import { store } from './redux'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
@@ -51,16 +49,6 @@ const theme = createMuiTheme({
     // TODO: fix typography
   }
 })
-
-const rootReducer = combineReducers({
-  tasks: taskReducer,
-  user: userReducer
-})
-
-const store = createStore(
-  rootReducer,
-  composeWithDevTools(applyMiddleware(thunk))
-)
 
 interface IRootProps {
   onInitialLoad: () => void

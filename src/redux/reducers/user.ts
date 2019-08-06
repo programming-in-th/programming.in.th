@@ -1,7 +1,8 @@
 import { AnyAction } from 'redux'
 import { RECEIVE_USER } from '../actions/user'
+import { IUserState } from '../types/user'
 
-const initialState = {
+const initialState: IUserState = {
   user: null
 }
 

@@ -7,7 +7,7 @@ import { List, CircularProgress } from '@material-ui/core'
 /* Redux */
 import { connect } from 'react-redux'
 import * as actionCreators from '../redux/actions/index'
-import { TaskList } from '../redux/types/task'
+import { ITask } from '../redux/types/task'
 
 /* React Component */
 import { TaskItem } from '../components/tasks/TaskItem'
@@ -16,9 +16,11 @@ import { Task } from '../components/tasks/Task'
 /* Static */
 import '../assets/css/taskList.css'
 import '../assets/css/avatar.css'
+import { ThunkDispatch } from 'redux-thunk'
+import { AnyAction } from 'redux'
 
 interface ITasksPageProps {
-  taskList: TaskList[]
+  taskList: ITask[]
   status: string
   onInitialLoad: () => void
 }
@@ -34,7 +36,6 @@ class Tasks extends React.Component<ITasksPageProps, ITasksPageState> {
 
   handleClick = (task: string): void => {
     this.setState({ currentTask: task })
-    console.log(task)
   }
 
   componentDidMount() {
@@ -50,7 +51,7 @@ class Tasks extends React.Component<ITasksPageProps, ITasksPageState> {
               title={task.title}
               difficulty={task.difficulty}
               tags={task.tags}
-              onClick={() => this.handleClick(task.title)}
+              onClick={() => this.handleClick(task.problem_id)}
             />
           )
         })
@@ -63,7 +64,7 @@ class Tasks extends React.Component<ITasksPageProps, ITasksPageState> {
             <CircularProgress />
           </div>
         ) : this.state.currentTask !== '' ? (
-          <Task></Task>
+          <Task id={this.state.currentTask} />
         ) : (
           <div id="task-list-wrapper">
             <List component="nav">{listItems}</List>
@@ -82,11 +83,13 @@ const mapStateToProps: (state: any) => any = state => {
   }
 }
 
-const mapDispatchToProps: (dispatch: any) => any = dispatch => {
+const mapDispatchToProps: (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) => any = dispatch => {
   return {
     onInitialLoad: () => {
       // TODO: load tags
-      dispatch(actionCreators.loadTasks(-1, -1, []))
+      dispatch(actionCreators.loadTasksList(-1, -1, []))
     }
   }
 }

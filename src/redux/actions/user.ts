@@ -16,7 +16,7 @@ export const fetchUser = () => {
 }
 
 export const RECEIVE_USER = 'RECEIVE_USER'
-const receiveUser = (data: any) => {
+const receiveUser = (data: firebase.User | null) => {
   return {
     type: RECEIVE_USER,
     user: data
