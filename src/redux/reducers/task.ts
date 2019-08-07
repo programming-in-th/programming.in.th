@@ -1,4 +1,4 @@
-import { AnyAction } from 'redux'
+import { AnyAction, Reducer } from 'redux'
 import { ITaskState } from '../types/task'
 import {
   LOAD_TAGS,
@@ -14,7 +14,10 @@ const initialState: ITaskState = {
   status: 'LOADING'
 }
 
-const reducer = (state = initialState, action: AnyAction): ITaskState => {
+const reducer: Reducer = (
+  state = initialState,
+  action: AnyAction
+): ITaskState => {
   switch (action.type) {
     case LOAD_TAGS:
       return Object.assign({}, state, {

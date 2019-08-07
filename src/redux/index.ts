@@ -1,15 +1,36 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import {
+  createStore,
+  combineReducers,
+  applyMiddleware,
+  Store,
+  Reducer,
+  Action,
+  AnyAction,
+  Dispatch
+} from 'redux'
 import thunk from 'redux-thunk'
-import taskReducer from './reducers/task'
-import userReducer from './reducers/user'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-export const rootReducer = combineReducers({
+import taskReducer from './reducers/task'
+import userReducer from './reducers/user'
+import { ITaskState } from './types/task'
+import { IUserState } from './types/user'
+
+export interface IAppState {
+  tasks: ITaskState
+  user: IUserState
+}
+
+export interface ConnectedReduxProps<A extends Action = AnyAction> {
+  dispatch: Dispatch<A>
+}
+
+export const rootReducer: Reducer = combineReducers<IAppState>({
   tasks: taskReducer,
   user: userReducer
 })
 
-export const store = createStore(
+export const store: Store = createStore(
   rootReducer,
   {},
   composeWithDevTools(applyMiddleware(thunk))
