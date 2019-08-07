@@ -110,7 +110,6 @@ export default function LeftDrawer() {
         className="action-icon"
         onClick={toggleDrawer(!state)}
       >
-        // eslint-disable-next-line
         <a className="nav-icon ">
           <i className="material-icons">menu</i>
         </a>

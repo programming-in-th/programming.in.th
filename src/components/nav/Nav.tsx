@@ -18,7 +18,6 @@ interface NavProps {
 const LinkIcon = (props: NavProps) => {
   return (
     <Link to={`${props.to}`}>
-      // eslint-disable-next-line
       <a className="nav-icon link-icon-responsive">
         <i className="material-icons">{props.icon}</i>
       </a>
