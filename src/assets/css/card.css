@@ -1,78 +1,84 @@
 @import url('https://fonts.googleapis.com/css?family=DM+Sans&display=swap');
 .card-former {
-  display:flex;
-  flex:1;
+  display: flex;
+  flex: 1;
   margin: 5px 15px 10px 10px;
 }
 
-.card-former:hover .card-square, .card-former:focus .card-square {
-  margin-top:0;
+.card-former:hover .card-square,
+.card-former:focus .card-square {
+  margin-top: 0;
 }
 
 .card-wrapper {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: flex-start;
-  width:100%;
-  margin:0;
+  width: 100%;
+  margin: 0;
 }
 
-.card-wrapper > .card-former:first-child { margin-left:0; }
-.card-wrapper > .card-former:last-child { margin-right:0; }
+.card-wrapper > .card-former:first-child {
+  margin-left: 0;
+}
+.card-wrapper > .card-former:last-child {
+  margin-right: 0;
+}
 
 .card-square {
-  position:absolute;
-  z-index:1;
+  position: absolute;
+  z-index: 1;
   border-radius: 5px;
-  width:90px;
-  height:90px;
+  width: 90px;
+  height: 90px;
   margin: 15px 0 0 15px;
   background-color: #007aff;
-  box-shadow:0 5px 25px rgba(0,123,255,.625);
-  display:flex;
+  box-shadow: 0 5px 25px rgba(0, 123, 255, 0.625);
+  display: flex;
   justify-content: center;
   align-items: center;
-  transition:margin-top .25s ease-out;
+  transition: margin-top 0.25s ease-out;
 }
 
 .card-square > .material-icons {
   font-size: 45px;
-  color:#fff;
+  color: #fff;
 }
 
 .card {
   background-color: #ffffff;
-  box-shadow: 0 7px 25px rgba(0,0,0,.0925);
+  box-shadow: 0 7px 25px rgba(0, 0, 0, 0.0925);
   margin-top: 52.5px;
   border-radius: 5px;
   width: 100%;
   min-height: 100px;
-  display:flex;
+  display: flex;
   flex-direction: column;
 }
 
 .card-title {
-  padding:15px 15px 15px 140px;
-  min-height:90px;
-  display:flex;
+  padding: 15px 15px 15px 140px;
+  min-height: 90px;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
   font-size: 34px;
   font-family: 'DM Sans', sans-serif;
-  cursor:pointer;
+  cursor: pointer;
 }
 
-.card-body, .card > button {
-  display:flex;
+.card-body,
+.card > button {
+  display: flex;
   flex-direction: column !important;
   min-height: 25px;
 }
 
 .card-description {
-  padding:15px 25px;
-  cursor:pointer;
+  padding: 15px 25px;
+  cursor: pointer;
 }
 
 .card-description > p {
@@ -81,12 +87,12 @@
 }
 
 .card-footer {
-  padding:10px 15px;
-  display:flex;
+  padding: 10px 15px;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-content: center;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .card-button {
@@ -95,10 +101,10 @@
 
 .card-button > span > a {
   text-decoration: none;
-  color:#fff;
+  color: #fff;
 }
 
 .card-body-link {
   text-decoration: none;
-  color:unset;
+  color: unset;
 }

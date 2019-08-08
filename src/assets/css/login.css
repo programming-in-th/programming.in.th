@@ -4,7 +4,7 @@
   text-align: center;
   margin: 5px 0;
   font-family: Roboto;
-  display: block ;
+  display: block;
 }
 
 div#oauth-text {
@@ -21,7 +21,7 @@ div#oauth-text {
   background: transparent;
   box-shadow: unset;
   color: grey;
-  flex:1;
+  flex: 1;
 }
 
 #login-button {
@@ -49,7 +49,7 @@ div#oauth-text {
   background: transparent;
   box-shadow: unset;
   color: grey;
-  flex:1;
+  flex: 1;
 }
 
 #oauth-link {
@@ -67,7 +67,7 @@ div#oauth-text {
   align-items: center;
 }
 
-#account-container > button  > span > i {
+#account-container > button > span > i {
   font-size: 18px;
   margin-right: 8px;
 }
@@ -82,7 +82,8 @@ div#oauth-text {
 
 #google-button {
   background-color: white;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
   width: 250px;
   margin: 10px 0;
   text-align: left;
@@ -95,8 +96,9 @@ div#oauth-text {
 }
 
 #facebook-button {
-  background-color: #3B5998;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  background-color: #3b5998;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
   color: white;
   width: 250px;
   margin: 10px 0;
@@ -111,7 +113,8 @@ div#oauth-text {
 
 #github-button {
   background-color: black;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2),
+    0 1px 5px 0 rgba(0, 0, 0, 0.12);
   color: white;
   width: 250px;
   margin: 10px 0;
