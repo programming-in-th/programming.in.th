@@ -2,7 +2,7 @@
 import React from 'react'
 
 /* React Component */
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import LeftDrawer from './LeftDrawer'
 import { AccountRender } from './Account'
 import '../../assets/css/nav.css'
@@ -13,13 +13,19 @@ import 'firebase/auth'
 interface NavProps {
   icon: String
   to: String
+  exact?: Boolean
 }
 
 const LinkIcon = (props: NavProps) => {
   return (
-    <Link to={`${props.to}`} className="nav-icon link-icon-responsive">
-      <i className="material-icons">{props.icon}</i>
-    </Link>
+    props.exact ?
+      <NavLink to={`${props.to}`} exact activeClassName="nav-active" className="nav-icon link-icon-responsive">
+        <i className="material-icons">{props.icon}</i>
+      </NavLink>
+    :
+      <NavLink to={`${props.to}`} activeClassName="nav-active" className="nav-icon link-icon-responsive">
+        <i className="material-icons">{props.icon}</i>
+      </NavLink>
   )
 }
 
@@ -29,7 +35,7 @@ export const Nav = () => {
       <nav id="main-nav">
         <div>
           <LeftDrawer />
-          <LinkIcon icon="home" to="/" />
+          <LinkIcon icon="home" to="/" exact={true}/>
           <LinkIcon icon="functions" to="/tasks" />
           <LinkIcon icon="school" to="/learn" />
           <LinkIcon icon="forum" to="/forum" />
