@@ -1,48 +1,40 @@
-# Grader
+# programming.in.th [![DeepScan grade](https://deepscan.io/api/teams/4940/projects/6738/branches/57818/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=4940&pid=6738&bid=57818) [![CircleCI](https://circleci.com/gh/programming-in-th/programming.in.th.svg?style=svg)](https://circleci.com/gh/programming-in-th/programming.in.th)
+
+## What is programming.in.th
+
+It is where people come to practice about competitive programming!
 
 ## Stack
 
-React.js, Firebase
+React, Redux, Firebase
 
-## Dev setup
+## Project structure
 
-1. Create src/config.ts
-2. Export firebase config
-
-## How to use
-
-Install for linux:
-
-```bash
-sudo apt-get install yarn
+```
+├── .circleci
+├── public
+│   └── assets
+│       ├── css
+│       └── img
+└── src
+    ├── assets
+    │   ├── css
+    │   ├── fonts
+    │   └── material-icon
+    ├── components
+    │   ├── auth
+    │   ├── nav
+    │   └── tasks
+    ├── pages
+    └── redux
+        ├── actions
+        ├── reducers
+        └── types
 ```
 
-Install for OSX:
+## Core team
 
-```bash
-brew install yarn
-```
-
-Add node_modules:
-
-```bash
-yarn
-```
-
-To start:
-
-```bash
-firebase serve
-```
-
-To dev:
-
-```bash
-yarn dev
-```
-
-To deploy:
-
-```bash
-firebase deploy
-```
+- [@win11905](https://github.com/win11905)
+- [@iammarkps](https://github.com/iammarkps)
+- [@szawinis](https://github.com/szawinis)
+- [@PeppaPigHS](https://github.com/PeppaPigHS)
