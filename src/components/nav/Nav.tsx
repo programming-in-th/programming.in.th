@@ -17,10 +17,8 @@ interface NavProps {
 
 const LinkIcon = (props: NavProps) => {
   return (
-    <Link to={`${props.to}`}>
-      <a className="nav-icon link-icon-responsive">
-        <i className="material-icons">{props.icon}</i>
-      </a>
+    <Link to={`${props.to}`} className="nav-icon link-icon-responsive">
+      <i className="material-icons">{props.icon}</i>
     </Link>
   )
 }

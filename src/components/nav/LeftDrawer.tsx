@@ -110,9 +110,9 @@ export default function LeftDrawer() {
         className="action-icon"
         onClick={toggleDrawer(!state)}
       >
-        <a className="nav-icon ">
+        <div className="nav-icon ">
           <i className="material-icons">menu</i>
-        </a>
+        </div>
       </button>
       <SwipeableDrawer
         open={state}
