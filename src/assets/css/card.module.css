@@ -1,16 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=DM+Sans&display=swap');
-.card-former {
+
+.former {
   display: flex;
   flex: 1;
   margin: 5px 15px 10px 10px;
 }
 
-.card-former:hover .card-square,
-.card-former:focus .card-square {
+.former:hover .card-square,
+.former:focus .card-square {
   margin-top: 0;
 }
 
-.card-wrapper {
+.wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -19,14 +20,14 @@
   margin: 0;
 }
 
-.card-wrapper > .card-former:first-child {
+.wrapper > .former:first-child {
   margin-left: 0;
 }
-.card-wrapper > .card-former:last-child {
+.wrapper > .former:last-child {
   margin-right: 0;
 }
 
-.card-square {
+.square {
   position: absolute;
   z-index: 1;
   border-radius: 5px;
@@ -41,7 +42,7 @@
   transition: margin-top 0.25s ease-out;
 }
 
-.card-square > .material-icons {
+.square > .material-icons {
   font-size: 45px;
   color: #fff;
 }
@@ -57,7 +58,7 @@
   flex-direction: column;
 }
 
-.card-title {
+.title {
   padding: 15px 15px 15px 140px;
   min-height: 90px;
   display: flex;
@@ -69,24 +70,24 @@
   cursor: pointer;
 }
 
-.card-body,
+.body,
 .card > button {
   display: flex;
   flex-direction: column !important;
   min-height: 25px;
 }
 
-.card-description {
+.description {
   padding: 15px 25px;
   cursor: pointer;
 }
 
-.card-description > p {
+.description > p {
   font-size: 28px;
   font-family: Sarabun;
 }
 
-.card-footer {
+.footer {
   padding: 10px 15px;
   display: flex;
   flex-direction: row;
@@ -95,16 +96,16 @@
   cursor: pointer;
 }
 
-.card-button {
+.button {
   background-color: var(--primary);
 }
 
-.card-button > span > a {
+.button > span > a {
   text-decoration: none;
   color: #fff;
 }
 
-.card-body-link {
+.bodyLink {
   text-decoration: none;
   color: unset;
 }

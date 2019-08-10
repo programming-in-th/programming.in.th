@@ -8,11 +8,11 @@ import { List } from '@material-ui/core'
 import { ForumList } from './ForumList'
 
 /* Static */
-import '../assets/css/forumList.css'
+import styles from '../assets/css/forum.module.css'
 
 export const ForumListWrapper = () => {
   return (
-    <div id="forum-list-wrapper">
+    <div className={styles.wrapper}>
       <List component="nav">
         <ForumList
           title="Hello World! This is a test title for forum list testing!"

@@ -1,9 +1,0 @@
-@media screen and (max-width: 568px){
-    .link-icon-responsive {
-        display:none;
-    }
-    #main-nav {padding:0;}
-    #menu-icon {
-        margin-right:0;
-    }
-}

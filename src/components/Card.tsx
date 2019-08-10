@@ -6,7 +6,7 @@ import { Button, Card, CardActionArea } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 
 /* Static */
-import '../assets/css/card.css'
+import styles from '../assets/css/card.module.css'
 
 interface detailProps {
   title: string
@@ -18,17 +18,21 @@ interface detailProps {
 const CardDetail = (props: detailProps) => {
   return (
     <React.Fragment>
-      <div className="card-title">{props.title}</div>
-      <div className="card-body">
+      <div className={styles.title}>{props.title}</div>
+      <div className={styles.body}>
         {props.description ? (
-          <div className="card-description">
+          <div className={styles.description}>
             <p>{props.description}</p>
           </div>
         ) : null}
         {props.to && !props.linkCard ? (
-          <div className="card-footer">
+          <div className={styles.footer}>
             <div></div>
-            <Button variant="contained" color="primary" className="card-button">
+            <Button
+              variant="contained"
+              color="primary"
+              className={styles.button}
+            >
               <Link to={`${props.to}`}>{props.title}</Link>
             </Button>
           </div>
@@ -50,9 +54,9 @@ interface props {
 
 export const CustomCard = (props: props) => {
   return (
-    <div className="card-former">
+    <div className={styles.former}>
       <div
-        className="card-square"
+        className={styles.square}
         style={{
           backgroundColor: `${props.color}`,
           boxShadow: `0 5px 25px ${props.shadow}`
@@ -60,11 +64,11 @@ export const CustomCard = (props: props) => {
       >
         <i className="material-icons">{props.icon}</i>
       </div>
-      <div className="card">
+      <div className={styles.card}>
         {props.linkCard ? (
           <Card style={{ boxShadow: 'unset' }}>
             <CardActionArea>
-              <Link to={`${props.to}`} className="card-body-link">
+              <Link to={`${props.to}`} className={styles.bodyLink}>
                 <CardDetail
                   title={props.title}
                   description={props.description}

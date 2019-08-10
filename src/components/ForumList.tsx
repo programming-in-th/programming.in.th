@@ -10,6 +10,8 @@ import {
   Avatar
 } from '@material-ui/core'
 
+import styles from '../assets/css/forum.module.css'
+
 interface props {
   title: string
   date?: string
@@ -17,18 +19,18 @@ interface props {
 
 export const ForumList = (props: props) => {
   return (
-    <ListItem button className="forum-list">
+    <ListItem button className={styles.list}>
       <Avatar>
         <i className="material-icons">timeline</i>
       </Avatar>
       {props.date ? (
         <ListItemText
-          className="forum-item"
+          className={styles.item}
           primary={props.title}
           secondary={props.date}
         />
       ) : (
-        <ListItemText className="forum-item" primary={props.title} />
+        <ListItemText className={styles.item} primary={props.title} />
       )}
       <ListItemSecondaryAction>
         <IconButton aria-label="Delete">
