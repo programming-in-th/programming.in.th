@@ -3,10 +3,7 @@ import {
   combineReducers,
   applyMiddleware,
   Store,
-  Reducer,
-  Action,
-  AnyAction,
-  Dispatch
+  Reducer
 } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
@@ -19,10 +16,6 @@ import { IUserState } from './types/user'
 export interface IAppState {
   tasks: ITaskState
   user: IUserState
-}
-
-export interface ConnectedReduxProps<A extends Action = AnyAction> {
-  dispatch: Dispatch<A>
 }
 
 export const rootReducer: Reducer = combineReducers<IAppState>({
