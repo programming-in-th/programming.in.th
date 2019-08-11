@@ -20,7 +20,7 @@ export const loadTasksList = (
     dispatch(requestTasks())
     try {
       let url =
-        'https://us-central1-grader-ef0b5.cloudfunctions.net/api/getTasksWithFilter?limit=10'
+        'https://asia-east2-grader-ef0b5.cloudfunctions.net/api/getTasksWithFilter?limit=10'
       if (min_difficulty !== -1) {
         url += '&min_difficulty=' + min_difficulty
       }
