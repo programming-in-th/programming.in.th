@@ -20,7 +20,7 @@ class Submissions extends React.Component<ISubmissionsPageProps, any> {
 				<MaterialTable
 					columns={[
 						{ title: 'Date', field : 'timestamp'},
-						{ title : 'User', field: 'username' }, // TODO: change to username
+						{ title : 'User', field: 'username' },
 						{ title: 'Problem', field: 'problem_id' },
 						{ title: 'Language', field: 'language' },
 						{ title: 'Status', field: 'status' },
