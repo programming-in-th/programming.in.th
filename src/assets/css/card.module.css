@@ -42,7 +42,7 @@
   transition: margin-top 0.25s ease-out;
 }
 
-.square > .material-icons {
+.square > .icons {
   font-size: 45px;
   color: #fff;
 }

@@ -5,10 +5,13 @@ import React from 'react'
 import { CustomCard } from '../components/Card'
 import { ForumListWrapper } from '../components/ForumListWrapper'
 
+/* Static */
+import styles from '../assets/css/card.module.css'
+
 export const Index: React.FunctionComponent = () => (
   <React.Fragment>
     <div id="root">
-      <div className="card-wrapper">
+      <div className={styles.wrapper}>
         <CustomCard
           title="Tasks"
           icon="functions"
@@ -34,7 +37,7 @@ export const Index: React.FunctionComponent = () => (
           linkCard
         />
       </div>
-      <div className="card-wrapper">
+      <div className={styles.wrapper}>
         <CustomCard
           title="Forum"
           icon="forum"

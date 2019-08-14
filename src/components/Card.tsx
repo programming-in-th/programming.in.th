@@ -62,7 +62,7 @@ export const CustomCard = (props: props) => {
           boxShadow: `0 5px 25px ${props.shadow}`
         }}
       >
-        <i className="material-icons">{props.icon}</i>
+        <i className={`material-icons ${styles.icons}`}>{props.icon}</i>
       </div>
       <div className={styles.card}>
         {props.linkCard ? (
