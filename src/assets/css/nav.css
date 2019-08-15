@@ -53,7 +53,7 @@
 }
 
 .nav-active > i {
-  color:var(--primary);
+  color: var(--primary);
   border-bottom-color: var(--primary);
 }
 

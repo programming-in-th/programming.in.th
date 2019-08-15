@@ -4,6 +4,13 @@
 
 It is where people come to practice about competitive programming!
 
+## Table of Contents
+
+- [Codebase](#codebase)
+  - [The stack](#stack)
+  - [Project structure](#project-structure)
+- [Core Team Members](#core-team)
+
 ## Stack
 
 React, Redux, Firebase

@@ -16,7 +16,7 @@ interface ISubmissionsPageProps {
 class Submissions extends React.Component<ISubmissionsPageProps, any> {
 	render() {
 		return (
-			<div style={{ maxWidth: '100%', margin: '0 13px' }}>
+			<div style={{ maxWidth: '100%' }}>
 				<MaterialTable
 					columns={[
 						{ title: 'Date', field : 'timestamp'},
