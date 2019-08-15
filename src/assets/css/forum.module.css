@@ -22,3 +22,19 @@
 .wrapper > nav > li:first-child .forum-list {
   border-top: unset !important;
 }
+
+@media screen and (max-width: 567.9px) {
+  .wrapper {
+    width: calc(100% - 60px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 568px) and (max-width: 959.9px) {
+  .wrapper {
+    width: calc(100% - 60px);
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

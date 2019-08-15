@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=DM+Sans&display=swap');
 
+
+
 .former {
   display: flex;
   flex: 1;
@@ -108,4 +110,34 @@
 .bodyLink {
   text-decoration: none;
   color: unset;
+}
+@media screen and (max-width: 567.9px) {
+  .former {
+    width: 100%;
+    margin: 5px 0;
+  }
+  .wrapper {
+    flex-direction: column;
+    padding: 0 30px;
+  }
+}
+
+@media screen and (min-width: 568px) and (max-width: 959.9px) {
+  .former {
+    margin-top: 5px;
+  }
+  .wrapper {
+    padding: 0 30px;
+  }
+  .square {
+    width: 65px;
+    height: 65px;
+  }
+  .square .square > .icons {
+    font-size: 28px;
+  }
+  .title {
+    padding-top: 50px;
+    padding-left: 30px;
+  }
 }
