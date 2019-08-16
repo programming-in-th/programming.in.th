@@ -5,23 +5,30 @@ import React from 'react'
 import MaterialTable from 'material-table'
 
 /* Redux */
-import { ISubmission } from '../redux/types/task'
+import { ISubmissions } from '../redux/types/submission'
+import * as actionCreators from '../redux/actions/index'
+import { ThunkDispatch } from 'redux-thunk'
+import { AnyAction } from 'redux'
+import { connect } from 'react-redux'
 
 import styles from '../assets/css/submission.module.css'
 
 interface ISubmissionsPageProps {
-  submissionsList: ISubmission[]
+  submissionsList: ISubmissions[]
   status: string
   onInitialLoad: () => void
 }
 
-class Submissions extends React.Component<ISubmissionsPageProps, any> {
+class Submissions extends React.Component<ISubmissionsPageProps, {}> {
+  componentDidMount() {
+    this.props.onInitialLoad()
+  }
+
   render() {
     return (
       <div className={styles.wrapper}>
         <MaterialTable
           columns={[
-            { title: 'Date', field: 'timestamp' },
             { title: 'User', field: 'username' },
             { title: 'Problem', field: 'problem_id' },
             { title: 'Language', field: 'language' },
@@ -38,4 +45,23 @@ class Submissions extends React.Component<ISubmissionsPageProps, any> {
   }
 }
 
-export const SubmissionsPage = Submissions
+const mapStateToProps: (state: any) => any = state => {
+  return {
+    submissionsList: state.submissions.submissionsList
+  }
+}
+
+const mapDispatchToProps: (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) => any = dispatch => {
+  return {
+    onInitialLoad: () => {
+      dispatch(actionCreators.loadSubmissionsList(10))
+    }
+  }
+}
+
+export const SubmissionsPage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Submissions)
