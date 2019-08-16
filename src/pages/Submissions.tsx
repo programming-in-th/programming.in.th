@@ -99,8 +99,10 @@ class Submissions extends React.Component<ISubmissionsPageProps, {}> {
           options={{
             search: false,
             selectableRows: 'none',
-            onRowClick: (rowData: string[]) => {
-              console.log(rowData)
+            expandableRows: true,
+            renderExpandableRow: (rowData, rowMeta) => {
+              console.log(this.props.submissionsList[rowMeta.dataIndex])
+              return <p>Hello</p>
             }
           }}
         />
