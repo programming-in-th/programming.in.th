@@ -28,7 +28,7 @@
     "@types/node": "12.7.2",
     "@types/react": "16.9.0",
     "@types/react-dom": "16.8.5",
-    "@types/react-redux": "^7.1.1",
+    "@types/react-redux": "^7.1.2",
     "@types/react-router-dom": "^4.3.4",
     "firebase-tools": "^7.2.2",
     "husky": "^3.0.3",
