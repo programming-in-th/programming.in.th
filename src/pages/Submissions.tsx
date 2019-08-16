@@ -1,8 +1,7 @@
 /* React */
 import React from 'react'
 
-/* Material Table */
-import MaterialTable from 'material-table'
+import MUIDataTable, { FilterType } from 'mui-datatables'
 
 /* Redux */
 import { ISubmissions } from '../redux/types/submission'
@@ -25,20 +24,85 @@ class Submissions extends React.Component<ISubmissionsPageProps, {}> {
   }
 
   render() {
+    const columns = [
+      {
+        name: 'username',
+        label: 'User',
+        options: {
+          filter: true,
+          sort: true,
+          filterType: 'textField' as FilterType
+        }
+      },
+      {
+        name: 'problem_id',
+        label: 'Problem',
+        options: {
+          filter: true,
+          sort: true,
+          filterType: 'textField' as FilterType
+        }
+      },
+      {
+        name: 'language',
+        label: 'Language',
+        options: {
+          filter: true,
+          sort: true,
+          filterType: 'dropdown' as FilterType
+        }
+      },
+      {
+        name: 'status',
+        label: 'Status',
+        options: {
+          filter: true, // custom filter
+          sort: false, // consider changing?
+          filterType: 'textField' as FilterType
+        }
+      },
+      {
+        name: 'points',
+        label: 'Points',
+        options: {
+          filter: true, // custom filter
+          sort: true,
+          filterType: 'textField' as FilterType
+        }
+      },
+      {
+        name: 'time',
+        label: 'Time (s)',
+        options: {
+          filter: true, // custom filter
+          sort: true,
+          filterType: 'textField' as FilterType
+        }
+      },
+      {
+        name: 'memory',
+        label: 'Memory (KB)',
+        options: {
+          filter: true, // mode of filter
+          sort: true,
+          filterType: 'textField' as FilterType
+        }
+      }
+    ]
+
     return (
       <div className={styles.wrapper}>
-        <MaterialTable
-          columns={[
-            { title: 'User', field: 'username' },
-            { title: 'Problem', field: 'problem_id' },
-            { title: 'Language', field: 'language' },
-            { title: 'Status', field: 'status' },
-            { title: 'Points', field: 'points' },
-            { title: 'Time', field: 'time' },
-            { title: 'Memory', field: 'memory' }
-          ]}
-          data={this.props.submissionsList}
+        <MUIDataTable
           title="Submissions"
+          columns={columns}
+          data={this.props.submissionsList}
+          options={{
+            search: false,
+            selectableRows: 'none',
+            onRowClick: (rowData: string[]) => {
+              console.log(rowData)
+            }
+          }}
         />
       </div>
     )
