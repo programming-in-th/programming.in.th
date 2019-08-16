@@ -7,6 +7,8 @@ import MaterialTable from 'material-table'
 /* Redux */
 import { ISubmission } from '../redux/types/task'
 
+import styles from '../assets/css/submission.module.css'
+
 interface ISubmissionsPageProps {
   submissionsList: ISubmission[]
   status: string
@@ -16,7 +18,7 @@ interface ISubmissionsPageProps {
 class Submissions extends React.Component<ISubmissionsPageProps, any> {
   render() {
     return (
-      <div style={{ maxWidth: '100%' }}>
+      <div className={styles.wrapper}>
         <MaterialTable
           columns={[
             { title: 'Date', field: 'timestamp' },
