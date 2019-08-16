@@ -17,15 +17,23 @@ interface NavProps {
 }
 
 const LinkIcon = (props: NavProps) => {
-  return (
-    props.exact ?
-      <NavLink to={`${props.to}`} exact activeClassName="nav-active" className="nav-icon link-icon-responsive">
-        <i className="material-icons">{props.icon}</i>
-      </NavLink>
-    :
-      <NavLink to={`${props.to}`} activeClassName="nav-active" className="nav-icon link-icon-responsive">
-        <i className="material-icons">{props.icon}</i>
-      </NavLink>
+  return props.exact ? (
+    <NavLink
+      to={`${props.to}`}
+      exact
+      activeClassName="nav-active"
+      className="nav-icon link-icon-responsive"
+    >
+      <i className="material-icons">{props.icon}</i>
+    </NavLink>
+  ) : (
+    <NavLink
+      to={`${props.to}`}
+      activeClassName="nav-active"
+      className="nav-icon link-icon-responsive"
+    >
+      <i className="material-icons">{props.icon}</i>
+    </NavLink>
   )
 }
 
@@ -35,7 +43,7 @@ export const Nav = () => {
       <nav id="main-nav">
         <div>
           <LeftDrawer />
-          <LinkIcon icon="home" to="/" exact={true}/>
+          <LinkIcon icon="home" to="/" exact={true} />
           <LinkIcon icon="functions" to="/tasks" />
           <LinkIcon icon="school" to="/learn" />
           <LinkIcon icon="forum" to="/forum" />

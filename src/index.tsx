@@ -98,5 +98,5 @@ ReactDOM.render(
   <Provider store={store}>
     <RootPage />
   </Provider>,
-  document.getElementById('react')
+  document.getElementById('react') as HTMLElement
 )

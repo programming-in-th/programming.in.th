@@ -16,15 +16,15 @@ export interface ITask {
 }
 
 export interface ISubmission {
-  readonly uid: string,
-  readonly submission_id: string,
+  readonly uid: string
+  readonly submission_id: string
 
-  readonly username: string,
-  readonly problem_id: string,
-  readonly language: string,
-  readonly status: string,
-  readonly points: number,
-  readonly time: number,
-  readonly memory: number,
-  readonly timestamp: Date,
+  readonly username: string
+  readonly problem_id: string
+  readonly language: string
+  readonly status: string
+  readonly points: number
+  readonly time: number
+  readonly memory: number
+  readonly timestamp: Date
 }
