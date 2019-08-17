@@ -2,7 +2,7 @@
 
 ## What is programming.in.th
 
-It is where people come to practice about competitive programming!
+A website for practicing algorithms, data structures and competitive programming. Includes all the resources you need to go from noob to pro in algorithms and data structures.
 
 ## Table of Contents
 
