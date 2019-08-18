@@ -11,6 +11,7 @@ import { AnyAction } from 'redux'
 import { connect } from 'react-redux'
 
 import styles from '../assets/css/submission.module.css'
+import { FormLabel, FormGroup, TextField } from '@material-ui/core'
 
 interface ISubmissionsPageProps {
   submissionsList: ISubmissions[]
@@ -74,8 +75,7 @@ class Submissions extends React.Component<ISubmissionsPageProps, {}> {
         name: 'time',
         label: 'Time (s)',
         options: {
-          filter: true, // custom filter
-          sort: true,
+          filter: true,
           filterType: 'textField' as FilterType
         }
       },
