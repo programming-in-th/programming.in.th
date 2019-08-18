@@ -1,12 +1,10 @@
-/* React */
 import React from 'react'
 import MUIDataTable from 'mui-datatables'
+import { FormGroup, FormLabel, TextField } from '@material-ui/core'
+import styles from '../assets/css/submission.module.css'
 
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
-
-import styles from '../assets/css/submission.module.css'
-import { FormLabel, FormGroup, TextField } from '@material-ui/core'
 
 class Submissions extends React.Component {
   componentDidMount() {
@@ -187,10 +185,12 @@ class Submissions extends React.Component {
           options={{
             search: false,
             selectableRows: 'none',
-            expandableRows: true,
-            renderExpandableRow: (rowData, rowMeta) => {
-              console.log(this.props.submissionsList[rowMeta.dataIndex])
-              return <p>Hello</p>
+            onRowClick: (rowData, rowMeta) => {
+              const submission_id = this.props.submissionsList[
+                rowMeta.dataIndex
+              ].submission_id
+              console.log(submission_id)
+              this.props.history.push('/submission_detail/' + submission_id)
             }
           }}
         />
@@ -201,7 +201,8 @@ class Submissions extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    submissionsList: state.submissions.submissionsList
+    submissionsList: state.submissions.submissionsList,
+    submissionsListStatus: state.submissions.submissionsListStatus
   }
 }
 

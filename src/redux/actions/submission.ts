@@ -21,6 +21,36 @@ export const loadSubmissionsList = (limit: number) => {
   }
 }
 
+export const loadDetail = (submission_id: string) => {
+  return async (
+    dispatch: ThunkDispatch<IAppState, {}, AnyAction>
+  ): Promise<void> => {
+    dispatch(requestDetail())
+    try {
+      const url = `https://asia-east2-grader-ef0b5.cloudfunctions.net/api/getDetailedSubmissionData?submission_id=${submission_id}`
+      const response = (await axios.get(url)).data
+      dispatch(receiveDetail(response))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
+export const REQUEST_DETAIL = 'REQUEST_DETAIL'
+const requestDetail = () => {
+  return {
+    type: REQUEST_DETAIL
+  }
+}
+
+export const RECEIVE_DETAIL = 'RECEIVE_DETAIL'
+const receiveDetail = (data: string) => {
+  return {
+    type: RECEIVE_DETAIL,
+    detail: data
+  }
+}
+
 export const REQUEST_SUBMISSIONS_LIST = 'REQUEST_SUBMISSIONS_LIST'
 const requestSubmissions = () => {
   return {

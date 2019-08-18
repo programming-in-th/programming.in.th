@@ -1,6 +1,8 @@
 export interface ISubmissionsState {
   readonly submissionsList: ReadonlyArray<ISubmissions>
-  readonly status: 'LOADING' | 'SUCCESS'
+  readonly submissionListStatus: 'LOADING' | 'SUCCESS'
+  readonly detail: ISubmissions | undefined
+  readonly detailStatus: 'LOADING' | 'SUCCESS'
 }
 
 export interface ISubmissions {
@@ -14,4 +16,5 @@ export interface ISubmissions {
   readonly time: number
   readonly memory: number
   readonly timestamp: Date
+  readonly code?: string
 }

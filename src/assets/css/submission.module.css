@@ -4,3 +4,7 @@
   width: 90%;
   margin: auto;
 }
+
+.editor * {
+  font-family: inherit;
+}
