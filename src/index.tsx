@@ -13,6 +13,7 @@ import { Index } from './pages/Index'
 import { TasksPage } from './pages/Tasks'
 import { AuthPage } from './pages/Auth'
 import { SubmissionsPage } from './pages/Submissions'
+import { SubmitPage } from './pages/Submit'
 import { NotFound } from './pages/404'
 
 /* React Component */
@@ -70,6 +71,7 @@ class Root extends React.Component<IRootProps> {
               <Route exact path="/tasks" component={TasksPage} />
               <Route exact path="/login" component={AuthPage} />
               <Route exact path="/submissions" component={SubmissionsPage} />
+              <Route exact path="/submit" component={SubmitPage} />
               <Route component={NotFound} />
             </Switch>
           </React.Fragment>
