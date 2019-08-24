@@ -3,6 +3,7 @@ export interface ISubmissionsState {
   readonly submissionListStatus: 'LOADING' | 'SUCCESS'
   readonly detail: ISubmissions | undefined
   readonly detailStatus: 'LOADING' | 'SUCCESS'
+  readonly submissionResponse?: number
 }
 
 export interface ISubmissions {
@@ -17,4 +18,11 @@ export interface ISubmissions {
   readonly memory: number
   readonly timestamp: Date
   readonly code?: string
+}
+
+export interface INewSubmission {
+  readonly uid: string
+  readonly problem_id: string
+  readonly language: string
+  readonly code: string
 }

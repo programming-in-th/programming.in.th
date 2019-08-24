@@ -2,7 +2,8 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import axios from 'axios'
 import { IAppState } from '..'
-import { ISubmissions } from '../types/submission'
+import { ISubmissions, INewSubmission } from '../types/submission'
+import firebase from 'firebase'
 
 export const loadSubmissionsList = (limit: number) => {
   return async (
@@ -36,6 +37,31 @@ export const loadDetail = (submission_id: string) => {
   }
 }
 
+export const makeSubmission = (
+  uid: string,
+  problem_id: string,
+  code: string,
+  language: string
+) => {
+  return async (
+    dispatch: ThunkDispatch<IAppState, {}, AnyAction>
+  ): Promise<void> => {
+    dispatch(requestMakeSubmission())
+    try {
+      const url = `https://asia-east2-grader-ef0b5.cloudfunctions.net/api/makeSubmission`
+      const response = (await axios.post(url, {
+        uid: uid,
+        problem_id: problem_id,
+        code: code,
+        language: language
+      })).status
+      dispatch(receiveMakeSubmission(response))
+    } catch (error) {
+      console.log(error)
+    }
+  }
+}
+
 export const REQUEST_DETAIL = 'REQUEST_DETAIL'
 const requestDetail = () => {
   return {
@@ -63,5 +89,21 @@ const receiveSubmissions = (data: ISubmissions[]) => {
   return {
     type: RECEIVE_SUBMISSIONS_LIST,
     submissionsList: data
+  }
+}
+
+export const REQUEST_MAKE_SUBMISSION = 'REQUEST_MAKE_SUBMISSION'
+const requestMakeSubmission = () => {
+  return {
+    type: REQUEST_MAKE_SUBMISSION,
+    submitResponse: -1
+  }
+}
+
+export const RECEIVE_MAKE_SUBMISSION = 'RECEIVE_MAKE_SUBMISSION'
+const receiveMakeSubmission = (data: number) => {
+  return {
+    type: RECEIVE_MAKE_SUBMISSION,
+    submitResponse: data
   }
 }
