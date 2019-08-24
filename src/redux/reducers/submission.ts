@@ -1,5 +1,5 @@
 import { AnyAction, Reducer } from 'redux'
-import { ISubmissionsState, ISubmissions } from '../types/submission'
+import { ISubmissionsState } from '../types/submission'
 import {
   REQUEST_SUBMISSIONS_LIST,
   RECEIVE_SUBMISSIONS_LIST,
