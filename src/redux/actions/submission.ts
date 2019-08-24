@@ -2,8 +2,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import axios from 'axios'
 import { IAppState } from '..'
-import { ISubmissions, INewSubmission } from '../types/submission'
-import firebase from 'firebase'
+import { ISubmissions } from '../types/submission'
 
 export const loadSubmissionsList = (limit: number) => {
   return async (
