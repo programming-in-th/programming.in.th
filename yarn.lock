@@ -5048,10 +5048,10 @@ find-up@^4.0.0:
     locate-path "^5.0.0"
     path-exists "^4.0.0"
 
-firebase-tools@^7.2.2:
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-7.2.2.tgz#15f548403e249802627eb3610a906ab0465e46d7"
-  integrity sha512-irHSMFE8HIrIUaFOVEBK5TFhKmBs9G8AWJSR6YUIeSwqEhmn9KZ0t/PwEbkC/dqqemGQoUgghL+E6hvMA1W7pQ==
+firebase-tools@^7.2.4:
+  version "7.2.4"
+  resolved "https://registry.yarnpkg.com/firebase-tools/-/firebase-tools-7.2.4.tgz#5473a294d63cb4d8c4f00f74161ad4240fc5a378"
+  integrity sha512-w+iKe3TyLZHkzhLakIle6Z6fRfvl3kqlICcihjriYkRuUmUodXqHlBe4wu/1Oa8oQuGdWotdL+evrmDgsaw3eA==
   dependencies:
     JSONStream "^1.2.1"
     archiver "^3.0.0"
@@ -5078,11 +5078,11 @@ firebase-tools@^7.2.2:
     jsonwebtoken "^8.2.1"
     lodash "^4.17.14"
     marked "^0.7.0"
-    marked-terminal "^3.1.1"
+    marked-terminal "^3.3.0"
     minimatch "^3.0.4"
     open "^6.3.0"
-    ora "3.2.0"
-    portfinder "^1.0.13"
+    ora "^3.4.0"
+    portfinder "^1.0.23"
     progress "^2.0.3"
     request "^2.87.0"
     semver "^5.0.3"
@@ -7884,7 +7884,7 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-marked-terminal@^3.1.1:
+marked-terminal@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/marked-terminal/-/marked-terminal-3.3.0.tgz#25ce0c0299285998c7636beaefc87055341ba1bd"
   integrity sha512-+IUQJ5VlZoAFsM5MHNT7g3RHSkA3eETqhRCdXv4niUMAKHQ7lb1yvAcuGPmm4soxhmtX13u4Li6ZToXtvSEH+A==
@@ -8730,16 +8730,16 @@ optjs@~3.2.2:
   resolved "https://registry.yarnpkg.com/optjs/-/optjs-3.2.2.tgz#69a6ce89c442a44403141ad2f9b370bd5bb6f4ee"
   integrity sha1-aabOicRCpEQDFBrS+bNwvVu29O4=
 
-ora@3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/ora/-/ora-3.2.0.tgz#67e98a7e11f7f0ac95deaaaf11bb04de3d09e481"
-  integrity sha512-XHMZA5WieCbtg+tu0uPF8CjvwQdNzKCX6BVh3N6GFsEXH40mTk5dsw/ya1lBTUGJslcEFJFQ8cBhOgkkZXQtMA==
+ora@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/ora/-/ora-3.4.0.tgz#bf0752491059a3ef3ed4c85097531de9fdbcd318"
+  integrity sha512-eNwHudNbO1folBP3JsZ19v9azXWtQZjICdr3Q0TDPIaeBQ3mXLrh54wM+er0+hSp+dWKf+Z8KM58CYzEyIYxYg==
   dependencies:
     chalk "^2.4.2"
     cli-cursor "^2.1.0"
     cli-spinners "^2.0.0"
     log-symbols "^2.2.0"
-    strip-ansi "^5.0.0"
+    strip-ansi "^5.2.0"
     wcwidth "^1.0.1"
 
 original@^1.0.0:
@@ -9152,10 +9152,10 @@ popper.js@^1.14.1:
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.15.0.tgz#5560b99bbad7647e9faa475c6b8056621f5a4ff2"
   integrity sha512-w010cY1oCUmI+9KwwlWki+r5jxKfTFDVoadl7MSrIujHU5MJ5OR6HTDj6Xo8aoR/QsA56x8jKjA59qGH4ELtrA==
 
-portfinder@^1.0.13, portfinder@^1.0.9:
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.21.tgz#60e1397b95ac170749db70034ece306b9a27e324"
-  integrity sha512-ESabpDCzmBS3ekHbmpAIiESq3udRsCBGiBZLsC+HgBKv2ezb0R4oG+7RnYEVZ/ZCfhel5Tx3UzdNWA0Lox2QCA==
+portfinder@^1.0.23, portfinder@^1.0.9:
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/portfinder/-/portfinder-1.0.23.tgz#894db4bcc5daf02b6614517ce89cd21a38226b82"
+  integrity sha512-B729mL/uLklxtxuiJKfQ84WPxNw5a7Yhx3geQZdcA4GjNjZSTSSMMWyoennMVnTWSmAR0lMdzWYN0JLnHrg1KQ==
   dependencies:
     async "^1.5.2"
     debug "^2.2.0"
