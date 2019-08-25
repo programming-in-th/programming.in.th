@@ -1,8 +1,8 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import axios from 'axios'
 import { IAppState } from '..'
 import { ISubmissions } from '../types/submission'
+import firebase from 'firebase'
 
 export const loadSubmissionsList = (limit: number) => {
   return async (
@@ -10,11 +10,11 @@ export const loadSubmissionsList = (limit: number) => {
   ): Promise<void> => {
     dispatch(requestSubmissions())
     try {
-      const url = `https://asia-east2-grader-ef0b5.cloudfunctions.net/api/getRecentSubmissions?limit=${
-        limit ? limit : '-1'
-      }`
-      const response = (await axios.get(url)).data
-      dispatch(receiveSubmissions(response))
+      const response = await firebase
+        .app()
+        .functions('asia-east2')
+        .httpsCallable('getRecentSubmissions')({ limit: limit })
+      dispatch(receiveSubmissions(response.data))
     } catch (error) {
       console.log(error)
     }
@@ -27,9 +27,13 @@ export const loadDetail = (submission_id: string) => {
   ): Promise<void> => {
     dispatch(requestDetail())
     try {
-      const url = `https://asia-east2-grader-ef0b5.cloudfunctions.net/api/getDetailedSubmissionData?submission_id=${submission_id}`
-      const response = (await axios.get(url)).data
-      dispatch(receiveDetail(response))
+      const response = await firebase
+        .app()
+        .functions('asia-east2')
+        .httpsCallable('getDetailedSubmissionData')({
+        submission_id: submission_id
+      })
+      dispatch(receiveDetail(response.data))
     } catch (error) {
       console.log(error)
     }
@@ -47,16 +51,20 @@ export const makeSubmission = (
   ): Promise<void> => {
     dispatch(requestMakeSubmission())
     try {
-      const url = `https://asia-east2-grader-ef0b5.cloudfunctions.net/api/makeSubmission`
-      const response = (await axios.post(url, {
+      const params = {
         uid: uid,
         problem_id: problem_id,
         code: code,
         language: language
-      })).status
-      dispatch(receiveMakeSubmission(response))
+      }
+      await firebase
+        .app()
+        .functions('asia-east2')
+        .httpsCallable('makeSubmission')(params)
+      dispatch(receiveMakeSubmission(200))
     } catch (error) {
       console.log(error)
+      dispatch(receiveMakeSubmission(error.code))
     }
   }
 }

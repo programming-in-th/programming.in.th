@@ -38,6 +38,7 @@ import { store } from './redux'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
+  firebase.app().functions('asia-east2')
 }
 
 const theme = createMuiTheme({

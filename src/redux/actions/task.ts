@@ -1,8 +1,8 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import axios from 'axios'
 import { ITask } from '../types/task'
 import { IAppState } from '..'
+import firebase from 'firebase'
 
 export const LOAD_TAGS = 'LOAD_TAGS'
 export const loadTags = () => {
@@ -10,6 +10,7 @@ export const loadTags = () => {
 }
 
 export const loadTasksList = (
+  limit: number,
   min_difficulty: number,
   max_difficulty: number,
   tags: Array<String>
@@ -19,24 +20,18 @@ export const loadTasksList = (
   ): Promise<void> => {
     dispatch(requestTasks())
     try {
-      let url =
-        'https://asia-east2-grader-ef0b5.cloudfunctions.net/api/getTasksWithFilter?limit=10'
-      if (min_difficulty !== -1) {
-        url += '&min_difficulty=' + min_difficulty
+      let params: Object = {
+        limit: limit,
+        min_difficulty: min_difficulty !== -1 ? min_difficulty : 0,
+        max_difficulty:
+          max_difficulty !== -1 ? max_difficulty : Number.MAX_SAFE_INTEGER,
+        tags: tags && tags.length ? tags : []
       }
-      if (max_difficulty !== -1) {
-        url += '&max_difficulty=' + max_difficulty
-      }
-      if (tags && tags.length) {
-        let tagString = '&tags=['
-        tags.forEach(tag => {
-          tagString += '"' + tag + '",'
-        })
-        tagString += ']'
-        url += tagString
-      }
-      const response = (await axios.get(url)).data
-      dispatch(receiveTasks(response))
+      const response = await firebase
+        .app()
+        .functions('asia-east2')
+        .httpsCallable('getTasksWithFilter')(params)
+      dispatch(receiveTasks(response.data))
     } catch (error) {
       console.log(error)
     }
