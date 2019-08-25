@@ -12,7 +12,7 @@
   "dependencies": {
     "@material-ui/core": "^4.3.3",
     "@material-ui/icons": "^4.2.1",
-    "@types/mui-datatables": "^2.1.5",
+    "@types/mui-datatables": "^2.1.8",
     "axios": "^0.19.0",
     "firebase": "^6.4.0",
     "mui-datatables": "^2.8.1",
