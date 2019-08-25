@@ -1557,10 +1557,10 @@
   resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.0.tgz#719551d2352d301ac8b81db732acb6bdc28dbdef"
   integrity sha512-1w52Nyx4Gq47uuu0EVcsHBxZFJgurQ+rTKS3qMHxR1GY2T8c2AJYd6vZoZ9q1rupaDjU0yT+Jc2XTyXkjeMA+Q==
 
-"@types/mui-datatables@^2.1.5":
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-2.1.5.tgz#21c9aba53cd7f35fe81eba0a9b6d5631d36f1426"
-  integrity sha512-d54hJ1/dARmiLeurmfhVPtla9ojHPP5B3QaYkQ8pIVCkajQd93N1+lrFhxhANBlS705ZCaXoe6c3g1nDYKpyOQ==
+"@types/mui-datatables@^2.1.8":
+  version "2.1.8"
+  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-2.1.8.tgz#2a76191c77ad2d44f426b7f123395ace55a3a4ab"
+  integrity sha512-WJ1JEAJdGQKwm/WZ5+1b4Ss+m3KNshoR26C23NpDygDvCJjD1Hu/qGX7a5LWWOMs5QQ/xFt/GwFW5BggxyRvAg==
   dependencies:
     "@types/react" "*"
 
