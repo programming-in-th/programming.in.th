@@ -8,7 +8,6 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 
 import { LoginPage } from '../components/auth/Login'
-import { OAuthPage } from '../components/auth/OAuth'
 import { RegisterPage } from '../components/auth/Register'
 
 import '../assets/css/login.css'
@@ -32,10 +31,8 @@ export const Auth: React.FunctionComponent<IAuthPageProps> = props => {
         <div id="account-container">
           {state === 'main' ? (
             <LoginPage setState={setState} history={props.history} />
-          ) : state === 'register' ? (
-            <RegisterPage setState={setState} history={props.history} />
           ) : (
-            <OAuthPage setState={setState} history={props.history} />
+            <RegisterPage setState={setState} history={props.history} />
           )}
         </div>
       )}
