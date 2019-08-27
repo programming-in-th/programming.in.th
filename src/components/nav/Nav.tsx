@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import LeftMenu from './LeftMenu'
-import RightMenu from './RightMenu'
+import { NavLink } from 'react-router-dom'
+import { LeftMenu } from './LeftMenu'
+import { RightMenu } from './RightMenu'
 import { Drawer, Button } from 'antd'
 import './app.css'
 
@@ -23,7 +24,7 @@ class Navbar extends Component {
     return (
       <nav className="menuBar">
         <div className="logo">
-          <a href="">logo</a>
+          <NavLink to="/">programming</NavLink>
         </div>
         <div className="menuCon">
           <div className="leftMenu">
