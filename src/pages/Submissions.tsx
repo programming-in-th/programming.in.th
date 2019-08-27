@@ -1,12 +1,12 @@
 import React from 'react'
-import MUIDataTable from 'mui-datatables'
+import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
 import { FormGroup, FormLabel, TextField } from '@material-ui/core'
 import styles from '../assets/css/submission.module.css'
 
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 
-class Submissions extends React.Component {
+class Submissions extends React.Component<any, {}> {
   componentDidMount() {
     this.props.onInitialLoad()
   }
@@ -64,7 +64,7 @@ class Submissions extends React.Component {
         options: {
           filter: true,
           filterType: 'custom',
-          customFilterListRender: v => {
+          customFilterListRender: (v: any) => {
             if (v[0] && v[1]) {
               return 'Time: ' + v[0] + ' <= ' + v[1] + ' s'
             } else if (v[0]) {
@@ -77,7 +77,7 @@ class Submissions extends React.Component {
           },
           filterOptions: {
             names: [],
-            logic(time, filters) {
+            logic(time: any, filters: any) {
               if (filters[0] && filters[1]) {
                 return time < filters[0] || time > filters[1]
               } else if (filters[0]) {
@@ -87,7 +87,12 @@ class Submissions extends React.Component {
               }
               return false
             },
-            display: (filterList, onChange, index, column) => (
+            display: (
+              filterList: any,
+              onChange: any,
+              index: any,
+              column: any
+            ) => (
               <div>
                 <FormLabel>Time</FormLabel>
                 <FormGroup row>
@@ -122,7 +127,7 @@ class Submissions extends React.Component {
         options: {
           filter: true,
           filterType: 'custom',
-          customFilterListRender: v => {
+          customFilterListRender: (v: any) => {
             if (v[0] && v[1]) {
               return 'Memory: ' + v[0] + ' <= ' + v[1] + ' KB'
             } else if (v[0]) {
@@ -135,7 +140,7 @@ class Submissions extends React.Component {
           },
           filterOptions: {
             names: [],
-            logic(memory, filters) {
+            logic(memory: any, filters: any) {
               if (filters[0] && filters[1]) {
                 return memory < filters[0] || memory > filters[1]
               } else if (filters[0]) {
@@ -145,7 +150,12 @@ class Submissions extends React.Component {
               }
               return false
             },
-            display: (filterList, onChange, index, column) => (
+            display: (
+              filterList: any,
+              onChange: any,
+              index: any,
+              column: any
+            ) => (
               <div>
                 <FormLabel>Memory (KB)</FormLabel>
                 <FormGroup row>
@@ -180,7 +190,7 @@ class Submissions extends React.Component {
       <div className={styles.wrapper}>
         <MUIDataTable
           title="Submissions"
-          columns={columns}
+          columns={columns as MUIDataTableColumnDef[]}
           data={this.props.submissionsList}
           options={{
             search: false,
@@ -199,14 +209,14 @@ class Submissions extends React.Component {
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: any) => {
   return {
     submissionsList: state.submissions.submissionsList,
     submissionsListStatus: state.submissions.submissionsListStatus
   }
 }
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch: any) => {
   return {
     onInitialLoad: () => {
       dispatch(actionCreators.loadSubmissionsList(10))
