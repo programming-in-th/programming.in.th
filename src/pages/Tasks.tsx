@@ -16,12 +16,19 @@ import { Task } from '../components/tasks/Task'
 /* Static */
 import '../assets/css/taskList.css'
 import '../assets/css/avatar.css'
+import styles from '../assets/css/submission.module.css'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
+import H from 'history'
+
+import Layout from 'antd/lib/layout'
+import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
+const { Header, Content, Footer } = Layout
 
 interface ITasksPageProps {
   taskList: ITask[]
   status: string
+  history: H.History
   onInitialLoad: () => void
 }
 
@@ -43,34 +50,88 @@ class Tasks extends React.Component<ITasksPageProps, ITasksPageState> {
   }
 
   render() {
-    const listItems = this.props.taskList
-      ? this.props.taskList.map(task => {
-          return (
-            <TaskItem
-              key={task.title}
-              title={task.title}
-              difficulty={task.difficulty}
-              tags={task.tags}
-              onClick={() => this.handleClick(task.problem_id)}
-            />
-          )
-        })
-      : []
+    const columns = [
+      {
+        name: 'title',
+        label: 'Problem',
+        options: {
+          filter: false,
+          sort: true
+        }
+      },
+      {
+        name: 'tags',
+        label: 'Tags',
+        options: {
+          filter: true,
+          filterType: 'checkbox',
+          customBodyRender: (
+            data: Array<string>,
+            dataIndex: number,
+            rowIndex: number
+          ) => {
+            let displayString = ''
+            data.forEach((str: string, index: number) => {
+              if (index === 0) {
+                displayString += str
+              } else {
+                displayString += ', ' + str
+              }
+            })
+            return <div>{displayString}</div>
+          }
+        }
+      },
+      {
+        name: 'difficulty',
+        label: 'Difficulty'
+      },
+      {
+        name: 'solve_count',
+        label: 'Users solved'
+      }
+    ]
 
     return (
-      <div>
-        {this.props.status === 'LOADING' ? (
-          <div id="loading">
-            <CircularProgress />
-          </div>
-        ) : this.state.currentTask !== '' ? (
-          <Task id={this.state.currentTask} />
-        ) : (
-          <div id="task-list-wrapper">
-            <List component="nav">{listItems}</List>
-          </div>
-        )}
-      </div>
+      <Layout className="layout">
+        <Content>
+          {this.props.status === 'LOADING' ? (
+            <div id="loading">
+              <CircularProgress />
+            </div>
+          ) : this.state.currentTask !== '' ? (
+            <Task id={this.state.currentTask} />
+          ) : (
+            <div className={styles.wrapper}>
+              <MUIDataTable
+                title="Tasks"
+                columns={columns as MUIDataTableColumnDef[]}
+                data={this.props.taskList}
+                options={{
+                  responsive: 'scroll',
+                  search: true,
+                  print: false,
+                  download: false,
+                  selectableRows: 'none',
+                  onRowClick: (rowData, rowMeta) => {
+                    const problem_id = this.props.taskList[rowMeta.dataIndex]
+                      .problem_id
+                    this.props.history.push('/task_detail/' + problem_id)
+                  },
+                  customSearch: (
+                    searchQuery: string,
+                    currentRow: Array<any>,
+                    columns: Array<any>
+                  ): boolean => {
+                    return currentRow[0].toString().indexOf(searchQuery) >= 0
+                  }
+                }}
+              />
+            </div>
+          )}
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
+      </Layout>
     )
   }
 }

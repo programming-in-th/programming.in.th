@@ -2,9 +2,11 @@ import React from 'react'
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
 import { FormGroup, FormLabel, TextField } from '@material-ui/core'
 import styles from '../assets/css/submission.module.css'
-
+import { Layout, Menu, Breadcrumb } from 'antd'
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
+
+const { Header, Content, Footer } = Layout
 
 class Submissions extends React.Component<any, {}> {
   componentDidMount() {
@@ -103,7 +105,7 @@ class Submissions extends React.Component<any, {}> {
                       filterList[index][0] = event.target.value
                       onChange(filterList[index], index, column)
                     }}
-                    style={{ width: '45%', marginRight: '5%' }}
+                    style={{ marginRight: '5%' }}
                   />
                   <TextField
                     label="Max"
@@ -112,7 +114,7 @@ class Submissions extends React.Component<any, {}> {
                       filterList[index][1] = event.target.value
                       onChange(filterList[index], index, column)
                     }}
-                    style={{ width: '45%' }}
+                    style={{}}
                   />
                 </FormGroup>
               </div>
@@ -166,7 +168,7 @@ class Submissions extends React.Component<any, {}> {
                       filterList[index][0] = event.target.value
                       onChange(filterList[index], index, column)
                     }}
-                    style={{ width: '45%', marginRight: '5%' }}
+                    style={{ marginRight: '5%' }}
                   />
                   <TextField
                     label="Max"
@@ -175,7 +177,7 @@ class Submissions extends React.Component<any, {}> {
                       filterList[index][1] = event.target.value
                       onChange(filterList[index], index, column)
                     }}
-                    style={{ width: '45%' }}
+                    style={{}}
                   />
                 </FormGroup>
               </div>
@@ -187,24 +189,30 @@ class Submissions extends React.Component<any, {}> {
     ]
 
     return (
-      <div className={styles.wrapper}>
-        <MUIDataTable
-          title="Submissions"
-          columns={columns as MUIDataTableColumnDef[]}
-          data={this.props.submissionsList}
-          options={{
-            search: false,
-            selectableRows: 'none',
-            onRowClick: (rowData, rowMeta) => {
-              const submission_id = this.props.submissionsList[
-                rowMeta.dataIndex
-              ].submission_id
-              console.log(submission_id)
-              this.props.history.push('/submission_detail/' + submission_id)
-            }
-          }}
-        />
-      </div>
+      <Layout className="layout">
+        <Content>
+          <div className={styles.wrapper}>
+            <MUIDataTable
+              title="Submissions"
+              columns={columns as MUIDataTableColumnDef[]}
+              data={this.props.submissionsList}
+              options={{
+                responsive: 'scroll',
+                search: false,
+                selectableRows: 'none',
+                onRowClick: (rowData, rowMeta) => {
+                  const submission_id = this.props.submissionsList[
+                    rowMeta.dataIndex
+                  ].submission_id
+                  console.log(submission_id)
+                  this.props.history.push('/submission_detail/' + submission_id)
+                }
+              }}
+            />
+          </div>
+        </Content>
+        <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
+      </Layout>
     )
   }
 }
