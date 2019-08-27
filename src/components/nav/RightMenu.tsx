@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
-import { Menu, Icon } from 'antd'
-const SubMenu = Menu.SubMenu
-const MenuItemGroup = Menu.ItemGroup
-class RightMenu extends Component {
+import { NavLink } from 'react-router-dom'
+import { Menu } from 'antd'
+
+class Main extends Component {
   render() {
     return (
       <Menu mode="horizontal">
-        <Menu.Item key="mail">
-          <a href="">Signin</a>
+        <Menu.Item key="login">
+          <NavLink to="/login">Login</NavLink>
         </Menu.Item>
-        <Menu.Item key="app">
-          <a href="">Signup</a>
+        <Menu.Item key="register">
+          <NavLink to="/register">Register</NavLink>
         </Menu.Item>
       </Menu>
     )
   }
 }
-export default RightMenu
+
+export const RightMenu = Main
