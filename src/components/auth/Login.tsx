@@ -1,25 +1,53 @@
-import React, { useState } from 'react'
-import firebase from 'firebase'
-import 'firebase/auth'
-
-import TextField from '@material-ui/core/TextField'
-import { AccountButton } from './AccountButton'
+import React from 'react'
+import { Form, Icon, Input, Button, Checkbox } from 'antd'
+import { FormComponentProps } from 'antd/lib/form/Form'
 
 import H from 'history'
+import firebase from 'firebase'
+import 'firebase/auth'
+import styled from 'styled-components'
 
-interface ILoginPageProps {
+interface ILoginProps {
   history: H.History
-  setState(arg: string): any
+  setState: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const LoginPage: React.FunctionComponent<ILoginPageProps> = props => {
-  const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('')
-  const [error, setError] = useState('')
+const StyledForm = styled(Form)`
+  max-width: 300px;
+`
 
-  const submitLogin = async (history: H.History) => {
+const LoginButton = styled(Button)`
+  width: 100%;
+`
+
+class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
+  handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values)
+        this.submitLogin(
+          this.props.history,
+          values.email,
+          values.password,
+          values.remember
+        )
+      }
+    })
+  }
+
+  submitLogin = async (
+    history: H.History,
+    email: string,
+    pass: string,
+    remember: boolean
+  ) => {
     try {
-      await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+      if (remember) {
+        await firebase
+          .auth()
+          .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
+      }
 
       return firebase
         .auth()
@@ -29,56 +57,55 @@ export const LoginPage: React.FunctionComponent<ILoginPageProps> = props => {
           if (currentUser)
             if (!currentUser.emailVerified) {
               firebase.auth().signOut()
-              setError('Please Verify Your Email')
+              window.alert('Please Verify Your Email')
             } else history.length > 2 ? history.goBack() : history.replace('/')
         })
         .catch(function(error) {
-          setError(error.message)
+          console.log(error.message)
         })
     } catch (error) {
-      setError(error.message)
+      console.log(error.message)
     }
   }
 
-  return (
-    <form onSubmit={() => submitLogin(props.history)} style={{ width: '100%' }}>
-      <div id="main-text">Login</div>
-      <TextField
-        id="textfield"
-        label="Email"
-        margin="normal"
-        variant="outlined"
-        onChange={event => setEmail(event.target.value)}
-      />
-      <TextField
-        id="textfield"
-        label="Password"
-        margin="normal"
-        type="password"
-        variant="outlined"
-        onChange={event => setPass(event.target.value)}
-      />
-      {error ? <p style={{ color: 'red' }}>{error}</p> : null}
-      <AccountButton
-        id="login-button"
-        icon="account_circle"
-        text="Login"
-        onClick={() => submitLogin(props.history)}
-      />
-      <div id="account-form">
-        <AccountButton
-          id="grey-button"
-          icon="person_add"
-          text="Register account"
-          onClick={() => props.setState('register')}
-        />
-        <AccountButton
-          id="grey-button"
-          icon="apps"
-          text="Different Method"
-          onClick={() => props.setState('oauth')}
-        />
-      </div>
-    </form>
-  )
+  render() {
+    const { getFieldDecorator } = this.props.form
+    return (
+      <StyledForm onSubmit={this.handleSubmit}>
+        <Form.Item>
+          {getFieldDecorator('email', {
+            rules: [{ required: true, message: 'Please input your username!' }]
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Email"
+            />
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your Password!' }]
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="Password"
+            />
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('remember', {
+            valuePropName: 'checked',
+            initialValue: true
+          })(<Checkbox>Remember me</Checkbox>)}
+          <LoginButton type="primary" htmlType="submit">
+            Log in
+          </LoginButton>
+          Or <a href="">register now!</a>
+        </Form.Item>
+      </StyledForm>
+    )
+  }
 }
+
+export const LoginPage = Form.create({ name: 'login' })(Login) as any
