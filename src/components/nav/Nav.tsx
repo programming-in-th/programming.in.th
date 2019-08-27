@@ -1,58 +1,53 @@
-/* React */
-import React from 'react'
+import React, { Component } from 'react'
+import LeftMenu from './LeftMenu'
+import RightMenu from './RightMenu'
+import { Drawer, Button } from 'antd'
+import './app.css'
 
-/* React Component */
-import { NavLink } from 'react-router-dom'
-import LeftDrawer from './LeftDrawer'
-import { AccountRender } from './Account'
-import '../../assets/css/nav.css'
-
-/* Data model */
-import 'firebase/auth'
-
-interface NavProps {
-  icon: String
-  to: String
-  exact?: Boolean
-}
-
-const LinkIcon = (props: NavProps) => {
-  return props.exact ? (
-    <NavLink
-      to={`${props.to}`}
-      exact
-      activeClassName="nav-active"
-      className="nav-icon link-icon-responsive"
-    >
-      <i className="material-icons">{props.icon}</i>
-    </NavLink>
-  ) : (
-    <NavLink
-      to={`${props.to}`}
-      activeClassName="nav-active"
-      className="nav-icon link-icon-responsive"
-    >
-      <i className="material-icons">{props.icon}</i>
-    </NavLink>
-  )
-}
-
-export const Nav = () => {
-  return (
-    <React.Fragment>
-      <nav id="main-nav">
-        <div>
-          <LeftDrawer />
-          <LinkIcon icon="home" to="/" exact={true} />
-          <LinkIcon icon="functions" to="/tasks" />
-          <LinkIcon icon="school" to="/learn" />
-          <LinkIcon icon="forum" to="/forum" />
-          <LinkIcon icon="featured_play_list" to="/exam" />
+class Navbar extends Component {
+  state = {
+    current: 'mail',
+    visible: false
+  }
+  showDrawer = () => {
+    this.setState({
+      visible: true
+    })
+  }
+  onClose = () => {
+    this.setState({
+      visible: false
+    })
+  }
+  render() {
+    return (
+      <nav className="menuBar">
+        <div className="logo">
+          <a href="">logo</a>
         </div>
-        <div style={{ display: 'inline-flex', flexDirection: 'row-reverse' }}>
-          <AccountRender />
+        <div className="menuCon">
+          <div className="leftMenu">
+            <LeftMenu />
+          </div>
+          <div className="rightMenu">
+            <RightMenu />
+          </div>
+          <Button className="barsMenu" type="primary" onClick={this.showDrawer}>
+            <span className="barsBtn"></span>
+          </Button>
+          <Drawer
+            title="Basic Drawer"
+            placement="right"
+            closable={false}
+            onClose={this.onClose}
+            visible={this.state.visible}
+          >
+            <LeftMenu />
+            <RightMenu />
+          </Drawer>
         </div>
       </nav>
-    </React.Fragment>
-  )
+    )
+  }
 }
+export const Nav = Navbar
