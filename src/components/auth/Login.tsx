@@ -1,11 +1,12 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd'
-import { FormComponentProps } from 'antd/lib/form/Form'
+import { Form, Icon, Input, Button, Checkbox, Row, Col, Card } from 'antd'
+import styled from 'styled-components'
 
-import H from 'history'
 import firebase from 'firebase'
 import 'firebase/auth'
-import styled from 'styled-components'
+
+import { FormComponentProps } from 'antd/lib/form/Form'
+import H from 'history'
 
 interface ILoginProps {
   history: H.History
