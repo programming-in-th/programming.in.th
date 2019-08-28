@@ -1,54 +1,65 @@
-import React, { Component } from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, withRouter } from 'react-router-dom'
 import { LeftMenu } from './LeftMenu'
 import { RightMenu } from './RightMenu'
-import { Drawer, Button } from 'antd'
+import { Drawer, Button, Menu } from 'antd'
 import './app.css'
 
-class Navbar extends Component {
-  state = {
-    current: 'mail',
-    visible: false
-  }
-  showDrawer = () => {
-    this.setState({
-      visible: true
-    })
-  }
-  onClose = () => {
-    this.setState({
-      visible: false
-    })
-  }
-  render() {
-    return (
-      <nav className="menuBar">
-        <div className="logo">
-          <NavLink to="/">programming</NavLink>
+const _Nav = (props: any) => {
+  const [visible, setVisibility] = useState(false)
+
+  return (
+    <nav className="menuBar">
+      <div className="logo">
+        <Link to="/">programming</Link>
+      </div>
+      <div className="menuCon">
+        <div className="leftMenu">
+          <Menu mode="horizontal" selectedKeys={[props.location.pathname]}>
+            <Menu.Item key="/tasks">
+              <Link to="/tasks">Tasks</Link>
+            </Menu.Item>
+            <Menu.Item key="/learn">
+              <Link to="/learn">Learn</Link>
+            </Menu.Item>
+            <Menu.Item key="/forum">
+              <Link to="/forum">Forum</Link>
+            </Menu.Item>
+            <Menu.Item key="/exam">
+              <Link to="/exam">Exam</Link>
+            </Menu.Item>
+          </Menu>
         </div>
-        <div className="menuCon">
-          <div className="leftMenu">
-            <LeftMenu />
-          </div>
-          <div className="rightMenu">
-            <RightMenu />
-          </div>
-          <Button className="barsMenu" type="primary" onClick={this.showDrawer}>
-            <span className="barsBtn"></span>
-          </Button>
-          <Drawer
-            title="Basic Drawer"
-            placement="right"
-            closable={false}
-            onClose={this.onClose}
-            visible={this.state.visible}
-          >
-            <LeftMenu />
-            <RightMenu />
-          </Drawer>
+        <div className="rightMenu">
+          <Menu mode="horizontal" selectedKeys={[props.location.pathname]}>
+            <Menu.Item key="/login">
+              <Link to="/login">Login</Link>
+            </Menu.Item>
+            <Menu.Item key="/register">
+              <Link to="/register">Register</Link>
+            </Menu.Item>
+          </Menu>
         </div>
-      </nav>
-    )
-  }
+        <Button
+          className="barsMenu"
+          type="primary"
+          onClick={() => setVisibility(true)}
+        >
+          <span className="barsBtn"></span>
+        </Button>
+        <Drawer
+          title="Basic Drawer"
+          placement="right"
+          closable={false}
+          onClose={() => setVisibility(false)}
+          visible={visible}
+        >
+          <LeftMenu />
+          <RightMenu />
+        </Drawer>
+      </div>
+    </nav>
+  )
 }
-export const Nav = Navbar
+
+export const Nav = withRouter(_Nav)
