@@ -2,11 +2,11 @@ import React from 'react'
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
 import { FormGroup, FormLabel, TextField } from '@material-ui/core'
 import styles from '../assets/css/submission.module.css'
-import { Layout, Menu, Breadcrumb } from 'antd'
+import { Layout } from 'antd'
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 
-const { Header, Content, Footer } = Layout
+const { Content, Footer } = Layout
 
 class Submissions extends React.Component<any, {}> {
   componentDidMount() {

@@ -2,7 +2,7 @@
 import React from 'react'
 
 /* React Util */
-import { List, CircularProgress } from '@material-ui/core'
+import { CircularProgress } from '@material-ui/core'
 
 /* Redux */
 import { connect } from 'react-redux'
@@ -10,7 +10,6 @@ import * as actionCreators from '../redux/actions/index'
 import { ITask } from '../redux/types/task'
 
 /* React Component */
-import { TaskItem } from '../components/tasks/TaskItem'
 import { Task } from '../components/tasks/Task'
 
 /* Static */
@@ -23,7 +22,7 @@ import H from 'history'
 
 import Layout from 'antd/lib/layout'
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
-const { Header, Content, Footer } = Layout
+const { Content, Footer } = Layout
 
 interface ITasksPageProps {
   taskList: ITask[]

@@ -43,10 +43,6 @@ const Others = styled.div`
   text-align: left;
 `
 
-const LoginDiv = styled.div`
-  padding-top: 200px;
-`
-
 class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
   handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -158,7 +154,10 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
                 />
                 <Register>
                   Or{' '}
-                  <a href="#" onClick={() => this.props.setState('register')}>
+                  <a
+                    href="/login"
+                    onClick={() => this.props.setState('register')}
+                  >
                     register now!
                   </a>
                 </Register>
