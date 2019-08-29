@@ -69,7 +69,11 @@ const responsive = `(max-width: 767px)`
 const Navigator = styled.nav`
   padding: 0 20px;
   overflow: auto;
-  background-color: white;
+  background-color: #fff;
+  position: fixed;
+  z-index: 200000;
+  width: 100%;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.075);
 `
 
 const Logo = styled.div`
@@ -77,10 +81,11 @@ const Logo = styled.div`
   & a {
     display: inline-block;
     font-size: 17px;
-    padding-top: 10px;
+    padding-top: 9px;
     padding-bottom: 8px;
+    margin-right: 15px;
     @media ${responsive} {
-      padding-top: 11px;
+      padding-top: 15px;
     }
   }
 `
@@ -100,7 +105,7 @@ const RightMenu = styled(Login)`
 
 const BarMenu = styled(Button)`
   float: right;
-  margin: 8px;
+  margin: 11px;
   display: none !important;
   @media ${responsive} {
     display: inline-block !important;
@@ -114,19 +119,19 @@ const MainDrawer = styled(Main)`
 `
 
 const LoginDrawer = styled(Login)`
-  float: right;
   & ul {
-    border-bottom: none;
+    border-right: none;
   }
 `
 
 const _Nav = (props: any) => {
   const [visible, setVisibility] = useState(false)
-
   return (
     <Navigator>
       <Logo>
-        <Link to="/">programming.in.th</Link>
+        <Link to="/" onClick={() => setVisibility(false)}>
+          programming.in.th
+        </Link>
       </Logo>
       <LeftMenu
         mode="horizontal"
@@ -138,13 +143,14 @@ const _Nav = (props: any) => {
         pathname={props.location.pathname}
         onClick={() => setVisibility(false)}
       />
-      <BarMenu icon="menu" onClick={() => setVisibility(true)} />
+      <BarMenu icon="menu" onClick={() => setVisibility(!visible)} />
       <Drawer
         title="Menu"
         placement="top"
         onClose={() => setVisibility(false)}
         visible={visible}
-        height="350px"
+        height="360px"
+        bodyStyle={{ padding: '10px' }}
       >
         <MainDrawer
           mode="vertical"
@@ -152,7 +158,7 @@ const _Nav = (props: any) => {
           onClick={() => setVisibility(false)}
         />
         <LoginDrawer
-          mode="horizontal"
+          mode="vertical"
           pathname={props.location.pathname}
           onClick={() => setVisibility(false)}
         />
