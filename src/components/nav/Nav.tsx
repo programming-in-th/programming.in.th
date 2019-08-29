@@ -3,6 +3,67 @@ import { Link, withRouter } from 'react-router-dom'
 import styled from 'styled-components'
 import { Drawer, Button, Menu } from 'antd'
 
+interface item {
+  className?: any
+  mode?:
+    | 'vertical'
+    | 'vertical-left'
+    | 'vertical-right'
+    | 'horizontal'
+    | 'inline'
+    | undefined
+  pathname: any
+  onClick: any
+}
+
+const Main = (props: item) => {
+  return (
+    <div className={props.className}>
+      <Menu mode={props.mode} selectedKeys={[props.pathname]}>
+        <Menu.Item key="/tasks">
+          <Link to="/tasks" onClick={props.onClick}>
+            Tasks
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="/learn">
+          <Link to="/learn" onClick={props.onClick}>
+            Learn
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="/forum">
+          <Link to="/forum" onClick={props.onClick}>
+            Forum
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="/exam">
+          <Link to="/exam" onClick={props.onClick}>
+            Exam
+          </Link>
+        </Menu.Item>
+      </Menu>
+    </div>
+  )
+}
+
+const Login = (props: item) => {
+  return (
+    <div className={props.className}>
+      <Menu mode={props.mode} selectedKeys={[props.pathname]}>
+        <Menu.Item key="/login">
+          <Link to="/login" onClick={props.onClick}>
+            Login
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="/register">
+          <Link to="/register" onClick={props.onClick}>
+            Register
+          </Link>
+        </Menu.Item>
+      </Menu>
+    </div>
+  )
+}
+
 const responsive = `(max-width: 767px)`
 
 const Navigator = styled.nav`
@@ -23,13 +84,14 @@ const Logo = styled.div`
     }
   }
 `
-const LeftMenu = styled.div`
+const LeftMenu = styled(Main)`
   float: left;
+  border-right: none;
   @media ${responsive} {
     display: none;
   }
 `
-const RightMenu = styled.div`
+const RightMenu = styled(Login)`
   float: right;
   @media ${responsive} {
     display: none;
@@ -45,46 +107,56 @@ const BarMenu = styled(Button)`
   }
 `
 
+const MainDrawer = styled(Main)`
+  & ul {
+    border-right: none;
+  }
+`
+
+const LoginDrawer = styled(Login)`
+  float: right;
+  & ul {
+    border-bottom: none;
+  }
+`
+
 const _Nav = (props: any) => {
   const [visible, setVisibility] = useState(false)
+
   return (
     <Navigator>
       <Logo>
         <Link to="/">programming.in.th</Link>
       </Logo>
-      <LeftMenu>
-        <Menu mode="horizontal" selectedKeys={[props.location.pathname]}>
-          <Menu.Item key="/tasks">
-            <Link to="/tasks">Tasks</Link>
-          </Menu.Item>
-          <Menu.Item key="/learn">
-            <Link to="/learn">Learn</Link>
-          </Menu.Item>
-          <Menu.Item key="/forum">
-            <Link to="/forum">Forum</Link>
-          </Menu.Item>
-          <Menu.Item key="/exam">
-            <Link to="/exam">Exam</Link>
-          </Menu.Item>
-        </Menu>
-      </LeftMenu>
-      <RightMenu>
-        <Menu mode="horizontal" selectedKeys={[props.location.pathname]}>
-          <Menu.Item key="/login">
-            <Link to="/login">Login</Link>
-          </Menu.Item>
-          <Menu.Item key="/register">
-            <Link to="/register">Register</Link>
-          </Menu.Item>
-        </Menu>
-      </RightMenu>
+      <LeftMenu
+        mode="horizontal"
+        pathname={props.location.pathname}
+        onClick={() => setVisibility(false)}
+      />
+      <RightMenu
+        mode="horizontal"
+        pathname={props.location.pathname}
+        onClick={() => setVisibility(false)}
+      />
       <BarMenu icon="menu" onClick={() => setVisibility(true)} />
       <Drawer
         title="Menu"
         placement="top"
         onClose={() => setVisibility(false)}
         visible={visible}
-      ></Drawer>
+        height="350px"
+      >
+        <MainDrawer
+          mode="vertical"
+          pathname={props.location.pathname}
+          onClick={() => setVisibility(false)}
+        />
+        <LoginDrawer
+          mode="horizontal"
+          pathname={props.location.pathname}
+          onClick={() => setVisibility(false)}
+        />
+      </Drawer>
     </Navigator>
   )
 }
