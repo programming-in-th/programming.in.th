@@ -96,76 +96,78 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
     const { getFieldDecorator } = this.props.form
     return (
       <Row type="flex" align="middle">
-        <Col span={12}>
-          <h1>Login</h1>
-          <StyledForm onSubmit={this.handleSubmit}>
-            <Form.Item>
-              {getFieldDecorator('email', {
-                rules: [
-                  { required: true, message: 'Please input your username!' }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
-                  }
-                  placeholder="Email"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('password', {
-                rules: [
-                  { required: true, message: 'Please input your Password!' }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
-                  }
-                  type="password"
-                  placeholder="Password"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true
-              })(<Checkbox>Remember me</Checkbox>)}
-              <LoginButton type="primary" htmlType="submit">
-                Log in
-              </LoginButton>
-              <Others>
-                Log in with
-                <StyledIcon
-                  type="google"
-                  theme="outlined"
-                  onClick={() => loginWithGmail(this.props.history)}
-                />
-                <StyledIcon
-                  type="facebook"
-                  theme="outlined"
-                  onClick={() => loginWithFacebook(this.props.history)}
-                />
-                <StyledIcon
-                  type="github"
-                  theme="outlined"
-                  onClick={() => loginWithGithub(this.props.history)}
-                />
-                <Register>
-                  Or{' '}
-                  <a
-                    href="/login"
-                    onClick={() => this.props.setState('register')}
-                  >
-                    register now!
-                  </a>
-                </Register>
-              </Others>
-            </Form.Item>
-          </StyledForm>
-        </Col>
+        <Card bordered={false}>
+          <Col span={12}>
+            <h1>Login</h1>
+            <StyledForm onSubmit={this.handleSubmit}>
+              <Form.Item>
+                {getFieldDecorator('email', {
+                  rules: [
+                    { required: true, message: 'Please input your username!' }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
+                    }
+                    placeholder="Email"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator('password', {
+                  rules: [
+                    { required: true, message: 'Please input your Password!' }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                    }
+                    type="password"
+                    placeholder="Password"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator('remember', {
+                  valuePropName: 'checked',
+                  initialValue: true
+                })(<Checkbox>Remember me</Checkbox>)}
+                <LoginButton type="primary" htmlType="submit">
+                  Log in
+                </LoginButton>
+                <Others>
+                  Log in with
+                  <StyledIcon
+                    type="google"
+                    theme="outlined"
+                    onClick={() => loginWithGmail(this.props.history)}
+                  />
+                  <StyledIcon
+                    type="facebook"
+                    theme="outlined"
+                    onClick={() => loginWithFacebook(this.props.history)}
+                  />
+                  <StyledIcon
+                    type="github"
+                    theme="outlined"
+                    onClick={() => loginWithGithub(this.props.history)}
+                  />
+                  <Register>
+                    Or{' '}
+                    <a
+                      href="/login"
+                      onClick={() => this.props.setState('register')}
+                    >
+                      register now!
+                    </a>
+                  </Register>
+                </Others>
+              </Form.Item>
+            </StyledForm>
+          </Col>
+        </Card>
       </Row>
     )
   }
