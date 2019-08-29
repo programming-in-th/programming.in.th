@@ -129,7 +129,6 @@ class Tasks extends React.Component<ITasksPageProps, ITasksPageState> {
             </div>
           )}
         </Content>
-        <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
       </Layout>
     )
   }

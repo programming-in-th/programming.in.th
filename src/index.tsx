@@ -4,9 +4,7 @@ import ReactDOM from 'react-dom'
 
 /* React Util */
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider'
-import createMuiTheme from '@material-ui/core/styles/createMuiTheme'
-import { blue } from '@material-ui/core/colors'
+import { Layout } from 'antd'
 
 /* Pages */
 import { Index } from './pages/Index'
@@ -41,18 +39,7 @@ if (!firebase.apps.length) {
   firebase.app().functions('asia-east2')
 }
 
-const theme = createMuiTheme({
-  palette: {
-    primary: blue,
-    secondary: {
-      main: '#fafafa'
-    }
-  },
-  typography: {
-    // useNextVariants: true,
-    // TODO: fix typography
-  }
-})
+const { Header, Content, Footer } = Layout
 
 interface IRootProps {
   onInitialLoad: () => void
@@ -61,13 +48,14 @@ class Root extends React.Component<IRootProps> {
   componentDidMount() {
     this.props.onInitialLoad()
   }
-
   render() {
     return (
       <Router>
-        <MuiThemeProvider theme={theme}>
-          <React.Fragment>
+        <Layout>
+          <Header style={{ background: 'white' }}>
             <Nav />
+          </Header>
+          <Content>
             <Switch>
               <Route exact path="/" component={Index} />
               <Route exact path="/tasks" component={TasksPage} />
@@ -81,8 +69,9 @@ class Root extends React.Component<IRootProps> {
               />
               <Route component={NotFound} />
             </Switch>
-          </React.Fragment>
-        </MuiThemeProvider>
+          </Content>
+          <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
+        </Layout>
       </Router>
     )
   }
