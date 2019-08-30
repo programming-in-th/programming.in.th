@@ -17,7 +17,7 @@
     "axios": "^0.19.0",
     "babel-plugin-import": "^1.12.1",
     "customize-cra": "^0.5.0",
-    "firebase": "^6.4.2",
+    "firebase": "^6.5.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
     "mui-datatables": "^2.9.0",
