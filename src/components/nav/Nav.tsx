@@ -19,7 +19,11 @@ interface item {
 const Main = (props: item) => {
   return (
     <div className={props.className}>
-      <Menu mode={props.mode} selectedKeys={[props.pathname]}>
+      <Menu
+        mode={props.mode}
+        selectedKeys={[props.pathname]}
+        style={{ lineHeight: '64px' }}
+      >
         <Menu.Item key="/tasks">
           <Link to="/tasks" onClick={props.onClick}>
             Tasks
@@ -48,7 +52,11 @@ const Main = (props: item) => {
 const Login = (props: item) => {
   return (
     <div className={props.className}>
-      <Menu mode={props.mode} selectedKeys={[props.pathname]}>
+      <Menu
+        mode={props.mode}
+        selectedKeys={[props.pathname]}
+        style={{ lineHeight: '64px' }}
+      >
         <Menu.Item key="/login">
           <Link to="/login" onClick={props.onClick}>
             Login
@@ -66,27 +74,12 @@ const Login = (props: item) => {
 
 const responsive = `(max-width: 767px)`
 
-const Navigator = styled.nav`
-  padding: 0 20px;
-  overflow: auto;
-  background-color: #fff;
-  position: fixed;
-  z-index: 200000;
-  width: 100%;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.075);
-`
-
 const Logo = styled.div`
   float: left;
   & a {
     display: inline-block;
     font-size: 17px;
-    padding-top: 9px;
-    padding-bottom: 8px;
     margin-right: 15px;
-    @media ${responsive} {
-      padding-top: 15px;
-    }
   }
 `
 const LeftMenu = styled(Main)`
@@ -105,7 +98,7 @@ const RightMenu = styled(Login)`
 
 const BarMenu = styled(Button)`
   float: right;
-  margin: 11px;
+  margin-top: 12px;
   display: none !important;
   @media ${responsive} {
     display: inline-block !important;
@@ -127,7 +120,7 @@ const LoginDrawer = styled(Login)`
 const _Nav = (props: any) => {
   const [visible, setVisibility] = useState(false)
   return (
-    <Navigator>
+    <React.Fragment>
       <Logo>
         <Link to="/" onClick={() => setVisibility(false)}>
           programming.in.th
@@ -143,7 +136,11 @@ const _Nav = (props: any) => {
         pathname={props.location.pathname}
         onClick={() => setVisibility(false)}
       />
-      <BarMenu icon="menu" onClick={() => setVisibility(!visible)} />
+      <BarMenu
+        icon="menu"
+        onClick={() => setVisibility(!visible)}
+        size="large"
+      />
       <Drawer
         title="Menu"
         placement="top"
@@ -163,7 +160,7 @@ const _Nav = (props: any) => {
           onClick={() => setVisibility(false)}
         />
       </Drawer>
-    </Navigator>
+    </React.Fragment>
   )
 }
 
