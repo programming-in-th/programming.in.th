@@ -2,12 +2,7 @@
 import React from 'react'
 
 /* React Util */
-import {
-  CircularProgress,
-  FormLabel,
-  FormGroup,
-  TextField
-} from '@material-ui/core'
+import { Table, Tag } from 'antd'
 
 /* Redux */
 import { connect } from 'react-redux'
@@ -15,14 +10,10 @@ import * as actionCreators from '../../redux/actions/index'
 import { ITask } from '../../redux/types/task'
 
 /* Static */
-import '../../assets/css/taskList.css'
-import '../../assets/css/avatar.css'
-import styles from '../../assets/css/submission.module.css'
+import styled from 'styled-components'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import H from 'history'
-
-import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
 
 interface ITasksPageProps {
   taskList: ITask[]
@@ -32,6 +23,11 @@ interface ITasksPageProps {
 }
 
 interface ITasksPageState {}
+
+const MainTable = styled(Table)`
+  width: 90%;
+  margin-left: 5%;
+`
 
 class TasksListComponent extends React.Component<
   ITasksPageProps,
@@ -48,201 +44,43 @@ class TasksListComponent extends React.Component<
   render() {
     const columns = [
       {
-        name: 'title',
-        label: 'Problem',
-        options: {
-          filter: false,
-          sort: true
-        }
+        title: 'Problem',
+        dataIndex: 'title'
+        // defaultSortOrder: ['descend', 'ascend'],
+        // sorter: (a: any, b: any) => a.title.length - b.title.length,
       },
       {
-        name: 'tags',
-        label: 'Tags',
-        options: {
-          filter: true,
-          filterType: 'checkbox',
-          customBodyRender: (
-            data: Array<string>,
-            dataIndex: number,
-            rowIndex: number
-          ) => {
-            let displayString = ''
-            data.forEach((str: string, index: number) => {
-              if (index === 0) {
-                displayString += str
-              } else {
-                displayString += ', ' + str
-              }
-            })
-            return <div>{displayString}</div>
-          }
-        }
+        title: 'Difficulty',
+        dataIndex: 'difficulty'
+        // defaultSortOrder: ['descend', 'ascend'],
+        // sorter: (a: any, b: any) => a.difficulty - b.difficulty,
       },
       {
-        name: 'difficulty',
-        label: 'Difficulty',
-        options: {
-          customBodyRender: (value: any) => {
-            if (value === -1) return 'N/A'
-            return value
-          },
-          filter: true,
-          filterType: 'custom',
-          customFilterListRender: (v: any) => {
-            if (v[0] && v[1]) {
-              return 'Difficulty: ' + v[0] + ' <= ' + v[1]
-            } else if (v[0]) {
-              return 'Difficulty: >= ' + v[0]
-            } else if (v[1]) {
-              return 'Difficulty: <= ' + v[1]
-            } else {
-              return false
-            }
-          },
-          filterOptions: {
-            names: [],
-            logic(difficulty: any, filters: any) {
-              if (filters[0] && filters[1]) {
-                return difficulty < filters[0] || difficulty > filters[1]
-              } else if (filters[0]) {
-                return difficulty < filters[0]
-              } else if (filters[1]) {
-                return difficulty > filters[1]
-              }
-              return false
-            },
-            display: (
-              filterList: any,
-              onChange: any,
-              index: any,
-              column: any
-            ) => (
-              <div>
-                <FormLabel>Difficulty</FormLabel>
-                <FormGroup row>
-                  <TextField
-                    label="Min"
-                    value={filterList[index][0] || ''}
-                    onChange={event => {
-                      filterList[index][0] = event.target.value
-                      onChange(filterList[index], index, column)
-                    }}
-                    style={{ marginRight: '5%' }}
-                  />
-                  <TextField
-                    label="Max"
-                    value={filterList[index][1] || ''}
-                    onChange={event => {
-                      filterList[index][1] = event.target.value
-                      onChange(filterList[index], index, column)
-                    }}
-                    style={{}}
-                  />
-                </FormGroup>
-              </div>
-            )
-          }
-        }
-      },
-      {
-        name: 'solve_count',
-        label: 'Users solved',
-        options: {
-          customBodyRender: (value: any) => {
-            if (value === -1) return 'N/A'
-            return value
-          },
-          filter: true,
-          filterType: 'custom',
-          customFilterListRender: (v: any) => {
-            if (v[0] && v[1]) {
-              return 'Users solved: ' + v[0] + ' <= ' + v[1]
-            } else if (v[0]) {
-              return 'Users solved: >= ' + v[0]
-            } else if (v[1]) {
-              return 'Users solved: <= ' + v[1]
-            } else {
-              return false
-            }
-          },
-          filterOptions: {
-            names: [],
-            logic(solve_count: any, filters: any) {
-              if (filters[0] && filters[1]) {
-                return solve_count < filters[0] || solve_count > filters[1]
-              } else if (filters[0]) {
-                return solve_count < filters[0]
-              } else if (filters[1]) {
-                return solve_count > filters[1]
-              }
-              return false
-            },
-            display: (
-              filterList: any,
-              onChange: any,
-              index: any,
-              column: any
-            ) => (
-              <div>
-                <FormLabel>Users Solved</FormLabel>
-                <FormGroup row>
-                  <TextField
-                    label="Min"
-                    value={filterList[index][0] || ''}
-                    onChange={event => {
-                      filterList[index][0] = event.target.value
-                      onChange(filterList[index], index, column)
-                    }}
-                    style={{ marginRight: '5%' }}
-                  />
-                  <TextField
-                    label="Max"
-                    value={filterList[index][1] || ''}
-                    onChange={event => {
-                      filterList[index][1] = event.target.value
-                      onChange(filterList[index], index, column)
-                    }}
-                    style={{}}
-                  />
-                </FormGroup>
-              </div>
-            )
-          }
-        }
+        title: 'Tags',
+        dataIndex: 'tags',
+        render: (tags: any) => (
+          <span>
+            {tags.map((tag: string) => (
+              <Tag color="blue" key={tag}>
+                {tag}
+              </Tag>
+            ))}
+          </span>
+        )
       }
+      // {
+      //   title: 'Users solved',
+      //   dataIndex: 'solve_count',
+      //   defaultSortOrder: ['descend', 'ascend'],
+      //   sorter: (a: ITask, b: ITask) => a.solve_count < b.solve_count,
+      // }
     ]
-
-    return this.props.status === 'LOADING' ? (
-      <div id="loading">
-        <CircularProgress />
-      </div>
-    ) : (
-      <div className={styles.wrapper}>
-        <MUIDataTable
-          title="Tasks"
-          columns={columns as MUIDataTableColumnDef[]}
-          data={this.props.taskList}
-          options={{
-            responsive: 'scroll',
-            search: true,
-            print: false,
-            download: false,
-            selectableRows: 'none',
-            onRowClick: (rowData, rowMeta) => {
-              const problem_id = this.props.taskList[rowMeta.dataIndex]
-                .problem_id
-              this.props.history.push('/tasks/' + problem_id)
-            },
-            customSearch: (
-              searchQuery: string,
-              currentRow: Array<any>,
-              columns: Array<any>
-            ): boolean => {
-              return currentRow[0].toString().indexOf(searchQuery) >= 0
-            }
-          }}
-        />
-      </div>
+    return (
+      <MainTable
+        columns={columns}
+        dataSource={this.props.taskList}
+        loading={this.props.status === 'LOADING'}
+      />
     )
   }
 }
