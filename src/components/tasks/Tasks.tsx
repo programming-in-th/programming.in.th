@@ -9,9 +9,6 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../../redux/actions/index'
 import { ITask } from '../../redux/types/task'
 
-/* React Component */
-import { Task } from './TaskDetail'
-
 /* Static */
 import '../../assets/css/taskList.css'
 import '../../assets/css/avatar.css'
@@ -29,17 +26,14 @@ interface ITasksPageProps {
   onInitialLoad: () => void
 }
 
-interface ITasksPageState {
-  currentTask: string
-}
+interface ITasksPageState {}
 
-class TasksComponent extends React.Component<ITasksPageProps, ITasksPageState> {
-  state: ITasksPageState = {
-    currentTask: ''
-  }
-
+class TasksListComponent extends React.Component<
+  ITasksPageProps,
+  ITasksPageState
+> {
   handleClick = (task: string): void => {
-    this.setState({ currentTask: task })
+    this.props.history.push('/tasks/' + task)
   }
 
   componentDidMount() {
@@ -93,8 +87,6 @@ class TasksComponent extends React.Component<ITasksPageProps, ITasksPageState> {
       <div id="loading">
         <CircularProgress />
       </div>
-    ) : this.state.currentTask !== '' ? (
-      <Task id={this.state.currentTask} />
     ) : (
       <div className={styles.wrapper}>
         <MUIDataTable
@@ -110,7 +102,7 @@ class TasksComponent extends React.Component<ITasksPageProps, ITasksPageState> {
             onRowClick: (rowData, rowMeta) => {
               const problem_id = this.props.taskList[rowMeta.dataIndex]
                 .problem_id
-              this.props.history.push('/task_detail/' + problem_id)
+              this.props.history.push('/tasks/' + problem_id)
             },
             customSearch: (
               searchQuery: string,
@@ -145,7 +137,7 @@ const mapDispatchToProps: (
   }
 }
 
-export const TasksPage = connect(
+export const TasksList = connect(
   mapStateToProps,
   mapDispatchToProps
-)(TasksComponent)
+)(TasksListComponent)

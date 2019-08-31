@@ -1,11 +1,16 @@
 import React from 'react'
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
-import { FormGroup, FormLabel, TextField } from '@material-ui/core'
+import {
+  FormGroup,
+  FormLabel,
+  TextField,
+  CircularProgress
+} from '@material-ui/core'
 import styles from '../../assets/css/submission.module.css'
 import * as actionCreators from '../../redux/actions/index'
 import { connect } from 'react-redux'
 
-class SubmissionsComponent extends React.Component<any, {}> {
+class SubmissionsComponent extends React.Component<any, any> {
   componentDidMount() {
     this.props.onInitialLoad()
   }
@@ -54,13 +59,21 @@ class SubmissionsComponent extends React.Component<any, {}> {
         options: {
           filter: true,
           sort: true,
-          filterType: 'textField'
+          filterType: 'textField',
+          customBodyRender: (value: any) => {
+            if (value === -1) return 'N/A'
+            return value
+          }
         }
       },
       {
         name: 'time',
         label: 'Time (s)',
         options: {
+          customBodyRender: (value: any) => {
+            if (value === -1) return 'N/A'
+            return value
+          },
           filter: true,
           filterType: 'custom',
           customFilterListRender: (v: any) => {
@@ -124,6 +137,10 @@ class SubmissionsComponent extends React.Component<any, {}> {
         name: 'memory',
         label: 'Memory (KB)',
         options: {
+          customBodyRender: (value: any) => {
+            if (value === -1) return 'N/A'
+            return value
+          },
           filter: true,
           filterType: 'custom',
           customFilterListRender: (v: any) => {
@@ -185,7 +202,11 @@ class SubmissionsComponent extends React.Component<any, {}> {
       }
     ]
 
-    return (
+    return this.props.submissionsListStatus === 'LOADING' ? (
+      <div id="loading">
+        <CircularProgress />
+      </div>
+    ) : (
       <div className={styles.wrapper}>
         <MUIDataTable
           title="Submissions"
@@ -199,8 +220,7 @@ class SubmissionsComponent extends React.Component<any, {}> {
               const submission_id = this.props.submissionsList[
                 rowMeta.dataIndex
               ].submission_id
-              console.log(submission_id)
-              this.props.history.push('/submission_detail/' + submission_id)
+              this.props.history.push('/tasks/submissions/' + submission_id)
             }
           }}
         />
@@ -210,6 +230,7 @@ class SubmissionsComponent extends React.Component<any, {}> {
 }
 
 const mapStateToProps = (state: any) => {
+  console.log(state)
   return {
     submissionsList: state.submissions.submissionsList,
     submissionsListStatus: state.submissions.submissionsListStatus
@@ -224,7 +245,9 @@ const mapDispatchToProps = (dispatch: any) => {
   }
 }
 
-export const SubmissionsPage = connect(
+export const SubmissionsList = connect(
   mapStateToProps,
   mapDispatchToProps
 )(SubmissionsComponent)
+
+// TODO: handle pages of 10

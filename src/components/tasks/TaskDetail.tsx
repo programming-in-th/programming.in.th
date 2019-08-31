@@ -45,7 +45,7 @@ const mapDispatchToProps: (
   }
 }
 
-export const Task = connect(
+export const TaskDetailPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TaskDetailComponent) as any

@@ -39,7 +39,6 @@ class SubmissionDetailComponent extends React.Component<any, any> {
         alert('Unauthorized')
         return
       }
-      console.log((this.refs.aceEditor as any).editor.getValue())
       this.props.submit(
         this.props.detail.metadata.uid,
         this.props.detail.metadata.problem_id,
@@ -48,7 +47,9 @@ class SubmissionDetailComponent extends React.Component<any, any> {
       )
     }
     return this.props.detailStatus === 'LOADING' ? (
-      <CircularProgress />
+      <div id="loading">
+        <CircularProgress />
+      </div>
     ) : (
       <div>
         <div className={styles.editor}>
@@ -57,6 +58,11 @@ class SubmissionDetailComponent extends React.Component<any, any> {
             mode={this.props.detail.metadata.language}
             theme="monokai"
             value={this.props.detail.code}
+            readOnly={
+              !firebase.auth().currentUser ||
+              firebase.auth().currentUser!.uid !==
+                this.props.detail.metadata.uid
+            }
           />
         </div>
         <Button onClick={submitCode}>Submit</Button>
@@ -71,7 +77,6 @@ class SubmissionDetailComponent extends React.Component<any, any> {
 }
 
 const mapStateToProps: (state: any) => any = state => {
-  console.log(state)
   return {
     detail: state.submissions.detail,
     detailStatus: state.submissions.detailStatus,
@@ -101,5 +106,3 @@ export const SubmissionDetailPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )(SubmissionDetailComponent)
-
-// TODO: Check ownership of submission

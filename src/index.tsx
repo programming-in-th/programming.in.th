@@ -10,9 +10,6 @@ import { Layout } from 'antd'
 import { Index } from './pages/Index'
 import { TasksPage } from './pages/Tasks'
 import { AuthPage } from './pages/Auth'
-import { SubmissionsPage } from './components/tasks/Submissions'
-import { SubmitPage } from './components/tasks/Submit'
-import { SubmissionDetailPage } from './components/tasks/SubmissionDetail'
 import { NotFound } from './pages/404'
 
 /* React Component */
@@ -58,15 +55,13 @@ class Root extends React.Component<IRootProps> {
           <Content>
             <Switch>
               <Route exact path="/" component={Index} />
-              <Route exact path="/tasks" component={TasksPage} />
-              <Route exact path="/login" component={AuthPage} />
-              <Route exact path="/submissions" component={SubmissionsPage} />
-              <Route exact path="/submit" component={SubmitPage} />
               <Route
-                exact
-                path="/submission_detail/:submission_id"
-                component={SubmissionDetailPage}
+                path="/tasks/:tab?"
+                render={({ match, history }) => {
+                  return <TasksPage match={match} history={history} />
+                }}
               />
+              <Route exact path="/login" component={AuthPage} />
               <Route component={NotFound} />
             </Switch>
           </Content>

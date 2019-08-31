@@ -22,7 +22,9 @@ class SubmitComponent extends React.Component {
 export const SubmitPage = SubmitComponent
 /*
 TODO:
-CSS
+Authentication
 Dropdown list of languages and change AceEditor mode to match language
+Which problem
+CSS
 Redirect to SubmissionDetail page
 */

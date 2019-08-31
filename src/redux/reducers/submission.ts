@@ -11,7 +11,7 @@ import {
 
 const initialState: ISubmissionsState = {
   submissionsList: [],
-  submissionListStatus: 'LOADING',
+  submissionsListStatus: 'LOADING',
   detail: undefined,
   detailStatus: 'LOADING'
 }
@@ -23,11 +23,11 @@ const reducer: Reducer = (
   switch (action.type) {
     case REQUEST_SUBMISSIONS_LIST:
       return Object.assign({}, state, {
-        submissionListStatus: 'LOADING'
+        submissionsListStatus: 'LOADING'
       })
     case RECEIVE_SUBMISSIONS_LIST:
       return Object.assign({}, state, {
-        submissionListStatus: 'SUCCESS',
+        submissionsListStatus: 'SUCCESS',
         submissionsList: action.submissionsList
       })
     case REQUEST_DETAIL:
