@@ -7,7 +7,7 @@ import 'brace/theme/monokai'
 /* Material */
 import Button from '@material-ui/core/Button'
 
-class Submit extends React.Component {
+class SubmitComponent extends React.Component {
   render() {
     return (
       <div>
@@ -19,7 +19,7 @@ class Submit extends React.Component {
   }
 }
 
-export const SubmitPage = Submit
+export const SubmitPage = SubmitComponent
 /*
 TODO:
 CSS

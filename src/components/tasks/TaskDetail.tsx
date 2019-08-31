@@ -15,7 +15,7 @@ interface ITaskProps {
   onInitialLoad: (id: string) => void
 }
 
-export class TaskComp extends React.Component<ITaskProps> {
+export class TaskDetailComponent extends React.Component<ITaskProps> {
   componentDidMount() {
     this.props.onInitialLoad(this.props.id)
   }
@@ -48,4 +48,4 @@ const mapDispatchToProps: (
 export const Task = connect(
   mapStateToProps,
   mapDispatchToProps
-)(TaskComp) as any
+)(TaskDetailComponent) as any

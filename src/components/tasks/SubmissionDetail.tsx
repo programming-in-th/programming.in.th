@@ -3,7 +3,7 @@ import React from 'react'
 
 /* Redux */
 import { connect } from 'react-redux'
-import * as actionCreators from '../redux/actions/index'
+import * as actionCreators from '../../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 
@@ -21,13 +21,13 @@ import 'brace/mode/haskell'
 import 'brace/theme/monokai'
 
 /* Components */
-import SubmissionResponseDialog from '../components/tasks/SubmissionResponseDialog'
+import SubmissionResponseDialog from './SubmissionResponseDialog'
 
 /* Styles */
-import styles from '../assets/css/submission.module.css'
+import styles from '../../assets/css/submission.module.css'
 import firebase from 'firebase'
 
-class SubmissionDetail extends React.Component<any, any> {
+class SubmissionDetailComponent extends React.Component<any, any> {
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.submission_id)
   }
@@ -100,6 +100,6 @@ const mapDispatchToProps: (
 export const SubmissionDetailPage = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SubmissionDetail)
+)(SubmissionDetailComponent)
 
 // TODO: Check ownership of submission

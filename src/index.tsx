@@ -12,9 +12,9 @@ import { blue } from '@material-ui/core/colors'
 import { Index } from './pages/Index'
 import { TasksPage } from './pages/Tasks'
 import { AuthPage } from './pages/Auth'
-import { SubmissionsPage } from './pages/Submissions'
-import { SubmitPage } from './pages/Submit'
-import { SubmissionDetailPage } from './pages/SubmissionDetail'
+import { SubmissionsPage } from './components/tasks/Submissions'
+import { SubmitPage } from './components/tasks/Submit'
+import { SubmissionDetailPage } from './components/tasks/SubmissionDetail'
 import { NotFound } from './pages/404'
 
 /* React Component */

@@ -1,14 +1,11 @@
 import React from 'react'
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
 import { FormGroup, FormLabel, TextField } from '@material-ui/core'
-import styles from '../assets/css/submission.module.css'
-import { Layout } from 'antd'
-import * as actionCreators from '../redux/actions/index'
+import styles from '../../assets/css/submission.module.css'
+import * as actionCreators from '../../redux/actions/index'
 import { connect } from 'react-redux'
 
-const { Content, Footer } = Layout
-
-class Submissions extends React.Component<any, {}> {
+class SubmissionsComponent extends React.Component<any, {}> {
   componentDidMount() {
     this.props.onInitialLoad()
   }
@@ -189,30 +186,25 @@ class Submissions extends React.Component<any, {}> {
     ]
 
     return (
-      <Layout className="layout">
-        <Content>
-          <div className={styles.wrapper}>
-            <MUIDataTable
-              title="Submissions"
-              columns={columns as MUIDataTableColumnDef[]}
-              data={this.props.submissionsList}
-              options={{
-                responsive: 'scroll',
-                search: false,
-                selectableRows: 'none',
-                onRowClick: (rowData, rowMeta) => {
-                  const submission_id = this.props.submissionsList[
-                    rowMeta.dataIndex
-                  ].submission_id
-                  console.log(submission_id)
-                  this.props.history.push('/submission_detail/' + submission_id)
-                }
-              }}
-            />
-          </div>
-        </Content>
-        <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
-      </Layout>
+      <div className={styles.wrapper}>
+        <MUIDataTable
+          title="Submissions"
+          columns={columns as MUIDataTableColumnDef[]}
+          data={this.props.submissionsList}
+          options={{
+            responsive: 'scroll',
+            search: false,
+            selectableRows: 'none',
+            onRowClick: (rowData, rowMeta) => {
+              const submission_id = this.props.submissionsList[
+                rowMeta.dataIndex
+              ].submission_id
+              console.log(submission_id)
+              this.props.history.push('/submission_detail/' + submission_id)
+            }
+          }}
+        />
+      </div>
     )
   }
 }
@@ -235,4 +227,4 @@ const mapDispatchToProps = (dispatch: any) => {
 export const SubmissionsPage = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Submissions)
+)(SubmissionsComponent)
