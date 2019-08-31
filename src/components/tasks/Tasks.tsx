@@ -2,7 +2,12 @@
 import React from 'react'
 
 /* React Util */
-import { CircularProgress } from '@material-ui/core'
+import {
+  CircularProgress,
+  FormLabel,
+  FormGroup,
+  TextField
+} from '@material-ui/core'
 
 /* Redux */
 import { connect } from 'react-redux'
@@ -75,11 +80,135 @@ class TasksListComponent extends React.Component<
       },
       {
         name: 'difficulty',
-        label: 'Difficulty'
+        label: 'Difficulty',
+        options: {
+          customBodyRender: (value: any) => {
+            if (value === -1) return 'N/A'
+            return value
+          },
+          filter: true,
+          filterType: 'custom',
+          customFilterListRender: (v: any) => {
+            if (v[0] && v[1]) {
+              return 'Difficulty: ' + v[0] + ' <= ' + v[1]
+            } else if (v[0]) {
+              return 'Difficulty: >= ' + v[0]
+            } else if (v[1]) {
+              return 'Difficulty: <= ' + v[1]
+            } else {
+              return false
+            }
+          },
+          filterOptions: {
+            names: [],
+            logic(difficulty: any, filters: any) {
+              if (filters[0] && filters[1]) {
+                return difficulty < filters[0] || difficulty > filters[1]
+              } else if (filters[0]) {
+                return difficulty < filters[0]
+              } else if (filters[1]) {
+                return difficulty > filters[1]
+              }
+              return false
+            },
+            display: (
+              filterList: any,
+              onChange: any,
+              index: any,
+              column: any
+            ) => (
+              <div>
+                <FormLabel>Difficulty</FormLabel>
+                <FormGroup row>
+                  <TextField
+                    label="Min"
+                    value={filterList[index][0] || ''}
+                    onChange={event => {
+                      filterList[index][0] = event.target.value
+                      onChange(filterList[index], index, column)
+                    }}
+                    style={{ marginRight: '5%' }}
+                  />
+                  <TextField
+                    label="Max"
+                    value={filterList[index][1] || ''}
+                    onChange={event => {
+                      filterList[index][1] = event.target.value
+                      onChange(filterList[index], index, column)
+                    }}
+                    style={{}}
+                  />
+                </FormGroup>
+              </div>
+            )
+          }
+        }
       },
       {
         name: 'solve_count',
-        label: 'Users solved'
+        label: 'Users solved',
+        options: {
+          customBodyRender: (value: any) => {
+            if (value === -1) return 'N/A'
+            return value
+          },
+          filter: true,
+          filterType: 'custom',
+          customFilterListRender: (v: any) => {
+            if (v[0] && v[1]) {
+              return 'Users solved: ' + v[0] + ' <= ' + v[1]
+            } else if (v[0]) {
+              return 'Users solved: >= ' + v[0]
+            } else if (v[1]) {
+              return 'Users solved: <= ' + v[1]
+            } else {
+              return false
+            }
+          },
+          filterOptions: {
+            names: [],
+            logic(solve_count: any, filters: any) {
+              if (filters[0] && filters[1]) {
+                return solve_count < filters[0] || solve_count > filters[1]
+              } else if (filters[0]) {
+                return solve_count < filters[0]
+              } else if (filters[1]) {
+                return solve_count > filters[1]
+              }
+              return false
+            },
+            display: (
+              filterList: any,
+              onChange: any,
+              index: any,
+              column: any
+            ) => (
+              <div>
+                <FormLabel>Users Solved</FormLabel>
+                <FormGroup row>
+                  <TextField
+                    label="Min"
+                    value={filterList[index][0] || ''}
+                    onChange={event => {
+                      filterList[index][0] = event.target.value
+                      onChange(filterList[index], index, column)
+                    }}
+                    style={{ marginRight: '5%' }}
+                  />
+                  <TextField
+                    label="Max"
+                    value={filterList[index][1] || ''}
+                    onChange={event => {
+                      filterList[index][1] = event.target.value
+                      onChange(filterList[index], index, column)
+                    }}
+                    style={{}}
+                  />
+                </FormGroup>
+              </div>
+            )
+          }
+        }
       }
     ]
 
