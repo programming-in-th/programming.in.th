@@ -48,9 +48,13 @@ class SubmissionsComponent extends React.Component<any, any> {
         name: 'status',
         label: 'Status',
         options: {
-          filter: true, // custom filter
-          sort: false, // consider changing?
-          filterType: 'textField'
+          filter: true,
+          sort: false,
+          filterType: 'textField',
+          customBodyRender: (value: any) => {
+            if (value === 'in_queue') return 'Pending'
+            return value
+          }
         }
       },
       {
@@ -196,8 +200,7 @@ class SubmissionsComponent extends React.Component<any, any> {
                 </FormGroup>
               </div>
             )
-          },
-          print: false
+          }
         }
       }
     ]
@@ -216,6 +219,8 @@ class SubmissionsComponent extends React.Component<any, any> {
             responsive: 'scroll',
             search: false,
             selectableRows: 'none',
+            print: false,
+            download: false,
             onRowClick: (rowData, rowMeta) => {
               const submission_id = this.props.submissionsList[
                 rowMeta.dataIndex
