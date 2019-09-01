@@ -3,6 +3,7 @@ import * as actionCreators from '../../redux/actions/index'
 import { connect } from 'react-redux'
 import { Table } from 'antd'
 import styled from 'styled-components'
+import { ColumnProps } from 'antd/lib/table'
 
 const MainTable = styled(Table)`
   width: 90%;
@@ -18,7 +19,9 @@ class SubmissionsComponent extends React.Component<any, any> {
     const columns = [
       {
         title: 'User',
-        dataIndex: 'username'
+        dataIndex: 'username',
+        width: 150,
+        fixed: 'left'
       },
       {
         title: 'Problem',
@@ -44,10 +47,11 @@ class SubmissionsComponent extends React.Component<any, any> {
         title: 'Memory (KB)',
         dataIndex: 'memory'
       }
-    ]
+    ] as ColumnProps<{}>[]
     return (
       <MainTable
         columns={columns}
+        scroll={{ x: 800 }}
         dataSource={this.props.submissionsList}
         loading={this.props.submissionsListStatus === 'LOADING'}
       />
