@@ -25,14 +25,9 @@ interface ITasksPageProps {
 
 interface ITasksPageState {}
 
-const TableWrapper = styled.div`
+const MainTable = styled(Table)`
   width: 90%;
   margin-left: 5%;
-  margin-bottom: 10px;
-  padding: 10px 20px;
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-  background-color: white;
 `
 
 class TasksListComponent extends React.Component<
@@ -53,9 +48,7 @@ class TasksListComponent extends React.Component<
         title: 'Problem',
         dataIndex: 'title',
         defaultSortOrder: ['descend', 'ascend'],
-        sorter: (a: any, b: any) => b.title.length - a.title.length,
-        width: 100,
-        fixed: 'left'
+        sorter: (a: any, b: any) => b.title.length - a.title.length
       },
       {
         title: 'Difficulty',
@@ -66,7 +59,7 @@ class TasksListComponent extends React.Component<
       {
         title: 'Tags',
         dataIndex: 'tags',
-        render: (tags: Array<string>) => (
+        render: (tags: any) => (
           <span>
             {tags.map((tag: string) => (
               <Tag color="blue" key={tag}>
@@ -84,14 +77,11 @@ class TasksListComponent extends React.Component<
       // }
     ] as ColumnProps<{}>[]
     return (
-      <TableWrapper>
-        <Table
-          columns={columns}
-          scroll={{ x: 400 }}
-          dataSource={this.props.taskList}
-          loading={this.props.status === 'LOADING'}
-        />
-      </TableWrapper>
+      <MainTable
+        columns={columns}
+        dataSource={this.props.taskList}
+        loading={this.props.status === 'LOADING'}
+      />
     )
   }
 }

@@ -5,14 +5,9 @@ import { Table } from 'antd'
 import styled from 'styled-components'
 import { ColumnProps } from 'antd/lib/table'
 
-const TableWrapper = styled.div`
+const MainTable = styled(Table)`
   width: 90%;
   margin-left: 5%;
-  margin-bottom: 10px;
-  padding: 10px 20px;
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-  background-color: white;
 `
 
 class SubmissionsComponent extends React.Component<any, any> {
@@ -25,7 +20,7 @@ class SubmissionsComponent extends React.Component<any, any> {
       {
         title: 'User',
         dataIndex: 'username',
-        width: 120,
+        width: 150,
         fixed: 'left'
       },
       {
@@ -54,14 +49,12 @@ class SubmissionsComponent extends React.Component<any, any> {
       }
     ] as ColumnProps<{}>[]
     return (
-      <TableWrapper>
-        <Table
-          columns={columns}
-          scroll={{ x: 800 }}
-          dataSource={this.props.submissionsList}
-          loading={this.props.submissionsListStatus === 'LOADING'}
-        />
-      </TableWrapper>
+      <MainTable
+        columns={columns}
+        scroll={{ x: 800 }}
+        dataSource={this.props.submissionsList}
+        loading={this.props.submissionsListStatus === 'LOADING'}
+      />
     )
   }
 }
