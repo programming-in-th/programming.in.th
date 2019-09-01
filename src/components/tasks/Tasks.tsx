@@ -14,7 +14,6 @@ import styled from 'styled-components'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import H from 'history'
-import { ColumnProps } from 'antd/lib/table'
 
 interface ITasksPageProps {
   taskList: ITask[]
@@ -46,15 +45,15 @@ class TasksListComponent extends React.Component<
     const columns = [
       {
         title: 'Problem',
-        dataIndex: 'title',
-        defaultSortOrder: ['descend', 'ascend'],
-        sorter: (a: any, b: any) => b.title.length - a.title.length
+        dataIndex: 'title'
+        // defaultSortOrder: ['descend', 'ascend'],
+        // sorter: (a: any, b: any) => a.title.length - b.title.length,
       },
       {
         title: 'Difficulty',
-        dataIndex: 'difficulty',
-        defaultSortOrder: ['descend', 'ascend'],
-        sorter: (a: any, b: any) => b.difficulty - a.difficulty
+        dataIndex: 'difficulty'
+        // defaultSortOrder: ['descend', 'ascend'],
+        // sorter: (a: any, b: any) => a.difficulty - b.difficulty,
       },
       {
         title: 'Tags',
@@ -75,7 +74,7 @@ class TasksListComponent extends React.Component<
       //   defaultSortOrder: ['descend', 'ascend'],
       //   sorter: (a: ITask, b: ITask) => a.solve_count < b.solve_count,
       // }
-    ] as ColumnProps<{}>[]
+    ]
     return (
       <MainTable
         columns={columns}
