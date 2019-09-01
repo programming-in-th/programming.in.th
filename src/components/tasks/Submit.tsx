@@ -5,7 +5,7 @@ import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 
 /* Material */
-import Button from '@material-ui/core/Button'
+import { Button } from 'antd'
 
 class SubmitComponent extends React.Component {
   render() {
@@ -13,7 +13,7 @@ class SubmitComponent extends React.Component {
       <div>
         <h1>Submit Code</h1>
         <AceEditor mode="javascript" theme="monokai" />
-        <Button>Submit</Button>
+        <Button type="primary">Submit</Button>
       </div>
     )
   }
