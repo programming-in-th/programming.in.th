@@ -24,9 +24,7 @@ class SubmissionsComponent extends React.Component<any, any> {
     const columns = [
       {
         title: 'User',
-        dataIndex: 'username',
-        width: 120,
-        fixed: 'left'
+        dataIndex: 'username'
       },
       {
         title: 'Problem',
@@ -38,19 +36,35 @@ class SubmissionsComponent extends React.Component<any, any> {
       },
       {
         title: 'Status',
-        dataIndex: 'status'
+        dataIndex: 'status',
+        render: (text: any, record: {}, index: number): React.ReactNode => {
+          if (text === 'in_queue') return <div>Pending</div>
+          else return text
+        }
       },
       {
         title: 'Points',
-        dataIndex: 'points'
+        dataIndex: 'points',
+        render: (text: any, record: {}, index: number): React.ReactNode => {
+          if (text === -1) return <div>N/A</div>
+          else return text
+        }
       },
       {
         title: 'Time (s)',
-        dataIndex: 'time'
+        dataIndex: 'time',
+        render: (text: any, record: {}, index: number): React.ReactNode => {
+          if (text === -1) return <div>N/A</div>
+          else return text
+        }
       },
       {
         title: 'Memory (KB)',
-        dataIndex: 'memory'
+        dataIndex: 'memory',
+        render: (text: any, record: {}, index: number): React.ReactNode => {
+          if (text === -1) return <div>N/A</div>
+          else return text
+        }
       }
     ] as ColumnProps<{}>[]
     return (
