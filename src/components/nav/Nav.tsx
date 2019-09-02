@@ -1,13 +1,17 @@
 import React from 'react'
 import { Link, RouteComponentProps } from 'react-router-dom'
 import { withRouter } from 'react-router'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
 import styled from 'styled-components'
-import { Drawer, Button, Menu } from 'antd'
+import { Drawer, Button, Menu, Avatar } from 'antd'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-class Navigator extends React.Component<RouteComponentProps<any>> {
+class Navigator extends React.Component<
+  RouteComponentProps<any> & { user: firebase.User }
+> {
   firebaseLogout() {
     firebase
       .auth()
@@ -30,8 +34,9 @@ class Navigator extends React.Component<RouteComponentProps<any>> {
       className?: any
       mode?: 'vertical' | 'horizontal'
     }
-    const Location = this.props.location.pathname.split('/')[1]
-    const user = firebase.auth().currentUser
+    const LocationReal = this.props.location.pathname as string
+    const Location = LocationReal.split('/')[1]
+    const { user } = this.props
     const Main = (props: item) => {
       return (
         <div className={props.className}>
@@ -70,14 +75,6 @@ class Navigator extends React.Component<RouteComponentProps<any>> {
       justify-content: center;
       align-items: center;
     `
-    const ImgWrapper = styled.img`
-      margin-left: 15px;
-      width: 36px;
-      height: 36px;
-      border-radius: 5px;
-      object-fit: fill;
-      object-fit: cover;
-    `
     const Login = (props: item) => {
       return (
         <div className={props.className}>
@@ -89,9 +86,10 @@ class Navigator extends React.Component<RouteComponentProps<any>> {
             >
               <Menu.Item key="user">
                 <UserWrapper onClick={this.firebaseLogout}>
-                  <p>{user.displayName === '' ? 'User' : user.displayName}</p>
-                  <ImgWrapper
-                    alt="avatar"
+                  <p style={{ marginRight: '15px' }}>
+                    {user.displayName === '' ? 'User' : user.displayName}
+                  </p>
+                  <Avatar
                     src={
                       user.photoURL === ''
                         ? '/assets/img/default-user.png'
@@ -191,4 +189,13 @@ class Navigator extends React.Component<RouteComponentProps<any>> {
   }
 }
 
-export const Nav = withRouter(Navigator)
+const mapStateToProps: (state: any) => any = state => {
+  return {
+    user: state.user.user
+  }
+}
+
+export const Nav = compose(
+  withRouter,
+  connect(mapStateToProps)
+)(Navigator) as any
