@@ -1,14 +1,13 @@
-import React, { useState } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import React from 'react'
+import { Link, RouteComponentProps } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import styled from 'styled-components'
 import { Drawer, Button, Menu } from 'antd'
-import { connect } from 'react-redux'
 
-import { RouteComponentProps } from 'react-router'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-class Navigator extends React.Component<{ user: firebase.User }, any> {
+class Navigator extends React.Component<RouteComponentProps<any>> {
   firebaseLogout() {
     firebase
       .auth()
@@ -31,26 +30,32 @@ class Navigator extends React.Component<{ user: firebase.User }, any> {
       className?: any
       mode?: 'vertical' | 'horizontal'
     }
+    const Location = this.props.location.pathname.split('/')[1]
+    const user = firebase.auth().currentUser
     const Main = (props: item) => {
       return (
         <div className={props.className}>
-          <Menu mode={props.mode} style={{ lineHeight: '64px' }}>
-            <Menu.Item key="/tasks">
+          <Menu
+            mode={props.mode}
+            style={{ lineHeight: '64px' }}
+            selectedKeys={[Location]}
+          >
+            <Menu.Item key="tasks">
               <Link to="/tasks" onClick={this.hideDrawer}>
                 Tasks
               </Link>
             </Menu.Item>
-            <Menu.Item key="/learn">
+            <Menu.Item key="learn">
               <Link to="/learn" onClick={this.hideDrawer}>
                 Learn
               </Link>
             </Menu.Item>
-            <Menu.Item key="/forum">
+            <Menu.Item key="forum">
               <Link to="/forum" onClick={this.hideDrawer}>
                 Forum
               </Link>
             </Menu.Item>
-            <Menu.Item key="/exam">
+            <Menu.Item key="exam">
               <Link to="/exam" onClick={this.hideDrawer}>
                 Exam
               </Link>
@@ -59,7 +64,6 @@ class Navigator extends React.Component<{ user: firebase.User }, any> {
         </div>
       )
     }
-    const { user } = this.props
     const UserWrapper = styled.div`
       display: inline-flex;
       flex-direction: row;
@@ -68,8 +72,8 @@ class Navigator extends React.Component<{ user: firebase.User }, any> {
     `
     const ImgWrapper = styled.img`
       margin-left: 15px;
-      width: 40px;
-      height: 40px;
+      width: 36px;
+      height: 36px;
       border-radius: 5px;
       object-fit: fill;
       object-fit: cover;
@@ -77,10 +81,14 @@ class Navigator extends React.Component<{ user: firebase.User }, any> {
     const Login = (props: item) => {
       return (
         <div className={props.className}>
-          <Menu mode={props.mode} style={{ lineHeight: '64px' }}>
-            {user ? (
+          {user ? (
+            <Menu
+              mode={props.mode}
+              style={{ lineHeight: '64px' }}
+              selectedKeys={[Location]}
+            >
               <Menu.Item key="user">
-                <UserWrapper>
+                <UserWrapper onClick={this.firebaseLogout}>
                   <p>{user.displayName === '' ? 'User' : user.displayName}</p>
                   <ImgWrapper
                     alt="avatar"
@@ -92,26 +100,30 @@ class Navigator extends React.Component<{ user: firebase.User }, any> {
                   />
                 </UserWrapper>
               </Menu.Item>
-            ) : (
-              <React.Fragment>
-                <Menu.Item key="/login">
-                  <Link to="/login" onClick={this.hideDrawer}>
-                    Login
-                  </Link>
-                </Menu.Item>
-                <Menu.Item key="/register">
-                  <Link to="/register" onClick={this.hideDrawer}>
-                    Register
-                  </Link>
-                </Menu.Item>
-              </React.Fragment>
-            )}
-          </Menu>
+            </Menu>
+          ) : (
+            <Menu
+              mode={props.mode}
+              style={{ lineHeight: '64px' }}
+              selectedKeys={[Location]}
+            >
+              <Menu.Item key="login">
+                <Link to="/login" onClick={this.hideDrawer}>
+                  Login
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="register">
+                <Link to="/register" onClick={this.hideDrawer}>
+                  Register
+                </Link>
+              </Menu.Item>
+            </Menu>
+          )}
         </div>
       )
     }
 
-    const responsive = `(max-width: 767px)`
+    const responsive = `(max-width: 822px)`
 
     const Logo = styled.div`
       float: left;
@@ -168,7 +180,7 @@ class Navigator extends React.Component<{ user: firebase.User }, any> {
           placement="top"
           onClose={this.hideDrawer}
           visible={this.state.visible}
-          height="360px"
+          height="auto"
           bodyStyle={{ padding: '10px' }}
         >
           <MainDrawer mode="vertical" />
@@ -179,10 +191,4 @@ class Navigator extends React.Component<{ user: firebase.User }, any> {
   }
 }
 
-const mapStateToProps: (state: any) => any = state => {
-  return {
-    user: state.user.user
-  }
-}
-
-export const Nav = connect(mapStateToProps)(Navigator) as any
+export const Nav = withRouter(Navigator)

@@ -16,14 +16,9 @@ import 'brace/mode/c_cpp'
 import 'brace/mode/python'
 
 const { Option, OptGroup } = Select
-const responsive = `(max-width: 767px)`
+// const responsive = `(max-width: 767px)`
 
-const Wrapper = styled.div`
-  margin: 10px 5%;
-  @media ${responsive} {
-    width: 90% !important;
-  }
-`
+const Wrapper = styled.div``
 
 class SubmitComponent extends React.Component<any, any> {
   render() {
