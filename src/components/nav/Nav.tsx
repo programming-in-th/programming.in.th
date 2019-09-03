@@ -74,6 +74,8 @@ class Navigator extends React.Component<
       flex-direction: row;
       justify-content: center;
       align-items: center;
+      position: absolute;
+      right: 20px;
     `
     const Login = (props: item) => {
       return (
