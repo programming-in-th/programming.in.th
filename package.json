@@ -20,7 +20,7 @@
     "firebase": "^6.5.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
-    "mui-datatables": "^2.10.0",
+    "mui-datatables": "^2.10.2",
     "react": "^16.9.0",
     "react-ace": "^7.0.4",
     "react-app-rewired": "^2.1.3",

@@ -7949,10 +7949,10 @@ lodash._shimkeys@~2.4.1:
   dependencies:
     lodash._objecttypes "~2.4.1"
 
-lodash.assign@^4.2.0:
+lodash.assignwith@^4.2.0:
   version "4.2.0"
-  resolved "https://registry.yarnpkg.com/lodash.assign/-/lodash.assign-4.2.0.tgz#0d99f3ccd7a6d261d19bdaeb9245005d285808e7"
-  integrity sha1-DZnzzNem0mHRm9rrkkUAXShYCOc=
+  resolved "https://registry.yarnpkg.com/lodash.assignwith/-/lodash.assignwith-4.2.0.tgz#127a97f02adc41751a954d24b0de17e100e038eb"
+  integrity sha1-EnqX8CrcQXUalU0ksN4X4QDgOOs=
 
 lodash.camelcase@^4.3.0:
   version "4.3.0"
@@ -8624,13 +8624,13 @@ ms@^2.1.1:
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
-mui-datatables@^2.10.0:
-  version "2.10.0"
-  resolved "https://registry.yarnpkg.com/mui-datatables/-/mui-datatables-2.10.0.tgz#e6ce2d04e914d799862ef363f9f3deb44b00ef6a"
-  integrity sha512-KCuTDvYlLTxkmYdsVedY+UpNsXWvKrILsR7c1VzNWCIKhhVPU9uQKZaONms62m2oot+u/plfPX4CzuQVpkUx6w==
+mui-datatables@^2.10.2:
+  version "2.10.2"
+  resolved "https://registry.yarnpkg.com/mui-datatables/-/mui-datatables-2.10.2.tgz#85b4a15d85f6d19f8d2d8545bd34a9bfeeaafa48"
+  integrity sha512-9xLevMt17fVOvkoWHw/Mxy0Wn+YIa7PZS+SQpNgpRQVU1/bEZmDi+ov+wKASUmq6a4tJ/6ua3EcvrYN1NW6D1w==
   dependencies:
     classnames "^2.2.5"
-    lodash.assign "^4.2.0"
+    lodash.assignwith "^4.2.0"
     lodash.clonedeep "^4.5.0"
     lodash.find "^4.6.0"
     lodash.get "^4.4.2"
