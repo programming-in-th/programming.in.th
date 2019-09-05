@@ -57,13 +57,19 @@ class SubmitComponent extends React.Component<any, any> {
         >
           <OptGroup label="Language">
             <Option value="c_cpp">C / C++</Option>
-            <Option value="python">python</Option>
+            <Option value="python">Python</Option>
           </OptGroup>
         </Select>
         <br />
-        <Button type="primary" onClick={submitCode}>
-          Submit
-        </Button>
+        {firebase.auth().currentUser ? (
+          <Button type="primary" onClick={submitCode}>
+            Submit
+          </Button>
+        ) : (
+          <Button type="primary" onClick={submitCode} disabled>
+            Submit
+          </Button>
+        )}
       </Wrapper>
     )
   }
