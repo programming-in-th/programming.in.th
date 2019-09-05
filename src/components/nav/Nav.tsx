@@ -30,6 +30,7 @@ class Navigator extends React.Component<
     this.setState({ visible: false })
   }
   render() {
+    const responsive = `(max-width: 822px)`
     interface item {
       className?: any
       mode?: 'vertical' | 'horizontal'
@@ -74,8 +75,10 @@ class Navigator extends React.Component<
       flex-direction: row;
       justify-content: center;
       align-items: center;
-      position: absolute;
-      right: 20px;
+      @media ${responsive} {
+        position: absolute;
+        right: 20px;
+      }
     `
     const Login = (props: item) => {
       return (
@@ -122,8 +125,6 @@ class Navigator extends React.Component<
         </div>
       )
     }
-
-    const responsive = `(max-width: 822px)`
 
     const Logo = styled.div`
       float: left;
