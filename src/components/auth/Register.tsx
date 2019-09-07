@@ -1,31 +1,66 @@
 import React, { useState } from 'react'
+import { Form, Icon, Input, Button, Row, Col, Card } from 'antd'
+import styled from 'styled-components'
+
 import firebase from 'firebase'
 import 'firebase/auth'
 
-import TextField from '@material-ui/core/TextField'
-import { AccountButton } from './AccountButton'
-
+import { FormComponentProps } from 'antd/lib/form/Form'
 import H from 'history'
 
-interface IRegisterPageProps {
+interface IRegisterProps {
   history: H.History
-  setState(arg: string): any
+  setState: React.Dispatch<React.SetStateAction<string>>
 }
 
-export const RegisterPage: React.FunctionComponent<
-  IRegisterPageProps
-> = props => {
-  const [email, setEmail] = useState('')
-  const [pass, setPass] = useState('')
-  const [passC, setPassC] = useState('')
-  const [error, setError] = useState('')
+const StyledForm = styled(Form)`
+  width: 368px;
+  margin: 0 auto;
+`
 
-  const submitRegister = (history: H.History) => {
-    if (pass !== passC) {
-      setError('password not match')
+const RegisterButton = styled(Button)`
+  width: 100%;
+`
+
+const BackToMainPage = styled.div`
+  float: right;
+`
+
+const Others = styled.div`
+  margin-top: 24px;
+  text-align: left;
+`
+
+class Register extends React.Component<
+  IRegisterProps & FormComponentProps,
+  {}
+> {
+  handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    this.props.form.validateFields((err, values) => {
+      if (!err) {
+        console.log('Received values of form: ', values)
+        this.submitRegister(
+          this.props.history,
+          values.email,
+          values.password,
+          values.passwordConfirm
+        )
+      }
+    })
+  }
+
+  submitRegister = async (
+    history: H.History,
+    email: string,
+    pass: string,
+    passConfirm: string
+  ) => {
+    if (pass !== passConfirm) {
+      console.log('password not match')
       return
     }
-    firebase
+    return firebase
       .auth()
       .createUserWithEmailAndPassword(email, pass)
       .then(() => {
@@ -37,52 +72,86 @@ export const RegisterPage: React.FunctionComponent<
         history.length > 2 ? history.goBack() : history.replace('/')
       })
       .catch(function(error) {
-        setError(error.message)
+        console.log(error.message)
       })
   }
 
-  return (
-    <form
-      onSubmit={() => submitRegister(props.history)}
-      style={{ width: '100%' }}
-    >
-      <div id="main-text">Register</div>
-      <TextField
-        id="textfield"
-        label="Email"
-        margin="normal"
-        variant="outlined"
-        onChange={event => setEmail(event.target.value)}
-      />
-      <TextField
-        id="textfield"
-        label="Password"
-        margin="normal"
-        type="password"
-        variant="outlined"
-        onChange={event => setPass(event.target.value)}
-      />
-      <TextField
-        id="textfield"
-        label="Confirm Password"
-        margin="normal"
-        type="password"
-        variant="outlined"
-        onChange={event => setPassC(event.target.value)}
-      />
-      {error ? <p style={{ color: 'red' }}>{error}</p> : null}
-      <AccountButton
-        icon="person_add"
-        id="login-button"
-        text="Sign Up"
-        onClick={() => submitRegister(props.history)}
-      />
-      <AccountButton
-        id="grey-button"
-        icon="apps"
-        text="Back to Main page"
-        onClick={() => props.setState('main')}
-      />
-    </form>
-  )
+  render() {
+    const { getFieldDecorator } = this.props.form
+    return (
+      <Row type="flex" align="middle">
+        <Card bordered={false}>
+          <Col span={12}>
+            <h1>Register</h1>
+            <StyledForm onSubmit={this.handleSubmit}>
+              <Form.Item>
+                {getFieldDecorator('email', {
+                  rules: [
+                    { required: true, message: 'Please input your username!' }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
+                    }
+                    placeholder="Email"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator('password', {
+                  rules: [
+                    { required: true, message: 'Please input your Password!' }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                    }
+                    type="password"
+                    placeholder="Password"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator('passwordConfirm', {
+                  rules: [
+                    {
+                      required: true,
+                      message: 'Please input your confirmed Password!'
+                    }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
+                    }
+                    type="password"
+                    placeholder="Confirm Password"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                <RegisterButton type="primary" htmlType="submit">
+                  Register
+                </RegisterButton>
+                <Others>
+                  <BackToMainPage>
+                    <a
+                      href="/login"
+                      onClick={() => this.props.setState('main')}
+                    >
+                      Back to main page
+                    </a>
+                  </BackToMainPage>
+                </Others>
+              </Form.Item>
+            </StyledForm>
+          </Col>
+        </Card>
+      </Row>
+    )
+  }
 }
+
+export const RegisterPage = Form.create({ name: 'register' })(Register) as any
