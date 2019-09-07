@@ -54,7 +54,9 @@ class SubmitComponent extends React.Component<any, any> {
             title="Submission Successful"
             status="success"
             extra={[
-              <Button type="primary">View Submission</Button>,
+              <a href={'/tasks/submissions/' + this.props.UID}>
+                <Button type="primary">View Submission</Button>
+              </a>,
               <Button onClick={this.props.reSubmit}>Resubmit</Button>
             ]}
           />
@@ -102,6 +104,7 @@ class SubmitComponent extends React.Component<any, any> {
 const mapStateToProps: (state: any) => any = state => {
   return {
     submissionResponse: state.submissions.submissionResponse,
+    UID: state.submissions.submissionUID,
     user: state.user.user
   }
 }

@@ -57,14 +57,14 @@ export const makeSubmission = (
         code: code,
         language: language
       }
-      await firebase
+      const response = await firebase
         .app()
         .functions('asia-east2')
         .httpsCallable('makeSubmission')(params)
-      dispatch(receiveMakeSubmission(200))
+      dispatch(receiveMakeSubmission(200, response.data))
     } catch (error) {
       console.log(error)
-      dispatch(receiveMakeSubmission(error.code))
+      dispatch(receiveMakeSubmission(error.code, ''))
     }
   }
 }
@@ -108,10 +108,11 @@ const requestMakeSubmission = () => {
 }
 
 export const RECEIVE_MAKE_SUBMISSION = 'RECEIVE_MAKE_SUBMISSION'
-const receiveMakeSubmission = (data: number) => {
+const receiveMakeSubmission = (data: number, response: string) => {
   return {
     type: RECEIVE_MAKE_SUBMISSION,
-    submissionResponse: data
+    submissionResponse: data,
+    detail: response
   }
 }
 

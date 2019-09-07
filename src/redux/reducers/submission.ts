@@ -16,6 +16,7 @@ const initialState: ISubmissionsState = {
   submissionsListStatus: 'LOADING',
   detail: undefined,
   detailStatus: 'LOADING',
+  submissionUID: undefined,
   submissionResponse: 0
 }
 
@@ -48,7 +49,8 @@ const reducer: Reducer = (
       })
     case RECEIVE_MAKE_SUBMISSION:
       return Object.assign({}, state, {
-        submissionResponse: action.submissionResponse
+        submissionResponse: action.submissionResponse,
+        submissionUID: action.detail
       })
     case RESUBMIT_SUBMISSION:
       return Object.assign({}, state, {
