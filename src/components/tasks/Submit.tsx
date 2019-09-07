@@ -46,9 +46,8 @@ class SubmitComponent extends React.Component<any, any> {
         {this.props.submissionResponse === -1 ? (
           <Result
             status="success"
-            icon={<Icon type="loading" theme="twoTone" />}
-            title="Great, we have done all the operations!"
-            extra={<Button type="primary">Next</Button>}
+            icon={<Icon type="loading" />}
+            title="Submiting"
           />
         ) : this.props.submissionResponse === 200 ? (
           <Result

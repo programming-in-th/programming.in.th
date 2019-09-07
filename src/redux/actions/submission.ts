@@ -103,7 +103,7 @@ export const REQUEST_MAKE_SUBMISSION = 'REQUEST_MAKE_SUBMISSION'
 const requestMakeSubmission = () => {
   return {
     type: REQUEST_MAKE_SUBMISSION,
-    submitResponse: -1
+    submissionResponse: -1
   }
 }
 
