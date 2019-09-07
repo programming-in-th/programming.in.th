@@ -52,7 +52,7 @@ class Root extends React.Component<IRootProps> {
           <Header style={{ background: 'white' }}>
             <Nav />
           </Header>
-          <Content style={{ height: 'calc(100vh - 64px - 69px)' }}>
+          <Content>
             <Switch>
               <Route exact path="/" component={Index} />
               <Route
