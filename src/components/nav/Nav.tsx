@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link, RouteComponentProps } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
@@ -9,9 +9,7 @@ import { Drawer, Button, Menu, Avatar } from 'antd'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 
-class Navigator extends React.Component<
-  RouteComponentProps<any> & { user: firebase.User }
-> {
+class Navigator extends React.Component<any> {
   firebaseLogout() {
     firebase
       .auth()
