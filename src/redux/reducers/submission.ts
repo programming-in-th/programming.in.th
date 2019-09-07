@@ -6,14 +6,17 @@ import {
   REQUEST_DETAIL,
   RECEIVE_DETAIL,
   REQUEST_MAKE_SUBMISSION,
-  RECEIVE_MAKE_SUBMISSION
+  RECEIVE_MAKE_SUBMISSION,
+  RESUBMIT_SUBMISSION,
+  ERROR_SUBMIT
 } from '../actions/submission'
 
 const initialState: ISubmissionsState = {
   submissionsList: [],
   submissionsListStatus: 'LOADING',
   detail: undefined,
-  detailStatus: 'LOADING'
+  detailStatus: 'LOADING',
+  submissionResponse: 0
 }
 
 const reducer: Reducer = (
@@ -46,6 +49,14 @@ const reducer: Reducer = (
     case RECEIVE_MAKE_SUBMISSION:
       return Object.assign({}, state, {
         submissionResponse: action.submissionResponse
+      })
+    case RESUBMIT_SUBMISSION:
+      return Object.assign({}, state, {
+        submissionResponse: 0
+      })
+    case ERROR_SUBMIT:
+      return Object.assign({}, state, {
+        submissionResponse: -2
       })
     default:
       return state

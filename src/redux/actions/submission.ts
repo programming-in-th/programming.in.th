@@ -111,6 +111,20 @@ export const RECEIVE_MAKE_SUBMISSION = 'RECEIVE_MAKE_SUBMISSION'
 const receiveMakeSubmission = (data: number) => {
   return {
     type: RECEIVE_MAKE_SUBMISSION,
-    submitResponse: data
+    submissionResponse: data
+  }
+}
+
+export const RESUBMIT_SUBMISSION = 'RESUBMIT_SUBMISSION'
+export const resubmitSubmission = () => {
+  return {
+    type: RESUBMIT_SUBMISSION
+  }
+}
+
+export const ERROR_SUBMIT = 'ERROR_SUBMIT'
+export const errorSubmit = () => {
+  return {
+    type: ERROR_SUBMIT
   }
 }

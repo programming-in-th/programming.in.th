@@ -7,74 +7,103 @@ import * as actionCreators from '../../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { connect } from 'react-redux'
 import { AnyAction } from 'redux'
-import styled from 'styled-components'
 import firebase from 'firebase'
 
 /* Material */
-import { Button, Select } from 'antd'
+import { Icon, Result, Button, Select } from 'antd'
 import 'brace/mode/c_cpp'
 import 'brace/mode/python'
 
 const { Option, OptGroup } = Select
 // const responsive = `(max-width: 767px)`
 
-const Wrapper = styled.div``
-
 class SubmitComponent extends React.Component<any, any> {
+  state = {
+    language: 'c_cpp'
+  }
   render() {
-    let state = 'c_cpp'
     const submitCode = () => {
       console.log('call submitCode')
       const user = firebase.auth().currentUser
       if (!user) {
         console.log('no user')
+        this.props.errorSubmit()
         return
       }
       this.props.submit(
         user.uid,
         'a_plus_b',
         (this.refs.aceEditor as any).editor.getValue(),
-        state
+        this.state.language
       )
     }
     const changeState = (key: string) => {
-      state = key
-      console.log(state)
+      this.setState({ language: key })
+      console.log(this.state.language)
     }
     return (
-      <Wrapper>
-        <h1>Submit Code</h1>
-        <AceEditor mode={`${state}`} ref="aceEditor" theme="monokai" />
-        <Select
-          defaultValue="c_cpp"
-          style={{ width: 120 }}
-          onChange={changeState}
-        >
-          <OptGroup label="Language">
-            <Option value="c_cpp">C / C++</Option>
-            <Option value="python">Python</Option>
-          </OptGroup>
-        </Select>
-        <br />
-        {firebase.auth().currentUser ? (
-          <Button type="primary" onClick={submitCode}>
-            Submit
-          </Button>
+      <React.Fragment>
+        {this.props.submissionResponse === -1 ? (
+          <Result
+            status="success"
+            icon={<Icon type="loading" theme="twoTone" />}
+            title="Great, we have done all the operations!"
+            extra={<Button type="primary">Next</Button>}
+          />
+        ) : this.props.submissionResponse === 200 ? (
+          <Result
+            title="Submission Successful"
+            status="success"
+            extra={[
+              <Button type="primary">View Submission</Button>,
+              <Button onClick={this.props.reSubmit}>Resubmit</Button>
+            ]}
+          />
+        ) : this.props.submissionResponse !== 0 ? (
+          <Result
+            status="error"
+            title="Submission Failed"
+            extra={[<Button onClick={this.props.reSubmit}>Resubmit</Button>]}
+          />
         ) : (
-          <Button type="primary" onClick={submitCode} disabled>
-            Submit
-          </Button>
+          <div>
+            <h1>Submit Code</h1>
+            <AceEditor
+              mode={`${this.state.language}`}
+              ref="aceEditor"
+              theme="monokai"
+            />
+            <Select
+              defaultValue="c_cpp"
+              style={{ width: 120 }}
+              onChange={changeState}
+            >
+              <OptGroup label="Language">
+                <Option value="c_cpp">C / C++</Option>
+                <Option value="python">Python</Option>
+              </OptGroup>
+            </Select>
+            <br />
+            {this.props.user ? (
+              <Button type="primary" onClick={submitCode}>
+                Submit
+              </Button>
+            ) : (
+              <Button type="primary" onClick={submitCode} disabled>
+                Submit
+              </Button>
+            )}
+          </div>
         )}
-      </Wrapper>
+      </React.Fragment>
     )
   }
 }
 
 const mapStateToProps: (state: any) => any = state => {
   return {
-    detail: state.submissions.detail,
-    detailStatus: state.submissions.detailStatus,
-    submissionResponse: state.submissions.submissionResponse
+    submissionResponse: state.submissions.submissionResponse,
+    user: state.user.user
   }
 }
 
@@ -89,7 +118,9 @@ const mapDispatchToProps: (
       language: string
     ) => {
       dispatch(actionCreators.makeSubmission(uid, problem_id, code, language))
-    }
+    },
+    reSubmit: () => dispatch(actionCreators.resubmitSubmission()),
+    errorSubmit: () => dispatch(actionCreators.errorSubmit())
   }
 }
 
