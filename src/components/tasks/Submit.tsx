@@ -11,8 +11,6 @@ import { UnControlled as CodeMirror } from 'react-codemirror2'
 
 /* Material */
 import { Icon, Result, Button, Select } from 'antd'
-import 'brace/mode/c_cpp'
-import 'brace/mode/python'
 
 import 'codemirror/lib/codemirror.css'
 
@@ -116,7 +114,7 @@ class SubmitComponent extends React.Component<any, any> {
               onChange={this.changeLanguage}
             >
               {languageData.map((data: any) => (
-                <Option value={data[0]}>{data[1]}</Option>
+                <Option key={data[0]}>{data[1]}</Option>
               ))}
             </Select>
             <Select
@@ -125,7 +123,7 @@ class SubmitComponent extends React.Component<any, any> {
               onChange={this.changeTheme}
             >
               {themeData.map((data: any) => (
-                <Option value={data[0]}>{data[1]}</Option>
+                <Option key={data[0]}>{data[1]}</Option>
               ))}
             </Select>
             <Button
