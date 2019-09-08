@@ -1,46 +1,76 @@
 /* React */
 import React from 'react'
-import AceEditor from 'react-ace'
 import 'brace/mode/javascript'
 import 'brace/theme/monokai'
 import * as actionCreators from '../../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { connect } from 'react-redux'
-import { AnyAction } from 'redux'
-import firebase from 'firebase'
+import { AnyAction, compose } from 'redux'
+import { withRouter } from 'react-router'
+import { UnControlled as CodeMirror } from 'react-codemirror2'
 
 /* Material */
 import { Icon, Result, Button, Select } from 'antd'
 import 'brace/mode/c_cpp'
 import 'brace/mode/python'
 
-const { Option, OptGroup } = Select
+import 'codemirror/lib/codemirror.css'
+
+// theme
+import 'codemirror/theme/monokai.css'
+import 'codemirror/theme/solarized.css'
+import 'codemirror/theme/material.css'
+
+// mode
+import 'codemirror/mode/clike/clike.js'
+import 'codemirror/mode/python/python.js'
+import 'codemirror/addon/selection/active-line.js'
+import 'codemirror/addon/fold/foldgutter.css'
+import 'codemirror/addon/fold/foldgutter.js'
+import 'codemirror/addon/fold/brace-fold.js'
+import 'codemirror/addon/fold/indent-fold.js'
+
+const { Option } = Select
 // const responsive = `(max-width: 767px)`
+
+const languageData = [['text/x-csrc', 'C / C++'], ['python', 'Python']]
+
+const themeData = [
+  ['material', 'Material'],
+  ['monokai', 'Monokai'],
+  ['solarized', 'Solarized Light']
+]
 
 class SubmitComponent extends React.Component<any, any> {
   state = {
-    language: 'c_cpp'
+    language: 'text/x-csrc',
+    theme: 'material',
+    code: ''
+  }
+  changeLanguage = (value: string) => {
+    this.setState({ language: value })
+  }
+  changeEditor = (editor: any, value: any, code: any) => {
+    this.setState({ code: code })
+    console.log(this.state)
+  }
+  changeTheme = (value: string) => {
+    this.setState({ theme: value })
+  }
+  submitCode = () => {
+    const user = this.props.user
+    if (!user) {
+      this.props.errorSubmit()
+      return
+    }
+    this.props.submit(
+      user.uid,
+      'a_plus_b',
+      this.state.code,
+      this.state.language
+    )
   }
   render() {
-    const submitCode = () => {
-      console.log('call submitCode')
-      const user = firebase.auth().currentUser
-      if (!user) {
-        console.log('no user')
-        this.props.errorSubmit()
-        return
-      }
-      this.props.submit(
-        user.uid,
-        'a_plus_b',
-        (this.refs.aceEditor as any).editor.getValue(),
-        this.state.language
-      )
-    }
-    const changeState = (key: string) => {
-      this.setState({ language: key })
-      console.log(this.state.language)
-    }
     return (
       <React.Fragment>
         {this.props.submissionResponse === -1 ? (
@@ -69,31 +99,42 @@ class SubmitComponent extends React.Component<any, any> {
         ) : (
           <div>
             <h1>Submit Code</h1>
-            <AceEditor
-              mode={`${this.state.language}`}
-              ref="aceEditor"
-              theme="monokai"
+            <CodeMirror
+              options={{
+                mode: `${this.state.language}`,
+                theme: `${this.state.theme}`,
+                lineNumbers: true,
+                foldGutter: true,
+                gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+                lineWrapping: true
+              }}
+              onChange={this.changeEditor}
             />
             <Select
-              defaultValue="c_cpp"
+              defaultValue={languageData[0][0]}
               style={{ width: 120 }}
-              onChange={changeState}
+              onChange={this.changeLanguage}
             >
-              <OptGroup label="Language">
-                <Option value="c_cpp">C / C++</Option>
-                <Option value="python">Python</Option>
-              </OptGroup>
+              {languageData.map((data: any) => (
+                <Option value={data[0]}>{data[1]}</Option>
+              ))}
             </Select>
-            <br />
-            {this.props.user ? (
-              <Button type="primary" onClick={submitCode}>
-                Submit
-              </Button>
-            ) : (
-              <Button type="primary" onClick={submitCode} disabled>
-                Submit
-              </Button>
-            )}
+            <Select
+              defaultValue={themeData[0][0]}
+              style={{ width: 120 }}
+              onChange={this.changeTheme}
+            >
+              {themeData.map((data: any) => (
+                <Option value={data[0]}>{data[1]}</Option>
+              ))}
+            </Select>
+            <Button
+              type="primary"
+              onClick={this.submitCode}
+              disabled={this.props.user ? false : true}
+            >
+              Submit
+            </Button>
           </div>
         )}
       </React.Fragment>
@@ -126,10 +167,14 @@ const mapDispatchToProps: (
   }
 }
 
-export const SubmitPage = connect(
-  mapStateToProps,
-  mapDispatchToProps
+export const SubmitPage = compose(
+  withRouter,
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )
 )(SubmitComponent)
+
 /*
 TODO:
 Authentication
