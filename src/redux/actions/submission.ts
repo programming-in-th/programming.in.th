@@ -4,7 +4,7 @@ import { IAppState } from '..'
 import { ISubmissions } from '../types/submission'
 import firebase from 'firebase'
 
-export const loadSubmissionsList = (limit: number) => {
+export const loadSubmissionsList = () => {
   return async (
     dispatch: ThunkDispatch<IAppState, {}, AnyAction>
   ): Promise<void> => {
@@ -13,7 +13,7 @@ export const loadSubmissionsList = (limit: number) => {
       const response = await firebase
         .app()
         .functions('asia-east2')
-        .httpsCallable('getRecentSubmissions')({ limit: limit })
+        .httpsCallable('getRecentSubmissions')({})
       dispatch(receiveSubmissions(response.data))
     } catch (error) {
       console.log(error)
