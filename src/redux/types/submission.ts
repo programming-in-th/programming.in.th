@@ -1,8 +1,8 @@
 export interface ISubmissionsState {
   readonly submissionsList: ReadonlyArray<ISubmissions>
-  readonly submissionsListStatus: 'LOADING' | 'SUCCESS'
+  readonly submissionsListStatus: 'LOADING' | 'SUCCESS' | null
   readonly detail: ISubmissions | undefined
-  readonly detailStatus: 'LOADING' | 'SUCCESS'
+  readonly detailStatus: 'LOADING' | 'SUCCESS' | null
   readonly submissionUID: string | undefined
   readonly submissionResponse?: number
 }

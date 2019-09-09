@@ -3,7 +3,7 @@ import { RECEIVE_USER } from '../actions/user'
 import { IUserState } from '../types/user'
 
 const initialState: IUserState = {
-  user: null
+  user: 'LOADING'
 }
 
 const reducer: Reducer = (state = initialState, action: AnyAction) => {

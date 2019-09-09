@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 
 /* React Util */
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Layout } from 'antd'
+import { Layout, Spin } from 'antd'
 
 /* Pages */
 import { Index } from './pages/Index'
@@ -30,6 +30,7 @@ import { Provider, connect } from 'react-redux'
 import { firebaseConfig } from './config'
 
 import { store } from './redux'
+import styled from 'styled-components'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
@@ -38,8 +39,21 @@ if (!firebase.apps.length) {
 
 const { Header, Content, Footer } = Layout
 
+const SpinWrapper = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
 interface IRootProps {
   onInitialLoad: () => void
+  user: any
+  taskStatus: any
+  submissionsListStatus: any
+  submissionDetailStatus: any
 }
 class Root extends React.Component<IRootProps> {
   componentDidMount() {
@@ -47,28 +61,52 @@ class Root extends React.Component<IRootProps> {
   }
   render() {
     return (
-      <Router>
-        <Layout>
-          <Header style={{ background: 'white' }}>
-            <Nav />
-          </Header>
-          <Content>
-            <Switch>
-              <Route exact path="/" component={Index} />
-              <Route
-                path="/tasks/:tab?"
-                render={({ match, history }) => {
-                  return <TasksPage match={match} history={history} />
+      <React.Fragment>
+        {this.props.user === 'LOADING' ? (
+          <SpinWrapper>
+            <Spin tip="Loading..." size="large" />
+          </SpinWrapper>
+        ) : (
+          <Router>
+            <Layout>
+              <Header
+                style={{
+                  background: 'white',
+                  position: 'fixed',
+                  zIndex: 100,
+                  width: '100%'
                 }}
-              />
-              <Route exact path="/login" component={AuthPage} />
-              <Route component={NotFound} />
-            </Switch>
-          </Content>
-          <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
-        </Layout>
-      </Router>
+              >
+                <Nav />
+              </Header>
+              <Content style={{ padding: '0 20px', marginTop: 64 }}>
+                <Switch>
+                  <Route exact path="/" component={Index} />
+                  <Route
+                    path="/tasks/:tab?"
+                    render={({ match, history }) => {
+                      return <TasksPage match={match} history={history} />
+                    }}
+                  />
+                  <Route exact path="/login" component={AuthPage} />
+                  <Route component={NotFound} />
+                </Switch>
+              </Content>
+              <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
+            </Layout>
+          </Router>
+        )}
+      </React.Fragment>
     )
+  }
+}
+
+const mapStateToProps: (state: any) => any = state => {
+  return {
+    user: state.user.user,
+    taskStatus: state.tasks.status,
+    submissionsListStatus: state.submissions.submissionsListStatus,
+    submissionDetailStatus: state.submissions.detailStatus
   }
 }
 
@@ -83,7 +121,7 @@ const mapDispatchToProps: (
 }
 
 const RootPage = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Root) as any
 

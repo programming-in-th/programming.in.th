@@ -11,7 +11,7 @@ const initialState: ITaskState = {
   currentTask: null,
   taskList: [],
   tags: [],
-  status: 'LOADING'
+  status: null
 }
 
 const reducer: Reducer = (
