@@ -11,7 +11,7 @@
   ],
   "dependencies": {
     "@material-ui/core": "^4.4.0",
-    "@material-ui/icons": "^4.2.1",
+    "@material-ui/icons": "^4.4.1",
     "@types/codemirror": "^0.0.76",
     "@types/mui-datatables": "^2.1.8",
     "antd": "^3.23.1",
