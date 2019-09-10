@@ -1,21 +1,24 @@
 import React from 'react'
 
-import { Layout, Menu, Breadcrumb, Icon } from 'antd'
+import { Layout, Menu, Icon } from 'antd'
+import { LearnContent } from '../components/learn/LearnContent'
 
 const { SubMenu } = Menu
-const { Header, Content, Footer, Sider } = Layout
+const { Content, Sider } = Layout
 
-class Learn extends React.Component {
+class Learn extends React.Component<any> {
+  check = () => {
+    console.log(this.props)
+  }
   render() {
+    const param = this.props.match.params.page
     return (
       <Layout>
-        <Layout style={{ marginTop: 20 }}>
+        <Layout style={{ marginTop: 30 }}>
           <Sider width={200} style={{ background: '#fff' }}>
             <Menu
-              theme="dark"
+              theme="light"
               mode="inline"
-              defaultSelectedKeys={['1']}
-              defaultOpenKeys={['sub1']}
               style={{ height: '100%', borderRight: 0 }}
             >
               <SubMenu
@@ -71,7 +74,7 @@ class Learn extends React.Component {
                 minHeight: 280
               }}
             >
-              Content
+              {param ? <LearnContent uid={param} /> : <div>Main Page</div>}
             </Content>
           </Layout>
         </Layout>

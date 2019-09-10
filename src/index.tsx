@@ -91,6 +91,7 @@ class Root extends React.Component<IRootProps> {
                   />
                   <Route exact path="/login" component={AuthPage} />
                   <Route exact path="/learn" component={LearnPage} />
+                  <Route exact path="/learn/:page" component={LearnPage} />
                   <Route component={NotFound} />
                 </Switch>
               </Content>
