@@ -80,7 +80,7 @@ class Root extends React.Component<IRootProps> {
               >
                 <Nav />
               </Header>
-              <Content style={{ padding: '0 20px', marginTop: 64 }}>
+              <Content style={{ marginTop: 64 }}>
                 <Switch>
                   <Route exact path="/" component={Index} />
                   <Route
