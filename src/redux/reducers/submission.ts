@@ -13,9 +13,9 @@ import {
 
 const initialState: ISubmissionsState = {
   submissionsList: [],
-  submissionsListStatus: null,
+  submissionsListStatus: 'LOADING',
   detail: undefined,
-  detailStatus: null,
+  detailStatus: 'LOADING',
   submissionUID: undefined,
   submissionResponse: 0
 }

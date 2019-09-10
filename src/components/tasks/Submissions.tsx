@@ -245,7 +245,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = (dispatch: any) => {
   return {
     onInitialLoad: () => {
-      dispatch(actionCreators.loadSubmissionsList(10))
+      dispatch(actionCreators.loadSubmissionsList())
     }
   }
 }
