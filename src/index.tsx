@@ -11,6 +11,7 @@ import { Index } from './pages/Index'
 import { TasksPage } from './pages/Tasks'
 import { AuthPage } from './pages/Auth'
 import { NotFound } from './pages/404'
+import { LearnPage } from './pages/Learn'
 
 /* React Component */
 import { Nav } from './components/nav/Nav'
@@ -89,6 +90,7 @@ class Root extends React.Component<IRootProps> {
                     }}
                   />
                   <Route exact path="/login" component={AuthPage} />
+                  <Route exact path="/learn" component={LearnPage} />
                   <Route component={NotFound} />
                 </Switch>
               </Content>
