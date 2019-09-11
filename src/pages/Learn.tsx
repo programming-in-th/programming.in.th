@@ -11,6 +11,9 @@ const responsive = `(max-width: 822px)`
 
 const MainLayout = styled(Layout)`
   margin: 30px 10px 0 20px;
+  @media ${responsive} {
+    margin: 30px 0 0 0;
+  }
 `
 
 const ContentLayout = styled(Layout)`
@@ -130,6 +133,7 @@ class Learn extends React.Component<any> {
           closable={false}
           onClose={this.onClose}
           visible={this.state.visible}
+          bodyStyle={{ padding: '10px' }}
         >
           <SideMenu />
         </Drawer>
