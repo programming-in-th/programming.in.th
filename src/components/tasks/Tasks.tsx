@@ -248,6 +248,7 @@ class TasksListComponent extends React.Component<
 }
 
 const mapStateToProps: (state: any) => any = state => {
+  console.log(state)
   return {
     tags: state.tasks.tags,
     taskList: state.tasks.taskList,

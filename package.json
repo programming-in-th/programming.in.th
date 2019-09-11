@@ -10,11 +10,11 @@
     "Ithsarasuk Na Ayuthaya"
   ],
   "dependencies": {
-    "@material-ui/core": "^4.4.0",
-    "@material-ui/icons": "^4.2.1",
+    "@material-ui/core": "^4.4.1",
+    "@material-ui/icons": "^4.4.1",
     "@types/codemirror": "^0.0.76",
     "@types/mui-datatables": "^2.1.8",
-    "antd": "^3.23.1",
+    "antd": "^3.23.2",
     "axios": "^0.19.0",
     "babel-plugin-import": "^1.12.1",
     "codemirror": "^5.48.4",
@@ -43,7 +43,7 @@
     "@types/react-dom": "16.9.0",
     "@types/react-redux": "^7.1.2",
     "@types/react-router-dom": "^4.3.5",
-    "@types/styled-components": "^4.1.18",
+    "@types/styled-components": "^4.1.19",
     "firebase-tools": "^7.3.1",
     "husky": "^3.0.5",
     "prettier": "^1.18.2",
