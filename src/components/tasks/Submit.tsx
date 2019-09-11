@@ -165,10 +165,7 @@ const mapDispatchToProps: (
   }
 }
 
-export const SubmitPage = compose(
-  withRouter,
-  connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )
+export const SubmitPage = connect(
+  mapStateToProps,
+  mapDispatchToProps
 )(SubmitComponent)
