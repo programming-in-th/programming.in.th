@@ -9,7 +9,8 @@ import { Layout } from 'antd'
 /* Pages */
 import { Index } from './pages/Index'
 import { TasksPage } from './pages/Tasks'
-import { AuthPage } from './pages/Auth'
+import { Login } from './pages/Login'
+import { Register } from './pages/Register'
 import { NotFound } from './pages/404'
 
 /* React Component */
@@ -61,11 +62,11 @@ class Root extends React.Component<IRootProps> {
                   return <TasksPage match={match} history={history} />
                 }}
               />
-              <Route exact path="/login" component={AuthPage} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
               <Route component={NotFound} />
             </Switch>
           </Content>
-          <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
         </Layout>
       </Router>
     )

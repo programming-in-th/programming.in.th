@@ -10,7 +10,6 @@ import H from 'history'
 
 interface ILoginProps {
   history: H.History
-  setState: React.Dispatch<React.SetStateAction<string>>
 }
 
 const StyledForm = styled(Form)`
@@ -155,13 +154,7 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
                     onClick={() => loginWithGithub(this.props.history)}
                   />
                   <Register>
-                    Or{' '}
-                    <a
-                      href="/login"
-                      onClick={() => this.props.setState('register')}
-                    >
-                      register now!
-                    </a>
+                    Or <a href="/login">register now!</a>
                   </Register>
                 </Others>
               </Form.Item>
