@@ -5,7 +5,6 @@ import * as actionCreators from '../redux/actions/index'
 
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import { Button } from 'antd'
 import { ITask } from '../redux/types/task'
 import { SubmitPage } from '../components/tasks/Submit'
 
@@ -51,7 +50,7 @@ const mapDispatchToProps: (
 ) => any = dispatch => {
   return {
     onInitialLoad: (id: string): void => {
-      // dispatch(actionCreators.loadTask(id))
+      dispatch(actionCreators.loadTask(id))
     }
   }
 }
