@@ -8,7 +8,6 @@ import { Layout, Spin } from 'antd'
 
 /* Pages */
 import { Index } from './pages/Index'
-import { TasksPage } from './pages/Tasks'
 import { NotFound } from './pages/404'
 import { LearnPage } from './pages/Learn'
 import { TasksPage } from './pages/Tasks'
@@ -37,6 +36,8 @@ import { store } from './redux'
 import styled from 'styled-components'
 import { LoginPage } from './components/auth/Login'
 import { RegisterPage } from './components/auth/Register'
+import { Login } from './pages/Login'
+import { Register } from './pages/Register'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
@@ -102,7 +103,8 @@ class Root extends React.Component<IRootProps> {
                     path="/submissions/:id"
                     component={SubmissionDetailPage}
                   />
-                  <Route exact path="/login" component={AuthPage} />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/register" component={Register} />
                   <Route exact path="/learn" component={LearnPage} />
                   <Route exact path="/learn/:page" component={LearnPage} />
                   <Route component={NotFound} />
