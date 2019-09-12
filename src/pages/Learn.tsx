@@ -129,9 +129,23 @@ const DrawerClosed = styled.div`
 `
 
 class Learn extends React.Component<any> {
+  rootSubmenuKeys = ['sub1', 'sub2', 'sub3']
   state = {
     visible: false,
-    handle: false
+    handle: false,
+    openKeys: ['']
+  }
+  onOpenChange = (openKeys: string[]) => {
+    const latestOpenKey = openKeys.find(
+      (key: string) => this.state.openKeys.indexOf(key) === -1
+    ) as any
+    if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+      this.setState({ openKeys })
+    } else {
+      this.setState({
+        openKeys: latestOpenKey ? [latestOpenKey] : []
+      })
+    }
   }
   showDrawer = () => {
     this.setState({
@@ -167,9 +181,10 @@ class Learn extends React.Component<any> {
           mode="inline"
           style={{ height: '100%', borderRight: 0 }}
           selectedKeys={[location]}
+          openKeys={this.state.openKeys}
+          onOpenChange={this.onOpenChange}
         >
           <Menu.Item key="/learn">
-            {' '}
             <Link to="/learn">
               <Icon type="home" />
               Menu
@@ -185,19 +200,15 @@ class Learn extends React.Component<any> {
             }
           >
             <Menu.Item key="/learn/1">
-              {' '}
               <Link to="/learn/1"> option1</Link>
             </Menu.Item>
             <Menu.Item key="/learn/2">
-              {' '}
               <Link to="/learn/2"> option2</Link>
             </Menu.Item>
             <Menu.Item key="/learn/3">
-              {' '}
               <Link to="/learn/3"> option3</Link>
             </Menu.Item>
             <Menu.Item key="/learn/4">
-              {' '}
               <Link to="/learn/4"> option4</Link>
             </Menu.Item>
           </SubMenu>
@@ -211,19 +222,15 @@ class Learn extends React.Component<any> {
             }
           >
             <Menu.Item key="/learn/5">
-              {' '}
               <Link to="/learn/5"> option5</Link>
             </Menu.Item>
             <Menu.Item key="/learn/6">
-              {' '}
               <Link to="/learn/6"> option6</Link>
             </Menu.Item>
             <Menu.Item key="/learn/7">
-              {' '}
               <Link to="/learn/7"> option7</Link>
             </Menu.Item>
             <Menu.Item key="/learn/8">
-              {' '}
               <Link to="/learn/8"> option8</Link>
             </Menu.Item>
           </SubMenu>
