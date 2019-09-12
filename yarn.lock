@@ -1616,10 +1616,10 @@
   resolved "https://registry.yarnpkg.com/@types/long/-/long-4.0.0.tgz#719551d2352d301ac8b81db732acb6bdc28dbdef"
   integrity sha512-1w52Nyx4Gq47uuu0EVcsHBxZFJgurQ+rTKS3qMHxR1GY2T8c2AJYd6vZoZ9q1rupaDjU0yT+Jc2XTyXkjeMA+Q==
 
-"@types/mui-datatables@^2.1.8":
-  version "2.1.8"
-  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-2.1.8.tgz#2a76191c77ad2d44f426b7f123395ace55a3a4ab"
-  integrity sha512-WJ1JEAJdGQKwm/WZ5+1b4Ss+m3KNshoR26C23NpDygDvCJjD1Hu/qGX7a5LWWOMs5QQ/xFt/GwFW5BggxyRvAg==
+"@types/mui-datatables@^2.10.2":
+  version "2.10.2"
+  resolved "https://registry.yarnpkg.com/@types/mui-datatables/-/mui-datatables-2.10.2.tgz#64c12bdff13b43adca62674a1c5fcf2df04f300d"
+  integrity sha512-YQ4T4qWYzHK4j5CprhsnGvmM5ZVyzBDELJ8qGVKHE1/P5Odv/QH9bc1fyz8LnWqoGjLTN0mrar7+Ixn440ajYQ==
   dependencies:
     "@types/react" "*"
 
@@ -12969,10 +12969,10 @@ typedarray@^0.0.6:
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@3.6.3:
-  version "3.6.3"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.6.3.tgz#fea942fabb20f7e1ca7164ff626f1a9f3f70b4da"
-  integrity sha512-N7bceJL1CtRQ2RiG0AQME13ksR7DiuQh/QehubYcghzv20tnh+MQnQIuJddTmsbqYj+dztchykemz0zFzlvdQw==
+typescript@3.5.3:
+  version "3.5.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-3.5.3.tgz#c830f657f93f1ea846819e929092f5fe5983e977"
+  integrity sha512-ACzBtm/PhXBDId6a6sDJfroT2pOWt/oOnk4/dElG5G33ZL776N3Y6/6bKZJBFpd+b05F3Ct9qDjMeJmRWtE2/g==
 
 ua-parser-js@^0.7.18:
   version "0.7.20"

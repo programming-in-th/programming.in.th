@@ -222,7 +222,7 @@ class TasksListComponent extends React.Component<
           columns={columns as MUIDataTableColumnDef[]}
           data={this.props.taskList}
           options={{
-            responsive: 'scroll',
+            responsive: 'scrollMaxHeight',
             search: true,
             print: false,
             download: false,

@@ -218,7 +218,7 @@ class SubmissionsComponent extends React.Component<any, any> {
           columns={columns as MUIDataTableColumnDef[]}
           data={this.props.submissionsList}
           options={{
-            responsive: 'scroll',
+            responsive: 'scrollMaxHeight',
             search: false,
             selectableRows: 'none',
             print: false,
