@@ -11,6 +11,10 @@ import { Index } from './pages/Index'
 import { TasksPage } from './pages/Tasks'
 import { NotFound } from './pages/404'
 import { LearnPage } from './pages/Learn'
+import { TasksPage } from './pages/Tasks'
+import { TaskDetailPage } from './pages/TaskDetail'
+import { SubmissionsPage } from './pages/Submissions'
+import { SubmissionDetailPage } from './pages/SubmissionDetail'
 
 /* React Component */
 import { Nav } from './components/nav/Nav'
@@ -84,14 +88,21 @@ class Root extends React.Component<IRootProps> {
               <Content style={{ marginTop: 64 }}>
                 <Switch>
                   <Route exact path="/" component={Index} />
+                  <Route exact path="/tasks" component={TasksPage} />
+                  <Route exact path="/tasks/:id" component={TaskDetailPage} />
                   <Route
-                    path="/tasks/:tab?"
-                    render={({ match, history }) => {
-                      return <TasksPage match={match} history={history} />
-                    }}
+                    exact
+                    path="/submissions"
+                    component={SubmissionsPage}
                   />
                   <Route exact path="/login" component={LoginPage} />
                   <Route exact path="/register" component={RegisterPage} />
+                  <Route
+                    exact
+                    path="/submissions/:id"
+                    component={SubmissionDetailPage}
+                  />
+                  <Route exact path="/login" component={AuthPage} />
                   <Route exact path="/learn" component={LearnPage} />
                   <Route exact path="/learn/:page" component={LearnPage} />
                   <Route component={NotFound} />

@@ -5,8 +5,7 @@ import 'brace/theme/monokai'
 import * as actionCreators from '../../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { connect } from 'react-redux'
-import { AnyAction, compose } from 'redux'
-import { withRouter } from 'react-router'
+import { AnyAction } from 'redux'
 import { UnControlled as CodeMirror } from 'react-codemirror2'
 
 /* Material */
