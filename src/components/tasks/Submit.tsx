@@ -1,12 +1,11 @@
 /* React */
 import React from 'react'
-import 'brace/mode/javascript'
-import 'brace/theme/monokai'
 import * as actionCreators from '../../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { connect } from 'react-redux'
 import { AnyAction } from 'redux'
 import { UnControlled as CodeMirror } from 'react-codemirror2'
+import { Link } from 'react-router-dom'
 
 /* Material */
 import { Icon, Result, Button, Select } from 'antd'
@@ -38,7 +37,22 @@ const themeData = [
   ['solarized', 'Solarized Light']
 ]
 
-class SubmitComponent extends React.Component<any, any> {
+interface ISubmitProps {
+  problemID: string
+  errorSubmit: () => void
+  reSubmit: () => void
+  user: firebase.User
+  submit: (
+    uid: string,
+    problemID: string,
+    code: string,
+    language: string
+  ) => void
+  UID: string
+  submissionResponse: number
+}
+
+class SubmitComponent extends React.Component<ISubmitProps, any> {
   state = {
     language: 'text/x-csrc',
     theme: 'material',
@@ -60,9 +74,15 @@ class SubmitComponent extends React.Component<any, any> {
       this.props.errorSubmit()
       return
     }
+    console.log(
+      user.uid,
+      this.props.problemID,
+      this.state.code,
+      this.state.language
+    )
     this.props.submit(
       user.uid,
-      'a_plus_b',
+      this.props.problemID,
       this.state.code,
       this.state.language
     )
@@ -81,9 +101,9 @@ class SubmitComponent extends React.Component<any, any> {
             title="Submission Successful"
             status="success"
             extra={[
-              <a href={'/tasks/submissions/' + this.props.UID}>
+              <Link to={'/submissions/' + this.props.UID}>
                 <Button type="primary">View Submission</Button>
-              </a>,
+              </Link>,
               <Button onClick={this.props.reSubmit}>Resubmit</Button>
             ]}
           />
@@ -167,4 +187,4 @@ const mapDispatchToProps: (
 export const SubmitPage = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SubmitComponent)
+)(SubmitComponent) as any
