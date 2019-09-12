@@ -2,12 +2,11 @@ import React from 'react'
 import Paper from '@material-ui/core/Paper'
 
 import { connect } from 'react-redux'
-import * as actionCreators from '../../redux/actions/index'
+import * as actionCreators from '../redux/actions/index'
 
-import '../../assets/css/task.css'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import { ITask } from '../../redux/types/task'
+import { ITask } from '../redux/types/task'
 
 interface ITaskProps {
   id: string
