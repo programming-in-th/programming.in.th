@@ -44,7 +44,7 @@
     "@types/react-redux": "^7.1.2",
     "@types/react-router-dom": "^4.3.5",
     "@types/styled-components": "^4.1.19",
-    "firebase-tools": "^7.3.1",
+    "firebase-tools": "^7.3.2",
     "husky": "^3.0.5",
     "prettier": "^1.18.2",
     "pretty-quick": "^1.11.1",
