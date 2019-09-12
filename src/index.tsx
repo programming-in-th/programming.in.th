@@ -9,9 +9,9 @@ import { Layout, Spin } from 'antd'
 /* Pages */
 import { Index } from './pages/Index'
 import { TasksPage } from './pages/Tasks'
-import { Login } from './pages/Login'
-import { Register } from './pages/Register'
+import { AuthPage } from './pages/Auth'
 import { NotFound } from './pages/404'
+import { LearnPage } from './pages/Learn'
 
 /* React Component */
 import { Nav } from './components/nav/Nav'
@@ -32,8 +32,6 @@ import { firebaseConfig } from './config'
 
 import { store } from './redux'
 import styled from 'styled-components'
-import { LoginPage } from './components/auth/Login'
-import { RegisterPage } from './components/auth/Register'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
@@ -82,7 +80,7 @@ class Root extends React.Component<IRootProps> {
               >
                 <Nav />
               </Header>
-              <Content style={{ padding: '0 20px', marginTop: 64 }}>
+              <Content style={{ marginTop: 64 }}>
                 <Switch>
                   <Route exact path="/" component={Index} />
                   <Route
@@ -91,8 +89,9 @@ class Root extends React.Component<IRootProps> {
                       return <TasksPage match={match} history={history} />
                     }}
                   />
-                  <Route exact path="/login" component={LoginPage} />
-                  <Route exact path="/register" component={RegisterPage} />
+                  <Route exact path="/login" component={AuthPage} />
+                  <Route exact path="/learn" component={LearnPage} />
+                  <Route exact path="/learn/:page" component={LearnPage} />
                   <Route component={NotFound} />
                 </Switch>
               </Content>
