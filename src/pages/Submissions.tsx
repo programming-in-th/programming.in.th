@@ -6,8 +6,8 @@ import {
   TextField,
   CircularProgress
 } from '@material-ui/core'
-import styles from '../../assets/css/submission.module.css'
-import * as actionCreators from '../../redux/actions/index'
+
+import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 
 class SubmissionsComponent extends React.Component<any, any> {
@@ -210,13 +210,15 @@ class SubmissionsComponent extends React.Component<any, any> {
         <CircularProgress />
       </div>
     ) : (
-      <div className={styles.wrapper}>
+      <div
+      // className={styles.wrapper}
+      >
         <MUIDataTable
           title="Submissions"
           columns={columns as MUIDataTableColumnDef[]}
           data={this.props.submissionsList}
           options={{
-            responsive: 'scroll',
+            responsive: 'scrollMaxHeight',
             search: false,
             selectableRows: 'none',
             print: false,
@@ -225,7 +227,7 @@ class SubmissionsComponent extends React.Component<any, any> {
               const submission_id = this.props.submissionsList[
                 rowMeta.dataIndex
               ].submission_id
-              this.props.history.push('/tasks/submissions/' + submission_id)
+              this.props.history.push('/submissions/' + submission_id)
             }
           }}
         />
@@ -250,7 +252,7 @@ const mapDispatchToProps = (dispatch: any) => {
   }
 }
 
-export const SubmissionsList = connect(
+export const SubmissionsPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )(SubmissionsComponent)
