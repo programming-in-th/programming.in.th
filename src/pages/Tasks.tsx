@@ -11,20 +11,21 @@ import { Route, Switch } from 'react-router'
 
 const { TabPane } = Tabs
 
-const keyToPage = {
+const keyToPage: { [id: string]: string } = {
   list: '/tasks',
   submissions: '/tasks/submissions',
   submit: '/tasks/submit'
 }
 
-export class TasksPage extends React.Component {
+export class TasksPage extends React.Component<any> {
   render() {
     return (
       <div className="card-container">
         <Switch>
           <Tabs
             defaultActiveKey={this.props.match.params.tab}
-            onTabClick={key => {
+            onTabClick={(key: string) => {
+              console.log(key)
               this.props.history.push(keyToPage[key])
             }}
           >
@@ -49,7 +50,7 @@ export class TasksPage extends React.Component {
               </Switch>
             </TabPane>
             <TabPane tab="Submit" key="submit">
-              <SubmitPage />
+              <Route exact path="/tasks/submit" component={SubmitPage} />
             </TabPane>
           </Tabs>
         </Switch>
