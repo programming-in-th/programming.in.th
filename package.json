@@ -18,7 +18,7 @@
     "axios": "^0.19.0",
     "babel-plugin-import": "^1.12.1",
     "codemirror": "^5.48.4",
-    "customize-cra": "^0.6.0",
+    "customize-cra": "^0.6.1",
     "firebase": "^6.6.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
