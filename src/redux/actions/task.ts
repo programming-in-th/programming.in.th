@@ -20,7 +20,7 @@ export const loadTasksList = (
   ): Promise<void> => {
     dispatch(requestTasks())
     try {
-      let params: Object = {
+      const params: Object = {
         limit: limit,
         min_difficulty: min_difficulty !== -1 ? min_difficulty : 0,
         max_difficulty:
@@ -58,12 +58,14 @@ export const loadTask = (id: string) => {
     dispatch: ThunkDispatch<IAppState, {}, AnyAction>
   ): Promise<void> => {
     dispatch(requestTask())
-    console.log(id)
     try {
+      const params: Object = {
+        problem_id: id
+      }
       const response = await firebase
         .app()
         .functions('asia-east2')
-        .httpsCallable('getProblemMetadata')(id)
+        .httpsCallable('getProblemMetadata')(params)
       dispatch(receiveTask(response.data))
     } catch (error) {
       console.log(error)

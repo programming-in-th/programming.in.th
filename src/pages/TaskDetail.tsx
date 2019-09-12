@@ -19,9 +19,6 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.id)
   }
-  showError = () => {
-    console.log(this.props.task)
-  }
   render() {
     return (
       <React.Fragment>
