@@ -1,5 +1,8 @@
 import React from 'react'
-import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
+import MUIDataTable, {
+  MUIDataTableColumnDef,
+  MUIDataTableOptions
+} from 'mui-datatables'
 import { ISubmissions } from '../redux/types/submission'
 import {
   FormGroup,
@@ -222,15 +225,13 @@ class SubmissionsComponent extends React.Component<
         <CircularProgress />
       </div>
     ) : (
-      <div
-      // className={styles.wrapper}
-      >
+      <div>
         <MUIDataTable
           title="Submissions"
           columns={columns as MUIDataTableColumnDef[]}
           data={this.props.submissionsList}
           options={{
-            responsive: 'scrollMaxHeight',
+            responsive: 'scroll',
             search: false,
             selectableRows: 'none',
             print: false,
