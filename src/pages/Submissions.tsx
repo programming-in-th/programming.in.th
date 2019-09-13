@@ -1,5 +1,6 @@
 import React from 'react'
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
+import { ISubmissions } from '../redux/types/submission'
 import {
   FormGroup,
   FormLabel,
@@ -9,8 +10,19 @@ import {
 
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
+import H from 'history'
 
-class SubmissionsComponent extends React.Component<any, any> {
+interface ISubmissionsComponentProps {
+  onInitialLoad: () => void
+  submissionsListStatus: 'LOADING' | 'SUCCESS' | null
+  submissionsList: Array<ISubmissions>
+  history: H.History
+}
+
+class SubmissionsComponent extends React.Component<
+  ISubmissionsComponentProps,
+  any
+> {
   componentDidMount() {
     this.props.onInitialLoad()
   }

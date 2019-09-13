@@ -8,8 +8,14 @@ import { Drawer, Button, Menu, Avatar } from 'antd'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
+import H from 'history'
 
-class Navigator extends React.Component<any> {
+interface INavigatorProps {
+  location: H.Location
+  user?: firebase.User
+}
+
+class Navigator extends React.Component<INavigatorProps> {
   firebaseLogout() {
     firebase
       .auth()
