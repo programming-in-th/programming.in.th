@@ -9,8 +9,8 @@ import { FormComponentProps } from 'antd/lib/form/Form'
 import H from 'history'
 
 interface IRegisterProps {
+  errorMessage?: string
   history: H.History
-  setState: React.Dispatch<React.SetStateAction<string>>
 }
 
 const StyledForm = styled(Form)`
@@ -50,6 +50,10 @@ class Register extends React.Component<
     })
   }
 
+  state = {
+    errorMessage: null
+  }
+
   submitRegister = async (
     history: H.History,
     email: string,
@@ -57,7 +61,7 @@ class Register extends React.Component<
     passConfirm: string
   ) => {
     if (pass !== passConfirm) {
-      console.log('password not match')
+      this.setState({ errorMessage: 'Password not match' })
       return
     }
     return firebase
@@ -71,8 +75,8 @@ class Register extends React.Component<
         firebase.auth().signOut()
         history.length > 2 ? history.goBack() : history.replace('/')
       })
-      .catch(function(error) {
-        console.log(error.message)
+      .catch(error => {
+        this.setState({ errorMessage: error.message })
       })
   }
 
@@ -130,6 +134,9 @@ class Register extends React.Component<
                     placeholder="Confirm Password"
                   />
                 )}
+                {this.state.errorMessage ? (
+                  <a>{this.state.errorMessage}</a>
+                ) : null}
               </Form.Item>
               <Form.Item>
                 <RegisterButton type="primary" htmlType="submit">
@@ -137,12 +144,7 @@ class Register extends React.Component<
                 </RegisterButton>
                 <Others>
                   <BackToMainPage>
-                    <a
-                      href="/login"
-                      onClick={() => this.props.setState('main')}
-                    >
-                      Back to main page
-                    </a>
+                    <a href="/login"> Back to main page </a>
                   </BackToMainPage>
                 </Others>
               </Form.Item>

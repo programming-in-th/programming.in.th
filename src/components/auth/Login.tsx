@@ -59,6 +59,10 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
     })
   }
 
+  state = {
+    errorMessage: null
+  }
+
   submitLogin = async (
     history: H.History,
     email: string,
@@ -83,11 +87,11 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
               window.alert('Please Verify Your Email')
             } else history.length > 2 ? history.goBack() : history.replace('/')
         })
-        .catch(function(error) {
-          console.log(error.message)
+        .catch(error => {
+          this.setState({ errorMessage: error.message })
         })
     } catch (error) {
-      console.log(error.message)
+      this.setState({ errorMessage: error.message })
     }
   }
 
@@ -127,6 +131,9 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
                     placeholder="Password"
                   />
                 )}
+                {this.state.errorMessage ? (
+                  <a>{this.state.errorMessage}</a>
+                ) : null}
               </Form.Item>
               <Form.Item>
                 {getFieldDecorator('remember', {
@@ -154,7 +161,7 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
                     onClick={() => loginWithGithub(this.props.history)}
                   />
                   <Register>
-                    Or <a href="/login">register now!</a>
+                    Or <a href="/register">register now!</a>
                   </Register>
                 </Others>
               </Form.Item>
