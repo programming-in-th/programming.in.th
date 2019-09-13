@@ -38,6 +38,7 @@ import { LoginPage } from './components/auth/Login'
 import { RegisterPage } from './components/auth/Register'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
+import { SettingPage } from './pages/Setting'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
@@ -107,6 +108,7 @@ class Root extends React.Component<IRootProps> {
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/learn" component={LearnPage} />
                   <Route exact path="/learn/:page" component={LearnPage} />
+                  <Route exact path="/setting" component={SettingPage} />
                   <Route component={NotFound} />
                 </Switch>
               </Content>
