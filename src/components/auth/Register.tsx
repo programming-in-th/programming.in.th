@@ -9,7 +9,6 @@ import { FormComponentProps } from 'antd/lib/form/Form'
 import H from 'history'
 
 interface IRegisterProps {
-  errorMessage?: string
   history: H.History
 }
 
