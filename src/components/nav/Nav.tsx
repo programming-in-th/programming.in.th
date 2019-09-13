@@ -4,7 +4,7 @@ import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import styled from 'styled-components'
-import { Drawer, Button, Menu, Avatar } from 'antd'
+import { Drawer, Button, Menu, Avatar, Icon } from 'antd'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -34,7 +34,7 @@ class Navigator extends React.Component<INavigatorProps> {
     this.setState({ visible: false })
   }
   render() {
-    const responsive = `(max-width: 822px)`
+    const responsive = `(max-width: 1020px)`
     interface item {
       className?: any
       mode?: 'vertical' | 'horizontal'
@@ -52,22 +52,26 @@ class Navigator extends React.Component<INavigatorProps> {
           >
             <Menu.Item key="tasks">
               <Link to="/tasks" onClick={this.hideDrawer}>
+                <Icon type="appstore" />
                 Tasks
+              </Link>
+            </Menu.Item>
+            <Menu.Item key="submissions">
+              <Link to="/submissions" onClick={this.hideDrawer}>
+                <Icon type="container" />
+                Submissions
               </Link>
             </Menu.Item>
             <Menu.Item key="learn">
               <Link to="/learn" onClick={this.hideDrawer}>
+                <Icon type="read" />
                 Learn
               </Link>
             </Menu.Item>
             <Menu.Item key="forum">
               <Link to="/forum" onClick={this.hideDrawer}>
+                <Icon type="project" />
                 Forum
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="exam">
-              <Link to="/exam" onClick={this.hideDrawer}>
-                Exam
               </Link>
             </Menu.Item>
           </Menu>
@@ -116,11 +120,13 @@ class Navigator extends React.Component<INavigatorProps> {
             >
               <Menu.Item key="login">
                 <Link to="/login" onClick={this.hideDrawer}>
+                  <Icon type="login" />
                   Login
                 </Link>
               </Menu.Item>
               <Menu.Item key="register">
                 <Link to="/register" onClick={this.hideDrawer}>
+                  <Icon type="up-square" />
                   Register
                 </Link>
               </Menu.Item>
