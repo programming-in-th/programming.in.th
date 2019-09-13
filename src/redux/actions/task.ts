@@ -20,7 +20,7 @@ export const loadTasksList = (
   ): Promise<void> => {
     dispatch(requestTasks())
     try {
-      let params: Object = {
+      const params: Object = {
         limit: limit,
         min_difficulty: min_difficulty !== -1 ? min_difficulty : 0,
         max_difficulty:
@@ -54,21 +54,36 @@ const receiveTasks = (data: ITask[]) => {
 }
 
 export const loadTask = (id: string) => {
-  return (
-    dispatch: ThunkDispatch<IAppState, {}, AnyAction>,
-    getState: any
-  ): void => {
-    const task: ITask | undefined = getState().tasks.taskList.find(
-      (task: ITask) => task.problem_id === id
-    )
-    dispatch(loadCurrentTask(task))
+  return async (
+    dispatch: ThunkDispatch<IAppState, {}, AnyAction>
+  ): Promise<void> => {
+    dispatch(requestTask())
+    try {
+      const params: Object = {
+        problem_id: id
+      }
+      const response = await firebase
+        .app()
+        .functions('asia-east2')
+        .httpsCallable('getProblemMetadata')(params)
+      dispatch(receiveTask(response.data))
+    } catch (error) {
+      console.log(error)
+    }
   }
 }
 
-export const LOAD_CURRENT_TASK = 'LOAD_CURRENT_TASK'
-const loadCurrentTask = (task: ITask | undefined) => {
+export const REQUEST_TASK = 'REQUEST_TASK'
+const requestTask = () => {
   return {
-    type: LOAD_CURRENT_TASK,
+    type: REQUEST_TASK
+  }
+}
+
+export const RECEIVE_TASK = 'RECEIVE_TASK'
+const receiveTask = (task: ITask | undefined) => {
+  return {
+    type: RECEIVE_TASK,
     currentTask: task
   }
 }

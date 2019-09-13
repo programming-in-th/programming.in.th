@@ -4,7 +4,8 @@ import {
   LOAD_TAGS,
   REQUEST_TASKS_LIST,
   RECEIVE_TASKS_LIST,
-  LOAD_CURRENT_TASK
+  REQUEST_TASK,
+  RECEIVE_TASK
 } from '../actions/task'
 
 const initialState: ITaskState = {
@@ -32,8 +33,13 @@ const reducer: Reducer = (
         status: 'SUCCESS',
         taskList: action.taskList
       })
-    case LOAD_CURRENT_TASK:
+    case REQUEST_TASK:
       return Object.assign({}, state, {
+        status: 'LOADING'
+      })
+    case RECEIVE_TASK:
+      return Object.assign({}, state, {
+        status: 'SUCCESS',
         currentTask: action.currentTask
       })
     default:
