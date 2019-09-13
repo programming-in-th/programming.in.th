@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Layout, Menu, Icon, Drawer } from 'antd'
 import { LearnContent } from '../components/learn/LearnContent'
 import styled, { keyframes } from 'styled-components'
+import { BooleanLiteral } from '@babel/types'
 
 const { SubMenu } = Menu
 const { Content, Sider } = Layout
@@ -128,7 +129,18 @@ const DrawerClosed = styled.div`
   }
 `
 
-class Learn extends React.Component<any> {
+interface ILearnProps {
+  match: any
+  location: any
+}
+
+interface ILearnState {
+  visible: boolean
+  handle: boolean
+  openKeys: string[]
+}
+
+class Learn extends React.Component<ILearnProps, ILearnState> {
   rootSubmenuKeys = ['sub1', 'sub2', 'sub3']
   state = {
     visible: false,
