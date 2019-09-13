@@ -2,12 +2,7 @@
 import React from 'react'
 
 /* React Util */
-import {
-  CircularProgress,
-  FormLabel,
-  FormGroup,
-  TextField
-} from '@material-ui/core'
+import { FormLabel, FormGroup, TextField } from '@material-ui/core'
 
 /* Redux */
 import { connect } from 'react-redux'
@@ -20,6 +15,8 @@ import { AnyAction } from 'redux'
 import H from 'history'
 
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
+import { Spin, Row, Col } from 'antd'
+import { SpinWrapper } from '../components/SpinWrapper'
 
 interface ITasksPageProps {
   taskList: ITask[]
@@ -211,37 +208,41 @@ class TasksListComponent extends React.Component<
 
     return this.props.status === 'LOADING' ? (
       <div id="loading">
-        <CircularProgress />
+        <SpinWrapper>
+          <Spin tip="Loading..." size="large" />
+        </SpinWrapper>{' '}
       </div>
     ) : (
-      <div
-      // className={styles.wrapper}
-      >
-        <MUIDataTable
-          title="Tasks"
-          columns={columns as MUIDataTableColumnDef[]}
-          data={this.props.taskList}
-          options={{
-            responsive: 'scroll',
-            search: true,
-            print: false,
-            download: false,
-            selectableRows: 'none',
-            onRowClick: (rowData, rowMeta) => {
-              const problem_id = this.props.taskList[rowMeta.dataIndex]
-                .problem_id
-              this.props.history.push('/tasks/' + problem_id)
-            },
-            customSearch: (
-              searchQuery: string,
-              currentRow: Array<any>,
-              columns: Array<any>
-            ): boolean => {
-              return currentRow[0].toString().indexOf(searchQuery) >= 0
-            }
-          }}
-        />
-      </div>
+      <Row>
+        <Col span={18} offset={3}>
+          <div>
+            <MUIDataTable
+              title="Tasks"
+              columns={columns as MUIDataTableColumnDef[]}
+              data={this.props.taskList}
+              options={{
+                responsive: 'scroll',
+                search: true,
+                print: false,
+                download: false,
+                selectableRows: 'none',
+                onRowClick: (rowData, rowMeta) => {
+                  const problem_id = this.props.taskList[rowMeta.dataIndex]
+                    .problem_id
+                  this.props.history.push('/tasks/' + problem_id)
+                },
+                customSearch: (
+                  searchQuery: string,
+                  currentRow: Array<any>,
+                  columns: Array<any>
+                ): boolean => {
+                  return currentRow[0].toString().indexOf(searchQuery) >= 0
+                }
+              }}
+            />
+          </div>
+        </Col>
+      </Row>
     )
   }
 }

@@ -1,12 +1,9 @@
-/* React */
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-/* React Util */
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Layout, Spin } from 'antd'
 
-/* Pages */
 import { Index } from './pages/Index'
 import { NotFound } from './pages/404'
 import { LearnPage } from './pages/Learn'
@@ -14,30 +11,25 @@ import { TasksPage } from './pages/Tasks'
 import { TaskDetailPage } from './pages/TaskDetail'
 import { SubmissionsPage } from './pages/Submissions'
 import { SubmissionDetailPage } from './pages/SubmissionDetail'
+import { Login } from './pages/Login'
+import { Register } from './pages/Register'
 
-/* React Component */
 import { Nav } from './components/nav/Nav'
+import { SpinWrapper } from './components/SpinWrapper'
 
-/* Static */
 import './assets/css/init.css'
 import './assets/css/main.css'
 import './assets/material-icon/material-icons.css'
 import './assets/css/responsive.css'
-import firebase from 'firebase'
 
-/* Redux */
-import * as actionCreators from './redux/actions/index'
 import { AnyAction } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { Provider, connect } from 'react-redux'
+import * as actionCreators from './redux/actions/index'
 import { firebaseConfig } from './config'
-
 import { store } from './redux'
-import styled from 'styled-components'
-import { LoginPage } from './components/auth/Login'
-import { RegisterPage } from './components/auth/Register'
-import { Login } from './pages/Login'
-import { Register } from './pages/Register'
+
+import firebase from 'firebase'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
@@ -45,15 +37,6 @@ if (!firebase.apps.length) {
 }
 
 const { Header, Content, Footer } = Layout
-
-const SpinWrapper = styled.div`
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-`
 
 interface IRootProps {
   onInitialLoad: () => void
@@ -66,6 +49,7 @@ class Root extends React.Component<IRootProps> {
   componentDidMount() {
     this.props.onInitialLoad()
   }
+
   render() {
     return (
       <React.Fragment>
@@ -96,8 +80,6 @@ class Root extends React.Component<IRootProps> {
                     path="/submissions"
                     component={SubmissionsPage}
                   />
-                  <Route exact path="/login" component={LoginPage} />
-                  <Route exact path="/register" component={RegisterPage} />
                   <Route
                     exact
                     path="/submissions/:id"
