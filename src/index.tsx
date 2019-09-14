@@ -40,7 +40,7 @@ const { Header, Content, Footer } = Layout
 
 interface IRootProps {
   onInitialLoad: () => void
-  user: any
+  user: 'LOADING' | firebase.User | null
   taskStatus: any
   submissionsListStatus: any
   submissionDetailStatus: any
