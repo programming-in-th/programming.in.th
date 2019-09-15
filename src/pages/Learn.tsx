@@ -1,10 +1,14 @@
 import React from 'react'
 
-import { Link } from 'react-router-dom'
 import { Layout, Menu, Icon, Drawer } from 'antd'
 import { LearnContent } from '../components/learn/LearnContent'
 import styled, { keyframes } from 'styled-components'
-import { BooleanLiteral } from '@babel/types'
+
+import * as actionCreators from '../redux/actions/index'
+import { connect } from 'react-redux'
+import { INode } from '../redux/types/learn'
+import { CircularProgress } from '@material-ui/core'
+import { NavLink } from 'react-router-dom'
 
 const { SubMenu } = Menu
 const { Content, Sider } = Layout
@@ -129,36 +133,14 @@ const DrawerClosed = styled.div`
   }
 `
 
-interface ILearnProps {
-  match: any
-  location: any
-}
-
-interface ILearnState {
-  visible: boolean
-  handle: boolean
-  openKeys: string[]
-}
-
-class Learn extends React.Component<ILearnProps, ILearnState> {
-  rootSubmenuKeys = ['sub1', 'sub2', 'sub3']
-  state = {
-    visible: false,
-    handle: false,
-    openKeys: ['']
+class Learn extends React.Component<any> {
+  state = { visible: false, handle: false }
+  componentDidMount() {
+    this.props.onInitialLoad()
   }
-  onOpenChange = (openKeys: string[]) => {
-    const latestOpenKey = openKeys.find(
-      (key: string) => this.state.openKeys.indexOf(key) === -1
-    ) as any
-    if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-      this.setState({ openKeys })
-    } else {
-      this.setState({
-        openKeys: latestOpenKey ? [latestOpenKey] : []
-      })
-    }
-  }
+
+  componentDidUpdate() {}
+
   showDrawer = () => {
     this.setState({
       visible: true
@@ -180,76 +162,62 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
       })
     }, 300)
   }
-  componentWillReceiveProps() {
-    if (this.state.visible) this.onClose()
-  }
+
   render() {
-    const param = this.props.match.params.page
-    const location = this.props.location.pathname
-    const SideMenu = () => {
+    const SideMenu = (props: any) => {
       return (
         <Menu
           theme="light"
           mode="inline"
           style={{ height: '100%', borderRight: 0 }}
-          selectedKeys={[location]}
-          openKeys={this.state.openKeys}
-          onOpenChange={this.onOpenChange}
+          selectedKeys={[props.currentPath]}
         >
-          <Menu.Item key="/learn">
-            <Link to="/learn">
-              <Icon type="home" />
-              Menu
-            </Link>
+          <Menu.Item key={'/learn'}>
+            <NavLink to={'/learn'}>
+              <Icon type="home" theme="filled" />
+              Welcome!
+            </NavLink>
           </Menu.Item>
-          <SubMenu
-            key="sub1"
-            title={
-              <span>
-                <Icon type="user" />
-                subnav 1
-              </span>
-            }
-          >
-            <Menu.Item key="/learn/1">
-              <Link to="/learn/1"> option1</Link>
-            </Menu.Item>
-            <Menu.Item key="/learn/2">
-              <Link to="/learn/2"> option2</Link>
-            </Menu.Item>
-            <Menu.Item key="/learn/3">
-              <Link to="/learn/3"> option3</Link>
-            </Menu.Item>
-            <Menu.Item key="/learn/4">
-              <Link to="/learn/4"> option4</Link>
-            </Menu.Item>
-          </SubMenu>
-          <SubMenu
-            key="sub2"
-            title={
-              <span>
-                <Icon type="laptop" />
-                subnav 2
-              </span>
-            }
-          >
-            <Menu.Item key="/learn/5">
-              <Link to="/learn/5"> option5</Link>
-            </Menu.Item>
-            <Menu.Item key="/learn/6">
-              <Link to="/learn/6"> option6</Link>
-            </Menu.Item>
-            <Menu.Item key="/learn/7">
-              <Link to="/learn/7"> option7</Link>
-            </Menu.Item>
-            <Menu.Item key="/learn/8">
-              <Link to="/learn/8"> option8</Link>
-            </Menu.Item>
-          </SubMenu>
+          {props.nodes.map((node: INode) => {
+            return node.type === 'section' ? (
+              <SubMenu key={node.name} title={node.name}>
+                {node.articles!.map((sub_node: INode) => {
+                  return (
+                    <Menu.Item
+                      key={'/learn/' + sub_node.article_id}
+                      onClick={() =>
+                        this.props.onChangeArticle(
+                          this.props.idMap.get(sub_node.article_id)
+                        )
+                      }
+                    >
+                      <NavLink to={'/learn/' + sub_node.article_id}>
+                        {sub_node.name}
+                      </NavLink>
+                    </Menu.Item>
+                  )
+                })}
+              </SubMenu>
+            ) : (
+              <Menu.Item
+                key={'/learn/' + node.article_id}
+                onClick={() =>
+                  this.props.onChangeArticle(
+                    this.props.idMap.get(node.article_id)
+                  )
+                }
+              >
+                <NavLink to={'/learn/' + node.article_id}>{node.name}</NavLink>
+              </Menu.Item>
+            )
+          })}
         </Menu>
       )
     }
-    return (
+    const article_id = this.props.match.params.article_id
+    return this.props.menuStatus !== 'SUCCESS' ? (
+      <CircularProgress />
+    ) : (
       <React.Fragment>
         {this.state.visible ? (
           this.state.handle ? (
@@ -282,56 +250,25 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
         </Drawer>
         <MainLayout>
           <SiderMenu>
-            <SideMenu />
+            <SideMenu
+              nodes={this.props.menu}
+              currentPath={this.props.match.url}
+            />
           </SiderMenu>
           <ContentLayout>
             <MainContent>
-              {param ? (
-                <LearnContent uid={param} />
+              {article_id ? (
+                <LearnContent
+                  article_id={article_id}
+                  currentContentStatus={this.props.currentContentStatus}
+                  currentContent={this.props.currentContent}
+                />
               ) : (
                 <div>
-                  Main Page The standard Lorem Ipsum passage, used since the
-                  1500s "Lorem ipsum dolor sit amet, consectetur adipiscing
-                  elit, sed do eiusmod tempor incididunt ut labore et dolore
-                  magna aliqua. Ut enim ad minim veniam, quis nostrud
-                  exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                  consequat. Duis aute irure dolor in reprehenderit in voluptate
-                  velit esse cillum dolore eu fugiat nulla pariatur. Excepteur
-                  sint occaecat cupidatat non proident, sunt in culpa qui
-                  officia deserunt mollit anim id est laborum." Section 1.10.32
-                  of "de Finibus Bonorum et Malorum", written by Cicero in 45 BC
-                  "Sed ut perspiciatis unde omnis iste natus error sit
-                  voluptatem accusantium doloremque laudantium, totam rem
-                  aperiam, eaque ipsa quae ab illo inventore veritatis et quasi
-                  architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam
-                  voluptatem quia voluptas sit aspernatur aut odit aut fugit,
-                  sed quia consequuntur magni dolores eos qui ratione voluptatem
-                  sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum
-                  quia dolor sit amet, consectetur, adipisci velit, sed quia non
-                  numquam eius modi tempora incidunt ut labore et dolore magnam
-                  aliquam quaerat voluptatem. Ut enim ad minima veniam, quis
-                  nostrum exercitationem ullam corporis suscipit laboriosam,
-                  nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum
-                  iure reprehenderit qui in ea voluptate velit esse quam nihil
-                  molestiae consequatur, vel illum qui dolorem eum fugiat quo
-                  voluptas nulla pariatur?" 1914 translation by H. Rackham "But
-                  I must explain to you how all this mistaken idea of denouncing
-                  pleasure and praising pain was born and I will give you a
-                  complete account of the system, and expound the actual
-                  teachings of the great explorer of the truth, the
-                  master-builder of human happiness. No one rejects, dislikes,
-                  or avoids pleasure itself, because it is pleasure, but because
-                  those who do not know how to pursue pleasure rationally
-                  encounter consequences that are extremely painful. Nor again
-                  is there anyone who loves or pursues or desires to obtain pain
-                  of itself, because it is pain, but because occasionally
-                  circumstances occur in which toil and pain can procure him
-                  some great pleasure. To take a trivial example, which of us
-                  ever undertakes laborious physical exercise, except to obtain
-                  some advantage from it? But who has any right to find fault
-                  with a man who chooses to enjoy a pleasure that has no
-                  annoying consequences, or one who avoids a pain that produces
-                  no resultant pleasure?"
+                  Welcome to Programming.in.th Tutorials, a comprehensive
+                  compilation of all the resources you need to succeed in
+                  learning algorithms, data structures and competitive
+                  programming!
                 </div>
               )}
             </MainContent>
@@ -342,4 +279,29 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
   }
 }
 
-export const LearnPage = Learn
+const mapStateToProps = (state: any) => {
+  console.log(state)
+  return {
+    menu: state.learn.menu,
+    menuStatus: state.learn.menuStatus,
+    idMap: state.learn.idMap,
+    currentContent: state.learn.currentContent,
+    currentContentStatus: state.learn.currentContentStatus
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onInitialLoad: () => {
+      dispatch(actionCreators.loadMenu())
+    },
+    onChangeArticle: (newArticle: INode) => {
+      dispatch(actionCreators.loadContent(newArticle.url!))
+    }
+  }
+}
+
+export const LearnPage = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Learn)

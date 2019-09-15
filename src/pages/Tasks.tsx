@@ -2,12 +2,7 @@
 import React from 'react'
 
 /* React Util */
-import {
-  CircularProgress,
-  FormLabel,
-  FormGroup,
-  TextField
-} from '@material-ui/core'
+import { FormLabel, FormGroup, TextField } from '@material-ui/core'
 
 /* Redux */
 import { connect } from 'react-redux'
@@ -20,6 +15,8 @@ import { AnyAction } from 'redux'
 import H from 'history'
 
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
+import { Spin, Row, Col } from 'antd'
+import { SpinWrapper } from '../components/SpinWrapper'
 
 interface ITasksPageProps {
   taskList: ITask[]
@@ -211,7 +208,9 @@ class TasksListComponent extends React.Component<
 
     return this.props.status === 'LOADING' ? (
       <div id="loading">
-        <CircularProgress />
+        <SpinWrapper>
+          <Spin tip="Loading..." size="large" />
+        </SpinWrapper>{' '}
       </div>
     ) : (
       <div

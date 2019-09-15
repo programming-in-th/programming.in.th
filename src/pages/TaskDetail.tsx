@@ -1,5 +1,4 @@
 import React from 'react'
-import Paper from '@material-ui/core/Paper'
 
 import { connect } from 'react-redux'
 import * as actionCreators from '../redux/actions/index'
@@ -7,30 +6,39 @@ import * as actionCreators from '../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { ITask } from '../redux/types/task'
+import { SubmitPage } from '../components/tasks/Submit'
 
 interface ITaskProps {
-  id: string
   task?: ITask
+  status: string
+  match: any
   onInitialLoad: (id: string) => void
 }
 
 export class TaskDetailComponent extends React.Component<ITaskProps> {
   componentDidMount() {
-    this.props.onInitialLoad(this.props.id)
+    this.props.onInitialLoad(this.props.match.params.id)
   }
-
   render() {
     return (
-      <div className="task-wrapper">
-        <Paper>Hi</Paper>
-      </div>
+      <React.Fragment>
+        {/* {this.props.status === 'LOADING' ? (
+          <div>LOADING</div>
+        ) : (
+          <div> */}
+        {/* <Button onClick={this.showError}>show Log</Button> */}
+        <SubmitPage problemID={this.props.match.params.id} />
+        {/* </div>
+        )} */}
+      </React.Fragment>
     )
   }
 }
 
 const mapStateToProps: (state: any) => any = state => {
   return {
-    task: state.tasks.currentTask
+    task: state.tasks.currentTask,
+    status: state.tasks.status
   }
 }
 

@@ -26,7 +26,24 @@ import SubmissionResponseDialog from '../components/tasks/SubmissionResponseDial
 /* Styles */
 import firebase from 'firebase'
 
-class SubmissionDetailComponent extends React.Component<any, any> {
+interface ISubmissionDetailComponentProps {
+  onInitialLoad: (submission_id: string) => void
+  detail: any
+  match: any
+  submit: (
+    uid: string,
+    problem_id: string,
+    code: string,
+    language: string
+  ) => void
+  detailStatus: 'LOADING' | 'SUCCESS' | null
+  submissionResponse?: number
+}
+
+class SubmissionDetailComponent extends React.Component<
+  ISubmissionDetailComponentProps,
+  any
+> {
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.id)
   }
