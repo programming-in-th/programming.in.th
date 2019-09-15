@@ -1,0 +1,13 @@
+export interface ILearnState {
+  readonly menuStatus: 'LOADING' | 'SUCCESS' | null
+  readonly currentContentStatus: 'LOADING' | 'SUCCESS' | null
+  readonly menu: INode[] | undefined
+  readonly currentContent: string | undefined
+}
+
+export interface INode {
+  readonly name: string
+  readonly type: string
+  readonly url?: string
+  readonly articles?: INode[]
+}
