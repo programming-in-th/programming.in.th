@@ -3,7 +3,7 @@ import React from 'react'
 
 /* Redux */
 import { connect } from 'react-redux'
-import * as actionCreators from '../../redux/actions/index'
+import * as actionCreators from '../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 
@@ -21,15 +21,31 @@ import 'brace/mode/haskell'
 import 'brace/theme/monokai'
 
 /* Components */
-import SubmissionResponseDialog from './SubmissionResponseDialog'
+import SubmissionResponseDialog from '../components/tasks/SubmissionResponseDialog'
 
 /* Styles */
-import styles from '../../assets/css/submission.module.css'
 import firebase from 'firebase'
 
-class SubmissionDetailComponent extends React.Component<any, any> {
+interface ISubmissionDetailComponentProps {
+  onInitialLoad: (submission_id: string) => void
+  detail: any
+  match: any
+  submit: (
+    uid: string,
+    problem_id: string,
+    code: string,
+    language: string
+  ) => void
+  detailStatus: 'LOADING' | 'SUCCESS' | null
+  submissionResponse?: number
+}
+
+class SubmissionDetailComponent extends React.Component<
+  ISubmissionDetailComponentProps,
+  any
+> {
   componentDidMount() {
-    this.props.onInitialLoad(this.props.match.params.submission_id)
+    this.props.onInitialLoad(this.props.match.params.id)
   }
 
   render() {
@@ -52,7 +68,9 @@ class SubmissionDetailComponent extends React.Component<any, any> {
       </div>
     ) : (
       <div>
-        <div className={styles.editor}>
+        <div
+        // className={styles.editor}
+        >
           <AceEditor
             ref="aceEditor"
             mode={this.props.detail.metadata.language}

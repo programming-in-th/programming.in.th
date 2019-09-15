@@ -2,27 +2,21 @@
 import React from 'react'
 
 /* React Util */
-import {
-  CircularProgress,
-  FormLabel,
-  FormGroup,
-  TextField
-} from '@material-ui/core'
+import { FormLabel, FormGroup, TextField } from '@material-ui/core'
 
 /* Redux */
 import { connect } from 'react-redux'
-import * as actionCreators from '../../redux/actions/index'
-import { ITask } from '../../redux/types/task'
+import * as actionCreators from '../redux/actions/index'
+import { ITask } from '../redux/types/task'
 
 /* Static */
-import '../../assets/css/taskList.css'
-import '../../assets/css/avatar.css'
-import styles from '../../assets/css/submission.module.css'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import H from 'history'
 
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
+import { Spin, Row, Col } from 'antd'
+import { SpinWrapper } from '../components/SpinWrapper'
 
 interface ITasksPageProps {
   taskList: ITask[]
@@ -214,16 +208,20 @@ class TasksListComponent extends React.Component<
 
     return this.props.status === 'LOADING' ? (
       <div id="loading">
-        <CircularProgress />
+        <SpinWrapper>
+          <Spin tip="Loading..." size="large" />
+        </SpinWrapper>{' '}
       </div>
     ) : (
-      <div className={styles.wrapper}>
+      <div
+      // className={styles.wrapper}
+      >
         <MUIDataTable
           title="Tasks"
           columns={columns as MUIDataTableColumnDef[]}
           data={this.props.taskList}
           options={{
-            responsive: 'scroll',
+            responsive: 'scrollMaxHeight',
             search: true,
             print: false,
             download: false,
@@ -267,7 +265,7 @@ const mapDispatchToProps: (
   }
 }
 
-export const TasksList = connect(
+export const TasksPage = connect(
   mapStateToProps,
   mapDispatchToProps
 )(TasksListComponent)
