@@ -19,6 +19,17 @@ export const loadMenu = () => {
       nodes.sort((a: INode, b: INode) => {
         return a.name.localeCompare(b.name)
       })
+      const mapToStore = new Map<string, INode>()
+      for (const node of nodes) {
+        if (node.article_id) {
+          mapToStore.set(node.article_id, node)
+        } else {
+          for (const sub_node of node.articles!) {
+            mapToStore.set(sub_node.article_id!, sub_node)
+          }
+        }
+      }
+      dispatch(storeMap(mapToStore))
       dispatch(receiveMenu(nodes))
     } catch (error) {
       console.log(error)
@@ -67,5 +78,13 @@ const receiveContent = (data: string) => {
   return {
     type: RECEIVE_CONTENT,
     currentContent: data
+  }
+}
+
+export const STORE_MAP = 'STORE_MAP'
+const storeMap = (mapToStore: Map<string, INode>) => {
+  return {
+    type: STORE_MAP,
+    mapToStore: mapToStore
   }
 }

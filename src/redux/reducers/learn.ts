@@ -1,10 +1,11 @@
 import { AnyAction, Reducer } from 'redux'
-import { ILearnState } from '../types/learn'
+import { ILearnState, INode } from '../types/learn'
 import {
   REQUEST_CONTENT,
   REQUEST_MENU,
   RECEIVE_CONTENT,
-  RECEIVE_MENU
+  RECEIVE_MENU,
+  STORE_MAP
 } from '../actions/learn'
 
 const initialState: ILearnState = {
@@ -12,7 +13,9 @@ const initialState: ILearnState = {
   currentContentStatus: null,
 
   menu: undefined,
-  currentContent: undefined
+  currentContent: undefined,
+
+  idMap: new Map<string, INode>()
 }
 
 const reducer: Reducer = (
@@ -37,6 +40,10 @@ const reducer: Reducer = (
       return Object.assign({}, state, {
         currentContentStatus: 'SUCCESS',
         currentContent: action.currentContent
+      })
+    case STORE_MAP:
+      return Object.assign({}, state, {
+        idMap: action.mapToStore
       })
     default:
       return state

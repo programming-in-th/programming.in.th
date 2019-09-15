@@ -1,8 +1,13 @@
 import React from 'react'
+import { CircularProgress } from '@material-ui/core'
 
 class Learn extends React.Component<any> {
   render() {
-    return <div>{this.props.article_id}</div>
+    return this.props.currentContentStatus === 'LOADING' ? (
+      <CircularProgress />
+    ) : (
+      <div>{this.props.currentContent}</div>
+    )
   }
 }
 

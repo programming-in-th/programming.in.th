@@ -133,48 +133,13 @@ const DrawerClosed = styled.div`
   }
 `
 
-const SideMenu = (props: any) => {
-  return (
-    <Menu
-      theme="light"
-      mode="inline"
-      style={{ height: '100%', borderRight: 0 }}
-      selectedKeys={[props.currentPath]}
-    >
-      <Menu.Item key={'/learn'}>
-        <NavLink to={'/learn'}>
-          <Icon type="home" theme="filled" />
-          Welcome!
-        </NavLink>
-      </Menu.Item>
-      {props.nodes.map((node: INode) => {
-        return node.type === 'section' ? (
-          <SubMenu key={node.name} title={node.name}>
-            {node.articles!.map((sub_node: INode) => {
-              return (
-                <Menu.Item key={'/learn/' + sub_node.article_id}>
-                  <NavLink to={'/learn/' + sub_node.article_id}>
-                    {sub_node.name}
-                  </NavLink>
-                </Menu.Item>
-              )
-            })}
-          </SubMenu>
-        ) : (
-          <Menu.Item key={'/learn/' + node.article_id}>
-            <NavLink to={'/learn/' + node.article_id}>{node.name}</NavLink>
-          </Menu.Item>
-        )
-      })}
-    </Menu>
-  )
-}
-
 class Learn extends React.Component<any> {
   state = { visible: false, handle: false }
   componentDidMount() {
     this.props.onInitialLoad()
   }
+
+  componentDidUpdate() {}
 
   showDrawer = () => {
     this.setState({
@@ -197,9 +162,62 @@ class Learn extends React.Component<any> {
       })
     }, 300)
   }
+
   render() {
+    const SideMenu = (props: any) => {
+      return (
+        <Menu
+          theme="light"
+          mode="inline"
+          style={{ height: '100%', borderRight: 0 }}
+          selectedKeys={[props.currentPath]}
+        >
+          <Menu.Item key={'/learn'}>
+            <NavLink to={'/learn'}>
+              <Icon type="home" theme="filled" />
+              Welcome!
+            </NavLink>
+          </Menu.Item>
+          {props.nodes.map((node: INode) => {
+            return node.type === 'section' ? (
+              <SubMenu key={node.name} title={node.name}>
+                {node.articles!.map((sub_node: INode) => {
+                  return (
+                    <Menu.Item
+                      key={'/learn/' + sub_node.article_id}
+                      onClick={() =>
+                        this.props.onChangeArticle(
+                          this.props.idMap.get(sub_node.article_id)
+                        )
+                      }
+                    >
+                      <NavLink to={'/learn/' + sub_node.article_id}>
+                        {sub_node.name}
+                      </NavLink>
+                    </Menu.Item>
+                  )
+                })}
+              </SubMenu>
+            ) : (
+              <Menu.Item
+                key={'/learn/' + node.article_id}
+                onClick={() =>
+                  this.props.onChangeArticle(
+                    this.props.idMap.get(node.article_id)
+                  )
+                }
+              >
+                <NavLink to={'/learn/' + node.article_id}>{node.name}</NavLink>
+              </Menu.Item>
+            )
+          })}
+        </Menu>
+      )
+    }
     const article_id = this.props.match.params.article_id
-    return (
+    return this.props.menuStatus !== 'SUCCESS' ? (
+      <CircularProgress />
+    ) : (
       <React.Fragment>
         {this.state.visible ? (
           this.state.handle ? (
@@ -232,21 +250,18 @@ class Learn extends React.Component<any> {
         </Drawer>
         <MainLayout>
           <SiderMenu>
-            {this.props.menuStatus === 'LOADING' ? (
-              <CircularProgress />
-            ) : (
-              <SideMenu
-                nodes={this.props.menu}
-                currentPath={this.props.match.url}
-              />
-            )}
+            <SideMenu
+              nodes={this.props.menu}
+              currentPath={this.props.match.url}
+            />
           </SiderMenu>
           <ContentLayout>
             <MainContent>
               {article_id ? (
                 <LearnContent
                   article_id={article_id}
-                  onInitialLoad={this.props.onChangeArticle}
+                  currentContentStatus={this.props.currentContentStatus}
+                  currentContent={this.props.currentContent}
                 />
               ) : (
                 <div>
@@ -269,6 +284,7 @@ const mapStateToProps = (state: any) => {
   return {
     menu: state.learn.menu,
     menuStatus: state.learn.menuStatus,
+    idMap: state.learn.idMap,
     currentContent: state.learn.currentContent,
     currentContentStatus: state.learn.currentContentStatus
   }

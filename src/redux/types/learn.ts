@@ -1,6 +1,7 @@
 export interface ILearnState {
   readonly menuStatus: 'LOADING' | 'SUCCESS' | null
   readonly currentContentStatus: 'LOADING' | 'SUCCESS' | null
+  readonly idMap: Map<string, INode>
   readonly menu: INode[] | undefined
   readonly currentContent: string | undefined
 }
