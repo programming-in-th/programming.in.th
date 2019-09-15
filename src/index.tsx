@@ -82,7 +82,7 @@ const Root: React.FunctionComponent<IRootProps> = (props: IRootProps) => {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/learn" component={LearnPage} />
-                <Route exact path="/learn/:page" component={LearnPage} />
+                <Route exact path="/learn/:article_id" component={LearnPage} />
                 <Route component={NotFound} />
               </Switch>
             </Content>

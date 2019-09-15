@@ -2,7 +2,7 @@ import React from 'react'
 
 class Learn extends React.Component<any> {
   render() {
-    return <div></div>
+    return <div>{this.props.article_id}</div>
   }
 }
 

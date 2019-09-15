@@ -8,6 +8,7 @@ export interface ILearnState {
 export interface INode {
   readonly name: string
   readonly type: string
+  readonly article_id?: string
   readonly url?: string
   readonly articles?: INode[]
 }
