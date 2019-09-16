@@ -136,7 +136,7 @@ const DrawerClosed = styled.div`
 class Learn extends React.Component<any> {
   state = { visible: false, handle: false }
   componentDidMount() {
-    this.props.onInitialLoad()
+    this.props.onInitialLoad(this.props.match.params.article_id)
   }
 
   componentDidUpdate() {}
@@ -292,8 +292,8 @@ const mapStateToProps = (state: any) => {
 
 const mapDispatchToProps = (dispatch: any) => {
   return {
-    onInitialLoad: () => {
-      dispatch(actionCreators.loadMenu())
+    onInitialLoad: (article_id: string) => {
+      dispatch(actionCreators.loadMenu(article_id))
     },
     onChangeArticle: (newArticle: INode) => {
       dispatch(actionCreators.loadContent(newArticle.url!))

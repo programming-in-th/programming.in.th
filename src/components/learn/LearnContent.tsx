@@ -4,14 +4,14 @@ import MarkdownRender from './MarkdownRender'
 
 class Learn extends React.Component<any> {
   render() {
-    return this.props.currentContentStatus === 'LOADING' ? (
+    return this.props.currentContentStatus !== 'SUCCESS' ? (
       <CircularProgress />
     ) : (
-      <MarkdownRender source={this.props.currentContent} />
+      this.props.currentContent.map((snippet: string) => {
+        return <MarkdownRender source={snippet} />
+      })
     )
   }
 }
 
 export const LearnContent = Learn
-
-// TODO: Revert to Jupyter Notebook and merge array of strings for proper markdown

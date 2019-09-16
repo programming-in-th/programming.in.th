@@ -5,7 +5,7 @@ import { INode } from '../types/learn'
 import firebase from 'firebase'
 import axios from 'axios'
 
-export const loadMenu = () => {
+export const loadMenu = (article_id: string) => {
   return async (
     dispatch: ThunkDispatch<IAppState, {}, AnyAction>
   ): Promise<void> => {
@@ -31,6 +31,7 @@ export const loadMenu = () => {
       }
       dispatch(storeMap(mapToStore))
       dispatch(receiveMenu(nodes))
+      if (article_id) dispatch(loadContent(mapToStore.get(article_id)!.url!))
     } catch (error) {
       console.log(error)
     }
@@ -44,7 +45,16 @@ export const loadContent = (url: string) => {
     dispatch(requestContent())
     try {
       const response = await axios.get(url)
-      dispatch(receiveContent(response.data))
+      const data = response.data.cells
+      const snippets: string[] = []
+      for (const cell of data) {
+        if (cell.cell_type === 'markdown') {
+          for (const snippet of cell.source) {
+            snippets.push(snippet)
+          }
+        }
+      }
+      dispatch(receiveContent(snippets))
     } catch (error) {
       console.log(error)
     }
@@ -74,7 +84,7 @@ const requestContent = () => {
 }
 
 export const RECEIVE_CONTENT = 'RECEIVE_CONTENT'
-const receiveContent = (data: string) => {
+const receiveContent = (data: string[]) => {
   return {
     type: RECEIVE_CONTENT,
     currentContent: data

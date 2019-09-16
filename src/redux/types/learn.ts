@@ -3,7 +3,7 @@ export interface ILearnState {
   readonly currentContentStatus: 'LOADING' | 'SUCCESS' | null
   readonly idMap: Map<string, INode>
   readonly menu: INode[] | undefined
-  readonly currentContent: string | undefined
+  readonly currentContent: string[] | undefined
 }
 
 export interface INode {
