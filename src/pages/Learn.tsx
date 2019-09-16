@@ -118,7 +118,7 @@ const DrawerClosed = styled.div`
   width: 41px;
   height: 40px;
   cursor: pointer;
-  z-index: 20000;
+  z-index: 200;
   text-align: center;
   line-height: 40px;
   font-size: 16px;
@@ -164,56 +164,69 @@ class Learn extends React.Component<any> {
   }
 
   render() {
-    const SideMenu = (props: any) => {
+    const currentPath = this.props.match.url
+    const nodes = this.props.menu
+    const menu = (props: any) => {
       return (
-        <Menu
-          theme="light"
-          mode="inline"
-          style={{ height: '100%', borderRight: 0 }}
-          selectedKeys={[props.currentPath]}
-        >
-          <Menu.Item key={'/learn'}>
-            <NavLink to={'/learn'}>
-              <Icon type="home" theme="filled" />
-              Welcome!
-            </NavLink>
-          </Menu.Item>
-          {props.nodes.map((node: INode) => {
-            return node.type === 'section' ? (
-              <SubMenu key={node.name} title={node.name}>
-                {node.articles!.map((sub_node: INode) => {
-                  return (
-                    <Menu.Item
-                      key={'/learn/' + sub_node.article_id}
-                      onClick={() =>
-                        this.props.onChangeArticle(
-                          this.props.idMap.get(sub_node.article_id)
-                        )
-                      }
-                    >
-                      <NavLink to={'/learn/' + sub_node.article_id}>
-                        {sub_node.name}
-                      </NavLink>
-                    </Menu.Item>
-                  )
-                })}
-              </SubMenu>
-            ) : (
-              <Menu.Item
-                key={'/learn/' + node.article_id}
-                onClick={() =>
-                  this.props.onChangeArticle(
-                    this.props.idMap.get(node.article_id)
-                  )
-                }
-              >
-                <NavLink to={'/learn/' + node.article_id}>{node.name}</NavLink>
-              </Menu.Item>
-            )
-          })}
-        </Menu>
+        <div className={props.className}>
+          <Menu
+            theme="light"
+            mode="inline"
+            style={{ height: '100%', borderRight: 0 }}
+            selectedKeys={[currentPath]}
+          >
+            <Menu.Item key={'/learn'}>
+              <NavLink to={'/learn'}>
+                <Icon type="home" theme="filled" />
+                Welcome!
+              </NavLink>
+            </Menu.Item>
+            {nodes.map((node: INode) => {
+              return node.type === 'section' ? (
+                <SubMenu key={node.name} title={node.name}>
+                  {node.articles!.map((sub_node: INode) => {
+                    return (
+                      <Menu.Item
+                        key={'/learn/' + sub_node.article_id}
+                        onClick={() =>
+                          this.props.onChangeArticle(
+                            this.props.idMap.get(sub_node.article_id)
+                          )
+                        }
+                      >
+                        <NavLink to={'/learn/' + sub_node.article_id}>
+                          {sub_node.name}
+                        </NavLink>
+                      </Menu.Item>
+                    )
+                  })}
+                </SubMenu>
+              ) : (
+                <Menu.Item
+                  key={'/learn/' + node.article_id}
+                  onClick={() =>
+                    this.props.onChangeArticle(
+                      this.props.idMap.get(node.article_id)
+                    )
+                  }
+                >
+                  <NavLink to={'/learn/' + node.article_id}>
+                    {node.name}
+                  </NavLink>
+                </Menu.Item>
+              )
+            })}
+          </Menu>
+        </div>
       )
     }
+    const SideMenu = styled(menu)`
+      @media ${responsive} {
+        & ul {
+          border-right: none !important;
+        }
+      }
+    `
     const article_id = this.props.match.params.article_id
     return this.props.menuStatus !== 'SUCCESS' ? (
       <CircularProgress />
@@ -250,10 +263,7 @@ class Learn extends React.Component<any> {
         </Drawer>
         <MainLayout>
           <SiderMenu>
-            <SideMenu
-              nodes={this.props.menu}
-              currentPath={this.props.match.url}
-            />
+            <SideMenu />
           </SiderMenu>
           <ContentLayout>
             <MainContent>
