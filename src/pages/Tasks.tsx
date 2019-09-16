@@ -207,40 +207,40 @@ class TasksListComponent extends React.Component<
     ]
 
     return this.props.status === 'LOADING' ? (
-      <div id="loading">
-        <SpinWrapper>
-          <Spin tip="Loading..." size="large" />
-        </SpinWrapper>{' '}
-      </div>
+      <SpinWrapper>
+        <Spin tip="Loading..." size="large" />
+      </SpinWrapper>
     ) : (
-      <div
-      // className={styles.wrapper}
-      >
-        <MUIDataTable
-          title="Tasks"
-          columns={columns as MUIDataTableColumnDef[]}
-          data={this.props.taskList}
-          options={{
-            responsive: 'scroll',
-            search: true,
-            print: false,
-            download: false,
-            selectableRows: 'none',
-            onRowClick: (rowData, rowMeta) => {
-              const problem_id = this.props.taskList[rowMeta.dataIndex]
-                .problem_id
-              this.props.history.push('/tasks/' + problem_id)
-            },
-            customSearch: (
-              searchQuery: string,
-              currentRow: Array<any>,
-              columns: Array<any>
-            ): boolean => {
-              return currentRow[0].toString().indexOf(searchQuery) >= 0
-            }
-          }}
-        />
-      </div>
+      <Row>
+        <Col span={18} offset={3}>
+          <div style={{ paddingTop: '50px' }}>
+            <MUIDataTable
+              title="Tasks"
+              columns={columns as MUIDataTableColumnDef[]}
+              data={this.props.taskList}
+              options={{
+                responsive: 'scroll',
+                search: true,
+                print: false,
+                download: false,
+                selectableRows: 'none',
+                onRowClick: (rowData, rowMeta) => {
+                  const problem_id = this.props.taskList[rowMeta.dataIndex]
+                    .problem_id
+                  this.props.history.push('/tasks/' + problem_id)
+                },
+                customSearch: (
+                  searchQuery: string,
+                  currentRow: Array<any>,
+                  columns: Array<any>
+                ): boolean => {
+                  return currentRow[0].toString().indexOf(searchQuery) >= 0
+                }
+              }}
+            />
+          </div>
+        </Col>
+      </Row>
     )
   }
 }

@@ -14,6 +14,8 @@ import {
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 import H from 'history'
+import { SpinWrapper } from '../components/SpinWrapper'
+import { Spin } from 'antd'
 
 interface ISubmissionsComponentProps {
   onInitialLoad: () => void
@@ -221,9 +223,9 @@ class SubmissionsComponent extends React.Component<
     ]
 
     return this.props.submissionsListStatus === 'LOADING' ? (
-      <div id="loading">
-        <CircularProgress />
-      </div>
+      <SpinWrapper>
+        <Spin tip="Loading..." size="large" />
+      </SpinWrapper>
     ) : (
       <div>
         <MUIDataTable
