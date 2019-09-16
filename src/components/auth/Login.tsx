@@ -3,6 +3,7 @@ import { Form, Icon, Input, Button, Checkbox, Row, Col, Card } from 'antd'
 import styled from 'styled-components'
 
 import firebase from 'firebase'
+import { Link } from 'react-router-dom'
 import 'firebase/auth'
 
 import { FormComponentProps } from 'antd/lib/form/Form'
@@ -161,7 +162,7 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
                     onClick={() => loginWithGithub(this.props.history)}
                   />
                   <Register>
-                    Or <a href="/register">register now!</a>
+                    Or <Link to="/register">register now!</Link>
                   </Register>
                 </Others>
               </Form.Item>
