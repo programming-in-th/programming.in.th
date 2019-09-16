@@ -7,3 +7,4 @@ export {
   resubmitSubmission,
   errorSubmit
 } from './submission'
+export { loadContent, loadMenu } from './learn'

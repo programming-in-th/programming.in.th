@@ -252,7 +252,6 @@ class SubmissionsComponent extends React.Component<
 }
 
 const mapStateToProps = (state: any) => {
-  console.log(state)
   return {
     submissionsList: state.submissions.submissionsList,
     submissionsListStatus: state.submissions.submissionsListStatus

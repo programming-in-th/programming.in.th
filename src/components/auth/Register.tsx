@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Icon, Input, Button, Row, Col, Card } from 'antd'
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import firebase from 'firebase'
@@ -143,7 +144,7 @@ class Register extends React.Component<
                 </RegisterButton>
                 <Others>
                   <BackToMainPage>
-                    <a href="/login"> Back to main page </a>
+                    <Link to="/login"> Back to main page </Link>
                   </BackToMainPage>
                 </Others>
               </Form.Item>

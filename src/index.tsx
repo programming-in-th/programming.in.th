@@ -11,6 +11,7 @@ import { TasksPage } from './pages/Tasks'
 import { TaskDetailPage } from './pages/TaskDetail'
 import { SubmissionsPage } from './pages/Submissions'
 import { SubmissionDetailPage } from './pages/SubmissionDetail'
+import { SettingPage } from './pages/Setting'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 
@@ -82,7 +83,8 @@ const Root: React.FunctionComponent<IRootProps> = (props: IRootProps) => {
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/learn" component={LearnPage} />
-                <Route exact path="/learn/:page" component={LearnPage} />
+                <Route exact path="/learn/:article_id" component={LearnPage} />
+                <Route exact path="/setting" component={SettingPage} />
                 <Route component={NotFound} />
               </Switch>
             </Content>
