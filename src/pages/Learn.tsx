@@ -41,84 +41,13 @@ const SiderMenu = styled(Sider)`
   }
 `
 
-const move = keyframes`
-  from { margin-left: 0; }
-  to { margin-left: 256px; }
-`
-const rmove = keyframes`
-  from { margin-left: 256px; }
-  to { margin-left: 0; }
-`
-
-const DrawerOpening = styled.div`
+const DrawerMenu = styled.div`
   position: fixed;
   top: 72px;
   width: 41px;
   height: 40px;
   cursor: pointer;
-  z-index: 10000;
-  text-align: center;
-  line-height: 40px;
-  font-size: 16px;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border-radius: 0 4px 4px 0;
-  -webkit-animation: ${move}0.3s infinite; /* Safari 4.0 - 8.0 */
-  animation: ${move} 0.3s infinite;
-  @media ${responsive} {
-    display: flex;
-  }
-`
-const DrawerClosing = styled.div`
-  position: fixed;
-  top: 72px;
-  width: 41px;
-  height: 40px;
-  cursor: pointer;
-  z-index: 10000;
-  text-align: center;
-  line-height: 40px;
-  font-size: 16px;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border-radius: 0 4px 4px 0;
-  -webkit-animation: ${rmove} 0.3s infinite; /* Safari 4.0 - 8.0 */
-  animation: ${rmove} 0.3s infinite;
-  @media ${responsive} {
-    display: flex;
-  }
-`
-const DrawerOpened = styled.div`
-  position: fixed;
-  top: 72px;
-  width: 41px;
-  height: 40px;
-  cursor: pointer;
-  z-index: 20000;
-  text-align: center;
-  line-height: 40px;
-  font-size: 16px;
-  display: none;
-  margin-left: 256px;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border-radius: 0 4px 4px 0;
-  @media ${responsive} {
-    display: flex;
-  }
-`
-const DrawerClosed = styled.div`
-  position: fixed;
-  top: 72px;
-  width: 41px;
-  height: 40px;
-  cursor: pointer;
-  z-index: 200;
+  z-index: 10;
   text-align: center;
   line-height: 40px;
   font-size: 16px;
@@ -134,7 +63,7 @@ const DrawerClosed = styled.div`
 `
 
 class Learn extends React.Component<any> {
-  state = { visible: false, handle: false }
+  state = { visible: false }
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.article_id)
   }
@@ -145,28 +74,18 @@ class Learn extends React.Component<any> {
     this.setState({
       visible: true
     })
-    setTimeout(() => {
-      this.setState({
-        handle: true
-      })
-    }, 300)
   }
 
   onClose = () => {
     this.setState({
       visible: false
     })
-    setTimeout(() => {
-      this.setState({
-        handle: false
-      })
-    }, 300)
   }
 
   render() {
     const currentPath = this.props.match.url
     const nodes = this.props.menu
-    const menu = (props: any) => {
+    const SideMenu = (props: any) => {
       return (
         <div className={props.className}>
           <Menu
@@ -176,7 +95,7 @@ class Learn extends React.Component<any> {
             selectedKeys={[currentPath]}
           >
             <Menu.Item key={'/learn'}>
-              <NavLink to={'/learn'}>
+              <NavLink to={'/learn'} onClick={this.onClose}>
                 <Icon type="home" theme="filled" />
                 Welcome!
               </NavLink>
@@ -194,7 +113,10 @@ class Learn extends React.Component<any> {
                           )
                         }
                       >
-                        <NavLink to={'/learn/' + sub_node.article_id}>
+                        <NavLink
+                          to={'/learn/' + sub_node.article_id}
+                          onClick={this.onClose}
+                        >
                           {sub_node.name}
                         </NavLink>
                       </Menu.Item>
@@ -220,38 +142,14 @@ class Learn extends React.Component<any> {
         </div>
       )
     }
-    const SideMenu = styled(menu)`
-      @media ${responsive} {
-        & ul {
-          border-right: none !important;
-        }
-      }
-    `
     const article_id = this.props.match.params.article_id
     return this.props.menuStatus !== 'SUCCESS' ? (
       <CircularProgress />
     ) : (
       <React.Fragment>
-        {this.state.visible ? (
-          this.state.handle ? (
-            <DrawerOpened onClick={this.onClose}>
-              <Icon type="close" />
-            </DrawerOpened>
-          ) : (
-            <DrawerOpening>
-              <Icon type="menu" />
-            </DrawerOpening>
-          )
-        ) : this.state.handle ? (
-          <DrawerClosing>
-            <Icon type="close" />
-          </DrawerClosing>
-        ) : (
-          <DrawerClosed onClick={this.showDrawer}>
-            <Icon type="menu" />
-          </DrawerClosed>
-        )}
-
+        <DrawerMenu onClick={this.showDrawer}>
+          <Icon type="menu" />
+        </DrawerMenu>
         <Drawer
           placement="left"
           closable={false}
