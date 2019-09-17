@@ -19,8 +19,6 @@ import { Nav } from './components/nav/Nav'
 import { SpinWrapper } from './components/SpinWrapper'
 
 import './assets/css/init.css'
-import './assets/material-icon/material-icons.css'
-import './assets/css/responsive.css'
 
 import { AnyAction } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'

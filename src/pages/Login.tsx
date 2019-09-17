@@ -2,7 +2,6 @@ import React from 'react'
 import { withRouter } from 'react-router'
 
 import { LoginPage } from '../components/auth/Login'
-import '../assets/css/login.css'
 import { Container } from '../components/auth/Style'
 
 const _Login = () => (
