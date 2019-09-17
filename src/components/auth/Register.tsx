@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Row, Col, Card } from 'antd'
+import { Form, Icon, Input, Button, Row, Col } from 'antd'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { StyledCard, StyledForm, Others } from './Style'
@@ -125,7 +125,7 @@ class Register extends React.Component<
                   />
                 )}
                 {this.state.errorMessage ? (
-                  <a>{this.state.errorMessage}</a>
+                  <i>{this.state.errorMessage}</i>
                 ) : null}
               </Form.Item>
               <Form.Item>

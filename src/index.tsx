@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
@@ -66,54 +66,65 @@ interface IRootProps {
   submissionDetailStatus: any
 }
 
-const Root: React.FunctionComponent<IRootProps> = (props: IRootProps) => {
-  useEffect(() => props.onInitialLoad(), [])
-
-  return (
-    <React.Fragment>
-      {props.user === 'LOADING' ? (
-        <SpinWrapper>
-          <Spin tip="Loading..." size="large" />
-        </SpinWrapper>
-      ) : (
-        <Router>
-          <Layout>
-            <GlobalStyle />
-            <Header
-              style={{
-                background: 'white',
-                position: 'fixed',
-                zIndex: 100,
-                width: '100%'
-              }}
-            >
-              <Nav />
-            </Header>
-            <Content style={{ marginTop: 64 }}>
-              <Switch>
-                <Route exact path="/" component={Index} />
-                <Route exact path="/tasks" component={TasksPage} />
-                <Route exact path="/tasks/:id" component={TaskDetailPage} />
-                <Route exact path="/submissions" component={SubmissionsPage} />
-                <Route
-                  exact
-                  path="/submissions/:id"
-                  component={SubmissionDetailPage}
-                />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/register" component={Register} />
-                <Route exact path="/learn" component={LearnPage} />
-                <Route exact path="/learn/:article_id" component={LearnPage} />
-                <Route exact path="/setting" component={SettingPage} />
-                <Route component={NotFound} />
-              </Switch>
-            </Content>
-            <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
-          </Layout>
-        </Router>
-      )}
-    </React.Fragment>
-  )
+class Root extends React.Component<IRootProps, {}> {
+  componentDidMount() {
+    this.props.onInitialLoad()
+  }
+  render() {
+    return (
+      <React.Fragment>
+        {this.props.user === 'LOADING' ? (
+          <SpinWrapper>
+            <Spin tip="Loading..." size="large" />
+          </SpinWrapper>
+        ) : (
+          <Router>
+            <Layout>
+              <GlobalStyle />
+              <Header
+                style={{
+                  background: 'white',
+                  position: 'fixed',
+                  zIndex: 100,
+                  width: '100%'
+                }}
+              >
+                <Nav />
+              </Header>
+              <Content style={{ marginTop: 64 }}>
+                <Switch>
+                  <Route exact path="/" component={Index} />
+                  <Route exact path="/tasks" component={TasksPage} />
+                  <Route exact path="/tasks/:id" component={TaskDetailPage} />
+                  <Route
+                    exact
+                    path="/submissions"
+                    component={SubmissionsPage}
+                  />
+                  <Route
+                    exact
+                    path="/submissions/:id"
+                    component={SubmissionDetailPage}
+                  />
+                  <Route exact path="/login" component={Login} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/learn" component={LearnPage} />
+                  <Route
+                    exact
+                    path="/learn/:article_id"
+                    component={LearnPage}
+                  />
+                  <Route exact path="/setting" component={SettingPage} />
+                  <Route component={NotFound} />
+                </Switch>
+              </Content>
+              <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
+            </Layout>
+          </Router>
+        )}
+      </React.Fragment>
+    )
+  }
 }
 
 const mapStateToProps: (state: any) => any = state => {

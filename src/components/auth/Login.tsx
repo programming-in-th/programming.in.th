@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Icon, Input, Button, Checkbox, Row, Col, Card } from 'antd'
+import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd'
 import styled from 'styled-components'
 import { StyledCard, StyledForm, StyledIcon, Others } from './Style'
 
@@ -111,7 +111,7 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
                   />
                 )}
                 {this.state.errorMessage ? (
-                  <a>{this.state.errorMessage}</a>
+                  <i>{this.state.errorMessage}</i>
                 ) : null}
               </Form.Item>
               <Form.Item>

@@ -16,7 +16,7 @@ export const Container = styled.div`
 export const StyledCard = styled(Card)`
   bordered: false;
   width: 416px;
-  padding: 0px 24px 24px;
+  // padding: 0px 24px 24px;
   @media ${responsive} {
     width: 90vw;
     padding: 0px 0px 0px;

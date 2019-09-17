@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Layout, Menu, Icon, Drawer } from 'antd'
 import { LearnContent } from '../components/learn/LearnContent'
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
