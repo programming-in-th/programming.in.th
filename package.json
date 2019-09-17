@@ -14,7 +14,7 @@
     "@material-ui/icons": "^4.4.1",
     "@types/codemirror": "^0.0.77",
     "@types/mui-datatables": "^2.10.2",
-    "antd": "^3.23.2",
+    "antd": "^3.23.3",
     "axios": "^0.19.0",
     "babel-plugin-import": "^1.12.1",
     "codemirror": "^5.48.4",
