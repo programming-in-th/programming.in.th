@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Icon, Input, Button, Row, Col, Card } from 'antd'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { StyledCard, StyledForm, Others } from './Style'
 
 import firebase from 'firebase'
 import 'firebase/auth'
@@ -13,11 +14,6 @@ interface IRegisterProps {
   history: H.History
 }
 
-const StyledForm = styled(Form)`
-  width: 368px;
-  margin: 0 auto;
-`
-
 const RegisterButton = styled(Button)`
   width: 100%;
 `
@@ -25,12 +21,6 @@ const RegisterButton = styled(Button)`
 const BackToMainPage = styled.div`
   float: right;
 `
-
-const Others = styled.div`
-  margin-top: 24px;
-  text-align: left;
-`
-
 class Register extends React.Component<
   IRegisterProps & FormComponentProps,
   {}
@@ -84,8 +74,8 @@ class Register extends React.Component<
     const { getFieldDecorator } = this.props.form
     return (
       <Row type="flex" align="middle">
-        <Card bordered={false}>
-          <Col span={12}>
+        <StyledCard>
+          <Col>
             <h1>Register</h1>
             <StyledForm onSubmit={this.handleSubmit}>
               <Form.Item>
@@ -150,7 +140,7 @@ class Register extends React.Component<
               </Form.Item>
             </StyledForm>
           </Col>
-        </Card>
+        </StyledCard>
       </Row>
     )
   }

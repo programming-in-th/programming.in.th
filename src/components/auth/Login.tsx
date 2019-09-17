@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Icon, Input, Button, Checkbox, Row, Col, Card } from 'antd'
 import styled from 'styled-components'
+import { StyledCard, StyledForm, StyledIcon, Others } from './Style'
 
 import firebase from 'firebase'
 import { Link } from 'react-router-dom'
@@ -13,37 +14,14 @@ interface ILoginProps {
   history: H.History
 }
 
-const StyledForm = styled(Form)`
-  width: 368px;
-  margin: 0 auto;
-`
-
 const LoginButton = styled(Button)`
   width: 100%;
 `
 
-const StyledIcon = styled(Icon)`
-  margin-left: 16px;
-  color: rgba(0, 0, 0, 0.2);
-  font-size: 24px;
-  vertical-align: middle;
-  cursor: pointer;
-  transition: color 0.3s;
-
-  &:hover {
-    color: #188fff;
-  }
-`
-
 const Register = styled.div`
   float: right;
+  padding: 0px 24px 0px;
 `
-
-const Others = styled.div`
-  margin-top: 24px;
-  text-align: left;
-`
-
 class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
   handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
@@ -100,8 +78,8 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
     const { getFieldDecorator } = this.props.form
     return (
       <Row type="flex" align="middle">
-        <Card bordered={false}>
-          <Col span={12}>
+        <StyledCard>
+          <Col>
             <h1>Login</h1>
             <StyledForm onSubmit={this.handleSubmit}>
               <Form.Item>
@@ -168,7 +146,7 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
               </Form.Item>
             </StyledForm>
           </Col>
-        </Card>
+        </StyledCard>
       </Row>
     )
   }
