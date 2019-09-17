@@ -41,84 +41,13 @@ const SiderMenu = styled(Sider)`
   }
 `
 
-const move = keyframes`
-  from { margin-left: 0; }
-  to { margin-left: 256px; }
-`
-const rmove = keyframes`
-  from { margin-left: 256px; }
-  to { margin-left: 0; }
-`
-
-const DrawerOpening = styled.div`
+const DrawerMenu = styled.div`
   position: fixed;
   top: 72px;
   width: 41px;
   height: 40px;
   cursor: pointer;
-  z-index: 10000;
-  text-align: center;
-  line-height: 40px;
-  font-size: 16px;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border-radius: 0 4px 4px 0;
-  -webkit-animation: ${move}0.3s infinite; /* Safari 4.0 - 8.0 */
-  animation: ${move} 0.3s infinite;
-  @media ${responsive} {
-    display: flex;
-  }
-`
-const DrawerClosing = styled.div`
-  position: fixed;
-  top: 72px;
-  width: 41px;
-  height: 40px;
-  cursor: pointer;
-  z-index: 10000;
-  text-align: center;
-  line-height: 40px;
-  font-size: 16px;
-  display: none;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border-radius: 0 4px 4px 0;
-  -webkit-animation: ${rmove} 0.3s infinite; /* Safari 4.0 - 8.0 */
-  animation: ${rmove} 0.3s infinite;
-  @media ${responsive} {
-    display: flex;
-  }
-`
-const DrawerOpened = styled.div`
-  position: fixed;
-  top: 72px;
-  width: 41px;
-  height: 40px;
-  cursor: pointer;
-  z-index: 20000;
-  text-align: center;
-  line-height: 40px;
-  font-size: 16px;
-  display: none;
-  margin-left: 256px;
-  justify-content: center;
-  align-items: center;
-  background: #fff;
-  border-radius: 0 4px 4px 0;
-  @media ${responsive} {
-    display: flex;
-  }
-`
-const DrawerClosed = styled.div`
-  position: fixed;
-  top: 72px;
-  width: 41px;
-  height: 40px;
-  cursor: pointer;
-  z-index: 20000;
+  z-index: 10;
   text-align: center;
   line-height: 40px;
   font-size: 16px;
@@ -134,7 +63,7 @@ const DrawerClosed = styled.div`
 `
 
 class Learn extends React.Component<any> {
-  state = { visible: false, handle: false }
+  state = { visible: false }
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.article_id)
   }
@@ -145,73 +74,72 @@ class Learn extends React.Component<any> {
     this.setState({
       visible: true
     })
-    setTimeout(() => {
-      this.setState({
-        handle: true
-      })
-    }, 300)
   }
 
   onClose = () => {
     this.setState({
       visible: false
     })
-    setTimeout(() => {
-      this.setState({
-        handle: false
-      })
-    }, 300)
   }
 
   render() {
+    const currentPath = this.props.match.url
+    const nodes = this.props.menu
     const SideMenu = (props: any) => {
       return (
-        <Menu
-          theme="light"
-          mode="inline"
-          style={{ height: '100%', borderRight: 0 }}
-          selectedKeys={[props.currentPath]}
-        >
-          <Menu.Item key={'/learn'}>
-            <NavLink to={'/learn'}>
-              <Icon type="home" theme="filled" />
-              Welcome!
-            </NavLink>
-          </Menu.Item>
-          {props.nodes.map((node: INode) => {
-            return node.type === 'section' ? (
-              <SubMenu key={node.name} title={node.name}>
-                {node.articles!.map((sub_node: INode) => {
-                  return (
-                    <Menu.Item
-                      key={'/learn/' + sub_node.article_id}
-                      onClick={() =>
-                        this.props.onChangeArticle(
-                          this.props.idMap.get(sub_node.article_id)
-                        )
-                      }
-                    >
-                      <NavLink to={'/learn/' + sub_node.article_id}>
-                        {sub_node.name}
-                      </NavLink>
-                    </Menu.Item>
-                  )
-                })}
-              </SubMenu>
-            ) : (
-              <Menu.Item
-                key={'/learn/' + node.article_id}
-                onClick={() =>
-                  this.props.onChangeArticle(
-                    this.props.idMap.get(node.article_id)
-                  )
-                }
-              >
-                <NavLink to={'/learn/' + node.article_id}>{node.name}</NavLink>
-              </Menu.Item>
-            )
-          })}
-        </Menu>
+        <div className={props.className}>
+          <Menu
+            theme="light"
+            mode="inline"
+            style={{ height: '100%', borderRight: 0 }}
+            selectedKeys={[currentPath]}
+          >
+            <Menu.Item key={'/learn'}>
+              <NavLink to={'/learn'} onClick={this.onClose}>
+                <Icon type="home" theme="filled" />
+                Welcome!
+              </NavLink>
+            </Menu.Item>
+            {nodes.map((node: INode) => {
+              return node.type === 'section' ? (
+                <SubMenu key={node.name} title={node.name}>
+                  {node.articles!.map((sub_node: INode) => {
+                    return (
+                      <Menu.Item
+                        key={'/learn/' + sub_node.article_id}
+                        onClick={() =>
+                          this.props.onChangeArticle(
+                            this.props.idMap.get(sub_node.article_id)
+                          )
+                        }
+                      >
+                        <NavLink
+                          to={'/learn/' + sub_node.article_id}
+                          onClick={this.onClose}
+                        >
+                          {sub_node.name}
+                        </NavLink>
+                      </Menu.Item>
+                    )
+                  })}
+                </SubMenu>
+              ) : (
+                <Menu.Item
+                  key={'/learn/' + node.article_id}
+                  onClick={() =>
+                    this.props.onChangeArticle(
+                      this.props.idMap.get(node.article_id)
+                    )
+                  }
+                >
+                  <NavLink to={'/learn/' + node.article_id}>
+                    {node.name}
+                  </NavLink>
+                </Menu.Item>
+              )
+            })}
+          </Menu>
+        </div>
       )
     }
     const article_id = this.props.match.params.article_id
@@ -219,26 +147,9 @@ class Learn extends React.Component<any> {
       <CircularProgress />
     ) : (
       <React.Fragment>
-        {this.state.visible ? (
-          this.state.handle ? (
-            <DrawerOpened onClick={this.onClose}>
-              <Icon type="close" />
-            </DrawerOpened>
-          ) : (
-            <DrawerOpening>
-              <Icon type="menu" />
-            </DrawerOpening>
-          )
-        ) : this.state.handle ? (
-          <DrawerClosing>
-            <Icon type="close" />
-          </DrawerClosing>
-        ) : (
-          <DrawerClosed onClick={this.showDrawer}>
-            <Icon type="menu" />
-          </DrawerClosed>
-        )}
-
+        <DrawerMenu onClick={this.showDrawer}>
+          <Icon type="menu" />
+        </DrawerMenu>
         <Drawer
           placement="left"
           closable={false}
@@ -250,10 +161,7 @@ class Learn extends React.Component<any> {
         </Drawer>
         <MainLayout>
           <SiderMenu>
-            <SideMenu
-              nodes={this.props.menu}
-              currentPath={this.props.match.url}
-            />
+            <SideMenu />
           </SiderMenu>
           <ContentLayout>
             <MainContent>
