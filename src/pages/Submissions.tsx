@@ -1,21 +1,13 @@
 import React from 'react'
-import MUIDataTable, {
-  MUIDataTableColumnDef,
-  MUIDataTableOptions
-} from 'mui-datatables'
+import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
 import { ISubmissions } from '../redux/types/submission'
-import {
-  FormGroup,
-  FormLabel,
-  TextField,
-  CircularProgress
-} from '@material-ui/core'
+import { FormGroup, FormLabel, TextField } from '@material-ui/core'
 
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 import H from 'history'
 import { SpinWrapper } from '../components/SpinWrapper'
-import { Spin } from 'antd'
+import { Spin, Col, Row } from 'antd'
 
 interface ISubmissionsComponentProps {
   onInitialLoad: () => void
@@ -227,26 +219,30 @@ class SubmissionsComponent extends React.Component<
         <Spin tip="Loading..." size="large" />
       </SpinWrapper>
     ) : (
-      <div>
-        <MUIDataTable
-          title="Submissions"
-          columns={columns as MUIDataTableColumnDef[]}
-          data={this.props.submissionsList}
-          options={{
-            responsive: 'scroll',
-            search: false,
-            selectableRows: 'none',
-            print: false,
-            download: false,
-            onRowClick: (rowData, rowMeta) => {
-              const submission_id = this.props.submissionsList[
-                rowMeta.dataIndex
-              ].submission_id
-              this.props.history.push('/submissions/' + submission_id)
-            }
-          }}
-        />
-      </div>
+      <Row>
+        <Col span={18} offset={3}>
+          <div style={{ paddingTop: '50px' }}>
+            <MUIDataTable
+              title="Submissions"
+              columns={columns as MUIDataTableColumnDef[]}
+              data={this.props.submissionsList}
+              options={{
+                responsive: 'scrollMaxHeight',
+                search: false,
+                selectableRows: 'none',
+                print: false,
+                download: false,
+                onRowClick: (rowData, rowMeta) => {
+                  const submission_id = this.props.submissionsList[
+                    rowMeta.dataIndex
+                  ].submission_id
+                  this.props.history.push('/submissions/' + submission_id)
+                }
+              }}
+            />
+          </div>
+        </Col>
+      </Row>
     )
   }
 }

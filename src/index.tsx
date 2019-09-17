@@ -19,7 +19,6 @@ import { Nav } from './components/nav/Nav'
 import { SpinWrapper } from './components/SpinWrapper'
 
 import './assets/css/init.css'
-import './assets/css/main.css'
 import './assets/material-icon/material-icons.css'
 import './assets/css/responsive.css'
 
@@ -31,11 +30,31 @@ import { firebaseConfig } from './config'
 import { store } from './redux'
 
 import firebase from 'firebase'
+import { createGlobalStyle } from 'styled-components'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
   firebase.app().functions('asia-east2')
 }
+
+const GlobalStyle = createGlobalStyle`
+  #root {
+    width: 1020px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .divider {
+    margin-top: 25px;
+    padding: 7px 0;
+    color: var(--info);
+
+    p {
+      font-size: 24px;
+      font-weight: bolder;
+    }
+}
+`
 
 const { Header, Content, Footer } = Layout
 
@@ -59,6 +78,7 @@ const Root: React.FunctionComponent<IRootProps> = (props: IRootProps) => {
       ) : (
         <Router>
           <Layout>
+            <GlobalStyle />
             <Header
               style={{
                 background: 'white',
