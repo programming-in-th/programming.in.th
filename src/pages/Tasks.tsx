@@ -260,7 +260,7 @@ const mapDispatchToProps: (
   return {
     onInitialLoad: () => {
       // TODO: load tags
-      dispatch(actionCreators.loadTasksList(10, -1, -1, []))
+      dispatch(actionCreators.loadTasksList(-1, -1, -1, []))
     }
   }
 }

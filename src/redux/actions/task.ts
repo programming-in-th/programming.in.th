@@ -21,7 +21,7 @@ export const loadTasksList = (
     dispatch(requestTasks())
     try {
       const params: Object = {
-        limit: limit,
+        limit: limit !== -1 ? limit : 10000,
         min_difficulty: min_difficulty !== -1 ? min_difficulty : 0,
         max_difficulty:
           max_difficulty !== -1 ? max_difficulty : Number.MAX_SAFE_INTEGER,
@@ -31,6 +31,9 @@ export const loadTasksList = (
         .app()
         .functions('asia-east2')
         .httpsCallable('getTasksWithFilter')(params)
+      response.data.sort((a: any, b: any) => {
+        return a.problem_id.localeCompare(b.problem_id)
+      })
       dispatch(receiveTasks(response.data))
     } catch (error) {
       console.log(error)
