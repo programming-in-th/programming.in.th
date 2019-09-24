@@ -2,7 +2,7 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Layout, Spin } from 'antd'
+import { Layout } from 'antd'
 
 import { Index } from './pages/Index'
 import { NotFound } from './pages/404'
@@ -16,7 +16,7 @@ import { Login } from './pages/Login'
 import { Register } from './pages/Register'
 
 import { Nav } from './components/nav/Nav'
-import { SpinWrapper } from './components/SpinWrapper'
+import { CustomSpin } from './components/Spin'
 
 import './assets/css/init.css'
 
@@ -72,9 +72,7 @@ class Root extends React.Component<IRootProps, {}> {
     return (
       <React.Fragment>
         {this.props.user === 'LOADING' ? (
-          <SpinWrapper>
-            <Spin tip="Loading..." size="large" />
-          </SpinWrapper>
+          <CustomSpin />
         ) : (
           <Router>
             <Layout>

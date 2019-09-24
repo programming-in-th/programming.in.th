@@ -8,7 +8,7 @@ import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 import { INode } from '../redux/types/learn'
 import { NavLink } from 'react-router-dom'
-import { SpinWrapper } from '../components/SpinWrapper'
+import { CustomSpin } from '../components/Spin'
 
 const { SubMenu } = Menu
 const { Content, Sider } = Layout
@@ -144,7 +144,7 @@ class Learn extends React.Component<any> {
     }
     const article_id = this.props.match.params.article_id
     return this.props.menuStatus !== 'SUCCESS' ? (
-      <SpinWrapper />
+      <CustomSpin />
     ) : (
       <React.Fragment>
         <DrawerMenu onClick={this.showDrawer}>

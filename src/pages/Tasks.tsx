@@ -15,8 +15,8 @@ import { AnyAction } from 'redux'
 import H from 'history'
 
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
-import { Spin, Row, Col } from 'antd'
-import { SpinWrapper } from '../components/SpinWrapper'
+import { Row, Col } from 'antd'
+import { CustomSpin } from '../components/Spin'
 
 interface ITasksPageProps {
   taskList: ITask[]
@@ -207,9 +207,7 @@ class TasksListComponent extends React.Component<
     ]
 
     return this.props.status === 'LOADING' ? (
-      <SpinWrapper>
-        <Spin tip="Loading..." size="large" />
-      </SpinWrapper>
+      <CustomSpin />
     ) : (
       <Row>
         <Col span={18} offset={3}>

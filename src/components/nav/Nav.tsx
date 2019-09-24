@@ -10,181 +10,46 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import H from 'history'
 
+const responsive = `(max-width: 1020px)`
+
 interface INavigatorProps {
   location: H.Location
   user?: firebase.User
 }
 
+interface IItem {
+  className?: any
+  mode?: 'vertical' | 'horizontal'
+  location: string
+  hideDrawer?: () => void
+  user?: firebase.User
+}
+
 class Navigator extends React.Component<INavigatorProps> {
-  firebaseLogout() {
-    firebase
-      .auth()
-      .signOut()
-      .then(() => {
-        window.location.reload()
-      })
-  }
   state = {
     visible: false
   }
+
   showDrawer = () => {
     this.setState({ visible: true })
   }
+
   hideDrawer = () => {
     this.setState({ visible: false })
   }
+
   render() {
-    const responsive = `(max-width: 1020px)`
-    interface item {
-      className?: any
-      mode?: 'vertical' | 'horizontal'
-    }
-    const LocationReal = this.props.location.pathname as string
-    const Location = LocationReal.split('/')[1]
+    const locationReal = this.props.location.pathname as string
+    const location = locationReal.split('/')[1]
     const { user } = this.props
-    const Main = (props: item) => {
-      return (
-        <div className={props.className}>
-          <Menu
-            mode={props.mode}
-            style={{ lineHeight: '64px' }}
-            selectedKeys={[Location]}
-          >
-            <Menu.Item key="tasks">
-              <Link to="/tasks" onClick={this.hideDrawer}>
-                <Icon type="appstore" />
-                Tasks
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="submissions">
-              <Link to="/submissions" onClick={this.hideDrawer}>
-                <Icon type="container" />
-                Submissions
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="learn">
-              <Link to="/learn" onClick={this.hideDrawer}>
-                <Icon type="read" />
-                Learn
-              </Link>
-            </Menu.Item>
-            <Menu.Item key="forum">
-              <Link to="/forum" onClick={this.hideDrawer}>
-                <Icon type="project" />
-                Forum
-              </Link>
-            </Menu.Item>
-          </Menu>
-        </div>
-      )
-    }
-    const UserWrapper = styled.div`
-      display: inline-flex;
-      flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      @media ${responsive} {
-        position: absolute;
-        right: 20px;
-      }
-    `
-    const Login = (props: item) => {
-      return (
-        <div className={props.className}>
-          {user ? (
-            <Menu
-              mode={props.mode}
-              style={{ lineHeight: '64px' }}
-              selectedKeys={[Location]}
-            >
-              <Menu.Item key="user">
-                <UserWrapper onClick={this.firebaseLogout}>
-                  <p style={{ marginRight: '15px' }}>
-                    {user.displayName === '' ? 'User' : user.displayName}
-                  </p>
-                  <Avatar
-                    src={
-                      user.photoURL === ''
-                        ? '/assets/img/default-user.png'
-                        : `${user.photoURL}`
-                    }
-                  />
-                </UserWrapper>
-              </Menu.Item>
-            </Menu>
-          ) : (
-            <Menu
-              mode={props.mode}
-              style={{ lineHeight: '64px' }}
-              selectedKeys={[Location]}
-            >
-              <Menu.Item key="login">
-                <Link to="/login" onClick={this.hideDrawer}>
-                  <Icon type="login" />
-                  Login
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="register">
-                <Link to="/register" onClick={this.hideDrawer}>
-                  <Icon type="up-square" />
-                  Register
-                </Link>
-              </Menu.Item>
-            </Menu>
-          )}
-        </div>
-      )
-    }
 
-    const Logo = styled.div`
-      float: left;
-      & a {
-        display: inline-block;
-        font-size: 17px;
-        margin-right: 15px;
-      }
-    `
-    const LeftMenu = styled(Main)`
-      float: left;
-      border-right: none;
-      @media ${responsive} {
-        display: none;
-      }
-    `
-    const RightMenu = styled(Login)`
-      float: right;
-      @media ${responsive} {
-        display: none;
-      }
-    `
-
-    const BarMenu = styled(Button)`
-      float: right;
-      margin-top: 12px;
-      display: none !important;
-      @media ${responsive} {
-        display: inline-block !important;
-      }
-    `
-
-    const MainDrawer = styled(Main)`
-      & ul {
-        border-right: none;
-      }
-    `
-
-    const LoginDrawer = styled(Login)`
-      & ul {
-        border-right: none;
-      }
-    `
     return (
       <React.Fragment>
         <Logo>
           <Link to="/">programming.in.th</Link>
         </Logo>
-        <LeftMenu mode="horizontal" />
-        <RightMenu mode="horizontal" />
+        <LeftMenu mode="horizontal" location={location} />
+        <RightMenu mode="horizontal" location={location} />
         <BarMenu icon="menu" onClick={this.showDrawer} size="large" />
         <Drawer
           title="Menu"
@@ -194,13 +59,163 @@ class Navigator extends React.Component<INavigatorProps> {
           height="auto"
           bodyStyle={{ padding: '10px' }}
         >
-          <MainDrawer mode="vertical" />
-          <LoginDrawer mode="vertical" />
+          <MainDrawer
+            mode="vertical"
+            location={location}
+            hideDrawer={this.hideDrawer}
+          />
+          <LoginDrawer
+            mode="vertical"
+            location={location}
+            hideDrawer={this.hideDrawer}
+            user={user}
+          />
         </Drawer>
       </React.Fragment>
     )
   }
 }
+
+const Main = (props: IItem) => {
+  return (
+    <div className={props.className}>
+      <Menu
+        mode={props.mode}
+        style={{ lineHeight: '64px' }}
+        selectedKeys={[props.location]}
+      >
+        <Menu.Item key="tasks">
+          <Link to="/tasks" onClick={props.hideDrawer}>
+            <Icon type="appstore" />
+            Tasks
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="submissions">
+          <Link to="/submissions" onClick={props.hideDrawer}>
+            <Icon type="container" />
+            Submissions
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="learn">
+          <Link to="/learn" onClick={props.hideDrawer}>
+            <Icon type="read" />
+            Learn
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="forum">
+          <Link to="/forum" onClick={props.hideDrawer}>
+            <Icon type="project" />
+            Forum
+          </Link>
+        </Menu.Item>
+      </Menu>
+    </div>
+  )
+}
+
+const Login = (props: IItem) => {
+  return (
+    <div className={props.className}>
+      {props.user ? (
+        <Menu
+          mode={props.mode}
+          style={{ lineHeight: '64px' }}
+          selectedKeys={[props.location]}
+        >
+          <Menu.Item key="user">
+            <UserWrapper>
+              <p style={{ marginRight: '15px' }}>
+                {props.user.displayName === ''
+                  ? 'User'
+                  : props.user.displayName}
+              </p>
+              <Avatar
+                src={
+                  props.user.photoURL === ''
+                    ? '/assets/img/default-user.png'
+                    : `${props.user.photoURL}`
+                }
+              />
+            </UserWrapper>
+          </Menu.Item>
+        </Menu>
+      ) : (
+        <Menu
+          mode={props.mode}
+          style={{ lineHeight: '64px' }}
+          selectedKeys={[props.location]}
+        >
+          <Menu.Item key="login">
+            <Link to="/login" onClick={props.hideDrawer}>
+              <Icon type="login" />
+              Login
+            </Link>
+          </Menu.Item>
+          <Menu.Item key="register">
+            <Link to="/register" onClick={props.hideDrawer}>
+              <Icon type="up-square" />
+              Register
+            </Link>
+          </Menu.Item>
+        </Menu>
+      )}
+    </div>
+  )
+}
+
+const Logo = styled.div`
+  float: left;
+  & a {
+    display: inline-block;
+    font-size: 17px;
+    margin-right: 15px;
+  }
+`
+const LeftMenu = styled(Main)`
+  float: left;
+  border-right: none;
+  @media ${responsive} {
+    display: none;
+  }
+`
+const RightMenu = styled(Login)`
+  float: right;
+  @media ${responsive} {
+    display: none;
+  }
+`
+
+const BarMenu = styled(Button)`
+  float: right;
+  margin-top: 12px;
+  display: none !important;
+  @media ${responsive} {
+    display: inline-block !important;
+  }
+`
+
+const MainDrawer = styled(Main)`
+  & ul {
+    border-right: none;
+  }
+`
+
+const LoginDrawer = styled(Login)`
+  & ul {
+    border-right: none;
+  }
+`
+
+const UserWrapper = styled.div`
+  display: inline-flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  @media ${responsive} {
+    position: absolute;
+    right: 20px;
+  }
+`
 
 const mapStateToProps: (state: any) => any = state => {
   return {

@@ -1,4 +1,6 @@
+import React from 'react'
 import styled from 'styled-components'
+import { Spin } from 'antd'
 
 export const SpinWrapper = styled.div`
   width: 100%;
@@ -8,3 +10,9 @@ export const SpinWrapper = styled.div`
   justify-content: center;
   align-items: center;
 `
+
+export const CustomSpin = () => (
+  <SpinWrapper>
+    <Spin tip="Loading..." size="large" />
+  </SpinWrapper>
+)

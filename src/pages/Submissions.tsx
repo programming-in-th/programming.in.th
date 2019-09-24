@@ -6,8 +6,8 @@ import { FormGroup, FormLabel, TextField } from '@material-ui/core'
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 import H from 'history'
-import { SpinWrapper } from '../components/SpinWrapper'
-import { Spin, Col, Row } from 'antd'
+import { CustomSpin } from '../components/Spin'
+import { Col, Row } from 'antd'
 
 interface ISubmissionsComponentProps {
   onInitialLoad: () => void
@@ -215,9 +215,7 @@ class SubmissionsComponent extends React.Component<
     ]
 
     return this.props.submissionsListStatus === 'LOADING' ? (
-      <SpinWrapper>
-        <Spin tip="Loading..." size="large" />
-      </SpinWrapper>
+      <CustomSpin />
     ) : (
       <Row>
         <Col span={18} offset={3}>
