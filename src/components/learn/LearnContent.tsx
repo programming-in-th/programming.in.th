@@ -1,11 +1,11 @@
 import React from 'react'
-import { CircularProgress } from '@material-ui/core'
 import MarkdownRender from './MarkdownRender'
+import { SpinWrapper } from '../SpinWrapper'
 
 class Learn extends React.Component<any> {
   render() {
     return this.props.currentContentStatus !== 'SUCCESS' ? (
-      <CircularProgress />
+      <SpinWrapper />
     ) : (
       this.props.currentContent.map((snippet: string) => {
         return <MarkdownRender source={snippet} />
