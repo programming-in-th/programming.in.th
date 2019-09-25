@@ -31,6 +31,15 @@ const { Option } = Select
 
 const languageData = [['text/x-csrc', 'C / C++'], ['python', 'Python']]
 
+type tplot = {
+  [key: string]: string
+}
+
+const mapLanguage: { [key: string]: string } = {
+  'text/x-csrc': 'cpp',
+  python: 'python'
+}
+
 const themeData = [
   ['material', 'Material'],
   ['monokai', 'Monokai'],
@@ -74,17 +83,11 @@ class SubmitComponent extends React.Component<ISubmitProps, any> {
       this.props.errorSubmit()
       return
     }
-    console.log(
-      user.uid,
-      this.props.problemID,
-      this.state.code,
-      this.state.language
-    )
     this.props.submit(
       user.uid,
       this.props.problemID,
       this.state.code,
-      this.state.language
+      mapLanguage[this.state.language]
     )
   }
   render() {
