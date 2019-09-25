@@ -4,13 +4,7 @@ import { Card, Form, Icon } from 'antd'
 export const responsive = '(max-width: 436px)'
 
 export const Container = styled.div`
-  padding: 10px;
-  width: auto;
-  margin: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding-top: 64px;
 `
 
 export const StyledCard = styled(Card)`

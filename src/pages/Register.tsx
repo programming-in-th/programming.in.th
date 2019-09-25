@@ -2,12 +2,37 @@ import React from 'react'
 import { withRouter } from 'react-router'
 
 import { RegisterPage } from '../components/auth/Register'
-import { Container } from '../components/auth/Style'
+import { Row, Col } from 'antd'
+import H from 'history'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { AlreadyLoggedIn } from '../components/auth/Already'
 
-const _Register = () => (
-  <Container>
-    <RegisterPage></RegisterPage>
-  </Container>
-)
+interface IRegisterProps {
+  history: H.History
+  user?: firebase.User
+}
 
-export const Register = withRouter(_Register)
+const _Register = (props: IRegisterProps) =>
+  props.user ? (
+    <AlreadyLoggedIn></AlreadyLoggedIn>
+  ) : (
+    <Row>
+      <Col span={6} offset={9}>
+        <div style={{ paddingTop: '64px' }}>
+          <RegisterPage history={props.history}></RegisterPage>
+        </div>
+      </Col>
+    </Row>
+  )
+
+const mapStateToProps: (state: any) => any = state => {
+  return {
+    user: state.user.user
+  }
+}
+
+export const Register = compose(
+  withRouter,
+  connect(mapStateToProps)
+)(_Register) as any

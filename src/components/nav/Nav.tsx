@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
@@ -49,7 +49,7 @@ class Navigator extends React.Component<INavigatorProps> {
           <Link to="/">programming.in.th</Link>
         </Logo>
         <LeftMenu mode="horizontal" location={location} />
-        <RightMenu mode="horizontal" location={location} />
+        <RightMenu mode="horizontal" location={location} user={user} />
         <BarMenu icon="menu" onClick={this.showDrawer} size="large" />
         <Drawer
           title="Menu"
@@ -114,6 +114,7 @@ const Main = (props: IItem) => {
 }
 
 const Login = (props: IItem) => {
+  useEffect(() => console.log(props.user), [])
   return (
     <div className={props.className}>
       {props.user ? (
