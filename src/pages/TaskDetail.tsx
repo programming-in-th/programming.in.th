@@ -18,6 +18,7 @@ interface ITaskProps {
   match: any
   onInitialLoad: (id: string) => void
 }
+
 const Wrapper = styled.div`
   width: 100%;
   padding: 20px 3%;
@@ -40,6 +41,23 @@ const BlankComponent = (height: any) => {
   `
   return <BlankWrapper />
 }
+
+const StatementComponent = styled.div`
+  & table,
+  table tbody tr,
+  table tbody tr td,
+  table tbody tr th {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  & table tbody tr td {
+    font-family: consolas, 'courier new', courier, monospace;
+    width: 40%;
+    border: 1px solid gray;
+    padding: 6px;
+    vertical-align: top;
+  }
+`
 
 // const __html = require('https://raw.githubusercontent.com/programming-in-th/legacy_statement/master/2040.html');
 
@@ -84,7 +102,7 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
               <h1>{this.props.task.title}</h1>
               <p> time limit : {this.props.task.time_limit} second </p>
               <p> memory limit : {this.props.task.memory_limit} MB </p>
-              <div dangerouslySetInnerHTML={template} />
+              <StatementComponent dangerouslySetInnerHTML={template} />
             </Wrapper>
             <Wrapper style={{ height: '440px' }}>
               <SubmitPage problemID={this.props.match.params.id} />
