@@ -28,7 +28,7 @@ import { firebaseConfig } from './config'
 import { store } from './redux'
 
 import firebase from 'firebase'
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
@@ -56,6 +56,10 @@ const GlobalStyle = createGlobalStyle`
 
 const { Header, Content, Footer } = Layout
 
+const CustomLayout = styled(Layout)`
+  min-height: 100vh;
+`
+
 interface IRootProps {
   onInitialLoad: () => void
   user: 'LOADING' | firebase.User | null
@@ -76,7 +80,7 @@ class Root extends React.Component<IRootProps, {}> {
           <CustomSpin />
         ) : (
           <Router>
-            <Layout>
+            <CustomLayout>
               <GlobalStyle />
               <Header
                 style={{
@@ -116,7 +120,7 @@ class Root extends React.Component<IRootProps, {}> {
                 </Switch>
               </Content>
               <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
-            </Layout>
+            </CustomLayout>
           </Router>
         )}
       </React.Fragment>
