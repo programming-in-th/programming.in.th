@@ -3,6 +3,8 @@ import ReactMarkdown from 'react-markdown'
 import MathJax from 'react-mathjax'
 import RemarkMathPlugin from 'remark-math'
 
+import '../../assets/css/markdown_render.css'
+
 function MarkdownRender(props) {
   const newProps = {
     ...props,
