@@ -9,6 +9,8 @@ import { ITask } from '../redux/types/task'
 import { SubmitPage } from '../components/tasks/Submit'
 import { Row, Col } from 'antd'
 import styled from 'styled-components'
+import axios from 'axios'
+import { CustomSpin } from '../components/Spin'
 
 interface ITaskProps {
   task?: ITask
@@ -16,40 +18,73 @@ interface ITaskProps {
   match: any
   onInitialLoad: (id: string) => void
 }
+const Wrapper = styled.div`
+  width: 100%;
+  padding: 20px 3%;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  margin-top: 24px;
+  box-sizing: border-box;
+  background-color: white;
+`
 
 const BlankComponent = (height: any) => {
   const BlankWrapper = styled.div`
     width: 100%;
     ${height};
-    padding: 10px 20px;
+    padding: 20px 15%;
     box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
       0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-    margin-top: 20px;
+    margin-top: 24px;
     background-color: white;
   `
   return <BlankWrapper />
 }
 
+// const __html = require('https://raw.githubusercontent.com/programming-in-th/legacy_statement/master/2040.html');
+
 export class TaskDetailComponent extends React.Component<ITaskProps> {
+  state = {
+    problemStatement: ''
+  }
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.id)
+    this.setState({ problemStatement: '' })
+  }
+  loadStatement = () => {
+    if (!this.props.task) return
+    axios.get(this.props.task.url).then((res: any) => {
+      this.setState({ problemStatement: res.data })
+    })
   }
   render() {
-    return (
-      <Row gutter={16}>
-        <Col span={1} />
-        <Col span={16}>
-          <BlankComponent height="600px" />
-          <BlankComponent height="350px" />
-          {/* <SubmitPage problemID={this.props.match.params.id} /> */}
-        </Col>
-        <Col span={6}>
-          <BlankComponent height="300px" />
-          <BlankComponent height="250px" />
-        </Col>
-        <Col span={1} />
-      </Row>
-    )
+    const template = { __html: this.state.problemStatement }
+    if (this.props.task && this.state.problemStatement === '')
+      this.loadStatement()
+    if (this.state.problemStatement === '') return <CustomSpin />
+    if (this.props.task)
+      return (
+        <Row gutter={24}>
+          <Col span={1} />
+          <Col span={16}>
+            {/* <BlankComponent height="600px" /> */}
+            <Wrapper>
+              <h1>{this.props.task.title}</h1>
+              <p> time limit : {this.props.task.time_limit} second </p>
+              <p> memory limit : {this.props.task.memory_limit} MB </p>
+              <div dangerouslySetInnerHTML={template} />
+            </Wrapper>
+            <Wrapper style={{ height: '440px' }}>
+              <SubmitPage problemID={this.props.match.params.id} />
+            </Wrapper>
+          </Col>
+          <Col span={6}>
+            <BlankComponent height="300px" />
+            <BlankComponent height="250px" />
+          </Col>
+          <Col span={1} />
+        </Row>
+      )
   }
 }
 

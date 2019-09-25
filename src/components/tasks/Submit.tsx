@@ -8,7 +8,7 @@ import { UnControlled as CodeMirror } from 'react-codemirror2'
 import { Link } from 'react-router-dom'
 
 /* Material */
-import { Icon, Result, Button, Select } from 'antd'
+import { Row, Col, Icon, Result, Button, Select } from 'antd'
 
 import 'codemirror/lib/codemirror.css'
 
@@ -117,8 +117,33 @@ class SubmitComponent extends React.Component<ISubmitProps, any> {
             extra={[<Button onClick={this.props.reSubmit}>Resubmit</Button>]}
           />
         ) : (
-          <div>
+          <React.Fragment>
             <h1>Submit Code</h1>
+            <Row>
+              <Col span={6}>
+                <Select
+                  defaultValue={languageData[0][0]}
+                  style={{ width: 120 }}
+                  onChange={this.changeLanguage}
+                >
+                  {languageData.map((data: any) => (
+                    <Option key={data[0]}>{data[1]}</Option>
+                  ))}
+                </Select>
+              </Col>
+              <Col span={14} />
+              <Col span={4}>
+                <Select
+                  defaultValue={themeData[0][0]}
+                  style={{ width: 120 }}
+                  onChange={this.changeTheme}
+                >
+                  {themeData.map((data: any) => (
+                    <Option key={data[0]}>{data[1]}</Option>
+                  ))}
+                </Select>
+              </Col>
+            </Row>
             <CodeMirror
               options={{
                 mode: `${this.state.language}`,
@@ -130,24 +155,6 @@ class SubmitComponent extends React.Component<ISubmitProps, any> {
               }}
               onChange={this.changeEditor}
             />
-            <Select
-              defaultValue={languageData[0][0]}
-              style={{ width: 120 }}
-              onChange={this.changeLanguage}
-            >
-              {languageData.map((data: any) => (
-                <Option key={data[0]}>{data[1]}</Option>
-              ))}
-            </Select>
-            <Select
-              defaultValue={themeData[0][0]}
-              style={{ width: 120 }}
-              onChange={this.changeTheme}
-            >
-              {themeData.map((data: any) => (
-                <Option key={data[0]}>{data[1]}</Option>
-              ))}
-            </Select>
             <Button
               type="primary"
               onClick={this.submitCode}
@@ -155,7 +162,7 @@ class SubmitComponent extends React.Component<ISubmitProps, any> {
             >
               Submit
             </Button>
-          </div>
+          </React.Fragment>
         )}
       </React.Fragment>
     )
