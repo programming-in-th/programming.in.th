@@ -70,3 +70,18 @@ div {
 .th {
   font-family: Sarabun;
 }
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+td {
+  font-family: consolas, 'courier new', courier, monospace;
+  width: 40%;
+  border: 1px solid gray;
+  padding: 6px;
+  vertical-align: top;
+}
