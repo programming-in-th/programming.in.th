@@ -78,7 +78,7 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
       return (
         <Row gutter={24}>
           <Col span={1} />
-          <Col span={16}>
+          <Col span={22}>
             {/* <BlankComponent height="600px" /> */}
             <Wrapper>
               <h1>{this.props.task.title}</h1>
@@ -90,10 +90,10 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
               <SubmitPage problemID={this.props.match.params.id} />
             </Wrapper>
           </Col>
-          <Col span={6}>
+          {/* <Col span={6}>
             <BlankComponent height="300px" />
             <BlankComponent height="250px" />
-          </Col>
+          </Col> */}
           <Col span={1} />
         </Row>
       )
