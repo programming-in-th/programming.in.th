@@ -68,6 +68,7 @@ class Root extends React.Component<IRootProps, {}> {
   componentDidMount() {
     this.props.onInitialLoad()
   }
+
   render() {
     return (
       <React.Fragment>

@@ -42,6 +42,10 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
     errorMessage: null
   }
 
+  setError = (msg: string) => {
+    this.setState({ errorMessage: msg })
+  }
+
   submitLogin = async (
     history: H.History,
     email: string,
@@ -67,10 +71,10 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
             } else history.length > 2 ? history.goBack() : history.replace('/')
         })
         .catch(error => {
-          this.setState({ errorMessage: error.message })
+          this.setError(error.message)
         })
     } catch (error) {
-      this.setState({ errorMessage: error.message })
+      this.setError(error.message)
     }
   }
 
@@ -111,7 +115,7 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
                   />
                 )}
                 {this.state.errorMessage ? (
-                  <i>{this.state.errorMessage}</i>
+                  <p>{this.state.errorMessage}</p>
                 ) : null}
               </Form.Item>
               <Form.Item>
@@ -127,17 +131,23 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
                   <StyledIcon
                     type="google"
                     theme="outlined"
-                    onClick={() => loginWithGmail(this.props.history)}
+                    onClick={() =>
+                      loginWithGmail(this.props.history, this.setError)
+                    }
                   />
                   <StyledIcon
                     type="facebook"
                     theme="outlined"
-                    onClick={() => loginWithFacebook(this.props.history)}
+                    onClick={() =>
+                      loginWithFacebook(this.props.history, this.setError)
+                    }
                   />
                   <StyledIcon
                     type="github"
                     theme="outlined"
-                    onClick={() => loginWithGithub(this.props.history)}
+                    onClick={() =>
+                      loginWithGithub(this.props.history, this.setError)
+                    }
                   />
                   <Register>
                     Or <Link to="/register">register now!</Link>
@@ -154,7 +164,10 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
 
 export const LoginPage = Form.create({ name: 'login' })(Login) as any
 
-const loginWithGmail = async (history: H.History) => {
+const loginWithGmail = async (
+  history: H.History,
+  setError: (msg: string) => void
+) => {
   const provider = new firebase.auth.GoogleAuthProvider()
   try {
     await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
@@ -166,16 +179,19 @@ const loginWithGmail = async (history: H.History) => {
         history.length > 2 ? history.goBack() : history.replace('/')
       })
       .catch((error: any) => {
-        const { code, message } = error
-        console.log(`${code}: ${message}`)
+        const { _, message } = error
+        setError(message)
       })
   } catch (error) {
-    const { code, message } = error
-    console.log(`${code}: ${message}`)
+    const { _, message } = error
+    setError(message)
   }
 }
 
-const loginWithFacebook = async (history: H.History) => {
+const loginWithFacebook = async (
+  history: H.History,
+  setError: (msg: string) => void
+) => {
   const provider = new firebase.auth.FacebookAuthProvider()
 
   try {
@@ -188,16 +204,19 @@ const loginWithFacebook = async (history: H.History) => {
         history.length > 2 ? history.goBack() : history.replace('/')
       })
       .catch((error: any) => {
-        const { code, message } = error
-        console.log(`${code}: ${message}`)
+        const { _, message } = error
+        setError(message)
       })
   } catch (error) {
-    const { code, message } = error
-    console.log(`${code}: ${message}`)
+    const { _, message } = error
+    setError(message)
   }
 }
 
-const loginWithGithub = async (history: H.History) => {
+const loginWithGithub = async (
+  history: H.History,
+  setError: (msg: string) => void
+) => {
   const provider = new firebase.auth.GithubAuthProvider()
 
   try {
@@ -211,10 +230,10 @@ const loginWithGithub = async (history: H.History) => {
       })
       .catch((error: any) => {
         const { code, message } = error
-        console.log(`${code}: ${message}`)
+        setError(message)
       })
   } catch (error) {
     const { code, message } = error
-    console.log(`${code}: ${message}`)
+    setError(message)
   }
 }
