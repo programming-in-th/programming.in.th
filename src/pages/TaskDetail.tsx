@@ -45,7 +45,8 @@ const BlankComponent = (height: any) => {
 
 export class TaskDetailComponent extends React.Component<ITaskProps> {
   state = {
-    problemStatement: ''
+    problemStatement: '',
+    isInit: false
   }
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.id)
@@ -53,16 +54,27 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
   }
   loadStatement = () => {
     if (!this.props.task) return
+    console.log(this.props.task.url)
     axios.get(this.props.task.url).then((res: any) => {
+      console.log(res.data)
       this.setState({ problemStatement: res.data })
     })
   }
   render() {
     const template = { __html: this.state.problemStatement }
-    if (this.props.task && this.state.problemStatement === '')
+    if (this.props.status === 'LOADING' && this.state.isInit === false)
+      this.setState({ isInit: true })
+    if (
+      this.props.status === 'SUCCESS' &&
+      this.state.isInit &&
+      this.state.problemStatement === ''
+    )
       this.loadStatement()
-    if (this.state.problemStatement === '') return <CustomSpin />
-    if (this.props.task)
+    if (
+      this.props.task &&
+      this.props.status === 'SUCCESS' &&
+      this.state.problemStatement !== ''
+    )
       return (
         <Row gutter={24}>
           <Col span={1} />
@@ -85,10 +97,12 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
           <Col span={1} />
         </Row>
       )
+    return <CustomSpin />
   }
 }
 
 const mapStateToProps: (state: any) => any = state => {
+  console.log(state.tasks)
   return {
     task: state.tasks.currentTask,
     status: state.tasks.status
