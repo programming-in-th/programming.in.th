@@ -1,23 +1,19 @@
-/* React */
 import React from 'react'
+import { Row, Col, Icon, Result, Button, Select } from 'antd'
+import { UnControlled as CodeMirror } from 'react-codemirror2'
+
 import * as actionCreators from '../../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { connect } from 'react-redux'
 import { AnyAction } from 'redux'
-import { UnControlled as CodeMirror } from 'react-codemirror2'
 import { Link } from 'react-router-dom'
-
-/* Material */
-import { Row, Col, Icon, Result, Button, Select } from 'antd'
 
 import 'codemirror/lib/codemirror.css'
 
-// theme
 import 'codemirror/theme/monokai.css'
 import 'codemirror/theme/solarized.css'
 import 'codemirror/theme/material.css'
 
-// mode
 import 'codemirror/mode/clike/clike.js'
 import 'codemirror/mode/python/python.js'
 import 'codemirror/addon/selection/active-line.js'
@@ -72,7 +68,6 @@ class SubmitComponent extends React.Component<ISubmitProps, any> {
   }
   changeEditor = (editor: any, value: any, code: any) => {
     this.setState({ code: code })
-    console.log(this.state)
   }
   changeTheme = (value: string) => {
     this.setState({ theme: value })

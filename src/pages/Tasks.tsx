@@ -1,23 +1,15 @@
-/* React */
 import React from 'react'
-
-/* React Util */
-import { FormLabel, FormGroup, TextField } from '@material-ui/core'
-
-/* Redux */
-import { connect } from 'react-redux'
-import * as actionCreators from '../redux/actions/index'
-import { ITask } from '../redux/types/task'
-
-/* Static */
-import { ThunkDispatch } from 'redux-thunk'
-import { AnyAction } from 'redux'
 import H from 'history'
 import styled from 'styled-components'
+import { Row, Col, Table, Tag } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 
-import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
-import { Row, Col, Table, Tag } from 'antd'
+import { connect } from 'react-redux'
+import * as actionCreators from '../redux/actions/index'
+import { ThunkDispatch } from 'redux-thunk'
+import { AnyAction } from 'redux'
+
+import { ITask } from '../redux/types/task'
 import { CustomSpin } from '../components/Spin'
 
 const TableWrapper = styled.div`
@@ -112,7 +104,6 @@ class TasksListComponent extends React.Component<
 }
 
 const mapStateToProps: (state: any) => any = state => {
-  console.log(state)
   return {
     tags: state.tasks.tags,
     taskList: state.tasks.taskList,

@@ -72,9 +72,7 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
   }
   loadStatement = () => {
     if (!this.props.task) return
-    console.log(this.props.task.url)
     axios.get(this.props.task.url).then((res: any) => {
-      console.log(res.data)
       this.setState({ problemStatement: res.data })
     })
   }

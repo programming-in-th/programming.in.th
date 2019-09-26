@@ -1,8 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd'
+import firebase from 'firebase'
+import styled, { createGlobalStyle } from 'styled-components'
 
 import { Index } from './pages/Index'
 import { NotFound } from './pages/404'
@@ -14,11 +15,8 @@ import { SubmissionDetailPage } from './pages/SubmissionDetail'
 import { SettingPage } from './pages/Setting'
 import { Login } from './pages/Login'
 import { Register } from './pages/Register'
-
 import { Nav } from './components/nav/Nav'
 import { CustomSpin } from './components/Spin'
-
-import './assets/css/init.css'
 
 import { AnyAction } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
@@ -27,8 +25,7 @@ import * as actionCreators from './redux/actions/index'
 import { firebaseConfig } from './config'
 import { store } from './redux'
 
-import firebase from 'firebase'
-import styled, { createGlobalStyle } from 'styled-components'
+import './assets/css/init.css'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)

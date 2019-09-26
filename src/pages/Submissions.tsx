@@ -1,13 +1,14 @@
 import React from 'react'
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
-import { ISubmissions } from '../redux/types/submission'
 import { FormGroup, FormLabel, TextField } from '@material-ui/core'
+import H from 'history'
+import { Col, Row } from 'antd'
 
+import { ISubmissions } from '../redux/types/submission'
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
-import H from 'history'
+
 import { CustomSpin } from '../components/Spin'
-import { Col, Row } from 'antd'
 
 interface ISubmissionsComponentProps {
   onInitialLoad: () => void

@@ -1,8 +1,9 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { NotFound } from './404'
-
 import firebase from 'firebase/app'
+
+import { connect } from 'react-redux'
+
+import { NotFound } from './404'
 
 interface ISettingProps {
   user: firebase.User

@@ -1,11 +1,12 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-
-import { LoginPage } from '../components/auth/Login'
 import { Row, Col } from 'antd'
 import H from 'history'
+
 import { compose } from 'redux'
 import { connect } from 'react-redux'
+
+import { LoginPage } from '../components/auth/Login'
 import { AlreadyLoggedIn } from '../components/auth/Already'
 
 interface ILoginProps {

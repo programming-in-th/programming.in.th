@@ -1,13 +1,13 @@
 import React from 'react'
-
 import { Layout, Menu, Icon, Drawer } from 'antd'
-import { LearnContent } from '../components/learn/LearnContent'
 import styled from 'styled-components'
+import { NavLink } from 'react-router-dom'
+
+import { LearnContent } from '../components/learn/LearnContent'
 
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 import { INode } from '../redux/types/learn'
-import { NavLink } from 'react-router-dom'
 import { CustomSpin } from '../components/Spin'
 
 const { SubMenu } = Menu
@@ -188,7 +188,6 @@ class Learn extends React.Component<any> {
 }
 
 const mapStateToProps = (state: any) => {
-  console.log(state)
   return {
     menu: state.learn.menu,
     menuStatus: state.learn.menuStatus,

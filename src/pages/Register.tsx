@@ -1,11 +1,12 @@
 import React from 'react'
 import { withRouter } from 'react-router'
-
-import { RegisterPage } from '../components/auth/Register'
 import { Row, Col } from 'antd'
 import H from 'history'
+
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+
+import { RegisterPage } from '../components/auth/Register'
 import { AlreadyLoggedIn } from '../components/auth/Already'
 
 interface IRegisterProps {

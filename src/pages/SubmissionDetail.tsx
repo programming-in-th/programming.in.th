@@ -1,16 +1,13 @@
-/* React */
 import React from 'react'
+import firebase from 'firebase'
 
-/* Redux */
 import { connect } from 'react-redux'
 import * as actionCreators from '../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 
-/* Material */
 import { CircularProgress, Button } from '@material-ui/core'
 
-/* Ace */
 import AceEditor from 'react-ace'
 import 'brace/mode/c_cpp'
 import 'brace/mode/java'
@@ -20,11 +17,7 @@ import 'brace/mode/pascal'
 import 'brace/mode/haskell'
 import 'brace/theme/monokai'
 
-/* Components */
 import SubmissionResponseDialog from '../components/tasks/SubmissionResponseDialog'
-
-/* Styles */
-import firebase from 'firebase'
 
 interface ISubmissionDetailComponentProps {
   onInitialLoad: (submission_id: string) => void
