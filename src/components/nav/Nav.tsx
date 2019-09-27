@@ -49,7 +49,7 @@ class Navigator extends React.Component<INavigatorProps> {
           <Link to="/">programming.in.th</Link>
         </Logo>
         <LeftMenu mode="horizontal" location={location} />
-        <RightMenu mode="horizontal" location={location} />
+        <RightMenu mode="horizontal" location={location} user={user} />
         <BarMenu icon="menu" onClick={this.showDrawer} size="large" />
         <Drawer
           title="Menu"

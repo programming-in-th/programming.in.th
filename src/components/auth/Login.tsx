@@ -68,7 +68,10 @@ class Login extends React.Component<ILoginProps & FormComponentProps, {}> {
             if (!currentUser.emailVerified) {
               firebase.auth().signOut()
               window.alert('Please Verify Your Email')
-            } else history.length > 2 ? history.goBack() : history.replace('/')
+            } else
+              this.props.history.length > 2
+                ? this.props.history.goBack()
+                : this.props.history.replace('/')
         })
         .catch(error => {
           this.setError(error.message)
