@@ -1,7 +1,7 @@
 import React from 'react'
 import H from 'history'
 import styled from 'styled-components'
-import { Row, Col, Table, Tag } from 'antd'
+import { Table, Tag } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 
 import { connect } from 'react-redux'
@@ -17,7 +17,7 @@ const TableWrapper = styled.div`
   margin-left: 5%;
   margin-bottom: 10px;
   margin-top: 20px;
-  padding: 10px 20px;
+  padding: 2%;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
   background-color: white;
@@ -94,6 +94,7 @@ class TasksListComponent extends React.Component<
               }
             }
           }}
+          scroll={{ x: 100 }}
           columns={columns}
           dataSource={this.props.taskList}
           loading={this.props.status === 'LOADING'}
