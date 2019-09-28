@@ -8,6 +8,8 @@ import { connect } from 'react-redux'
 import { AnyAction } from 'redux'
 import { Link } from 'react-router-dom'
 
+import { Upload } from '../tasks/FileUploader'
+
 import 'codemirror/lib/codemirror.css'
 
 import 'codemirror/theme/monokai.css'
@@ -23,15 +25,14 @@ import 'codemirror/addon/fold/brace-fold.js'
 import 'codemirror/addon/fold/indent-fold.js'
 
 const { Option } = Select
-// const responsive = `(max-width: 767px)`
 
 const languageData = [['text/x-csrc', 'C / C++'], ['python', 'Python']]
 
-type tplot = {
+type TPlot = {
   [key: string]: string
 }
 
-const mapLanguage: { [key: string]: string } = {
+const mapLanguage: TPlot = {
   'text/x-csrc': 'cpp',
   python: 'python'
 }
@@ -57,21 +58,39 @@ interface ISubmitProps {
   submissionResponse: number
 }
 
-class SubmitComponent extends React.Component<ISubmitProps, any> {
+interface ISubmitState {
+  language: string
+  theme: string
+  code: string
+}
+
+class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
   state = {
     language: 'text/x-csrc',
     theme: 'material',
     code: ''
   }
+
   changeLanguage = (value: string) => {
     this.setState({ language: value })
   }
-  changeEditor = (editor: any, value: any, code: any) => {
+
+  changeEditor = (
+    editor: CodeMirror.Editor,
+    value: CodeMirror.EditorChange,
+    code: string
+  ) => {
     this.setState({ code: code })
   }
+
+  updateCode = (code: string) => {
+    this.setState({ code: code })
+  }
+
   changeTheme = (value: string) => {
     this.setState({ theme: value })
   }
+
   submitCode = () => {
     const user = this.props.user
     if (!user) {
@@ -85,6 +104,7 @@ class SubmitComponent extends React.Component<ISubmitProps, any> {
       mapLanguage[this.state.language]
     )
   }
+
   render() {
     return (
       <React.Fragment>
@@ -137,6 +157,7 @@ class SubmitComponent extends React.Component<ISubmitProps, any> {
                     <Option key={data[0]}>{data[1]}</Option>
                   ))}
                 </Select>
+                <Upload updateCode={this.updateCode}></Upload>
               </Col>
             </Row>
             <CodeMirror
@@ -149,6 +170,7 @@ class SubmitComponent extends React.Component<ISubmitProps, any> {
                 lineWrapping: true
               }}
               onChange={this.changeEditor}
+              value={this.state.code}
             />
             <Button
               type="primary"
