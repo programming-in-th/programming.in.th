@@ -33,7 +33,20 @@ export const loadDetail = (submission_id: string) => {
         .httpsCallable('getDetailedSubmissionData')({
         submission_id: submission_id
       })
-      dispatch(receiveDetail(response.data))
+      const submission_data: ISubmissions = {
+        uid: response.data.metadata.uid,
+        submission_id: submission_id,
+        username: response.data.metadata.username,
+        problem_id: response.data.metadata.problem_id,
+        language: response.data.metadata.language,
+        status: response.data.metadata.status,
+        points: response.data.metadata.points,
+        time: response.data.metadata.time,
+        memory: response.data.metadata.memory,
+        timestamp: response.data.metadata.timestamp,
+        code: response.data.code
+      }
+      dispatch(receiveDetail(submission_data))
     } catch (error) {
       console.log(error)
     }
@@ -77,7 +90,7 @@ const requestDetail = () => {
 }
 
 export const RECEIVE_DETAIL = 'RECEIVE_DETAIL'
-const receiveDetail = (data: string) => {
+const receiveDetail = (data: ISubmissions) => {
   return {
     type: RECEIVE_DETAIL,
     detail: data

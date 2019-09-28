@@ -5,93 +5,77 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
+import { ISubmissions } from '../redux/types/submission'
+import { SubmitPage } from '../components/tasks/Submit'
+import { CustomSpin } from '../components/Spin'
+import styled from 'styled-components'
+import { Row, Col } from 'antd'
 
-import { CircularProgress, Button } from '@material-ui/core'
+const Wrapper = styled.div`
+  width: 100%;
+  padding: 20px 3%;
+  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  margin-top: 24px;
+  box-sizing: border-box;
+  background-color: white;
+`
 
-import AceEditor from 'react-ace'
-import 'brace/mode/c_cpp'
-import 'brace/mode/java'
-import 'brace/mode/python'
-import 'brace/mode/ruby'
-import 'brace/mode/pascal'
-import 'brace/mode/haskell'
-import 'brace/theme/monokai'
-
-import SubmissionResponseDialog from '../components/tasks/SubmissionResponseDialog'
-
-interface ISubmissionDetailComponentProps {
-  onInitialLoad: (submission_id: string) => void
-  detail: any
+interface ISubmissionDetail {
+  onInitialLoad: (id: string) => void
+  detail: ISubmissions
   match: any
-  submit: (
-    uid: string,
-    problem_id: string,
-    code: string,
-    language: string
-  ) => void
-  detailStatus: 'LOADING' | 'SUCCESS' | null
-  submissionResponse?: number
+  user: firebase.User
+  status: 'LOADING' | 'SUCCESS' | null
 }
 
-class SubmissionDetailComponent extends React.Component<
-  ISubmissionDetailComponentProps,
-  any
-> {
+class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.id)
+    setInterval(() => {
+      this.props.onInitialLoad(this.props.match.params.id)
+    }, 3000)
   }
-
+  state = {
+    step: 0
+  }
   render() {
-    const submitCode = () => {
-      const user = firebase.auth().currentUser
-      if (!user || user.uid !== this.props.detail.metadata.uid) {
-        alert('Unauthorized')
-        return
-      }
-      this.props.submit(
-        this.props.detail.metadata.uid,
-        this.props.detail.metadata.problem_id,
-        (this.refs.aceEditor as any).editor.getValue(),
-        this.props.detail.metadata.language
+    if (this.props.status === 'LOADING' && this.state.step === 0) {
+      this.setState({ step: 1 })
+    }
+    if (this.props.status === 'SUCCESS' && this.state.step === 1) {
+      this.setState({ step: 2 })
+    }
+    if (this.state.step === 2) {
+      return (
+        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+          <Col span={22} offset={1}>
+            <Wrapper>
+              <p>Problem ID: {this.props.detail.problem_id}</p>
+              <p>Status: {this.props.detail.status}</p>
+              <p>Points: {this.props.detail.points}</p>
+              <p>Memory: {this.props.detail.memory} KB</p>
+              <p>Time: {this.props.detail.time} second</p>
+              <p>User: {this.props.detail.username}</p>
+              <SubmitPage
+                problem_id={this.props.detail.problem_id}
+                code={this.props.detail.code}
+                canSubmit={this.props.user.uid === this.props.detail.uid}
+              />
+            </Wrapper>
+          </Col>
+        </Row>
       )
     }
-    return this.props.detailStatus === 'LOADING' ? (
-      <div id="loading">
-        <CircularProgress />
-      </div>
-    ) : (
-      <div>
-        <div
-        // className={styles.editor}
-        >
-          <AceEditor
-            ref="aceEditor"
-            mode={this.props.detail.metadata.language}
-            theme="monokai"
-            value={this.props.detail.code}
-            readOnly={
-              !firebase.auth().currentUser ||
-              firebase.auth().currentUser!.uid !==
-                this.props.detail.metadata.uid
-            }
-          />
-        </div>
-        <Button onClick={submitCode}>Submit</Button>
-        {this.props.submissionResponse === -1 ? (
-          <CircularProgress />
-        ) : this.props.submissionResponse ? (
-          <SubmissionResponseDialog status={this.props.submissionResponse} />
-        ) : null}
-      </div>
-    )
+    return <CustomSpin />
   }
 }
 
 const mapStateToProps: (state: any) => any = state => {
   return {
     detail: state.submissions.detail,
-    detailStatus: state.submissions.detailStatus,
-    submissionResponse: state.submissions.submissionResponse
+    status: state.submissions.detailStatus,
+    user: state.user.user
   }
 }
 
@@ -101,14 +85,6 @@ const mapDispatchToProps: (
   return {
     onInitialLoad: (submission_id: string) => {
       dispatch(actionCreators.loadDetail(submission_id))
-    },
-    submit: (
-      uid: string,
-      problem_id: string,
-      code: string,
-      language: string
-    ) => {
-      dispatch(actionCreators.makeSubmission(uid, problem_id, code, language))
     }
   }
 }
@@ -116,4 +92,4 @@ const mapDispatchToProps: (
 export const SubmissionDetailPage = connect(
   mapStateToProps,
   mapDispatchToProps
-)(SubmissionDetailComponent)
+)(SubmissionDetailComponent) as any

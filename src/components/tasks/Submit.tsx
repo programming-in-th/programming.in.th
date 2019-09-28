@@ -51,17 +51,19 @@ const themeData = [
 ]
 
 interface ISubmitProps {
-  problemID: string
+  problem_id: string
+  code: string
+  canSubmit: boolean
   errorSubmit: () => void
   reSubmit: () => void
   user: firebase.User
   submit: (
     uid: string,
-    problemID: string,
+    problem_id: string,
     code: string,
     language: string
   ) => void
-  UID: string
+  submission_uid: string
   submissionResponse: number
 }
 
@@ -78,6 +80,11 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
     code: ''
   }
 
+  componentDidMount() {
+    this.setState({ code: this.props.code })
+    this.props.reSubmit()
+  }
+
   changeLanguage = (value: string) => {
     this.setState({ language: value })
   }
@@ -87,7 +94,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
     value: CodeMirror.EditorChange,
     code: string
   ) => {
-    this.setState({ code: code })
+    this.updateCode(code)
   }
 
   updateCode = (code: string) => {
@@ -108,7 +115,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
 
     this.props.submit(
       user.uid,
-      this.props.problemID,
+      this.props.problem_id,
       this.state.code,
       mapLanguage[this.state.language]
     )
@@ -128,7 +135,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
             title="Submission Successful"
             status="success"
             extra={[
-              <Link to={'/submissions/' + this.props.UID}>
+              <Link to={'/submissions/' + this.props.submission_uid}>
                 <Button type="primary">View Submission</Button>
               </Link>,
               <Button onClick={this.props.reSubmit}>Resubmit</Button>
@@ -180,7 +187,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
               <Button
                 type="primary"
                 onClick={this.submitCode}
-                disabled={this.props.user ? false : true}
+                disabled={!this.props.canSubmit}
               >
                 Submit
               </Button>
@@ -195,7 +202,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
 const mapStateToProps: (state: any) => any = state => {
   return {
     submissionResponse: state.submissions.submissionResponse,
-    UID: state.submissions.submissionUID,
+    submission_uid: state.submissions.submission_uid,
     user: state.user.user
   }
 }
@@ -210,6 +217,7 @@ const mapDispatchToProps: (
       code: string,
       language: string
     ) => {
+      console.log(uid, problem_id, code, language)
       dispatch(actionCreators.makeSubmission(uid, problem_id, code, language))
     },
     reSubmit: () => dispatch(actionCreators.resubmitSubmission()),

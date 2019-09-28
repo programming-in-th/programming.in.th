@@ -16,6 +16,7 @@ interface ITaskProps {
   task?: ITask
   status: string
   match: any
+  user: firebase.User
   onInitialLoad: (id: string) => void
 }
 
@@ -111,7 +112,10 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
           <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
             <Col span={22} offset={1}>
               <Wrapper style={{ height: '440px' }}>
-                <SubmitPage problemID={this.props.match.params.id} />
+                <SubmitPage
+                  problem_id={this.props.match.params.id}
+                  canSubmit={this.props.user}
+                />
               </Wrapper>
             </Col>
           </Row>
@@ -127,7 +131,8 @@ const mapStateToProps: (state: any) => any = state => {
   console.log(state.tasks)
   return {
     task: state.tasks.currentTask,
-    status: state.tasks.status
+    status: state.tasks.status,
+    user: state.user.user
   }
 }
 
