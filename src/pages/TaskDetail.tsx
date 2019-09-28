@@ -59,60 +59,66 @@ const StatementComponent = styled.div`
   }
 `
 
-// const __html = require('https://raw.githubusercontent.com/programming-in-th/legacy_statement/master/2040.html');
-
 export class TaskDetailComponent extends React.Component<ITaskProps> {
   state = {
     problemStatement: '',
     isInit: false
   }
+
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.id)
     this.setState({ problemStatement: '' })
   }
+
   loadStatement = () => {
     if (!this.props.task) return
     axios.get(this.props.task.url).then((res: any) => {
       this.setState({ problemStatement: res.data })
     })
   }
+
   render() {
     const template = { __html: this.state.problemStatement }
-    if (this.props.status === 'LOADING' && this.state.isInit === false)
+    if (this.props.status === 'LOADING' && this.state.isInit === false) {
       this.setState({ isInit: true })
+    }
+
     if (
       this.props.status === 'SUCCESS' &&
       this.state.isInit &&
       this.state.problemStatement === ''
-    )
+    ) {
       this.loadStatement()
+    }
+
     if (
       this.props.task &&
       this.props.status === 'SUCCESS' &&
       this.state.problemStatement !== ''
-    )
+    ) {
       return (
-        <Row gutter={24}>
-          <Col span={1} />
-          <Col span={22}>
-            {/* <BlankComponent height="600px" /> */}
-            <Wrapper>
-              <h1>{this.props.task.title}</h1>
-              <p> time limit : {this.props.task.time_limit} second </p>
-              <p> memory limit : {this.props.task.memory_limit} MB </p>
-              <StatementComponent dangerouslySetInnerHTML={template} />
-            </Wrapper>
-            <Wrapper style={{ height: '440px' }}>
-              <SubmitPage problemID={this.props.match.params.id} />
-            </Wrapper>
-          </Col>
-          {/* <Col span={6}>
-            <BlankComponent height="300px" />
-            <BlankComponent height="250px" />
-          </Col> */}
-          <Col span={1} />
-        </Row>
+        <div>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col span={22} offset={1}>
+              <Wrapper>
+                <h1>{this.props.task.title}</h1>
+                <p> Time Limit : {this.props.task.time_limit} second(s)</p>
+                <p> Memory Limit : {this.props.task.memory_limit} MB(s)</p>
+                <StatementComponent dangerouslySetInnerHTML={template} />
+              </Wrapper>
+            </Col>
+          </Row>
+          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
+            <Col span={22} offset={1}>
+              <Wrapper style={{ height: '440px' }}>
+                <SubmitPage problemID={this.props.match.params.id} />
+              </Wrapper>
+            </Col>
+          </Row>
+        </div>
       )
+    }
+
     return <CustomSpin />
   }
 }

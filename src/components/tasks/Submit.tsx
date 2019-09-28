@@ -1,6 +1,7 @@
 import React from 'react'
-import { Row, Col, Icon, Result, Button, Select } from 'antd'
+import { Row, Icon, Result, Button, Select } from 'antd'
 import { UnControlled as CodeMirror } from 'react-codemirror2'
+import styled from 'styled-components'
 
 import * as actionCreators from '../../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
@@ -11,11 +12,9 @@ import { Link } from 'react-router-dom'
 import { Upload } from '../tasks/FileUploader'
 
 import 'codemirror/lib/codemirror.css'
-
 import 'codemirror/theme/monokai.css'
 import 'codemirror/theme/solarized.css'
 import 'codemirror/theme/material.css'
-
 import 'codemirror/mode/clike/clike.js'
 import 'codemirror/mode/python/python.js'
 import 'codemirror/addon/selection/active-line.js'
@@ -23,6 +22,14 @@ import 'codemirror/addon/fold/foldgutter.css'
 import 'codemirror/addon/fold/foldgutter.js'
 import 'codemirror/addon/fold/brace-fold.js'
 import 'codemirror/addon/fold/indent-fold.js'
+
+const CustomCodeMirror = styled(CodeMirror)`
+  font-family: Fira Code !important;
+
+  span {
+    font-family: Fira Code !important;
+  }
+`
 
 const { Option } = Select
 
@@ -92,11 +99,13 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
   }
 
   submitCode = () => {
-    const user = this.props.user
+    const { user } = this.props
+
     if (!user) {
       this.props.errorSubmit()
       return
     }
+
     this.props.submit(
       user.uid,
       this.props.problemID,
@@ -135,50 +144,47 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
           <React.Fragment>
             <h1>Submit Code</h1>
             <Row>
-              <Col span={6}>
-                <Select
-                  defaultValue={languageData[0][0]}
-                  style={{ width: 120 }}
-                  onChange={this.changeLanguage}
-                >
-                  {languageData.map((data: any) => (
-                    <Option key={data[0]}>{data[1]}</Option>
-                  ))}
-                </Select>
-              </Col>
-              <Col span={14} />
-              <Col span={4}>
-                <Select
-                  defaultValue={themeData[0][0]}
-                  style={{ width: 120 }}
-                  onChange={this.changeTheme}
-                >
-                  {themeData.map((data: any) => (
-                    <Option key={data[0]}>{data[1]}</Option>
-                  ))}
-                </Select>
-                <Upload updateCode={this.updateCode}></Upload>
-              </Col>
+              <Select
+                defaultValue={languageData[0][0]}
+                style={{ width: 120 }}
+                onChange={this.changeLanguage}
+              >
+                {languageData.map((data: any) => (
+                  <Option key={data[0]}>{data[1]}</Option>
+                ))}
+              </Select>
+              <Select
+                defaultValue={themeData[0][0]}
+                style={{ width: 120 }}
+                onChange={this.changeTheme}
+              >
+                {themeData.map((data: any) => (
+                  <Option key={data[0]}>{data[1]}</Option>
+                ))}
+              </Select>
+              <Upload updateCode={this.updateCode}></Upload>
             </Row>
-            <CodeMirror
-              options={{
-                mode: `${this.state.language}`,
-                theme: `${this.state.theme}`,
-                lineNumbers: true,
-                foldGutter: true,
-                gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-                lineWrapping: true
-              }}
-              onChange={this.changeEditor}
-              value={this.state.code}
-            />
-            <Button
-              type="primary"
-              onClick={this.submitCode}
-              disabled={this.props.user ? false : true}
-            >
-              Submit
-            </Button>
+            <Row>
+              <CustomCodeMirror
+                options={{
+                  mode: `${this.state.language}`,
+                  theme: `${this.state.theme}`,
+                  lineNumbers: true,
+                  foldGutter: true,
+                  gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+                  lineWrapping: true
+                }}
+                onChange={this.changeEditor}
+                value={this.state.code}
+              />
+              <Button
+                type="primary"
+                onClick={this.submitCode}
+                disabled={this.props.user ? false : true}
+              >
+                Submit
+              </Button>
+            </Row>
           </React.Fragment>
         )}
       </React.Fragment>

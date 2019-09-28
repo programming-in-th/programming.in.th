@@ -25,7 +25,7 @@ export const Upload: React.FunctionComponent<IUploaderProps> = (
     }}
   >
     <Button>
-      <Icon type="upload" />
+      <Icon type="upload" /> Upload
     </Button>
   </AntDUpload>
 )
