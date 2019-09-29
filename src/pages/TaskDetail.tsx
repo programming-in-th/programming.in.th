@@ -128,7 +128,6 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
 }
 
 const mapStateToProps: (state: any) => any = state => {
-  console.log(state.tasks)
   return {
     task: state.tasks.currentTask,
     status: state.tasks.status,
