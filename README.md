@@ -1,4 +1,4 @@
-# programming.in.th [![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components) [![DeepScan grade](https://deepscan.io/api/teams/4940/projects/6738/branches/57818/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=4940&pid=6738&bid=57818) [![CircleCI](https://circleci.com/gh/programming-in-th/programming.in.th.svg?style=svg)](https://circleci.com/gh/programming-in-th/programming.in.th)
+# programming.in.th [![style: styled-components](https://img.shields.io/badge/style-%F0%9F%92%85%20styled--components-orange.svg?colorB=daa357&colorA=db748e)](https://github.com/styled-components/styled-components) [![DeepScan grade](https://deepscan.io/api/teams/4940/projects/6738/branches/57818/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=4940&pid=6738&bid=57818) 
 
 ## What is programming.in.th
 
