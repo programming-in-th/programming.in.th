@@ -1,20 +1,25 @@
 import React from 'react'
-import ReactMarkdown from 'react-markdown'
+import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown'
 import MathJax from 'react-mathjax'
 import RemarkMathPlugin from 'remark-math'
 
 import '../../assets/css/markdown_render.css'
 
-function MarkdownRender(props) {
+interface ICustomProps {}
+
+type Props = ReactMarkdownProps & ICustomProps
+
+function MarkdownRender(props: Props) {
   const newProps = {
     ...props,
     plugins: [RemarkMathPlugin],
     renderers: {
       ...props.renderers,
-      math: props => <MathJax.Node formula={props.value} />,
-      inlineMath: props => <MathJax.Node inline formula={props.value} />
+      math: (props: any) => <MathJax.Node formula={props.value} />,
+      inlineMath: (props: any) => <MathJax.Node inline formula={props.value} />
     }
   }
+
   return (
     <MathJax.Provider input="tex">
       <ReactMarkdown {...newProps} />
