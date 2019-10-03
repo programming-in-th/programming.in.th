@@ -43,13 +43,9 @@
   "devDependencies": {
     "@types/node": "12.7.5",
     "@types/react": "16.9.4",
-    "@types/react-dom": "16.9.0",
     "@types/react-dom": "16.9.1",
     "@types/react-redux": "^7.1.4",
-    "@types/react-router-dom": "^4.3.5",
-
     "@types/react-router-dom": "^5.1.0",
-
     "@types/styled-components": "^4.1.19",
     "firebase-tools": "^7.3.2",
     "husky": "^3.0.7",
@@ -63,7 +59,7 @@
     "build": "react-app-rewired build",
     "now-build": "react-app-rewired build",
     "eject": "react-scripts eject",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css}\" "
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
   },
   "eslintConfig": {
     "extends": "react-app"
