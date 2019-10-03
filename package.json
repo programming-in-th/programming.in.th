@@ -59,7 +59,7 @@
     "build": "react-app-rewired build",
     "now-build": "react-app-rewired build",
     "eject": "react-scripts eject",
-    "format": "prettier --write \"src/**/*.{ts,tsx,css}\" "
+    "format": "prettier --write \"src/**/*.{ts,tsx,css}\""
   },
   "eslintConfig": {
     "extends": "react-app"
