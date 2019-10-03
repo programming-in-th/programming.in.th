@@ -2,7 +2,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { IAppState } from '..'
 import { ISubmissions } from '../types/submission'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 export const loadSubmissionsList = () => {
   return async (

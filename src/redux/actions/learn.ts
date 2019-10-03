@@ -2,7 +2,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { IAppState } from '..'
 import { INode } from '../types/learn'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import axios from 'axios'
 
 export const loadMenu = (article_id: string) => {
