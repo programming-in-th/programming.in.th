@@ -182,11 +182,11 @@ const loginWithGmail = async (
         history.length > 2 ? history.goBack() : history.replace('/')
       })
       .catch((error: any) => {
-        const { _, message } = error
+        const { message } = error
         setError(message)
       })
   } catch (error) {
-    const { _, message } = error
+    const { message } = error
     setError(message)
   }
 }
@@ -207,11 +207,11 @@ const loginWithFacebook = async (
         history.length > 2 ? history.goBack() : history.replace('/')
       })
       .catch((error: any) => {
-        const { _, message } = error
+        const { message } = error
         setError(message)
       })
   } catch (error) {
-    const { _, message } = error
+    const { message } = error
     setError(message)
   }
 }
