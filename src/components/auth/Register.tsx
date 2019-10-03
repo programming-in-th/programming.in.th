@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import { StyledCard, StyledForm, Others } from './Style'
 
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import 'firebase/auth'
 
 import { FormComponentProps } from 'antd/lib/form/Form'

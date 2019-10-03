@@ -7,8 +7,9 @@ class Learn extends React.Component<any> {
     return this.props.currentContentStatus !== 'SUCCESS' ? (
       <CustomSpin />
     ) : (
-      this.props.currentContent.map((snippet: string) => {
-        return <MarkdownRender source={snippet} key={snippet} />
+      this.props.currentContent.map((snippet: string, index: number) => {
+        // Keys has to be unique. Switch to index key.
+        return <MarkdownRender key={index} source={snippet} />
       })
     )
   }

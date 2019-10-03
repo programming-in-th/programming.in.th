@@ -2,7 +2,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { ITask } from '../types/task'
 import { IAppState } from '..'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 export const LOAD_TAGS = 'LOAD_TAGS'
 export const loadTags = () => {

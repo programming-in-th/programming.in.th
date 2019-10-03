@@ -56,7 +56,10 @@ div {
 }
 
 * {
-  font-family: Roboto;
+  /* This will automatic fallback Thai font which Roboto can't handle. In other words, this will support Thai font by default. */
+  font-family: Roboto, Sarabun, -apple-system, BlinkMacSystemFont, 'Segoe UI',
+    Helvetica, arial, sans-serif;
+  font-display: swap;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent !important;
 }

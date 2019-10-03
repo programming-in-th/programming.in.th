@@ -3,7 +3,7 @@ import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd'
 import styled from 'styled-components'
 import { StyledCard, StyledForm, StyledIcon, Others } from './Style'
 
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 import { Link } from 'react-router-dom'
 import 'firebase/auth'
 
