@@ -232,11 +232,11 @@ const loginWithGithub = async (
         history.length > 2 ? history.goBack() : history.replace('/')
       })
       .catch((error: any) => {
-        const { code, message } = error
+        const { message } = error
         setError(message)
       })
   } catch (error) {
-    const { code, message } = error
+    const { message } = error
     setError(message)
   }
 }

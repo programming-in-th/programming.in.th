@@ -1,4 +1,7 @@
 import React from 'react'
+import { Row, Col } from 'antd'
+import styled from 'styled-components'
+import axios from 'axios'
 
 import { connect } from 'react-redux'
 import * as actionCreators from '../redux/actions/index'
@@ -7,9 +10,6 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { ITask } from '../redux/types/task'
 import { SubmitPage } from '../components/tasks/Submit'
-import { Row, Col } from 'antd'
-import styled from 'styled-components'
-import axios from 'axios'
 import { CustomSpin } from '../components/Spin'
 
 interface ITaskProps {
@@ -30,19 +30,6 @@ const Wrapper = styled.div`
   background-color: white;
 `
 
-const BlankComponent = (height: any) => {
-  const BlankWrapper = styled.div`
-    width: 100%;
-    ${height};
-    padding: 20px 15%;
-    box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-    margin-top: 24px;
-    background-color: white;
-  `
-  return <BlankWrapper />
-}
-
 const StatementComponent = styled.div`
   & table,
   table tbody tr,
@@ -62,13 +49,22 @@ const StatementComponent = styled.div`
 
 export class TaskDetailComponent extends React.Component<ITaskProps> {
   state = {
-    problemStatement: '',
-    isInit: false
+    problemStatement: ''
   }
 
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.id)
-    this.setState({ problemStatement: '' })
+  }
+
+  componentDidUpdate(prevProps: ITaskProps, prevState: {}) {
+    if (prevProps.status !== this.props.status) {
+      if (
+        this.props.status === 'SUCCESS' &&
+        this.state.problemStatement === ''
+      ) {
+        this.loadStatement()
+      }
+    }
   }
 
   loadStatement = () => {
@@ -80,17 +76,6 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
 
   render() {
     const template = { __html: this.state.problemStatement }
-    if (this.props.status === 'LOADING' && this.state.isInit === false) {
-      this.setState({ isInit: true })
-    }
-
-    if (
-      this.props.status === 'SUCCESS' &&
-      this.state.isInit &&
-      this.state.problemStatement === ''
-    ) {
-      this.loadStatement()
-    }
 
     if (
       this.props.task &&

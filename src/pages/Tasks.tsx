@@ -10,7 +10,6 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 
 import { ITask } from '../redux/types/task'
-import { CustomSpin } from '../components/Spin'
 
 const TableWrapper = styled.div`
   width: 90%;

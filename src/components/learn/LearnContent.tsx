@@ -8,7 +8,7 @@ class Learn extends React.Component<any> {
       <CustomSpin />
     ) : (
       this.props.currentContent.map((snippet: string) => {
-        return <MarkdownRender source={snippet} />
+        return <MarkdownRender source={snippet} key={snippet} />
       })
     )
   }

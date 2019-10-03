@@ -1,5 +1,6 @@
 import React from 'react'
 import firebase from 'firebase'
+import styled from 'styled-components'
 
 import { connect } from 'react-redux'
 import * as actionCreators from '../redux/actions/index'
@@ -7,7 +8,6 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { ISubmissions } from '../redux/types/submission'
 import { CustomSpin } from '../components/Spin'
-import styled from 'styled-components'
 
 import { Code } from '../components/Code'
 import { Row, Col, Button, Icon, Select } from 'antd'
@@ -47,18 +47,22 @@ interface ISubmissionDetail {
 }
 
 class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
-  updateProps = () => {
-    this.props.onInitialLoad(this.props.match.params.id)
-  }
-  componentDidMount() {
-    this.updateProps()
-  }
   state = {
     theme: 'material'
   }
+
+  updateProps = () => {
+    this.props.onInitialLoad(this.props.match.params.id)
+  }
+
+  componentDidMount() {
+    this.updateProps()
+  }
+
   changeTheme = (value: string) => {
     this.setState({ theme: value })
   }
+
   render() {
     if (this.props.status === 'SUCCESS') {
       return (
