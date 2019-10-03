@@ -1,39 +1,18 @@
 import React from 'react'
 import firebase from 'firebase'
 
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/monokai.css'
-import 'codemirror/theme/solarized.css'
-import 'codemirror/theme/material.css'
-import 'codemirror/mode/clike/clike.js'
-import 'codemirror/mode/python/python.js'
-import 'codemirror/addon/selection/active-line.js'
-import 'codemirror/addon/fold/foldgutter.css'
-import 'codemirror/addon/fold/foldgutter.js'
-import 'codemirror/addon/fold/brace-fold.js'
-import 'codemirror/addon/fold/indent-fold.js'
-
 import { connect } from 'react-redux'
 import * as actionCreators from '../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { ISubmissions } from '../redux/types/submission'
-import { SubmitPage } from '../components/tasks/Submit'
 import { CustomSpin } from '../components/Spin'
 import styled from 'styled-components'
 
+import { Code } from '../components/Code'
 import { Row, Col, Button, Icon, Select } from 'antd'
-import { UnControlled as CodeMirror } from 'react-codemirror2'
 
 const { Option } = Select
-
-const CustomCodeMirror = styled(CodeMirror)`
-  font-family: Fira Code !important;
-
-  span {
-    font-family: Fira Code !important;
-  }
-`
 
 const Wrapper = styled.div`
   width: 100%;
@@ -109,7 +88,7 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
                   <Option key={data[0]}>{data[1]}</Option>
                 ))}
               </Select>
-              <CustomCodeMirror
+              <Code
                 options={{
                   mode: `${mapLanguage[this.props.detail.language]}`,
                   theme: `${this.state.theme}`,

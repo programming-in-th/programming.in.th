@@ -1,7 +1,5 @@
 import React from 'react'
 import { Row, Icon, Result, Button, Select } from 'antd'
-import { UnControlled as CodeMirror } from 'react-codemirror2'
-import styled from 'styled-components'
 
 import * as actionCreators from '../../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
@@ -11,25 +9,7 @@ import { Link } from 'react-router-dom'
 
 import { Upload } from '../tasks/FileUploader'
 
-import 'codemirror/lib/codemirror.css'
-import 'codemirror/theme/monokai.css'
-import 'codemirror/theme/solarized.css'
-import 'codemirror/theme/material.css'
-import 'codemirror/mode/clike/clike.js'
-import 'codemirror/mode/python/python.js'
-import 'codemirror/addon/selection/active-line.js'
-import 'codemirror/addon/fold/foldgutter.css'
-import 'codemirror/addon/fold/foldgutter.js'
-import 'codemirror/addon/fold/brace-fold.js'
-import 'codemirror/addon/fold/indent-fold.js'
-
-const CustomCodeMirror = styled(CodeMirror)`
-  font-family: Fira Code !important;
-
-  span {
-    font-family: Fira Code !important;
-  }
-`
+import { Code } from '../Code'
 
 const { Option } = Select
 
@@ -172,7 +152,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
               <Upload updateCode={this.updateCode}></Upload>
             </Row>
             <Row>
-              <CustomCodeMirror
+              <Code
                 options={{
                   mode: `${this.state.language}`,
                   theme: `${this.state.theme}`,
