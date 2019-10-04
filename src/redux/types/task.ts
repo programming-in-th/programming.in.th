@@ -1,4 +1,6 @@
 export interface ITaskState {
+  readonly currentPage: number
+  readonly currentPageSize: number
   readonly currentTask: ITask | null
   readonly taskList: ReadonlyArray<ITask>
   readonly tags: ReadonlyArray<String>

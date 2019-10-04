@@ -1,7 +1,7 @@
 import React from 'react'
 import H from 'history'
 import styled from 'styled-components'
-import { Table, Tag } from 'antd'
+import { Table, Tag, Button } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 
 import { connect } from 'react-redux'
@@ -26,6 +26,9 @@ interface ITasksPageProps {
   taskList: ITask[]
   status: string
   history: H.History
+  currentPage: number
+  currentPageSize: number
+  setPage: (page: number, pageSize: number) => void
   onInitialLoad: () => void
 }
 
@@ -43,62 +46,86 @@ class TasksListComponent extends React.Component<
     this.props.onInitialLoad()
   }
 
+  columns = [
+    {
+      title: 'Problem ID',
+      dataIndex: 'problem_id',
+      defaultSortOrder: ['descend', 'ascend'],
+      sorter: (a: ITask, b: ITask) => b.problem_id.length - a.problem_id.length
+    },
+    {
+      title: 'Problem',
+      dataIndex: 'title',
+      defaultSortOrder: ['descend', 'ascend'],
+      sorter: (a: ITask, b: ITask) => b.title.length - a.title.length
+    },
+    {
+      title: 'Difficulty',
+      dataIndex: 'difficulty',
+      defaultSortOrder: ['descend', 'ascend'],
+      sorter: (a: ITask, b: ITask) => b.difficulty - a.difficulty
+    },
+    {
+      title: 'Tags',
+      dataIndex: 'tags',
+      render: (tags: Array<string>) => (
+        <span>
+          {tags.map((tag: string) => (
+            <Tag color="blue" key={tag}>
+              {tag}
+            </Tag>
+          ))}
+        </span>
+      )
+    }
+    // {
+    //   title: 'Users solved',
+    //   dataIndex: 'solve_count',
+    //   defaultSortOrder: ['descend', 'ascend'],
+    //   sorter: (a: ITask, b: ITask) => a.solve_count < b.solve_count,
+    // }
+  ] as ColumnProps<{}>[]
+
+  CustomPagination = {
+    showQuickJumper: true,
+    showSizeChanger: true,
+    defaultCurrent: this.props.currentPage,
+    defaultPageSize: this.props.currentPageSize,
+    onChange: (page: number, pageSize: number | undefined) => {
+      this.props.setPage(page, pageSize ? pageSize : 10)
+    },
+    onShowSizeChange: (page: number, pageSize: number | undefined) => {
+      this.props.setPage(page, pageSize ? pageSize : 10)
+    }
+  }
+
   render() {
-    const columns = [
-      {
-        title: 'Problem ID',
-        dataIndex: 'problem_id',
-        defaultSortOrder: ['descend', 'ascend'],
-        sorter: (a: any, b: any) => b.problem_id.length - a.problem_id.length
-      },
-      {
-        title: 'Problem',
-        dataIndex: 'title',
-        defaultSortOrder: ['descend', 'ascend'],
-        sorter: (a: any, b: any) => b.title.length - a.title.length
-      },
-      {
-        title: 'Difficulty',
-        dataIndex: 'difficulty',
-        defaultSortOrder: ['descend', 'ascend'],
-        sorter: (a: any, b: any) => b.difficulty - a.difficulty
-      },
-      {
-        title: 'Tags',
-        dataIndex: 'tags',
-        render: (tags: Array<string>) => (
-          <span>
-            {tags.map((tag: string) => (
-              <Tag color="blue" key={tag}>
-                {tag}
-              </Tag>
-            ))}
-          </span>
-        )
-      }
-      // {
-      //   title: 'Users solved',
-      //   dataIndex: 'solve_count',
-      //   defaultSortOrder: ['descend', 'ascend'],
-      //   sorter: (a: ITask, b: ITask) => a.solve_count < b.solve_count,
-      // }
-    ] as ColumnProps<{}>[]
     return (
-      <TableWrapper>
-        <Table
-          onRow={(record: any) => {
-            return {
-              onClick: () => {
-                this.props.history.push('/tasks/' + record.problem_id)
-              }
-            }
+      <React.Fragment>
+        <Button
+          onClick={() => {
+            console.log(this.props.currentPage)
           }}
-          scroll={{ x: 100 }}
-          columns={columns}
-          dataSource={this.props.taskList}
-          loading={this.props.status === 'LOADING'}
-        />
-      </TableWrapper>
+        >
+          Click!
+        </Button>
+        <TableWrapper>
+          <Table
+            onRow={(record: any) => {
+              return {
+                onClick: () => {
+                  this.props.history.push('/tasks/' + record.problem_id)
+                }
+              }
+            }}
+            scroll={{ x: 100 }}
+            columns={this.columns}
+            dataSource={this.props.taskList}
+            loading={this.props.status === 'LOADING'}
+            pagination={this.CustomPagination}
+          />
+        </TableWrapper>
+      </React.Fragment>
     )
   }
 }
@@ -107,7 +134,9 @@ const mapStateToProps: (state: any) => any = state => {
   return {
     tags: state.tasks.tags,
     taskList: state.tasks.taskList,
-    status: state.tasks.status
+    status: state.tasks.status,
+    currentPage: state.tasks.currentPage,
+    currentPageSize: state.tasks.currentPageSize
   }
 }
 
@@ -116,8 +145,10 @@ const mapDispatchToProps: (
 ) => any = dispatch => {
   return {
     onInitialLoad: () => {
-      // TODO: load tags
       dispatch(actionCreators.loadTasksList(-1, -1, -1, []))
+    },
+    setPage: (page: number, pageSize: number) => {
+      dispatch(actionCreators.setPage(page, pageSize))
     }
   }
 }

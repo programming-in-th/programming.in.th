@@ -90,3 +90,18 @@ const receiveTask = (task: ITask | undefined) => {
     currentTask: task
   }
 }
+
+export const setPage = (page: number, pageSize: number) => {
+  return (dispatch: ThunkDispatch<IAppState, {}, AnyAction>) => {
+    dispatch(receivePage(page, pageSize))
+  }
+}
+
+export const RECEIVE_PAGE = 'RECEIVE_PAGE'
+const receivePage = (page: number, pageSize: number) => {
+  return {
+    type: RECEIVE_PAGE,
+    currentPage: page,
+    currentPageSize: pageSize
+  }
+}
