@@ -1,7 +1,7 @@
 import React from 'react'
 import H from 'history'
 import styled from 'styled-components'
-import { Table, Tag, Button } from 'antd'
+import { Table, Tag } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 
 import { connect } from 'react-redux'
@@ -102,13 +102,6 @@ class TasksListComponent extends React.Component<
   render() {
     return (
       <React.Fragment>
-        <Button
-          onClick={() => {
-            console.log(this.props.currentPage)
-          }}
-        >
-          Click!
-        </Button>
         <TableWrapper>
           <Table
             onRow={(record: any) => {
