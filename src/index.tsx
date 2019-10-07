@@ -1,7 +1,7 @@
 import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import { Layout, Icon } from 'antd'
+import { Layout } from 'antd'
 import firebase from 'firebase/app'
 import 'firebase/functions'
 import styled, { createGlobalStyle } from 'styled-components'
@@ -25,7 +25,7 @@ if (!firebase.apps.length) {
 
 function LazyComponent(Component: any) {
   return (props: any) => (
-    <Suspense fallback={<Icon type="loading" />}>
+    <Suspense fallback={<CustomSpin />}>
       <Component {...props} />
     </Suspense>
   )
