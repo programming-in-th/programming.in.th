@@ -145,9 +145,6 @@ interface IRootProps {
   onInitialLoad: () => void
   resetCurrentSubmissionUID: () => void
   user: 'LOADING' | firebase.User | null
-  taskStatus: any
-  submissionsListStatus: any
-  submissionDetailStatus: any
   currentSubmissionUID: string
 }
 
@@ -235,9 +232,6 @@ class Root extends React.Component<IRootProps, {}> {
 const mapStateToProps: (state: any) => any = state => {
   return {
     user: state.user.user,
-    taskStatus: state.tasks.status,
-    submissionsListStatus: state.submissions.submissionsListStatus,
-    submissionDetailStatus: state.submissions.detailStatus,
     currentSubmissionUID: state.submissions.currentSubmissionUID
   }
 }

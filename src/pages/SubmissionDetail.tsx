@@ -1,16 +1,15 @@
 import React from 'react'
-import firebase from 'firebase/app'
 import styled from 'styled-components'
 
-import { connect } from 'react-redux'
-import * as actionCreators from '../redux/actions/index'
-import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
+import { connect } from 'react-redux'
+import { ThunkDispatch } from 'redux-thunk'
+import * as actionCreators from '../redux/actions/index'
 import { ISubmissions } from '../redux/types/submission'
 import { CustomSpin } from '../components/Spin'
 
 import { Code } from '../components/Code'
-import { Row, Col, Button, Icon, Select } from 'antd'
+import { Row, Col, Select } from 'antd'
 
 const { Option } = Select
 
@@ -40,6 +39,8 @@ const mapLanguage: TPlot = {
 
 interface ISubmissionDetail {
   onInitialLoad: (id: string) => void
+  resetCurrentSubmissionUID: () => void
+  currentSubmissionUID: string
   detail: ISubmissions
   match: any
   user: firebase.User
@@ -51,12 +52,8 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
     theme: 'material'
   }
 
-  updateProps = () => {
-    this.props.onInitialLoad(this.props.match.params.id)
-  }
-
   componentDidMount() {
-    this.updateProps()
+    this.props.onInitialLoad(this.props.match.params.id)
   }
 
   changeTheme = (value: string) => {
@@ -65,19 +62,12 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
 
   render() {
     const { detail } = this.props
+
     if (this.props.status === 'SUCCESS') {
       return (
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
           <Col span={22} offset={1}>
             <Wrapper>
-              <Button
-                onClick={() => {
-                  this.updateProps()
-                }}
-              >
-                <Icon type="reload" />
-              </Button>
-              <h1>SID: {detail.submission_id}</h1>
               <p>Problem ID: {detail.problem_id}</p>
               <p>Status: {detail.status}</p>
               <p>Points: {detail.points}</p>
