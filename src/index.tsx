@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd'
@@ -6,16 +6,6 @@ import firebase from 'firebase/app'
 import 'firebase/functions'
 import styled, { createGlobalStyle } from 'styled-components'
 
-import { Index } from './pages/Index'
-import { NotFound } from './pages/404'
-import { LearnPage } from './pages/Learn'
-import { TasksPage } from './pages/Tasks'
-import { TaskDetailPage } from './pages/TaskDetail'
-import { SubmissionsPage } from './pages/Submissions'
-import { SubmissionDetailPage } from './pages/SubmissionDetail'
-import { SettingPage } from './pages/Setting'
-import { Login } from './pages/Login'
-import { Register } from './pages/Register'
 import { Nav } from './components/nav/Nav'
 import { CustomSpin } from './components/Spin'
 
@@ -32,6 +22,94 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
   firebase.app().functions('asia-east2')
 }
+
+function LazyComponent(Component: any) {
+  return (props: any) => (
+    <Suspense fallback={<CustomSpin />}>
+      <Component {...props} />
+    </Suspense>
+  )
+}
+
+const Index = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "index.page" */ './pages/Index').then(
+      module => ({ default: module.Index })
+    )
+  )
+)
+
+const NotFound = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "not-found.page" */ './pages/404').then(
+      module => ({ default: module.NotFound })
+    )
+  )
+)
+
+const LearnPage = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "learn.page" */ './pages/Learn').then(
+      module => ({ default: module.LearnPage })
+    )
+  )
+)
+
+const TasksPage = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "tasks.page" */ './pages/Tasks').then(
+      module => ({ default: module.TasksPage })
+    )
+  )
+)
+
+const TaskDetailPage = LazyComponent(
+  lazy(() =>
+    import(
+      /* webpackChunkName: "task-detail.page" */ './pages/TaskDetail'
+    ).then(module => ({ default: module.TaskDetailPage }))
+  )
+)
+
+const SubmissionsPage = LazyComponent(
+  lazy(() =>
+    import(
+      /* webpackChunkName: "submissions.page" */ './pages/Submissions'
+    ).then(module => ({ default: module.SubmissionsPage }))
+  )
+)
+
+const SubmissionDetailPage = LazyComponent(
+  lazy(() =>
+    import(
+      /* webpackChunkName: "submission-detail.page" */ './pages/SubmissionDetail'
+    ).then(module => ({ default: module.SubmissionDetailPage }))
+  )
+)
+
+const SettingPage = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "setting.page" */ './pages/Setting').then(
+      module => ({ default: module.SettingPage })
+    )
+  )
+)
+
+const Login = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "login.page" */ './pages/Login').then(
+      module => ({ default: module.Login })
+    )
+  )
+)
+
+const Register = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "register.page" */ './pages/Register').then(
+      module => ({ default: module.Register })
+    )
+  )
+)
 
 const GlobalStyle = createGlobalStyle`
   #root {
