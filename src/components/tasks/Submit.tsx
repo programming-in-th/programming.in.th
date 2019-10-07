@@ -51,13 +51,15 @@ interface ISubmitState {
   language: string
   theme: string
   code: string
+  uploadedCode: string
 }
 
 class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
   state = {
     language: 'text/x-csrc',
     theme: 'material',
-    code: ''
+    code: '',
+    uploadedCode: ''
   }
 
   componentDidMount() {
@@ -75,6 +77,10 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
     code: string
   ) => {
     this.updateCode(code)
+  }
+
+  getCodeFromUpload = (code: string) => {
+    this.setState({ uploadedCode: code, code })
   }
 
   updateCode = (code: string) => {
@@ -149,7 +155,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
                   <Option key={data[0]}>{data[1]}</Option>
                 ))}
               </Select>
-              <Upload updateCode={this.updateCode}></Upload>
+              <Upload getCodeFromUpload={this.getCodeFromUpload}></Upload>
             </Row>
             <Row>
               <Code
@@ -162,7 +168,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
                   lineWrapping: true
                 }}
                 onChange={this.changeEditor}
-                value={this.state.code}
+                value={this.state.uploadedCode}
               />
               <Button
                 type="primary"

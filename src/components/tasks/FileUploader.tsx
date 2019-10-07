@@ -2,7 +2,7 @@ import React from 'react'
 import { Upload as AntDUpload, Button, Icon } from 'antd'
 
 interface IUploaderProps {
-  updateCode: (code: string) => void
+  getCodeFromUpload: (code: string) => void
 }
 
 export const Upload: React.FunctionComponent<IUploaderProps> = (
@@ -13,10 +13,9 @@ export const Upload: React.FunctionComponent<IUploaderProps> = (
     showUploadList={false}
     beforeUpload={file => {
       const reader = new FileReader()
-      console.log(file)
 
       reader.onload = (ev: any) => {
-        props.updateCode(ev.target.result)
+        props.getCodeFromUpload(ev.target.result)
       }
 
       reader.readAsText(file)
