@@ -10,7 +10,8 @@ import { ISubmissions } from '../redux/types/submission'
 import { CustomSpin } from '../components/Spin'
 
 import { Code } from '../components/Code'
-import { Row, Col, Button, Icon, Select } from 'antd'
+import { Button, Icon, Select } from 'antd'
+import { ContainerWrapper } from '../components/atomics'
 
 const { Option } = Select
 
@@ -66,16 +67,16 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
   render() {
     if (this.props.status === 'SUCCESS') {
       return (
-        <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-          <Col span={22} offset={1}>
-            <Wrapper>
-              <Button
-                onClick={() => {
-                  this.updateProps()
-                }}
-              >
-                <Icon type="reload" />
-              </Button>
+        <ContainerWrapper>
+          <Wrapper>
+            <Button
+              onClick={() => {
+                this.updateProps()
+              }}
+            >
+              <Icon type="reload" />
+            </Button>
+            <div style={{ margin: '15px 0' }}>
               <h1>sid: {this.props.detail.submission_id}</h1>
               <p>Problem ID: {this.props.detail.problem_id}</p>
               <p>Status: {this.props.detail.status}</p>
@@ -83,29 +84,29 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
               <p>Memory: {this.props.detail.memory} KB</p>
               <p>Time: {this.props.detail.time} second</p>
               <p>User: {this.props.detail.username}</p>
-              <Select
-                defaultValue={themeData[0][0]}
-                style={{ width: 120 }}
-                onChange={this.changeTheme}
-              >
-                {themeData.map((data: any) => (
-                  <Option key={data[0]}>{data[1]}</Option>
-                ))}
-              </Select>
-              <Code
-                options={{
-                  mode: `${mapLanguage[this.props.detail.language]}`,
-                  theme: `${this.state.theme}`,
-                  lineNumbers: true,
-                  foldGutter: true,
-                  gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-                  lineWrapping: true
-                }}
-                value={this.props.detail.code}
-              />
-            </Wrapper>
-          </Col>
-        </Row>
+            </div>
+            <Select
+              defaultValue={themeData[0][0]}
+              style={{ width: 120 }}
+              onChange={this.changeTheme}
+            >
+              {themeData.map((data: any) => (
+                <Option key={data[0]}>{data[1]}</Option>
+              ))}
+            </Select>
+            <Code
+              options={{
+                mode: `${mapLanguage[this.props.detail.language]}`,
+                theme: `${this.state.theme}`,
+                lineNumbers: true,
+                foldGutter: true,
+                gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+                lineWrapping: true
+              }}
+              value={this.props.detail.code}
+            />
+          </Wrapper>
+        </ContainerWrapper>
       )
     }
     return <CustomSpin />

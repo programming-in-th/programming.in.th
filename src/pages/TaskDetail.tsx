@@ -1,5 +1,4 @@
 import React from 'react'
-import { Row, Col } from 'antd'
 import styled, { createGlobalStyle } from 'styled-components'
 import axios from 'axios'
 
@@ -49,6 +48,7 @@ const StatementComponent = styled.div`
 const FullSizePDFStyle = createGlobalStyle`
   embed {
     width: 100%!important;
+    margin-top: 20px;
   }
 `
 

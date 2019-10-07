@@ -129,7 +129,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
           />
         ) : (
           <React.Fragment>
-            <h1>Submit Code</h1>
+            <h1 style={{ marginBottom: 15 }}>Submit Code</h1>
             <Row>
               <Select
                 defaultValue={languageData[0][0]}
