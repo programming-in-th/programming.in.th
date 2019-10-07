@@ -65,6 +65,7 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
   }
 
   render() {
+    const { detail } = this.props
     if (this.props.status === 'SUCCESS') {
       return (
         <ContainerWrapper>
@@ -114,7 +115,6 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
 }
 
 const mapStateToProps: (state: any) => any = state => {
-  console.log(state.submissions)
   return {
     detail: state.submissions.detail,
     status: state.submissions.detailStatus,

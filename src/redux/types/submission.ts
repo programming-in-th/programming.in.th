@@ -3,6 +3,7 @@ export interface ISubmissionsState {
   readonly submissionsListStatus: 'LOADING' | 'SUCCESS' | null
   readonly detail: ISubmissions | undefined
   readonly detailStatus: 'LOADING' | 'SUCCESS' | null
+  readonly currentSubmissionUID: string | undefined
   readonly submission_uid: string | undefined
   readonly submissionResponse?: number
 }

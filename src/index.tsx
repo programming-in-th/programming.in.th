@@ -1,21 +1,12 @@
-import React from 'react'
+import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd'
 import firebase from 'firebase/app'
 import 'firebase/functions'
+import 'firebase/firestore'
 import styled, { createGlobalStyle } from 'styled-components'
 
-import { Index } from './pages/Index'
-import { NotFound } from './pages/404'
-import { LearnPage } from './pages/Learn'
-import { TasksPage } from './pages/Tasks'
-import { TaskDetailPage } from './pages/TaskDetail'
-import { SubmissionsPage } from './pages/Submissions'
-import { SubmissionDetailPage } from './pages/SubmissionDetail'
-import { SettingPage } from './pages/Setting'
-import { Login } from './pages/Login'
-import { Register } from './pages/Register'
 import { Nav } from './components/nav/Nav'
 import { CustomSpin } from './components/Spin'
 
@@ -26,12 +17,102 @@ import * as actionCreators from './redux/actions/index'
 import { firebaseConfig } from './config'
 import { store } from './redux'
 
+import { openNotificationWithIcon } from './components/Notification'
+
 import './assets/css/init.css'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
   firebase.app().functions('asia-east2')
 }
+
+function LazyComponent(Component: any) {
+  return (props: any) => (
+    <Suspense fallback={<CustomSpin />}>
+      <Component {...props} />
+    </Suspense>
+  )
+}
+
+const Index = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "index.page" */ './pages/Index').then(
+      module => ({ default: module.Index })
+    )
+  )
+)
+
+const NotFound = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "not-found.page" */ './pages/404').then(
+      module => ({ default: module.NotFound })
+    )
+  )
+)
+
+const LearnPage = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "learn.page" */ './pages/Learn').then(
+      module => ({ default: module.LearnPage })
+    )
+  )
+)
+
+const TasksPage = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "tasks.page" */ './pages/Tasks').then(
+      module => ({ default: module.TasksPage })
+    )
+  )
+)
+
+const TaskDetailPage = LazyComponent(
+  lazy(() =>
+    import(
+      /* webpackChunkName: "task-detail.page" */ './pages/TaskDetail'
+    ).then(module => ({ default: module.TaskDetailPage }))
+  )
+)
+
+const SubmissionsPage = LazyComponent(
+  lazy(() =>
+    import(
+      /* webpackChunkName: "submissions.page" */ './pages/Submissions'
+    ).then(module => ({ default: module.SubmissionsPage }))
+  )
+)
+
+const SubmissionDetailPage = LazyComponent(
+  lazy(() =>
+    import(
+      /* webpackChunkName: "submission-detail.page" */ './pages/SubmissionDetail'
+    ).then(module => ({ default: module.SubmissionDetailPage }))
+  )
+)
+
+const SettingPage = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "setting.page" */ './pages/Setting').then(
+      module => ({ default: module.SettingPage })
+    )
+  )
+)
+
+const Login = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "login.page" */ './pages/Login').then(
+      module => ({ default: module.Login })
+    )
+  )
+)
+
+const Register = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "register.page" */ './pages/Register').then(
+      module => ({ default: module.Register })
+    )
+  )
+)
 
 const GlobalStyle = createGlobalStyle`
   #root {
@@ -51,6 +132,8 @@ const GlobalStyle = createGlobalStyle`
     }
 }
 `
+
+const db = firebase.firestore()
 
 const { Header, Content, Footer } = Layout
 
@@ -72,15 +155,38 @@ const CustomLayout = styled(Layout)`
 
 interface IRootProps {
   onInitialLoad: () => void
+  resetCurrentSubmissionUID: () => void
   user: 'LOADING' | firebase.User | null
   taskStatus: any
   submissionsListStatus: any
   submissionDetailStatus: any
+  currentSubmissionUID: string
 }
 
 class Root extends React.Component<IRootProps, {}> {
   componentDidMount() {
     this.props.onInitialLoad()
+  }
+
+  componentDidUpdate() {
+    if (this.props.currentSubmissionUID !== undefined) {
+      db.collection('submissions')
+        .doc(this.props.currentSubmissionUID)
+        .onSnapshot(doc => {
+          const data = doc.data()
+          if (data != null) {
+            if (data.status !== 'in_queue') {
+              openNotificationWithIcon(
+                'success',
+                'Submission Successful',
+                'Done!'
+              )
+
+              this.props.resetCurrentSubmissionUID()
+            }
+          }
+        })
+    }
   }
 
   render() {
@@ -136,7 +242,8 @@ const mapStateToProps: (state: any) => any = state => {
     user: state.user.user,
     taskStatus: state.tasks.status,
     submissionsListStatus: state.submissions.submissionsListStatus,
-    submissionDetailStatus: state.submissions.detailStatus
+    submissionDetailStatus: state.submissions.detailStatus,
+    currentSubmissionUID: state.submissions.currentSubmissionUID
   }
 }
 
@@ -146,6 +253,10 @@ const mapDispatchToProps: (
   return {
     onInitialLoad: () => {
       dispatch(actionCreators.fetchUser())
+    },
+
+    resetCurrentSubmissionUID: () => {
+      dispatch(actionCreators.resetCurrentSubmission())
     }
   }
 }

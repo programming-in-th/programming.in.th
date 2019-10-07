@@ -33,19 +33,13 @@ export const loadDetail = (submission_id: string) => {
         .httpsCallable('getDetailedSubmissionData')({
         submission_id: submission_id
       })
+
       const submission_data: ISubmissions = {
-        uid: response.data.metadata.uid,
+        ...response.data.metadata,
         submission_id: submission_id,
-        username: response.data.metadata.username,
-        problem_id: response.data.metadata.problem_id,
-        language: response.data.metadata.language,
-        status: response.data.metadata.status,
-        points: response.data.metadata.points,
-        time: response.data.metadata.time,
-        memory: response.data.metadata.memory,
-        timestamp: response.data.metadata.timestamp,
         code: response.data.code
       }
+
       dispatch(receiveDetail(submission_data))
     } catch (error) {
       console.log(error)
@@ -63,6 +57,7 @@ export const makeSubmission = (
     dispatch: ThunkDispatch<IAppState, {}, AnyAction>
   ): Promise<void> => {
     dispatch(requestMakeSubmission())
+
     try {
       const params = {
         uid: uid,
@@ -70,10 +65,12 @@ export const makeSubmission = (
         code: code,
         language: language
       }
+
       const response = await firebase
         .app()
         .functions('asia-east2')
         .httpsCallable('makeSubmission')(params)
+
       dispatch(receiveMakeSubmission(200, response.data))
     } catch (error) {
       console.log(error)
@@ -124,6 +121,7 @@ export const RECEIVE_MAKE_SUBMISSION = 'RECEIVE_MAKE_SUBMISSION'
 const receiveMakeSubmission = (data: number, response: string) => {
   return {
     type: RECEIVE_MAKE_SUBMISSION,
+    currentSubmissionUID: response,
     submissionResponse: data,
     detail: response
   }
@@ -140,5 +138,12 @@ export const ERROR_SUBMIT = 'ERROR_SUBMIT'
 export const errorSubmit = () => {
   return {
     type: ERROR_SUBMIT
+  }
+}
+
+export const RESET_CURRENT_SUBMISSION = 'RESET_CURRENT_SUBMISSION'
+export const resetCurrentSubmission = () => {
+  return {
+    type: RESET_CURRENT_SUBMISSION
   }
 }
