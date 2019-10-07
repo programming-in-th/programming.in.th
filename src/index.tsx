@@ -122,8 +122,8 @@ class Root extends React.Component<IRootProps, {}> {
                   <Route component={NotFound} />
                 </Switch>
               </Content>
-              <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
             </CustomLayout>
+            <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
           </Router>
         )}
       </React.Fragment>

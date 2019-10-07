@@ -9,22 +9,24 @@ import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 import { INode } from '../redux/types/learn'
 import { CustomSpin } from '../components/Spin'
+import { ContainerWrapper } from '../components/atomics'
 
 const { SubMenu } = Menu
 const { Content, Sider } = Layout
 
 const responsive = `(max-width: 822px)`
 
-const MainLayout = styled(Layout)`
-  margin: 30px 10px 0 20px;
+const Grid = styled(ContainerWrapper)`
+  display: grid;
+  grid-gap: 30px;
+  grid-template-columns: 200px 1fr;
+
   @media ${responsive} {
-    margin: 30px 0 0 0;
+    grid-template-columns: 1fr;
   }
 `
 
-const ContentLayout = styled(Layout)`
-  padding: 0 24px 24px;
-`
+const ContentLayout = styled(Layout)``
 
 const MainContent = styled(Content)`
   background: white;
@@ -36,6 +38,7 @@ const MainContent = styled(Content)`
 const SiderMenu = styled(Sider)`
   width: 200px;
   background: white;
+
   @media ${responsive} {
     display: none;
   }
@@ -57,6 +60,7 @@ const DrawerMenu = styled.div`
   background: #fff;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
   border-radius: 0 4px 4px 0;
+
   @media ${responsive} {
     display: flex;
   }
@@ -159,7 +163,8 @@ class Learn extends React.Component<any> {
         >
           <SideMenu />
         </Drawer>
-        <MainLayout>
+
+        <Grid>
           <SiderMenu>
             <SideMenu />
           </SiderMenu>
@@ -181,7 +186,7 @@ class Learn extends React.Component<any> {
               )}
             </MainContent>
           </ContentLayout>
-        </MainLayout>
+        </Grid>
       </React.Fragment>
     )
   }
