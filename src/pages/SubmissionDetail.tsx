@@ -64,6 +64,7 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
   }
 
   render() {
+    const { detail } = this.props
     if (this.props.status === 'SUCCESS') {
       return (
         <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
@@ -76,13 +77,13 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
               >
                 <Icon type="reload" />
               </Button>
-              <h1>sid: {this.props.detail.submission_id}</h1>
-              <p>Problem ID: {this.props.detail.problem_id}</p>
-              <p>Status: {this.props.detail.status}</p>
-              <p>Points: {this.props.detail.points}</p>
-              <p>Memory: {this.props.detail.memory} KB</p>
-              <p>Time: {this.props.detail.time} second</p>
-              <p>User: {this.props.detail.username}</p>
+              <h1>SID: {detail.submission_id}</h1>
+              <p>Problem ID: {detail.problem_id}</p>
+              <p>Status: {detail.status}</p>
+              <p>Points: {detail.points}</p>
+              <p>Memory: {detail.memory} KB(s)</p>
+              <p>Time: {detail.time} second(s)</p>
+              <p>User: {detail.username}</p>
               <Select
                 defaultValue={themeData[0][0]}
                 style={{ width: 120 }}
@@ -94,14 +95,14 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
               </Select>
               <Code
                 options={{
-                  mode: `${mapLanguage[this.props.detail.language]}`,
+                  mode: `${mapLanguage[detail.language]}`,
                   theme: `${this.state.theme}`,
                   lineNumbers: true,
                   foldGutter: true,
                   gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
                   lineWrapping: true
                 }}
-                value={this.props.detail.code}
+                value={detail.code}
               />
             </Wrapper>
           </Col>
@@ -113,7 +114,6 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
 }
 
 const mapStateToProps: (state: any) => any = state => {
-  console.log(state.submissions)
   return {
     detail: state.submissions.detail,
     status: state.submissions.detailStatus,

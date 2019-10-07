@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { Layout } from 'antd'
 import firebase from 'firebase/app'
 import 'firebase/functions'
+import 'firebase/firestore'
 import styled, { createGlobalStyle } from 'styled-components'
 
 import { Nav } from './components/nav/Nav'
@@ -15,6 +16,8 @@ import { Provider, connect } from 'react-redux'
 import * as actionCreators from './redux/actions/index'
 import { firebaseConfig } from './config'
 import { store } from './redux'
+
+import { openNotificationWithIcon } from './components/Notification'
 
 import './assets/css/init.css'
 
@@ -130,6 +133,8 @@ const GlobalStyle = createGlobalStyle`
 }
 `
 
+const db = firebase.firestore()
+
 const { Header, Content, Footer } = Layout
 
 const CustomLayout = styled(Layout)`
@@ -138,15 +143,38 @@ const CustomLayout = styled(Layout)`
 
 interface IRootProps {
   onInitialLoad: () => void
+  resetCurrentSubmissionUID: () => void
   user: 'LOADING' | firebase.User | null
   taskStatus: any
   submissionsListStatus: any
   submissionDetailStatus: any
+  currentSubmissionUID: string
 }
 
 class Root extends React.Component<IRootProps, {}> {
   componentDidMount() {
     this.props.onInitialLoad()
+  }
+
+  componentDidUpdate() {
+    if (this.props.currentSubmissionUID !== undefined) {
+      db.collection('submissions')
+        .doc(this.props.currentSubmissionUID)
+        .onSnapshot(doc => {
+          const data = doc.data()
+          if (data != null) {
+            if (data.status !== 'in_queue') {
+              openNotificationWithIcon(
+                'success',
+                'Submission Successful',
+                'Done!'
+              )
+
+              this.props.resetCurrentSubmissionUID()
+            }
+          }
+        })
+    }
   }
 
   render() {
@@ -209,7 +237,8 @@ const mapStateToProps: (state: any) => any = state => {
     user: state.user.user,
     taskStatus: state.tasks.status,
     submissionsListStatus: state.submissions.submissionsListStatus,
-    submissionDetailStatus: state.submissions.detailStatus
+    submissionDetailStatus: state.submissions.detailStatus,
+    currentSubmissionUID: state.submissions.currentSubmissionUID
   }
 }
 
@@ -219,6 +248,10 @@ const mapDispatchToProps: (
   return {
     onInitialLoad: () => {
       dispatch(actionCreators.fetchUser())
+    },
+
+    resetCurrentSubmissionUID: () => {
+      dispatch(actionCreators.resetCurrentSubmission())
     }
   }
 }

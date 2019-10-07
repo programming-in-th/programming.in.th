@@ -5,6 +5,7 @@ export {
   loadDetail,
   makeSubmission,
   resubmitSubmission,
-  errorSubmit
+  errorSubmit,
+  resetCurrentSubmission
 } from './submission'
 export { loadContent, loadMenu } from './learn'
