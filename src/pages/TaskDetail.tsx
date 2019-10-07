@@ -1,6 +1,6 @@
 import React from 'react'
 import { Row, Col } from 'antd'
-import styled from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 import axios from 'axios'
 
 import { connect } from 'react-redux'
@@ -11,6 +11,7 @@ import { AnyAction } from 'redux'
 import { ITask } from '../redux/types/task'
 import { SubmitPage } from '../components/tasks/Submit'
 import { CustomSpin } from '../components/Spin'
+import { ContainerWrapper, Padding } from '../components/atomics'
 
 interface ITaskProps {
   task?: ITask
@@ -21,11 +22,9 @@ interface ITaskProps {
 }
 
 const Wrapper = styled.div`
-  width: 100%;
-  padding: 20px 3%;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-  margin-top: 24px;
+  padding: 20px;
   box-sizing: border-box;
   background-color: white;
 `
@@ -44,6 +43,12 @@ const StatementComponent = styled.div`
     border: 1px solid gray;
     padding: 6px;
     vertical-align: top;
+  }
+`
+
+const FullSizePDFStyle = createGlobalStyle`
+  embed {
+    width: 100%!important;
   }
 `
 
@@ -83,28 +88,26 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
       this.state.problemStatement !== ''
     ) {
       return (
-        <div>
-          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-            <Col span={22} offset={1}>
-              <Wrapper>
-                <h1>{this.props.task.title}</h1>
-                <p> Time Limit : {this.props.task.time_limit} second(s)</p>
-                <p> Memory Limit : {this.props.task.memory_limit} MB(s)</p>
-                <StatementComponent dangerouslySetInnerHTML={template} />
-              </Wrapper>
-            </Col>
-          </Row>
-          <Row gutter={{ xs: 8, sm: 16, md: 24, lg: 32 }}>
-            <Col span={22} offset={1}>
-              <Wrapper style={{ height: '440px' }}>
-                <SubmitPage
-                  problem_id={this.props.match.params.id}
-                  canSubmit={this.props.user}
-                />
-              </Wrapper>
-            </Col>
-          </Row>
-        </div>
+        <ContainerWrapper>
+          <Padding>
+            <Wrapper>
+              <h1>{this.props.task.title}</h1>
+              <p> Time Limit : {this.props.task.time_limit} second(s)</p>
+              <p> Memory Limit : {this.props.task.memory_limit} MB(s)</p>
+
+              <FullSizePDFStyle />
+              <StatementComponent dangerouslySetInnerHTML={template} />
+            </Wrapper>
+          </Padding>
+          <Padding>
+            <Wrapper>
+              <SubmitPage
+                problem_id={this.props.match.params.id}
+                canSubmit={this.props.user}
+              />
+            </Wrapper>
+          </Padding>
+        </ContainerWrapper>
       )
     }
 
