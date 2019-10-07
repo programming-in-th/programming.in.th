@@ -65,7 +65,6 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
   }
 
   render() {
-    const { detail } = this.props
     if (this.props.status === 'SUCCESS') {
       return (
         <ContainerWrapper>
