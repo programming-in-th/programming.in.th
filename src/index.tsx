@@ -142,11 +142,6 @@ const NavHeader = styled(Header)<{ top: boolean }>`
   position: fixed;
   z-index: 100;
   width: 100%;
-
-  @media screen and (max-width: 768px) {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
 `
 
 const CustomLayout = styled(Layout)`
@@ -155,6 +150,7 @@ const CustomLayout = styled(Layout)`
 
 interface IRootProps {
   onInitialLoad: () => void
+  loadCurrentSubmissionData: (submission_id: string) => void
   resetCurrentSubmissionUID: () => void
   user: 'LOADING' | firebase.User | null
   currentSubmissionUID: string
@@ -162,11 +158,15 @@ interface IRootProps {
 
 interface IRootStates {
   top: boolean
+  checkNoti: boolean
+  old_submission_id: string
 }
 
 class Root extends React.Component<IRootProps, IRootStates> {
   state: IRootStates = {
-    top: true
+    top: true,
+    checkNoti: false,
+    old_submission_id: ''
   }
 
   checkScrollPosition = () => {
@@ -189,7 +189,15 @@ class Root extends React.Component<IRootProps, IRootStates> {
   }
 
   componentDidUpdate() {
-    if (this.props.currentSubmissionUID !== undefined) {
+    if (
+      this.props.currentSubmissionUID !== undefined &&
+      this.state.checkNoti === false
+    ) {
+      this.setState({
+        checkNoti: true,
+        old_submission_id: this.props.currentSubmissionUID
+      })
+      this.state.checkNoti = true
       db.collection('submissions')
         .doc(this.props.currentSubmissionUID)
         .onSnapshot(doc => {
@@ -202,8 +210,9 @@ class Root extends React.Component<IRootProps, IRootStates> {
                 'Done!',
                 this.props.currentSubmissionUID
               )
-
               this.props.resetCurrentSubmissionUID()
+              this.props.loadCurrentSubmissionData(this.state.old_submission_id)
+              this.setState({ checkNoti: false })
             }
           }
         })
@@ -275,7 +284,9 @@ const mapDispatchToProps: (
     onInitialLoad: () => {
       dispatch(actionCreators.fetchUser())
     },
-    loadCurrentSubmissionData: () => {},
+    loadCurrentSubmissionData: (submission_id: string) => {
+      dispatch(actionCreators.loadDetail(submission_id))
+    },
     resetCurrentSubmissionUID: () => {
       dispatch(actionCreators.resetCurrentSubmission())
     }
