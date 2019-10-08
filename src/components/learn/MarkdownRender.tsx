@@ -1,13 +1,19 @@
 import React from 'react'
 import ReactMarkdown, { ReactMarkdownProps } from 'react-markdown'
+import styled from 'styled-components'
+
 import MathJax from 'react-mathjax'
 import RemarkMathPlugin from 'remark-math'
-
-import '../../assets/css/markdown_render.css'
 
 interface ICustomProps {}
 
 type Props = ReactMarkdownProps & ICustomProps
+
+const MarkDownStyle = styled.div`
+  .mjx-chtml {
+    white-space: normal !important;
+  }
+`
 
 function MarkdownRender(props: Props) {
   const newProps = {
@@ -22,7 +28,9 @@ function MarkdownRender(props: Props) {
 
   return (
     <MathJax.Provider input="tex">
-      <ReactMarkdown {...newProps} />
+      <MarkDownStyle>
+        <ReactMarkdown {...newProps} />
+      </MarkDownStyle>
     </MathJax.Provider>
   )
 }
