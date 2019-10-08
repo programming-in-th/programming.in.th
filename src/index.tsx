@@ -218,18 +218,18 @@ class Root extends React.Component<IRootProps, IRootStates> {
                   <Route component={NotFound} />
                 </Switch>
               </Content>
+              <Footer style={{ textAlign: 'center' }}>
+                IPST ©2019 | Contribute: All the source code for this website is
+                available on{' '}
+                <a
+                  href="https://github.com/programming-in-th/programming.in.th"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              </Footer>
             </CustomLayout>
-            <Footer style={{ textAlign: 'center' }}>
-              IPST ©2019 | Contribute: All the source code for this website is
-              available on{' '}
-              <a
-                href="https://github.com/programming-in-th/programming.in.th"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                GitHub
-              </a>
-            </Footer>
           </Router>
         )}
       </React.Fragment>
