@@ -6,6 +6,7 @@ import firebase from 'firebase/app'
 import 'firebase/functions'
 import 'firebase/firestore'
 import styled from 'styled-components'
+import WebFont from 'webfontloader'
 
 import { Nav } from './components/nav/Nav'
 import { CustomSpin } from './components/Spin'
@@ -25,6 +26,14 @@ if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
   firebase.app().functions('asia-east2')
 }
+
+const WebFontConfig: WebFont.Config = {
+  google: {
+    families: ['Fira Code', 'Montserrat:400,800', 'Roboto']
+  }
+}
+
+WebFont.load(WebFontConfig)
 
 function LazyComponent(Component: any) {
   return (props: any) => (
