@@ -20,7 +20,6 @@ import { store } from './redux'
 import { openNotificationWithIcon } from './components/Notification'
 
 import { GlobalStyle } from './design'
-import './assets/css/init.css'
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
