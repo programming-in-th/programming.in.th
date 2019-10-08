@@ -9,7 +9,7 @@ import { ISubmissions } from '../redux/types/submission'
 import { CustomSpin } from '../components/Spin'
 
 import { Code } from '../components/Code'
-import { Button, Icon, Select } from 'antd'
+import { Select } from 'antd'
 import { ContainerWrapper } from '../components/atomics'
 
 const { Option } = Select
@@ -66,16 +66,8 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
       return (
         <ContainerWrapper>
           <Wrapper>
-            <Button
-              onClick={() => {
-                this.updateProps()
-              }}
-            >
-              <Icon type="reload" />
-            </Button>
             <div style={{ margin: '15px 0' }}>
-              <h1>sid: {this.props.detail.submission_id}</h1>
-              <p>Problem ID: {this.props.detail.problem_id}</p>
+              <h1>{this.props.detail.problem_id}</h1>
               <p>Status: {this.props.detail.status}</p>
               <p>Points: {this.props.detail.points}</p>
               <p>Memory: {this.props.detail.memory} KB</p>
