@@ -137,6 +137,18 @@ const db = firebase.firestore()
 
 const { Header, Content, Footer } = Layout
 
+const NavHeader = styled(Header)`
+  background: white;
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+
+  @media screen and (max-width: 768px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+`
+
 const CustomLayout = styled(Layout)`
   min-height: 100vh;
 `
@@ -186,16 +198,9 @@ class Root extends React.Component<IRootProps, {}> {
           <Router>
             <CustomLayout>
               <GlobalStyle />
-              <Header
-                style={{
-                  background: 'white',
-                  position: 'fixed',
-                  zIndex: 100,
-                  width: '100%'
-                }}
-              >
+              <NavHeader>
                 <Nav />
-              </Header>
+              </NavHeader>
               <Content style={{ marginTop: 64 }}>
                 <Switch>
                   <Route exact path="/" component={Index} />
@@ -223,8 +228,8 @@ class Root extends React.Component<IRootProps, {}> {
                   <Route component={NotFound} />
                 </Switch>
               </Content>
-              <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
             </CustomLayout>
+            <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
           </Router>
         )}
       </React.Fragment>

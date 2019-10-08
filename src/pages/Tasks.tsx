@@ -1,6 +1,5 @@
 import React from 'react'
 import H from 'history'
-import styled from 'styled-components'
 import { Table, Tag } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 
@@ -10,17 +9,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 
 import { ITask } from '../redux/types/task'
-
-const TableWrapper = styled.div`
-  width: 90%;
-  margin-left: 5%;
-  margin-bottom: 10px;
-  margin-top: 20px;
-  padding: 2%;
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-  background-color: white;
-`
+import { WhiteContainerWrapper } from '../components/atomics'
 
 interface ITasksPageProps {
   taskList: ITask[]
@@ -101,24 +90,22 @@ class TasksListComponent extends React.Component<
 
   render() {
     return (
-      <React.Fragment>
-        <TableWrapper>
-          <Table
-            onRow={(record: any) => {
-              return {
-                onClick: () => {
-                  this.props.history.push('/tasks/' + record.problem_id)
-                }
+      <WhiteContainerWrapper>
+        <Table
+          onRow={(record: any) => {
+            return {
+              onClick: () => {
+                this.props.history.push('/tasks/' + record.problem_id)
               }
-            }}
-            scroll={{ x: 100 }}
-            columns={this.columns}
-            dataSource={this.props.taskList}
-            loading={this.props.status === 'LOADING'}
-            pagination={this.CustomPagination}
-          />
-        </TableWrapper>
-      </React.Fragment>
+            }
+          }}
+          scroll={{ x: 100 }}
+          columns={this.columns}
+          dataSource={this.props.taskList}
+          loading={this.props.status === 'LOADING'}
+          pagination={this.CustomPagination}
+        />
+      </WhiteContainerWrapper>
     )
   }
 }
