@@ -30,20 +30,20 @@ interface IItem {
 
 interface INavigatorStates {
   visible: boolean
-  top: boolean
+  top: number
 }
 
 const { Header } = Layout
 
-const enableTransparency = (location: string, top: boolean): string => {
+const enableTransparency = (location: string, top: number): string => {
   if (location === '/') {
-    return top ? 'transparent' : 'white'
+    return 'rgba(255, 255, 255, ' + Math.min(top / 120, 1) + ')'
   }
 
   return 'white'
 }
 
-const NavHeader = styled(Header)<{ top: boolean; location: string }>`
+const NavHeader = styled(Header)<{ top: number; location: string }>`
   background: ${props => enableTransparency(props.location, props.top)};
   position: fixed;
   z-index: 100;
@@ -58,17 +58,12 @@ const NavHeader = styled(Header)<{ top: boolean; location: string }>`
 class Navigator extends React.Component<INavigatorProps, INavigatorStates> {
   state: INavigatorStates = {
     visible: false,
-    top: true
+    top: 0
   }
 
   checkScrollPosition = () => {
     const { pageYOffset } = window
-
-    if (pageYOffset > 20) {
-      this.setState({ top: false })
-    } else if (pageYOffset === 0) {
-      this.setState({ top: true })
-    }
+    this.setState({ top: pageYOffset })
   }
 
   componentDidMount() {
@@ -100,7 +95,13 @@ class Navigator extends React.Component<INavigatorProps, INavigatorStates> {
           </Logo>
           <LeftMenu mode="horizontal" location={location} />
           <RightMenu mode="horizontal" location={location} user={user} />
-          <BarMenu icon="menu" onClick={this.showDrawer} size="large" />
+          <BarMenu
+            icon="menu"
+            onClick={this.showDrawer}
+            size="large"
+            top={this.state.top}
+            location={locationReal}
+          />
           <Drawer
             title="Menu"
             placement="top"
@@ -250,10 +251,11 @@ const RightMenu = styled(Login)`
   }
 `
 
-const BarMenu = styled(Button)`
+const BarMenu = styled(Button)<{ top: number; location: string }>`
   float: right;
   margin-top: 12px;
   display: none !important;
+  background: ${props => enableTransparency(props.location, props.top)};
   @media ${responsive} {
     display: inline-block !important;
   }
