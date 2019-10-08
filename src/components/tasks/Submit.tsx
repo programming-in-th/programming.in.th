@@ -10,7 +10,6 @@ import { Link } from 'react-router-dom'
 import { Upload } from '../tasks/FileUploader'
 
 import { Code } from '../Code'
-import { openNotificationWithIcon } from '../Notification'
 
 const { Option } = Select
 

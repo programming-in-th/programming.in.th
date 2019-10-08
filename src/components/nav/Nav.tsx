@@ -81,7 +81,11 @@ const Main = (props: IItem) => {
     <div className={props.className}>
       <Menu
         mode={props.mode}
-        style={{ lineHeight: '64px' }}
+        style={{
+          lineHeight: '64px',
+          background: 'transparent',
+          border: 'none'
+        }}
         selectedKeys={[props.location]}
       >
         <Menu.Item key="tasks">
@@ -119,7 +123,11 @@ const Login = (props: IItem) => {
       {props.user ? (
         <Menu
           mode={props.mode}
-          style={{ lineHeight: '64px' }}
+          style={{
+            lineHeight: '64px',
+            background: 'transparent',
+            border: 'none'
+          }}
           selectedKeys={[props.location]}
         >
           <Menu.Item key="user">
@@ -172,6 +180,7 @@ const Logo = styled.div`
   }
 `
 const LeftMenu = styled(Main)`
+  background: transparent;
   float: left;
   border-right: none;
   @media ${responsive} {
@@ -179,6 +188,7 @@ const LeftMenu = styled(Main)`
   }
 `
 const RightMenu = styled(Login)`
+  background: transparent;
   float: right;
   @media ${responsive} {
     display: none;
