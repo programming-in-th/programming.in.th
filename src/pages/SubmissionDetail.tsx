@@ -9,7 +9,7 @@ import * as actionCreators from '../redux/actions/index'
 import { ISubmissions } from '../redux/types/submission'
 import { CustomSpin } from '../components/Spin'
 import { transformStatus } from '../utils/transform'
-import { Code } from '../components/Code'
+import { CodeDisplay } from '../components/Code'
 import { ContainerWrapper } from '../components/atomics'
 
 const { Option } = Select
@@ -82,7 +82,7 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
                 <Option key={data[0]}>{data[1]}</Option>
               ))}
             </Select>
-            <Code
+            <CodeDisplay
               options={{
                 mode: `${mapLanguage[this.props.detail.language]}`,
                 theme: `${this.state.theme}`,
@@ -91,7 +91,8 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
                 gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
                 lineWrapping: true
               }}
-              value={this.props.detail.code}
+              onBeforeChange={(editor, data, value) => {}}
+              value={this.props.detail.code as string}
             />
           </Wrapper>
         </ContainerWrapper>

@@ -1,4 +1,7 @@
-import { UnControlled as CodeMirror } from 'react-codemirror2'
+import {
+  UnControlled as CodeMirror,
+  Controlled as CodeMirrorDisplay
+} from 'react-codemirror2'
 import styled from 'styled-components'
 
 import 'codemirror/lib/codemirror.css'
@@ -17,6 +20,15 @@ import 'codemirror/theme/solarized.css'
 import 'codemirror/theme/material.css'
 
 export const Code = styled(CodeMirror)`
+  font-family: Fira Code !important;
+  margin: 15px 0;
+
+  span {
+    font-family: Fira Code !important;
+  }
+`
+
+export const CodeDisplay = styled(CodeMirrorDisplay)`
   font-family: Fira Code !important;
   margin: 15px 0;
 
