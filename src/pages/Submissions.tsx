@@ -2,11 +2,11 @@ import React from 'react'
 import MUIDataTable, { MUIDataTableColumnDef } from 'mui-datatables'
 import { FormGroup, FormLabel, TextField } from '@material-ui/core'
 import H from 'history'
-import { Col, Row } from 'antd'
+import { connect } from 'react-redux'
 
 import { ISubmissions } from '../redux/types/submission'
 import * as actionCreators from '../redux/actions/index'
-import { connect } from 'react-redux'
+import { ContainerWrapper } from '../components/atomics'
 
 import { CustomSpin } from '../components/Spin'
 
@@ -218,30 +218,28 @@ class SubmissionsComponent extends React.Component<
     return this.props.submissionsListStatus === 'LOADING' ? (
       <CustomSpin />
     ) : (
-      <Row>
-        <Col span={18} offset={3}>
-          <div style={{ paddingTop: '50px' }}>
-            <MUIDataTable
-              title="Submissions"
-              columns={columns as MUIDataTableColumnDef[]}
-              data={this.props.submissionsList}
-              options={{
-                responsive: 'scrollMaxHeight',
-                search: false,
-                selectableRows: 'none',
-                print: false,
-                download: false,
-                onRowClick: (rowData, rowMeta) => {
-                  const submission_id = this.props.submissionsList[
-                    rowMeta.dataIndex
-                  ].submission_id
-                  this.props.history.push('/submissions/' + submission_id)
-                }
-              }}
-            />
-          </div>
-        </Col>
-      </Row>
+      <ContainerWrapper>
+        <div>
+          <MUIDataTable
+            title="Submissions"
+            columns={columns as MUIDataTableColumnDef[]}
+            data={this.props.submissionsList}
+            options={{
+              responsive: 'scrollMaxHeight',
+              search: false,
+              selectableRows: 'none',
+              print: false,
+              download: false,
+              onRowClick: (rowData, rowMeta) => {
+                const submission_id = this.props.submissionsList[
+                  rowMeta.dataIndex
+                ].submission_id
+                this.props.history.push('/submissions/' + submission_id)
+              }
+            }}
+          />
+        </div>
+      </ContainerWrapper>
     )
   }
 }
