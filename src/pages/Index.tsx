@@ -4,6 +4,12 @@ import styled, { keyframes } from 'styled-components'
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 
+import { DesktopOnly } from '../components/Responsive'
+
+import TitleIllus from '../assets/svg/title.svg'
+import ProblemIllus from '../assets/svg/problem.svg'
+import LearnIllus from '../assets/svg/learn.svg'
+
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -19,7 +25,6 @@ const Container = styled.div`
   flex-direction: row;
   justify-content: space-around;
   margin: 64px;
-  margin-top: 128px;
 
   @media (max-width: 768px) {
     display: block;
@@ -30,10 +35,11 @@ const Container = styled.div`
 const MainContainer = styled(Container)`
   animation: ${fadeIn} 3s;
   min-height: calc(100vh - 64px);
+  margin-top: 128px;
 `
 
 const Title = styled.h1`
-  font-size: 48px;
+  font-size: 42px;
   font-family: Montserrat;
   font-weight: 800;
 
@@ -62,6 +68,15 @@ const SubTitle = styled.h2`
     font-size: 12px;
   }
 `
+const RightIllus = styled.div`
+  min-width: 700px;
+  padding-left: 64px;
+`
+const LeftIllus = styled.div`
+  min-width: 700px;
+  padding-right: 64px;
+`
+
 export const _Index: React.FunctionComponent = () => (
   <React.Fragment>
     <MainContainer>
@@ -76,10 +91,18 @@ export const _Index: React.FunctionComponent = () => (
           programmer in an increasingly technologically advanced world.
         </SubTitle>
       </div>
-      <div style={{ minWidth: '543px' }}></div>
+      <DesktopOnly>
+        <RightIllus>
+          <img src={TitleIllus} alt="Title"></img>
+        </RightIllus>
+      </DesktopOnly>
     </MainContainer>
     <Container>
-      <div style={{ minWidth: '543px' }}></div>
+      <DesktopOnly>
+        <LeftIllus>
+          <img src={ProblemIllus} alt="Problem"></img>
+        </LeftIllus>
+      </DesktopOnly>
       <div>
         <Title>
           With over 200 problems designed and curated by our specialists, we
@@ -108,7 +131,11 @@ export const _Index: React.FunctionComponent = () => (
           programmer in an increasingly technologically advanced world.
         </SubTitle>
       </div>
-      <div style={{ minWidth: '543px' }}></div>
+      <DesktopOnly>
+        <RightIllus>
+          <img src={LearnIllus} alt="Learn"></img>
+        </RightIllus>
+      </DesktopOnly>
     </Container>
     <Container>
       <div>
