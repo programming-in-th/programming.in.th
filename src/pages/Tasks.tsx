@@ -21,12 +21,7 @@ interface ITasksPageProps {
   onInitialLoad: () => void
 }
 
-interface ITasksPageState {}
-
-class TasksListComponent extends React.Component<
-  ITasksPageProps,
-  ITasksPageState
-> {
+class TasksListComponent extends React.Component<ITasksPageProps> {
   handleClick = (task: string): void => {
     this.props.history.push('/tasks/' + task)
   }
