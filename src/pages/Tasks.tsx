@@ -1,7 +1,9 @@
 import React from 'react'
 import H from 'history'
-import { Table, Tag } from 'antd'
+import { Table, Tag, Input } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
+
+import styled from 'styled-components'
 
 import { connect } from 'react-redux'
 import * as actionCreators from '../redux/actions/index'
@@ -10,6 +12,12 @@ import { AnyAction } from 'redux'
 
 import { ITask } from '../redux/types/task'
 import { WhiteContainerWrapper } from '../components/atomics'
+
+const Search = Input.Search
+
+const SearchWrapper = styled.div`
+  margin-left: 20px;
+`
 
 interface ITasksPageProps {
   taskList: ITask[]
@@ -21,13 +29,30 @@ interface ITasksPageProps {
   onInitialLoad: () => void
 }
 
-class TasksListComponent extends React.Component<ITasksPageProps> {
+interface ITaskPageState {
+  taskList: ITask[]
+  firstLoad: boolean
+}
+
+class TasksListComponent extends React.Component<
+  ITasksPageProps,
+  ITaskPageState
+> {
+  state = {
+    taskList: [],
+    firstLoad: false
+  }
   handleClick = (task: string): void => {
     this.props.history.push('/tasks/' + task)
   }
 
   componentDidMount() {
     this.props.onInitialLoad()
+  }
+
+  componentDidUpdate() {
+    if (this.props.taskList.length > 1 && !this.state.firstLoad)
+      this.setState({ taskList: this.props.taskList, firstLoad: true })
   }
 
   columns = [
@@ -76,16 +101,38 @@ class TasksListComponent extends React.Component<ITasksPageProps> {
     defaultCurrent: this.props.currentPage,
     defaultPageSize: this.props.currentPageSize,
     onChange: (page: number, pageSize: number | undefined) => {
-      this.props.setPage(page, pageSize ? pageSize : 10)
+      this.props.setPage(page, pageSize ? pageSize : 20)
     },
     onShowSizeChange: (page: number, pageSize: number | undefined) => {
-      this.props.setPage(page, pageSize ? pageSize : 10)
+      this.props.setPage(page, pageSize ? pageSize : 20)
     }
   }
 
+  handleSearch = (searchText: string) => {
+    const filteredEvents = this.props.taskList.filter(
+      ({ problem_id, title }) => {
+        const textLowerCase = searchText.toLowerCase()
+        title = title.toLowerCase()
+        const statusProblemID = problem_id.toLowerCase().includes(textLowerCase)
+        const statusTitle = title.toLowerCase().includes(textLowerCase)
+        return statusProblemID || statusTitle
+      }
+    )
+    this.setState({
+      taskList: filteredEvents
+    })
+  }
   render() {
     return (
       <WhiteContainerWrapper>
+        <SearchWrapper>
+          Search:
+          <Search
+            placeholder="Enter Problem ID or Title"
+            onSearch={this.handleSearch}
+            style={{ width: 200, margin: 10 }}
+          />
+        </SearchWrapper>
         <Table
           onRow={(record: any) => {
             return {
@@ -96,7 +143,7 @@ class TasksListComponent extends React.Component<ITasksPageProps> {
           }}
           scroll={{ x: 100 }}
           columns={this.columns}
-          dataSource={this.props.taskList}
+          dataSource={this.state.taskList}
           loading={this.props.status === 'LOADING'}
           pagination={this.CustomPagination}
         />

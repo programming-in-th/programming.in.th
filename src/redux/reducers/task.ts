@@ -11,7 +11,7 @@ import {
 
 const initialState: ITaskState = {
   currentPage: 1,
-  currentPageSize: 10,
+  currentPageSize: 20,
   currentTask: null,
   taskList: [],
   tags: [],
