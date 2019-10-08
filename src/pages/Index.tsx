@@ -81,71 +81,79 @@ const LeftIllus = styled.div`
   padding-right: 64px;
 `
 
+const Wrapper = styled.div`
+  max-width: 1440px;
+  margin: 0 auto;
+`
+
 export const _Index: React.FunctionComponent = () => (
   <React.Fragment>
-    <MainContainer>
-      <div>
-        <Title>
-          "Bad programmers worry about the code. Good programmers worry about
-          data structures and their relationships" — Linus Torvalds.
-        </Title>
-        <SubTitle>
-          Programming.in.th provides you with the fundamentals of algorithmic
-          problem-solving, an important skill to differentiate yourself as a
-          programmer in an increasingly technologically advanced world.
-        </SubTitle>
-      </div>
-      <DesktopOnly>
-        <RightIllus>
-          <img src={TitleIllus} alt="Title"></img>
-        </RightIllus>
-      </DesktopOnly>
-    </MainContainer>
-    <Container>
-      <DesktopOnly>
-        <LeftIllus>
-          <img src={ProblemIllus} alt="Problem"></img>
-        </LeftIllus>
-      </DesktopOnly>
-      <div>
-        <Title>
-          With over 200 problems designed and curated by our specialists, we
-          strive to deliver the most comprehensive learning experience possible.{' '}
-          <CustomLink to="/tasks/0000">
-            (Take me to my first problem!)
-          </CustomLink>
-        </Title>
-        <SubTitle>
-          Programming.in.th provides you with the fundamentals of algorithmic
-          problem-solving, an important skill to differentiate yourself as a
-          programmer in an increasingly technologically advanced world.
-        </SubTitle>
-      </div>
-    </Container>
-    <Container>
-      <div>
-        <Title>
-          Our learning resources contain all the content you need to excel at
-          algorithmic problem-solving.{' '}
-          <CustomLink to="/learn">(Start learning now!)</CustomLink>
-        </Title>
-        <SubTitle>
-          Programming.in.th provides you with the fundamentals of algorithmic
-          problem-solving, an important skill to differentiate yourself as a
-          programmer in an increasingly technologically advanced world.
-        </SubTitle>
-      </div>
-      <DesktopOnly>
-        <RightIllus>
-          <img src={LearnIllus} alt="Learn"></img>
-        </RightIllus>
-      </DesktopOnly>
-    </Container>
-    <Container>
-      <div>
-        <Title>Got a question? Ask away!</Title>
-      </div>
-    </Container>
+    <Wrapper>
+      <MainContainer>
+        <div>
+          <Title>
+            "Bad programmers worry about the code. Good programmers worry about
+            data structures and their relationships" — Linus Torvalds.
+          </Title>
+          <SubTitle>
+            Programming.in.th provides you with the fundamentals of algorithmic
+            problem-solving, an important skill to differentiate yourself as a
+            programmer in an increasingly technologically advanced world.
+          </SubTitle>
+        </div>
+        <DesktopOnly>
+          <RightIllus>
+            <img src={TitleIllus} alt="Title"></img>
+          </RightIllus>
+        </DesktopOnly>
+      </MainContainer>
+      <Container>
+        <DesktopOnly>
+          <LeftIllus>
+            <img src={ProblemIllus} alt="Problem"></img>
+          </LeftIllus>
+        </DesktopOnly>
+        <div>
+          <Title>
+            With over 200 problems designed and curated by our specialists, we
+            strive to deliver the most comprehensive learning experience
+            possible.{' '}
+            <CustomLink to="/tasks/0000">
+              (Take me to my first problem!)
+            </CustomLink>
+          </Title>
+          <SubTitle>
+            Programming.in.th provides you with the fundamentals of algorithmic
+            problem-solving, an important skill to differentiate yourself as a
+            programmer in an increasingly technologically advanced world.
+          </SubTitle>
+        </div>
+      </Container>
+      <Container>
+        <div>
+          <Title>
+            Our learning resources contain all the content you need to excel at
+            algorithmic problem-solving.{' '}
+            <CustomLink to="/learn">(Start learning now!)</CustomLink>
+          </Title>
+          <SubTitle>
+            Programming.in.th provides you with the fundamentals of algorithmic
+            problem-solving, an important skill to differentiate yourself as a
+            programmer in an increasingly technologically advanced world.
+          </SubTitle>
+        </div>
+        <DesktopOnly>
+          <RightIllus>
+            <img src={LearnIllus} alt="Learn"></img>
+          </RightIllus>
+        </DesktopOnly>
+      </Container>
+      <Container>
+        <div>
+          <Title>Got a question? Ask away!</Title>
+        </div>
+      </Container>
+    </Wrapper>
   </React.Fragment>
 )
 

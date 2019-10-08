@@ -123,11 +123,6 @@ const CustomLayout = styled(Layout)`
   min-height: 100vh;
 `
 
-const CustomContent = styled(Content)`
-  max-width: 1440px;
-  margin: 0 auto;
-`
-
 interface IRootProps {
   onInitialLoad: () => void
   loadCurrentSubmissionData: (submission_id: string) => void
@@ -196,7 +191,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
             <CustomLayout>
               <GlobalStyle />
               <Nav />
-              <CustomContent style={{ marginTop: 64 }}>
+              <Content style={{ marginTop: 64 }}>
                 <Switch>
                   <Route exact path="/" component={Index} />
                   <Route exact path="/tasks" component={TasksPage} />
@@ -222,7 +217,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
                   <Route exact path="/setting" component={SettingPage} />
                   <Route component={NotFound} />
                 </Switch>
-              </CustomContent>
+              </Content>
               <Footer style={{ textAlign: 'center' }}>
                 IPST ©2019 | Contribute: All the source code for this website is
                 available on{' '}
