@@ -5,7 +5,7 @@ import { Layout } from 'antd'
 import firebase from 'firebase/app'
 import 'firebase/functions'
 import 'firebase/firestore'
-import styled, { createGlobalStyle, css } from 'styled-components'
+import styled from 'styled-components'
 
 import { Nav } from './components/nav/Nav'
 import { CustomSpin } from './components/Spin'
@@ -19,6 +19,7 @@ import { store } from './redux'
 
 import { openNotificationWithIcon } from './components/Notification'
 
+import { GlobalStyle } from './design'
 import './assets/css/init.css'
 
 if (!firebase.apps.length) {
@@ -113,25 +114,6 @@ const Register = LazyComponent(
     )
   )
 )
-
-const GlobalStyle = createGlobalStyle`
-  #root {
-    width: 1020px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .divider {
-    margin-top: 25px;
-    padding: 7px 0;
-    color: var(--info);
-
-    p {
-      font-size: 24px;
-      font-weight: bolder;
-    }
-}
-`
 
 const db = firebase.firestore()
 
