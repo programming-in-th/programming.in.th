@@ -36,6 +36,10 @@ const MainContainer = styled(Container)`
   animation: ${fadeIn} 3s;
   min-height: calc(100vh - 64px);
   margin-top: 128px;
+
+  @media (max-width: 812px) {
+    min-height: unset;
+  }
 `
 
 const Title = styled.h1`
