@@ -158,7 +158,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
         checkNoti: true,
         old_submission_id: this.props.currentSubmissionUID
       })
-      this.state.checkNoti = true
+
       db.collection('submissions')
         .doc(this.props.currentSubmissionUID)
         .onSnapshot(doc => {
@@ -171,6 +171,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
                 'Done!',
                 this.props.currentSubmissionUID
               )
+
               this.props.resetCurrentSubmissionUID()
               this.props.loadCurrentSubmissionData(this.state.old_submission_id)
               this.setState({ checkNoti: false })
