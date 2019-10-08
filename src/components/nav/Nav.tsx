@@ -25,8 +25,12 @@ interface IItem {
   user?: firebase.User
 }
 
-class Navigator extends React.Component<INavigatorProps> {
-  state = {
+interface INavigatorStates {
+  visible: boolean
+}
+
+class Navigator extends React.Component<INavigatorProps, INavigatorStates> {
+  state: INavigatorStates = {
     visible: false
   }
 

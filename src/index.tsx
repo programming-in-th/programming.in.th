@@ -5,7 +5,7 @@ import { Layout } from 'antd'
 import firebase from 'firebase/app'
 import 'firebase/functions'
 import 'firebase/firestore'
-import styled, { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle, css } from 'styled-components'
 
 import { Nav } from './components/nav/Nav'
 import { CustomSpin } from './components/Spin'
@@ -137,8 +137,8 @@ const db = firebase.firestore()
 
 const { Header, Content, Footer } = Layout
 
-const NavHeader = styled(Header)`
-  background: white;
+const NavHeader = styled(Header)<{ top: boolean }>`
+  background: ${props => (props.top ? 'transparent' : 'white')};
   position: fixed;
   z-index: 100;
   width: 100%;
@@ -160,9 +160,32 @@ interface IRootProps {
   currentSubmissionUID: string
 }
 
-class Root extends React.Component<IRootProps, {}> {
+interface IRootStates {
+  top: boolean
+}
+
+class Root extends React.Component<IRootProps, IRootStates> {
+  state: IRootStates = {
+    top: true
+  }
+
+  checkScrollPosition = () => {
+    const { pageYOffset } = window
+
+    if (pageYOffset > 20) {
+      this.setState({ top: false })
+    } else if (pageYOffset === 0) {
+      this.setState({ top: true })
+    }
+  }
+
   componentDidMount() {
     this.props.onInitialLoad()
+    window.addEventListener('scroll', this.checkScrollPosition)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.checkScrollPosition)
   }
 
   componentDidUpdate() {
@@ -176,7 +199,8 @@ class Root extends React.Component<IRootProps, {}> {
               openNotificationWithIcon(
                 'success',
                 'Submission Successful',
-                'Done!'
+                'Done!',
+                this.props.currentSubmissionUID
               )
 
               this.props.resetCurrentSubmissionUID()
@@ -195,7 +219,7 @@ class Root extends React.Component<IRootProps, {}> {
           <Router>
             <CustomLayout>
               <GlobalStyle />
-              <NavHeader>
+              <NavHeader top={this.state.top}>
                 <Nav />
               </NavHeader>
               <Content style={{ marginTop: 64 }}>
@@ -248,7 +272,7 @@ const mapDispatchToProps: (
     onInitialLoad: () => {
       dispatch(actionCreators.fetchUser())
     },
-
+    loadCurrentSubmissionData: () => {},
     resetCurrentSubmissionUID: () => {
       dispatch(actionCreators.resetCurrentSubmission())
     }
