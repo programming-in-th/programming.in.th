@@ -250,7 +250,10 @@ class Root extends React.Component<IRootProps, IRootStates> {
                 </Switch>
               </Content>
             </CustomLayout>
-            <Footer style={{ textAlign: 'center' }}>IPST ©2019</Footer>
+            <Footer style={{ textAlign: 'center' }}>
+              IPST ©2019 | Contribute: All the source code for this website is
+              available on Github
+            </Footer>
           </Router>
         )}
       </React.Fragment>

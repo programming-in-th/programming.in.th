@@ -2,6 +2,7 @@ import React from 'react'
 import styled, { keyframes } from 'styled-components'
 
 import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
 
 const fadeIn = keyframes`
   from {
@@ -14,7 +15,6 @@ const fadeIn = keyframes`
 `
 
 const Container = styled.div`
-  animation: ${fadeIn} 3s;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -28,6 +28,7 @@ const Container = styled.div`
 `
 
 const MainContainer = styled(Container)`
+  animation: ${fadeIn} 3s;
   min-height: calc(100vh - 64px);
 `
 
@@ -35,6 +36,16 @@ const Title = styled.h1`
   font-size: 48px;
   font-family: Montserrat;
   font-weight: 800;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+`
+const CustomLink = styled(Link)`
+  font-size: 48px;
+  font-family: Montserrat;
+  font-weight: 800;
+  text-decoration: none;
 
   @media (max-width: 768px) {
     font-size: 24px;
@@ -72,8 +83,10 @@ export const _Index: React.FunctionComponent = () => (
       <div>
         <Title>
           With over 200 problems designed and curated by our specialists, we
-          strive to deliver the most comprehensive learning experience possible.
-          (Take me to my first problem!)
+          strive to deliver the most comprehensive learning experience possible.{' '}
+          <CustomLink to="/tasks/0000">
+            (Take me to my first problem!)
+          </CustomLink>
         </Title>
         <SubTitle>
           Programming.in.th provides you with the fundamentals of algorithmic
@@ -86,7 +99,8 @@ export const _Index: React.FunctionComponent = () => (
       <div>
         <Title>
           Our learning resources contain all the content you need to excel at
-          algorithmic problem-solving. (Start learning now!)
+          algorithmic problem-solving.{' '}
+          <CustomLink to="/learn">(Start learning now!)</CustomLink>
         </Title>
         <SubTitle>
           Programming.in.th provides you with the fundamentals of algorithmic
