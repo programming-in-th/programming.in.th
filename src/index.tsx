@@ -121,6 +121,7 @@ const { Content, Footer } = Layout
 
 const CustomLayout = styled(Layout)`
   min-height: 100vh;
+  max-width: 1800px;
 `
 
 interface IRootProps {
