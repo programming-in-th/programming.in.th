@@ -121,7 +121,11 @@ const { Content, Footer } = Layout
 
 const CustomLayout = styled(Layout)`
   min-height: 100vh;
-  max-width: 1800px;
+`
+
+const CustomContent = styled(Content)`
+  max-width: 1440px;
+  margin: 0 auto;
 `
 
 interface IRootProps {
@@ -192,7 +196,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
             <CustomLayout>
               <GlobalStyle />
               <Nav />
-              <Content style={{ marginTop: 64 }}>
+              <CustomContent style={{ marginTop: 64 }}>
                 <Switch>
                   <Route exact path="/" component={Index} />
                   <Route exact path="/tasks" component={TasksPage} />
@@ -218,7 +222,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
                   <Route exact path="/setting" component={SettingPage} />
                   <Route component={NotFound} />
                 </Switch>
-              </Content>
+              </CustomContent>
               <Footer style={{ textAlign: 'center' }}>
                 IPST ©2019 | Contribute: All the source code for this website is
                 available on{' '}
