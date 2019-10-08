@@ -30,6 +30,12 @@
 }
 
 @font-face {
+  font-family: Kanit;
+  font-weight: 400;
+  src: url('../fonts/Kanit-Regular.ttf') format('truetype');
+}
+
+@font-face {
   font-family: Fira Code;
   src: url('../fonts/FiraCode-Regular.ttf') format('truetype');
 }
@@ -73,8 +79,8 @@ div {
 
 * {
   /* This will automatic fallback Thai font which Roboto can't handle. In other words, this will support Thai font by default. */
-  font-family: Roboto, Sarabun, -apple-system, BlinkMacSystemFont, 'Segoe UI',
-    Helvetica, arial, sans-serif;
+  font-family: Roboto, Kanit, Sarabun, -apple-system, BlinkMacSystemFont,
+    'Segoe UI', Helvetica, arial, sans-serif;
   font-display: swap;
   box-sizing: border-box;
   -webkit-tap-highlight-color: transparent !important;
