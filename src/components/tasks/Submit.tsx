@@ -203,7 +203,6 @@ const mapDispatchToProps: (
       code: string,
       language: string
     ) => {
-      console.log(uid, problem_id, code, language)
       dispatch(actionCreators.makeSubmission(uid, problem_id, code, language))
     },
     reSubmit: () => dispatch(actionCreators.resubmitSubmission()),
