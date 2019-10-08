@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Select } from 'antd'
 
 import { AnyAction } from 'redux'
 import { connect } from 'react-redux'
@@ -7,9 +8,8 @@ import { ThunkDispatch } from 'redux-thunk'
 import * as actionCreators from '../redux/actions/index'
 import { ISubmissions } from '../redux/types/submission'
 import { CustomSpin } from '../components/Spin'
-
+import { transformStatus } from '../utils/transform'
 import { Code } from '../components/Code'
-import { Select } from 'antd'
 import { ContainerWrapper } from '../components/atomics'
 
 const { Option } = Select
@@ -67,7 +67,6 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
         <ContainerWrapper>
           <Wrapper>
             <div style={{ margin: '15px 0' }}>
-              <h1>{this.props.detail.problem_id}</h1>
               <p>Status: {this.props.detail.status}</p>
               <p>Points: {this.props.detail.points}</p>
               <p>Memory: {this.props.detail.memory} KB</p>
@@ -104,7 +103,7 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
 
 const mapStateToProps: (state: any) => any = state => {
   return {
-    detail: state.submissions.detail,
+    detail: transformStatus(state.submissions.detail),
     status: state.submissions.detailStatus,
     user: state.user.user
   }
