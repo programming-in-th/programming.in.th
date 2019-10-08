@@ -1,6 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { withRouter } from 'react-router'
+import { Layout } from 'antd'
+
+import { withRouter, match } from 'react-router'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import styled from 'styled-components'
@@ -14,6 +16,7 @@ const responsive = `(max-width: 1020px)`
 
 interface INavigatorProps {
   location: H.Location
+  match: match
   user?: firebase.User
 }
 
@@ -27,11 +30,53 @@ interface IItem {
 
 interface INavigatorStates {
   visible: boolean
+  top: boolean
 }
+
+const { Header } = Layout
+
+const enableTransparency = (location: string, top: boolean): string => {
+  if (location === '/') {
+    return top ? 'transparent' : 'white'
+  }
+
+  return 'white'
+}
+
+const NavHeader = styled(Header)<{ top: boolean; location: string }>`
+  background: ${props => enableTransparency(props.location, props.top)};
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+
+  @media screen and (max-width: 768px) {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+`
 
 class Navigator extends React.Component<INavigatorProps, INavigatorStates> {
   state: INavigatorStates = {
-    visible: false
+    visible: false,
+    top: true
+  }
+
+  checkScrollPosition = () => {
+    const { pageYOffset } = window
+
+    if (pageYOffset > 20) {
+      this.setState({ top: false })
+    } else if (pageYOffset === 0) {
+      this.setState({ top: true })
+    }
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.checkScrollPosition)
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.checkScrollPosition)
   }
 
   showDrawer = () => {
@@ -48,34 +93,36 @@ class Navigator extends React.Component<INavigatorProps, INavigatorStates> {
     const { user } = this.props
 
     return (
-      <React.Fragment>
-        <Logo>
-          <Link to="/">programming.in.th</Link>
-        </Logo>
-        <LeftMenu mode="horizontal" location={location} />
-        <RightMenu mode="horizontal" location={location} user={user} />
-        <BarMenu icon="menu" onClick={this.showDrawer} size="large" />
-        <Drawer
-          title="Menu"
-          placement="top"
-          onClose={this.hideDrawer}
-          visible={this.state.visible}
-          height="auto"
-          bodyStyle={{ padding: '10px' }}
-        >
-          <MainDrawer
-            mode="vertical"
-            location={location}
-            hideDrawer={this.hideDrawer}
-          />
-          <LoginDrawer
-            mode="vertical"
-            location={location}
-            hideDrawer={this.hideDrawer}
-            user={user}
-          />
-        </Drawer>
-      </React.Fragment>
+      <NavHeader top={this.state.top} location={locationReal}>
+        <React.Fragment>
+          <Logo>
+            <Link to="/">programming.in.th</Link>
+          </Logo>
+          <LeftMenu mode="horizontal" location={location} />
+          <RightMenu mode="horizontal" location={location} user={user} />
+          <BarMenu icon="menu" onClick={this.showDrawer} size="large" />
+          <Drawer
+            title="Menu"
+            placement="top"
+            onClose={this.hideDrawer}
+            visible={this.state.visible}
+            height="auto"
+            bodyStyle={{ padding: '10px' }}
+          >
+            <MainDrawer
+              mode="vertical"
+              location={location}
+              hideDrawer={this.hideDrawer}
+            />
+            <LoginDrawer
+              mode="vertical"
+              location={location}
+              hideDrawer={this.hideDrawer}
+              user={user}
+            />
+          </Drawer>
+        </React.Fragment>
+      </NavHeader>
     )
   }
 }

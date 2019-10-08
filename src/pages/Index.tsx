@@ -58,7 +58,7 @@ const SubTitle = styled.h2`
   font-family: Montserrat;
   color: #262626;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1020px) {
     font-size: 12px;
   }
 `

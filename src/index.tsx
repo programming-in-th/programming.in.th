@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react'
 import ReactDOM from 'react-dom'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, match } from 'react-router-dom'
 import { Layout } from 'antd'
 import firebase from 'firebase/app'
 import 'firebase/functions'
@@ -117,14 +117,7 @@ const Register = LazyComponent(
 
 const db = firebase.firestore()
 
-const { Header, Content, Footer } = Layout
-
-const NavHeader = styled(Header)<{ top: boolean }>`
-  background: ${props => (props.top ? 'transparent' : 'white')};
-  position: fixed;
-  z-index: 100;
-  width: 100%;
-`
+const { Content, Footer } = Layout
 
 const CustomLayout = styled(Layout)`
   min-height: 100vh;
@@ -136,6 +129,7 @@ interface IRootProps {
   resetCurrentSubmissionUID: () => void
   user: 'LOADING' | firebase.User | null
   currentSubmissionUID: string
+  match: match
 }
 
 interface IRootStates {
@@ -151,23 +145,8 @@ class Root extends React.Component<IRootProps, IRootStates> {
     old_submission_id: ''
   }
 
-  checkScrollPosition = () => {
-    const { pageYOffset } = window
-
-    if (pageYOffset > 20) {
-      this.setState({ top: false })
-    } else if (pageYOffset === 0) {
-      this.setState({ top: true })
-    }
-  }
-
   componentDidMount() {
     this.props.onInitialLoad()
-    window.addEventListener('scroll', this.checkScrollPosition)
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.checkScrollPosition)
   }
 
   componentDidUpdate() {
@@ -210,9 +189,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
           <Router>
             <CustomLayout>
               <GlobalStyle />
-              <NavHeader top={this.state.top}>
-                <Nav />
-              </NavHeader>
+              <Nav />
               <Content style={{ marginTop: 64 }}>
                 <Switch>
                   <Route exact path="/" component={Index} />
@@ -243,7 +220,14 @@ class Root extends React.Component<IRootProps, IRootStates> {
             </CustomLayout>
             <Footer style={{ textAlign: 'center' }}>
               IPST ©2019 | Contribute: All the source code for this website is
-              available on Github
+              available on{' '}
+              <a
+                href="https://github.com/programming-in-th/programming.in.th"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                GitHub
+              </a>
             </Footer>
           </Router>
         )}

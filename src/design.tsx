@@ -42,9 +42,9 @@ export function fontSize(n: number): string {
 
 export const GlobalStyle = createGlobalStyle`
   body {
-  margin: 0;
-  width: 100%;
-  background-color: #f1f5fa;
+	margin: 0;
+	width: 100%;
+	background-color: #f1f5fa;
 }
 
 h1,
@@ -59,8 +59,8 @@ b,
 u,
 i,
 div {
-  cursor: default;
-  margin: 0;
+	cursor: default;
+	margin: 0;
 }
 
 h1,
@@ -69,51 +69,51 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: ${Fonts.display};
+	font-family: ${Fonts.display}
+	;
 }
 
 ::selection,
 ::-webkit-selection {
-  background-color: rgba(0, 123, 255, 0.25);
+	background-color: rgba(0, 123, 255, 0.25);
 }
 
 * {
-  /* This will automatic fallback Thai font which Roboto can't handle. In other words, this will support Thai font by default. */
-  font-family:  ${Fonts.body};
-  font-display: swap;
-  box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent !important;
+	/* This will automatic fallback Thai font which Roboto can't handle. In other words, this will support Thai font by default. */
+	font-family : ${Fonts.body};
+	font-display: swap;
+	box-sizing: border-box;
+	-webkit-tap-highlight-color: transparent !important;
 }
 
 .untouchable {
-  -webkit-user-select: none !important;
-  -moz-user-select: none !important;
-  -ms-user-select: none !important;
-  user-select: none !important;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-touch-callout: none !important;
-  -webkit-text-size-adjust: none !important;
-  -webkit-overflow-scrolling: touch;
+	-webkit-user-select: none !important;
+	-moz-user-select: none !important;
+	-ms-user-select: none !important;
+	user-select: none !important;
+	-webkit-tap-highlight-color: transparent !important;
+	-webkit-touch-callout: none !important;
+	-webkit-text-size-adjust: none !important;
+	-webkit-overflow-scrolling: touch;
 }
 
 .th {
-  font-family: Sarabun;
+	font-family: Sarabun;
 }
 
 #root {
-    width: 1020px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+	width: 1020px;
+	margin-left: auto;
+	margin-right: auto;
+}
 
-  .divider {
-    margin-top: 25px;
-    padding: 7px 0;
-    color: #8e8e93;
-
-    p {
-      font-size: 24px;
-      font-weight: bolder;
-    }
+.divider {
+	margin-top: 25px;
+	padding: 7px 0;
+	color: #8e8e93;
+	p {
+		font-size: 24px;
+		font-weight: bolder;
+	}
 }
 `
