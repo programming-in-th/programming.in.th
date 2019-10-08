@@ -201,7 +201,11 @@ const Login = (props: IItem) => {
       ) : (
         <Menu
           mode={props.mode}
-          style={{ lineHeight: '64px' }}
+          style={{
+            lineHeight: '64px',
+            background: 'transparent',
+            border: 'none'
+          }}
           selectedKeys={[props.location]}
         >
           <Menu.Item key="login">
