@@ -42,10 +42,12 @@ const MainContainer = styled(Container)`
   }
 `
 
-const Title = styled.h1`
+const Title = styled.h1<{ color?: string }>`
   font-size: 42px;
   font-family: Montserrat;
   font-weight: 800;
+  display: inline;
+  color: ${props => props.color || 'black'};
 
   @media (max-width: 768px) {
     font-size: 24px;
@@ -93,8 +95,9 @@ export const _Index: React.FunctionComponent = () => (
         <div>
           <Title>
             "Bad programmers worry about the code. Good programmers worry about
-            data structures and their relationships" — Linus Torvalds.
           </Title>
+          <Title color="#5D5CFF"> data structures </Title>{' '}
+          <Title>and their relationships" — Linus Torvalds.</Title>
           <SubTitle>
             Programming.in.th provides you with the fundamentals of algorithmic
             problem-solving, an important skill to differentiate yourself as a
