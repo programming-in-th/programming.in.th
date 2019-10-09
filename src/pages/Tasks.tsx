@@ -42,6 +42,7 @@ class TasksListComponent extends React.Component<
     taskList: [],
     firstLoad: false
   }
+
   handleClick = (task: string): void => {
     this.props.history.push('/tasks/' + task)
   }
@@ -108,20 +109,22 @@ class TasksListComponent extends React.Component<
     }
   }
 
-  handleSearch = (searchText: string) => {
+  handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
     const filteredEvents = this.props.taskList.filter(
       ({ problem_id, title }) => {
-        const textLowerCase = searchText.toLowerCase()
+        const textLowerCase = e.currentTarget.value.toLowerCase()
         title = title.toLowerCase()
         const statusProblemID = problem_id.toLowerCase().includes(textLowerCase)
         const statusTitle = title.toLowerCase().includes(textLowerCase)
         return statusProblemID || statusTitle
       }
     )
+
     this.setState({
       taskList: filteredEvents
     })
   }
+
   render() {
     return (
       <WhiteContainerWrapper>
@@ -129,7 +132,7 @@ class TasksListComponent extends React.Component<
           Search:
           <Search
             placeholder="Enter Problem ID or Title"
-            onSearch={this.handleSearch}
+            onChange={e => this.handleSearch(e)}
             style={{ width: 200, margin: 10 }}
           />
         </SearchWrapper>
