@@ -193,7 +193,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
   render() {
     return (
       <React.Fragment>
-        <Head></Head>
+        <Head />
         {this.props.user === 'LOADING' ? (
           <CustomSpin />
         ) : (

@@ -3,8 +3,18 @@ import { Helmet } from 'react-helmet'
 
 export const Head: React.FunctionComponent<{}> = () => (
   <Helmet>
-    <link rel="preload" href="assets/fonts/Kanit-Regular.woff2" as="font" />
-    <link rel="preload" href="assets/fonts/THSarabun.woff2" as="font" />
+    <link
+      rel="preload"
+      href="assets/fonts/Kanit-Regular.woff2"
+      as="font"
+      crossOrigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/THSarabun.woff2"
+      as="font"
+      crossOrigin="anonymous"
+    />
     <meta
       name="Description"
       content="Programming.in.th provides you with the fundamentals of algorithmic problem-solving, an important skill to differentiate yourself as a programmer in an increasingly technologically advanced world."
