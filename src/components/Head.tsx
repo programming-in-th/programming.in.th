@@ -30,6 +30,7 @@ export const Head: React.FunctionComponent<{}> = () => (
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary" />
     <style type="text/css">
       {` @font-face {
         font-family: 'Sarabun';
