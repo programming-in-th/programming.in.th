@@ -34,7 +34,8 @@ class Register extends React.Component<
           this.props.history,
           values.email,
           values.password,
-          values.passwordConfirm
+          values.passwordConfirm,
+          values.displayName
         )
       }
     })
@@ -48,12 +49,14 @@ class Register extends React.Component<
     history: H.History,
     email: string,
     pass: string,
-    passConfirm: string
+    passConfirm: string,
+    displayName: string
   ) => {
     if (pass !== passConfirm) {
       this.setState({ errorMessage: 'Password not match' })
       return
     }
+
     return firebase
       .auth()
       .createUserWithEmailAndPassword(email, pass)
@@ -61,9 +64,11 @@ class Register extends React.Component<
         const currentUser = firebase.auth().currentUser
         if (currentUser) {
           currentUser.sendEmailVerification()
+          return currentUser.updateProfile({ displayName }).then(() => {
+            history.length > 2 ? history.goBack() : history.replace('/')
+            firebase.auth().signOut()
+          })
         }
-        firebase.auth().signOut()
-        history.length > 2 ? history.goBack() : history.replace('/')
       })
       .catch(error => {
         this.setState({ errorMessage: error.message })
@@ -79,14 +84,31 @@ class Register extends React.Component<
             <h1>Register</h1>
             <StyledForm onSubmit={this.handleSubmit}>
               <Form.Item>
-                {getFieldDecorator('email', {
+                {getFieldDecorator('displayName', {
                   rules: [
-                    { required: true, message: 'Please input your username!' }
+                    {
+                      required: true,
+                      message: 'Please input your Display Name!'
+                    }
                   ]
                 })(
                   <Input
                     prefix={
                       <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
+                    }
+                    placeholder="Name"
+                  />
+                )}
+              </Form.Item>
+              <Form.Item>
+                {getFieldDecorator('email', {
+                  rules: [
+                    { required: true, message: 'Please input your E-mail!' }
+                  ]
+                })(
+                  <Input
+                    prefix={
+                      <Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />
                     }
                     placeholder="Email"
                   />
