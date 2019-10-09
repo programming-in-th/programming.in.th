@@ -61,13 +61,13 @@ class TasksListComponent extends React.Component<
       title: 'Problem ID',
       dataIndex: 'problem_id',
       defaultSortOrder: ['descend', 'ascend'],
-      sorter: (a: ITask, b: ITask) => b.problem_id.length - a.problem_id.length
+      sorter: (a: ITask, b: ITask) => a.problem_id.localeCompare(b.problem_id)
     },
     {
       title: 'Problem',
       dataIndex: 'title',
       defaultSortOrder: ['descend', 'ascend'],
-      sorter: (a: ITask, b: ITask) => b.title.length - a.title.length
+      sorter: (a: ITask, b: ITask) => a.title.localeCompare(b.title)
     },
     {
       title: 'Difficulty',
