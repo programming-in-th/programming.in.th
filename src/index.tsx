@@ -10,6 +10,7 @@ import WebFont from 'webfontloader'
 
 import { Nav } from './components/nav/Nav'
 import { CustomSpin } from './components/Spin'
+import { Head } from './components/Head'
 
 import { AnyAction } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
@@ -192,6 +193,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
   render() {
     return (
       <React.Fragment>
+        <Head></Head>
         {this.props.user === 'LOADING' ? (
           <CustomSpin />
         ) : (
