@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { animated } from 'react-spring'
 
 export const ContainerWrapper = styled.div`
   width: calc(100% - 50px * 2);
@@ -17,4 +18,16 @@ export const WhiteContainerWrapper = styled(ContainerWrapper)`
 
 export const Padding = styled.div`
   padding: 15px 0;
+`
+
+export const AnimatedTitle = styled(animated.h1)<{ color?: string }>`
+  font-size: 42px;
+  font-family: Montserrat;
+  font-weight: 800;
+  display: inline;
+  color: ${props => props.color || 'black'};
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
 `

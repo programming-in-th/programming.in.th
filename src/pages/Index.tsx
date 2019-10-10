@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styled, { keyframes } from 'styled-components'
+import 'intersection-observer'
+import Observer from '@researchgate/react-intersection-observer'
 
 import { withRouter } from 'react-router'
 import { Link } from 'react-router-dom'
 
 import { DesktopOnly } from '../components/Responsive'
+import { IncreasingNumber } from '../components/IncreasingNumber'
 
 import TitleIllus from '../assets/svg/title.svg'
 import ProblemIllus from '../assets/svg/problem.svg'
@@ -53,6 +56,7 @@ const Title = styled.h1<{ color?: string }>`
     font-size: 24px;
   }
 `
+
 const CustomLink = styled(Link)`
   font-size: 48px;
   font-family: Montserrat;
@@ -74,12 +78,14 @@ const SubTitle = styled.h2`
     font-size: 12px;
   }
 `
+
 const RightIllus = styled.div`
-  min-width: 700px;
+  min-width: 55%;
   padding-left: 64px;
 `
+
 const LeftIllus = styled.div`
-  min-width: 700px;
+  min-width: 55%;
   padding-right: 64px;
 `
 
@@ -88,76 +94,105 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `
 
-export const _Index: React.FunctionComponent = () => (
-  <React.Fragment>
-    <Wrapper>
-      <MainContainer>
-        <div>
-          <Title>
-            "Bad programmers worry about the code. Good programmers worry about
-          </Title>
-          <Title color="#5D5CFF"> data structures </Title>{' '}
-          <Title>and their relationships" — Linus Torvalds.</Title>
-          <SubTitle>
-            Programming.in.th provides you with the fundamentals of algorithmic
-            problem-solving, an important skill to differentiate yourself as a
-            programmer in an increasingly technologically advanced world.
-          </SubTitle>
-        </div>
-        <DesktopOnly>
-          <RightIllus>
-            <img src={TitleIllus} alt="Title"></img>
-          </RightIllus>
-        </DesktopOnly>
-      </MainContainer>
-      <Container>
-        <DesktopOnly>
-          <LeftIllus>
-            <img src={ProblemIllus} alt="Problem"></img>
-          </LeftIllus>
-        </DesktopOnly>
-        <div>
-          <Title>
-            With over 200 problems designed and curated by our specialists, we
-            strive to deliver the most comprehensive learning experience
-            possible.{' '}
-            <CustomLink to="/tasks/0000">
-              (Take me to my first problem!)
-            </CustomLink>
-          </Title>
-          <SubTitle>
-            Programming.in.th provides you with the fundamentals of algorithmic
-            problem-solving, an important skill to differentiate yourself as a
-            programmer in an increasingly technologically advanced world.
-          </SubTitle>
-        </div>
-      </Container>
-      <Container>
-        <div>
-          <Title>
-            Our learning resources contain all the content you need to excel at
-            algorithmic problem-solving.{' '}
-            <CustomLink to="/learn">(Start learning now!)</CustomLink>
-          </Title>
-          <SubTitle>
-            Programming.in.th provides you with the fundamentals of algorithmic
-            problem-solving, an important skill to differentiate yourself as a
-            programmer in an increasingly technologically advanced world.
-          </SubTitle>
-        </div>
-        <DesktopOnly>
-          <RightIllus>
-            <img src={LearnIllus} alt="Learn"></img>
-          </RightIllus>
-        </DesktopOnly>
-      </Container>
-      <Container>
-        <div>
-          <Title>Got a question? Ask away!</Title>
-        </div>
-      </Container>
-    </Wrapper>
-  </React.Fragment>
-)
+export const _Index: React.FunctionComponent = () => {
+  const [isIntersecting, setIntersection] = useState(false)
+
+  const handleChange = (
+    ev: IntersectionObserverEntry,
+    unobserve: () => void
+  ) => {
+    if (ev.isIntersecting) {
+      unobserve()
+    }
+
+    ev.isIntersecting ? setIntersection(true) : setIntersection(false)
+    console.log(isIntersecting)
+  }
+
+  return (
+    <React.Fragment>
+      <Wrapper id="scrolling-container">
+        <MainContainer>
+          <div>
+            <Title>
+              "Bad programmers worry about the code. Good programmers worry
+              about
+            </Title>
+            <Title color="#5D5CFF"> data structures </Title>{' '}
+            <Title>and their relationships" — Linus Torvalds.</Title>
+            <SubTitle>
+              Programming.in.th provides you with the fundamentals of
+              algorithmic problem-solving, an important skill to differentiate
+              yourself as a programmer in an increasingly technologically
+              advanced world.
+            </SubTitle>
+          </div>
+          <DesktopOnly>
+            <RightIllus>
+              <img src={TitleIllus} alt="Title"></img>
+            </RightIllus>
+          </DesktopOnly>
+        </MainContainer>
+        <Observer onChange={handleChange} threshold={0.25}>
+          <Container>
+            <DesktopOnly>
+              <LeftIllus>
+                <img src={ProblemIllus} alt="Problem"></img>
+              </LeftIllus>
+            </DesktopOnly>
+            <div>
+              <Title>With over </Title>
+              {isIntersecting ? (
+                <IncreasingNumber></IncreasingNumber>
+              ) : (
+                <Title>0</Title>
+              )}
+              <Title>
+                {' '}
+                problems designed and curated by our specialists, we strive to
+                deliver the most comprehensive learning experience possible.{' '}
+              </Title>
+              <CustomLink to="/tasks/0000">
+                (Take me to my first problem!)
+              </CustomLink>
+              <SubTitle>
+                Programming.in.th provides you with the fundamentals of
+                algorithmic problem-solving, an important skill to differentiate
+                yourself as a programmer in an increasingly technologically
+                advanced world.
+              </SubTitle>
+            </div>
+          </Container>
+        </Observer>
+
+        <Container>
+          <div>
+            <Title>
+              Our learning resources contain all the content you need to excel
+              at algorithmic problem-solving.{' '}
+              <CustomLink to="/learn">(Start learning now!)</CustomLink>
+            </Title>
+            <SubTitle>
+              Programming.in.th provides you with the fundamentals of
+              algorithmic problem-solving, an important skill to differentiate
+              yourself as a programmer in an increasingly technologically
+              advanced world.
+            </SubTitle>
+          </div>
+          <DesktopOnly>
+            <RightIllus>
+              <img src={LearnIllus} alt="Learn"></img>
+            </RightIllus>
+          </DesktopOnly>
+        </Container>
+        <Container>
+          <div>
+            <Title>Got a question? Ask away!</Title>
+          </div>
+        </Container>
+      </Wrapper>
+    </React.Fragment>
+  )
+}
 
 export const Index = withRouter(_Index)
