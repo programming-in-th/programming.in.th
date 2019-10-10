@@ -1,9 +1,7 @@
 export interface ITaskState {
-  readonly currentPage: number
-  readonly currentPageSize: number
+  readonly taskPage: ITaskPage
   readonly currentTask: ITask | null
   readonly taskList: ReadonlyArray<ITask>
-  readonly tags: ReadonlyArray<String>
   readonly status: 'LOADING' | 'SUCCESS' | null
 }
 
@@ -17,4 +15,12 @@ export interface ITask {
   readonly memory_limit: number
   readonly difficulty: number
   readonly tags: ReadonlyArray<string>
+}
+
+export interface ITaskPage {
+  readonly currentPage: number
+  readonly currentPageSize: number | undefined
+  readonly searchWord: string
+  readonly searchTag: ReadonlyArray<string>
+  readonly searchDifficulty: ReadonlyArray<number>
 }

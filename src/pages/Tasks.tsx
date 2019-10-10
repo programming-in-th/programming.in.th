@@ -10,7 +10,7 @@ import * as actionCreators from '../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 
-import { ITask } from '../redux/types/task'
+import { ITask, ITaskPage } from '../redux/types/task'
 import { WhiteContainerWrapper } from '../components/atomics'
 import { SliderValue } from 'antd/lib/slider'
 
@@ -37,20 +37,17 @@ const SubFilterWrapper = styled.div`
 interface ITasksPageProps {
   taskList: ITask[]
   status: string
+  taskPage: ITaskPage
   history: H.History
-  currentPage: number
-  currentPageSize: number
-  setPage: (page: number, pageSize: number) => void
+  setPage: (page: ITaskPage) => void
   onInitialLoad: () => void
 }
 
 interface ITaskPageState {
   taskList: ITask[]
-  firstLoad: boolean
-  searchWord: string
   tagList: Array<string>
-  searchTag: Array<string>
-  difficulty: Array<number>
+  firstLoad: boolean
+  taskPage: ITaskPage | undefined
 }
 
 class TasksListComponent extends React.Component<
@@ -59,11 +56,9 @@ class TasksListComponent extends React.Component<
 > {
   state = {
     taskList: [],
-    firstLoad: false,
-    searchWord: '',
     tagList: [],
-    searchTag: [],
-    difficulty: [0, 10]
+    firstLoad: false,
+    taskPage: undefined
   }
 
   componentDidMount() {
@@ -80,6 +75,10 @@ class TasksListComponent extends React.Component<
         })
       })
       this.setState({ tagList: Array.from(new Set(tagNow)) })
+    }
+    if (this.state.taskPage !== this.props.taskPage) {
+      this.setState({ taskPage: this.props.taskPage })
+      this.updateTask()
     }
   }
 
@@ -126,62 +125,67 @@ class TasksListComponent extends React.Component<
   CustomPagination = {
     showQuickJumper: true,
     showSizeChanger: true,
-    defaultCurrent: this.props.currentPage,
-    defaultPageSize: this.props.currentPageSize,
-    onChange: (page: number, pageSize: number | undefined) => {
-      this.props.setPage(page, pageSize ? pageSize : 20)
+    defaultCurrent: this.props.taskPage.currentPage,
+    defaultPageSize: this.props.taskPage.currentPageSize,
+    onChange: (currentPage: number, currentPageSize: number | undefined) => {
+      this.props.setPage({
+        ...this.props.taskPage,
+        currentPage,
+        currentPageSize
+      })
     },
-    onShowSizeChange: (page: number, pageSize: number | undefined) => {
-      this.props.setPage(page, pageSize ? pageSize : 20)
+    onShowSizeChange: (
+      currentPage: number,
+      currentPageSize: number | undefined
+    ) => {
+      this.props.setPage({
+        ...this.props.taskPage,
+        currentPage,
+        currentPageSize
+      })
     }
   }
 
   updateTask = () => {
     const filteredEvents = this.props.taskList.filter(
       ({ problem_id, title, tags, difficulty }) => {
-        const textLowerCase = this.state.searchWord.toLowerCase()
+        const textLowerCase = this.props.taskPage.searchWord.toLowerCase()
         title = title.toLowerCase()
         const statusProblemID = problem_id.toLowerCase().includes(textLowerCase)
         const statusTitle = title.toLowerCase().includes(textLowerCase)
         let isTag = true
-        this.state.searchTag.forEach(
+        this.props.taskPage.searchTag.forEach(
           value => (isTag = isTag && tags.includes(value))
         )
 
         const difficultyStatus =
-          difficulty >= this.state.difficulty[0] &&
-          difficulty <= this.state.difficulty[1]
+          difficulty >= this.props.taskPage.searchDifficulty[0] &&
+          difficulty <= this.props.taskPage.searchDifficulty[1]
 
         return (statusProblemID || statusTitle) && isTag && difficultyStatus
       }
     )
-
     this.setState({
       taskList: filteredEvents
     })
   }
 
   handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
-    this.setState({ searchWord: e.currentTarget.value })
-    this.updateTask()
+    this.props.setPage({
+      ...this.props.taskPage,
+      searchWord: e.currentTarget.value
+    })
   }
 
-  handleTag = async (e: Array<string>) => {
-    const setStateAsync = (updater: any) =>
-      new Promise(resolve => this.setState(updater, resolve))
-    await setStateAsync((state: any) => ({
-      searchTag: e
-    }))
-    this.updateTask()
+  handleTag = async (value: Array<string>) => {
+    this.props.setPage({ ...this.props.taskPage, searchTag: value })
   }
 
   handleDifficulty = async (value: SliderValue) => {
-    const setStateAsync = (updater: any) =>
-      new Promise(resolve => this.setState(updater, resolve))
-    await setStateAsync((state: any) => ({
-      difficulty: value
-    }))
-    this.updateTask()
+    this.props.setPage({
+      ...this.props.taskPage,
+      searchDifficulty: value as Array<number>
+    })
   }
 
   render() {
@@ -192,6 +196,7 @@ class TasksListComponent extends React.Component<
           <SubFilterWrapper>
             Search:
             <Search
+              defaultValue={this.props.taskPage.searchWord}
               placeholder="Enter Problem ID or Title"
               onChange={e => this.handleSearch(e)}
               style={{ width: 200, margin: 10 }}
@@ -204,6 +209,7 @@ class TasksListComponent extends React.Component<
               mode="multiple"
               style={{ width: '100%', marginLeft: '10px' }}
               placeholder="Please select"
+              defaultValue={this.props.taskPage.searchTag as Array<string>}
               onChange={this.handleTag}
             >
               {tagArray.map(value => {
@@ -219,7 +225,7 @@ class TasksListComponent extends React.Component<
               min={0}
               max={10}
               style={{ width: '100%', marginLeft: '20px' }}
-              defaultValue={[0, 10]}
+              defaultValue={this.props.taskPage.searchDifficulty as SliderValue}
               onChange={this.handleDifficulty}
             />
           </SubFilterWrapper>
@@ -244,13 +250,7 @@ class TasksListComponent extends React.Component<
 }
 
 const mapStateToProps: (state: any) => any = state => {
-  return {
-    tags: state.tasks.tags,
-    taskList: state.tasks.taskList,
-    status: state.tasks.status,
-    currentPage: state.tasks.currentPage,
-    currentPageSize: state.tasks.currentPageSize
-  }
+  return { ...state.tasks }
 }
 
 const mapDispatchToProps: (
@@ -260,8 +260,8 @@ const mapDispatchToProps: (
     onInitialLoad: () => {
       dispatch(actionCreators.loadTasksList(-1, -1, -1, []))
     },
-    setPage: (page: number, pageSize: number) => {
-      dispatch(actionCreators.setPage(page, pageSize))
+    setPage: (page: ITaskPage) => {
+      dispatch(actionCreators.setPage(page))
     }
   }
 }

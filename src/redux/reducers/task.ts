@@ -1,7 +1,6 @@
 import { AnyAction, Reducer } from 'redux'
 import { ITaskState } from '../types/task'
 import {
-  LOAD_TAGS,
   REQUEST_TASKS_LIST,
   RECEIVE_TASKS_LIST,
   REQUEST_TASK,
@@ -10,11 +9,15 @@ import {
 } from '../actions/task'
 
 const initialState: ITaskState = {
-  currentPage: 1,
-  currentPageSize: 20,
+  taskPage: {
+    currentPage: 1,
+    currentPageSize: 20,
+    searchWord: '',
+    searchTag: [],
+    searchDifficulty: [0, 10]
+  },
   currentTask: null,
   taskList: [],
-  tags: [],
   status: null
 }
 
@@ -23,10 +26,6 @@ const reducer: Reducer = (
   action: AnyAction
 ): ITaskState => {
   switch (action.type) {
-    case LOAD_TAGS:
-      return Object.assign({}, state, {
-        tags: action.tags
-      })
     case REQUEST_TASKS_LIST:
       return Object.assign({}, state, {
         status: 'LOADING'
@@ -47,8 +46,7 @@ const reducer: Reducer = (
       })
     case RECEIVE_PAGE:
       return Object.assign({}, state, {
-        currentPage: action.currentPage,
-        currentPageSize: action.currentPageSize
+        taskPage: action.taskPage
       })
     default:
       return state

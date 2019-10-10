@@ -1,4 +1,4 @@
-export { loadTags, loadTasksList, loadTask, setPage } from './task'
+export { loadTasksList, loadTask, setPage } from './task'
 export { fetchUser } from './user'
 export {
   loadSubmissionsList,

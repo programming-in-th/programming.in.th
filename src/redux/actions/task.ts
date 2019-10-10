@@ -1,13 +1,8 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import { ITask } from '../types/task'
+import { ITask, ITaskPage } from '../types/task'
 import { IAppState } from '..'
 import firebase from 'firebase/app'
-
-export const LOAD_TAGS = 'LOAD_TAGS'
-export const loadTags = () => {
-  // TODO: Implement
-}
 
 export const loadTasksList = (
   limit: number,
@@ -91,17 +86,16 @@ const receiveTask = (task: ITask | undefined) => {
   }
 }
 
-export const setPage = (page: number, pageSize: number) => {
+export const setPage = (page: ITaskPage) => {
   return (dispatch: ThunkDispatch<IAppState, {}, AnyAction>) => {
-    dispatch(receivePage(page, pageSize))
+    dispatch(receivePage(page))
   }
 }
 
 export const RECEIVE_PAGE = 'RECEIVE_PAGE'
-const receivePage = (page: number, pageSize: number) => {
+const receivePage = (page: ITaskPage) => {
   return {
     type: RECEIVE_PAGE,
-    currentPage: page,
-    currentPageSize: pageSize
+    taskPage: page
   }
 }
