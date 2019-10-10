@@ -60,6 +60,13 @@ class SubmissionsComponent extends React.Component<
           dataSource={this.props.submissionsList}
           columns={this.columns}
           loading={this.props.submissionsListStatus === 'LOADING'}
+          onRow={(record: any) => {
+            return {
+              onClick: () => {
+                this.props.history.push('/submissions/' + record.submission_id)
+              }
+            }
+          }}
         />
       </WhiteContainerWrapper>
     )
