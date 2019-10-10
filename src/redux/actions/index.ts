@@ -6,6 +6,7 @@ export {
   makeSubmission,
   resubmitSubmission,
   errorSubmit,
-  resetCurrentSubmission
+  resetCurrentSubmission,
+  setPageConfig
 } from './submission'
 export { loadContent, loadMenu } from './learn'

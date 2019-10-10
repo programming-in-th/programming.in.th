@@ -1,7 +1,7 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { IAppState } from '..'
-import { ISubmissions } from '../types/submission'
+import { ISubmission, ISubmissionPage } from '../types/submission'
 import firebase from 'firebase/app'
 
 export const loadSubmissionsList = () => {
@@ -34,7 +34,7 @@ export const loadDetail = (submission_id: string) => {
         submission_id: submission_id
       })
 
-      const submission_data: ISubmissions = {
+      const submission_data: ISubmission = {
         ...response.data.metadata,
         submission_id: submission_id,
         code: response.data.code
@@ -87,7 +87,7 @@ const requestDetail = () => {
 }
 
 export const RECEIVE_DETAIL = 'RECEIVE_DETAIL'
-const receiveDetail = (data: ISubmissions) => {
+const receiveDetail = (data: ISubmission) => {
   return {
     type: RECEIVE_DETAIL,
     detail: data
@@ -102,7 +102,7 @@ const requestSubmissions = () => {
 }
 
 export const RECEIVE_SUBMISSIONS_LIST = 'RECEIVE_SUBMISSIONS_LIST'
-const receiveSubmissions = (data: ISubmissions[]) => {
+const receiveSubmissions = (data: ISubmission[]) => {
   return {
     type: RECEIVE_SUBMISSIONS_LIST,
     submissionsList: data
@@ -145,5 +145,13 @@ export const RESET_CURRENT_SUBMISSION = 'RESET_CURRENT_SUBMISSION'
 export const resetCurrentSubmission = () => {
   return {
     type: RESET_CURRENT_SUBMISSION
+  }
+}
+
+export const SET_PAGE_CONFIG = 'SET_PAGE_CONFIG'
+export const setPageConfig = (setting: ISubmissionPage) => {
+  return {
+    type: SET_PAGE_CONFIG,
+    submissionsPage: setting
   }
 }

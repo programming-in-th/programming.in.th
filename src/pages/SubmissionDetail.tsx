@@ -6,7 +6,7 @@ import { AnyAction } from 'redux'
 import { connect } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import * as actionCreators from '../redux/actions/index'
-import { ISubmissions } from '../redux/types/submission'
+import { ISubmission } from '../redux/types/submission'
 import { CustomSpin } from '../components/Spin'
 import { transformStatus } from '../utils/transform'
 import { CodeDisplay } from '../components/Code'
@@ -42,7 +42,7 @@ interface ISubmissionDetail {
   onInitialLoad: (id: string) => void
   resetCurrentSubmissionUID: () => void
   currentSubmissionUID: string
-  detail: ISubmissions
+  detail: ISubmission
   match: any
   user: firebase.User
   status: 'LOADING' | 'SUCCESS' | null

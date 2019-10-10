@@ -1,6 +1,6 @@
-import { ISubmissions } from '../redux/types/submission'
+import { ISubmission } from '../redux/types/submission'
 
-export const transformStatus = (detail: ISubmissions) => {
+export const transformStatus = (detail: ISubmission) => {
   if (detail === undefined) return
 
   if (detail.status === 'in_queue') {

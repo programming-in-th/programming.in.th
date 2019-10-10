@@ -3,36 +3,21 @@ import H from 'history'
 import { Table, Tag, Input, Select, Slider, Switch, Icon } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 
-import styled from 'styled-components'
-
 import { connect } from 'react-redux'
 import * as actionCreators from '../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 
 import { ITask, ITaskPage } from '../redux/types/task'
-import { WhiteContainerWrapper } from '../components/atomics'
+import {
+  WhiteContainerWrapper,
+  FilterWrapper,
+  SubFilterWrapper
+} from '../components/atomics'
 import { SliderValue } from 'antd/lib/slider'
 
 const Search = Input.Search
 const { Option } = Select
-
-const FilterWrapper = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-left: 20px;
-  margin-right: 20px;
-  @media (max-width: 1020px) {
-    display: block;
-  }
-`
-
-const SubFilterWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 5px;
-  min-width: 250px;
-`
 
 interface ITasksPageProps {
   taskList: ITask[]
@@ -76,6 +61,7 @@ class TasksListComponent extends React.Component<
       })
       this.setState({ tagList: Array.from(new Set(tagNow)) })
     }
+
     if (this.state.taskPage !== this.props.taskPage) {
       this.setState({ taskPage: this.props.taskPage })
       this.updateTask()
@@ -186,7 +172,7 @@ class TasksListComponent extends React.Component<
     })
   }
 
-  handleHideTag = async (check: boolean) => {
+  handleHideTag = (check: boolean) => {
     this.props.setPage({
       ...this.props.taskPage,
       hideTag: check

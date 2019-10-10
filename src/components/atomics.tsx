@@ -31,3 +31,20 @@ export const AnimatedTitle = styled(animated.h1)<{ color?: string }>`
     font-size: 24px;
   }
 `
+
+export const FilterWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-left: 20px;
+  margin-right: 20px;
+  @media (max-width: 1020px) {
+    display: block;
+  }
+`
+
+export const SubFilterWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  min-width: 250px;
+`

@@ -9,7 +9,8 @@ import {
   RECEIVE_MAKE_SUBMISSION,
   RESUBMIT_SUBMISSION,
   ERROR_SUBMIT,
-  RESET_CURRENT_SUBMISSION
+  RESET_CURRENT_SUBMISSION,
+  SET_PAGE_CONFIG
 } from '../actions/submission'
 
 const initialState: ISubmissionsState = {
@@ -19,7 +20,13 @@ const initialState: ISubmissionsState = {
   detailStatus: 'LOADING',
   currentSubmissionUID: undefined,
   submission_uid: undefined,
-  submissionResponse: 0
+  submissionResponse: 0,
+  submissionsPage: {
+    currentPage: 1,
+    currentPageSize: 20,
+    searchWord: '',
+    pointFilter: false
+  }
 }
 
 const reducer: Reducer = (
@@ -66,6 +73,10 @@ const reducer: Reducer = (
     case RESET_CURRENT_SUBMISSION:
       return Object.assign({}, state, {
         currentSubmissionUID: undefined
+      })
+    case SET_PAGE_CONFIG:
+      return Object.assign({}, state, {
+        submissionsPage: action.submissionsPage
       })
     default:
       return state

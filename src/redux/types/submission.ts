@@ -1,14 +1,15 @@
 export interface ISubmissionsState {
-  readonly submissionsList: ReadonlyArray<ISubmissions>
+  readonly submissionsList: ReadonlyArray<ISubmission>
+  readonly submissionsPage: ISubmissionPage
   readonly submissionsListStatus: 'LOADING' | 'SUCCESS' | null
-  readonly detail: ISubmissions | undefined
+  readonly detail: ISubmission | undefined
   readonly detailStatus: 'LOADING' | 'SUCCESS' | null
   readonly currentSubmissionUID: string | undefined
   readonly submission_uid: string | undefined
   readonly submissionResponse?: number
 }
 
-export interface ISubmissions {
+export interface ISubmission {
   readonly uid: string
   readonly submission_id: string
   readonly username: string
@@ -27,4 +28,11 @@ export interface INewSubmission {
   readonly problem_id: string
   readonly language: string
   readonly code: string
+}
+
+export interface ISubmissionPage {
+  readonly currentPage: number
+  readonly currentPageSize: number | undefined
+  readonly searchWord: string
+  readonly pointFilter: boolean
 }
