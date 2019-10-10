@@ -1,6 +1,6 @@
 import React from 'react'
 import H from 'history'
-import { Table, Tag, Input } from 'antd'
+import { Table, Tag, Input, Select } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 
 import styled from 'styled-components'
@@ -14,6 +14,7 @@ import { ITask } from '../redux/types/task'
 import { WhiteContainerWrapper } from '../components/atomics'
 
 const Search = Input.Search
+const { Option } = Select
 
 const SearchWrapper = styled.div`
   margin-left: 20px;
@@ -32,6 +33,9 @@ interface ITasksPageProps {
 interface ITaskPageState {
   taskList: ITask[]
   firstLoad: boolean
+  searchWord: string
+  tagList: Array<string>
+  searchTag: Array<string>
 }
 
 class TasksListComponent extends React.Component<
@@ -40,11 +44,10 @@ class TasksListComponent extends React.Component<
 > {
   state = {
     taskList: [],
-    firstLoad: false
-  }
-
-  handleClick = (task: string): void => {
-    this.props.history.push('/tasks/' + task)
+    firstLoad: false,
+    searchWord: '',
+    tagList: [],
+    searchTag: []
   }
 
   componentDidMount() {
@@ -52,8 +55,16 @@ class TasksListComponent extends React.Component<
   }
 
   componentDidUpdate() {
-    if (this.props.taskList.length > 1 && !this.state.firstLoad)
+    if (this.props.taskList.length > 1 && !this.state.firstLoad) {
       this.setState({ taskList: this.props.taskList, firstLoad: true })
+      let tagNow: Array<string> = []
+      this.props.taskList.forEach(val => {
+        val.tags.forEach(tag => {
+          tagNow.push(tag)
+        })
+      })
+      this.setState({ tagList: Array.from(new Set(tagNow)) })
+    }
   }
 
   columns = [
@@ -109,23 +120,43 @@ class TasksListComponent extends React.Component<
     }
   }
 
-  handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
+  updateTask = () => {
+    console.log(this.state.searchTag)
     const filteredEvents = this.props.taskList.filter(
-      ({ problem_id, title }) => {
-        const textLowerCase = e.currentTarget.value.toLowerCase()
+      ({ problem_id, title, tags }) => {
+        const textLowerCase = this.state.searchWord.toLowerCase()
         title = title.toLowerCase()
         const statusProblemID = problem_id.toLowerCase().includes(textLowerCase)
         const statusTitle = title.toLowerCase().includes(textLowerCase)
-        return statusProblemID || statusTitle
+        let isTag = true
+        this.state.searchTag.forEach(
+          value => (isTag = isTag && tags.includes(value))
+        )
+        return (statusProblemID || statusTitle) && isTag
       }
     )
-
     this.setState({
       taskList: filteredEvents
     })
   }
 
+  handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
+    this.setState({ searchWord: e.currentTarget.value })
+    this.updateTask()
+  }
+
+  handleTag = async (e: Array<string>) => {
+    console.log(e)
+    const setStateAsync = (updater: any) =>
+      new Promise(resolve => this.setState(updater, resolve))
+    await setStateAsync((state: any) => ({
+      searchTag: e
+    }))
+    this.updateTask()
+  }
+
   render() {
+    const tagArray = Array.from(this.state.tagList)
     return (
       <WhiteContainerWrapper>
         <SearchWrapper>
@@ -136,6 +167,16 @@ class TasksListComponent extends React.Component<
             style={{ width: 200, margin: 10 }}
           />
         </SearchWrapper>
+        <Select
+          mode="multiple"
+          style={{ width: '100%' }}
+          placeholder="Please select"
+          onChange={this.handleTag}
+        >
+          {tagArray.map(value => {
+            return <Option key={value}>{value}</Option>
+          })}
+        </Select>
         <Table
           onRow={(record: any) => {
             return {
