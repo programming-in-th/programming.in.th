@@ -1,6 +1,6 @@
 import React from 'react'
 import H from 'history'
-import { Table, Tag, Input, Select, Slider } from 'antd'
+import { Table, Tag, Input, Select, Slider, Switch, Icon } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 
 import styled from 'styled-components'
@@ -82,7 +82,7 @@ class TasksListComponent extends React.Component<
     }
   }
 
-  columns = [
+  columnsTag = [
     {
       title: 'Problem ID',
       dataIndex: 'problem_id',
@@ -114,13 +114,28 @@ class TasksListComponent extends React.Component<
         </span>
       )
     }
-    // {
-    //   title: 'Users solved',
-    //   dataIndex: 'solve_count',
-    //   defaultSortOrder: ['descend', 'ascend'],
-    //   sorter: (a: ITask, b: ITask) => a.solve_count < b.solve_count,
-    // }
-  ] as ColumnProps<{}>[]
+  ]
+
+  columnsHideTag = [
+    {
+      title: 'Problem ID',
+      dataIndex: 'problem_id',
+      defaultSortOrder: ['descend', 'ascend'],
+      sorter: (a: ITask, b: ITask) => a.problem_id.localeCompare(b.problem_id)
+    },
+    {
+      title: 'Problem',
+      dataIndex: 'title',
+      defaultSortOrder: ['descend', 'ascend'],
+      sorter: (a: ITask, b: ITask) => a.title.localeCompare(b.title)
+    },
+    {
+      title: 'Difficulty',
+      dataIndex: 'difficulty',
+      defaultSortOrder: ['descend', 'ascend'],
+      sorter: (a: ITask, b: ITask) => b.difficulty - a.difficulty
+    }
+  ]
 
   CustomPagination = {
     showQuickJumper: true,
@@ -177,14 +192,21 @@ class TasksListComponent extends React.Component<
     })
   }
 
-  handleTag = async (value: Array<string>) => {
+  handleTag = (value: Array<string>) => {
     this.props.setPage({ ...this.props.taskPage, searchTag: value })
   }
 
-  handleDifficulty = async (value: SliderValue) => {
+  handleDifficulty = (value: SliderValue) => {
     this.props.setPage({
       ...this.props.taskPage,
       searchDifficulty: value as Array<number>
+    })
+  }
+
+  handleHideTag = async (check: boolean) => {
+    this.props.setPage({
+      ...this.props.taskPage,
+      hideTag: check
     })
   }
 
@@ -229,6 +251,16 @@ class TasksListComponent extends React.Component<
               onChange={this.handleDifficulty}
             />
           </SubFilterWrapper>
+          <SubFilterWrapper>
+            <p>Hide Tag:</p>
+            <Switch
+              style={{ marginLeft: 10 }}
+              checkedChildren={<Icon type="check" />}
+              unCheckedChildren={<Icon type="close" />}
+              defaultChecked={this.props.taskPage.hideTag}
+              onChange={this.handleHideTag}
+            />
+          </SubFilterWrapper>
         </FilterWrapper>
         <Table
           onRow={(record: any) => {
@@ -239,7 +271,11 @@ class TasksListComponent extends React.Component<
             }
           }}
           scroll={{ x: 100 }}
-          columns={this.columns}
+          columns={
+            (this.props.taskPage.hideTag
+              ? this.columnsHideTag
+              : this.columnsTag) as ColumnProps<ITask>[]
+          }
           dataSource={this.state.taskList}
           loading={this.props.status === 'LOADING'}
           pagination={this.CustomPagination}

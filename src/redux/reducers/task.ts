@@ -14,7 +14,8 @@ const initialState: ITaskState = {
     currentPageSize: 20,
     searchWord: '',
     searchTag: [],
-    searchDifficulty: [0, 10]
+    searchDifficulty: [0, 10],
+    hideTag: true
   },
   currentTask: null,
   taskList: [],

@@ -23,4 +23,5 @@ export interface ITaskPage {
   readonly searchWord: string
   readonly searchTag: ReadonlyArray<string>
   readonly searchDifficulty: ReadonlyArray<number>
+  readonly hideTag: boolean
 }
