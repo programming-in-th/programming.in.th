@@ -21,8 +21,8 @@ const FilterWrapper = styled.div`
   display: flex;
   flex-direction: row;
   margin-left: 20px;
-
-  @media (max-width: 768px) {
+  margin-right: 20px;
+  @media (max-width: 1020px) {
     display: block;
   }
 `
