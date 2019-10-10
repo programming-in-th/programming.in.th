@@ -82,40 +82,6 @@ class TasksListComponent extends React.Component<
     }
   }
 
-  columnsTag = [
-    {
-      title: 'Problem ID',
-      dataIndex: 'problem_id',
-      defaultSortOrder: ['descend', 'ascend'],
-      sorter: (a: ITask, b: ITask) => a.problem_id.localeCompare(b.problem_id)
-    },
-    {
-      title: 'Problem',
-      dataIndex: 'title',
-      defaultSortOrder: ['descend', 'ascend'],
-      sorter: (a: ITask, b: ITask) => a.title.localeCompare(b.title)
-    },
-    {
-      title: 'Difficulty',
-      dataIndex: 'difficulty',
-      defaultSortOrder: ['descend', 'ascend'],
-      sorter: (a: ITask, b: ITask) => b.difficulty - a.difficulty
-    },
-    {
-      title: 'Tags',
-      dataIndex: 'tags',
-      render: (tags: Array<string>) => (
-        <span>
-          {tags.map((tag: string) => (
-            <Tag color="blue" key={tag}>
-              {tag}
-            </Tag>
-          ))}
-        </span>
-      )
-    }
-  ]
-
   columnsHideTag = [
     {
       title: 'Problem ID',
@@ -134,6 +100,23 @@ class TasksListComponent extends React.Component<
       dataIndex: 'difficulty',
       defaultSortOrder: ['descend', 'ascend'],
       sorter: (a: ITask, b: ITask) => b.difficulty - a.difficulty
+    }
+  ]
+
+  columnsTag = [
+    ...this.columnsHideTag,
+    {
+      title: 'Tags',
+      dataIndex: 'tags',
+      render: (tags: Array<string>) => (
+        <span>
+          {tags.map((tag: string) => (
+            <Tag color="blue" key={tag}>
+              {tag}
+            </Tag>
+          ))}
+        </span>
+      )
     }
   ]
 
@@ -233,6 +216,7 @@ class TasksListComponent extends React.Component<
               placeholder="Please select"
               defaultValue={this.props.taskPage.searchTag as Array<string>}
               onChange={this.handleTag}
+              disabled={this.props.taskPage.hideTag}
             >
               {tagArray.map(value => {
                 return <Option key={value}>{value}</Option>
