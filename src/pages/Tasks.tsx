@@ -1,6 +1,6 @@
 import React from 'react'
 import H from 'history'
-import { Table, Tag, Input, Select } from 'antd'
+import { Table, Tag, Input, Select, Slider } from 'antd'
 import { ColumnProps } from 'antd/lib/table'
 
 import styled from 'styled-components'
@@ -12,12 +12,26 @@ import { AnyAction } from 'redux'
 
 import { ITask } from '../redux/types/task'
 import { WhiteContainerWrapper } from '../components/atomics'
+import { SliderValue } from 'antd/lib/slider'
 
 const Search = Input.Search
 const { Option } = Select
 
-const SearchWrapper = styled.div`
+const FilterWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
   margin-left: 20px;
+
+  @media (max-width: 768px) {
+    display: block;
+  }
+`
+
+const SubFilterWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  min-width: 250px;
 `
 
 interface ITasksPageProps {
@@ -36,6 +50,7 @@ interface ITaskPageState {
   searchWord: string
   tagList: Array<string>
   searchTag: Array<string>
+  difficulty: Array<number>
 }
 
 class TasksListComponent extends React.Component<
@@ -47,7 +62,8 @@ class TasksListComponent extends React.Component<
     firstLoad: false,
     searchWord: '',
     tagList: [],
-    searchTag: []
+    searchTag: [],
+    difficulty: [0, 10]
   }
 
   componentDidMount() {
@@ -121,9 +137,8 @@ class TasksListComponent extends React.Component<
   }
 
   updateTask = () => {
-    console.log(this.state.searchTag)
     const filteredEvents = this.props.taskList.filter(
-      ({ problem_id, title, tags }) => {
+      ({ problem_id, title, tags, difficulty }) => {
         const textLowerCase = this.state.searchWord.toLowerCase()
         title = title.toLowerCase()
         const statusProblemID = problem_id.toLowerCase().includes(textLowerCase)
@@ -132,9 +147,15 @@ class TasksListComponent extends React.Component<
         this.state.searchTag.forEach(
           value => (isTag = isTag && tags.includes(value))
         )
-        return (statusProblemID || statusTitle) && isTag
+
+        const difficultyStatus =
+          difficulty >= this.state.difficulty[0] &&
+          difficulty <= this.state.difficulty[1]
+
+        return (statusProblemID || statusTitle) && isTag && difficultyStatus
       }
     )
+
     this.setState({
       taskList: filteredEvents
     })
@@ -146,7 +167,6 @@ class TasksListComponent extends React.Component<
   }
 
   handleTag = async (e: Array<string>) => {
-    console.log(e)
     const setStateAsync = (updater: any) =>
       new Promise(resolve => this.setState(updater, resolve))
     await setStateAsync((state: any) => ({
@@ -155,28 +175,55 @@ class TasksListComponent extends React.Component<
     this.updateTask()
   }
 
+  handleDifficulty = async (value: SliderValue) => {
+    const setStateAsync = (updater: any) =>
+      new Promise(resolve => this.setState(updater, resolve))
+    await setStateAsync((state: any) => ({
+      difficulty: value
+    }))
+    this.updateTask()
+  }
+
   render() {
     const tagArray = Array.from(this.state.tagList)
     return (
       <WhiteContainerWrapper>
-        <SearchWrapper>
-          Search:
-          <Search
-            placeholder="Enter Problem ID or Title"
-            onChange={e => this.handleSearch(e)}
-            style={{ width: 200, margin: 10 }}
-          />
-        </SearchWrapper>
-        <Select
-          mode="multiple"
-          style={{ width: '100%' }}
-          placeholder="Please select"
-          onChange={this.handleTag}
-        >
-          {tagArray.map(value => {
-            return <Option key={value}>{value}</Option>
-          })}
-        </Select>
+        <FilterWrapper>
+          <SubFilterWrapper>
+            Search:
+            <Search
+              placeholder="Enter Problem ID or Title"
+              onChange={e => this.handleSearch(e)}
+              style={{ width: 200, margin: 10 }}
+            />
+          </SubFilterWrapper>
+          <SubFilterWrapper>
+            <p>Tag:</p>
+            {'  '}
+            <Select
+              mode="multiple"
+              style={{ width: '100%', marginLeft: '10px' }}
+              placeholder="Please select"
+              onChange={this.handleTag}
+            >
+              {tagArray.map(value => {
+                return <Option key={value}>{value}</Option>
+              })}
+            </Select>
+          </SubFilterWrapper>
+          <SubFilterWrapper>
+            <p>Difficulty:</p>
+            {'  '}
+            <Slider
+              range
+              min={0}
+              max={10}
+              style={{ width: '100%', marginLeft: '20px' }}
+              defaultValue={[0, 10]}
+              onChange={this.handleDifficulty}
+            />
+          </SubFilterWrapper>
+        </FilterWrapper>
         <Table
           onRow={(record: any) => {
             return {

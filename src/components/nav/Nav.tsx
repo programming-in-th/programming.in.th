@@ -37,7 +37,7 @@ const { Header } = Layout
 
 const enableTransparency = (location: string, top: number): string => {
   if (location === '/') {
-    return 'rgba(255, 255, 255, ' + Math.min(top / 120, 1) + ')'
+    return `rgba(255, 255, 255,${Math.min(top / 120, 1)})`
   }
 
   return 'white'
