@@ -60,6 +60,7 @@ class SubmissionsComponent extends React.Component<
           dataSource={this.props.submissionsList}
           columns={this.columns}
           loading={this.props.submissionsListStatus === 'LOADING'}
+          scroll={{ x: 100 }}
           onRow={(record: any) => {
             return {
               onClick: () => {
