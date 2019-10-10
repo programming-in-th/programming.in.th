@@ -9,7 +9,7 @@ class Learn extends React.Component<any> {
     ) : (
       this.props.currentContent.map((snippet: string, index: number) => {
         // Keys has to be unique. Switch to index key.
-        return <MarkdownRender key={index} source={snippet} />
+        return <div dangerouslySetInnerHTML={{ __html: snippet }}></div>
       })
     )
   }

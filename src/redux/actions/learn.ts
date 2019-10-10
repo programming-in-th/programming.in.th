@@ -45,15 +45,8 @@ export const loadContent = (url: string) => {
     dispatch(requestContent())
     try {
       const response = await axios.get(url)
-      const data = response.data.cells
-      const snippets: string[] = []
-      for (const cell of data) {
-        if (cell.cell_type === 'markdown') {
-          for (const snippet of cell.source) {
-            snippets.push(snippet)
-          }
-        }
-      }
+      const data = response.data
+      const snippets: string[] = [data]
       dispatch(receiveContent(snippets))
     } catch (error) {
       console.log(error)
