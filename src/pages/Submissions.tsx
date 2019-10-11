@@ -2,6 +2,7 @@ import React from 'react'
 import { Table, Input, Switch, Icon } from 'antd'
 import H from 'history'
 import { connect } from 'react-redux'
+import firebase from 'firebase/app'
 
 import { ISubmissionPage, ISubmission } from '../redux/types/submission'
 import * as actionCreators from '../redux/actions/index'
@@ -12,6 +13,7 @@ import {
 } from '../components/atomics'
 import { ColumnProps } from 'antd/lib/table'
 import { IAppState } from '../redux'
+import { transformDate, ITimeObject } from '../utils/transform'
 
 const Search = Input.Search
 
@@ -120,50 +122,41 @@ class SubmissionsComponent extends React.Component<
 
   columns = [
     {
+      title: 'Timestamp',
+      dataIndex: 'timestamp',
+      render: (timestamp: ITimeObject) => <p>{transformDate(timestamp)}</p>
+    },
+    {
       title: 'User',
       dataIndex: 'username',
-      defaultSortOrder: 'descend',
-      sorter: (a: ISubmission, b: ISubmission) =>
-        a.username.localeCompare(b.username)
+      defaultSortOrder: 'descend'
     },
     {
       title: 'Problem',
       dataIndex: 'problem_id',
-      defaultSortOrder: 'descend',
-      sorter: (a: ISubmission, b: ISubmission) =>
-        a.problem_id.localeCompare(b.problem_id)
+      defaultSortOrder: 'descend'
     },
     {
       title: 'Language',
       dataIndex: 'language',
-      defaultSortOrder: 'descend',
-      sorter: (a: ISubmission, b: ISubmission) =>
-        a.language.localeCompare(b.language)
+      defaultSortOrder: 'descend'
     },
     {
       title: 'Status',
       dataIndex: 'status',
-      defaultSortOrder: 'descend',
-      sorter: (a: ISubmission, b: ISubmission) =>
-        a.status.localeCompare(b.status)
+      defaultSortOrder: 'descend'
     },
     {
       title: 'Points',
-      dataIndex: 'points',
-      defaultSortOrder: 'descend',
-      sorter: (a: ISubmission, b: ISubmission) => b.points - a.points
+      dataIndex: 'points'
     },
     {
       title: 'Time (s)',
-      dataIndex: 'time',
-      defaultSortOrder: 'descend',
-      sorter: (a: ISubmission, b: ISubmission) => b.time - a.time
+      dataIndex: 'time'
     },
     {
       dataIndex: 'memory',
-      title: 'Memory (KB)',
-      defaultSortOrder: 'descend',
-      sorter: (a: ISubmission, b: ISubmission) => b.memory - a.memory
+      title: 'Memory (KB)'
     }
   ]
 
