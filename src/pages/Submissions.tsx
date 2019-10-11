@@ -2,7 +2,6 @@ import React from 'react'
 import { Table, Input, Switch, Icon } from 'antd'
 import H from 'history'
 import { connect } from 'react-redux'
-import firebase from 'firebase/app'
 
 import { ISubmissionPage, ISubmission } from '../redux/types/submission'
 import * as actionCreators from '../redux/actions/index'
