@@ -13,9 +13,7 @@ import 'firebase/auth'
 import H from 'history'
 
 const LogoutWrapper = styled.div`
-  text-align: center;
   margin: 5px;
-  float: right;
 `
 
 const responsive = `(max-width: 1020px)`
@@ -207,12 +205,26 @@ const Login = (props: IItem) => {
               </UserWrapper>
             }
           >
-            <Menu.ItemGroup title="Item 1">
-              <Menu.Item key="setting:1">Option 1</Menu.Item>
-              <Menu.Item key="setting:2">Option 2</Menu.Item>
+            <Menu.ItemGroup>
+              <Menu.Item key="profile">
+                <Link to="/profile">
+                  <Icon type="user" />
+                  Profile
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="options">
+                <Link to="/setting">
+                  <Icon type="setting" />
+                  Setting
+                </Link>
+              </Menu.Item>
             </Menu.ItemGroup>
             <LogoutWrapper>
-              <Button type="danger" onClick={() => firebase.auth().signOut()}>
+              <Button
+                type="link"
+                style={{ color: 'red' }}
+                onClick={() => firebase.auth().signOut()}
+              >
                 Logout
               </Button>
             </LogoutWrapper>

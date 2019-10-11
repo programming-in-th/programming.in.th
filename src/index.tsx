@@ -100,6 +100,14 @@ const SubmissionDetailPage = LazyComponent(
   )
 )
 
+const ProfilePage = LazyComponent(
+  lazy(() =>
+    import(/* webpackChunkName: "profile.page" */ './pages/Profile').then(
+      module => ({ default: module.Profile })
+    )
+  )
+)
+
 const SettingPage = LazyComponent(
   lazy(() =>
     import(/* webpackChunkName: "setting.page" */ './pages/Setting').then(
@@ -224,6 +232,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
                     path="/learn/:article_id"
                     component={LearnPage}
                   />
+                  <Route exact path="/profile" component={ProfilePage} />
                   <Route exact path="/setting" component={SettingPage} />
                   <Route component={NotFound} />
                 </Switch>
