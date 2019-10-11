@@ -180,59 +180,40 @@ class TasksListComponent extends React.Component<
     })
   }
 
+  filterConfig = {
+    tagList: this.state.tagList,
+    searchWord: this.props.taskPage.searchWord,
+    searchTag: this.props.taskPage.searchTag as string[],
+    hideTag: this.props.taskPage.hideTag,
+    searchDifficulty: this.props.taskPage.searchDifficulty as number[],
+    handleSearch: this.handleSearch,
+    handleTag: this.handleTag,
+    handleDifficulty: this.handleDifficulty,
+    handleHideTag: this.handleHideTag
+  }
+
+  // tableConfig = {
+  //   onRow: (record: any) => {
+  //     return {
+  //       onClick: () => {
+  //         this.props.history.push('/tasks/' + record.problem_id)
+  //       }
+  //     }
+  //   },
+  //   scroll: { x: 100 },
+  //   columns: (this.props.taskPage.hideTag
+  //       ? this.columnsHideTag
+  //       : this.columnsTag) as ColumnProps<ITask>[],
+
+  //   dataSource: this.state.taskList,
+  //   loading: this.props.status === 'LOADING',
+  //   pagination: this.CustomPagination
+  // }
+
   render() {
-    const tagArray = Array.from(this.state.tagList)
     return (
       <WhiteContainerWrapper>
-        <FilterWrapper>
-          <SubFilterWrapper>
-            Search:
-            <Search
-              defaultValue={this.props.taskPage.searchWord}
-              placeholder="Enter Problem ID or Title"
-              onChange={e => this.handleSearch(e)}
-              style={{ width: 200, margin: 10 }}
-            />
-          </SubFilterWrapper>
-          <SubFilterWrapper>
-            <p>Tag:</p>
-            {'  '}
-            <Select
-              mode="multiple"
-              style={{ width: '100%', marginLeft: '10px' }}
-              placeholder="Please select"
-              defaultValue={this.props.taskPage.searchTag as Array<string>}
-              onChange={this.handleTag}
-              disabled={this.props.taskPage.hideTag}
-            >
-              {tagArray.map(value => {
-                return <Option key={value}>{value}</Option>
-              })}
-            </Select>
-          </SubFilterWrapper>
-          <SubFilterWrapper>
-            <p>Difficulty:</p>
-            {'  '}
-            <Slider
-              range
-              min={0}
-              max={10}
-              style={{ width: '100%', marginLeft: '20px' }}
-              defaultValue={this.props.taskPage.searchDifficulty as SliderValue}
-              onChange={this.handleDifficulty}
-            />
-          </SubFilterWrapper>
-          <SubFilterWrapper>
-            <p>Hide Tag:</p>
-            <Switch
-              style={{ marginLeft: 10 }}
-              checkedChildren={<Icon type="check" />}
-              unCheckedChildren={<Icon type="close" />}
-              defaultChecked={this.props.taskPage.hideTag}
-              onChange={this.handleHideTag}
-            />
-          </SubFilterWrapper>
-        </FilterWrapper>
+        <FilterComponent {...this.filterConfig} />
         <Table
           onRow={(record: any) => {
             return {
@@ -254,6 +235,72 @@ class TasksListComponent extends React.Component<
       </WhiteContainerWrapper>
     )
   }
+}
+
+interface IFilter {
+  tagList: string[]
+  searchWord: string
+  searchTag: string[]
+  hideTag: boolean
+  searchDifficulty: number[]
+  handleSearch: (e: React.FormEvent<HTMLInputElement>) => void
+  handleTag: (value: Array<string>) => void
+  handleDifficulty: (value: SliderValue) => void
+  handleHideTag: (check: boolean) => void
+}
+
+const FilterComponent = (props: IFilter) => {
+  return (
+    <FilterWrapper>
+      <SubFilterWrapper>
+        Search:
+        <Search
+          defaultValue={props.searchWord}
+          placeholder="Enter Problem ID or Title"
+          onChange={e => props.handleSearch(e)}
+          style={{ width: 200, margin: 10 }}
+        />
+      </SubFilterWrapper>
+      <SubFilterWrapper>
+        <p>Tag:</p>
+        {'  '}
+        <Select
+          mode="multiple"
+          style={{ width: '100%', marginLeft: '10px' }}
+          placeholder="Please select"
+          defaultValue={props.searchTag as Array<string>}
+          onChange={props.handleTag}
+          disabled={props.hideTag}
+        >
+          {props.tagList.map(value => {
+            return <Option key={value}>{value}</Option>
+          })}
+        </Select>
+      </SubFilterWrapper>
+      <SubFilterWrapper>
+        <p>Difficulty:</p>
+        {'  '}
+        <Slider
+          range
+          min={0}
+          max={10}
+          style={{ width: '100%', marginLeft: '20px' }}
+          defaultValue={props.searchDifficulty as SliderValue}
+          onChange={props.handleDifficulty}
+        />
+      </SubFilterWrapper>
+      <SubFilterWrapper>
+        <p>Hide Tag:</p>
+        <Switch
+          style={{ marginLeft: 10 }}
+          checkedChildren={<Icon type="check" />}
+          unCheckedChildren={<Icon type="close" />}
+          defaultChecked={props.hideTag}
+          onChange={props.handleHideTag}
+        />
+      </SubFilterWrapper>
+    </FilterWrapper>
+  )
 }
 
 const mapStateToProps: (state: IAppState) => any = state => {
