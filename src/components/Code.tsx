@@ -11,7 +11,6 @@ import 'codemirror/addon/fold/foldgutter.css'
 import 'codemirror/addon/fold/foldgutter.js'
 import 'codemirror/addon/fold/brace-fold.js'
 import 'codemirror/addon/fold/indent-fold.js'
-import 'codemirror/keymap/vim'
 
 import 'codemirror/mode/clike/clike.js'
 import 'codemirror/mode/python/python.js'
