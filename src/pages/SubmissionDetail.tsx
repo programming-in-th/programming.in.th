@@ -62,16 +62,20 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
   }
 
   render() {
+    const { detail } = this.props
     if (this.props.status === 'SUCCESS') {
       return (
         <ContainerWrapper>
           <Wrapper>
             <div style={{ margin: '15px 0' }}>
-              <p>Status: {this.props.detail.status}</p>
-              <p>Points: {this.props.detail.points}</p>
-              <p>Memory: {this.props.detail.memory} KB</p>
-              <p>Time: {this.props.detail.time} second</p>
-              <p>User: {this.props.detail.username}</p>
+              <h1>
+                [{detail.problem_id}] {detail.problem_name}
+              </h1>
+              <p>Status: {detail.status}</p>
+              <p>Points: {detail.points}</p>
+              <p>Memory: {detail.memory} KB</p>
+              <p>Time: {detail.time} second</p>
+              <p>User: {detail.username}</p>
             </div>
             <Select
               defaultValue={themeData[0][0]}
@@ -84,7 +88,7 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
             </Select>
             <CodeDisplay
               options={{
-                mode: `${mapLanguage[this.props.detail.language]}`,
+                mode: `${mapLanguage[detail.language]}`,
                 theme: `${this.state.theme}`,
                 lineNumbers: true,
                 foldGutter: true,

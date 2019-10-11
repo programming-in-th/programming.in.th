@@ -14,6 +14,7 @@ export interface ISubmission {
   readonly submission_id: string
   readonly username: string
   readonly problem_id: string
+  readonly problem_name: string
   readonly language: string
   readonly status: string
   readonly points: number

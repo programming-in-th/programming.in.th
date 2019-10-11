@@ -132,7 +132,7 @@ class SubmissionsComponent extends React.Component<
     },
     {
       title: 'Problem',
-      dataIndex: 'problem_id',
+      dataIndex: 'problem_name',
       defaultSortOrder: 'descend'
     },
     {

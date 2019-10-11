@@ -106,7 +106,6 @@ export const _Index: React.FunctionComponent = () => {
     }
 
     ev.isIntersecting ? setIntersection(true) : setIntersection(false)
-    console.log(isIntersecting)
   }
 
   return (
