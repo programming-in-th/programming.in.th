@@ -1,5 +1,5 @@
 import React from 'react'
-import { Layout, Menu, Icon, Drawer } from 'antd'
+import { Menu, Icon, Drawer, Col, Row } from 'antd'
 import styled from 'styled-components'
 import { NavLink } from 'react-router-dom'
 
@@ -9,40 +9,10 @@ import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 import { INode } from '../redux/types/learn'
 import { CustomSpin } from '../components/Spin'
-import { ContainerWrapper } from '../components/atomics'
 
 const { SubMenu } = Menu
-const { Content, Sider } = Layout
 
 const responsive = `(max-width: 822px)`
-
-const Grid = styled(ContainerWrapper)`
-  display: grid;
-  grid-gap: 30px;
-  grid-template-columns: 200px 1fr;
-
-  @media ${responsive} {
-    grid-template-columns: 1fr;
-  }
-`
-
-const ContentLayout = styled(Layout)``
-
-const MainContent = styled(Content)`
-  background: white;
-  padding: 24px;
-  margin: 0;
-  min-height: 280px;
-`
-
-const SiderMenu = styled(Sider)`
-  width: 200px;
-  background: white;
-
-  @media ${responsive} {
-    display: none;
-  }
-`
 
 const DrawerMenu = styled.div`
   position: fixed;
@@ -164,29 +134,31 @@ class Learn extends React.Component<any> {
           <SideMenu />
         </Drawer>
 
-        <Grid>
-          <SiderMenu>
-            <SideMenu />
-          </SiderMenu>
-          <ContentLayout>
-            <MainContent>
-              {article_id ? (
-                <LearnContent
-                  article_id={article_id}
-                  currentContentStatus={this.props.currentContentStatus}
-                  currentContent={this.props.currentContent}
-                />
-              ) : (
-                <div>
-                  Welcome to Programming.in.th Tutorials, a comprehensive
-                  compilation of all the resources you need to succeed in
-                  learning algorithms, data structures and competitive
-                  programming!
-                </div>
-              )}
-            </MainContent>
-          </ContentLayout>
-        </Grid>
+        <Row>
+          <Col span={2}></Col>
+          <Col span={4}>
+            {/* <SiderMenu>
+                  <SideMenu />
+                </SiderMenu> */}
+          </Col>
+          <Col span={2}></Col>
+          <Col span={14}>
+            {article_id ? (
+              <LearnContent
+                article_id={article_id}
+                currentContentStatus={this.props.currentContentStatus}
+                currentContent={this.props.currentContent}
+              />
+            ) : (
+              <div>
+                Welcome to Programming.in.th Tutorials, a comprehensive
+                compilation of all the resources you need to succeed in learning
+                algorithms, data structures and competitive programming!
+              </div>
+            )}
+          </Col>
+          <Col span={2}></Col>
+        </Row>
       </React.Fragment>
     )
   }
