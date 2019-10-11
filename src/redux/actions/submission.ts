@@ -51,7 +51,8 @@ export const makeSubmission = (
   uid: string,
   problem_id: string,
   code: string,
-  language: string
+  language: string,
+  hideCode: boolean
 ) => {
   return async (
     dispatch: ThunkDispatch<IAppState, {}, AnyAction>
@@ -60,10 +61,11 @@ export const makeSubmission = (
 
     try {
       const params = {
-        uid: uid,
-        problem_id: problem_id,
-        code: code,
-        language: language
+        uid,
+        problem_id,
+        code,
+        language,
+        hideCode
       }
 
       const response = await firebase

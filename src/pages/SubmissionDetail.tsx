@@ -86,18 +86,22 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
                 <Option key={data[0]}>{data[1]}</Option>
               ))}
             </Select>
-            <CodeDisplay
-              options={{
-                mode: `${mapLanguage[detail.language]}`,
-                theme: `${this.state.theme}`,
-                lineNumbers: true,
-                foldGutter: true,
-                gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-                lineWrapping: true
-              }}
-              onBeforeChange={(editor, data, value) => {}}
-              value={this.props.detail.code as string}
-            />
+            {this.props.detail.code !== '' ? (
+              <CodeDisplay
+                options={{
+                  mode: `${mapLanguage[detail.language]}`,
+                  theme: `${this.state.theme}`,
+                  lineNumbers: true,
+                  foldGutter: true,
+                  gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
+                  lineWrapping: true
+                }}
+                onBeforeChange={(editor, data, value) => {}}
+                value={this.props.detail.code as string}
+              />
+            ) : (
+              <h1>Code Hidden</h1>
+            )}
           </Wrapper>
         </ContainerWrapper>
       )

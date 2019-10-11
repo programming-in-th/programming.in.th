@@ -1,15 +1,27 @@
 import React from 'react'
-import { Row, Icon, Result, Button, Select } from 'antd'
+import { Row, Icon, Result, Button, Select, Switch } from 'antd'
 
 import * as actionCreators from '../../redux/actions/index'
 import { ThunkDispatch } from 'redux-thunk'
 import { connect } from 'react-redux'
 import { AnyAction } from 'redux'
 import { Link } from 'react-router-dom'
+import { FilterWrapper, SubFilterWrapper } from '../atomics'
 
 import { Upload } from '../tasks/FileUploader'
 
 import { Code } from '../Code'
+import styled from 'styled-components'
+
+const OptionsWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+
+  @media (max-width: 1020px) {
+    display: block;
+  }
+`
 
 const { Option } = Select
 
@@ -52,6 +64,7 @@ interface ISubmitState {
   theme: string
   code: string
   uploadedCode: string
+  hideCode: boolean
 }
 
 class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
@@ -59,7 +72,8 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
     language: 'text/x-csrc',
     theme: 'material',
     code: '',
-    uploadedCode: ''
+    uploadedCode: '',
+    hideCode: false
   }
 
   componentDidMount() {
@@ -89,6 +103,10 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
 
   changeTheme = (value: string) => {
     this.setState({ theme: value })
+  }
+
+  handleHideCode = (value: boolean) => {
+    this.setState({ hideCode: value })
   }
 
   submitCode = () => {
@@ -136,27 +154,43 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
         ) : (
           <React.Fragment>
             <h1 style={{ marginBottom: 15 }}>Submit Code</h1>
-            <Row>
-              <Select
-                defaultValue={languageData[0][0]}
-                style={{ width: 120 }}
-                onChange={this.changeLanguage}
-              >
-                {languageData.map((data: any) => (
-                  <Option key={data[0]}>{data[1]}</Option>
-                ))}
-              </Select>
-              <Select
-                defaultValue={themeData[0][0]}
-                style={{ width: 120 }}
-                onChange={this.changeTheme}
-              >
-                {themeData.map((data: any) => (
-                  <Option key={data[0]}>{data[1]}</Option>
-                ))}
-              </Select>
-              <Upload getCodeFromUpload={this.getCodeFromUpload}></Upload>
-            </Row>
+            <OptionsWrapper>
+              <SubFilterWrapper>
+                <Select
+                  defaultValue={languageData[0][0]}
+                  style={{ width: 120 }}
+                  onChange={this.changeLanguage}
+                >
+                  {languageData.map((data: any) => (
+                    <Option key={data[0]}>{data[1]}</Option>
+                  ))}
+                </Select>
+              </SubFilterWrapper>
+              <SubFilterWrapper>
+                <Select
+                  defaultValue={themeData[0][0]}
+                  style={{ width: 120 }}
+                  onChange={this.changeTheme}
+                >
+                  {themeData.map((data: any) => (
+                    <Option key={data[0]}>{data[1]}</Option>
+                  ))}
+                </Select>
+              </SubFilterWrapper>
+              <SubFilterWrapper>
+                <Upload getCodeFromUpload={this.getCodeFromUpload}></Upload>
+              </SubFilterWrapper>
+              <SubFilterWrapper>
+                <p>Hide Code: </p>
+                <Switch
+                  style={{ marginLeft: 10 }}
+                  checkedChildren={<Icon type="check" />}
+                  unCheckedChildren={<Icon type="close" />}
+                  defaultChecked={this.state.hideCode}
+                  onChange={this.handleHideCode}
+                />
+              </SubFilterWrapper>
+            </OptionsWrapper>
             <Row>
               <Code
                 options={{
@@ -201,9 +235,12 @@ const mapDispatchToProps: (
       uid: string,
       problem_id: string,
       code: string,
-      language: string
+      language: string,
+      hideCode: boolean
     ) => {
-      dispatch(actionCreators.makeSubmission(uid, problem_id, code, language))
+      dispatch(
+        actionCreators.makeSubmission(uid, problem_id, code, language, hideCode)
+      )
     },
     reSubmit: () => dispatch(actionCreators.resubmitSubmission()),
     errorSubmit: () => dispatch(actionCreators.errorSubmit())
