@@ -12,6 +12,12 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import H from 'history'
 
+const LogoutWrapper = styled.div`
+  text-align: center;
+  margin: 5px;
+  float: right;
+`
+
 const responsive = `(max-width: 1020px)`
 
 interface INavigatorProps {
@@ -182,22 +188,35 @@ const Login = (props: IItem) => {
           }}
           selectedKeys={[props.location]}
         >
-          <Menu.Item key="user">
-            <UserWrapper>
-              <p style={{ marginRight: '15px' }}>
-                {props.user.displayName === ''
-                  ? 'User'
-                  : props.user.displayName}
-              </p>
-              <Avatar
-                src={
-                  props.user.photoURL === ''
-                    ? '/assets/img/default-user.png'
-                    : `${props.user.photoURL}`
-                }
-              />
-            </UserWrapper>
-          </Menu.Item>
+          <Menu.SubMenu
+            key="user"
+            title={
+              <UserWrapper>
+                <p style={{ marginRight: '15px' }}>
+                  {props.user.displayName === ''
+                    ? 'User'
+                    : props.user.displayName}
+                </p>
+                <Avatar
+                  src={
+                    props.user.photoURL === ''
+                      ? '/assets/img/default-user.png'
+                      : `${props.user.photoURL}`
+                  }
+                />
+              </UserWrapper>
+            }
+          >
+            <Menu.ItemGroup title="Item 1">
+              <Menu.Item key="setting:1">Option 1</Menu.Item>
+              <Menu.Item key="setting:2">Option 2</Menu.Item>
+            </Menu.ItemGroup>
+            <LogoutWrapper>
+              <Button type="danger" onClick={() => firebase.auth().signOut()}>
+                Logout
+              </Button>
+            </LogoutWrapper>
+          </Menu.SubMenu>
         </Menu>
       ) : (
         <Menu
@@ -235,6 +254,7 @@ const Logo = styled.div`
     margin-right: 15px;
   }
 `
+
 const LeftMenu = styled(Main)`
   background: transparent;
   float: left;
@@ -243,6 +263,7 @@ const LeftMenu = styled(Main)`
     display: none;
   }
 `
+
 const RightMenu = styled(Login)`
   background: transparent;
   float: right;
