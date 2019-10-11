@@ -58,7 +58,7 @@ const Title = styled.h1<{ color?: string }>`
 `
 
 const CustomLink = styled(Link)`
-  font-size: 48px;
+  font-size: 36px;
   font-family: Montserrat;
   font-weight: 800;
   text-decoration: none;
@@ -118,7 +118,7 @@ export const _Index: React.FunctionComponent = () => {
               about
             </Title>
             <Title color="#5D5CFF"> data structures </Title>{' '}
-            <Title>and their relationships" — Linus Torvalds.</Title>
+            <Title>and their relationships" — Linus Torvalds</Title>
             <SubTitle>
               Programming.in.th provides you with the fundamentals of
               algorithmic problem-solving, an important skill to differentiate
@@ -154,12 +154,6 @@ export const _Index: React.FunctionComponent = () => {
               <CustomLink to="/tasks/0000">
                 (Take me to my first problem!)
               </CustomLink>
-              <SubTitle>
-                Programming.in.th provides you with the fundamentals of
-                algorithmic problem-solving, an important skill to differentiate
-                yourself as a programmer in an increasingly technologically
-                advanced world.
-              </SubTitle>
             </div>
           </Container>
         </Observer>
@@ -171,12 +165,6 @@ export const _Index: React.FunctionComponent = () => {
               at algorithmic problem-solving.{' '}
               <CustomLink to="/learn">(Start learning now!)</CustomLink>
             </Title>
-            <SubTitle>
-              Programming.in.th provides you with the fundamentals of
-              algorithmic problem-solving, an important skill to differentiate
-              yourself as a programmer in an increasingly technologically
-              advanced world.
-            </SubTitle>
           </div>
           <DesktopOnly>
             <RightIllus>
