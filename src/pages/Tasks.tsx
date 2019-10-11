@@ -69,6 +69,55 @@ class TasksListComponent extends React.Component<
     }
   }
 
+  updateTask = () => {
+    const filteredEvents = this.props.taskList.filter(
+      ({ problem_id, title, tags, difficulty }) => {
+        const textLowerCase = this.props.taskPage.searchWord.toLowerCase()
+        title = title.toLowerCase()
+        const statusProblemID = problem_id.toLowerCase().includes(textLowerCase)
+        const statusTitle = title.toLowerCase().includes(textLowerCase)
+        let isTag = true
+        this.props.taskPage.searchTag.forEach(
+          value => (isTag = isTag && tags.includes(value))
+        )
+
+        const difficultyStatus =
+          difficulty >= this.props.taskPage.searchDifficulty[0] &&
+          difficulty <= this.props.taskPage.searchDifficulty[1]
+
+        return (statusProblemID || statusTitle) && isTag && difficultyStatus
+      }
+    )
+    this.setState({
+      taskList: filteredEvents
+    })
+  }
+
+  handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
+    this.props.setPage({
+      ...this.props.taskPage,
+      searchWord: e.currentTarget.value
+    })
+  }
+
+  handleTag = (value: Array<string>) => {
+    this.props.setPage({ ...this.props.taskPage, searchTag: value })
+  }
+
+  handleDifficulty = (value: SliderValue) => {
+    this.props.setPage({
+      ...this.props.taskPage,
+      searchDifficulty: value as Array<number>
+    })
+  }
+
+  handleHideTag = (check: boolean) => {
+    this.props.setPage({
+      ...this.props.taskPage,
+      hideTag: check
+    })
+  }
+
   columnsHideTag = [
     {
       title: 'Problem ID',
@@ -131,67 +180,6 @@ class TasksListComponent extends React.Component<
     }
   }
 
-  updateTask = () => {
-    const filteredEvents = this.props.taskList.filter(
-      ({ problem_id, title, tags, difficulty }) => {
-        const textLowerCase = this.props.taskPage.searchWord.toLowerCase()
-        title = title.toLowerCase()
-        const statusProblemID = problem_id.toLowerCase().includes(textLowerCase)
-        const statusTitle = title.toLowerCase().includes(textLowerCase)
-        let isTag = true
-        this.props.taskPage.searchTag.forEach(
-          value => (isTag = isTag && tags.includes(value))
-        )
-
-        const difficultyStatus =
-          difficulty >= this.props.taskPage.searchDifficulty[0] &&
-          difficulty <= this.props.taskPage.searchDifficulty[1]
-
-        return (statusProblemID || statusTitle) && isTag && difficultyStatus
-      }
-    )
-    this.setState({
-      taskList: filteredEvents
-    })
-  }
-
-  handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
-    this.props.setPage({
-      ...this.props.taskPage,
-      searchWord: e.currentTarget.value
-    })
-  }
-
-  handleTag = (value: Array<string>) => {
-    this.props.setPage({ ...this.props.taskPage, searchTag: value })
-  }
-
-  handleDifficulty = (value: SliderValue) => {
-    this.props.setPage({
-      ...this.props.taskPage,
-      searchDifficulty: value as Array<number>
-    })
-  }
-
-  handleHideTag = (check: boolean) => {
-    this.props.setPage({
-      ...this.props.taskPage,
-      hideTag: check
-    })
-  }
-
-  filterProps = {
-    tagList: this.state.tagList,
-    searchWord: this.props.taskPage.searchWord,
-    searchTag: this.props.taskPage.searchTag as string[],
-    hideTag: this.props.taskPage.hideTag,
-    searchDifficulty: this.props.taskPage.searchDifficulty as number[],
-    handleSearch: this.handleSearch,
-    handleTag: this.handleTag,
-    handleDifficulty: this.handleDifficulty,
-    handleHideTag: this.handleHideTag
-  }
-
   tableConfig = {
     rowKey: (record: ITask) => record.problem_id,
     onRow: (record: ITask) => {
@@ -207,6 +195,18 @@ class TasksListComponent extends React.Component<
       : this.columnsTag) as ColumnProps<ITask>[],
     loading: this.props.status === 'LOADING',
     pagination: this.CustomPagination
+  }
+
+  filterProps = {
+    tagList: this.state.tagList,
+    searchWord: this.props.taskPage.searchWord,
+    searchTag: this.props.taskPage.searchTag as string[],
+    hideTag: this.props.taskPage.hideTag,
+    searchDifficulty: this.props.taskPage.searchDifficulty as number[],
+    handleSearch: this.handleSearch,
+    handleTag: this.handleTag,
+    handleDifficulty: this.handleDifficulty,
+    handleHideTag: this.handleHideTag
   }
 
   render() {
