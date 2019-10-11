@@ -10,7 +10,7 @@ import {
   RESUBMIT_SUBMISSION,
   ERROR_SUBMIT,
   RESET_CURRENT_SUBMISSION,
-  SET_PAGE_CONFIG
+  SET_SUB_PAGE_CONFIG
 } from '../actions/submission'
 
 const initialState: ISubmissionsState = {
@@ -74,7 +74,7 @@ const reducer: Reducer = (
       return Object.assign({}, state, {
         currentSubmissionUID: undefined
       })
-    case SET_PAGE_CONFIG:
+    case SET_SUB_PAGE_CONFIG:
       return Object.assign({}, state, {
         submissionsPage: action.submissionsPage
       })

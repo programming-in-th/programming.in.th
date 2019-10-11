@@ -15,6 +15,7 @@ import {
   SubFilterWrapper
 } from '../components/atomics'
 import { SliderValue } from 'antd/lib/slider'
+import { IAppState } from '../redux'
 
 const Search = Input.Search
 const { Option } = Select
@@ -255,8 +256,12 @@ class TasksListComponent extends React.Component<
   }
 }
 
-const mapStateToProps: (state: any) => any = state => {
-  return { ...state.tasks }
+const mapStateToProps: (state: IAppState) => any = state => {
+  return {
+    taskList: state.tasks.taskList,
+    status: state.tasks.status,
+    taskPage: state.tasks.taskPage
+  }
 }
 
 const mapDispatchToProps: (

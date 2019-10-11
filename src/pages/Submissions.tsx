@@ -11,6 +11,7 @@ import {
   SubFilterWrapper
 } from '../components/atomics'
 import { ColumnProps } from 'antd/lib/table'
+import { IAppState } from '../redux'
 
 const Search = Input.Search
 
@@ -209,7 +210,7 @@ class SubmissionsComponent extends React.Component<
   }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps: (state: IAppState) => any = state => {
   return {
     submissionsList: state.submissions.submissionsList,
     submissionsPage: state.submissions.submissionsPage,
