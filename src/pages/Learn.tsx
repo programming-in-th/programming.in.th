@@ -35,6 +35,53 @@ const DrawerMenu = styled.div`
     display: flex;
   }
 `
+const SideMenu = (props: any) => {
+  return (
+    <div className={props.className}>
+      <Menu
+        theme="light"
+        mode="inline"
+        style={{ height: '100%', borderRight: 0 }}
+        selectedKeys={[props.currentPath]}
+      >
+        <Menu.Item key={'/learn'}>
+          <NavLink to={'/learn'} onClick={props.onClose}>
+            <Icon type="home" theme="filled" />
+            Welcome!
+          </NavLink>
+        </Menu.Item>
+        {props.nodes.map((node: INode) => {
+          return node.type === 'section' ? (
+            <SubMenu key={node.name} title={node.name}>
+              {node.articles!.map((sub_node: INode) => {
+                return (
+                  <Menu.Item
+                    key={'/learn/' + sub_node.article_id}
+                    onClick={() => props.onItemClick(sub_node)}
+                  >
+                    <NavLink
+                      to={'/learn/' + sub_node.article_id}
+                      onClick={props.onClose}
+                    >
+                      {sub_node.name}
+                    </NavLink>
+                  </Menu.Item>
+                )
+              })}
+            </SubMenu>
+          ) : (
+            <Menu.Item
+              key={'/learn/' + node.article_id}
+              onClick={() => props.onItemClick(node)}
+            >
+              <NavLink to={'/learn/' + node.article_id}>{node.name}</NavLink>
+            </Menu.Item>
+          )
+        })}
+      </Menu>
+    </div>
+  )
+}
 
 class Learn extends React.Component<any> {
   state = { visible: false }
@@ -56,66 +103,13 @@ class Learn extends React.Component<any> {
     })
   }
 
+  onItemClick = (node: any) => {
+    this.props.onChangeArticle(this.props.idMap.get(node.article_id))
+  }
+
   render() {
     const currentPath = this.props.match.url
     const nodes = this.props.menu
-    const SideMenu = (props: any) => {
-      return (
-        <div className={props.className}>
-          <Menu
-            theme="light"
-            mode="inline"
-            style={{ height: '100%', borderRight: 0 }}
-            selectedKeys={[currentPath]}
-          >
-            <Menu.Item key={'/learn'}>
-              <NavLink to={'/learn'} onClick={this.onClose}>
-                <Icon type="home" theme="filled" />
-                Welcome!
-              </NavLink>
-            </Menu.Item>
-            {nodes.map((node: INode) => {
-              return node.type === 'section' ? (
-                <SubMenu key={node.name} title={node.name}>
-                  {node.articles!.map((sub_node: INode) => {
-                    return (
-                      <Menu.Item
-                        key={'/learn/' + sub_node.article_id}
-                        onClick={() =>
-                          this.props.onChangeArticle(
-                            this.props.idMap.get(sub_node.article_id)
-                          )
-                        }
-                      >
-                        <NavLink
-                          to={'/learn/' + sub_node.article_id}
-                          onClick={this.onClose}
-                        >
-                          {sub_node.name}
-                        </NavLink>
-                      </Menu.Item>
-                    )
-                  })}
-                </SubMenu>
-              ) : (
-                <Menu.Item
-                  key={'/learn/' + node.article_id}
-                  onClick={() =>
-                    this.props.onChangeArticle(
-                      this.props.idMap.get(node.article_id)
-                    )
-                  }
-                >
-                  <NavLink to={'/learn/' + node.article_id}>
-                    {node.name}
-                  </NavLink>
-                </Menu.Item>
-              )
-            })}
-          </Menu>
-        </div>
-      )
-    }
     const article_id = this.props.match.params.article_id
     return this.props.menuStatus !== 'SUCCESS' ? (
       <CustomSpin />
@@ -135,11 +129,13 @@ class Learn extends React.Component<any> {
         </Drawer>
 
         <Row>
-          <Col span={2}></Col>
-          <Col span={4}>
-            {/* <SiderMenu>
-                  <SideMenu />
-                </SiderMenu> */}
+          <Col span={6}>
+            <SideMenu
+              currentPath={currentPath}
+              onClose={this.onClose}
+              nodes={nodes}
+              onItemClick={this.onItemClick}
+            />
           </Col>
           <Col span={2}></Col>
           <Col span={14}>
