@@ -6,7 +6,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { connect } from 'react-redux'
 import { AnyAction } from 'redux'
 import { Link } from 'react-router-dom'
-import { FilterWrapper, SubFilterWrapper } from '../atomics'
+import { SubFilterWrapper } from '../atomics'
 
 import { Upload } from '../tasks/FileUploader'
 
@@ -53,7 +53,8 @@ interface ISubmitProps {
     uid: string,
     problem_id: string,
     code: string,
-    language: string
+    language: string,
+    hideCode: boolean
   ) => void
   submission_uid: string
   submissionResponse: number
@@ -121,7 +122,8 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
       user.uid,
       this.props.problem_id,
       this.state.code,
-      mapLanguage[this.state.language]
+      mapLanguage[this.state.language],
+      this.state.hideCode
     )
   }
 

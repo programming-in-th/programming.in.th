@@ -77,28 +77,33 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
               <p>Time: {detail.time} second</p>
               <p>User: {detail.username}</p>
             </div>
-            <Select
-              defaultValue={themeData[0][0]}
-              style={{ width: 120 }}
-              onChange={this.changeTheme}
-            >
-              {themeData.map((data: any) => (
-                <Option key={data[0]}>{data[1]}</Option>
-              ))}
-            </Select>
             {this.props.detail.code !== '' ? (
-              <CodeDisplay
-                options={{
-                  mode: `${mapLanguage[detail.language]}`,
-                  theme: `${this.state.theme}`,
-                  lineNumbers: true,
-                  foldGutter: true,
-                  gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-                  lineWrapping: true
-                }}
-                onBeforeChange={(editor, data, value) => {}}
-                value={this.props.detail.code as string}
-              />
+              <React.Fragment>
+                <Select
+                  defaultValue={themeData[0][0]}
+                  style={{ width: 120 }}
+                  onChange={this.changeTheme}
+                >
+                  {themeData.map((data: any) => (
+                    <Option key={data[0]}>{data[1]}</Option>
+                  ))}
+                </Select>
+                <CodeDisplay
+                  options={{
+                    mode: `${mapLanguage[detail.language]}`,
+                    theme: `${this.state.theme}`,
+                    lineNumbers: true,
+                    foldGutter: true,
+                    gutters: [
+                      'CodeMirror-linenumbers',
+                      'CodeMirror-foldgutter'
+                    ],
+                    lineWrapping: true
+                  }}
+                  onBeforeChange={(editor, data, value) => {}}
+                  value={this.props.detail.code as string}
+                />
+              </React.Fragment>
             ) : (
               <h1>Code Hidden</h1>
             )}

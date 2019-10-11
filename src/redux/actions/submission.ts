@@ -58,7 +58,6 @@ export const makeSubmission = (
     dispatch: ThunkDispatch<IAppState, {}, AnyAction>
   ): Promise<void> => {
     dispatch(requestMakeSubmission())
-
     try {
       const params = {
         uid,
