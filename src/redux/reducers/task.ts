@@ -5,7 +5,7 @@ import {
   RECEIVE_TASKS_LIST,
   REQUEST_TASK,
   RECEIVE_TASK,
-  RECEIVE_PAGE
+  SET_TASK_PAGE_CONFIG
 } from '../actions/task'
 
 const initialState: ITaskState = {
@@ -45,7 +45,7 @@ const reducer: Reducer = (
         status: 'SUCCESS',
         currentTask: action.currentTask
       })
-    case RECEIVE_PAGE:
+    case SET_TASK_PAGE_CONFIG:
       return Object.assign({}, state, {
         taskPage: action.taskPage
       })

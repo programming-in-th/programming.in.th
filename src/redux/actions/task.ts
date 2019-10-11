@@ -86,16 +86,10 @@ const receiveTask = (task: ITask | undefined) => {
   }
 }
 
-export const setPage = (page: ITaskPage) => {
-  return (dispatch: ThunkDispatch<IAppState, {}, AnyAction>) => {
-    dispatch(receivePage(page))
-  }
-}
-
-export const RECEIVE_PAGE = 'RECEIVE_PAGE'
-const receivePage = (page: ITaskPage) => {
+export const SET_TASK_PAGE_CONFIG = 'SET_TASK_PAGE_CONFIG'
+export const setTaskPageConfig = (page: ITaskPage) => {
   return {
-    type: RECEIVE_PAGE,
+    type: SET_TASK_PAGE_CONFIG,
     taskPage: page
   }
 }

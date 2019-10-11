@@ -148,10 +148,10 @@ export const resetCurrentSubmission = () => {
   }
 }
 
-export const SET_PAGE_CONFIG = 'SET_PAGE_CONFIG'
-export const setPageConfig = (setting: ISubmissionPage) => {
+export const SET_SUB_PAGE_CONFIG = 'SET_SUB_PAGE_CONFIG'
+export const setSubPageConfig = (setting: ISubmissionPage) => {
   return {
-    type: SET_PAGE_CONFIG,
+    type: SET_SUB_PAGE_CONFIG,
     submissionsPage: setting
   }
 }

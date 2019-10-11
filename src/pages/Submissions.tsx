@@ -223,7 +223,7 @@ const mapDispatchToProps = (dispatch: any) => {
       dispatch(actionCreators.loadSubmissionsList())
     },
     setPage: (setting: ISubmissionPage) => {
-      dispatch(actionCreators.setPageConfig(setting))
+      dispatch(actionCreators.setSubPageConfig(setting))
     }
   }
 }

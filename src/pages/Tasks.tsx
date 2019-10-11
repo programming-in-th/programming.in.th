@@ -267,7 +267,7 @@ const mapDispatchToProps: (
       dispatch(actionCreators.loadTasksList(-1, -1, -1, []))
     },
     setPage: (page: ITaskPage) => {
-      dispatch(actionCreators.setPage(page))
+      dispatch(actionCreators.setTaskPageConfig(page))
     }
   }
 }

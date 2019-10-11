@@ -1,4 +1,4 @@
-export { loadTasksList, loadTask, setPage } from './task'
+export { loadTasksList, loadTask, setTaskPageConfig } from './task'
 export { fetchUser } from './user'
 export {
   loadSubmissionsList,
@@ -7,6 +7,6 @@ export {
   resubmitSubmission,
   errorSubmit,
   resetCurrentSubmission,
-  setPageConfig
+  setSubPageConfig
 } from './submission'
 export { loadContent, loadMenu } from './learn'
