@@ -1,5 +1,5 @@
 import React from 'react'
-import { Table, Input, Switch, Icon } from 'antd'
+import { Table, Input, Switch, Icon, message } from 'antd'
 import H from 'history'
 import { connect } from 'react-redux'
 
@@ -189,10 +189,16 @@ class SubmissionsComponent extends React.Component<
           loading={this.props.submissionsListStatus === 'LOADING'}
           pagination={this.CustomPagination}
           scroll={{ x: 100 }}
-          onRow={(record: any) => {
+          onRow={(record: ISubmission) => {
             return {
               onClick: () => {
-                this.props.history.push('/submissions/' + record.submission_id)
+                if (!record.hideCode) {
+                  this.props.history.push(
+                    '/submissions/' + record.submission_id
+                  )
+                } else {
+                  message.error('Access Denied')
+                }
               }
             }
           }}

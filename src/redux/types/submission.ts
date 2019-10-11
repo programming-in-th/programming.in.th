@@ -22,6 +22,7 @@ export interface ISubmission {
   readonly memory: number
   readonly timestamp: Date
   readonly code?: string
+  readonly hideCode: boolean
 }
 
 export interface INewSubmission {
