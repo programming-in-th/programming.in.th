@@ -180,7 +180,7 @@ class TasksListComponent extends React.Component<
     })
   }
 
-  filterConfig = {
+  filterProps = {
     tagList: this.state.tagList,
     searchWord: this.props.taskPage.searchWord,
     searchTag: this.props.taskPage.searchTag as string[],
@@ -192,46 +192,28 @@ class TasksListComponent extends React.Component<
     handleHideTag: this.handleHideTag
   }
 
-  // tableConfig = {
-  //   onRow: (record: any) => {
-  //     return {
-  //       onClick: () => {
-  //         this.props.history.push('/tasks/' + record.problem_id)
-  //       }
-  //     }
-  //   },
-  //   scroll: { x: 100 },
-  //   columns: (this.props.taskPage.hideTag
-  //       ? this.columnsHideTag
-  //       : this.columnsTag) as ColumnProps<ITask>[],
-
-  //   dataSource: this.state.taskList,
-  //   loading: this.props.status === 'LOADING',
-  //   pagination: this.CustomPagination
-  // }
+  tableConfig = {
+    rowKey: (record: ITask) => record.problem_id,
+    onRow: (record: ITask) => {
+      return {
+        onClick: () => {
+          this.props.history.push('/tasks/' + record.problem_id)
+        }
+      }
+    },
+    scroll: { x: 100 },
+    columns: (this.props.taskPage.hideTag
+      ? this.columnsHideTag
+      : this.columnsTag) as ColumnProps<ITask>[],
+    loading: this.props.status === 'LOADING',
+    pagination: this.CustomPagination
+  }
 
   render() {
     return (
       <WhiteContainerWrapper>
-        <FilterComponent {...this.filterConfig} />
-        <Table
-          onRow={(record: any) => {
-            return {
-              onClick: () => {
-                this.props.history.push('/tasks/' + record.problem_id)
-              }
-            }
-          }}
-          scroll={{ x: 100 }}
-          columns={
-            (this.props.taskPage.hideTag
-              ? this.columnsHideTag
-              : this.columnsTag) as ColumnProps<ITask>[]
-          }
-          dataSource={this.state.taskList}
-          loading={this.props.status === 'LOADING'}
-          pagination={this.CustomPagination}
-        />
+        <FilterComponent {...this.filterProps} />
+        <Table {...this.tableConfig} dataSource={this.state.taskList} />
       </WhiteContainerWrapper>
     )
   }
