@@ -30,6 +30,8 @@ const themeData = [
   ['solarized', 'Solarized Light']
 ]
 
+const keyMapData = [['default', 'Default'], ['vim', 'Vim']]
+
 interface ISubmitProps {
   problem_id: string
   code: string
@@ -52,6 +54,7 @@ interface ISubmitState {
   theme: string
   code: string
   uploadedCode: string
+  keyMap: string
 }
 
 class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
@@ -59,7 +62,8 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
     language: 'text/x-csrc',
     theme: 'material',
     code: '',
-    uploadedCode: ''
+    uploadedCode: '',
+    keyMap: 'default'
   }
 
   componentDidMount() {
@@ -89,6 +93,10 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
 
   changeTheme = (value: string) => {
     this.setState({ theme: value })
+  }
+
+  changeKeymap = (value: string) => {
+    this.setState({ keyMap: value })
   }
 
   submitCode = () => {
@@ -155,6 +163,15 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
                   <Option key={data[0]}>{data[1]}</Option>
                 ))}
               </Select>
+              <Select
+                defaultValue={keyMapData[0][0]}
+                style={{ width: 120 }}
+                onChange={this.changeKeymap}
+              >
+                {keyMapData.map((data: any) => (
+                  <Option key={data[0]}>{data[1]}</Option>
+                ))}
+              </Select>
               <Upload getCodeFromUpload={this.getCodeFromUpload}></Upload>
             </Row>
             <Row>
@@ -165,7 +182,8 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
                   lineNumbers: true,
                   foldGutter: true,
                   gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-                  lineWrapping: true
+                  lineWrapping: true,
+                  keyMap: `${this.state.keyMap}`
                 }}
                 onChange={this.changeEditor}
                 value={this.state.uploadedCode}
