@@ -54,8 +54,6 @@ interface IFilter {
 }
 
 const FilterComponent: (props: IFilter) => any = props => {
-  console.log('CALL THIS')
-  console.log(props)
   return (
     <FilterWrapper>
       <SubFilterWrapper>
@@ -135,10 +133,7 @@ class TasksListComponent extends React.Component<
       })
       this.setState({ tagList: Array.from(new Set(tagNow)) })
     }
-    console.log('CALL')
     if (this.state.taskPage !== this.props.taskPage) {
-      console.log('YY')
-      console.log(this.props.taskPage)
       this.setState({ taskPage: this.props.taskPage })
       this.updateTask()
     }
@@ -187,7 +182,6 @@ class TasksListComponent extends React.Component<
   }
 
   handleHideTag: (check: boolean) => void = check => {
-    console.log('yes', check)
     this.props.setPage({
       ...this.props.taskPage,
       hideTag: check

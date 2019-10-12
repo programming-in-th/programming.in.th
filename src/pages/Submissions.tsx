@@ -18,6 +18,7 @@ const Search = Input.Search
 
 interface ISubmissionsComponentProps {
   onInitialLoad: () => void
+  user: 'LOADING' | firebase.User | null
   history: H.History
   submissionsList: ISubmission[]
   submissionsPage: ISubmissionPage
@@ -192,7 +193,10 @@ class SubmissionsComponent extends React.Component<
           onRow={(record: ISubmission) => {
             return {
               onClick: () => {
-                if (!record.hideCode) {
+                let status = false
+                if (this.props.user && this.props.user !== 'LOADING')
+                  if (this.props.user.uid === record.uid) status = true
+                if (!record.hideCode || status) {
                   this.props.history.push(
                     '/submissions/' + record.submission_id
                   )
@@ -210,6 +214,7 @@ class SubmissionsComponent extends React.Component<
 
 const mapStateToProps: (state: IAppState) => any = state => {
   return {
+    user: state.user.user,
     submissionsList: state.submissions.submissionsList,
     submissionsPage: state.submissions.submissionsPage,
     submissionsListStatus: state.submissions.submissionsListStatus
