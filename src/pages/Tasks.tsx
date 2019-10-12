@@ -1,7 +1,9 @@
 import React from 'react'
 import H from 'history'
 import { Table, Tag, Input, Select, Slider, Switch, Icon } from 'antd'
-import { ColumnProps } from 'antd/lib/table'
+import { ColumnProps, TableProps } from 'antd/lib/table'
+import { SliderValue } from 'antd/lib/slider'
+import { PaginationConfig } from 'antd/lib/pagination'
 
 import { connect } from 'react-redux'
 import * as actionCreators from '../redux/actions/index'
@@ -9,12 +11,12 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 
 import { ITask, ITaskPage } from '../redux/types/task'
+
 import {
   WhiteContainerWrapper,
   FilterWrapper,
   SubFilterWrapper
 } from '../components/atomics'
-import { SliderValue } from 'antd/lib/slider'
 import { IAppState } from '../redux'
 
 const Search = Input.Search
@@ -31,7 +33,7 @@ interface ITasksPageProps {
 
 interface ITaskPageState {
   taskList: ITask[]
-  tagList: Array<string>
+  tagList: string[]
   firstLoad: boolean
   taskPage: ITaskPage | undefined
 }
@@ -54,7 +56,7 @@ class TasksListComponent extends React.Component<
   componentDidUpdate() {
     if (this.props.taskList.length > 1 && !this.state.firstLoad) {
       this.setState({ taskList: this.props.taskList, firstLoad: true })
-      let tagNow: Array<string> = []
+      let tagNow: string[] = []
       this.props.taskList.forEach(val => {
         val.tags.forEach(tag => {
           tagNow.push(tag)
@@ -69,7 +71,7 @@ class TasksListComponent extends React.Component<
     }
   }
 
-  updateTask = () => {
+  updateTask: () => void = () => {
     const filteredEvents = this.props.taskList.filter(
       ({ problem_id, title, tags, difficulty }) => {
         const textLowerCase = this.props.taskPage.searchWord.toLowerCase()
@@ -93,53 +95,53 @@ class TasksListComponent extends React.Component<
     })
   }
 
-  handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
+  handleSearch: (e: React.FormEvent<HTMLInputElement>) => void = e => {
     this.props.setPage({
       ...this.props.taskPage,
       searchWord: e.currentTarget.value
     })
   }
 
-  handleTag = (value: Array<string>) => {
+  handleTag: (value: string[]) => void = value => {
     this.props.setPage({ ...this.props.taskPage, searchTag: value })
   }
 
-  handleDifficulty = (value: SliderValue) => {
+  handleDifficulty: (value: SliderValue) => void = value => {
     this.props.setPage({
       ...this.props.taskPage,
-      searchDifficulty: value as Array<number>
+      searchDifficulty: value as number[]
     })
   }
 
-  handleHideTag = (check: boolean) => {
+  handleHideTag: (check: boolean) => void = check => {
     this.props.setPage({
       ...this.props.taskPage,
       hideTag: check
     })
   }
 
-  columnsHideTag = [
+  columnsHideTag: ColumnProps<ITask>[] = [
     {
       title: 'Problem ID',
       dataIndex: 'problem_id',
-      defaultSortOrder: ['descend', 'ascend'],
+      defaultSortOrder: 'ascend',
       sorter: (a: ITask, b: ITask) => a.problem_id.localeCompare(b.problem_id)
     },
     {
       title: 'Problem',
       dataIndex: 'title',
-      defaultSortOrder: ['descend', 'ascend'],
+      defaultSortOrder: 'ascend',
       sorter: (a: ITask, b: ITask) => a.title.localeCompare(b.title)
     },
     {
       title: 'Difficulty',
       dataIndex: 'difficulty',
-      defaultSortOrder: ['descend', 'ascend'],
+      defaultSortOrder: 'ascend',
       sorter: (a: ITask, b: ITask) => b.difficulty - a.difficulty
     }
   ]
 
-  columnsTag = [
+  columnsTag: ColumnProps<ITask>[] = [
     ...this.columnsHideTag,
     {
       title: 'Tags',
@@ -156,7 +158,7 @@ class TasksListComponent extends React.Component<
     }
   ]
 
-  CustomPagination = {
+  CustomPagination: PaginationConfig = {
     showQuickJumper: true,
     showSizeChanger: true,
     defaultCurrent: this.props.taskPage.currentPage,
@@ -180,7 +182,7 @@ class TasksListComponent extends React.Component<
     }
   }
 
-  tableConfig = {
+  tableConfig: TableProps<ITask> = {
     rowKey: (record: ITask) => record.problem_id,
     onRow: (record: ITask) => {
       return {
@@ -193,11 +195,10 @@ class TasksListComponent extends React.Component<
     columns: (this.props.taskPage.hideTag
       ? this.columnsHideTag
       : this.columnsTag) as ColumnProps<ITask>[],
-    loading: this.props.status === 'LOADING',
     pagination: this.CustomPagination
   }
 
-  filterProps = {
+  filterProps: IFilter = {
     tagList: this.state.tagList,
     searchWord: this.props.taskPage.searchWord,
     searchTag: this.props.taskPage.searchTag as string[],
@@ -213,7 +214,11 @@ class TasksListComponent extends React.Component<
     return (
       <WhiteContainerWrapper>
         <FilterComponent {...this.filterProps} />
-        <Table {...this.tableConfig} dataSource={this.state.taskList} />
+        <Table
+          {...this.tableConfig}
+          dataSource={this.state.taskList}
+          loading={this.props.status === 'LOADING'}
+        />
       </WhiteContainerWrapper>
     )
   }
@@ -231,7 +236,7 @@ interface IFilter {
   handleHideTag: (check: boolean) => void
 }
 
-const FilterComponent = (props: IFilter) => {
+const FilterComponent: (props: IFilter) => any = props => {
   return (
     <FilterWrapper>
       <SubFilterWrapper>
