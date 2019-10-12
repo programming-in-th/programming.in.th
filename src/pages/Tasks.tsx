@@ -54,6 +54,8 @@ interface IFilter {
 }
 
 const FilterComponent: (props: IFilter) => any = props => {
+  console.log('CALL THIS')
+  console.log(props)
   return (
     <FilterWrapper>
       <SubFilterWrapper>
@@ -133,8 +135,10 @@ class TasksListComponent extends React.Component<
       })
       this.setState({ tagList: Array.from(new Set(tagNow)) })
     }
-
+    console.log('CALL')
     if (this.state.taskPage !== this.props.taskPage) {
+      console.log('YY')
+      console.log(this.props.taskPage)
       this.setState({ taskPage: this.props.taskPage })
       this.updateTask()
     }
@@ -183,6 +187,7 @@ class TasksListComponent extends React.Component<
   }
 
   handleHideTag: (check: boolean) => void = check => {
+    console.log('yes', check)
     this.props.setPage({
       ...this.props.taskPage,
       hideTag: check
@@ -251,52 +256,49 @@ class TasksListComponent extends React.Component<
     }
   }
 
-  tableConfig: TableProps<ITask> = {
-    rowKey: (record: ITask) => record.problem_id,
-    onRow: (record: ITask) => {
-      return {
-        onClick: () => {
-          this.props.history.push('/tasks/' + record.problem_id)
-        }
-      }
-    },
-    scroll: { x: 100 },
-    columns: (this.props.taskPage.hideTag
-      ? this.columnsHideTag
-      : this.columnsTag) as ColumnProps<ITask>[],
-    pagination: this.CustomPagination
-  }
-
-  filterProps: IFilter = {
-    tagList: this.state.tagList,
-    searchWord: this.props.taskPage.searchWord,
-    searchTag: this.props.taskPage.searchTag as string[],
-    hideTag: this.props.taskPage.hideTag,
-    searchDifficulty: this.props.taskPage.searchDifficulty as number[],
-    handleSearch: this.handleSearch,
-    handleTag: this.handleTag,
-    handleDifficulty: this.handleDifficulty,
-    handleHideTag: this.handleHideTag
-  }
-
   render() {
+    const tableConfig: TableProps<ITask> = {
+      rowKey: (record: ITask) => record.problem_id,
+      onRow: (record: ITask) => {
+        return {
+          onClick: () => {
+            this.props.history.push('/tasks/' + record.problem_id)
+          }
+        }
+      },
+      scroll: { x: 100 },
+      columns: (this.props.taskPage.hideTag
+        ? this.columnsHideTag
+        : this.columnsTag) as ColumnProps<ITask>[],
+      pagination: this.CustomPagination,
+      dataSource: this.state.taskList,
+      loading: this.props.status === 'LOADING'
+    }
+
+    const filterProps: IFilter = {
+      tagList: this.state.tagList,
+      searchWord: this.props.taskPage.searchWord,
+      searchTag: this.props.taskPage.searchTag as string[],
+      hideTag: this.props.taskPage.hideTag,
+      searchDifficulty: this.props.taskPage.searchDifficulty as number[],
+      handleSearch: this.handleSearch,
+      handleTag: this.handleTag,
+      handleDifficulty: this.handleDifficulty,
+      handleHideTag: this.handleHideTag
+    }
     return (
       <WhiteContainerWrapper>
         <ResponsiveMain>
-          <FilterComponent {...this.filterProps} />
+          <FilterComponent {...filterProps} />
         </ResponsiveMain>
         <ResponsiveMobile>
           <Collapse>
             <Panel key="1" header="Filter">
-              <FilterComponent {...this.filterProps} />
+              <FilterComponent {...filterProps} />
             </Panel>
           </Collapse>
         </ResponsiveMobile>
-        <Table
-          {...this.tableConfig}
-          dataSource={this.state.taskList}
-          loading={this.props.status === 'LOADING'}
-        />
+        <Table {...tableConfig} />
       </WhiteContainerWrapper>
     )
   }
