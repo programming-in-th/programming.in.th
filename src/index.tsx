@@ -23,6 +23,10 @@ import { openNotificationWithIcon } from './components/Notification'
 
 import { GlobalStyle } from './design'
 
+if (process.env.NODE_ENV === 'production') {
+  console.log = () => {}
+}
+
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
   firebase.app().functions('asia-east2')
