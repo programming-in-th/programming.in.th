@@ -48,3 +48,17 @@ export const SubFilterWrapper = styled.div`
   padding: 5px;
   min-width: 250px;
 `
+
+export const ResponsiveMain = styled.div`
+  display: block;
+  @media (max-width: 1020px) {
+    display: none !important;
+  }
+`
+
+export const ResponsiveMobile = styled.div`
+  display: none;
+  @media (max-width: 1020px) {
+    display: block !important;
+  }
+`
