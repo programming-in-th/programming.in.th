@@ -17,7 +17,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { Provider, connect } from 'react-redux'
 import * as actionCreators from './redux/actions/index'
 import { firebaseConfig } from './config'
-import { store } from './redux'
+import { store, IAppState } from './redux'
 
 import { openNotificationWithIcon } from './components/Notification'
 
@@ -156,14 +156,14 @@ interface IRootProps {
 interface IRootStates {
   top: boolean
   checkNoti: boolean
-  old_submission_id: string
+  oldSubmissionID: string
 }
 
 class Root extends React.Component<IRootProps, IRootStates> {
   state: IRootStates = {
     top: true,
     checkNoti: false,
-    old_submission_id: ''
+    oldSubmissionID: ''
   }
 
   componentDidMount() {
@@ -177,7 +177,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
     ) {
       this.setState({
         checkNoti: true,
-        old_submission_id: this.props.currentSubmissionUID
+        oldSubmissionID: this.props.currentSubmissionUID
       })
 
       db.collection('submissions')
@@ -194,7 +194,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
               )
 
               this.props.resetCurrentSubmissionUID()
-              this.props.loadCurrentSubmissionData(this.state.old_submission_id)
+              this.props.loadCurrentSubmissionData(this.state.oldSubmissionID)
               this.setState({ checkNoti: false })
             }
           }
@@ -260,7 +260,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
   }
 }
 
-const mapStateToProps: (state: any) => any = state => {
+const mapStateToProps: (state: IAppState) => any = state => {
   return {
     user: state.user.user,
     currentSubmissionUID: state.submissions.currentSubmissionUID
