@@ -22,6 +22,7 @@ import { store, IAppState } from './redux'
 import { openNotificationWithIcon } from './components/Notification'
 
 import { GlobalStyle } from './design'
+import 'normalize.css'
 
 if (process.env.NODE_ENV === 'production') {
   console.log = () => {}

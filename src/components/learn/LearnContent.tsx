@@ -1,5 +1,5 @@
 import React from 'react'
-// import MarkdownRender from './MarkdownRender'
+import { MarkdownRenderer } from './MarkdownRenderer'
 import { CustomSpin } from '../Spin'
 
 class Learn extends React.Component<any> {
@@ -9,7 +9,7 @@ class Learn extends React.Component<any> {
     ) : (
       this.props.currentContent.map((snippet: string, index: number) => {
         // Keys has to be unique. Switch to index key.
-        return <div dangerouslySetInnerHTML={{ __html: snippet }}></div>
+        return <MarkdownRenderer content={snippet} />
       })
     )
   }

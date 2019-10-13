@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 export function getSystemFonts() {
   return [
@@ -68,8 +68,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: ${Fonts.display}
-	;
+	font-family: ${Fonts.display};
 }
 
 ::selection,
@@ -77,7 +76,7 @@ h6 {
 	background-color: rgba(0, 123, 255, 0.25);
 }
 
-* {
+body {
 	/* This will automatic fallback Thai font which Roboto can't handle. In other words, this will support Thai font by default. */
 	font-family : ${Fonts.body};
 	font-display: swap;
@@ -115,4 +114,51 @@ h6 {
 		font-weight: bolder;
 	}
 }
+`
+
+export const MarkDownStyle = styled.div`
+  p {
+    margin-bottom: 16px;
+  }
+
+  .math {
+    font-family: KaTeX_Main, 'Times New Roman', serif !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: ${Fonts.display};
+    border-bottom: 1px solid #d9d9d9;
+    margin-top: 24px;
+    margin-bottom: 16px;
+  }
+
+  h1 {
+    font-size: 32px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
+
+  h3 {
+    font-size: 20px;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-size: unset;
+  }
+
+  p,
+  ul {
+    font-size: 16px;
+    font-family: ${Fonts.body};
+    color: #24292e;
+  }
 `
