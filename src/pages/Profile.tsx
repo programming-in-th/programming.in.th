@@ -1,6 +1,5 @@
 import React from 'react'
 import { PageHeader } from 'antd'
-import { NewMarkdownRender } from '../components/learn/NewMarkdownRender'
 
 export class Profile extends React.Component {
   render() {
@@ -11,7 +10,6 @@ export class Profile extends React.Component {
           title="Title"
           subTitle="This is a subtitle"
         />
-        <NewMarkdownRender content={String.raw``} />
       </div>
     )
   }
