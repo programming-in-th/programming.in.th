@@ -119,6 +119,7 @@ body {
 export const MarkDownStyle = styled.div`
   p {
     margin-bottom: 16px;
+    font-family: ${getSystemFonts().join(', ')} !important;
   }
 
   .math {
@@ -131,7 +132,7 @@ export const MarkDownStyle = styled.div`
   h4,
   h5,
   h6 {
-    font-family: ${Fonts.display};
+    font-family: ${Fonts.display} !important;
     border-bottom: 1px solid #d9d9d9;
     margin-top: 24px;
     margin-bottom: 16px;
