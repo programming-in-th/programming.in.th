@@ -1,5 +1,5 @@
 import React from 'react'
-import { Menu, Icon, Col, Row, Layout } from 'antd'
+import { Menu, Icon, Col, Row, Layout, Drawer } from 'antd'
 import { NavLink } from 'react-router-dom'
 
 import { LearnContent } from '../components/learn/LearnContent'
@@ -8,17 +8,61 @@ import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 import { INode } from '../redux/types/learn'
 import { CustomSpin } from '../components/Spin'
+import { DesktopOnly } from '../components/Responsive'
+import styled from 'styled-components'
 
 const { SubMenu } = Menu
 const { Content, Sider } = Layout
 
-class Learn extends React.Component<any> {
+const responsive = `(max-width: 822px)`
+
+const DrawerMenu = styled.div`
+  position: fixed;
+  top: 144px;
+  width: 41px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+  text-align: center;
+  line-height: 40px;
+  font-size: 16px;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background: #fff;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  border-radius: 0 4px 4px 0;
+
+  @media ${responsive} {
+    display: flex;
+  }
+`
+interface ILearnState {
+  visible: boolean
+}
+
+class Learn extends React.Component<any, ILearnState> {
+  state = {
+    visible: false
+  }
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.article_id)
   }
 
   onItemClick = (node: any) => {
     this.props.onChangeArticle(this.props.idMap.get(node.article_id))
+  }
+
+  showDrawer = () => {
+    this.setState({
+      visible: true
+    })
+  }
+
+  onClose = () => {
+    this.setState({
+      visible: false
+    })
   }
 
   render() {
@@ -30,11 +74,15 @@ class Learn extends React.Component<any> {
       <CustomSpin />
     ) : (
       <Layout>
-        <Sider
-          width={325}
-          style={{ backgroundColor: 'white' }}
-          breakpoint="lg"
-          collapsedWidth="0"
+        <DrawerMenu onClick={this.showDrawer}>
+          <Icon type="menu" />
+        </DrawerMenu>
+        <Drawer
+          placement="left"
+          closable={false}
+          onClose={this.onClose}
+          visible={this.state.visible}
+          bodyStyle={{ padding: '10px' }}
         >
           <Menu theme="light" mode="inline" selectedKeys={[currentPath]}>
             <Menu.Item key={'/learn'}>
@@ -71,10 +119,50 @@ class Learn extends React.Component<any> {
               )
             })}
           </Menu>
-        </Sider>
+        </Drawer>
+        <DesktopOnly>
+          <Sider width={325} style={{ backgroundColor: 'white' }}>
+            <Menu theme="light" mode="inline" selectedKeys={[currentPath]}>
+              <Menu.Item key={'/learn'}>
+                <NavLink to={'/learn'}>
+                  <Icon type="home" theme="filled" />
+                  Welcome!
+                </NavLink>
+              </Menu.Item>
+              {nodes.map((node: INode) => {
+                return node.type === 'section' ? (
+                  <SubMenu key={node.name} title={node.name}>
+                    {node.articles!.map((sub_node: INode) => {
+                      return (
+                        <Menu.Item
+                          key={'/learn/' + sub_node.article_id}
+                          onClick={() => this.onItemClick(sub_node)}
+                        >
+                          <NavLink to={'/learn/' + sub_node.article_id}>
+                            {sub_node.name}
+                          </NavLink>
+                        </Menu.Item>
+                      )
+                    })}
+                  </SubMenu>
+                ) : (
+                  <Menu.Item
+                    key={'/learn/' + node.article_id}
+                    onClick={() => this.onItemClick(node)}
+                  >
+                    <NavLink to={'/learn/' + node.article_id}>
+                      {node.name}
+                    </NavLink>
+                  </Menu.Item>
+                )
+              })}
+            </Menu>
+          </Sider>
+        </DesktopOnly>
+
         <Content>
           <Row>
-            <Col span={14} offset={5}>
+            <Col lg={{ span: 14, offset: 5 }} xs={{ span: 18, offset: 2 }}>
               {article_id ? (
                 <LearnContent
                   article_id={article_id}

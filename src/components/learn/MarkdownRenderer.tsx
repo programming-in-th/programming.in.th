@@ -31,15 +31,12 @@ export const MarkdownRenderer: React.FunctionComponent<
 
   const processMarkdown = (content: VFileCompatible) => {
     const result = processor.processSync(content).contents
-
     return { __html: String(result) }
   }
 
   return (
     <MarkDownStyle>
-      <div
-        dangerouslySetInnerHTML={processMarkdown(String.raw`${props.content}`)}
-      />
+      <div dangerouslySetInnerHTML={processMarkdown(`${props.content}`)} />
     </MarkDownStyle>
   )
 }

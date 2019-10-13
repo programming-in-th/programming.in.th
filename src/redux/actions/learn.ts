@@ -46,7 +46,8 @@ export const loadContent = (url: string) => {
     try {
       const response = await axios.get(url)
       const data = response.data
-      const snippets: string[] = [data]
+      const snippets: string = data
+      console.log(snippets)
       dispatch(receiveContent(snippets))
     } catch (error) {
       console.log(error)
@@ -77,7 +78,7 @@ const requestContent = () => {
 }
 
 export const RECEIVE_CONTENT = 'RECEIVE_CONTENT'
-const receiveContent = (data: string[]) => {
+const receiveContent = (data: string) => {
   return {
     type: RECEIVE_CONTENT,
     currentContent: data
