@@ -56,4 +56,3 @@ This section provides a quick start guide for our project.
 - [@win11905](https://github.com/win11905)
 - [@iammarkps](https://github.com/iammarkps)
 - [@szawinis](https://github.com/szawinis)
-- [@PeppaPigHS](https://github.com/PeppaPigHS)
