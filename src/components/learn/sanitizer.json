@@ -80,7 +80,9 @@
     "span",
     "time",
     "wbr",
-    "input"
+    "input",
+    "svg",
+    "path"
   ],
   "attributes": {
     "a": ["href"],
@@ -92,6 +94,8 @@
     "del": ["cite"],
     "ins": ["cite"],
     "q": ["cite"],
+    "svg": ["viewBox", "preserveAspectRatio"],
+    "path": ["d"],
     "*": [
       "style",
       "className",
