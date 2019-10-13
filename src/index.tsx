@@ -243,8 +243,8 @@ class Root extends React.Component<IRootProps, IRootStates> {
                 </Switch>
               </Content>
               <Footer style={{ textAlign: 'center' }}>
-                IPST ©2019 | Contribute: All the source code for this website is
-                available on{' '}
+                IPST ©2019 | Contribution: All the source code for this website
+                is available on{' '}
                 <a
                   href="https://github.com/programming-in-th/programming.in.th"
                   target="_blank"

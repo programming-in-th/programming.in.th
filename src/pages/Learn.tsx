@@ -159,7 +159,6 @@ class Learn extends React.Component<any, ILearnState> {
             </Menu>
           </Sider>
         </DesktopOnly>
-
         <Content>
           <Row>
             <Col lg={{ span: 14, offset: 5 }} xs={{ span: 18, offset: 2 }}>
