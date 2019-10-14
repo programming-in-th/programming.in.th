@@ -16,11 +16,11 @@ export const loadTasksList = (
     getState: () => any
   ): Promise<void> => {
     const isCacheValid = checkCacheValid(getState, 'tasks')
-    console.log(getState())
-    console.log(isCacheValid)
+
     if (isCacheValid) {
       return
     }
+
     dispatch(requestTasks())
     try {
       const params: Object = {
@@ -30,6 +30,7 @@ export const loadTasksList = (
           max_difficulty !== -1 ? max_difficulty : Number.MAX_SAFE_INTEGER,
         tags: tags && tags.length ? tags : []
       }
+
       const response = await firebase
         .app()
         .functions('asia-east2')
@@ -37,6 +38,7 @@ export const loadTasksList = (
       response.data.sort((a: any, b: any) => {
         return a.problem_id.localeCompare(b.problem_id)
       })
+
       dispatch(receiveTasks(response.data))
     } catch (error) {
       console.log(error)
