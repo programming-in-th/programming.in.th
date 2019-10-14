@@ -11,21 +11,17 @@ A website for practicing algorithms, data structures and competitive programming
 - [Codebase](#codebase)
   - [The stack](#stack)
   - [Project structure](#project-structure)
+- [Gettting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Starting the application](#starting-the-application)
+- [Contributing](#contributing)
 - [Core Team Members](#core-team)
+- [License](#license)
 
 ## Stack
 
 We use React and Redux for the front end, and Firebase for our back end.
-
-## Getting Started
-
-This section provides a quick start guide for our project.
-
-### Prerequisites
-
-- Yarn: Please refer to their [installation guide](https://yarnpkg.com/en/docs/install).
-
-### Installation
 
 ## Project structure
 
@@ -51,8 +47,35 @@ This section provides a quick start guide for our project.
         └── types
 ```
 
+## Getting started
+
+This section provides a quick start guide for our project.
+
+### Prerequisites
+
+- Yarn: Please refer to their [installation guide](https://yarnpkg.com/en/docs/install).
+
+### Installation
+
+1. Make sure all the prerequisites are installed.
+1. Fork programming.in.th repository, https://github.com/programming-in-th/programming.in.th.git
+1. Clone your forked repository.
+1. Run `yarn` to install needed packages.
+1. Run `yarn start` to start the application. You can access it via `http://localhost:3000/`.
+
+### Starting the application
+
+Simply run `yarn start` will do the job.
+
+## Contributing
+
+You too can help us improve our project by suggesting features, bug report, etc. via [Pull Requests](https://github.com/programming-in-th/programming.in.th/pulls)
+
 ## Core team
 
 - [@win11905](https://github.com/win11905)
 - [@iammarkps](https://github.com/iammarkps)
 - [@szawinis](https://github.com/szawinis)
+
+## License
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation. Please see the [LICENSE](https://github.com/programming-in-th/programming.in.th/blob/master/LICENSE) for more information.
