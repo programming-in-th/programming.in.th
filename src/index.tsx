@@ -171,6 +171,11 @@ class Root extends React.Component<IRootProps, IRootStates> {
 
   componentDidMount() {
     this.props.onInitialLoad()
+
+    const channel = new BroadcastChannel('sw-messages')
+    channel.addEventListener('message', event => {
+      console.log('Received', event.data)
+    })
   }
 
   componentDidUpdate() {
