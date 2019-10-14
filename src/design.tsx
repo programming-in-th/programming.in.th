@@ -116,14 +116,37 @@ body {
 }
 `
 
+const MARGIN_BOTTOM: string = '16px'
+
 export const MarkDownStyle = styled.div`
-  p {
-    margin-bottom: 16px;
+  font-size: 16px;
+
+  /* Code */
+  code:not(.hljs) {
+    background-color: rgba(27, 31, 35, 0.1);
+    font-size: 85%;
+    padding: 0.2em 0.4em;
+    margin: 0;
+  }
+
+  /* Math */
+  .math {
+    font-family: KaTeX_Main, 'Times New Roman', serif !important;
+  }
+
+  /* Text  */
+  p,
+  ol {
+    margin-bottom: ${MARGIN_BOTTOM};
     font-family: ${getSystemFonts().join(', ')} !important;
   }
 
-  .math {
-    font-family: KaTeX_Main, 'Times New Roman', serif !important;
+  p,
+  ul,
+  ol {
+    font-size: 16px;
+    font-family: ${getSystemFonts().join(', ')} !important;
+    color: #24292e;
   }
 
   h1,
@@ -135,7 +158,7 @@ export const MarkDownStyle = styled.div`
     font-family: ${Fonts.display} !important;
     border-bottom: 1px solid #d9d9d9;
     margin-top: 24px;
-    margin-bottom: 16px;
+    margin-bottom: ${MARGIN_BOTTOM};
   }
 
   h1 {
@@ -156,10 +179,30 @@ export const MarkDownStyle = styled.div`
     font-size: unset;
   }
 
-  p,
-  ul {
-    font-size: 16px;
-    font-family: ${Fonts.body};
-    color: #24292e;
+  /* Table  */
+  table {
+    font-family: ${getSystemFonts().join(', ')} !important;
+    border-collapse: collapse;
+    text-align: center;
+    margin-bottom: ${MARGIN_BOTTOM};
+  }
+
+  table th {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+    font-weight: 600;
+  }
+
+  table td {
+    padding: 6px 13px;
+    border: 1px solid #dfe2e5;
+  }
+
+  table tr {
+    border-top: 1px solid #c6cbd1;
+  }
+
+  table tr:nth-child(2n) {
+    background-color: #f6f8fa;
   }
 `
