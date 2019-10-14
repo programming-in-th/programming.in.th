@@ -7,6 +7,7 @@ import {
 } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import { cacheEnhancer } from 'redux-cache'
 
 import taskReducer from './reducers/task'
 import userReducer from './reducers/user'
@@ -32,8 +33,10 @@ export const rootReducer: Reducer = combineReducers<IAppState>({
   learn: learnReducer
 })
 
+const composeEnhancers = composeWithDevTools({})
+
 export const store: Store = createStore(
   rootReducer,
   {},
-  composeWithDevTools(applyMiddleware(thunk))
+  composeEnhancers(applyMiddleware(thunk), cacheEnhancer())
 )

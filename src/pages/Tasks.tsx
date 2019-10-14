@@ -120,6 +120,7 @@ class TasksListComponent extends React.Component<
 
   componentDidMount() {
     this.props.onInitialLoad()
+    this.updateTask()
   }
 
   componentDidUpdate() {
@@ -266,7 +267,7 @@ class TasksListComponent extends React.Component<
         : this.columnsTag) as ColumnProps<ITask>[],
       pagination: this.CustomPagination,
       dataSource: this.state.taskList,
-      loading: this.props.status === 'LOADING'
+      loading: this.state.firstLoad ? false : this.props.status === 'LOADING'
     }
 
     const filterProps: IFilter = {
@@ -280,6 +281,7 @@ class TasksListComponent extends React.Component<
       handleDifficulty: this.handleDifficulty,
       handleHideTag: this.handleHideTag
     }
+
     return (
       <WhiteContainerWrapper>
         <ResponsiveMain>

@@ -1,4 +1,5 @@
 import { AnyAction, Reducer } from 'redux'
+import { DEFAULT_KEY, generateCacheTTL } from 'redux-cache'
 import { ITaskState } from '../types/task'
 import {
   REQUEST_TASKS_LIST,
@@ -9,6 +10,7 @@ import {
 } from '../actions/task'
 
 const initialState: ITaskState = {
+  cacheUntil: null,
   taskPage: {
     currentPage: 1,
     currentPageSize: 20,
@@ -33,6 +35,7 @@ const reducer: Reducer = (
       })
     case RECEIVE_TASKS_LIST:
       return Object.assign({}, state, {
+        [DEFAULT_KEY]: generateCacheTTL(),
         status: 'SUCCESS',
         taskList: action.taskList
       })

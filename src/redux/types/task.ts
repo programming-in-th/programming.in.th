@@ -1,4 +1,5 @@
 export interface ITaskState {
+  readonly cacheUntil: number | null
   readonly taskPage: ITaskPage
   readonly currentTask: ITask | null
   readonly taskList: ReadonlyArray<ITask>

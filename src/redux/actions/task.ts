@@ -1,8 +1,9 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
+import firebase from 'firebase/app'
+import { checkCacheValid } from 'redux-cache'
 import { ITask, ITaskPage } from '../types/task'
 import { IAppState } from '..'
-import firebase from 'firebase/app'
 
 export const loadTasksList = (
   limit: number,
@@ -11,8 +12,15 @@ export const loadTasksList = (
   tags: Array<String>
 ) => {
   return async (
-    dispatch: ThunkDispatch<IAppState, {}, AnyAction>
+    dispatch: ThunkDispatch<IAppState, {}, AnyAction>,
+    getState: () => any
   ): Promise<void> => {
+    const isCacheValid = checkCacheValid(getState, 'tasks')
+    console.log(getState())
+    console.log(isCacheValid)
+    if (isCacheValid) {
+      return
+    }
     dispatch(requestTasks())
     try {
       const params: Object = {
