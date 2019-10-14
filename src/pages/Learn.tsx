@@ -14,7 +14,7 @@ import styled from 'styled-components'
 const { SubMenu } = Menu
 const { Content, Sider } = Layout
 
-const responsive = `(max-width: 822px)`
+const responsive = `(max-width: 1020px)`
 
 const DrawerMenu = styled.div`
   position: fixed;
@@ -84,7 +84,12 @@ class Learn extends React.Component<any, ILearnState> {
           visible={this.state.visible}
           bodyStyle={{ padding: '10px' }}
         >
-          <Menu theme="light" mode="inline" selectedKeys={[currentPath]}>
+          <Menu
+            theme="light"
+            mode="inline"
+            selectedKeys={[currentPath]}
+            style={{ borderRight: 'none' }}
+          >
             <Menu.Item key={'/learn'}>
               <NavLink to={'/learn'}>
                 <Icon type="home" theme="filled" />
@@ -161,7 +166,7 @@ class Learn extends React.Component<any, ILearnState> {
         </DesktopOnly>
         <Content>
           <Row>
-            <Col lg={{ span: 14, offset: 5 }} xs={{ span: 18, offset: 2 }}>
+            <Col lg={{ span: 16, offset: 4 }} xs={{ span: 18, offset: 3 }}>
               {article_id ? (
                 <LearnContent
                   article_id={article_id}
@@ -170,6 +175,8 @@ class Learn extends React.Component<any, ILearnState> {
                 />
               ) : (
                 <div>
+                  <br />
+                  <br />
                   Welcome to Programming.in.th Tutorials, a comprehensive
                   compilation of all the resources you need to succeed in
                   learning algorithms, data structures and competitive
