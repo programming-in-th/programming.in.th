@@ -51,6 +51,7 @@ class Learn extends React.Component<any, ILearnState> {
 
   onItemClick = (node: any) => {
     this.props.onChangeArticle(this.props.idMap.get(node.article_id))
+    this.onClose()
   }
 
   showDrawer = () => {
@@ -84,84 +85,19 @@ class Learn extends React.Component<any, ILearnState> {
           visible={this.state.visible}
           bodyStyle={{ padding: '10px' }}
         >
-          <Menu
-            theme="light"
-            mode="inline"
-            selectedKeys={[currentPath]}
-            style={{ borderRight: 'none' }}
-          >
-            <Menu.Item key={'/learn'}>
-              <NavLink to={'/learn'}>
-                <Icon type="home" theme="filled" />
-                Welcome!
-              </NavLink>
-            </Menu.Item>
-            {nodes.map((node: INode) => {
-              return node.type === 'section' ? (
-                <SubMenu key={node.name} title={node.name}>
-                  {node.articles!.map((sub_node: INode) => {
-                    return (
-                      <Menu.Item
-                        key={'/learn/' + sub_node.article_id}
-                        onClick={() => this.onItemClick(sub_node)}
-                      >
-                        <NavLink to={'/learn/' + sub_node.article_id}>
-                          {sub_node.name}
-                        </NavLink>
-                      </Menu.Item>
-                    )
-                  })}
-                </SubMenu>
-              ) : (
-                <Menu.Item
-                  key={'/learn/' + node.article_id}
-                  onClick={() => this.onItemClick(node)}
-                >
-                  <NavLink to={'/learn/' + node.article_id}>
-                    {node.name}
-                  </NavLink>
-                </Menu.Item>
-              )
-            })}
-          </Menu>
+          <SideMenu
+            nodes={nodes}
+            currentPath={currentPath}
+            onItemClick={this.onItemClick}
+          />
         </Drawer>
         <DesktopOnly>
           <Sider width={325} style={{ backgroundColor: 'white' }}>
-            <Menu theme="light" mode="inline" selectedKeys={[currentPath]}>
-              <Menu.Item key={'/learn'}>
-                <NavLink to={'/learn'}>
-                  <Icon type="home" theme="filled" />
-                  Welcome!
-                </NavLink>
-              </Menu.Item>
-              {nodes.map((node: INode) => {
-                return node.type === 'section' ? (
-                  <SubMenu key={node.name} title={node.name}>
-                    {node.articles!.map((sub_node: INode) => {
-                      return (
-                        <Menu.Item
-                          key={'/learn/' + sub_node.article_id}
-                          onClick={() => this.onItemClick(sub_node)}
-                        >
-                          <NavLink to={'/learn/' + sub_node.article_id}>
-                            {sub_node.name}
-                          </NavLink>
-                        </Menu.Item>
-                      )
-                    })}
-                  </SubMenu>
-                ) : (
-                  <Menu.Item
-                    key={'/learn/' + node.article_id}
-                    onClick={() => this.onItemClick(node)}
-                  >
-                    <NavLink to={'/learn/' + node.article_id}>
-                      {node.name}
-                    </NavLink>
-                  </Menu.Item>
-                )
-              })}
-            </Menu>
+            <SideMenu
+              nodes={nodes}
+              currentPath={currentPath}
+              onItemClick={this.onItemClick}
+            />
           </Sider>
         </DesktopOnly>
         <Content>
@@ -189,6 +125,55 @@ class Learn extends React.Component<any, ILearnState> {
       </Layout>
     )
   }
+}
+
+interface ISiderProps {
+  currentPath: string
+  nodes: any
+  onItemClick: (node: any) => void
+}
+
+const SideMenu = (props: ISiderProps) => {
+  return (
+    <Menu
+      theme="light"
+      mode="inline"
+      selectedKeys={[props.currentPath]}
+      style={{ borderRight: 'none' }}
+    >
+      <Menu.Item key={'/learn'}>
+        <NavLink to={'/learn'}>
+          <Icon type="home" theme="filled" />
+          Welcome!
+        </NavLink>
+      </Menu.Item>
+      {props.nodes.map((node: INode) => {
+        return node.type === 'section' ? (
+          <SubMenu key={node.name} title={node.name}>
+            {node.articles!.map((sub_node: INode) => {
+              return (
+                <Menu.Item
+                  key={'/learn/' + sub_node.article_id}
+                  onClick={() => props.onItemClick(sub_node)}
+                >
+                  <NavLink to={'/learn/' + sub_node.article_id}>
+                    {sub_node.name}
+                  </NavLink>
+                </Menu.Item>
+              )
+            })}
+          </SubMenu>
+        ) : (
+          <Menu.Item
+            key={'/learn/' + node.article_id}
+            onClick={() => props.onItemClick(node)}
+          >
+            <NavLink to={'/learn/' + node.article_id}>{node.name}</NavLink>
+          </Menu.Item>
+        )
+      })}
+    </Menu>
+  )
 }
 
 const mapStateToProps = (state: any) => {
