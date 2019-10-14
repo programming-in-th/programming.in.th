@@ -179,6 +179,10 @@ export const MarkDownStyle = styled.div`
     font-size: unset;
   }
 
+  em {
+    font-style: italic;
+  }
+
   /* Table  */
   table {
     font-family: ${getSystemFonts().join(', ')} !important;

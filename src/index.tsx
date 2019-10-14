@@ -24,6 +24,8 @@ import { openNotificationWithIcon } from './components/Notification'
 import { GlobalStyle } from './design'
 import 'normalize.css'
 
+import * as serviceWorker from './serviceWorker'
+
 if (process.env.NODE_ENV === 'production') {
   console.log = () => {}
 }
@@ -295,3 +297,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('react') as HTMLElement
 )
+
+serviceWorker.register()
