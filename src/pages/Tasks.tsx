@@ -11,17 +11,15 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 
 import { ITask, ITaskPage } from '../redux/types/task'
+import { DesktopOnly, MobileOnly } from '../components/Responsive'
 
 import {
   WhiteContainerWrapper,
   FilterWrapper,
-  SubFilterWrapper,
-  ResponsiveMain,
-  ResponsiveMobile
+  SubFilterWrapper
 } from '../components/atomics'
 import { IAppState } from '../redux'
 
-const Search = Input.Search
 const { Panel } = Collapse
 const { Option } = Select
 
@@ -58,11 +56,11 @@ const FilterComponent: (props: IFilter) => any = props => {
     <FilterWrapper>
       <SubFilterWrapper>
         Search:
-        <Search
+        <Input
           defaultValue={props.searchWord}
           placeholder="Enter Problem ID or Title"
           onChange={e => props.handleSearch(e)}
-          style={{ width: 200, margin: 10 }}
+          style={{ margin: 10 }}
         />
       </SubFilterWrapper>
       <SubFilterWrapper>
@@ -284,16 +282,16 @@ class TasksListComponent extends React.Component<
 
     return (
       <WhiteContainerWrapper>
-        <ResponsiveMain>
+        <DesktopOnly>
           <FilterComponent {...filterProps} />
-        </ResponsiveMain>
-        <ResponsiveMobile>
+        </DesktopOnly>
+        <MobileOnly>
           <Collapse>
             <Panel key="1" header="Filter">
               <FilterComponent {...filterProps} />
             </Panel>
           </Collapse>
-        </ResponsiveMobile>
+        </MobileOnly>
         <Table {...tableConfig} />
       </WhiteContainerWrapper>
     )

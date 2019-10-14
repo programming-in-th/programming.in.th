@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import styled from 'styled-components'
 import { Drawer, Button, Menu, Avatar, Icon } from 'antd'
+import { responsive } from '../Responsive'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -15,8 +16,6 @@ import H from 'history'
 const LogoutWrapper = styled.div`
   margin: 5px;
 `
-
-const responsive = `(max-width: 1020px)`
 
 interface INavigatorProps {
   location: H.Location
@@ -52,10 +51,9 @@ const NavHeader = styled(Header)<{ top: number; location: string }>`
   position: fixed;
   z-index: 100;
   width: 100%;
-
-  @media screen and (max-width: 768px) {
-    padding-left: 10px;
-    padding-right: 10px;
+  @media screen and ${responsive} {
+    padding-left: 25px;
+    padding-right: 25px;
   }
 `
 

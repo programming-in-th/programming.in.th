@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 import { animated } from 'react-spring'
+import { responsive } from './Responsive'
 
 export const ContainerWrapper = styled.div`
   width: calc(100% - 50px * 2);
   margin: 20px auto;
 
-  @media screen and (max-width: 768px) {
+  @media screen and ${responsive} {
     width: calc(100% - 10px * 2);
   }
 `
@@ -27,7 +28,7 @@ export const AnimatedTitle = styled(animated.h1)<{ color?: string }>`
   display: inline;
   color: ${props => props.color || 'black'};
 
-  @media (max-width: 768px) {
+  @media ${responsive} {
     font-size: 24px;
   }
 `
@@ -37,7 +38,7 @@ export const FilterWrapper = styled.div`
   flex-direction: row;
   margin-left: 20px;
   margin-right: 20px;
-  @media (max-width: 1020px) {
+  @media ${responsive} {
     display: block;
   }
 `
@@ -46,19 +47,6 @@ export const SubFilterWrapper = styled.div`
   display: flex;
   align-items: center;
   padding: 5px;
-  min-width: 250px;
-`
-
-export const ResponsiveMain = styled.div`
-  display: block;
-  @media (max-width: 1020px) {
-    display: none !important;
-  }
-`
-
-export const ResponsiveMobile = styled.div`
-  display: none;
-  @media (max-width: 1020px) {
-    display: block !important;
-  }
+  width: 100%;
+  justify-content: center;
 `
