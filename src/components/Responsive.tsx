@@ -5,8 +5,12 @@ interface IDesktopOnlyProps {
   children: React.ReactNode
 }
 
+const defaultBreak: number = 992
+
+export const responsive = `(max-width: 992px)`
+
 export const DesktopOnly = ({
-  breakpoint = 1020,
+  breakpoint = defaultBreak,
   children
 }: IDesktopOnlyProps) => {
   const width = useWindowWidth()
@@ -14,6 +18,18 @@ export const DesktopOnly = ({
     return children as React.ReactElement
   } else {
     return null
+  }
+}
+
+export const MobileOnly = ({
+  breakpoint = defaultBreak,
+  children
+}: IDesktopOnlyProps) => {
+  const width = useWindowWidth()
+  if (width > breakpoint) {
+    return null
+  } else {
+    return children as React.ReactElement
   }
 }
 

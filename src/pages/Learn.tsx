@@ -8,13 +8,11 @@ import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
 import { INode } from '../redux/types/learn'
 import { CustomSpin } from '../components/Spin'
-import { DesktopOnly } from '../components/Responsive'
+import { responsive, DesktopOnly } from '../components/Responsive'
 import styled from 'styled-components'
 
 const { SubMenu } = Menu
 const { Content, Sider } = Layout
-
-const responsive = `(max-width: 1020px)`
 
 const DrawerMenu = styled.div`
   position: fixed;
@@ -37,6 +35,11 @@ const DrawerMenu = styled.div`
     display: flex;
   }
 `
+
+const Blank = styled.div`
+  margin-right: 325px !important;
+`
+
 interface ILearnState {
   visible: boolean
 }
@@ -80,10 +83,11 @@ class Learn extends React.Component<any, ILearnState> {
         </DrawerMenu>
         <Drawer
           placement="left"
+          width={290}
           closable={false}
           onClose={this.onClose}
           visible={this.state.visible}
-          bodyStyle={{ padding: '10px' }}
+          bodyStyle={{ marginTop: '20px', padding: 0 }}
         >
           <SideMenu
             nodes={nodes}
@@ -92,17 +96,25 @@ class Learn extends React.Component<any, ILearnState> {
           />
         </Drawer>
         <DesktopOnly>
-          <Sider width={325} style={{ backgroundColor: 'white' }}>
+          <Sider
+            width={325}
+            style={{
+              backgroundColor: 'white',
+              position: 'fixed',
+              height: '100vh'
+            }}
+          >
             <SideMenu
               nodes={nodes}
               currentPath={currentPath}
               onItemClick={this.onItemClick}
             />
           </Sider>
+          <Blank />
         </DesktopOnly>
         <Content>
           <Row>
-            <Col lg={{ span: 16, offset: 4 }} xs={{ span: 18, offset: 3 }}>
+            <Col span={18} offset={3}>
               {article_id ? (
                 <LearnContent
                   article_id={article_id}
