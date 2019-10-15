@@ -5,13 +5,13 @@ export const Head: React.FunctionComponent<{}> = () => (
   <Helmet>
     <link
       rel="preload"
-      href="assets/fonts/Kanit-Regular.woff2"
+      href={`${process.env.PUBLIC_URL}assets/fonts/Kanit-Regular.woff2`}
       as="font"
       crossOrigin="anonymous"
     />
     <link
       rel="preload"
-      href="assets/fonts/THSarabun.woff2"
+      href={`${process.env.PUBLIC_URL}assets/fonts/THSarabun.woff2`}
       as="font"
       crossOrigin="anonymous"
     />
