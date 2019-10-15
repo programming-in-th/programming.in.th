@@ -3,13 +3,18 @@ import { Menu, Icon, Col, Row, Layout, Drawer } from 'antd'
 import { NavLink } from 'react-router-dom'
 
 import { LearnContent } from '../components/learn/LearnContent'
+import { CustomSpin } from '../components/Spin'
+import { responsive, DesktopOnly } from '../components/Responsive'
 
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
-import { INode } from '../redux/types/learn'
-import { CustomSpin } from '../components/Spin'
-import { responsive, DesktopOnly } from '../components/Responsive'
+import { ThunkDispatch } from 'redux-thunk'
+import { AnyAction } from 'redux'
+
 import styled from 'styled-components'
+
+import { INode } from '../redux/types/learn'
+import { IAppState } from '../redux'
 
 const { SubMenu } = Menu
 const { Content, Sider } = Layout
@@ -40,11 +45,22 @@ const Blank = styled.div`
   margin-right: 325px !important;
 `
 
+interface ILearnProps {
+  menu: INode[]
+  match: any
+  menuStatus: string
+  idMap: Map<string, INode>
+  currentContent: string[]
+  currentContentStatus: string
+  onInitialLoad: (article_id: string) => void
+  onChangeArticle: (newArticle: INode | undefined) => void
+}
+
 interface ILearnState {
   visible: boolean
 }
 
-class Learn extends React.Component<any, ILearnState> {
+class Learn extends React.Component<ILearnProps, ILearnState> {
   state = {
     visible: false
   }
@@ -148,7 +164,7 @@ interface ISiderProps {
   onItemClick: (node: any) => void
 }
 
-const SideMenu = (props: ISiderProps) => {
+const SideMenu: (props: ISiderProps) => any = props => {
   return (
     <Menu
       theme="light"
@@ -191,7 +207,7 @@ const SideMenu = (props: ISiderProps) => {
   )
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps: (state: IAppState) => any = state => {
   return {
     menu: state.learn.menu,
     menuStatus: state.learn.menuStatus,
@@ -201,7 +217,9 @@ const mapStateToProps = (state: any) => {
   }
 }
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps: (
+  dispatch: ThunkDispatch<{}, {}, AnyAction>
+) => any = dispatch => {
   return {
     onInitialLoad: (article_id: string) => {
       dispatch(actionCreators.loadMenu(article_id))
