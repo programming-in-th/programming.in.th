@@ -121,6 +121,10 @@ const MARGIN_BOTTOM: string = '16px'
 export const MarkDownStyle = styled.div`
   font-size: 16px;
 
+  img {
+    max-width: 100%;
+  }
+
   /* Code */
   code:not(.hljs) {
     background-color: rgba(27, 31, 35, 0.1);
