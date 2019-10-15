@@ -22,6 +22,7 @@
     "intersection-observer": "^0.7.0",
     "less": "^3.10.3",
     "less-loader": "^5.0.0",
+    "mitt": "^1.1.3",
     "normalize.css": "^8.0.1",
     "react": "^16.10.2",
     "react-app-rewired": "^2.1.3",

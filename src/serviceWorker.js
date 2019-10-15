@@ -20,7 +20,7 @@ const isLocalhost = Boolean(
     )
 )
 
-export function register(config) {
+export function register(config, emitter) {
   if ('serviceWorker' in navigator) {
     // The URL constructor is available in all browsers that support SW.
     const publicUrl = new URL(process.env.PUBLIC_URL, window.location.href)
@@ -36,7 +36,8 @@ export function register(config) {
 
       if (isLocalhost) {
         // This is running on localhost. Let's check if a service worker still exists or not.
-        checkValidServiceWorker(swUrl, config)
+
+        checkValidServiceWorker(swUrl, config, emitter)
 
         // Add some additional logging to localhost, pointing developers to the
         // service worker/PWA documentation.
@@ -48,13 +49,14 @@ export function register(config) {
         })
       } else {
         // Is not localhost. Just register service worker
-        registerValidSW(swUrl, config)
+        registerValidSW(swUrl, config, emitter)
       }
     })
   }
 }
 
-function registerValidSW(swUrl, config) {
+function registerValidSW(swUrl, config, emitter) {
+  console.log(emitter)
   navigator.serviceWorker
     .register(swUrl)
     .then(registration => {
@@ -65,10 +67,12 @@ function registerValidSW(swUrl, config) {
         }
         installingWorker.onstatechange = () => {
           if (installingWorker.state === 'installed') {
+            emitter.emit('sw')
             if (navigator.serviceWorker.controller) {
               // At this point, the updated precached content has been fetched,
               // but the previous service worker will still serve the older
               // content until all client tabs are closed.
+
               console.log(
                 'New content is available and will be used when all ' +
                   'tabs for this page are closed. See https://bit.ly/CRA-PWA.'
@@ -98,7 +102,7 @@ function registerValidSW(swUrl, config) {
     })
 }
 
-function checkValidServiceWorker(swUrl, config) {
+function checkValidServiceWorker(swUrl, config, emitter) {
   // Check if the service worker can be found. If it can't reload the page.
   fetch(swUrl)
     .then(response => {
@@ -116,7 +120,7 @@ function checkValidServiceWorker(swUrl, config) {
         })
       } else {
         // Service worker found. Proceed as normal.
-        registerValidSW(swUrl, config)
+        registerValidSW(swUrl, config, emitter)
       }
     })
     .catch(() => {

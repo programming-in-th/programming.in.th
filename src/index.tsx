@@ -25,6 +25,7 @@ import { openNotificationWithIcon } from './components/Notification'
 import { GlobalStyle } from './design'
 import 'normalize.css'
 
+import mitt from 'mitt'
 import * as serviceWorker from './serviceWorker'
 
 if (process.env.NODE_ENV === 'production') {
@@ -163,6 +164,8 @@ interface IRootStates {
   oldSubmissionID: string
 }
 
+const emitter: mitt.Emitter = new mitt()
+
 class Root extends React.Component<IRootProps, IRootStates> {
   state: IRootStates = {
     top: true,
@@ -172,6 +175,32 @@ class Root extends React.Component<IRootProps, IRootStates> {
 
   componentDidMount() {
     this.props.onInitialLoad()
+    window.addEventListener('online', this.handleNetworkEvent)
+    window.addEventListener('offline', this.handleNetworkEvent)
+    emitter.on('sw', () =>
+      openNotificationWithIcon(
+        'success',
+        'Service Worker registered!',
+        'Content is cached for offline use. ⚡⚡⚡'
+      )
+    )
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('online', this.handleNetworkEvent)
+    window.removeEventListener('offline', this.handleNetworkEvent)
+  }
+
+  handleNetworkEvent = () => {
+    if (typeof navigator !== 'object') return
+
+    navigator.onLine
+      ? window.location.reload()
+      : openNotificationWithIcon(
+          'error',
+          'You are offline',
+          'Please connect to the internet before continuing'
+        )
   }
 
   componentDidUpdate() {
@@ -193,8 +222,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
               openNotificationWithIcon(
                 'success',
                 'Submission Successful',
-                'Done!',
-                this.props.currentSubmissionUID
+                'Done!'
               )
 
               this.props.resetCurrentSubmissionUID()
@@ -300,4 +328,4 @@ ReactDOM.render(
   document.getElementById('react') as HTMLElement
 )
 
-serviceWorker.register()
+serviceWorker.register({}, emitter)
