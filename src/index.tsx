@@ -177,18 +177,13 @@ class Root extends React.Component<IRootProps, IRootStates> {
     this.props.onInitialLoad()
     window.addEventListener('online', this.handleNetworkEvent)
     window.addEventListener('offline', this.handleNetworkEvent)
-    emitter.on('sw', () =>
-      openNotificationWithIcon(
-        'success',
-        'Service Worker registered!',
-        'Content is cached for offline use. ⚡⚡⚡'
-      )
-    )
+    emitter.on('sw', this.handleServiceWorker)
   }
 
   componentWillUnmount() {
     window.removeEventListener('online', this.handleNetworkEvent)
     window.removeEventListener('offline', this.handleNetworkEvent)
+    emitter.off('sw', this.handleServiceWorker)
   }
 
   handleNetworkEvent = () => {
@@ -201,6 +196,14 @@ class Root extends React.Component<IRootProps, IRootStates> {
           'You are offline',
           'Please connect to the internet before continuing'
         )
+  }
+
+  handleServiceWorker = () => {
+    openNotificationWithIcon(
+      'success',
+      'Service Worker registered!',
+      'Content is cached for offline use. ⚡⚡⚡'
+    )
   }
 
   componentDidUpdate() {
