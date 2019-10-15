@@ -46,12 +46,22 @@ const enableTransparency = (location: string, top: number): string => {
   return 'white'
 }
 
+const enableBoxShadow = (location: string, top: number): string => {
+  if (location === '/') {
+    return `rgba(0, 0, 0, ${top > 120 ? '0.1' : '0'}) 0px 6px 20px`
+  }
+
+  return 'rgba(0, 0, 0, 0.1) 0px 6px 20px'
+}
+
 const NavHeader = styled(Header)<{ top: number; location: string }>`
   background: ${props => enableTransparency(props.location, props.top)};
   position: fixed;
   z-index: 100;
   width: 100%;
-  @media screen and ${responsive} {
+  box-shadow: ${props => enableBoxShadow(props.location, props.top)};
+
+  @media screen and (${responsive}) {
     padding-left: 25px;
     padding-right: 25px;
   }
