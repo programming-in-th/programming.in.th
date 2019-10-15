@@ -61,7 +61,7 @@ const NavHeader = styled(Header)<{ top: number; location: string }>`
   width: 100%;
   box-shadow: ${props => enableBoxShadow(props.location, props.top)};
 
-  @media screen and (${responsive}) {
+  @media ${responsive} {
     padding-left: 25px;
     padding-right: 25px;
   }
