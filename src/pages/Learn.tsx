@@ -92,6 +92,7 @@ class Learn extends React.Component<any, ILearnState> {
           <SideMenu
             nodes={nodes}
             currentPath={currentPath}
+            onClose={this.onClose}
             onItemClick={this.onItemClick}
           />
         </Drawer>
@@ -107,6 +108,7 @@ class Learn extends React.Component<any, ILearnState> {
             <SideMenu
               nodes={nodes}
               currentPath={currentPath}
+              onClose={this.onClose}
               onItemClick={this.onItemClick}
             />
           </Sider>
@@ -142,6 +144,7 @@ class Learn extends React.Component<any, ILearnState> {
 interface ISiderProps {
   currentPath: string
   nodes: any
+  onClose: () => void
   onItemClick: (node: any) => void
 }
 
@@ -153,7 +156,7 @@ const SideMenu = (props: ISiderProps) => {
       selectedKeys={[props.currentPath]}
       style={{ borderRight: 'none' }}
     >
-      <Menu.Item key={'/learn'}>
+      <Menu.Item key={'/learn'} onClick={props.onClose}>
         <NavLink to={'/learn'}>
           <Icon type="home" theme="filled" />
           Welcome!
