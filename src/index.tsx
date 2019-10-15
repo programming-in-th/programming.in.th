@@ -11,6 +11,7 @@ import WebFont from 'webfontloader'
 import { Nav } from './components/nav/Nav'
 import { CustomSpin } from './components/Spin'
 import { Head } from './components/Head'
+import { ScrollToTop } from './components/ScrollToTop'
 
 import { AnyAction } from 'redux'
 import { ThunkDispatch } from 'redux-thunk'
@@ -213,6 +214,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
           <CustomSpin />
         ) : (
           <Router>
+            <ScrollToTop />
             <CustomLayout>
               <GlobalStyle />
               <Nav />

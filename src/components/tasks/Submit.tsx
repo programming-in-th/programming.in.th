@@ -74,7 +74,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
     theme: 'material',
     code: '',
     uploadedCode: '',
-    hideCode: false
+    hideCode: true
   }
 
   componentDidMount() {
