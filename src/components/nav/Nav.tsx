@@ -13,10 +13,6 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import H from 'history'
 
-const LogoutWrapper = styled.div`
-  margin: 5px;
-`
-
 interface INavigatorProps {
   location: H.Location
   match: match
@@ -48,10 +44,10 @@ const enableTransparency = (location: string, top: number): string => {
 
 const enableBoxShadow = (location: string, top: number): string => {
   if (location === '/') {
-    return `rgba(0, 0, 0, ${top > 120 ? '0.1' : '0'}) 0px 6px 20px`
+    return `0 2px 8px rgba(0,0,0,${top > 120 ? 0.15 : 0})`
   }
 
-  return 'rgba(0, 0, 0, 0.1) 0px 6px 20px'
+  return '0 2px 8px rgba(0,0,0,.15)'
 }
 
 const NavHeader = styled(Header)<{ top: number; location: string }>`
@@ -221,21 +217,18 @@ const Login = (props: IItem) => {
                 </Link>
               </Menu.Item>
               <Menu.Item key="options">
-                <Link to="/setting">
+                <Link to="/setting/basic">
                   <Icon type="setting" />
                   Setting
                 </Link>
               </Menu.Item>
             </Menu.ItemGroup>
-            <LogoutWrapper>
-              <Button
-                type="link"
-                style={{ color: 'red' }}
-                onClick={() => firebase.auth().signOut()}
-              >
+            <Menu.ItemGroup>
+              <Menu.Item key="logout">
+                <Icon type="logout" />
                 Logout
-              </Button>
-            </LogoutWrapper>
+              </Menu.Item>
+            </Menu.ItemGroup>
           </Menu.SubMenu>
         </Menu>
       ) : (

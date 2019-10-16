@@ -190,6 +190,7 @@ class SubmissionsComponent extends React.Component<
           loading={this.props.submissionsListStatus === 'LOADING'}
           pagination={this.CustomPagination}
           scroll={{ x: 100 }}
+          rowKey={(record: ISubmission) => record.submission_id}
           onRow={(record: ISubmission) => {
             return {
               onClick: () => {
