@@ -1,13 +1,14 @@
 import React from 'react'
 import firebase from 'firebase/app'
-import styled from 'styled-components'
-import { responsive } from '../components/Responsive'
 import { Menu } from 'antd'
-
+import styled from 'styled-components'
+import { Link, Route } from 'react-router-dom'
 import { connect } from 'react-redux'
 
+import { responsive } from '../components/Responsive'
+
 import { NotFound } from './404'
-import { Link } from 'react-router-dom'
+import { BasicSettings } from '../components/settings/basic'
 
 interface ISettingProps {
   user: firebase.User
@@ -37,12 +38,6 @@ const LeftMenu = styled.div`
 
 const Right = styled.div`
   padding: 0 32px 8px 32px;
-`
-
-const Title = styled.h1`
-  margin-bottom: 12px;
-  font-size: 32px;
-  line-height: 28px;
 `
 
 class Setting extends React.Component<ISettingProps> {
@@ -75,7 +70,9 @@ class Setting extends React.Component<ISettingProps> {
           </Menu>
         </LeftMenu>
         <Right>
-          <Title>Hello</Title>
+          <Route path="/setting/basic">
+            <BasicSettings user={this.props.user}></BasicSettings>
+          </Route>
         </Right>
       </SettingLayout>
     )
