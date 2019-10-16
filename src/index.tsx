@@ -273,7 +273,7 @@ class Root extends React.Component<IRootProps, IRootStates> {
                     component={LearnPage}
                   />
                   <Route exact path="/profile" component={ProfilePage} />
-                  <Route exact path="/setting" component={SettingPage} />
+                  <Route path="/setting/:sub" component={SettingPage} />
                   <Route component={NotFound} />
                 </Switch>
               </Content>
