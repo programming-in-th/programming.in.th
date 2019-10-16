@@ -5,12 +5,6 @@ import { FormComponentProps } from 'antd/lib/form'
 import { openNotificationWithIcon } from '../Notification'
 import { AvatarUploader } from '../FileUploader'
 
-const Title = styled.h1`
-  margin-bottom: 12px;
-  font-size: 24px;
-  line-height: 28px;
-`
-
 const Avatar = styled.div`
   width: 144px;
   height: 144px;
@@ -98,7 +92,6 @@ export class Basic extends React.Component<
     const { user } = this.props
     return (
       <div>
-        <Title>Basic Settings</Title>
         <Form onSubmit={this.handleSubmit}>
           <Form.Item label="Display Name">
             {getFieldDecorator('displayName', {

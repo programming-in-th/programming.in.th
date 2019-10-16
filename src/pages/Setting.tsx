@@ -8,7 +8,8 @@ import { connect } from 'react-redux'
 import { responsive } from '../components/Responsive'
 
 import { NotFound } from './404'
-import { BasicSettings } from '../components/settings/basic'
+import { BasicSettings } from '../components/settings/Basic'
+import { SocialSetting } from '../components/settings/Social'
 
 interface ISettingProps {
   user: firebase.User
@@ -40,10 +41,17 @@ const Right = styled.div`
   padding: 0 32px 8px 32px;
 `
 
+const Title = styled.h1`
+  margin-bottom: 12px;
+  font-size: 24px;
+  line-height: 28px;
+`
+
 class Setting extends React.Component<ISettingProps> {
   componentDidMount() {
-    console.log(this.props.match)
+    console.log(this.props.user.providerData)
   }
+
   render() {
     const currentPath = this.props.match.url
 
@@ -61,6 +69,9 @@ class Setting extends React.Component<ISettingProps> {
             <Menu.Item key="/setting/security">
               <Link to="/setting/security">Security Settings</Link>
             </Menu.Item>
+            <Menu.Item key="/setting/social">
+              <Link to="/setting/social">Social</Link>
+            </Menu.Item>
             <Menu.Item key="/setting/submissions">
               <Link to="/setting/submissions">Submissions Settings</Link>
             </Menu.Item>
@@ -71,7 +82,12 @@ class Setting extends React.Component<ISettingProps> {
         </LeftMenu>
         <Right>
           <Route path="/setting/basic">
+            <Title>Basic Settings</Title>
             <BasicSettings user={this.props.user}></BasicSettings>
+          </Route>
+          <Route path="/setting/social">
+            <Title>Social Binding</Title>
+            <SocialSetting user={this.props.user}></SocialSetting>
           </Route>
         </Right>
       </SettingLayout>
