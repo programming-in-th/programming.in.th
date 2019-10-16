@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { Form, Input, Icon, Button } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import { openNotificationWithIcon } from '../Notification'
+import { AvatarUploader } from '../FileUploader'
 
 const Title = styled.h1`
   margin-bottom: 12px;
@@ -19,6 +20,10 @@ const Avatar = styled.div`
     width: 100%;
   }
 `
+const AvatarTitle = styled.p`
+  color: black;
+`
+
 interface IAvatarViewProps {
   src: string
 }
@@ -27,7 +32,7 @@ const AvatarView: React.FunctionComponent<IAvatarViewProps> = ({
   src
 }: IAvatarViewProps) => (
   <div>
-    <p>Avatar:</p>
+    <AvatarTitle>Avatar:</AvatarTitle>
     <Avatar>
       <img src={src} alt="Avatar"></img>
     </Avatar>
@@ -90,6 +95,7 @@ export class Basic extends React.Component<
 
   render() {
     const { getFieldDecorator, getFieldsError } = this.props.form
+    const { user } = this.props
     return (
       <div>
         <Title>Basic Settings</Title>
@@ -134,6 +140,7 @@ export class Basic extends React.Component<
           </Form.Item>
         </Form>
         <AvatarView src={this.getAvatar()}></AvatarView>
+        <AvatarUploader user={user}></AvatarUploader>
       </div>
     )
   }

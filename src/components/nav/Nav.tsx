@@ -224,7 +224,7 @@ const Login = (props: IItem) => {
               </Menu.Item>
             </Menu.ItemGroup>
             <Menu.ItemGroup>
-              <Menu.Item key="logout">
+              <Menu.Item key="logout" onClick={() => firebase.auth().signOut()}>
                 <Icon type="logout" />
                 Logout
               </Menu.Item>

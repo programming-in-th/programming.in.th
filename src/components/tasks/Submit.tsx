@@ -8,7 +8,7 @@ import { AnyAction } from 'redux'
 import { Link } from 'react-router-dom'
 import { SubFilterWrapper } from '../atomics'
 
-import { Upload } from '../tasks/FileUploader'
+import { Upload } from '../FileUploader'
 
 import { Code } from '../Code'
 import styled from 'styled-components'
