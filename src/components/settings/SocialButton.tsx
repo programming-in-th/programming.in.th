@@ -3,24 +3,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import { Button, message, Modal } from 'antd'
 
-const extractProviderList = (user: firebase.User): string[] => {
-  const result = []
-
-  if (user.providerData) {
-    for (let i = 0; i < user.providerData.length; i++) {
-      result.push(user.providerData[i]!.providerId)
-    }
-  }
-
-  return result
-}
-
-const checkProvider = (
-  providerList: string[],
-  providerName: string
-): boolean => {
-  return providerList.includes(providerName)
-}
+import { extractProviderList, checkProvider } from './utils'
 
 const warnLastProvider = (providerList: string[]): boolean => {
   return providerList.length === 1

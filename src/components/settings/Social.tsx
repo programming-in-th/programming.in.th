@@ -7,10 +7,12 @@ import 'firebase/auth'
 import { useForceUpdate } from '../../utils/useForceUpdate'
 import { SocialButton } from './SocialButton'
 
+import { getDescriptionText } from './utils'
+
 const StyledIcon = styled(Icon)`
   margin-left: 16px;
   color: rgba(0, 0, 0, 0.2);
-  font-size: 18px;
+  font-size: 48px;
   vertical-align: middle;
   transition: color 0.3s;
 
@@ -25,6 +27,11 @@ const Provider = {
   github: new firebase.auth.GithubAuthProvider()
 }
 
+const descriptionText = {
+  bounded: 'Currently bounded',
+  unbound: 'Currently unbound'
+}
+
 interface ISocialSettingProps {
   user: firebase.User
 }
@@ -36,7 +43,7 @@ export const SocialSetting: React.FunctionComponent<ISocialSettingProps> = (
   const getData = (user: firebase.User) => [
     {
       title: 'Facebook',
-      description: '',
+      description: getDescriptionText(user, 'facebook.com'),
       actions: [
         <SocialButton
           user={user}
@@ -48,7 +55,7 @@ export const SocialSetting: React.FunctionComponent<ISocialSettingProps> = (
     },
     {
       title: 'Google',
-      description: '',
+      description: getDescriptionText(user, 'google.com'),
       actions: [
         <SocialButton
           user={user}
@@ -60,7 +67,7 @@ export const SocialSetting: React.FunctionComponent<ISocialSettingProps> = (
     },
     {
       title: 'GitHub',
-      description: '',
+      description: getDescriptionText(user, 'github.com'),
       actions: [
         <SocialButton
           user={user}

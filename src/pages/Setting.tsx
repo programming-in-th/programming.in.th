@@ -16,8 +16,13 @@ interface ISettingProps {
   match: any
 }
 
-const SettingLayout = styled.div`
+const SettingLayoutWrapper = styled.div`
   margin: 64px;
+  @media screen and ${responsive} {
+    margin: 8px;
+  }
+`
+const SettingLayout = styled.div`
   display: flex;
   background-color: #ffffff;
   display: flex;
@@ -28,17 +33,26 @@ const SettingLayout = styled.div`
   overflow: auto;
 
   @media screen and ${responsive} {
-    margin: 8px;
+    padding: 0;
+    flex-direction: column;
   }
 `
 
 const LeftMenu = styled.div`
   width: 224px;
   border-right: 1px solid #e8e8e8;
+  @media screen and ${responsive} {
+    width: 100%;
+    border: none;
+  }
 `
 
 const Right = styled.div`
   padding: 0 32px 8px 32px;
+
+  @media screen and ${responsive} {
+    padding: 40px;
+  }
 `
 
 const Title = styled.h1`
@@ -60,37 +74,39 @@ class Setting extends React.Component<ISettingProps> {
     }
 
     return (
-      <SettingLayout>
-        <LeftMenu>
-          <Menu mode="inline" selectedKeys={[currentPath]}>
-            <Menu.Item key="/setting/basic">
-              <Link to="/setting/basic">Basic Settings</Link>
-            </Menu.Item>
-            <Menu.Item key="/setting/security">
-              <Link to="/setting/security">Security Settings</Link>
-            </Menu.Item>
-            <Menu.Item key="/setting/social">
-              <Link to="/setting/social">Social</Link>
-            </Menu.Item>
-            <Menu.Item key="/setting/submissions">
-              <Link to="/setting/submissions">Submissions Settings</Link>
-            </Menu.Item>
-            <Menu.Item key="/setting/others">
-              <Link to="/setting/others">Others Settings</Link>
-            </Menu.Item>
-          </Menu>
-        </LeftMenu>
-        <Right>
-          <Route path="/setting/basic">
-            <Title>Basic Settings</Title>
-            <BasicSettings user={this.props.user}></BasicSettings>
-          </Route>
-          <Route path="/setting/social">
-            <Title>Social Binding</Title>
-            <SocialSetting user={this.props.user}></SocialSetting>
-          </Route>
-        </Right>
-      </SettingLayout>
+      <SettingLayoutWrapper>
+        <SettingLayout>
+          <LeftMenu>
+            <Menu mode="inline" selectedKeys={[currentPath]}>
+              <Menu.Item key="/setting/basic">
+                <Link to="/setting/basic">Basic</Link>
+              </Menu.Item>
+              <Menu.Item key="/setting/security">
+                <Link to="/setting/security">Security</Link>
+              </Menu.Item>
+              <Menu.Item key="/setting/social">
+                <Link to="/setting/social">Social</Link>
+              </Menu.Item>
+              <Menu.Item key="/setting/submissions">
+                <Link to="/setting/submissions">Submissions</Link>
+              </Menu.Item>
+              <Menu.Item key="/setting/others">
+                <Link to="/setting/others">Others</Link>
+              </Menu.Item>
+            </Menu>
+          </LeftMenu>
+          <Right>
+            <Route path="/setting/basic">
+              <Title>Basic Settings</Title>
+              <BasicSettings user={this.props.user}></BasicSettings>
+            </Route>
+            <Route path="/setting/social">
+              <Title>Social Binding</Title>
+              <SocialSetting user={this.props.user}></SocialSetting>
+            </Route>
+          </Right>
+        </SettingLayout>
+      </SettingLayoutWrapper>
     )
   }
 }
