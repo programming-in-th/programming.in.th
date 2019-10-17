@@ -27,11 +27,6 @@ const Provider = {
   github: new firebase.auth.GithubAuthProvider()
 }
 
-const descriptionText = {
-  bounded: 'Currently bounded',
-  unbound: 'Currently unbound'
-}
-
 interface ISocialSettingProps {
   user: firebase.User
 }

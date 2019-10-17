@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import { Button, message, Modal } from 'antd'
