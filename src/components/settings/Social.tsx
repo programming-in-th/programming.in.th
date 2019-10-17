@@ -1,8 +1,11 @@
 import React from 'react'
-import { List, Icon, Button, message } from 'antd'
+import { List, Icon } from 'antd'
 import styled from 'styled-components'
 import firebase from 'firebase/app'
 import 'firebase/auth'
+
+import { useForceUpdate } from '../../utils/useForceUpdate'
+import { SocialButton } from './SocialButton'
 
 const StyledIcon = styled(Icon)`
   margin-left: 16px;
@@ -26,61 +29,10 @@ interface ISocialSettingProps {
   user: firebase.User
 }
 
-const extractProviderList = (user: firebase.User): string[] => {
-  const result = []
-
-  if (user.providerData) {
-    for (let i = 0; i < user.providerData.length; i++) {
-      result.push(user.providerData[i]!.providerId)
-    }
-  }
-
-  return result
-}
-
-const checkProvider = (providerList: string[], providerName: string) => {
-  return providerList.includes(providerName)
-}
-
-interface ISocialButtonProps {
-  user: firebase.User
-  provider:
-    | firebase.auth.GithubAuthProvider
-    | firebase.auth.GoogleAuthProvider
-    | firebase.auth.FacebookAuthProvider
-  providerId: 'github.com' | 'facebook.com' | 'google.com'
-}
-
-const SocialButton: React.FunctionComponent<ISocialButtonProps> = ({
-  user,
-  provider,
-  providerId
-}: ISocialButtonProps) => {
-  const handleBinding = (status: boolean) => {
-    if (status) {
-      user.unlink(providerId).then(() => message.success('Unbounded!'))
-    } else {
-      user.linkWithPopup(provider).then(() => message.success('Binded!'))
-    }
-  }
-
-  return (
-    <Button
-      type="link"
-      onClick={() =>
-        handleBinding(checkProvider(extractProviderList(user), providerId))
-      }
-    >
-      {checkProvider(extractProviderList(user), providerId)
-        ? 'Unbound'
-        : 'Bind'}
-    </Button>
-  )
-}
-
 export const SocialSetting: React.FunctionComponent<ISocialSettingProps> = (
   props: ISocialSettingProps
 ) => {
+  const forceUpdate = useForceUpdate()
   const getData = (user: firebase.User) => [
     {
       title: 'Facebook',
@@ -89,7 +41,7 @@ export const SocialSetting: React.FunctionComponent<ISocialSettingProps> = (
         <SocialButton
           user={user}
           provider={Provider.facebook}
-          providerId="facebook.com"
+          forceUpdate={forceUpdate}
         ></SocialButton>
       ],
       avatar: <StyledIcon type="facebook" theme="outlined" />
@@ -101,7 +53,7 @@ export const SocialSetting: React.FunctionComponent<ISocialSettingProps> = (
         <SocialButton
           user={user}
           provider={Provider.google}
-          providerId="google.com"
+          forceUpdate={forceUpdate}
         ></SocialButton>
       ],
       avatar: <StyledIcon type="google" theme="outlined" />
@@ -113,7 +65,7 @@ export const SocialSetting: React.FunctionComponent<ISocialSettingProps> = (
         <SocialButton
           user={user}
           provider={Provider.github}
-          providerId="github.com"
+          forceUpdate={forceUpdate}
         ></SocialButton>
       ],
       avatar: <StyledIcon type="github" theme="outlined" />
