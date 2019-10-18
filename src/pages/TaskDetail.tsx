@@ -1,5 +1,5 @@
 import React from 'react'
-import styled, { createGlobalStyle } from 'styled-components'
+import styled from 'styled-components'
 import axios from 'axios'
 
 import { connect } from 'react-redux'
@@ -11,6 +11,7 @@ import { ITask } from '../redux/types/task'
 import { SubmitPage } from '../components/tasks/Submit'
 import { CustomSpin } from '../components/Spin'
 import { ContainerWrapper, Padding } from '../components/atomics'
+import { IAppState } from '../redux'
 
 interface ITaskProps {
   task?: ITask
@@ -36,6 +37,7 @@ const StatementComponent = styled.div`
     border: 1px solid black;
     border-collapse: collapse;
   }
+
   & table tbody tr td {
     font-family: consolas, 'courier new', courier, monospace;
     width: 40%;
@@ -43,11 +45,9 @@ const StatementComponent = styled.div`
     padding: 6px;
     vertical-align: top;
   }
-`
 
-const FullSizePDFStyle = createGlobalStyle`
   embed {
-    width: 100%!important;
+    width: 100% !important;
     margin-top: 20px;
   }
 `
@@ -95,7 +95,6 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
               <p> Time Limit : {this.props.task.time_limit} second(s)</p>
               <p> Memory Limit : {this.props.task.memory_limit} MB(s)</p>
 
-              <FullSizePDFStyle />
               <StatementComponent dangerouslySetInnerHTML={template} />
             </Wrapper>
           </Padding>
@@ -115,7 +114,7 @@ export class TaskDetailComponent extends React.Component<ITaskProps> {
   }
 }
 
-const mapStateToProps: (state: any) => any = state => {
+const mapStateToProps: (state: IAppState) => any = state => {
   return {
     task: state.tasks.currentTask,
     status: state.tasks.status,
