@@ -40,7 +40,7 @@ export const FilterWrapper = styled.div`
   margin-left: 20px;
   margin-right: 20px;
   @media ${responsive} {
-    display: block;
+    flex-direction: column;
   }
 `
 

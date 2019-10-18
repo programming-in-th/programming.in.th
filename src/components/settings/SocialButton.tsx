@@ -87,7 +87,7 @@ export const SocialButton: React.FunctionComponent<ISocialButtonProps> = ({
           : 'Link'}
       </Button>
       <Modal
-        title="Are you sure you want to unbind your LAST sign in provider?"
+        title="Are you sure you want to unlink your LAST sign in provider?"
         visible={isModalVisible}
         okType="danger"
         onOk={handleOk}

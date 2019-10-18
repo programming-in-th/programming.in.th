@@ -10,6 +10,7 @@ import { responsive } from '../components/Responsive'
 import { NotFound } from './404'
 import { BasicSettings } from '../components/settings/Basic'
 import { SocialSetting } from '../components/settings/Social'
+import { SubmissionSetting } from '../components/settings/Submission'
 
 interface ISettingProps {
   user: firebase.User
@@ -103,6 +104,10 @@ class Setting extends React.Component<ISettingProps> {
             <Route path="/setting/social">
               <Title>Social Binding</Title>
               <SocialSetting user={this.props.user}></SocialSetting>
+            </Route>
+            <Route path="/setting/submissions">
+              <Title>Submissions Setting</Title>
+              <SubmissionSetting></SubmissionSetting>
             </Route>
           </Right>
         </SettingLayout>
