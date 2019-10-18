@@ -286,7 +286,7 @@ class TasksListComponent extends React.Component<
           <FilterComponent {...filterProps} />
         </DesktopOnly>
         <MobileOnly>
-          <Collapse>
+          <Collapse bordered={false}>
             <Panel key="1" header="Filter">
               <FilterComponent {...filterProps} />
             </Panel>
