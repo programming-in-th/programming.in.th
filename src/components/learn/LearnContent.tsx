@@ -7,7 +7,9 @@ class Learn extends React.Component<any> {
     return this.props.currentContentStatus !== 'SUCCESS' ? (
       <CustomSpin />
     ) : (
-      <MarkdownRenderer content={this.props.currentContent} />
+      <div>
+        <MarkdownRenderer content={this.props.currentContent} />
+      </div>
     )
   }
 }

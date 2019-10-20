@@ -2,6 +2,7 @@ import styled, { createGlobalStyle } from 'styled-components'
 
 export function getSystemFonts() {
   return [
+    'SF Pro Display',
     '-apple-system',
     'BlinkMacSystemFont',
     'Segoe UI',
@@ -16,7 +17,9 @@ export function getSystemFonts() {
 }
 
 export const Fonts = {
-  display: ['Kanit', 'Montserrat', ...getSystemFonts()].join(', '),
+  display: ['Kanit', 'SF Pro Display', 'Montserrat', ...getSystemFonts()].join(
+    ', '
+  ),
   body: ['Kanit', ...getSystemFonts()].join(', ')
 }
 
@@ -97,22 +100,6 @@ body {
 
 .th {
 	font-family: Sarabun;
-}
-
-#root {
-	width: 1020px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.divider {
-	margin-top: 25px;
-	padding: 7px 0;
-	color: #8e8e93;
-	p {
-		font-size: 24px;
-		font-weight: bolder;
-	}
 }
 `
 

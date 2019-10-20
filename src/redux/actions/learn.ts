@@ -47,7 +47,6 @@ export const loadContent = (url: string) => {
       const response = await axios.get(url)
       const data = response.data
       const snippets: string = data
-      console.log(snippets)
       dispatch(receiveContent(snippets))
     } catch (error) {
       console.log(error)

@@ -1,10 +1,11 @@
 import React from 'react'
 import { Menu, Icon, Col, Row, Layout, Drawer } from 'antd'
 import { NavLink } from 'react-router-dom'
+import readingTime from 'reading-time'
 
 import { LearnContent } from '../components/learn/LearnContent'
 import { CustomSpin } from '../components/Spin'
-import { responsive, DesktopOnly } from '../components/Responsive'
+import { responsive } from '../components/Responsive'
 
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
@@ -17,7 +18,7 @@ import { INode } from '../redux/types/learn'
 import { IAppState } from '../redux'
 
 const { SubMenu } = Menu
-const { Content, Sider } = Layout
+const { Content } = Layout
 
 const DrawerMenu = styled.div`
   position: fixed;
@@ -29,7 +30,7 @@ const DrawerMenu = styled.div`
   text-align: center;
   line-height: 40px;
   font-size: 16px;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: center;
   background: #fff;
@@ -41,8 +42,40 @@ const DrawerMenu = styled.div`
   }
 `
 
-const Blank = styled.div`
-  margin-right: 325px !important;
+const Header = styled.header`
+  position: relative;
+  z-index: 10;
+  margin: 100px auto 120px;
+  max-width: 749px;
+  padding-left: 68px;
+
+  @media screen and ${responsive} {
+    margin: 50px auto 50px;
+    padding: 0 40px;
+    max-width: 100%;
+  }
+
+  @media screen and (max-height: 700px) {
+    margin: 100px auto;
+  }
+`
+
+const Heading = styled.h1`
+  font-size: 48px;
+  margin-bottom: 25px;
+  font-weight: bold;
+  line-height: 1.32;
+
+  @media screen and ${responsive} {
+    font-size: 32px;
+  }
+`
+
+const SubTitle = styled.div`
+  position: relative;
+  display: flex;
+  font-size: 18px;
+  color: grey;
 `
 
 interface ILearnProps {
@@ -61,9 +94,12 @@ interface ILearnState {
 }
 
 class Learn extends React.Component<ILearnProps, ILearnState> {
+  contentRef = React.createRef<HTMLDivElement>()
+
   state = {
     visible: false
   }
+
   componentDidMount() {
     this.props.onInitialLoad(this.props.match.params.article_id)
   }
@@ -83,6 +119,20 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
     this.setState({
       visible: false
     })
+  }
+
+  getArticleName = (nodes: INode[], id: string) => {
+    const node = nodes.find(element => {
+      if (element.article_id === id) {
+        return true
+      } else {
+        return false
+      }
+    })
+
+    if (node) {
+      return node.name
+    }
   }
 
   render() {
@@ -112,45 +162,44 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
             onItemClick={this.onItemClick}
           />
         </Drawer>
-        <DesktopOnly>
-          <Sider
-            width={325}
-            style={{
-              backgroundColor: 'white',
-              position: 'fixed',
-              height: '100vh'
-            }}
-          >
-            <SideMenu
-              nodes={nodes}
-              currentPath={currentPath}
-              onClose={this.onClose}
-              onItemClick={this.onItemClick}
-            />
-          </Sider>
-          <Blank />
-        </DesktopOnly>
         <Content>
-          <Row>
-            <Col span={18} offset={3}>
-              {article_id ? (
-                <LearnContent
-                  article_id={article_id}
-                  currentContentStatus={this.props.currentContentStatus}
-                  currentContent={this.props.currentContent}
-                />
-              ) : (
-                <div>
-                  <br />
-                  <br />
-                  Welcome to Programming.in.th Tutorials, a comprehensive
-                  compilation of all the resources you need to succeed in
-                  learning algorithms, data structures and competitive
-                  programming!
-                </div>
-              )}
-            </Col>
-          </Row>
+          <div>
+            {article_id ? (
+              <div ref={this.contentRef}>
+                <Header>
+                  <Heading>{this.getArticleName(nodes, article_id)}</Heading>
+                  <SubTitle>
+                    By programming.in.th |{' '}
+                    {this.props.currentContent &&
+                      readingTime((this.props
+                        .currentContent as unknown) as string).text}
+                  </SubTitle>
+                </Header>
+                <Row>
+                  <Col
+                    lg={{ span: 12, offset: 6 }}
+                    xs={{ span: 18, offset: 3 }}
+                  >
+                    <div>
+                      <LearnContent
+                        article_id={article_id}
+                        currentContentStatus={this.props.currentContentStatus}
+                        currentContent={this.props.currentContent}
+                      />
+                    </div>
+                  </Col>
+                </Row>
+              </div>
+            ) : (
+              <div>
+                <br />
+                <br />
+                Welcome to Programming.in.th Tutorials, a comprehensive
+                compilation of all the resources you need to succeed in learning
+                algorithms, data structures and competitive programming!
+              </div>
+            )}
+          </div>
         </Content>
       </Layout>
     )
