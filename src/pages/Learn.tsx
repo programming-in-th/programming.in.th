@@ -6,6 +6,7 @@ import readingTime from 'reading-time'
 import { LearnContent } from '../components/learn/LearnContent'
 import { CustomSpin } from '../components/Spin'
 import { responsive } from '../components/Responsive'
+import { copyToClipboard } from '../utils/copyToClipBoard'
 
 import * as actionCreators from '../redux/actions/index'
 import { connect } from 'react-redux'
@@ -42,12 +43,16 @@ const DrawerMenu = styled.div`
   }
 `
 
+const Clipboard = styled.p`
+  margin-right: 5px;
+  cursor: grab;
+`
+
 const Header = styled.header`
   position: relative;
   z-index: 10;
-  margin: 100px auto 120px;
+  margin: 100px auto 70px;
   max-width: 749px;
-  padding-left: 68px;
 
   @media screen and ${responsive} {
     margin: 50px auto 50px;
@@ -94,8 +99,6 @@ interface ILearnState {
 }
 
 class Learn extends React.Component<ILearnProps, ILearnState> {
-  contentRef = React.createRef<HTMLDivElement>()
-
   state = {
     visible: false
   }
@@ -143,7 +146,7 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
     return this.props.menuStatus !== 'SUCCESS' ? (
       <CustomSpin />
     ) : (
-      <Layout>
+      <Layout style={{ backgroundColor: '#fafafa' }}>
         <DrawerMenu onClick={this.showDrawer}>
           <Icon type="menu" />
         </DrawerMenu>
@@ -165,11 +168,16 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
         <Content>
           <div>
             {article_id ? (
-              <div ref={this.contentRef}>
+              <div>
                 <Header>
                   <Heading>{this.getArticleName(nodes, article_id)}</Heading>
                   <SubTitle>
-                    By programming.in.th |{' '}
+                    <Clipboard
+                      onClick={() => copyToClipboard(window.location.href)}
+                    >
+                      Link
+                    </Clipboard>
+                    |{' '}
                     {this.props.currentContent &&
                       readingTime((this.props
                         .currentContent as unknown) as string).text}
@@ -180,13 +188,11 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
                     lg={{ span: 12, offset: 6 }}
                     xs={{ span: 18, offset: 3 }}
                   >
-                    <div>
-                      <LearnContent
-                        article_id={article_id}
-                        currentContentStatus={this.props.currentContentStatus}
-                        currentContent={this.props.currentContent}
-                      />
-                    </div>
+                    <LearnContent
+                      article_id={article_id}
+                      currentContentStatus={this.props.currentContentStatus}
+                      currentContent={this.props.currentContent}
+                    />
                   </Col>
                 </Row>
               </div>
