@@ -205,6 +205,10 @@ class TasksListComponent extends React.Component<
       dataIndex: 'difficulty',
       defaultSortOrder: 'ascend',
       sorter: (a: ITask, b: ITask) => b.difficulty - a.difficulty
+    },
+    {
+      title: 'Source',
+      dataIndex: 'source'
     }
   ]
 

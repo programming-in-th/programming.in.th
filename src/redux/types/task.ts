@@ -16,6 +16,7 @@ export interface ITask {
   readonly memory_limit: number
   readonly difficulty: number
   readonly tags: ReadonlyArray<string>
+  readonly source: string
 }
 
 export interface ITaskPage {
