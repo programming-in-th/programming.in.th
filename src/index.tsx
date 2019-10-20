@@ -147,6 +147,7 @@ const { Content, Footer } = Layout
 
 const CustomLayout = styled(Layout)`
   min-height: 100vh;
+  background-color: #fafafa;
 `
 
 interface IRootProps {
@@ -277,7 +278,9 @@ class Root extends React.Component<IRootProps, IRootStates> {
                   <Route component={NotFound} />
                 </Switch>
               </Content>
-              <Footer style={{ textAlign: 'center' }}>
+              <Footer
+                style={{ textAlign: 'center', backgroundColor: '#fafafa' }}
+              >
                 IPST ©2019 | Contribution: All the source code for this website
                 is available on{' '}
                 <a
