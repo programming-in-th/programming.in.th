@@ -37,10 +37,6 @@ const DrawerMenu = styled.div`
   background: #fff;
   box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
   border-radius: 0 4px 4px 0;
-
-  @media ${responsive} {
-    display: flex;
-  }
 `
 
 const Clipboard = styled.p`
@@ -81,6 +77,16 @@ const SubTitle = styled.div`
   display: flex;
   font-size: 18px;
   color: grey;
+`
+
+const DefaultContent = styled.div`
+  margin: 0 auto;
+  max-width: 700px;
+  margin-top: 120px;
+
+  h1 {
+    font-size: 32px;
+  }
 `
 
 interface ILearnProps {
@@ -197,13 +203,14 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
                 </Row>
               </div>
             ) : (
-              <div>
-                <br />
-                <br />
-                Welcome to Programming.in.th Tutorials, a comprehensive
-                compilation of all the resources you need to succeed in learning
-                algorithms, data structures and competitive programming!
-              </div>
+              <DefaultContent>
+                <h1>
+                  Welcome to Programming.in.th Tutorials, a comprehensive
+                  compilation of all the resources you need to succeed in
+                  learning algorithms, data structures and competitive
+                  programming!
+                </h1>
+              </DefaultContent>
             )}
           </div>
         </Content>
