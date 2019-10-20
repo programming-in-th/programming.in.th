@@ -1,9 +1,10 @@
 import React from 'react'
-import { Menu, Icon, Col, Row, Layout, Drawer } from 'antd'
-import { NavLink } from 'react-router-dom'
+import { Icon, Col, Row, Layout, Drawer } from 'antd'
+import styled from 'styled-components'
 import readingTime from 'reading-time'
 
 import { LearnContent } from '../components/learn/LearnContent'
+import { SideMenu } from '../components/learn/SideMenu'
 import { CustomSpin } from '../components/Spin'
 import { responsive } from '../components/Responsive'
 import { copyToClipboard } from '../utils/copyToClipBoard'
@@ -13,12 +14,9 @@ import { connect } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 
-import styled from 'styled-components'
-
 import { INode } from '../redux/types/learn'
 import { IAppState } from '../redux'
 
-const { SubMenu } = Menu
 const { Content } = Layout
 
 const DrawerMenu = styled.div`
@@ -217,56 +215,6 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
       </Layout>
     )
   }
-}
-
-interface ISiderProps {
-  currentPath: string
-  nodes: any
-  onClose: () => void
-  onItemClick: (node: any) => void
-}
-
-const SideMenu: (props: ISiderProps) => any = props => {
-  return (
-    <Menu
-      theme="light"
-      mode="inline"
-      selectedKeys={[props.currentPath]}
-      style={{ borderRight: 'none' }}
-    >
-      <Menu.Item key={'/learn'} onClick={props.onClose}>
-        <NavLink to={'/learn'}>
-          <Icon type="home" theme="filled" />
-          Welcome!
-        </NavLink>
-      </Menu.Item>
-      {props.nodes.map((node: INode) => {
-        return node.type === 'section' ? (
-          <SubMenu key={node.name} title={node.name}>
-            {node.articles!.map((sub_node: INode) => {
-              return (
-                <Menu.Item
-                  key={'/learn/' + sub_node.article_id}
-                  onClick={() => props.onItemClick(sub_node)}
-                >
-                  <NavLink to={'/learn/' + sub_node.article_id}>
-                    {sub_node.name}
-                  </NavLink>
-                </Menu.Item>
-              )
-            })}
-          </SubMenu>
-        ) : (
-          <Menu.Item
-            key={'/learn/' + node.article_id}
-            onClick={() => props.onItemClick(node)}
-          >
-            <NavLink to={'/learn/' + node.article_id}>{node.name}</NavLink>
-          </Menu.Item>
-        )
-      })}
-    </Menu>
-  )
 }
 
 const mapStateToProps: (state: IAppState) => any = state => {
