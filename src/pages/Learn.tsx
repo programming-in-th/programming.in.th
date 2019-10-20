@@ -1,5 +1,5 @@
 import React from 'react'
-import { Icon, Col, Row, Layout, Drawer } from 'antd'
+import { Icon, Col, Row, Layout, Drawer, BackTop } from 'antd'
 import styled from 'styled-components'
 import readingTime from 'reading-time'
 
@@ -83,7 +83,7 @@ const DefaultContent = styled.div`
   margin-top: 120px;
 
   h1 {
-    font-size: 32px;
+    font-size: 48px;
   }
 `
 
@@ -151,6 +151,7 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
       <CustomSpin />
     ) : (
       <Layout style={{ backgroundColor: '#fafafa' }}>
+        <BackTop />
         <DrawerMenu onClick={this.showDrawer}>
           <Icon type="menu" />
         </DrawerMenu>
@@ -183,8 +184,9 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
                     </Clipboard>
                     |{' '}
                     {this.props.currentContent &&
-                      readingTime((this.props
-                        .currentContent as unknown) as string).text}
+                      (readingTime((this.props
+                        .currentContent as unknown) as string).text ||
+                        '...')}
                   </SubTitle>
                 </Header>
                 <Row>
@@ -203,7 +205,7 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
             ) : (
               <DefaultContent>
                 <h1>
-                  Welcome to Programming.in.th Tutorials, a comprehensive
+                  Welcome to programming.in.th tutorials, a comprehensive
                   compilation of all the resources you need to succeed in
                   learning algorithms, data structures and competitive
                   programming!
