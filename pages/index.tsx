@@ -7,10 +7,6 @@ import 'intersection-observer'
 import Observer from '@researchgate/react-intersection-observer'
 import { DesktopOnly } from '../components/Responsive'
 
-import TitleIllus from '../assets/svg/title.svg'
-import ProblemIllus from '../assets/svg/problem.svg'
-import LearnIllus from '../assets/svg/learn.svg'
-
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -125,17 +121,13 @@ export default () => {
             </SubTitle>
           </div>
           <DesktopOnly>
-            <RightIllus>
-              <TitleIllus></TitleIllus>
-            </RightIllus>
+            <RightIllus>{/* <TitleIllus></TitleIllus> */}</RightIllus>
           </DesktopOnly>
         </MainContainer>
         <Observer onChange={handleChange} threshold={0.25}>
           <Container>
             <DesktopOnly>
-              <LeftIllus>
-                <ProblemIllus></ProblemIllus>
-              </LeftIllus>
+              <LeftIllus>{/* <ProblemIllus></ProblemIllus> */}</LeftIllus>
             </DesktopOnly>
             <div>
               <Title>With over </Title>
@@ -162,9 +154,7 @@ export default () => {
             </Title>
           </div>
           <DesktopOnly>
-            <RightIllus>
-              <LearnIllus></LearnIllus>
-            </RightIllus>
+            <RightIllus>{/* <LearnIllus></LearnIllus> */}</RightIllus>
           </DesktopOnly>
         </Container>
         <Container>
