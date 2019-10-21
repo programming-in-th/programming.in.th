@@ -1,9 +1,10 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
+import axios from 'axios'
+import firebase from '../../lib/firebase'
+
 import { IAppState } from '..'
 import { INode } from '../types/learn'
-import firebase from 'firebase/app'
-import axios from 'axios'
 
 export const loadMenu = (article_id: string) => {
   return async (

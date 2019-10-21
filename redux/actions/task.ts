@@ -1,6 +1,6 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import firebase from 'firebase/app'
+import firebase from '../../lib/firebase'
 import { checkCacheValid } from 'redux-cache'
 import { ITask, ITaskPage } from '../types/task'
 import { IAppState } from '..'
