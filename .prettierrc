@@ -1,13 +1,4 @@
 {
   "semi": false,
-  "singleQuote": true,
-  "overrides": [
-    {
-      "files": "src/sw-template.js",
-      "options": {
-        "singleQuote": false,
-        "semi": true
-      }
-    }
-  ]
+  "singleQuote": true
 }
