@@ -8,6 +8,7 @@ import H from 'history'
 import { AlreadyLoggedIn } from '../components/auth/Already'
 import { LoginPage } from '../components/auth/Login'
 import { Container } from '../components/auth/Style'
+import { IAppState } from '../redux'
 
 interface ILoginProps {
   history: H.History
@@ -23,7 +24,7 @@ const _Login = (props: ILoginProps) =>
     </Container>
   )
 
-const mapStateToProps: (state: any) => any = state => {
+const mapStateToProps: (state: IAppState) => any = state => {
   return {
     user: state.user.user
   }

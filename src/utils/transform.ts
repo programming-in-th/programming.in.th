@@ -1,7 +1,7 @@
 import { ISubmission } from '../redux/types/submission'
 import firebase from 'firebase/app'
 
-export const transformStatus = (detail: ISubmission) => {
+export const transformStatus = (detail: ISubmission | undefined) => {
   if (detail === undefined) return
 
   if (detail.status === 'in_queue') {

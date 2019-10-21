@@ -11,6 +11,7 @@ import { NotFound } from './404'
 import { BasicSettings } from '../components/settings/Basic'
 import { SocialSetting } from '../components/settings/Social'
 import { SubmissionSetting } from '../components/settings/Submission'
+import { IAppState } from '../redux'
 
 interface ISettingProps {
   user: firebase.User
@@ -116,7 +117,7 @@ class Setting extends React.Component<ISettingProps> {
   }
 }
 
-const mapStateToProps: (state: any) => any = state => {
+const mapStateToProps: (state: IAppState) => any = state => {
   return {
     user: state.user.user
   }

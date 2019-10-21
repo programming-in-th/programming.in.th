@@ -12,6 +12,7 @@ import { responsive } from '../Responsive'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import H from 'history'
+import { IAppState } from '../../redux'
 
 interface INavigatorProps {
   location: H.Location
@@ -20,7 +21,7 @@ interface INavigatorProps {
 }
 
 interface IItem {
-  className?: any
+  className?: string
   mode?: 'vertical' | 'horizontal'
   location: string
   hideDrawer?: () => void
@@ -74,11 +75,11 @@ class Navigator extends React.Component<INavigatorProps, INavigatorStates> {
     this.setState({ top: pageYOffset })
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     window.addEventListener('scroll', this.checkScrollPosition)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount(): void {
     window.removeEventListener('scroll', this.checkScrollPosition)
   }
 
@@ -91,8 +92,8 @@ class Navigator extends React.Component<INavigatorProps, INavigatorStates> {
   }
 
   render() {
-    const locationReal = this.props.location.pathname as string
-    const location = locationReal.split('/')[1]
+    const locationReal: string = this.props.location.pathname as string
+    const location: string = locationReal.split('/')[1]
     const { user } = this.props
 
     return (
@@ -318,7 +319,7 @@ const UserWrapper = styled.div`
   }
 `
 
-const mapStateToProps: (state: any) => any = state => {
+const mapStateToProps: (state: IAppState) => any = state => {
   return {
     user: state.user.user
   }

@@ -181,7 +181,7 @@ const loginWithGmail = async (
       .then(() => {
         history.length > 2 ? history.goBack() : history.replace('/')
       })
-      .catch((error: any) => {
+      .catch((error: Error) => {
         const { message } = error
         setError(message)
       })
@@ -206,7 +206,7 @@ const loginWithFacebook = async (
       .then(() => {
         history.length > 2 ? history.goBack() : history.replace('/')
       })
-      .catch((error: any) => {
+      .catch((error: Error) => {
         const { message } = error
         setError(message)
       })
@@ -231,7 +231,7 @@ const loginWithGithub = async (
       .then(() => {
         history.length > 2 ? history.goBack() : history.replace('/')
       })
-      .catch((error: any) => {
+      .catch((error: Error) => {
         const { message } = error
         setError(message)
       })
