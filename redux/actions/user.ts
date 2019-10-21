@@ -1,7 +1,6 @@
 import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
-import firebase from 'firebase/app'
-import 'firebase/auth'
+import firebase from '../../lib/firebase'
 
 export const fetchUser = () => {
   return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {

@@ -13,6 +13,10 @@ const CustomLayout = styled(Layout)`
 `
 
 export const PageLayout: React.FunctionComponent = props => {
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(actionCreators.fetchUser())
+  })
   return (
     <CustomLayout>
       <GlobalStyle />
