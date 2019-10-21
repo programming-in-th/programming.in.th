@@ -14,6 +14,11 @@
   "author": "",
   "homepage": "https://betabeta.programming.in.th",
   "license": "AGPL-3.0",
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "dependencies": {
     "@researchgate/react-intersection-observer": "^1.0.1",
     "@zeit/next-css": "^1.0.1",
@@ -41,6 +46,9 @@
     "@types/styled-components": "^4.1.19",
     "babel-plugin-inline-react-svg": "^1.1.0",
     "babel-plugin-styled-components": "^1.10.6",
+    "husky": "^3.0.9",
+    "prettier": "^1.18.2",
+    "pretty-quick": "^2.0.0",
     "typescript": "^3.6.4"
   },
   "scripts": {
