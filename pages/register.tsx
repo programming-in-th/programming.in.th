@@ -1,12 +1,10 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-
 import { PageLayout } from '../components/Layout'
-import { LoginPage } from '../components/auth/Login'
+import { RegisterPage } from '../components/auth/Register'
 import { Container } from '../components/auth/Style'
-import { AlreadyLoggedIn } from '../components/auth/Already'
-
+import { useSelector } from 'react-redux'
 import { IAppState } from '../redux'
+import { AlreadyLoggedIn } from '../components/auth/Already'
 
 export default () => {
   const user = useSelector((state: IAppState) => state.user.user)
@@ -17,7 +15,7 @@ export default () => {
         <AlreadyLoggedIn></AlreadyLoggedIn>
       ) : (
         <Container>
-          <LoginPage></LoginPage>
+          <RegisterPage></RegisterPage>
         </Container>
       )}
     </PageLayout>
