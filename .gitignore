@@ -26,3 +26,5 @@ yarn-error.log*
 
 # npm's lock file
 package-lock.json
+
+.next
