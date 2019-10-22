@@ -51,6 +51,7 @@ export default () => {
   }, [])
   useEffect(() => {
     if (submissionsList.length > 1 && !firstLoad) {
+      setSubmissionsListState(submissionsList as ISubmission[])
       setFirstLoad(true)
     }
 
@@ -162,7 +163,7 @@ export default () => {
             <Search
               defaultValue={submissionsPage.searchWord}
               placeholder="Enter Problem ID or User"
-              onChange={e => this.handleSearch(e)}
+              onChange={e => handleSearch(e)}
               style={{ width: 200, margin: 10 }}
             />
           </SubFilterWrapper>
