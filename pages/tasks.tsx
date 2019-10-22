@@ -26,15 +26,19 @@ export default () => {
   const [taskPageState, setTaskPageState] = useState<ITaskPage | undefined>(
     undefined
   )
+
   const taskPage: ITaskPage = useSelector(
     (state: IAppState) => state.tasks.taskPage as ITaskPage
   )
+
   const taskList: ITask[] = useSelector(
     (state: IAppState) => state.tasks.taskList as ITask[]
   )
+
   const status: string = useSelector((state: IAppState) => state.tasks.status)
   const dispatch = useDispatch()
   const router = useRouter()
+
   const setPage: (page: ITaskPage) => void = page => {
     dispatch(actionCreators.setTaskPageConfig(page))
   }
@@ -64,6 +68,7 @@ export default () => {
       updateTask()
     }
   })
+
   const updateTask: () => void = () => {
     const filteredEvents = taskList.filter(
       ({ problem_id, title, tags, difficulty }) => {
@@ -85,6 +90,7 @@ export default () => {
     )
     setTaskListState(filteredEvents)
   }
+
   const handleSearch: (e: React.FormEvent<HTMLInputElement>) => void = e => {
     setPage({
       ...taskPage,

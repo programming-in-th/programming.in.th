@@ -146,7 +146,7 @@ const Login = (props: FormComponentProps) => {
   )
 }
 
-export const LoginPage = Form.create({ name: 'login' })(Login) as any
+export const LoginPage = Form.create({ name: 'login' })(Login)
 
 const loginWithGmail = async (
   router: NextRouter,
