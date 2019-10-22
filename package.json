@@ -29,6 +29,7 @@
     "firebase": "^7.2.1",
     "intersection-observer": "^0.7.0",
     "next": "^9.1.1",
+    "nprogress": "^0.2.0",
     "null-loader": "^3.0.0",
     "react": "^16.10.2",
     "react-codemirror2": "^6.0.0",
@@ -43,6 +44,7 @@
   "devDependencies": {
     "@types/codemirror": "^0.0.79",
     "@types/next": "^8.0.6",
+    "@types/nprogress": "^0.2.0",
     "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.2",
     "@types/react-redux": "^7.1.5",
