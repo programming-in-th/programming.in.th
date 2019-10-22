@@ -47,6 +47,7 @@ export default () => {
   }
   useEffect(() => {
     onInitialLoad()
+    updateTask()
   }, [])
   useEffect(() => {
     if (submissionsList.length > 1 && !firstLoad) {
