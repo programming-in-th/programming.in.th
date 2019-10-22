@@ -1,21 +1,21 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Tag, Collapse } from 'antd'
-import { ColumnProps, TableProps } from 'antd/lib/table'
+import { ColumnProps } from 'antd/lib/table'
 import { SliderValue } from 'antd/lib/slider'
 import { PaginationConfig } from 'antd/lib/pagination'
 
 import { useRouter } from 'next/router'
 
 import { useSelector, useDispatch } from 'react-redux'
-import * as actionCreators from '../redux/actions/index'
-import { ITask, ITaskPage } from '../redux/types/task'
+import * as actionCreators from '../../redux/actions/index'
+import { ITask, ITaskPage } from '../../redux/types/task'
 
-import { DesktopOnly, MobileOnly } from '../components/Responsive'
-import { FilterComponent, IFilter } from '../components/tasks/Filter'
+import { DesktopOnly, MobileOnly } from '../../components/Responsive'
+import { FilterComponent, IFilter } from '../../components/tasks/Filter'
 
-import { WhiteContainerWrapper } from '../components/atomics'
-import { IAppState } from '../redux'
-import { PageLayout } from '../components/Layout'
+import { WhiteContainerWrapper } from '../../components/atomics'
+import { IAppState } from '../../redux'
+import { PageLayout } from '../../components/Layout'
 
 const { Panel } = Collapse
 

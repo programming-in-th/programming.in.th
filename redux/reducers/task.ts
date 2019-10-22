@@ -4,8 +4,6 @@ import { ITaskState } from '../types/task'
 import {
   REQUEST_TASKS_LIST,
   RECEIVE_TASKS_LIST,
-  REQUEST_TASK,
-  RECEIVE_TASK,
   SET_TASK_PAGE_CONFIG
 } from '../actions/task'
 
@@ -19,7 +17,6 @@ const initialState: ITaskState = {
     searchDifficulty: [0, 10],
     hideTag: true
   },
-  currentTask: null,
   taskList: [],
   status: null
 }
@@ -38,15 +35,6 @@ const reducer: Reducer = (
         [DEFAULT_KEY]: generateCacheTTL(),
         status: 'SUCCESS',
         taskList: action.taskList
-      })
-    case REQUEST_TASK:
-      return Object.assign({}, state, {
-        status: 'LOADING'
-      })
-    case RECEIVE_TASK:
-      return Object.assign({}, state, {
-        status: 'SUCCESS',
-        currentTask: action.currentTask
       })
     case SET_TASK_PAGE_CONFIG:
       return Object.assign({}, state, {

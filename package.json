@@ -25,11 +25,13 @@
     "antd": "^3.24.2",
     "axios": "^0.19.0",
     "babel-plugin-import": "^1.12.2",
+    "codemirror": "^5.49.2",
     "firebase": "^7.2.1",
     "intersection-observer": "^0.7.0",
     "next": "^9.1.1",
     "null-loader": "^3.0.0",
     "react": "^16.10.2",
+    "react-codemirror2": "^6.0.0",
     "react-dom": "^16.10.2",
     "react-redux": "^7.1.1",
     "redux": "^4.0.4",
@@ -39,6 +41,7 @@
     "styled-components": "^4.4.0"
   },
   "devDependencies": {
+    "@types/codemirror": "^0.0.79",
     "@types/next": "^8.0.6",
     "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.2",

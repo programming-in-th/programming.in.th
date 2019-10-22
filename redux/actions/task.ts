@@ -61,41 +61,6 @@ const receiveTasks = (data: ITask[]) => {
   }
 }
 
-export const loadTask = (id: string) => {
-  return async (
-    dispatch: ThunkDispatch<IAppState, {}, AnyAction>
-  ): Promise<void> => {
-    dispatch(requestTask())
-    try {
-      const params: Object = {
-        problem_id: id
-      }
-      const response = await firebase
-        .app()
-        .functions('asia-east2')
-        .httpsCallable('getProblemMetadata')(params)
-      dispatch(receiveTask(response.data))
-    } catch (error) {
-      console.log(error)
-    }
-  }
-}
-
-export const REQUEST_TASK = 'REQUEST_TASK'
-const requestTask = () => {
-  return {
-    type: REQUEST_TASK
-  }
-}
-
-export const RECEIVE_TASK = 'RECEIVE_TASK'
-const receiveTask = (task: ITask | undefined) => {
-  return {
-    type: RECEIVE_TASK,
-    currentTask: task
-  }
-}
-
 export const SET_TASK_PAGE_CONFIG = 'SET_TASK_PAGE_CONFIG'
 export const setTaskPageConfig = (page: ITaskPage) => {
   return {

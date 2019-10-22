@@ -1,4 +1,4 @@
-import { AppProps } from 'next/app'
+import App, { AppProps } from 'next/app'
 import React from 'react'
 import { withRedux, Store } from '../lib/withRedux'
 import { Provider } from 'react-redux'
@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default withRedux(
-  class MyApp extends React.Component<Props & AppProps> {
+  class MyApp extends App<Props & AppProps> {
     render() {
       const { Component, pageProps, reduxStore } = this.props
       return (

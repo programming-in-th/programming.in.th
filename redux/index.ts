@@ -35,9 +35,9 @@ export const rootReducer: Reducer = combineReducers<IAppState>({
 
 const composeEnhancers = composeWithDevTools({})
 
-export const initStore = (): Store =>
+export const initStore = (initialState: IAppState | {} = {}): Store =>
   createStore(
     rootReducer,
-    {},
+    initialState,
     composeEnhancers(applyMiddleware(thunk), cacheEnhancer())
   )
