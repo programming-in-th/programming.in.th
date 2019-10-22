@@ -22,6 +22,7 @@ module.exports = withCss({
         use: 'null-loader'
       })
     }
+
     return config
   }
 })

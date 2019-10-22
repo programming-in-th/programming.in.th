@@ -8,6 +8,7 @@ import { Navigator } from '../components/Nav'
 import { GlobalStyle } from '../components/Design'
 
 import * as actionCreators from '../redux/actions'
+import { CustomHead } from './Head'
 
 const { Content, Footer } = Layout
 
@@ -24,12 +25,7 @@ export const PageLayout: React.FunctionComponent = props => {
 
   return (
     <React.Fragment>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css?family=Fira+Code|Montserrat:400,800|Roboto&display=swap"
-          rel="stylesheet"
-        />
-      </Head>
+      <CustomHead />
       <CustomLayout>
         <GlobalStyle />
         <Navigator />

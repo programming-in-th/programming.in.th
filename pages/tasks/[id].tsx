@@ -5,7 +5,6 @@ import axios from 'axios'
 import firebase from '../../lib/firebase'
 
 import { useSelector } from 'react-redux'
-import * as actionCreators from '../../redux/actions/index'
 
 import { ITask } from '../../redux/types/task'
 import { Submit } from '../../components/tasks/Submit'
