@@ -35,7 +35,7 @@ export const loadTasksList = (
         .app()
         .functions('asia-east2')
         .httpsCallable('getTasksWithFilter')(params)
-      response.data.sort((a: any, b: any) => {
+      response.data.sort((a: ITask, b: ITask) => {
         return a.problem_id.localeCompare(b.problem_id)
       })
 

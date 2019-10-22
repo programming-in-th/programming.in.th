@@ -8,6 +8,7 @@ import { AlreadyLoggedIn } from '../components/auth/Already'
 
 import { RegisterPage } from '../components/auth/Register'
 import { Container } from '../components/auth/Style'
+import { IAppState } from '../redux'
 
 interface IRegisterProps {
   history: H.History
@@ -23,7 +24,7 @@ const _Register = (props: IRegisterProps) =>
     </Container>
   )
 
-const mapStateToProps: (state: any) => any = state => {
+const mapStateToProps: (state: IAppState) => any = state => {
   return {
     user: state.user.user
   }

@@ -11,6 +11,7 @@ import { CustomSpin } from '../components/Spin'
 import { transformStatus } from '../utils/transform'
 import { CodeDisplay } from '../components/Code'
 import { ContainerWrapper } from '../components/atomics'
+import { IAppState } from '../redux'
 
 const { Option } = Select
 
@@ -84,7 +85,7 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
                   style={{ width: 120 }}
                   onChange={this.changeTheme}
                 >
-                  {themeData.map((data: any) => (
+                  {themeData.map((data: string[]) => (
                     <Option key={data[0]}>{data[1]}</Option>
                   ))}
                 </Select>
@@ -115,7 +116,7 @@ class SubmissionDetailComponent extends React.Component<ISubmissionDetail> {
   }
 }
 
-const mapStateToProps: (state: any) => any = state => {
+const mapStateToProps: (state: IAppState) => any = state => {
   return {
     detail: transformStatus(state.submissions.detail),
     status: state.submissions.detailStatus,

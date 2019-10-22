@@ -61,8 +61,8 @@ export const AvatarUploader: React.FunctionComponent<IAvatarUploaderProps> = (
     }
   }
 
-  const beforeUpload = (file: any) => {
-    const isImage = file.type.indexOf('image/') === 0
+  const beforeUpload = (file: Blob) => {
+    const isImage: boolean = file.type.indexOf('image/') === 0
     if (!isImage) {
       message.error('You need to upload image!')
     }

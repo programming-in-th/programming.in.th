@@ -12,6 +12,7 @@ import { Upload } from '../FileUploader'
 
 import { Code } from '../Code'
 import styled from 'styled-components'
+import { IAppState } from '../../redux'
 
 const OptionsWrapper = styled.div`
   display: flex;
@@ -163,7 +164,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
                   style={{ width: 120 }}
                   onChange={this.changeLanguage}
                 >
-                  {languageData.map((data: any) => (
+                  {languageData.map((data: string[]) => (
                     <Option key={data[0]}>{data[1]}</Option>
                   ))}
                 </Select>
@@ -174,7 +175,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
                   style={{ width: 120 }}
                   onChange={this.changeTheme}
                 >
-                  {themeData.map((data: any) => (
+                  {themeData.map((data: string[]) => (
                     <Option key={data[0]}>{data[1]}</Option>
                   ))}
                 </Select>
@@ -221,7 +222,7 @@ class SubmitComponent extends React.Component<ISubmitProps, ISubmitState> {
   }
 }
 
-const mapStateToProps: (state: any) => any = state => {
+const mapStateToProps: (state: IAppState) => any = state => {
   return {
     submissionResponse: state.submissions.submissionResponse,
     submission_uid: state.submissions.submission_uid,
