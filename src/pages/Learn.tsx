@@ -204,12 +204,13 @@ class Learn extends React.Component<ILearnProps, ILearnState> {
               </div>
             ) : (
               <DefaultContent>
-                <h1>
-                  Welcome to programming.in.th tutorials, a comprehensive
-                  compilation of all the resources you need to succeed in
-                  learning algorithms, data structures and competitive
-                  programming!
-                </h1>
+                <h1>ยินดีต้อนรับสู่คลังความรู้ของ programming.in.th!</h1>
+                <h2>
+                  ในนี้มีบทความมากมายที่เขียนโดยนักเรียนโอลิมปิกสสวท.เก่าโดยมีวัตถุประสงค์เพื่อให้คนส่วนมากได้เข้าถึงวิชาอัลกอริทึมได้ง่ายยิ่งขึ้น
+                  ซึ่งเป็นเนื้อหาที่จำเป็นต้องใช้ในค่ายโอลิมปิกวิชาการทั้งในค่ายสอวน.และสสวท.
+                </h2>
+                <br />
+                <h2>มาเริ่มเรียนกันเลย!</h2>
               </DefaultContent>
             )}
           </div>
