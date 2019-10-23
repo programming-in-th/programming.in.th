@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import Head from 'next/head'
 import styled from 'styled-components'
 import { Layout } from 'antd'
 

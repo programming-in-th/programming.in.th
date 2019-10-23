@@ -173,7 +173,7 @@ const Login = (props: IItem) => {
             title={
               <UserWrapper>
                 <p style={{ marginRight: '15px' }}>
-                  {props.user ? 'User' : props.user.displayName}
+                  {props.user ? props.user.displayName : 'User'}
                 </p>
                 <Avatar
                   src={
