@@ -16,8 +16,16 @@ const CustomLayout = styled(Layout)`
   background-color: #fafafa;
 `
 
-export const PageLayout: React.FunctionComponent = props => {
+interface IPageLayoutProps {
+  hideNav?: boolean
+  children: React.ReactNode
+}
+
+export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
+  props: IPageLayoutProps
+) => {
   const dispatch = useDispatch()
+
   useEffect(() => {
     dispatch(actionCreators.fetchUser())
   })
@@ -27,7 +35,7 @@ export const PageLayout: React.FunctionComponent = props => {
       <CustomHead />
       <CustomLayout>
         <GlobalStyle />
-        <Navigator />
+        <Navigator hidden={props.hideNav} />
         <Content style={{ marginTop: 64 }}>{props.children}</Content>
         <Footer style={{ textAlign: 'center', backgroundColor: '#fafafa' }}>
           IPST ©2019 | Contribution: All the source code for this website is
@@ -43,4 +51,8 @@ export const PageLayout: React.FunctionComponent = props => {
       </CustomLayout>
     </React.Fragment>
   )
+}
+
+PageLayout.defaultProps = {
+  hideNav: false
 }

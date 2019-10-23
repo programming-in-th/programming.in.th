@@ -14,12 +14,17 @@ import { IAppState } from '../redux'
 
 const { Header } = Layout
 
-const NavHeader = styled(Header)<{ top: number; location: string }>`
+const NavHeader = styled(Header)<{
+  top: number
+  location: string
+  hidden: boolean
+}>`
   background: ${props => enableTransparency(props.location, props.top)};
   position: fixed;
   z-index: 100;
   width: 100%;
   box-shadow: ${props => enableBoxShadow(props.location, props.top)};
+  display: ${props => (props.hidden ? 'none' : 'block')};
 
   @media ${responsive} {
     padding-left: 25px;
@@ -35,7 +40,13 @@ interface IItem {
   mode?: 'vertical' | 'horizontal'
 }
 
-export const Navigator: React.FunctionComponent = () => {
+interface INavigatorProps {
+  hidden: boolean
+}
+
+export const Navigator: React.FunctionComponent<INavigatorProps> = (
+  props: INavigatorProps
+) => {
   const Router = useRouter()
   const locationReal = Router.pathname
   const location = locationReal.split('/')[1]
@@ -51,6 +62,7 @@ export const Navigator: React.FunctionComponent = () => {
 
   useEffect(() => {
     window.addEventListener('scroll', checkScrollPosition)
+    console.log(props)
     return () => {
       window.removeEventListener('scroll', checkScrollPosition)
     }
@@ -65,7 +77,7 @@ export const Navigator: React.FunctionComponent = () => {
   }
 
   return (
-    <NavHeader top={top} location={locationReal}>
+    <NavHeader top={top} location={locationReal} hidden={props.hidden}>
       <React.Fragment>
         <Logo>
           <Link href="/">
