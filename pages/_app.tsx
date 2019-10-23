@@ -3,6 +3,7 @@ import React from 'react'
 import { withRedux, Store } from '../lib/withRedux'
 import { Provider } from 'react-redux'
 import NProgress from 'nprogress'
+import 'antd/dist/antd.css'
 
 import Router from 'next/router'
 

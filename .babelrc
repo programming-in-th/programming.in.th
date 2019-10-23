@@ -1,14 +1,4 @@
 {
   "presets": ["next/babel"],
-  "plugins": [
-    [
-      "import",
-      {
-        "libraryName": "antd",
-        "style": "css"
-      }
-    ],
-    ["styled-components", { "ssr": true }],
-    "inline-react-svg"
-  ]
+  "plugins": [["styled-components", { "ssr": true }], "inline-react-svg"]
 }

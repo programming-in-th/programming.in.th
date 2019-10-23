@@ -158,7 +158,7 @@ const Main = (props: IItem) => {
 const Login = (props: IItem) => {
   return (
     <div className={props.className}>
-      {props.user !== 'LOADING' ? (
+      {props.user !== 'LOADING' && props.user !== null ? (
         <Menu
           mode={props.mode}
           style={{
@@ -173,9 +173,7 @@ const Login = (props: IItem) => {
             title={
               <UserWrapper>
                 <p style={{ marginRight: '15px' }}>
-                  {props.user.displayName === ''
-                    ? 'User'
-                    : props.user.displayName}
+                  {props.user ? 'User' : props.user.displayName}
                 </p>
                 <Avatar
                   src={

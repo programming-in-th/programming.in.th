@@ -11,7 +11,6 @@ import {
 } from '../components/atomics'
 import { ColumnProps } from 'antd/lib/table'
 import { IAppState } from '../redux'
-import { transformDate, ITimeObject } from '../utils/transform'
 import { useRouter } from 'next/router'
 import { PageLayout } from '../components/Layout'
 
@@ -118,8 +117,7 @@ export default () => {
   const columns = [
     {
       title: 'Timestamp',
-      dataIndex: 'timestamp',
-      render: (timestamp: ITimeObject) => <p>{transformDate(timestamp)}</p>
+      dataIndex: 'humanTimestamp'
     },
     {
       title: 'User',
