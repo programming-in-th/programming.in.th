@@ -6,6 +6,7 @@ import styled, { keyframes } from 'styled-components'
 import 'intersection-observer'
 import Observer from '@researchgate/react-intersection-observer'
 import { DesktopOnly } from '../components/Responsive'
+import { RegisterPage } from '../components/auth/Register'
 
 const fadeIn = keyframes`
   from {
@@ -73,9 +74,13 @@ const SubTitle = styled.h2`
   }
 `
 
-const RightIllus = styled.div`
+const Right = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   min-width: 55%;
   padding-left: 64px;
+  padding-bottom: 300px;
 `
 
 const LeftIllus = styled.div`
@@ -121,7 +126,11 @@ export default () => {
             </SubTitle>
           </div>
           <DesktopOnly>
-            <RightIllus>{/* <TitleIllus></TitleIllus> */}</RightIllus>
+            <Right>
+              <div>
+                <RegisterPage></RegisterPage>
+              </div>
+            </Right>
           </DesktopOnly>
         </MainContainer>
         <Observer onChange={handleChange} threshold={0.25}>
@@ -154,7 +163,7 @@ export default () => {
             </Title>
           </div>
           <DesktopOnly>
-            <RightIllus>{/* <LearnIllus></LearnIllus> */}</RightIllus>
+            <Right>{/* <LearnIllus></LearnIllus> */}</Right>
           </DesktopOnly>
         </Container>
         <Container>

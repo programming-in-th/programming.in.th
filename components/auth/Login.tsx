@@ -3,11 +3,12 @@ import Link from 'next/link'
 import { useRouter, NextRouter } from 'next/router'
 import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd'
 import styled from 'styled-components'
-import { StyledCard, StyledForm, StyledIcon, Others } from './Style'
+import { StyledCard, StyledForm, Others } from './Style'
 
 import firebase from '../../lib/firebase'
 
 import { FormComponentProps } from 'antd/lib/form/Form'
+import { WithGoogle, WithFacebook, WithGithub } from './OAuth'
 
 const LoginButton = styled(Button)`
   width: 100%;
@@ -117,23 +118,12 @@ const Login = (props: FormComponentProps) => {
               </LoginButton>
               <Others>
                 Log in with
-                <StyledIcon
-                  type="google"
-                  theme="outlined"
-                  onClick={() => loginWithGmail(router, setError)}
-                />
-                <StyledIcon
-                  type="facebook"
-                  theme="outlined"
-                  onClick={() => loginWithFacebook(router, setError)}
-                />
-                <StyledIcon
-                  type="github"
-                  theme="outlined"
-                  onClick={() =>
-                    loginWithGithub(this.props.history, this.setError)
-                  }
-                />
+                <WithGoogle router={router} setError={setError}></WithGoogle>
+                <WithFacebook
+                  router={router}
+                  setError={setError}
+                ></WithFacebook>
+                <WithGithub router={router} setError={setError}></WithGithub>
                 <Register>
                   Or <Link href="/register">register now!</Link>
                 </Register>
@@ -147,77 +137,3 @@ const Login = (props: FormComponentProps) => {
 }
 
 export const LoginPage = Form.create({ name: 'login' })(Login)
-
-const loginWithGmail = async (
-  router: NextRouter,
-  setError: (msg: string) => void
-) => {
-  const provider = new firebase.auth.GoogleAuthProvider()
-  try {
-    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-
-    return firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(() => {
-        router.push('/')
-      })
-      .catch((error: any) => {
-        const { message } = error
-        setError(message)
-      })
-  } catch (error) {
-    const { message } = error
-    setError(message)
-  }
-}
-
-const loginWithFacebook = async (
-  router: NextRouter,
-  setError: (msg: string) => void
-) => {
-  const provider = new firebase.auth.FacebookAuthProvider()
-
-  try {
-    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-
-    return firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(() => {
-        router.push('/')
-      })
-      .catch((error: any) => {
-        const { message } = error
-        setError(message)
-      })
-  } catch (error) {
-    const { message } = error
-    setError(message)
-  }
-}
-
-const loginWithGithub = async (
-  router: NextRouter,
-  setError: (msg: string) => void
-) => {
-  const provider = new firebase.auth.GithubAuthProvider()
-
-  try {
-    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-
-    return firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(() => {
-        router.push('/')
-      })
-      .catch((error: any) => {
-        const { message } = error
-        setError(message)
-      })
-  } catch (error) {
-    const { message } = error
-    setError(message)
-  }
-}

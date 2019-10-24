@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { NextRouter, useRouter } from 'next/router'
 import Link from 'next/link'
+import { WithGoogle, WithFacebook, WithGithub } from './OAuth'
 
 import { Form, Icon, Input, Button, Row, Col } from 'antd'
 import styled from 'styled-components'
@@ -148,17 +149,19 @@ const Register = (props: FormComponentProps) => {
             </Form.Item>
             <Form.Item>
               <RegisterButton type="primary" htmlType="submit">
-                Register
+                Start coding now!
               </RegisterButton>
-              <Others>
-                <BackToMainPage>
-                  <Link href="/login">
-                    <a>Back to main page</a>
-                  </Link>
-                </BackToMainPage>
-              </Others>
             </Form.Item>
           </StyledForm>
+          <Others>
+            Or use
+            <WithGoogle router={router} setError={setErrorMessage}></WithGoogle>
+            <WithFacebook
+              router={router}
+              setError={setErrorMessage}
+            ></WithFacebook>
+            <WithGithub router={router} setError={setErrorMessage}></WithGithub>
+          </Others>
         </Col>
       </StyledCard>
     </Row>
