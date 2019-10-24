@@ -6,9 +6,8 @@ const rehypePrism = require('@mapbox/rehype-prism')
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
   options: {
-    hastPlugins: [rehypePrism],
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex]
+    rehypePlugins: [rehypeKatex, rehypePrism]
   }
 })
 
