@@ -1,0 +1,30 @@
+import { Learn } from '../../../components/learn/Page.tsx'
+
+export const meta = {
+  title: 'Advanced Dynamic Programming'
+}
+
+export default ({ children }) => <Learn meta={meta}>{children}</Learn>
+
+- SOS DP: [Link](https://codeforces.com/blog/entry/45223)
+- zscoder's Non-trivial DP Tricks (very useful): [Link](https://codeforces.com/blog/entry/47764)
+- Slope trick: [Link](https://codeforces.com/blog/entry/47821)
+- Convex hull optimization
+  - LiChao Trees
+    - Implementation #1 (by adamant): [Link](https://cp-algorithms.com/geometry/convex_hull_trick.html)
+    - Implementation #2 (by szawinis, dynamic version of minimum LCT): [Link](https://codeforces.com/contest/932/submission/51400890)
+    - Implementation #3 (by win11905, persistent of minimum LCT): [Link](https://github.com/win11905/submission/blob/master/CEOI/09/harbingers.cpp)
+  - Optimization for monotone style
+    - WCIPEG (read this first): [Link](https://wcipeg.com/wiki/Convex_hull_trick)
+    - meooow's article: [Link](https://codeforces.com/blog/entry/63823)
+    - Implementation (by szawinis): [Link](https://codeforces.com/contest/319/submission/25433048)
+  - Multiset style, based on optimization for monotone but can be used for general case: [Link](https://codeforces.com/contest/319/submission/28792061)
+- Knuth-Yao optimization
+  - Pramook Khungurn's paper: [Link](https://github.com/programming-in-th/tutorial/blob/master/advanced_topics/Pramook_2013_yao-speedup.pdf)
+  - Implementation for LIVEARCHIVE7577 (ICPC WF 2016): [Link](https://github.com/szawinis/CompetitiveProgramming/blob/master/LiveArchive/7577.cpp])
+- D&C optimization
+  - Explanation: [Link](https://www.youtube.com/watch?v=wLXEWuDWnzI)
+  - Implementation for 321E (CF): [Link](https://codeforces.com/contest/321/submission/25801193)
+- Bounded knapsack: [Link](https://codeforces.com/blog/entry/59606)
+- Digit DP: [Link](https://codeforces.com/blog/entry/53960)
+- Hirschberg LCS: [Link](https://codeforces.com/blog/entry/47247)
