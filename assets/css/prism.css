@@ -1,11 +1,12 @@
 code[class*='language-'],
+code > code,
 pre[class*='language-'] {
   text-align: left;
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
   word-wrap: normal;
-  color: #eee;
+  color: #eee !important;
   background: #011627;
   font-family: Fira Code, monospace;
   font-size: 1em;
@@ -37,8 +38,8 @@ pre[class*='language-'] ::selection {
 }
 
 :not(pre) > code {
-  color: whitesmoke;
-  background: #011627;
+  color: black;
+  background: rgba(27, 31, 35, 0.05);
   font-size: 0.9rem;
   padding: 4px;
   border-radius: 3px;

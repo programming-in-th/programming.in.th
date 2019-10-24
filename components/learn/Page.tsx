@@ -47,6 +47,7 @@ const Header = styled.header`
   position: relative;
   z-index: 10;
   margin: 60px auto 70px;
+  padding-left: 68px;
   max-width: 749px;
 
   @media screen and ${responsive} {

@@ -62,7 +62,7 @@ export const Navigator: React.FunctionComponent<INavigatorProps> = (
 
   useEffect(() => {
     window.addEventListener('scroll', checkScrollPosition)
-    console.log(props)
+
     return () => {
       window.removeEventListener('scroll', checkScrollPosition)
     }

@@ -1,4 +1,4 @@
-import styled, { createGlobalStyle } from 'styled-components'
+import { createGlobalStyle } from 'styled-components'
 
 export function getSystemFonts() {
   return [
@@ -17,43 +17,35 @@ export function getSystemFonts() {
 }
 
 export const Fonts = {
-  display: ['Kanit', 'SF Pro Display', 'Montserrat', ...getSystemFonts()].join(
-    ', '
-  ),
-  body: ['Kanit', ...getSystemFonts()].join(', ')
+  display: [
+    'Sukhumvit Set',
+    'Kanit',
+    'SF Pro Display',
+    'Montserrat',
+    ...getSystemFonts()
+  ].join(', '),
+  body: [...getSystemFonts()].join(', ')
 }
 
-/**
- * Computes the absolute font size for
- * [typographic scale](http://spencermortensen.com/articles/typographic-scale/).
- *
- * We use [7 tone equal temperament](https://en.wikipedia.org/wiki/Equal_temperament#5_and_7_tone_temperaments_in_ethnomusicology)
- * which is the [tuning of Thai traditional instruments](https://en.wikipedia.org/wiki/Ranat_ek#Tuning).
- *
- * @param {number} n The font size, where
- *
- *   - `-14` = 0.25x normal font size.
- *   - `-7` = 0.5x normal font size.
- *   - `0` = normal font size.
- *   - `7` = 2x normal font size.
- *   - `14` = 4x normal font size.
- */
-export function fontSize(n: number): string {
-  return `${(2 ** (n / 7)).toFixed(3)}rem`
-}
+const TH_UNICODE_RANGE = 'U+0E01-0E5B, U+200C-200D, U+25CC'
 
 export const GlobalStyle = createGlobalStyle`
-
 @font-face {
   font-family: 'Kanit';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src: url('/assets/fonts/Kanit-Regular.woff2') format('woff2');
-  unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+  unicode-range: ${TH_UNICODE_RANGE};
 }
 
-  body {
+@font-face {
+  font-family: 'Sukhumvit Set';
+  src: local('Sukhumvit Set');
+  unicode-range: ${TH_UNICODE_RANGE};
+}
+
+body {
 	margin: 0;
 	width: 100%;
 	background-color: #f1f5fa;
@@ -95,21 +87,6 @@ body {
 	font-display: swap;
 	box-sizing: border-box;
 	-webkit-tap-highlight-color: transparent !important;
-}
-
-.untouchable {
-	-webkit-user-select: none !important;
-	-moz-user-select: none !important;
-	-ms-user-select: none !important;
-	user-select: none !important;
-	-webkit-tap-highlight-color: transparent !important;
-	-webkit-touch-callout: none !important;
-	-webkit-text-size-adjust: none !important;
-	-webkit-overflow-scrolling: touch;
-}
-
-.th {
-	font-family: Sarabun;
 }
 
 #nprogress {
