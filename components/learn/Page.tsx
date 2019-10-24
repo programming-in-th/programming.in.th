@@ -83,9 +83,13 @@ const Nav = styled.div`
   width: 70%;
 `
 
+interface IMeta {
+  title: string
+}
+
 interface IInitailLearnProps {
   children: React.ReactNode
-  meta: any
+  meta: IMeta
 }
 
 export const Learn: NextPage<IInitailLearnProps> = props => {

@@ -43,6 +43,16 @@ export function fontSize(n: number): string {
 }
 
 export const GlobalStyle = createGlobalStyle`
+
+@font-face {
+  font-family: 'Kanit';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/assets/fonts/Kanit-Regular.woff2') format('woff2');
+  unicode-range: U+0E01-0E5B, U+200C-200D, U+25CC;
+}
+
   body {
 	margin: 0;
 	width: 100%;
@@ -141,6 +151,7 @@ pre {
   border-radius: 4px;
   code {
     padding: 0;
+    text-shadow: none;
   }
 }
 `

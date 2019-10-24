@@ -7,7 +7,6 @@ export const meta = {
 export default ({ children }) => <Learn meta={meta}>{children}</Learn>
 
 การที่เราจะรันโปรแกรมที่เขียนด้วยภาษา C++ ได้นั้นเราต้องมีสิ่งที่เรียกว่า compiler เสียก่อน ซึ่ง compiler จะทำหน้าที่ในการแปลงโค้ดที่เราเขียนไปเป็น binary file ทำให้ OS เราสามารถรันได้นั่นเอง
-
 Compiler นั้นมีหลายตัวให้เราใช้ แต่ตัวที่ฮิตที่สุดน่าจะหนีไม่พ้น [GCC](https://gcc.gnu.org/) หรือ GNU Compiler Collection นั่นเอง (Default ใน macOS ใช้ clang) ซึ่งเราจะมาดูวิธีการติดตั้ง GCC กันทั้งใน macOS และ Windows
 
 # การติดตั้งใน macOS
@@ -44,7 +43,7 @@ g++-9 --version
 
 หากเราติดตั้งสำเร็จ จะมี output ขึ้นมาที่ Terminal ของเราคล้ายกับตัวอย่างนี้
 
-```bash
+```
 g++-9 (Homebrew GCC 9.2.0_1) 9.2.0
 Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
@@ -79,7 +78,7 @@ g++ --version
 
 หากมี output แบบนี้ออกมา ก็ถือว่าการติดตั้งสำเร็จแล้ว
 
-```bash
+```
 g++ (MinGW.org GCC-8.2.0-5) 8.2.0
 Copyright (C) 2018 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO
@@ -114,7 +113,7 @@ g++-9 --version
 
 หากสำเร็จก็จะขึ้น output คล้ายกับตัวอย่างด้านล่าง
 
-```bash
+```
 g++-9 (Ubuntu 9.1.0-2ubuntu2~18.04) 9.1.0
 Copyright (C) 2019 Free Software Foundation, Inc.
 This is free software; see the source for copying conditions.  There is NO

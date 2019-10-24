@@ -1,20 +1,15 @@
-/**
- * Based on copypasta from overreacted.io.
- */
-
 code[class*='language-'],
 pre[class*='language-'] {
-  color: white;
-  background: none;
-  font-family: Fira Code, monospace !important;
-  font-feature-settings: normal;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
   word-wrap: normal;
-  line-height: 1.5;
-  margin-bottom: 0;
+  color: #eee;
+  background: #011627;
+  font-family: Fira Code, monospace;
+  font-size: 1em;
+  line-height: 1.5em;
 
   -moz-tab-size: 4;
   -o-tab-size: 4;
@@ -27,74 +22,187 @@ pre[class*='language-'] {
   text-shadow: none;
 }
 
-/* Code blocks */
-pre[class*='language-'] {
-  overflow: auto;
-  padding: 1.3125rem;
+code[class*='language-']::-moz-selection,
+pre[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection,
+pre[class*='language-'] ::-moz-selection {
+  background: #363636;
 }
 
-:not(pre) > code[class*='language-'] {
+code[class*='language-']::selection,
+pre[class*='language-']::selection,
+code[class*='language-'] ::selection,
+pre[class*='language-'] ::selection {
+  background: #363636;
+}
+
+:not(pre) > code {
+  color: whitesmoke;
   background: #011627;
-  padding: 3px 0;
+  font-size: 0.9rem;
+  padding: 4px;
+  border-radius: 3px;
+}
+
+pre[class*='language-'] {
+  overflow: auto;
+  position: relative;
+  margin: 0.5em 0;
+  padding: 1.25em 1em;
+}
+
+.language-css > code,
+.language-sass > code,
+.language-scss > code {
+  color: #fd9170;
+}
+
+[class*='language-'] .namespace {
+  opacity: 0.7;
+}
+
+.token.atrule {
+  color: #c792ea;
 }
 
 .token.attr-name {
-  color: rgb(173, 219, 103);
-  font-style: italic;
+  color: #ffcb6b;
 }
 
-.token.comment {
-  color: rgb(128, 147, 147);
+.token.attr-value {
+  color: #a5e844;
 }
 
-.token.string,
-.token.url {
-  color: rgb(173, 219, 103);
-}
-
-.token.variable {
-  color: rgb(214, 222, 235);
-}
-
-.token.number {
-  color: rgb(247, 140, 108);
-}
-
-.token.builtin,
-.token.char,
-.token.constant,
-.token.function {
-  color: rgb(130, 170, 255);
-}
-
-.token.punctuation {
-  color: rgb(199, 146, 234);
-}
-
-.token.selector,
-.token.doctype {
-  color: rgb(199, 146, 234);
-  font-style: 'italic';
-}
-
-.token.class-name {
-  color: rgb(255, 203, 139);
-}
-
-.token.tag,
-.token.operator,
-.token.keyword {
-  color: #ffa7c4;
+.token.attribute {
+  color: #a5e844;
 }
 
 .token.boolean {
-  color: rgb(255, 88, 116);
+  color: #c792ea;
+}
+
+.token.builtin {
+  color: #ffcb6b;
+}
+
+.token.cdata {
+  color: #80cbc4;
+}
+
+.token.char {
+  color: #80cbc4;
+}
+
+.token.class {
+  color: #ffcb6b;
+}
+
+.token.class-name {
+  color: #f2ff00;
+}
+
+.token.comment {
+  color: #616161;
+}
+
+.token.constant {
+  color: #c792ea;
+}
+
+.token.deleted {
+  color: #ff6666;
+}
+
+.token.doctype {
+  color: #616161;
+}
+
+.token.entity {
+  color: #ff6666;
+}
+
+.token.function {
+  color: #c792ea;
+}
+
+.token.hexcode {
+  color: #f2ff00;
+}
+
+.token.id {
+  color: #c792ea;
+  font-weight: bold;
+}
+
+.token.important {
+  color: #c792ea;
+  font-weight: bold;
+}
+
+.token.inserted {
+  color: #80cbc4;
+}
+
+.token.keyword {
+  color: #c792ea;
+}
+
+.token.number {
+  color: #fd9170;
+}
+
+.token.operator {
+  color: #89ddff;
+}
+
+.token.prolog {
+  color: #616161;
 }
 
 .token.property {
-  color: rgb(128, 203, 196);
+  color: #80cbc4;
 }
 
-.token.namespace {
-  color: rgb(178, 204, 214);
+.token.pseudo-class {
+  color: #a5e844;
+}
+
+.token.pseudo-element {
+  color: #a5e844;
+}
+
+.token.punctuation {
+  color: #89ddff;
+}
+
+.token.regex {
+  color: #f2ff00;
+}
+
+.token.selector {
+  color: #ff6666;
+}
+
+.token.string {
+  color: #a5e844;
+}
+
+.token.symbol {
+  color: #c792ea;
+}
+
+.token.tag {
+  color: #ff6666;
+}
+
+.token.unit {
+  color: #fd9170;
+}
+
+.token.url {
+  color: #ff6666;
+}
+
+.token.variable {
+  color: #ff6666;
 }
