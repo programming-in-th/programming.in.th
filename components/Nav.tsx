@@ -52,6 +52,7 @@ export const Navigator: React.FunctionComponent<INavigatorProps> = (
   const location = locationReal.split('/')[1]
 
   const user = useSelector((state: IAppState) => state.user.user)
+
   const [visible, setVisibility] = useState<boolean>(false)
   const [top, setTop] = useState<number>(0)
 

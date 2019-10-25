@@ -20,7 +20,6 @@ export default () => {
   const [submissionsListState, setSubmissionsListState] = useState<
     ISubmission[]
   >([])
-  const [firstLoad, setFirstLoad] = useState<boolean>(true)
 
   const submissionsList = useSelector(
     (state: IAppState) => state.submissions.submissionsList
@@ -52,15 +51,16 @@ export default () => {
       const filteredEvents = submissionsList.filter(
         ({ problem_id, username, points }) => {
           const textLowerCase = submissionsPage.searchWord.toLowerCase()
-          username = username.toLowerCase()
+
           const statusProblemID = problem_id
             .toLowerCase()
             .includes(textLowerCase)
           const statusUser = username.toLowerCase().includes(textLowerCase)
+
           let pointFilter = true
 
           if (submissionsPage.pointFilter) {
-            pointFilter = points === 100
+            pointFilter = points >= 100
           }
 
           return (statusProblemID || statusUser) && pointFilter
@@ -68,11 +68,6 @@ export default () => {
       )
 
       setSubmissionsListState(filteredEvents)
-    }
-
-    if (submissionsList.length > 1 && firstLoad) {
-      setSubmissionsListState(submissionsList as ISubmission[])
-      setFirstLoad(false)
     }
 
     updateTask()

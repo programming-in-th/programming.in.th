@@ -22,7 +22,6 @@ const { Panel } = Collapse
 export default () => {
   const [taskListState, setTaskListState] = useState<ITask[]>([])
   const [tagListState, setTagListState] = useState<string[]>([])
-  const [firstLoad, setFirstLoad] = useState<boolean>(true)
 
   const taskPage: ITaskPage = useSelector(
     (state: IAppState) => state.tasks.taskPage as ITaskPage
@@ -71,22 +70,20 @@ export default () => {
       setTaskListState(filteredEvents)
     }
 
-    if (taskList.length > 1 && firstLoad) {
-      setTaskListState(taskList)
-      setFirstLoad(false)
-
-      let tagNow: string[] = []
-      taskList.forEach(val => {
-        val.tags.forEach(tag => {
-          tagNow.push(tag)
-        })
-      })
-
-      setTagListState(Array.from(new Set(tagNow)))
-    }
-
     updateTask()
   }, [taskPage, taskList])
+
+  useEffect(() => {
+    let tagNow: string[] = []
+
+    taskList.forEach(val => {
+      val.tags.forEach(tag => {
+        tagNow.push(tag)
+      })
+    })
+
+    setTagListState(Array.from(new Set(tagNow)))
+  }, [taskList])
 
   const handleSearch: (e: React.FormEvent<HTMLInputElement>) => void = e => {
     setPage({
@@ -194,7 +191,7 @@ export default () => {
     >[],
     pagination: CustomPagination,
     dataSource: taskListState,
-    loading: firstLoad ? false : status === 'LOADING'
+    loading: status === 'LOADING'
   }
 
   const filterProps: IFilter = {
