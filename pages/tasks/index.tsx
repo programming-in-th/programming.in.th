@@ -22,10 +22,7 @@ const { Panel } = Collapse
 export default () => {
   const [taskListState, setTaskListState] = useState<ITask[]>([])
   const [tagListState, setTagListState] = useState<string[]>([])
-  const [firstLoad, setFirstLoad] = useState<boolean>(false)
-  const [taskPageState, setTaskPageState] = useState<ITaskPage | undefined>(
-    undefined
-  )
+  const [firstLoad, setFirstLoad] = useState<boolean>(true)
 
   const taskPage: ITaskPage = useSelector(
     (state: IAppState) => state.tasks.taskPage as ITaskPage
@@ -42,54 +39,54 @@ export default () => {
   const setPage: (page: ITaskPage) => void = page => {
     dispatch(actionCreators.setTaskPageConfig(page))
   }
-  const onInitialLoad: () => void = () => {
-    dispatch(actionCreators.loadTasksList(-1, -1, -1, []))
-  }
 
   useEffect(() => {
-    onInitialLoad()
-    updateTask()
+    dispatch(actionCreators.loadTasksList(-1, -1, -1, []))
   }, [])
 
   useEffect(() => {
-    if (taskList.length > 1 && !firstLoad) {
+    const updateTask = () => {
+      const filteredEvents = taskList.filter(
+        ({ problem_id, title, tags, difficulty }) => {
+          const textLowerCase = taskPage.searchWord.toLowerCase()
+          title = title.toLowerCase()
+          const statusProblemID = problem_id
+            .toLowerCase()
+            .includes(textLowerCase)
+          const statusTitle = title.toLowerCase().includes(textLowerCase)
+          let isTag = true
+
+          taskPage.searchTag.forEach(
+            value => (isTag = isTag && tags.includes(value))
+          )
+
+          const difficultyStatus =
+            difficulty >= taskPage.searchDifficulty[0] &&
+            difficulty <= taskPage.searchDifficulty[1]
+
+          return (statusProblemID || statusTitle) && isTag && difficultyStatus
+        }
+      )
+
+      setTaskListState(filteredEvents)
+    }
+
+    if (taskList.length > 1 && firstLoad) {
       setTaskListState(taskList)
-      setFirstLoad(true)
+      setFirstLoad(false)
+
       let tagNow: string[] = []
       taskList.forEach(val => {
         val.tags.forEach(tag => {
           tagNow.push(tag)
         })
       })
+
       setTagListState(Array.from(new Set(tagNow)))
     }
-    if (taskPageState !== taskPage) {
-      setTaskPageState(taskPage)
-      updateTask()
-    }
-  })
 
-  const updateTask: () => void = () => {
-    const filteredEvents = taskList.filter(
-      ({ problem_id, title, tags, difficulty }) => {
-        const textLowerCase = taskPage.searchWord.toLowerCase()
-        title = title.toLowerCase()
-        const statusProblemID = problem_id.toLowerCase().includes(textLowerCase)
-        const statusTitle = title.toLowerCase().includes(textLowerCase)
-        let isTag = true
-        taskPage.searchTag.forEach(
-          value => (isTag = isTag && tags.includes(value))
-        )
-
-        const difficultyStatus =
-          difficulty >= taskPage.searchDifficulty[0] &&
-          difficulty <= taskPage.searchDifficulty[1]
-
-        return (statusProblemID || statusTitle) && isTag && difficultyStatus
-      }
-    )
-    setTaskListState(filteredEvents)
-  }
+    updateTask()
+  }, [taskPage, taskList])
 
   const handleSearch: (e: React.FormEvent<HTMLInputElement>) => void = e => {
     setPage({

@@ -20,19 +20,20 @@ export default () => {
   const [submissionsListState, setSubmissionsListState] = useState<
     ISubmission[]
   >([])
-  const [firstLoad, setFirstLoad] = useState<boolean>(false)
-  const [submissionPageState, setSubmissionPageState] = useState<
-    ISubmissionPage | undefined
-  >(undefined)
+  const [firstLoad, setFirstLoad] = useState<boolean>(true)
+
   const submissionsList = useSelector(
     (state: IAppState) => state.submissions.submissionsList
   )
+
   const submissionsPage = useSelector(
     (state: IAppState) => state.submissions.submissionsPage
   )
+
   const submissionsListStatus = useSelector(
     (state: IAppState) => state.submissions.submissionsListStatus
   )
+
   const user = useSelector((state: IAppState) => state.user.user)
 
   const dispatch = useDispatch()
@@ -41,42 +42,42 @@ export default () => {
   const setPage = (setting: ISubmissionPage) => {
     dispatch(actionCreators.setSubPageConfig(setting))
   }
-  const onInitialLoad = () => {
+
+  useEffect(() => {
     dispatch(actionCreators.loadSubmissionsList())
-  }
-  useEffect(() => {
-    onInitialLoad()
-    updateTask()
   }, [])
+
   useEffect(() => {
-    if (submissionsList.length > 1 && !firstLoad) {
-      setSubmissionsListState(submissionsList as ISubmission[])
-      setFirstLoad(true)
-    }
+    const updateTask = () => {
+      const filteredEvents = submissionsList.filter(
+        ({ problem_id, username, points }) => {
+          const textLowerCase = submissionsPage.searchWord.toLowerCase()
+          username = username.toLowerCase()
+          const statusProblemID = problem_id
+            .toLowerCase()
+            .includes(textLowerCase)
+          const statusUser = username.toLowerCase().includes(textLowerCase)
+          let pointFilter = true
 
-    if (submissionPageState !== submissionsPage) {
-      setSubmissionPageState(submissionsPage)
-      updateTask()
-    }
-  })
-  const updateTask = () => {
-    const filteredEvents = submissionsList.filter(
-      ({ problem_id, username, points }) => {
-        const textLowerCase = submissionsPage.searchWord.toLowerCase()
-        username = username.toLowerCase()
-        const statusProblemID = problem_id.toLowerCase().includes(textLowerCase)
-        const statusUser = username.toLowerCase().includes(textLowerCase)
-        let pointFilter = true
+          if (submissionsPage.pointFilter) {
+            pointFilter = points === 100
+          }
 
-        if (submissionsPage.pointFilter) {
-          pointFilter = points === 100
+          return (statusProblemID || statusUser) && pointFilter
         }
+      )
 
-        return (statusProblemID || statusUser) && pointFilter
-      }
-    )
-    setSubmissionsListState(filteredEvents)
-  }
+      setSubmissionsListState(filteredEvents)
+    }
+
+    if (submissionsList.length > 1 && firstLoad) {
+      setSubmissionsListState(submissionsList as ISubmission[])
+      setFirstLoad(false)
+    }
+
+    updateTask()
+  }, [submissionsList, submissionsPage])
+
   const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
     setPage({
       ...submissionsPage,
@@ -114,6 +115,7 @@ export default () => {
       })
     }
   }
+
   const columns = [
     {
       title: 'Timestamp',
@@ -152,6 +154,7 @@ export default () => {
       title: 'Memory (KB)'
     }
   ]
+
   return (
     <PageLayout>
       <WhiteContainerWrapper>
