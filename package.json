@@ -37,6 +37,7 @@
     "react": "^16.10.2",
     "react-codemirror2": "^6.0.0",
     "react-dom": "^16.10.2",
+    "react-image": "^2.2.1",
     "react-redux": "^7.1.1",
     "react-syntax-highlighter": "^11.0.2",
     "reading-time": "^1.2.0",

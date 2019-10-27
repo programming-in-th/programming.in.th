@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useSelector } from 'react-redux'
 import Link from 'next/link'
+import Img from 'react-image'
+
 import { PageLayout } from '../components/Layout'
 
 import styled, { keyframes } from 'styled-components'
-import 'intersection-observer'
-import Observer from '@researchgate/react-intersection-observer'
 import { DesktopOnly } from '../components/Responsive'
 import { RegisterPage } from '../components/auth/Register'
 import { IAppState } from '../redux'
@@ -101,20 +101,13 @@ const Wrapper = styled.div`
   margin: 0 auto;
 `
 
+const ImgPlaceholder = styled.div`
+  height: 100%;
+  width: 100%;
+`
+
 export default () => {
-  const [isIntersecting, setIntersection] = useState(false)
   const user = useSelector((state: IAppState) => state.user.user)
-
-  const handleChange = (
-    ev: IntersectionObserverEntry,
-    unobserve: () => void
-  ) => {
-    if (ev.isIntersecting) {
-      unobserve()
-    }
-
-    ev.isIntersecting ? setIntersection(true) : setIntersection(false)
-  }
 
   return (
     <PageLayout>
@@ -135,9 +128,13 @@ export default () => {
             </SubTitle>
           </div>
           <DesktopOnly>
-            {user ? (
+            {user !== 'LOADING' && user ? (
               <RightIllus>
-                <img src="/svg/title.svg" alt="title"></img>
+                <Img
+                  src="/svg/title.svg"
+                  alt="title"
+                  loader={<ImgPlaceholder></ImgPlaceholder>}
+                ></Img>
               </RightIllus>
             ) : (
               <RegisterWrapper>
@@ -148,27 +145,27 @@ export default () => {
             )}
           </DesktopOnly>
         </MainContainer>
-        <Observer onChange={handleChange} threshold={0.25}>
-          <Container>
-            <DesktopOnly>
-              <LeftIllus>
-                <img src="/svg/problem.svg" alt="problem"></img>
-              </LeftIllus>
-            </DesktopOnly>
-            <div>
-              <Title>With over </Title>
-              {isIntersecting ? <Title>400</Title> : <Title>0</Title>}
-              <Title>
-                {' '}
-                problems designed and curated by our specialists, we strive to
-                deliver the most comprehensive learning experience possible.{' '}
-              </Title>
-              <Link href="/tasks/0000">
-                <CustomLink>(Take me to my first problem!)</CustomLink>
-              </Link>
-            </div>
-          </Container>
-        </Observer>
+        <Container>
+          <DesktopOnly>
+            <LeftIllus>
+              <Img
+                src="/svg/problem.svg"
+                alt="problem"
+                loader={<ImgPlaceholder></ImgPlaceholder>}
+              ></Img>
+            </LeftIllus>
+          </DesktopOnly>
+          <div>
+            <Title>
+              With over 400 problems designed and curated by our specialists, we
+              strive to deliver the most comprehensive learning experience
+              possible.{' '}
+            </Title>
+            <Link href="/tasks/0000">
+              <CustomLink>(Take me to my first problem!)</CustomLink>
+            </Link>
+          </div>
+        </Container>
         <Container>
           <div>
             <Title>
@@ -181,7 +178,11 @@ export default () => {
           </div>
           <DesktopOnly>
             <RightIllus>
-              <img src="/svg/learn.svg" alt="learn"></img>
+              <Img
+                src="/svg/learn.svg"
+                alt="learn"
+                loader={<ImgPlaceholder></ImgPlaceholder>}
+              ></Img>
             </RightIllus>
           </DesktopOnly>
         </Container>
