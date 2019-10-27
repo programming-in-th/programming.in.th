@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useSelector } from 'react-redux'
 import Link from 'next/link'
 import { PageLayout } from '../components/Layout'
 
@@ -7,6 +8,8 @@ import 'intersection-observer'
 import Observer from '@researchgate/react-intersection-observer'
 import { DesktopOnly } from '../components/Responsive'
 import { RegisterPage } from '../components/auth/Register'
+import { IAppState } from '../redux'
+import { StyledCard } from '../components/auth/Style'
 
 const fadeIn = keyframes`
   from {
@@ -21,6 +24,7 @@ const fadeIn = keyframes`
 const Container = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
   justify-content: space-around;
   margin: 64px;
 
@@ -32,8 +36,8 @@ const Container = styled.div`
 
 const MainContainer = styled(Container)`
   animation: ${fadeIn} 3s;
-  min-height: calc(100vh - 64px);
-  margin-top: 128px;
+  margin-top: 0;
+  min-height: calc(100vh - 128px);
 
   @media (max-width: 812px) {
     min-height: unset;
@@ -74,13 +78,17 @@ const SubTitle = styled.h2`
   }
 `
 
-const Right = styled.div`
+const RightIllus = styled.div`
+  min-width: 55%;
+  padding-left: 64px;
+`
+
+const RegisterWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   min-width: 55%;
   padding-left: 64px;
-  padding-bottom: 300px;
 `
 
 const LeftIllus = styled.div`
@@ -95,6 +103,7 @@ const Wrapper = styled.div`
 
 export default () => {
   const [isIntersecting, setIntersection] = useState(false)
+  const user = useSelector((state: IAppState) => state.user.user)
 
   const handleChange = (
     ev: IntersectionObserverEntry,
@@ -126,17 +135,25 @@ export default () => {
             </SubTitle>
           </div>
           <DesktopOnly>
-            <Right>
-              <div>
-                <RegisterPage></RegisterPage>
-              </div>
-            </Right>
+            {user ? (
+              <RightIllus>
+                <img src="/svg/title.svg" alt="title"></img>
+              </RightIllus>
+            ) : (
+              <RegisterWrapper>
+                <StyledCard>
+                  <RegisterPage></RegisterPage>
+                </StyledCard>
+              </RegisterWrapper>
+            )}
           </DesktopOnly>
         </MainContainer>
         <Observer onChange={handleChange} threshold={0.25}>
           <Container>
             <DesktopOnly>
-              <LeftIllus>{/* <ProblemIllus></ProblemIllus> */}</LeftIllus>
+              <LeftIllus>
+                <img src="/svg/problem.svg" alt="problem"></img>
+              </LeftIllus>
             </DesktopOnly>
             <div>
               <Title>With over </Title>
@@ -163,7 +180,9 @@ export default () => {
             </Title>
           </div>
           <DesktopOnly>
-            <Right>{/* <LearnIllus></LearnIllus> */}</Right>
+            <RightIllus>
+              <img src="/svg/learn.svg" alt="learn"></img>
+            </RightIllus>
           </DesktopOnly>
         </Container>
         <Container>

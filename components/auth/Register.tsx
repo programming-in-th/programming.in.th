@@ -2,9 +2,9 @@ import React, { useState } from 'react'
 import { NextRouter, useRouter } from 'next/router'
 import { WithGoogle, WithFacebook, WithGithub } from './OAuth'
 
-import { Form, Icon, Input, Button, Row, Col } from 'antd'
+import { Form, Icon, Input, Button } from 'antd'
 import styled from 'styled-components'
-import { StyledCard, StyledForm, Others } from './Style'
+import { StyledForm, Others } from './Style'
 
 import firebase from '../../lib/firebase'
 
@@ -72,94 +72,75 @@ const Register = (props: FormComponentProps) => {
   const { getFieldDecorator } = props.form
 
   return (
-    <Row type="flex" align="middle">
-      <StyledCard>
-        <Col>
-          <h1>Get Started</h1>
-          <StyledForm onSubmit={handleSubmit}>
-            <Form.Item>
-              {getFieldDecorator('displayName', {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please input your Display Name!'
-                  }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
-                  }
-                  placeholder="Name"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('email', {
-                rules: [
-                  { required: true, message: 'Please input your E-mail!' }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />
-                  }
-                  placeholder="Email"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('password', {
-                rules: [
-                  { required: true, message: 'Please input your Password!' }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
-                  }
-                  type="password"
-                  placeholder="Password"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('passwordConfirm', {
-                rules: [
-                  {
-                    required: true,
-                    message: 'Please input your confirmed Password!'
-                  }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
-                  }
-                  type="password"
-                  placeholder="Confirm Password"
-                />
-              )}
-              {errorMessage ? <i>{errorMessage}</i> : null}
-            </Form.Item>
-            <Form.Item>
-              <RegisterButton type="primary" htmlType="submit">
-                Start coding now!
-              </RegisterButton>
-            </Form.Item>
-          </StyledForm>
-          <Others>
-            Or use
-            <WithGoogle router={router} setError={setErrorMessage}></WithGoogle>
-            <WithFacebook
-              router={router}
-              setError={setErrorMessage}
-            ></WithFacebook>
-            <WithGithub router={router} setError={setErrorMessage}></WithGithub>
-          </Others>
-        </Col>
-      </StyledCard>
-    </Row>
+    <React.Fragment>
+      <h1>Get Started</h1>
+      <StyledForm onSubmit={handleSubmit}>
+        <Form.Item>
+          {getFieldDecorator('displayName', {
+            rules: [
+              {
+                required: true,
+                message: 'Please input your Display Name!'
+              }
+            ]
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Name"
+            />
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('email', {
+            rules: [{ required: true, message: 'Please input your E-mail!' }]
+          })(
+            <Input
+              prefix={<Icon type="mail" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Email"
+            />
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your Password!' }]
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="Password"
+            />
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('passwordConfirm', {
+            rules: [
+              {
+                required: true,
+                message: 'Please input your confirmed Password!'
+              }
+            ]
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="Confirm Password"
+            />
+          )}
+          {errorMessage ? <i>{errorMessage}</i> : null}
+        </Form.Item>
+        <Form.Item>
+          <RegisterButton type="primary" htmlType="submit">
+            Start coding now!
+          </RegisterButton>
+        </Form.Item>
+      </StyledForm>
+      <Others>
+        Or use
+        <WithGoogle router={router} setError={setErrorMessage}></WithGoogle>
+        <WithFacebook router={router} setError={setErrorMessage}></WithFacebook>
+        <WithGithub router={router} setError={setErrorMessage}></WithGithub>
+      </Others>
+    </React.Fragment>
   )
 }
 

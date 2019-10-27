@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter, NextRouter } from 'next/router'
 import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd'
 import styled from 'styled-components'
-import { StyledCard, StyledForm, Others } from './Style'
+import { StyledForm, Others, AuthContainer } from './Style'
 
 import firebase from '../../lib/firebase'
 
@@ -73,66 +73,51 @@ const Login = (props: FormComponentProps) => {
 
   const { getFieldDecorator } = props.form
   return (
-    <Row type="flex" align="middle">
-      <StyledCard>
-        <Col>
-          <h1>Login</h1>
-          <StyledForm onSubmit={handleSubmit}>
-            <Form.Item>
-              {getFieldDecorator('email', {
-                rules: [
-                  { required: true, message: 'Please input your username!' }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />
-                  }
-                  placeholder="Email"
-                />
-              )}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('password', {
-                rules: [
-                  { required: true, message: 'Please input your Password!' }
-                ]
-              })(
-                <Input
-                  prefix={
-                    <Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />
-                  }
-                  type="password"
-                  placeholder="Password"
-                />
-              )}
-              {errorMessage ? <p>{errorMessage}</p> : null}
-            </Form.Item>
-            <Form.Item>
-              {getFieldDecorator('remember', {
-                valuePropName: 'checked',
-                initialValue: true
-              })(<Checkbox>Remember me</Checkbox>)}
-              <LoginButton type="primary" htmlType="submit">
-                Log in
-              </LoginButton>
-              <Others>
-                Log in with
-                <WithGoogle router={router} setError={setError}></WithGoogle>
-                <WithFacebook
-                  router={router}
-                  setError={setError}
-                ></WithFacebook>
-                <WithGithub router={router} setError={setError}></WithGithub>
-                <Register>
-                  Or <Link href="/register">register now!</Link>
-                </Register>
-              </Others>
-            </Form.Item>
-          </StyledForm>
-        </Col>
-      </StyledCard>
-    </Row>
+    <AuthContainer>
+      <h1>Log In to programming.in.th</h1>
+      <StyledForm onSubmit={handleSubmit}>
+        <Form.Item>
+          {getFieldDecorator('email', {
+            rules: [{ required: true, message: 'Please input your username!' }]
+          })(
+            <Input
+              prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              placeholder="Email"
+            />
+          )}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('password', {
+            rules: [{ required: true, message: 'Please input your Password!' }]
+          })(
+            <Input
+              prefix={<Icon type="lock" style={{ color: 'rgba(0,0,0,.25)' }} />}
+              type="password"
+              placeholder="Password"
+            />
+          )}
+          {errorMessage ? <p>{errorMessage}</p> : null}
+        </Form.Item>
+        <Form.Item>
+          {getFieldDecorator('remember', {
+            valuePropName: 'checked',
+            initialValue: true
+          })(<Checkbox>Remember me</Checkbox>)}
+          <LoginButton type="primary" htmlType="submit">
+            Log in
+          </LoginButton>
+          <Others>
+            Log in with
+            <WithGoogle router={router} setError={setError}></WithGoogle>
+            <WithFacebook router={router} setError={setError}></WithFacebook>
+            <WithGithub router={router} setError={setError}></WithGithub>
+            <Register>
+              Or <Link href="/register">register now!</Link>
+            </Register>
+          </Others>
+        </Form.Item>
+      </StyledForm>
+    </AuthContainer>
   )
 }
 

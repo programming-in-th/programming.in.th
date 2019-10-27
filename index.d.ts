@@ -4,8 +4,12 @@ import { Store } from './lib/withRedux'
 declare module '*.png'
 declare module '*.jpg'
 declare module '*.jpeg'
-declare module '*.svg'
 declare module '*.gif'
+
+declare module '*.svg' {
+  const content: any
+  export default content
+}
 
 declare module 'next' {
   export interface NextPageContext {

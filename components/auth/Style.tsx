@@ -6,6 +6,7 @@ export const responsive = '(max-width: 436px)'
 export const Container = styled.div`
   padding: 10px;
   width: auto;
+  min-height: calc(100vh - 128px);
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -15,19 +16,35 @@ export const Container = styled.div`
 
 export const StyledCard = styled(Card)`
   width: 416px;
+
   @media ${responsive} {
     width: 90vw;
     padding: 0px 0px 0px;
   }
 `
 
+export const AuthContainer = styled.div`
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
+  @media ${responsive} {
+    width: 90vw;
+    padding: 0px 0px 0px;
+    height: unset;
+  }
+`
+
 export const StyledForm = styled(Form)`
   width: 368px;
-  margin-top: 15px;
+
+  margin-top: 30px;
   @media ${responsive} {
     width: 100%;
   }
 `
+
 export const StyledIcon = styled(Icon)`
   margin-left: 16px;
   color: rgba(0, 0, 0, 0.2);
