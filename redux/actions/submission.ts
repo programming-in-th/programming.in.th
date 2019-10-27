@@ -21,32 +21,6 @@ export const loadSubmissionsList = () => {
   }
 }
 
-export const loadDetail = (submission_id: string) => {
-  return async (
-    dispatch: ThunkDispatch<IAppState, {}, AnyAction>
-  ): Promise<void> => {
-    dispatch(requestDetail())
-    try {
-      const response = await firebase
-        .app()
-        .functions('asia-east2')
-        .httpsCallable('getDetailedSubmissionData')({
-        submission_id: submission_id
-      })
-
-      const submission_data: ISubmission = {
-        ...response.data.metadata,
-        submission_id: submission_id,
-        code: response.data.code
-      }
-
-      dispatch(receiveDetail(submission_data))
-    } catch (error) {
-      console.log(error)
-    }
-  }
-}
-
 export const makeSubmission = (
   uid: string,
   problem_id: string,
@@ -77,21 +51,6 @@ export const makeSubmission = (
       console.log(error)
       dispatch(receiveMakeSubmission(error.code, ''))
     }
-  }
-}
-
-export const REQUEST_DETAIL = 'REQUEST_DETAIL'
-const requestDetail = () => {
-  return {
-    type: REQUEST_DETAIL
-  }
-}
-
-export const RECEIVE_DETAIL = 'RECEIVE_DETAIL'
-const receiveDetail = (data: ISubmission) => {
-  return {
-    type: RECEIVE_DETAIL,
-    detail: data
   }
 }
 

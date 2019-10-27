@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Input, Switch, Icon, message } from 'antd'
 
-import { ISubmissionPage, ISubmission } from '../redux/types/submission'
+import { ISubmissionPage, ISubmission } from '../../redux/types/submission'
 import { useSelector, useDispatch } from 'react-redux'
-import * as actionCreators from '../redux/actions/index'
+import * as actionCreators from '../../redux/actions/index'
 import {
   WhiteContainerWrapper,
   FilterWrapper,
   SubFilterWrapper
-} from '../components/atomics'
+} from '../../components/atomics'
 import { ColumnProps } from 'antd/lib/table'
-import { IAppState } from '../redux'
+import { IAppState } from '../../redux'
 import { useRouter } from 'next/router'
-import { PageLayout } from '../components/Layout'
+import { PageLayout } from '../../components/Layout'
 
 const Search = Input.Search
 
@@ -188,7 +188,7 @@ export default () => {
                 if (user && user !== 'LOADING')
                   if (user.uid === record.uid) status = true
                 if (!record.hideCode || status) {
-                  router.push('/submissions/' + record.problem_id)
+                  router.push('/submissions/' + record.submission_id)
                 } else {
                   message.error('Access Denied')
                 }
