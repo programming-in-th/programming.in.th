@@ -23,7 +23,7 @@ export const StyledCard = styled(Card)`
 
 export const StyledForm = styled(Form)`
   width: 368px;
-  margin: 0 auto;
+  margin-top: 15px;
   @media ${responsive} {
     width: 100%;
   }

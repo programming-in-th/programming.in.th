@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { NextRouter, useRouter } from 'next/router'
-import Link from 'next/link'
 import { WithGoogle, WithFacebook, WithGithub } from './OAuth'
 
 import { Form, Icon, Input, Button, Row, Col } from 'antd'
@@ -14,10 +13,6 @@ import { openNotificationWithIcon } from '../Notification'
 
 const RegisterButton = styled(Button)`
   width: 100%;
-`
-
-const BackToMainPage = styled.div`
-  float: right;
 `
 
 const Register = (props: FormComponentProps) => {
@@ -80,7 +75,7 @@ const Register = (props: FormComponentProps) => {
     <Row type="flex" align="middle">
       <StyledCard>
         <Col>
-          <h1>Register</h1>
+          <h1>Get Started</h1>
           <StyledForm onSubmit={handleSubmit}>
             <Form.Item>
               {getFieldDecorator('displayName', {
