@@ -19,7 +19,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
-import { responsive } from '../Responsive'
+import { responsive } from '../../design/Responsive'
 import { copyToClipboard } from '../../utils/copyToClipboard'
 
 import { PageLayout } from '../Layout'

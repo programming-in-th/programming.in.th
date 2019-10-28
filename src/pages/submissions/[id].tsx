@@ -4,7 +4,7 @@ import { Select } from 'antd'
 
 import { transformStatus } from '../../utils/transform'
 import { CodeDisplay } from '../../components/CodeEditor'
-import { ContainerWrapper } from '../../components/atomics'
+import { ContainerWrapper } from '../../design/atomics'
 
 import { NextPage } from 'next'
 import firebase from '../../lib/firebase'

@@ -10,10 +10,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import * as actionCreators from '../../redux/actions/index'
 import { ITask, ITaskPage } from '../../redux/types/task'
 
-import { DesktopOnly, MobileOnly } from '../../components/Responsive'
+import { DesktopOnly, MobileOnly } from '../../design/Responsive'
 import { FilterComponent, IFilter } from '../../components/tasks/Filter'
 
-import { WhiteContainerWrapper } from '../../components/atomics'
+import { WhiteContainerWrapper } from '../../design/atomics'
 import { IAppState } from '../../redux'
 import { PageLayout } from '../../components/Layout'
 

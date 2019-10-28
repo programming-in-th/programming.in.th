@@ -13,5 +13,6 @@ export const CustomHead = () => (
       integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
       crossOrigin="anonymous"
     />
+    <title>programming.in.th | β</title>
   </Head>
 )

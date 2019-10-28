@@ -8,7 +8,7 @@ import {
   WhiteContainerWrapper,
   FilterWrapper,
   SubFilterWrapper
-} from '../../components/atomics'
+} from '../../design/atomics'
 import { ColumnProps } from 'antd/lib/table'
 import { IAppState } from '../../redux'
 import { useRouter } from 'next/router'

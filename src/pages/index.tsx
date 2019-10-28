@@ -6,7 +6,7 @@ import Img from 'react-image'
 import { PageLayout } from '../components/Layout'
 
 import styled, { keyframes } from 'styled-components'
-import { DesktopOnly } from '../components/Responsive'
+import { DesktopOnly } from '../design/Responsive'
 import { RegisterPage } from '../components/auth/Register'
 import { IAppState } from '../redux'
 import { StyledCard } from '../components/auth/Style'

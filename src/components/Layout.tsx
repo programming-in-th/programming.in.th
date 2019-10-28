@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Layout } from 'antd'
 
 import { Navigator } from './Nav'
-import { GlobalStyle } from './Design'
+import { GlobalStyle } from '../design'
 
 import * as actionCreators from '../redux/actions'
 import { CustomHead } from './Head'

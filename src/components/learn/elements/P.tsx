@@ -4,7 +4,7 @@ import {
   getSystemFonts,
   TEXT_COLOR,
   BASE_FONT_SIZE
-} from '../../Design'
+} from '../../../design'
 
 export const P = styled.p`
   margin-bottom: ${MARGIN_BOTTOM};

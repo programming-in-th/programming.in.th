@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import { useSelector } from 'react-redux'
 
-import { responsive } from './Responsive'
+import { responsive } from '../design/Responsive'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'

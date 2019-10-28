@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { getSystemFonts, MARGIN_BOTTOM } from '../../Design'
+import { getSystemFonts, MARGIN_BOTTOM } from '../../../design'
 
 export const Table = styled.table`
   font-family: ${getSystemFonts().join(', ')};

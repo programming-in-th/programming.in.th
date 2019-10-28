@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { useSelector, useDispatch } from 'react-redux'
 import * as actionCreators from '../../redux/actions/index'
 
-import { SubFilterWrapper } from '../atomics'
+import { SubFilterWrapper } from '../../design/atomics'
 
 import { Upload } from '../Upload'
 

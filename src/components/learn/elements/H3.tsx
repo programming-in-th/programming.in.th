@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Fonts, MARGIN_TOP, MARGIN_BOTTOM } from '../../Design'
+import { Fonts, MARGIN_TOP, MARGIN_BOTTOM } from '../../../design'
 
 export const H3 = styled.h3`
   font-family: ${Fonts.display};
