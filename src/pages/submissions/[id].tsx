@@ -1,14 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Select } from 'antd'
 
-import { useSelector, useDispatch } from 'react-redux'
-import * as actionCreators from '../../redux/actions/index'
 import { transformStatus } from '../../utils/transform'
 import { CodeDisplay } from '../../components/CodeEditor'
 import { ContainerWrapper } from '../../components/atomics'
-import { IAppState } from '../../redux'
-import { useRouter } from 'next/router'
+
 import { NextPage } from 'next'
 import firebase from '../../lib/firebase'
 import { ISubmission } from '../../redux/types/submission'

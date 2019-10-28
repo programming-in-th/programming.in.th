@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 import { responsive } from './Responsive'
 
 export const ContainerWrapper = styled.div`
@@ -10,7 +10,21 @@ export const ContainerWrapper = styled.div`
   }
 `
 
+const fade = keyframes`
+    from {
+        opacity: 0;
+        transform: translate(0px, 20px);
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0px,0px);
+    }
+`
+
 export const WhiteContainerWrapper = styled(ContainerWrapper)`
+  animation: ${fade} 2s;
   width: 75%;
   background-color: white;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
@@ -26,6 +40,7 @@ export const FilterWrapper = styled.div`
   flex-direction: row;
   margin-left: 20px;
   margin-right: 20px;
+
   @media ${responsive} {
     flex-direction: column;
   }

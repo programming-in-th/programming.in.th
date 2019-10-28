@@ -43,6 +43,7 @@ const Register = (props: FormComponentProps) => {
   ) => {
     if (pass !== passConfirm) {
       setErrorMessage('Password not match')
+
       return
     }
 

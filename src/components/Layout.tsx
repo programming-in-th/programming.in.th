@@ -3,8 +3,8 @@ import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Layout } from 'antd'
 
-import { Navigator } from '../components/Nav'
-import { GlobalStyle } from '../components/Design'
+import { Navigator } from './Nav'
+import { GlobalStyle } from './Design'
 
 import * as actionCreators from '../redux/actions'
 import { CustomHead } from './Head'

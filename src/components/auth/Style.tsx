@@ -15,6 +15,11 @@ export const Container = styled.div`
 `
 
 export const StyledCard = styled(Card)`
+  h1 {
+    font-size: 32px;
+    font-weight: 600;
+  }
+
   width: 416px;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
@@ -41,7 +46,7 @@ export const AuthContainer = styled.div`
 export const StyledForm = styled(Form)`
   width: 368px;
 
-  margin-top: 30px;
+  margin-top: 15px;
   @media ${responsive} {
     width: 100%;
   }

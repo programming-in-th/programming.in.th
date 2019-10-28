@@ -19,10 +19,10 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
-import { responsive } from '../../components/Responsive'
+import { responsive } from '../Responsive'
 import { copyToClipboard } from '../../utils/copyToClipboard'
 
-import { PageLayout } from '../../components/Layout'
+import { PageLayout } from '../Layout'
 
 const Components = {
   p: P,

@@ -1,5 +1,5 @@
 import 'next'
-import { Store } from './lib/withRedux'
+import { Store } from './src/lib/withRedux'
 
 declare module '*.png'
 declare module '*.jpg'

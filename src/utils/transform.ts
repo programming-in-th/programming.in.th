@@ -1,5 +1,4 @@
 import { ISubmission } from '../redux/types/submission'
-import firebase from '../lib/firebase'
 
 export const transformStatus = (detail: ISubmission) => {
   if (detail === undefined) return
