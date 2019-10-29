@@ -26,7 +26,7 @@ const NavHeader = styled(Header)<{
   box-shadow: ${props => enableBoxShadow(props.location, props.top)};
   display: ${props => (props.hidden ? 'none' : 'block')};
 
-  @media ${responsive} {
+  @media (${responsive}) {
     padding-left: 25px;
     padding-right: 25px;
   }
@@ -171,7 +171,7 @@ const Main = (props: IItem) => {
 const Login = (props: IItem) => {
   return (
     <div className={props.className}>
-      {props.user !== 'LOADING' && props.user !== null ? (
+      {props.user !== 'LOADING' && props.user ? (
         <Menu
           mode={props.mode}
           style={{
@@ -269,7 +269,7 @@ const LeftMenu = styled(Main)`
   background: transparent;
   float: left;
   border-right: none;
-  @media ${responsive} {
+  @media (${responsive}) {
     display: none;
   }
 `
@@ -277,7 +277,7 @@ const LeftMenu = styled(Main)`
 const RightMenu = styled(Login)`
   background: transparent;
   float: right;
-  @media ${responsive} {
+  @media (${responsive}) {
     display: none;
   }
 `
@@ -287,7 +287,7 @@ const BarMenu = styled(Button)<{ top: number; location: string }>`
   margin-top: 12px;
   display: none !important;
   background: ${props => enableTransparency(props.location, props.top)};
-  @media ${responsive} {
+  @media (${responsive}) {
     display: inline-block !important;
   }
 `
@@ -309,7 +309,7 @@ const UserWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  @media ${responsive} {
+  @media (${responsive}) {
     position: absolute;
     right: 20px;
   }

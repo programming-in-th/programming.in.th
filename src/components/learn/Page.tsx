@@ -50,7 +50,7 @@ const Header = styled.header`
   padding-left: 68px;
   max-width: 749px;
 
-  @media screen and ${responsive} {
+  @media screen and (${responsive}) {
     margin: 50px auto 50px;
     padding: 0 40px;
     max-width: 100%;
@@ -67,7 +67,7 @@ const Heading = styled.h1`
   font-weight: bold;
   line-height: 1.32;
 
-  @media screen and ${responsive} {
+  @media screen and (${responsive}) {
     font-size: 32px;
   }
 `

@@ -28,7 +28,7 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
 
   useEffect(() => {
     dispatch(actionCreators.fetchUser())
-  })
+  }, [])
 
   return (
     <React.Fragment>

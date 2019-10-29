@@ -7,7 +7,7 @@ interface IDesktopOnlyProps {
 
 const defaultBreak: number = 992
 
-export const responsive = `(max-width: ${defaultBreak}px)`
+export const responsive = `max-width: ${defaultBreak}px`
 
 export const DesktopOnly = ({
   breakpoint = defaultBreak,
