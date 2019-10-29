@@ -2,10 +2,10 @@ import styled, { keyframes } from 'styled-components'
 import { responsive } from './Responsive'
 
 export const ContainerWrapper = styled.div`
-  width: calc(100% - 50px * 2);
+  width: 70%;
   margin: 20px auto;
 
-  @media screen and ${responsive} {
+  @media screen and (${responsive}) {
     width: calc(100% - 10px * 2);
   }
 `
@@ -41,7 +41,7 @@ export const FilterWrapper = styled.div`
   margin-left: 20px;
   margin-right: 20px;
 
-  @media ${responsive} {
+  @media (${responsive}) {
     flex-direction: column;
   }
 `
