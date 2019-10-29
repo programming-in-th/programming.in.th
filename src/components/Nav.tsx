@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { Layout, Drawer, Button, Menu, Avatar, Icon } from 'antd'
+import { Layout, Drawer, Button, Menu, Avatar, Icon, Divider } from 'antd'
 import styled from 'styled-components'
 
 import { useSelector } from 'react-redux'
@@ -215,8 +215,7 @@ const Login = (props: IItem) => {
                   </a>
                 </Link>
               </Menu.Item>
-            </Menu.ItemGroup>
-            <Menu.ItemGroup>
+              <Divider></Divider>
               <Menu.Item key="logout" onClick={() => firebase.auth().signOut()}>
                 <Icon type="logout" />
                 Logout
