@@ -10,6 +10,7 @@ import { DesktopOnly } from '../design/Responsive'
 import { RegisterPage } from '../components/auth/Register'
 import { IAppState } from '../redux'
 import { StyledCard } from '../components/auth/Style'
+import { CustomSpin } from '../components/Spin'
 
 const fadeIn = keyframes`
   from {
@@ -87,7 +88,7 @@ const RegisterWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-width: 55%;
+  min-width: 40%;
   padding-left: 64px;
 `
 
@@ -128,7 +129,7 @@ export default () => {
             </SubTitle>
           </div>
           <DesktopOnly>
-            {user !== 'LOADING' && user ? (
+            {user ? (
               <RightIllus>
                 <Img
                   src="/svg/title.svg"
