@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { NextRouter, useRouter } from 'next/router'
 import { WithGoogle, WithFacebook, WithGithub } from './OAuth'
 
-import { Form, Icon, Input, Button } from 'antd'
+import { Form, Icon, Input, Button, Divider } from 'antd'
 import styled from 'styled-components'
 import { StyledForm, Others } from './Style'
 
@@ -136,7 +136,8 @@ const Register = (props: FormComponentProps) => {
         </Form.Item>
       </StyledForm>
       <Others>
-        Or use
+        <Divider>Or</Divider>
+        Log In with
         <WithGoogle router={router} setError={setErrorMessage}></WithGoogle>
         <WithFacebook router={router} setError={setErrorMessage}></WithFacebook>
         <WithGithub router={router} setError={setErrorMessage}></WithGithub>
