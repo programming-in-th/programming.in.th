@@ -8,11 +8,12 @@ import { useSelector } from 'react-redux'
 
 import { ITask } from '../../redux/types/task'
 import { Submit } from '../../components/tasks/Submit'
-import { ContainerWrapper, Padding } from '../../design/atomics'
+import { Padding } from '../../design/atomics'
 import { IAppState } from '../../redux'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { PageLayout } from '../../components/Layout'
+import { Row, Col } from 'antd'
 
 const Wrapper = styled.div`
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
@@ -63,22 +64,36 @@ const TaskDetail: NextPage<IInitialTaskDetailProps> = (
 
   return (
     <PageLayout>
-      <ContainerWrapper>
-        <Padding>
-          <Wrapper>
-            <h1>{props.title}</h1>
-            <p> Time Limit : {props.timeLimit} second(s)</p>
-            <p> Memory Limit : {props.memoryLimit} MB(s)</p>
+      <Row>
+        <Col lg={{ span: 17, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+          <Padding>
+            <Wrapper>
+              <h1>{props.title}</h1>
+              <p> Time Limit : {props.timeLimit} second(s)</p>
+              <p> Memory Limit : {props.memoryLimit} MB(s)</p>
 
-            <StatementComponent dangerouslySetInnerHTML={template} />
-          </Wrapper>
-        </Padding>
-        <Padding>
-          <Wrapper>
-            <Submit problem_id={id as string} canSubmit={!!user} />
-          </Wrapper>
-        </Padding>
-      </ContainerWrapper>
+              <StatementComponent dangerouslySetInnerHTML={template} />
+            </Wrapper>
+          </Padding>
+          <Padding>
+            <Wrapper>
+              <Submit problem_id={id as string} canSubmit={!!user} />
+            </Wrapper>
+          </Padding>
+        </Col>
+        <Col lg={{ span: 4, offset: 1 }} xs={{ span: 22, offset: 1 }}>
+          <Padding>
+            <Wrapper>
+              <h1>Information</h1>
+            </Wrapper>
+          </Padding>
+          <Padding>
+            <Wrapper>
+              <h1>Statistic</h1>
+            </Wrapper>
+          </Padding>
+        </Col>
+      </Row>
     </PageLayout>
   )
 }
