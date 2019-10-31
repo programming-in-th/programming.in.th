@@ -103,13 +103,14 @@ SubmissionDetail.getInitialProps = async ({ query }) => {
     .httpsCallable('getDetailedSubmissionData')({ submission_id: submissionID })
 
   const currentSubmission = response.data
-  const detail = {
-    ...currentSubmission.metadata,
-    submissionID,
-    code: currentSubmission.code
-  }
 
   if (currentSubmission) {
+    const detail = {
+      ...currentSubmission.metadata,
+      submissionID,
+      code: currentSubmission.code
+    }
+
     return {
       rawDetail: detail
     }

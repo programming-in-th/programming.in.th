@@ -108,8 +108,8 @@ TaskDetail.getInitialProps = async ({ query }) => {
 
   const currentTask = response.data as ITask
 
-  const { title, time_limit, memory_limit } = currentTask
   if (currentTask) {
+    const { title, time_limit, memory_limit } = currentTask
     const problemStatement = await axios.get(currentTask.url)
     return {
       title,

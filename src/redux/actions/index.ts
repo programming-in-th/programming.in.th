@@ -8,4 +8,3 @@ export {
   resetCurrentSubmission,
   setSubPageConfig
 } from './submission'
-export { loadContent, loadMenu } from './learn'
