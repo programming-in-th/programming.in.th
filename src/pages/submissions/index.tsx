@@ -179,7 +179,7 @@ export default () => {
           columns={columns as ColumnProps<ISubmission>[]}
           loading={submissionsListStatus === 'LOADING'}
           pagination={CustomPagination}
-          scroll={{ x: 100 }}
+          scroll={{ x: 850 }}
           rowKey={(record: ISubmission) => record.submission_id}
           onRow={(record: ISubmission) => {
             return {
