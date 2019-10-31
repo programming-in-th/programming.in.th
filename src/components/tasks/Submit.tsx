@@ -57,11 +57,6 @@ interface ISubmitSetting {
   hideCode: boolean
 }
 
-interface ISubmitCode {
-  code: string
-  uploadedCode: string
-}
-
 export const Submit: React.FunctionComponent<ISubmitProps> = (
   props: ISubmitProps
 ) => {
@@ -71,10 +66,8 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
     hideCode: true
   })
 
-  const [codeValue, setCode] = useState<ISubmitCode>({
-    code: '',
-    uploadedCode: ''
-  })
+  const [codeValue, setCode] = useState<string>('')
+  const [codeFromUpload, setCodeFromUpload] = useState<string>('')
 
   const dispatch = useDispatch()
 
@@ -101,11 +94,11 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
   }
 
   const getCodeFromUpload = (code: string) => {
-    setCode({ uploadedCode: code, code })
+    setCodeFromUpload(code)
   }
 
   const updateCode = (code: string) => {
-    setCode({ ...codeValue, code: code })
+    setCode(code)
   }
 
   const changeTheme = (value: string) => {
@@ -126,7 +119,7 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
       actionCreators.makeSubmission(
         user.uid,
         props.problem_id,
-        codeValue.code,
+        codeValue,
         mapLanguage[setting.language],
         setting.hideCode
       )
@@ -213,7 +206,7 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
                 lineWrapping: true
               }}
               onChange={changeEditor}
-              value={codeValue.uploadedCode}
+              value={codeFromUpload}
             />
             <Button
               type="primary"
