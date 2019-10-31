@@ -169,9 +169,9 @@ const Main = (props: IItem) => {
 }
 
 const Login = (props: IItem) => {
-  return (
-    <div className={props.className}>
-      {props.user !== 'LOADING' && props.user ? (
+  if (props.user === 'LOADING') {
+    return (
+      <div className={props.className}>
         <Menu
           mode={props.mode}
           style={{
@@ -185,9 +185,55 @@ const Login = (props: IItem) => {
             key="user"
             title={
               <UserWrapper>
-                <p style={{ marginRight: '15px' }}>
-                  {props.user ? props.user.displayName : 'User'}
-                </p>
+                <Avatar />
+              </UserWrapper>
+            }
+          >
+            <Menu.ItemGroup>
+              <Menu.Item key="profile">
+                <Link href="/profile">
+                  <a>
+                    <Icon type="user" />
+                    Profile
+                  </a>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="options">
+                <Link href="/setting/basic">
+                  <a>
+                    <Icon type="setting" />
+                    Setting
+                  </a>
+                </Link>
+              </Menu.Item>
+              <Divider></Divider>
+              <Menu.Item key="logout" onClick={() => firebase.auth().signOut()}>
+                <Icon type="logout" />
+                Logout
+              </Menu.Item>
+            </Menu.ItemGroup>
+          </Menu.SubMenu>
+        </Menu>
+      </div>
+    )
+  }
+
+  return (
+    <div className={props.className}>
+      {props.user ? (
+        <Menu
+          mode={props.mode}
+          style={{
+            lineHeight: '64px',
+            background: 'transparent',
+            border: 'none'
+          }}
+          selectedKeys={[props.location]}
+        >
+          <Menu.SubMenu
+            key="user"
+            title={
+              <UserWrapper>
                 <Avatar
                   src={
                     props.user.photoURL === ''
@@ -195,6 +241,9 @@ const Login = (props: IItem) => {
                       : `${props.user.photoURL}`
                   }
                 />
+                <p style={{ marginLeft: '15px' }}>
+                  {props.user ? props.user.displayName : 'User'}
+                </p>
               </UserWrapper>
             }
           >

@@ -1,11 +1,11 @@
 import App, { AppProps } from 'next/app'
 import React from 'react'
-import { withRedux, Store } from '../lib/withRedux'
 import { Provider } from 'react-redux'
 import NProgress from 'nprogress'
 import 'antd/dist/antd.css'
 
 import Router from 'next/router'
+import { initStore } from '../redux'
 
 let timeout: number
 
@@ -22,19 +22,16 @@ Router.events.on('routeChangeStart', start)
 Router.events.on('routeChangeComplete', done)
 Router.events.on('routeChangeError', done)
 
-interface Props {
-  reduxStore: Store
+const reduxStore = initStore()
+class MyApp extends App<AppProps> {
+  render() {
+    const { Component, pageProps } = this.props
+    return (
+      <Provider store={reduxStore}>
+        <Component {...pageProps} />
+      </Provider>
+    )
+  }
 }
 
-export default withRedux(
-  class MyApp extends App<Props & AppProps> {
-    render() {
-      const { Component, pageProps, reduxStore } = this.props
-      return (
-        <Provider store={reduxStore}>
-          <Component {...pageProps} />
-        </Provider>
-      )
-    }
-  }
-)
+export default MyApp

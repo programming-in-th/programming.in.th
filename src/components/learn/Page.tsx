@@ -23,6 +23,7 @@ import { responsive } from '../../design/Responsive'
 import { copyToClipboard } from '../../utils/copyToClipboard'
 
 import { PageLayout } from '../Layout'
+import Head from 'next/head'
 
 const Components = {
   p: P,
@@ -96,31 +97,41 @@ interface IInitailLearnProps {
 export const Learn: NextPage<IInitailLearnProps> = props => {
   const router = useRouter()
   return (
-    <PageLayout hideNav={true}>
-      <Nav>
-        <PageHeader
-          onBack={() => router.push('/learn')}
-          title="Back"
-          subTitle="Go to all articles"
+    <React.Fragment>
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+          integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+          crossOrigin="anonymous"
         />
-      </Nav>
-      <Header>
-        <Heading>{props.meta.title}</Heading>
-        <SubTitle>
-          <Clipboard onClick={() => copyToClipboard(window.location.href)}>
-            Link
-          </Clipboard>
-        </SubTitle>
-      </Header>
-      <div>
-        <Row>
-          <Col lg={{ span: 12, offset: 6 }} xs={{ span: 18, offset: 3 }}>
-            <MDXProvider components={Components}>
-              <article>{props.children}</article>
-            </MDXProvider>
-          </Col>
-        </Row>
-      </div>
-    </PageLayout>
+      </Head>
+      <PageLayout hideNav={true}>
+        <Nav>
+          <PageHeader
+            onBack={() => router.push('/learn')}
+            title="Back"
+            subTitle="Go to all articles"
+          />
+        </Nav>
+        <Header>
+          <Heading>{props.meta.title}</Heading>
+          <SubTitle>
+            <Clipboard onClick={() => copyToClipboard(window.location.href)}>
+              Link
+            </Clipboard>
+          </SubTitle>
+        </Header>
+        <div>
+          <Row>
+            <Col lg={{ span: 12, offset: 6 }} xs={{ span: 18, offset: 3 }}>
+              <MDXProvider components={Components}>
+                <article>{props.children}</article>
+              </MDXProvider>
+            </Col>
+          </Row>
+        </div>
+      </PageLayout>
+    </React.Fragment>
   )
 }
