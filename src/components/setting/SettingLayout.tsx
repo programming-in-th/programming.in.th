@@ -1,12 +1,11 @@
 import React from 'react'
-import firebase from 'firebase/app'
 import { Menu } from 'antd'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 
 import { responsive } from '../../design/Responsive'
 
-import { NotAuthorized } from '../403'
+import { NotAuthorized } from '../error/403'
 
 import { IAppState } from '../../redux'
 import Link from 'next/link'

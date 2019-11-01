@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Form, Input, Icon, Button } from 'antd'
 import { FormComponentProps } from 'antd/lib/form'
 import { openNotificationWithIcon } from '../Notification'
-import { AvatarUploader } from '../Upload'
+import { AvatarUploader } from '../upload'
 
 const Avatar = styled.div`
   width: 144px;

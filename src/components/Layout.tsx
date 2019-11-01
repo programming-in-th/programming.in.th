@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useLayoutEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Layout } from 'antd'
@@ -26,7 +26,7 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
 ) => {
   const dispatch = useDispatch()
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     dispatch(actionCreators.fetchUser())
   }, [])
 

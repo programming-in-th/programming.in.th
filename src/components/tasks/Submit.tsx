@@ -8,7 +8,7 @@ import * as actionCreators from '../../redux/actions/index'
 
 import { SubFilterWrapper } from '../../design/atomics'
 
-import { Upload } from '../Upload'
+import { Upload } from '../upload'
 
 import { Code } from '../CodeEditor'
 import { IAppState } from '../../redux'

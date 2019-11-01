@@ -11,6 +11,7 @@ import { RegisterPage } from '../components/auth/Register'
 import { IAppState } from '../redux'
 import { StyledCard } from '../components/auth/Style'
 import { CustomSpin } from '../components/Spin'
+import { Fonts } from '../design'
 
 const fadeIn = keyframes`
   from {
@@ -71,7 +72,7 @@ const CustomLink = styled.a`
 const SubTitle = styled.h2`
   margin-top: 16px;
   font-size: 24px;
-  font-family: Montserrat;
+  font-family: ${Fonts.display};
   color: #262626;
 
   @media (max-width: 1020px) {
