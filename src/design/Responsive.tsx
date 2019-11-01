@@ -18,7 +18,7 @@ const breakpoints = {
 }
 
 export const media = (type: string) => {
-  return `@media (max-width: ${breakpoints[type]})`
+  return `@media (max-width: ${breakpoints[type]}px)`
 }
 
 export const responsive = `max-width: ${defaultBreak}px`
