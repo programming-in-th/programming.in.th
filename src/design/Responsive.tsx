@@ -7,6 +7,20 @@ interface IDesktopOnlyProps {
 
 const defaultBreak: number = 992
 
+const breakpoints = {
+  phone_sm: 320,
+  phone: 376,
+  phablet: 540,
+  tablet: 735,
+  desktop: 1070,
+  desktop_md: 1280,
+  desktop_lg: 1440
+}
+
+export const media = (type: string) => {
+  return `@media (max-width: ${breakpoints[type]})`
+}
+
 export const responsive = `max-width: ${defaultBreak}px`
 
 export const DesktopOnly = ({
