@@ -170,52 +170,7 @@ const Main = (props: IItem) => {
 
 const Login = (props: IItem) => {
   if (props.user === 'LOADING') {
-    return (
-      <div className={props.className}>
-        <Menu
-          mode={props.mode}
-          style={{
-            lineHeight: '64px',
-            background: 'transparent',
-            border: 'none'
-          }}
-          selectedKeys={[props.location]}
-        >
-          <Menu.SubMenu
-            key="user"
-            title={
-              <UserWrapper>
-                <Avatar />
-              </UserWrapper>
-            }
-          >
-            <Menu.ItemGroup>
-              <Menu.Item key="profile">
-                <Link href="/profile">
-                  <a>
-                    <Icon type="user" />
-                    Profile
-                  </a>
-                </Link>
-              </Menu.Item>
-              <Menu.Item key="options">
-                <Link href="/setting/basic">
-                  <a>
-                    <Icon type="setting" />
-                    Setting
-                  </a>
-                </Link>
-              </Menu.Item>
-              <Divider></Divider>
-              <Menu.Item key="logout" onClick={() => firebase.auth().signOut()}>
-                <Icon type="logout" />
-                Logout
-              </Menu.Item>
-            </Menu.ItemGroup>
-          </Menu.SubMenu>
-        </Menu>
-      </div>
-    )
+    return null
   }
 
   return (

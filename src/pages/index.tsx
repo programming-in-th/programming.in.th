@@ -11,6 +11,7 @@ import { RegisterPage } from '../components/auth/Register'
 import { IAppState } from '../redux'
 import { StyledCard } from '../components/auth/Style'
 import { Fonts } from '../design'
+import { CustomSpin } from '../components/Spin'
 
 const fadeIn = keyframes`
   from {
@@ -109,6 +110,14 @@ const ImgPlaceholder = styled.div`
 
 export default () => {
   const user = useSelector((state: IAppState) => state.user.user)
+
+  if (user === 'LOADING') {
+    return (
+      <PageLayout hideNav={true}>
+        <CustomSpin></CustomSpin>
+      </PageLayout>
+    )
+  }
 
   return (
     <PageLayout>
