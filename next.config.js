@@ -1,4 +1,5 @@
 const withCss = require('@zeit/next-css')
+const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 const remarkMath = require('remark-math')
 const rehypeKatex = require('rehype-katex')
 const rehypePrism = require('@mapbox/rehype-prism')
@@ -20,9 +21,22 @@ module.exports = withPlugins(
       {
         pageExtensions: ['tsx', 'mdx']
       }
-    ]
+    ],
+    withBundleAnalyzer
   ],
   {
+    analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
+    analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
+    bundleAnalyzerConfig: {
+      server: {
+        analyzerMode: 'static',
+        reportFilename: '../bundles/server.html'
+      },
+      browser: {
+        analyzerMode: 'static',
+        reportFilename: '../bundles/client.html'
+      }
+    },
     webpack: (config, { isServer }) => {
       if (isServer) {
         const antStyles = /antd\/.*?\/style\/css.*?/

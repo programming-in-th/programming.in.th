@@ -25,6 +25,7 @@
     "@mdx-js/react": "^1.5.1",
     "@next/mdx": "^9.1.1",
     "@researchgate/react-intersection-observer": "^1.0.1",
+    "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-mdx": "^1.2.0",
     "antd": "^3.24.2",
@@ -72,6 +73,9 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "analyze": "BUNDLE_ANALYZE=both next build",
+    "analyze:server": "BUNDLE_ANALYZE=server next build",
+    "analyze:browser": "BUNDLE_ANALYZE=browser next build"
   }
 }
