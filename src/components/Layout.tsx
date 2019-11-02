@@ -7,7 +7,7 @@ import { Navigator } from './Nav'
 import { GlobalStyle } from '../design'
 
 import * as actionCreators from '../redux/actions'
-import { CustomHead } from './Head'
+import { CustomHead } from './head'
 
 const { Content, Footer } = Layout
 

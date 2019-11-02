@@ -10,7 +10,6 @@ import { DesktopOnly } from '../design/Responsive'
 import { RegisterPage } from '../components/auth/Register'
 import { IAppState } from '../redux'
 import { StyledCard } from '../components/auth/Style'
-import { CustomSpin } from '../components/Spin'
 import { Fonts } from '../design'
 
 const fadeIn = keyframes`
@@ -133,7 +132,7 @@ export default () => {
             {user ? (
               <RightIllus>
                 <Img
-                  src="/svg/title.svg"
+                  src="/assets/svg/title.svg"
                   alt="title"
                   loader={<ImgPlaceholder></ImgPlaceholder>}
                 ></Img>
@@ -151,7 +150,7 @@ export default () => {
           <DesktopOnly>
             <LeftIllus>
               <Img
-                src="/svg/problem.svg"
+                src="/assets/svg/problem.svg"
                 alt="problem"
                 loader={<ImgPlaceholder></ImgPlaceholder>}
               ></Img>
@@ -181,7 +180,7 @@ export default () => {
           <DesktopOnly>
             <RightIllus>
               <Img
-                src="/svg/learn.svg"
+                src="/assets/svg/learn.svg"
                 alt="learn"
                 loader={<ImgPlaceholder></ImgPlaceholder>}
               ></Img>
