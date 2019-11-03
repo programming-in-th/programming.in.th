@@ -16,8 +16,9 @@ import { PageLayout } from '../../components/Layout'
 import { Row, Col } from 'antd'
 
 const Wrapper = styled.div`
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  margin: 15px 0;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
   padding: 20px;
   box-sizing: border-box;
   background-color: white;
@@ -66,32 +67,24 @@ const TaskDetail: NextPage<IInitialTaskDetailProps> = (
     <PageLayout>
       <Row>
         <Col lg={{ span: 17, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-          <Padding>
-            <Wrapper>
-              <h1>{props.title}</h1>
-              <p> Time Limit : {props.timeLimit} second(s)</p>
-              <p> Memory Limit : {props.memoryLimit} MB(s)</p>
+          <Wrapper>
+            <h1>{props.title}</h1>
+            <p> Time Limit : {props.timeLimit} second(s)</p>
+            <p> Memory Limit : {props.memoryLimit} MB(s)</p>
 
-              <StatementComponent dangerouslySetInnerHTML={template} />
-            </Wrapper>
-          </Padding>
-          <Padding>
-            <Wrapper>
-              <Submit problem_id={id as string} canSubmit={!!user} />
-            </Wrapper>
-          </Padding>
+            <StatementComponent dangerouslySetInnerHTML={template} />
+          </Wrapper>
+          <Wrapper>
+            <Submit problem_id={id as string} canSubmit={!!user} />
+          </Wrapper>
         </Col>
         <Col lg={{ span: 4, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-          <Padding>
-            <Wrapper>
-              <h1>Information</h1>
-            </Wrapper>
-          </Padding>
-          <Padding>
-            <Wrapper>
-              <h1>Statistic</h1>
-            </Wrapper>
-          </Padding>
+          <Wrapper>
+            <h1>Information</h1>
+          </Wrapper>
+          <Wrapper>
+            <h1>Statistic</h1>
+          </Wrapper>
         </Col>
       </Row>
     </PageLayout>
