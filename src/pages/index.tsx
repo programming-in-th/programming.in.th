@@ -42,7 +42,7 @@ const Container = styled.div`
 `
 
 const MainContainer = styled(Container)`
-  animation: ${fadeIn} 3s;
+  animation: ${fadeIn} 1.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
   margin-top: 0;
   min-height: calc(100vh - 128px);
 
@@ -114,6 +114,7 @@ const ImgPlaceholder = styled.div`
 export default () => {
   const user = useSelector((state: IAppState) => state.user.user)
 
+  // Waiting for dashboard implementation, so we use this as placeholder
   if (user === 'LOADING') {
     return (
       <PageLayout hideNav={true}>
