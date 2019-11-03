@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 import { useSelector } from 'react-redux'
 
-import { responsive } from '../design/Responsive'
+import { media } from '../design/Responsive'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
@@ -20,13 +20,14 @@ const NavHeader = styled(Header)<{
   hidden: boolean
 }>`
   background: ${props => enableTransparency(props.location, props.top)};
+  transition: background 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
   position: fixed;
   z-index: 100;
   width: 100%;
   box-shadow: ${props => enableBoxShadow(props.location, props.top)};
   display: ${props => (props.hidden ? 'none' : 'block')};
 
-  @media (${responsive}) {
+  ${media('TABLET')} {
     padding-left: 25px;
     padding-right: 25px;
   }
@@ -272,7 +273,8 @@ const LeftMenu = styled(Main)`
   background: transparent;
   float: left;
   border-right: none;
-  @media (${responsive}) {
+
+  ${media('TABLET')} {
     display: none;
   }
 `
@@ -280,7 +282,8 @@ const LeftMenu = styled(Main)`
 const RightMenu = styled(Login)`
   background: transparent;
   float: right;
-  @media (${responsive}) {
+
+  ${media('TABLET')} {
     display: none;
   }
 `
@@ -290,7 +293,8 @@ const BarMenu = styled(Button)<{ top: number; location: string }>`
   margin-top: 12px;
   display: none !important;
   background: ${props => enableTransparency(props.location, props.top)};
-  @media (${responsive}) {
+
+  ${media('TABLET')} {
     display: inline-block !important;
   }
 `
@@ -312,7 +316,8 @@ const UserWrapper = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  @media (${responsive}) {
+
+  ${media('TABLET')} {
     position: absolute;
     right: 20px;
   }
@@ -320,7 +325,7 @@ const UserWrapper = styled.div`
 
 const enableTransparency = (location: string, top: number): string => {
   if (location === '/') {
-    return `rgba(255, 255, 255,${Math.min(top / 120, 1)})`
+    return `rgba(255, 255, 255,${top > 60 ? 1 : 0})`
   }
 
   return 'white'

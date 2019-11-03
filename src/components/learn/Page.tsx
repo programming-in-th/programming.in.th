@@ -19,7 +19,7 @@ import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
-import { responsive } from '../../design/Responsive'
+import { responsive, media } from '../../design/Responsive'
 import { copyToClipboard } from '../../utils/copyToClipboard'
 
 import { PageLayout } from '../Layout'
@@ -51,13 +51,13 @@ const Header = styled.header`
   padding-left: 68px;
   max-width: 749px;
 
-  @media screen and (${responsive}) {
+  ${media('TABLET')} {
     margin: 50px auto 50px;
     padding: 0 40px;
     max-width: 100%;
   }
 
-  @media screen and (max-height: 700px) {
+  @media (max-height: 700px) {
     margin: 100px auto;
   }
 `
@@ -68,7 +68,7 @@ const Heading = styled.h1`
   font-weight: bold;
   line-height: 1.32;
 
-  @media screen and (${responsive}) {
+  ${media('TABLET')} {
     font-size: 32px;
   }
 `

@@ -3,7 +3,7 @@ import { Menu } from 'antd'
 import styled from 'styled-components'
 import { useSelector } from 'react-redux'
 
-import { responsive } from '../../design/Responsive'
+import { media } from '../../design/Responsive'
 
 import { NotAuthorized } from '../error/403'
 
@@ -15,7 +15,7 @@ import { useRouter } from 'next/router'
 const SettingLayoutWrapper = styled.div`
   margin: 64px;
 
-  @media screen and (${responsive}) {
+  ${media('TABLET')} {
     margin: 8px;
   }
 `
@@ -30,7 +30,7 @@ const SettingLayout = styled.div`
   padding-bottom: 16px;
   overflow: auto;
 
-  @media screen and (${responsive}) {
+  ${media('TABLET')} {
     padding: 0;
     flex-direction: column;
   }
@@ -39,7 +39,8 @@ const SettingLayout = styled.div`
 const LeftMenu = styled.div`
   width: 224px;
   border-right: 1px solid #e8e8e8;
-  @media screen and (${responsive}) {
+
+  ${media('TABLET')} {
     width: 100%;
     border: none;
   }
@@ -47,7 +48,8 @@ const LeftMenu = styled.div`
 
 const Right = styled.div`
   padding: 0 32px 8px 32px;
-  @media screen and (${responsive}) {
+
+  ${media('TABLET')} {
     padding: 40px;
   }
 `
