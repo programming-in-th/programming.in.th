@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Layout, Drawer, Button, Menu, Avatar, Icon, Divider } from 'antd'
@@ -57,12 +57,12 @@ export const Navigator: React.FunctionComponent<INavigatorProps> = (
   const [visible, setVisibility] = useState<boolean>(false)
   const [top, setTop] = useState<number>(0)
 
-  const checkScrollPosition = useCallback(() => {
-    const { pageYOffset } = window
-    setTop(pageYOffset)
-  }, [])
-
   useEffect(() => {
+    const checkScrollPosition = () => {
+      const { pageYOffset } = window
+      setTop(pageYOffset)
+    }
+
     window.addEventListener('scroll', checkScrollPosition)
 
     return () => {
