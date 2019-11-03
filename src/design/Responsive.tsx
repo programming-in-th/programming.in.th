@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from 'react'
 
-interface IDesktopOnlyProps {
+interface IOnlyProps {
   breakpoint?: number
   children: React.ReactNode
 }
-
-const defaultBreak: number = 992
 
 const breakpoints = {
   PHONE_SM: 320,
@@ -28,30 +26,26 @@ type MediaType =
   | 'DESKTOP_MD'
   | 'DESKTOP_LG'
 
-export const media = (type: MediaType) => {
+export const media = (type: MediaType | number) => {
+  if (typeof type === 'number') {
+    return `@media (max-width: ${type}px)`
+  }
+
   return `@media (max-width: ${breakpoints[type]}px)`
 }
 
-export const responsive = `max-width: ${defaultBreak}px`
-
-export const DesktopOnly = ({
-  breakpoint = defaultBreak,
-  children
-}: IDesktopOnlyProps) => {
+export const DesktopOnly = ({ breakpoint = 1070, children }: IOnlyProps) => {
   const width = useWindowWidth()
-  if (width > breakpoint) {
+  if (width >= breakpoint) {
     return children as React.ReactElement
   } else {
     return null
   }
 }
 
-export const MobileOnly = ({
-  breakpoint = defaultBreak,
-  children
-}: IDesktopOnlyProps) => {
+export const MobileOnly = ({ breakpoint = 1070, children }: IOnlyProps) => {
   const width = useWindowWidth()
-  if (width > breakpoint) {
+  if (width >= breakpoint) {
     return null
   } else {
     return children as React.ReactElement
