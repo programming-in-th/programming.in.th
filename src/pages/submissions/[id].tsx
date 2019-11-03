@@ -4,7 +4,7 @@ import { Select } from 'antd'
 
 import { transformStatus } from '../../utils/transform'
 import { CodeDisplay } from '../../components/CodeEditor'
-import { ContainerWrapper } from '../../design/Atomics'
+import { ContainerWrapper, Center } from '../../design/Atomics'
 
 import { NextPage } from 'next'
 import firebase from '../../lib/firebase'
@@ -16,8 +16,8 @@ const { Option } = Select
 const Wrapper = styled.div`
   width: 100%;
   padding: 20px 3%;
-  box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-    0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
   margin-top: 24px;
   box-sizing: border-box;
   background-color: white;
@@ -49,47 +49,52 @@ const SubmissionDetail: NextPage<ISDInitialProps> = (
 
   return (
     <PageLayout>
-      <ContainerWrapper>
-        <Wrapper>
-          <div style={{ margin: '15px 0' }}>
-            <h1>
-              [{detail.problem_id}] {detail.problem_name}
-            </h1>
-            <p>Status: {detail.status}</p>
-            <p>Points: {detail.points}</p>
-            <p>Memory: {detail.memory} KB</p>
-            <p>Time: {detail.time} second</p>
-            <p>User: {detail.username}</p>
-          </div>
-          {detail.code !== '' ? (
-            <React.Fragment>
-              <Select
-                defaultValue={themeData[0][0]}
-                style={{ width: 120 }}
-                onChange={(val: string) => setTheme(val)}
-              >
-                {themeData.map((data: string[]) => (
-                  <Option key={data[0]}>{data[1]}</Option>
-                ))}
-              </Select>
-              <CodeDisplay
-                options={{
-                  mode: `${mapLanguage[detail.language]}`,
-                  theme: `${theme}`,
-                  lineNumbers: true,
-                  foldGutter: true,
-                  gutters: ['CodeMirror-linenumbers', 'CodeMirror-foldgutter'],
-                  lineWrapping: true
-                }}
-                onBeforeChange={(editor, data, value) => {}}
-                value={detail.code as string}
-              />
-            </React.Fragment>
-          ) : (
-            <h1>Code Hidden</h1>
-          )}
-        </Wrapper>
-      </ContainerWrapper>
+      <Center>
+        <ContainerWrapper>
+          <Wrapper>
+            <div style={{ margin: '15px 0' }}>
+              <h1>
+                [{detail.problem_id}] {detail.problem_name}
+              </h1>
+              <p>Status: {detail.status}</p>
+              <p>Points: {detail.points}</p>
+              <p>Memory: {detail.memory} KB</p>
+              <p>Time: {detail.time} second</p>
+              <p>User: {detail.username}</p>
+            </div>
+            {detail.code !== '' ? (
+              <React.Fragment>
+                <Select
+                  defaultValue={themeData[0][0]}
+                  style={{ width: 120 }}
+                  onChange={(val: string) => setTheme(val)}
+                >
+                  {themeData.map((data: string[]) => (
+                    <Option key={data[0]}>{data[1]}</Option>
+                  ))}
+                </Select>
+                <CodeDisplay
+                  options={{
+                    mode: `${mapLanguage[detail.language]}`,
+                    theme: `${theme}`,
+                    lineNumbers: true,
+                    foldGutter: true,
+                    gutters: [
+                      'CodeMirror-linenumbers',
+                      'CodeMirror-foldgutter'
+                    ],
+                    lineWrapping: true
+                  }}
+                  onBeforeChange={(editor, data, value) => {}}
+                  value={detail.code as string}
+                />
+              </React.Fragment>
+            ) : (
+              <h1>Code Hidden</h1>
+            )}
+          </Wrapper>
+        </ContainerWrapper>
+      </Center>
     </PageLayout>
   )
 }

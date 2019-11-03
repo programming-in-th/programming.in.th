@@ -54,3 +54,11 @@ export const SubFilterWrapper = styled.div`
   width: 100%;
   justify-content: center;
 `
+
+export const Center = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: calc(100vh - 128px);
+`
