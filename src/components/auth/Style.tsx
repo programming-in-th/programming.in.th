@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import { Card, Form, Icon } from 'antd'
-
-export const responsive = '(max-width: 436px)'
+import { media } from '../../design/Responsive'
 
 export const Container = styled.div`
   padding: 10px;
@@ -24,9 +23,14 @@ export const StyledCard = styled(Card)`
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
   border-radius: 8px;
 
-  @media (${responsive}) {
-    width: 90vw;
-    padding: 0px 0px 0px;
+  ${media('TABLET')} {
+    margin-top: 32px;
+    width: 60vw;
+  }
+
+  ${media('PHONE')} {
+    width: 80vw;
+    padding: 0;
   }
 `
 
@@ -36,7 +40,7 @@ export const AuthContainer = styled.div`
     font-weight: 600;
   }
 
-  @media (${responsive}) {
+  ${media('PHONE')} {
     width: 90vw;
     padding: 0px 0px 0px;
     height: unset;
@@ -45,9 +49,9 @@ export const AuthContainer = styled.div`
 
 export const StyledForm = styled(Form)`
   width: 368px;
-
   margin-top: 15px;
-  @media (${responsive}) {
+
+  ${media('TABLET')} {
     width: 100%;
   }
 `
@@ -59,6 +63,7 @@ export const StyledIcon = styled(Icon)`
   vertical-align: middle;
   cursor: pointer;
   transition: color 0.3s;
+
   &:hover {
     color: #188fff;
   }

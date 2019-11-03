@@ -8,16 +8,27 @@ interface IDesktopOnlyProps {
 const defaultBreak: number = 992
 
 const breakpoints = {
-  phone_sm: 320,
-  phone: 376,
-  phablet: 540,
-  tablet: 735,
-  desktop: 1070,
-  desktop_md: 1280,
-  desktop_lg: 1440
+  PHONE_SM: 320,
+  PHONE: 376,
+  PHABLET: 540,
+  TABLET: 768,
+  IPAD_PRO: 1024,
+  DESKTOP: 1070,
+  DESKTOP_MD: 1280,
+  DESKTOP_LG: 1440
 }
 
-export const media = (type: string) => {
+type MediaType =
+  | 'PHONE_SM'
+  | 'PHONE'
+  | 'PHABLET'
+  | 'TABLET'
+  | 'IPAD_PRO'
+  | 'DESKTOP'
+  | 'DESKTOP_MD'
+  | 'DESKTOP_LG'
+
+export const media = (type: MediaType) => {
   return `@media (max-width: ${breakpoints[type]}px)`
 }
 

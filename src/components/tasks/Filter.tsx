@@ -2,7 +2,7 @@ import React from 'react'
 import { Input, Select, Slider, Switch, Icon } from 'antd'
 import { SliderValue } from 'antd/lib/slider'
 
-import { FilterWrapper, SubFilterWrapper } from '../../design/atomics'
+import { FilterWrapper, SubFilterWrapper } from '../../design/Atomics'
 
 const { Option } = Select
 

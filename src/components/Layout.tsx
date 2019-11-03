@@ -1,4 +1,4 @@
-import React, { useLayoutEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Layout } from 'antd'
@@ -26,13 +26,12 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
 ) => {
   const dispatch = useDispatch()
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     dispatch(actionCreators.fetchUser())
   }, [])
 
   return (
     <React.Fragment>
-      <CustomHead />
       <CustomLayout>
         <GlobalStyle />
         <Navigator hidden={props.hideNav} />

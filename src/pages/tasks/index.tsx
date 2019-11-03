@@ -13,7 +13,7 @@ import { ITask, ITaskPage } from '../../redux/types/task'
 import { DesktopOnly, MobileOnly } from '../../design/Responsive'
 import { FilterComponent, IFilter } from '../../components/tasks/Filter'
 
-import { WhiteContainerWrapper } from '../../design/atomics'
+import { WhiteContainerWrapper } from '../../design/Atomics'
 import { IAppState } from '../../redux'
 import { PageLayout } from '../../components/Layout'
 

@@ -15,6 +15,11 @@ const RegisterButton = styled(Button)`
   width: 100%;
 `
 
+const RegisterWrapper = styled.div`
+  width: 100%;
+  height: 100%;
+`
+
 const Register = (props: FormComponentProps) => {
   const [errorMessage, setErrorMessage] = useState<string>(null)
   const router = useRouter()
@@ -73,7 +78,7 @@ const Register = (props: FormComponentProps) => {
   const { getFieldDecorator } = props.form
 
   return (
-    <React.Fragment>
+    <RegisterWrapper>
       <h1>Get Started</h1>
       <StyledForm onSubmit={handleSubmit}>
         <Form.Item>
@@ -142,7 +147,7 @@ const Register = (props: FormComponentProps) => {
         <WithFacebook router={router} setError={setErrorMessage}></WithFacebook>
         <WithGithub router={router} setError={setErrorMessage}></WithGithub>
       </Others>
-    </React.Fragment>
+    </RegisterWrapper>
   )
 }
 

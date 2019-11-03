@@ -3,7 +3,7 @@ import Head from 'next/head'
 import { Fonts } from './fonts'
 
 export const CustomHead = () => (
-  <Head>
+  <React.Fragment>
     <Fonts />
     <meta charSet="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -39,5 +39,5 @@ export const CustomHead = () => (
       href="https://asia-east2-grader-ef0b5.cloudfunctions.net/"
     />
     <title>programming.in.th | β</title>
-  </Head>
+  </React.Fragment>
 )
