@@ -143,7 +143,11 @@ export default () => {
           </div>
           {user ? (
             <RightIllus>
-              <LazyLoadImage src="/assets/svg/title.svg" alt="title" />
+              <LazyLoadImage
+                src="/assets/svg/title.svg"
+                alt="title"
+                threshold={1000}
+              />
             </RightIllus>
           ) : (
             <RegisterWrapper>
@@ -156,7 +160,11 @@ export default () => {
         <DesktopOnly>
           <Container>
             <LeftIllus>
-              <LazyLoadImage src="/assets/svg/problem.svg" alt="problem" />
+              <LazyLoadImage
+                src="/assets/svg/problem.svg"
+                alt="problem"
+                threshold={1000}
+              />
             </LeftIllus>
             <div>
               <Title>
@@ -180,7 +188,11 @@ export default () => {
               </Title>
             </div>
             <RightIllus>
-              <LazyLoadImage src="/assets/svg/learn.svg" alt="learn" />
+              <LazyLoadImage
+                src="/assets/svg/learn.svg"
+                alt="learn"
+                threshold={1000}
+              />
             </RightIllus>
           </Container>
           <Container>
