@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import Link from 'next/link'
-import Img from 'react-image'
+import { LazyLoadImage } from 'react-lazy-load-image-component'
 
 import { PageLayout } from '../components/Layout'
 
@@ -143,11 +143,7 @@ export default () => {
           </div>
           {user ? (
             <RightIllus>
-              <Img
-                src="/assets/svg/title.svg"
-                alt="title"
-                loader={<ImgPlaceholder></ImgPlaceholder>}
-              ></Img>
+              <LazyLoadImage src="/assets/svg/title.svg" alt="title" />
             </RightIllus>
           ) : (
             <RegisterWrapper>
@@ -160,11 +156,7 @@ export default () => {
         <DesktopOnly>
           <Container>
             <LeftIllus>
-              <Img
-                src="/assets/svg/problem.svg"
-                alt="problem"
-                loader={<ImgPlaceholder></ImgPlaceholder>}
-              ></Img>
+              <LazyLoadImage src="/assets/svg/problem.svg" alt="problem" />
             </LeftIllus>
             <div>
               <Title>
@@ -188,11 +180,7 @@ export default () => {
               </Title>
             </div>
             <RightIllus>
-              <Img
-                src="/assets/svg/learn.svg"
-                alt="learn"
-                loader={<ImgPlaceholder></ImgPlaceholder>}
-              ></Img>
+              <LazyLoadImage src="/assets/svg/learn.svg" alt="learn" />
             </RightIllus>
           </Container>
           <Container>
