@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
-import { useDispatch } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Layout } from 'antd'
 
 import { Navigator } from './Nav'
 import { GlobalStyle } from '../design'
 
+import { IAppState } from '../redux'
 import * as actionCreators from '../redux/actions'
 import { CustomHead } from './head'
+import { CustomSpin } from '../components/Spin'
+import firebase from '../lib/firebase'
 
 const { Content, Footer } = Layout
 
@@ -25,11 +28,13 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
   props: IPageLayoutProps
 ) => {
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    dispatch(actionCreators.fetchUser())
-  }, [])
-
+  firebase.auth().onAuthStateChanged(user => {
+    dispatch(actionCreators.fetchUser(user))
+  })
+  const user = useSelector((state: IAppState) => state.user.user)
+  if (user === 'LOADING') {
+    return <CustomSpin></CustomSpin>
+  }
   return (
     <React.Fragment>
       <CustomLayout>

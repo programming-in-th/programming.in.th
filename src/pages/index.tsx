@@ -11,7 +11,6 @@ import { RegisterPage } from '../components/auth/Register'
 import { IAppState } from '../redux'
 import { StyledCard } from '../components/auth/Style'
 import { Fonts } from '../design'
-import { CustomSpin } from '../components/Spin'
 
 const fadeIn = keyframes`
   from {
@@ -115,13 +114,6 @@ export default () => {
   const user = useSelector((state: IAppState) => state.user.user)
 
   // Waiting for dashboard implementation, so we use this as placeholder
-  if (user === 'LOADING') {
-    return (
-      <PageLayout hideNav={true}>
-        <CustomSpin></CustomSpin>
-      </PageLayout>
-    )
-  }
 
   return (
     <PageLayout>
