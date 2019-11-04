@@ -8,7 +8,6 @@ import { GlobalStyle } from '../design'
 
 import { IAppState } from '../redux'
 import * as actionCreators from '../redux/actions'
-import { CustomHead } from './head'
 import { CustomSpin } from '../components/Spin'
 import firebase from '../lib/firebase'
 
@@ -28,13 +27,20 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
   props: IPageLayoutProps
 ) => {
   const dispatch = useDispatch()
-  firebase.auth().onAuthStateChanged(user => {
-    dispatch(actionCreators.fetchUser(user))
-  })
+
+  useEffect(() => {
+    firebase.auth().onAuthStateChanged(user => {
+      dispatch(actionCreators.fetchUser(user))
+    })
+  }, [])
+
   const user = useSelector((state: IAppState) => state.user.user)
+
+  // Waiting for dashboard implementation, so we use this as placeholder
   if (user === 'LOADING') {
     return <CustomSpin></CustomSpin>
   }
+
   return (
     <React.Fragment>
       <CustomLayout>
