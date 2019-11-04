@@ -58,6 +58,7 @@ module.exports = withPlugins(
           use: 'null-loader'
         })
       }
+
       return config
     }
   }
