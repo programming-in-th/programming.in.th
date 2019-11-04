@@ -24,7 +24,7 @@ const fade = keyframes`
 `
 
 export const WhiteContainerWrapper = styled(ContainerWrapper)`
-  animation: ${fade} 2s;
+  animation: ${fade} 0.5s ease;
   width: 75%;
   background-color: white;
   border-radius: 8px;

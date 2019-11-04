@@ -41,7 +41,7 @@ const Container = styled.div`
 `
 
 const MainContainer = styled(Container)`
-  animation: ${fadeIn} 1.2s cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  animation: ${fadeIn} 1s cubic-bezier(0.39, 0.575, 0.565, 1);
   margin-top: 0;
   min-height: calc(100vh - 128px);
 
@@ -105,15 +105,8 @@ const RegisterWrapper = styled.div`
   }
 `
 
-const ImgPlaceholder = styled.div`
-  height: 100%;
-  width: 100%;
-`
-
 export default () => {
   const user = useSelector((state: IAppState) => state.user.user)
-
-  // Waiting for dashboard implementation, so we use this as placeholder
 
   return (
     <PageLayout>
