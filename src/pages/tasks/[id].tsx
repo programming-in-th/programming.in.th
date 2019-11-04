@@ -8,7 +8,6 @@ import { useSelector } from 'react-redux'
 
 import { ITask } from '../../redux/types/task'
 import { Submit } from '../../components/tasks/Submit'
-import { Padding } from '../../design/Atomics'
 import { IAppState } from '../../redux'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
