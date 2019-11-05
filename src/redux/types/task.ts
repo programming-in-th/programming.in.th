@@ -1,8 +1,5 @@
 export interface ITaskState {
-  readonly cacheUntil: number | null
   readonly taskPage: ITaskPage
-  readonly taskList: ReadonlyArray<ITask>
-  readonly status: 'LOADING' | 'SUCCESS' | null
 }
 
 export interface ITask {
