@@ -41,6 +41,8 @@ export default () => {
     dispatch(actionCreators.setSubPageConfig(setting))
   }
 
+  const isAdmin = useSelector((state: IAppState) => state.user.admin)
+
   useEffect(() => {
     const updateTask = () => {
       if (data) {
@@ -184,7 +186,7 @@ export default () => {
                 let status = false
                 if (user && user !== 'LOADING')
                   if (user.uid === record.uid) status = true
-                if (!record.hideCode || status) {
+                if (!record.hideCode || status || isAdmin) {
                   router.push('/submissions/' + record.submission_id)
                 } else {
                   message.error('Access Denied')

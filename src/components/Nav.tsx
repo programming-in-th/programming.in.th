@@ -37,6 +37,7 @@ interface IItem {
   className?: string
   location: string
   hideDrawer?: () => void
+  isAdmin?: boolean
   user?: firebase.User | 'LOADING'
   mode?: 'vertical' | 'horizontal'
 }
@@ -53,6 +54,8 @@ export const Navigator: React.FunctionComponent<INavigatorProps> = (
   const location = locationReal.split('/')[1]
 
   const user = useSelector((state: IAppState) => state.user.user)
+
+  const isAdmin = useSelector((state: IAppState) => state.user.admin)
 
   const [visible, setVisibility] = useState<boolean>(false)
   const [top, setTop] = useState<number>(0)
@@ -86,7 +89,7 @@ export const Navigator: React.FunctionComponent<INavigatorProps> = (
             <a>programming.in.th</a>
           </Link>
         </Logo>
-        <LeftMenu mode="horizontal" location={location} />
+        <LeftMenu mode="horizontal" location={location} isAdmin={isAdmin} />
         <RightMenu mode="horizontal" location={location} user={user} />
         <BarMenu
           icon="menu"
@@ -107,6 +110,7 @@ export const Navigator: React.FunctionComponent<INavigatorProps> = (
             mode="vertical"
             location={location}
             hideDrawer={hideDrawer}
+            isAdmin={isAdmin}
           />
           <LoginDrawer
             mode="vertical"
@@ -164,6 +168,16 @@ const Main = (props: IItem) => {
             </a>
           </Link>
         </Menu.Item>
+        {props.isAdmin ? (
+          <Menu.Item key="admin">
+            <Link href="/admin">
+              <a>
+                <Icon type="api" />
+                Admin
+              </a>
+            </Link>
+          </Menu.Item>
+        ) : null}
       </Menu>
     </div>
   )
