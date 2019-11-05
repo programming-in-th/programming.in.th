@@ -274,7 +274,7 @@ const LeftMenu = styled(Main)`
   float: left;
   border-right: none;
 
-  ${media('TABLET')} {
+  ${media('IPAD_PRO')} {
     display: none;
   }
 `
@@ -283,7 +283,7 @@ const RightMenu = styled(Login)`
   background: transparent;
   float: right;
 
-  ${media('TABLET')} {
+  ${media('IPAD_PRO')} {
     display: none;
   }
 `
@@ -294,7 +294,7 @@ const BarMenu = styled(Button)<{ top: number; location: string }>`
   display: none !important;
   background: ${props => enableTransparency(props.location, props.top)};
 
-  ${media('TABLET')} {
+  ${media('IPAD_PRO')} {
     display: inline-block !important;
   }
 `
@@ -317,7 +317,7 @@ const UserWrapper = styled.div`
   justify-content: center;
   align-items: center;
 
-  ${media('TABLET')} {
+  ${media('IPAD_PRO')} {
     position: absolute;
     right: 20px;
   }
