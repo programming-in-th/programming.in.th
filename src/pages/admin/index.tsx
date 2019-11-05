@@ -13,7 +13,7 @@ import { Table, Switch, Icon } from 'antd'
 export default () => {
   const isAdmin = useSelector((state: IAppState) => state.user.admin)
   const { data } = useSWR('getAllUser', fetchUserList)
-  console.log(data)
+  const [state, setState] = useState('')
   const columns = [
     {
       title: 'Display Name',
@@ -32,8 +32,16 @@ export default () => {
             checkedChildren={<Icon type="check" />}
             unCheckedChildren={<Icon type="close" />}
             defaultChecked={isadmin}
-            onChange={() => {
-              console.log('changed')
+            loading={row.uid === state}
+            onChange={async (checked: boolean) => {
+              setState(row.uid)
+              const param = { uid: row.uid, checked }
+              const response = await firebase
+                .app()
+                .functions('asia-east2')
+                .httpsCallable('updateAdmin')(param)
+              if (response.data) setState('')
+              else console.log('ERROR')
             }}
           />
         </span>
