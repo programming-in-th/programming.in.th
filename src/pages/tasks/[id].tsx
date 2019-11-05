@@ -54,10 +54,10 @@ const TaskDetail: NextPage = () => {
     () =>
       'https://asia-east2-grader-ef0b5.cloudfunctions.net/getProblemMetadata?id=' +
       id,
-    axios.get
+    axios
   )
 
-  const { data: statement } = useSWR(() => metadata.data.url, axios.get)
+  const { data: statement } = useSWR(() => metadata.data.url, axios)
 
   return (
     <PageLayout>
@@ -67,8 +67,8 @@ const TaskDetail: NextPage = () => {
             {metadata && statement ? (
               <React.Fragment>
                 <h1>{metadata.data.title}</h1>
-                <p> Time Limit : {metadata.data.timeLimit} second(s)</p>
-                <p> Memory Limit : {metadata.data.memoryLimit} MB(s)</p>
+                <p> Time Limit : {metadata.data.time_limit} second(s)</p>
+                <p> Memory Limit : {metadata.data.memory_limit} MB(s)</p>
 
                 <StatementComponent
                   dangerouslySetInnerHTML={{ __html: statement.data }}

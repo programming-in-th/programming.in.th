@@ -21,7 +21,7 @@ const Search = Input.Search
 export default () => {
   const { data } = useSWR(
     'https://asia-east2-grader-ef0b5.cloudfunctions.net/getRecentSubmissions',
-    axios.get
+    axios
   )
 
   const [submissionsListState, setSubmissionsListState] = useState<
