@@ -1,18 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 
-import firebase from '../../lib/firebase'
-
 import { useSelector } from 'react-redux'
 
-import { ITask } from '../../redux/types/task'
 import { Submit } from '../../components/tasks/Submit'
 import { IAppState } from '../../redux'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { PageLayout } from '../../components/Layout'
-import { Row, Col } from 'antd'
+import { Row, Col, Skeleton } from 'antd'
+import useSWR from 'swr'
 
 const Wrapper = styled.div`
   margin: 15px 0;
@@ -46,32 +44,37 @@ const StatementComponent = styled.div`
   }
 `
 
-interface IInitialTaskDetailProps {
-  title: string
-  timeLimit: number
-  memoryLimit: number
-  problemStatement: string
-}
-
-const TaskDetail: NextPage<IInitialTaskDetailProps> = (
-  props: IInitialTaskDetailProps
-) => {
+const TaskDetail: NextPage = () => {
   const router = useRouter()
   const user = useSelector((state: IAppState) => state.user.user)
-  const template = { __html: props.problemStatement }
 
   const { id } = router.query
+
+  const { data: metadata } = useSWR(
+    `https://asia-east2-grader-ef0b5.cloudfunctions.net/getProblemMetadata?id=${id}`,
+    axios.get
+  )
+
+  const { data: statement } = useSWR(() => metadata.data.url, axios.get)
 
   return (
     <PageLayout>
       <Row>
         <Col lg={{ span: 17, offset: 1 }} xs={{ span: 22, offset: 1 }}>
           <Wrapper>
-            <h1>{props.title}</h1>
-            <p> Time Limit : {props.timeLimit} second(s)</p>
-            <p> Memory Limit : {props.memoryLimit} MB(s)</p>
+            {metadata && statement ? (
+              <React.Fragment>
+                <h1>{metadata.data.title}</h1>
+                <p> Time Limit : {metadata.data.timeLimit} second(s)</p>
+                <p> Memory Limit : {metadata.data.memoryLimit} MB(s)</p>
 
-            <StatementComponent dangerouslySetInnerHTML={template} />
+                <StatementComponent
+                  dangerouslySetInnerHTML={{ __html: statement.data }}
+                />
+              </React.Fragment>
+            ) : (
+              <Skeleton loading={true}></Skeleton>
+            )}
           </Wrapper>
           <Wrapper>
             <Submit problem_id={id as string} canSubmit={!!user} />
@@ -88,28 +91,6 @@ const TaskDetail: NextPage<IInitialTaskDetailProps> = (
       </Row>
     </PageLayout>
   )
-}
-
-TaskDetail.getInitialProps = async ({ query }) => {
-  const taskId = query.id
-
-  const response = await firebase
-    .app()
-    .functions('asia-east2')
-    .httpsCallable('getProblemMetadata')({ problem_id: taskId })
-
-  const currentTask = response.data as ITask
-
-  if (currentTask) {
-    const { title, time_limit, memory_limit } = currentTask
-    const problemStatement = await axios.get(currentTask.url)
-    return {
-      title,
-      timeLimit: time_limit,
-      memoryLimit: memory_limit,
-      problemStatement: problemStatement.data
-    }
-  }
 }
 
 export default TaskDetail

@@ -5,6 +5,8 @@ import { SliderValue } from 'antd/lib/slider'
 import { PaginationConfig } from 'antd/lib/pagination'
 
 import { useRouter } from 'next/router'
+import useSWR from 'swr'
+import axios from 'axios'
 
 import { useSelector, useDispatch } from 'react-redux'
 import * as actionCreators from '../../redux/actions/index'
@@ -20,6 +22,11 @@ import { PageLayout } from '../../components/Layout'
 const { Panel } = Collapse
 
 export default () => {
+  const { data } = useSWR(
+    'https://asia-east2-grader-ef0b5.cloudfunctions.net/getAllTasks',
+    axios.get
+  )
+
   const [taskListState, setTaskListState] = useState<ITask[]>([])
   const [tagListState, setTagListState] = useState<string[]>([])
 
@@ -27,11 +34,6 @@ export default () => {
     (state: IAppState) => state.tasks.taskPage as ITaskPage
   )
 
-  const taskList: ITask[] = useSelector(
-    (state: IAppState) => state.tasks.taskList as ITask[]
-  )
-
-  const status: string = useSelector((state: IAppState) => state.tasks.status)
   const dispatch = useDispatch()
   const router = useRouter()
 
@@ -40,50 +42,49 @@ export default () => {
   }
 
   useEffect(() => {
-    dispatch(actionCreators.loadTasksList(-1, -1, -1, []))
-  }, [])
-
-  useEffect(() => {
     const updateTask = () => {
-      const filteredEvents = taskList.filter(
-        ({ problem_id, title, tags, difficulty }) => {
-          const textLowerCase = taskPage.searchWord.toLowerCase()
-          title = title.toLowerCase()
-          const statusProblemID = problem_id
-            .toLowerCase()
-            .includes(textLowerCase)
-          const statusTitle = title.toLowerCase().includes(textLowerCase)
-          let isTag = true
+      if (data) {
+        const filteredEvents = data.data.filter(
+          ({ problem_id, title, tags, difficulty }) => {
+            const textLowerCase = taskPage.searchWord.toLowerCase()
+            title = title.toLowerCase()
+            const statusProblemID = problem_id
+              .toLowerCase()
+              .includes(textLowerCase)
+            const statusTitle = title.toLowerCase().includes(textLowerCase)
+            let isTag = true
 
-          taskPage.searchTag.forEach(
-            value => (isTag = isTag && tags.includes(value))
-          )
+            taskPage.searchTag.forEach(
+              value => (isTag = isTag && tags.includes(value))
+            )
 
-          const difficultyStatus =
-            difficulty >= taskPage.searchDifficulty[0] &&
-            difficulty <= taskPage.searchDifficulty[1]
+            const difficultyStatus =
+              difficulty >= taskPage.searchDifficulty[0] &&
+              difficulty <= taskPage.searchDifficulty[1]
 
-          return (statusProblemID || statusTitle) && isTag && difficultyStatus
-        }
-      )
+            return (statusProblemID || statusTitle) && isTag && difficultyStatus
+          }
+        )
 
-      setTaskListState(filteredEvents)
+        setTaskListState(filteredEvents)
+      }
     }
 
     updateTask()
-  }, [taskPage, taskList])
+  }, [taskPage, data])
 
   useEffect(() => {
     let tagNow: string[] = []
-
-    taskList.forEach(val => {
-      val.tags.forEach(tag => {
-        tagNow.push(tag)
+    if (data) {
+      data.data.forEach(val => {
+        val.tags.forEach(tag => {
+          tagNow.push(tag)
+        })
       })
-    })
+    }
 
     setTagListState(Array.from(new Set(tagNow)))
-  }, [taskList])
+  }, [data])
 
   const handleSearch: (e: React.FormEvent<HTMLInputElement>) => void = e => {
     setPage({
@@ -191,7 +192,7 @@ export default () => {
     >[],
     pagination: CustomPagination,
     dataSource: taskListState,
-    loading: status === 'LOADING'
+    loading: !data
   }
 
   const filterProps: IFilter = {
