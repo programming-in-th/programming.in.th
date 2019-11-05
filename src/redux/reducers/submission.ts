@@ -1,8 +1,6 @@
 import { AnyAction, Reducer } from 'redux'
 import { ISubmissionsState } from '../types/submission'
 import {
-  REQUEST_SUBMISSIONS_LIST,
-  RECEIVE_SUBMISSIONS_LIST,
   REQUEST_MAKE_SUBMISSION,
   RECEIVE_MAKE_SUBMISSION,
   RESUBMIT_SUBMISSION,
@@ -12,8 +10,6 @@ import {
 } from '../actions/submission'
 
 const initialState: ISubmissionsState = {
-  submissionsList: [],
-  submissionsListStatus: 'LOADING',
   currentSubmissionUID: undefined,
   submission_uid: undefined,
   submissionResponse: 0,
@@ -30,15 +26,6 @@ const reducer: Reducer = (
   action: AnyAction
 ): ISubmissionsState => {
   switch (action.type) {
-    case REQUEST_SUBMISSIONS_LIST:
-      return Object.assign({}, state, {
-        submissionsListStatus: 'LOADING'
-      })
-    case RECEIVE_SUBMISSIONS_LIST:
-      return Object.assign({}, state, {
-        submissionsListStatus: 'SUCCESS',
-        submissionsList: action.submissionsList
-      })
     case REQUEST_MAKE_SUBMISSION:
       return Object.assign({}, state, {
         submissionResponse: action.submissionResponse

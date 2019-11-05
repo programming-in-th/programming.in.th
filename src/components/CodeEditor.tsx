@@ -27,6 +27,10 @@ export const Code = styled(CodeMirror)`
   span {
     font-family: Fira Code !important;
   }
+
+  .CodeMirror {
+    height: 500px !important;
+  }
 `
 
 export const CodeDisplay = styled(CodeMirrorDisplay)`
@@ -34,5 +38,9 @@ export const CodeDisplay = styled(CodeMirrorDisplay)`
   margin: 15px 0;
   span {
     font-family: Fira Code !important;
+  }
+
+  .CodeMirror {
+    height: 500px !important;
   }
 `

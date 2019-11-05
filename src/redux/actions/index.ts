@@ -1,7 +1,6 @@
-export { loadTasksList, setTaskPageConfig } from './task'
+export { setTaskPageConfig } from './task'
 export { fetchUser } from './user'
 export {
-  loadSubmissionsList,
   makeSubmission,
   resubmitSubmission,
   errorSubmit,

@@ -2,24 +2,7 @@ import { ThunkDispatch } from 'redux-thunk'
 import { AnyAction } from 'redux'
 import { IAppState } from '..'
 import firebase from '../../lib/firebase'
-import { ISubmission, ISubmissionPage } from '../types/submission'
-
-export const loadSubmissionsList = () => {
-  return async (
-    dispatch: ThunkDispatch<IAppState, {}, AnyAction>
-  ): Promise<void> => {
-    dispatch(requestSubmissions())
-    try {
-      const response = await firebase
-        .app()
-        .functions('asia-east2')
-        .httpsCallable('getRecentSubmissions')({})
-      dispatch(receiveSubmissions(response.data))
-    } catch (error) {
-      console.log(error)
-    }
-  }
-}
+import { ISubmissionPage } from '../types/submission'
 
 export const makeSubmission = (
   uid: string,
@@ -51,21 +34,6 @@ export const makeSubmission = (
       console.log(error)
       dispatch(receiveMakeSubmission(error.code, ''))
     }
-  }
-}
-
-export const REQUEST_SUBMISSIONS_LIST = 'REQUEST_SUBMISSIONS_LIST'
-const requestSubmissions = () => {
-  return {
-    type: REQUEST_SUBMISSIONS_LIST
-  }
-}
-
-export const RECEIVE_SUBMISSIONS_LIST = 'RECEIVE_SUBMISSIONS_LIST'
-const receiveSubmissions = (data: ISubmission[]) => {
-  return {
-    type: RECEIVE_SUBMISSIONS_LIST,
-    submissionsList: data
   }
 }
 

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Input, Switch, Icon, message } from 'antd'
+import useSWR from 'swr'
+import axios from 'axios'
 
 import { ISubmissionPage, ISubmission } from '../../redux/types/submission'
 import { useSelector, useDispatch } from 'react-redux'
@@ -17,20 +19,17 @@ import { PageLayout } from '../../components/Layout'
 const Search = Input.Search
 
 export default () => {
+  const { data } = useSWR(
+    'https://asia-east2-grader-ef0b5.cloudfunctions.net/getRecentSubmissions',
+    axios.get
+  )
+
   const [submissionsListState, setSubmissionsListState] = useState<
     ISubmission[]
   >([])
 
-  const submissionsList = useSelector(
-    (state: IAppState) => state.submissions.submissionsList
-  )
-
   const submissionsPage = useSelector(
     (state: IAppState) => state.submissions.submissionsPage
-  )
-
-  const submissionsListStatus = useSelector(
-    (state: IAppState) => state.submissions.submissionsListStatus
   )
 
   const user = useSelector((state: IAppState) => state.user.user)
@@ -43,35 +42,33 @@ export default () => {
   }
 
   useEffect(() => {
-    dispatch(actionCreators.loadSubmissionsList())
-  }, [])
-
-  useEffect(() => {
     const updateTask = () => {
-      const filteredEvents = submissionsList.filter(
-        ({ problem_id, username, points }) => {
-          const textLowerCase = submissionsPage.searchWord.toLowerCase()
+      if (data) {
+        const filteredEvents = data.data.filter(
+          ({ problem_id, username, points }) => {
+            const textLowerCase = submissionsPage.searchWord.toLowerCase()
 
-          const statusProblemID = problem_id
-            .toLowerCase()
-            .includes(textLowerCase)
-          const statusUser = username.toLowerCase().includes(textLowerCase)
+            const statusProblemID = problem_id
+              .toLowerCase()
+              .includes(textLowerCase)
+            const statusUser = username.toLowerCase().includes(textLowerCase)
 
-          let pointFilter = true
+            let pointFilter = true
 
-          if (submissionsPage.pointFilter) {
-            pointFilter = points >= 100
+            if (submissionsPage.pointFilter) {
+              pointFilter = points >= 100
+            }
+
+            return (statusProblemID || statusUser) && pointFilter
           }
+        )
 
-          return (statusProblemID || statusUser) && pointFilter
-        }
-      )
-
-      setSubmissionsListState(filteredEvents)
+        setSubmissionsListState(filteredEvents)
+      }
     }
 
     updateTask()
-  }, [submissionsList, submissionsPage])
+  }, [data, submissionsPage])
 
   const handleSearch = (e: React.FormEvent<HTMLInputElement>) => {
     setPage({
@@ -177,7 +174,7 @@ export default () => {
         <Table
           dataSource={submissionsListState}
           columns={columns as ColumnProps<ISubmission>[]}
-          loading={submissionsListStatus === 'LOADING'}
+          loading={!data}
           pagination={CustomPagination}
           scroll={{ x: 850 }}
           rowKey={(record: ISubmission) => record.submission_id}

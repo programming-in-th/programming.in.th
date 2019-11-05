@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
-import { Select } from 'antd'
+import { Select, Skeleton } from 'antd'
 
 import { transformStatus } from '../../utils/transform'
 import { CodeDisplay } from '../../components/CodeEditor'
 import { ContainerWrapper, Center } from '../../design/Atomics'
 
 import { NextPage } from 'next'
-import firebase from '../../lib/firebase'
-import { ISubmission } from '../../redux/types/submission'
 import { PageLayout } from '../../components/Layout'
+import useSWR from 'swr'
+import { useRouter } from 'next/router'
+import { fetchSubmissionData } from '../../utils/fetchSubmissionData'
 
 const { Option } = Select
 
@@ -37,89 +38,80 @@ const mapLanguage: TPlot = {
   python: 'python'
 }
 
-interface ISDInitialProps {
-  rawDetail: ISubmission
-}
+const SubmissionDetail: NextPage = () => {
+  const [current, setCurrent] = useState<any>({})
+  const router = useRouter()
+  const { id } = router.query
 
-const SubmissionDetail: NextPage<ISDInitialProps> = (
-  props: ISDInitialProps
-) => {
+  const { data } = useSWR(`${id}`, fetchSubmissionData)
+
+  useEffect(() => {
+    if (data) {
+      const rawDetail = {
+        ...data.data.metadata,
+        code: data.data.code
+      }
+
+      setCurrent(transformStatus(rawDetail))
+    }
+  }, [data])
+
   const [theme, setTheme] = useState<string>('material')
-  const detail = transformStatus(props.rawDetail)
 
   return (
     <PageLayout>
-      <Center>
-        <ContainerWrapper>
-          <Wrapper>
-            <div style={{ margin: '15px 0' }}>
-              <h1>
-                [{detail.problem_id}] {detail.problem_name}
-              </h1>
-              <p>Status: {detail.status}</p>
-              <p>Points: {detail.points}</p>
-              <p>Memory: {detail.memory} KB</p>
-              <p>Time: {detail.time} second</p>
-              <p>User: {detail.username}</p>
-            </div>
-            {detail.code !== '' ? (
-              <React.Fragment>
-                <Select
-                  defaultValue={themeData[0][0]}
-                  style={{ width: 120 }}
-                  onChange={(val: string) => setTheme(val)}
-                >
-                  {themeData.map((data: string[]) => (
-                    <Option key={data[0]}>{data[1]}</Option>
-                  ))}
-                </Select>
-                <CodeDisplay
-                  options={{
-                    mode: `${mapLanguage[detail.language]}`,
-                    theme: `${theme}`,
-                    lineNumbers: true,
-                    foldGutter: true,
-                    gutters: [
-                      'CodeMirror-linenumbers',
-                      'CodeMirror-foldgutter'
-                    ],
-                    lineWrapping: true
-                  }}
-                  onBeforeChange={(editor, data, value) => {}}
-                  value={detail.code as string}
-                />
-              </React.Fragment>
-            ) : (
-              <h1>Code Hidden</h1>
-            )}
-          </Wrapper>
-        </ContainerWrapper>
-      </Center>
+      <ContainerWrapper>
+        <Wrapper>
+          {data ? (
+            <React.Fragment>
+              <div style={{ margin: '15px 0' }}>
+                <h1>
+                  [{current.problem_id}] {current.problem_name}
+                </h1>
+                <p>Status: {current.status}</p>
+                <p>Points: {current.points}</p>
+                <p>Memory: {current.memory} KB</p>
+                <p>Time: {current.time} second</p>
+                <p>User: {current.username}</p>
+              </div>
+              {current.code !== '' ? (
+                <React.Fragment>
+                  <Select
+                    defaultValue={themeData[0][0]}
+                    style={{ width: 120 }}
+                    onChange={(val: string) => setTheme(val)}
+                  >
+                    {themeData.map((data: string[]) => (
+                      <Option key={data[0]}>{data[1]}</Option>
+                    ))}
+                  </Select>
+                  <CodeDisplay
+                    options={{
+                      mode: `${mapLanguage[current.language]}`,
+                      theme: `${theme}`,
+                      lineNumbers: true,
+                      foldGutter: true,
+                      gutters: [
+                        'CodeMirror-linenumbers',
+                        'CodeMirror-foldgutter'
+                      ],
+                      lineWrapping: true
+                    }}
+                    onBeforeChange={(editor, data, value) => {}}
+                    value={current.code as string}
+                  />
+                </React.Fragment>
+              ) : (
+                <h1>Code Hidden</h1>
+              )}
+            </React.Fragment>
+          ) : (
+            <Skeleton></Skeleton>
+          )}
+        </Wrapper>
+      </ContainerWrapper>
     </PageLayout>
   )
-}
-
-SubmissionDetail.getInitialProps = async ({ query }) => {
-  const submissionID = query.id
-
-  const response = await firebase
-    .app()
-    .functions('asia-east2')
-    .httpsCallable('getDetailedSubmissionData')({ submission_id: submissionID })
-
-  const currentSubmission = response.data
-
-  if (currentSubmission) {
-    const detail = {
-      ...currentSubmission.metadata,
-      submissionID,
-      code: currentSubmission.code
-    }
-
-    return {
-      rawDetail: detail
-    }
-  }
 }
 
 export default SubmissionDetail
