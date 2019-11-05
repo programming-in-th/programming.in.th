@@ -24,7 +24,7 @@ const { Panel } = Collapse
 export default () => {
   const { data } = useSWR(
     'https://asia-east2-grader-ef0b5.cloudfunctions.net/getAllTasks',
-    axios.get
+    axios
   )
 
   const [taskListState, setTaskListState] = useState<ITask[]>([])

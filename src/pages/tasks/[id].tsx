@@ -54,10 +54,10 @@ const TaskDetail: NextPage = () => {
     () =>
       'https://asia-east2-grader-ef0b5.cloudfunctions.net/getProblemMetadata?id=' +
       id,
-    axios.get
+    axios
   )
 
-  const { data: statement } = useSWR(() => metadata.data.url, axios.get)
+  const { data: statement } = useSWR(() => metadata.data.url, axios)
 
   return (
     <PageLayout>
