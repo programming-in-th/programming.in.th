@@ -51,7 +51,9 @@ const TaskDetail: NextPage = () => {
   const { id } = router.query
 
   const { data: metadata } = useSWR(
-    `https://asia-east2-grader-ef0b5.cloudfunctions.net/getProblemMetadata?id=${id}`,
+    () =>
+      'https://asia-east2-grader-ef0b5.cloudfunctions.net/getProblemMetadata?id=' +
+      id,
     axios.get
   )
 
