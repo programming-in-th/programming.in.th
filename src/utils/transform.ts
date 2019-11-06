@@ -5,8 +5,8 @@ export const transformStatus = (detail: ISubmission) => {
 
   if (detail.status === 'in_queue') {
     return Object.assign({}, detail, {
-      status: 'PENDING',
-      points: 'PENDING',
+      status: 'Pending',
+      points: 'Pending',
       memory: 0,
       time: 0
     })
