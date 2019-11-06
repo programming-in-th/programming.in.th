@@ -191,6 +191,9 @@ export default () => {
       return {
         onClick: () => {
           router.push('/tasks/' + record.problem_id)
+        },
+        onMouseEnter: () => {
+          router.prefetch('/tasks' + record.problem_id)
         }
       }
     },
