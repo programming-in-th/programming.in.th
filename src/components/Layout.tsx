@@ -25,10 +25,10 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
   props: IPageLayoutProps
 ) => {
   const dispatch = useUserDispatch()
-  const user = useUser()
+  const { user } = useUser()
 
   useEffect(() => {
-    firebase.auth().onAuthStateChanged(user => {
+    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       dispatch({
         type: 'RECEIVE_USER',
         payload: {
@@ -36,6 +36,10 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
         }
       })
     })
+
+    return () => {
+      unsubscribe()
+    }
   }, [])
 
   useEffect(() => {
@@ -48,12 +52,11 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
       dispatch({ type: 'RECEIVE_ADMIN', payload: { isAdmin: response.data } })
     }
 
-    console.log(user)
     fetchAdmin()
   }, [user])
 
   // Waiting for dashboard implementation, so we use this as placeholder
-  if (user.user === undefined) {
+  if (user === undefined) {
     return <CustomSpin></CustomSpin>
   }
 
