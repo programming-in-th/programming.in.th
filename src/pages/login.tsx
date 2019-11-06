@@ -1,15 +1,14 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 
 import { PageLayout } from '../components/Layout'
 import { LoginPage } from '../components/auth/Login'
 import { Container } from '../components/auth/Style'
 import { AlreadyLoggedIn } from '../components/auth/Already'
 
-import { IAppState } from '../redux'
+import { useUser } from '../components/UserContext'
 
 export default () => {
-  const user = useSelector((state: IAppState) => state.user.user)
+  const { user } = useUser()
 
   return (
     <PageLayout>

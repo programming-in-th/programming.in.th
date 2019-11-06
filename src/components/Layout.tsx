@@ -1,15 +1,13 @@
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
 import styled from 'styled-components'
 import { Layout } from 'antd'
 
 import { Navigator } from './Nav'
 import { GlobalStyle } from '../design'
 
-import { IAppState } from '../redux'
-import * as actionCreators from '../redux/actions'
 import { CustomSpin } from '../components/Spin'
 import firebase from '../lib/firebase'
+import { useUser, useUserDispatch } from './UserContext'
 
 const { Content, Footer } = Layout
 
@@ -26,18 +24,36 @@ interface IPageLayoutProps {
 export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
   props: IPageLayoutProps
 ) => {
-  const dispatch = useDispatch()
+  const dispatch = useUserDispatch()
+  const user = useUser()
 
   useEffect(() => {
     firebase.auth().onAuthStateChanged(user => {
-      dispatch(actionCreators.fetchUser(user))
+      dispatch({
+        type: 'RECEIVE_USER',
+        payload: {
+          user
+        }
+      })
     })
   }, [])
 
-  const user = useSelector((state: IAppState) => state.user.user)
+  useEffect(() => {
+    const fetchAdmin = async () => {
+      const response = await firebase
+        .app()
+        .functions('asia-east2')
+        .httpsCallable('getIsAdmin')({})
+
+      dispatch({ type: 'RECEIVE_ADMIN', payload: { isAdmin: response.data } })
+    }
+
+    console.log(user)
+    fetchAdmin()
+  }, [user])
 
   // Waiting for dashboard implementation, so we use this as placeholder
-  if (user === 'LOADING') {
+  if (user.user === undefined) {
     return <CustomSpin></CustomSpin>
   }
 

@@ -1,5 +1,4 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import Link from 'next/link'
 import { LazyLoadImage } from 'react-lazy-load-image-component'
 
@@ -8,9 +7,9 @@ import { PageLayout } from '../components/Layout'
 import styled, { keyframes } from 'styled-components'
 import { DesktopOnly, media } from '../design/Responsive'
 import { RegisterPage } from '../components/auth/Register'
-import { IAppState } from '../redux'
 import { StyledCard } from '../components/auth/Style'
 import { Fonts } from '../design'
+import { useUser } from '../components/UserContext'
 
 const fadeIn = keyframes`
   from {
@@ -106,8 +105,7 @@ const RegisterWrapper = styled.div`
 `
 
 export default () => {
-  const user = useSelector((state: IAppState) => state.user.user)
-
+  const { user } = useUser()
   return (
     <PageLayout>
       <Wrapper id="scrolling-container">

@@ -1,10 +1,9 @@
 import App, { AppProps } from 'next/app'
 import React from 'react'
-import { Provider } from 'react-redux'
 import NProgress from 'nprogress'
 
 import Router from 'next/router'
-import { initStore } from '../redux'
+import { UserProvider } from '../components/UserContext'
 
 let timeout: number
 
@@ -21,14 +20,13 @@ Router.events.on('routeChangeStart', start)
 Router.events.on('routeChangeComplete', done)
 Router.events.on('routeChangeError', done)
 
-const reduxStore = initStore()
 class MyApp extends App<AppProps> {
   render() {
     const { Component, pageProps } = this.props
     return (
-      <Provider store={reduxStore}>
+      <UserProvider>
         <Component {...pageProps} />
-      </Provider>
+      </UserProvider>
     )
   }
 }

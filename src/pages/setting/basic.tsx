@@ -2,11 +2,11 @@ import React from 'react'
 
 import { SettingPageLayout } from '../../components/setting/SettingLayout'
 import { BasicSettings } from '../../components/setting/Basic'
-import { useSelector } from 'react-redux'
-import { IAppState } from '../../redux'
+
+import { useUser } from '../../components/UserContext'
 
 export default () => {
-  const user = useSelector((state: IAppState) => state.user.user)
+  const { user } = useUser()
 
   return (
     <SettingPageLayout>

@@ -8,18 +8,34 @@ import { useRouter } from 'next/router'
 import useSWR from 'swr'
 import axios from 'axios'
 
-import { useSelector, useDispatch } from 'react-redux'
-import * as actionCreators from '../../redux/actions/index'
-import { ITask, ITaskPage } from '../../redux/types/task'
-
 import { DesktopOnly, MobileOnly } from '../../design/Responsive'
 import { FilterComponent, IFilter } from '../../components/tasks/Filter'
 
 import { WhiteContainerWrapper } from '../../design/Atomics'
-import { IAppState } from '../../redux'
 import { PageLayout } from '../../components/Layout'
 
 const { Panel } = Collapse
+
+interface ITask {
+  problem_id: string
+  author: string
+  path: string
+  url: string
+  title: string
+  time_limit: number
+  memory_limit: number
+  difficulty: number
+  tags: ReadonlyArray<string>
+  source: string
+}
+interface ITaskPage {
+  currentPage: number
+  currentPageSize: number | undefined
+  searchWord: string
+  searchTag: ReadonlyArray<string>
+  searchDifficulty: ReadonlyArray<number>
+  hideTag: boolean
+}
 
 export default () => {
   const { data } = useSWR(
@@ -29,16 +45,19 @@ export default () => {
 
   const [taskListState, setTaskListState] = useState<ITask[]>([])
   const [tagListState, setTagListState] = useState<string[]>([])
+  const [taskPage, setTaskPage] = useState<ITaskPage>({
+    currentPage: 1,
+    currentPageSize: 20,
+    searchWord: '',
+    searchTag: [],
+    searchDifficulty: [0, 10],
+    hideTag: true
+  })
 
-  const taskPage: ITaskPage = useSelector(
-    (state: IAppState) => state.tasks.taskPage as ITaskPage
-  )
-
-  const dispatch = useDispatch()
   const router = useRouter()
 
   const setPage: (page: ITaskPage) => void = page => {
-    dispatch(actionCreators.setTaskPageConfig(page))
+    setTaskPage(page)
   }
 
   useEffect(() => {

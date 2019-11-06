@@ -4,13 +4,11 @@ import { useRouter } from 'next/router'
 import { Layout, Drawer, Button, Menu, Avatar, Icon, Divider } from 'antd'
 import styled from 'styled-components'
 
-import { useSelector } from 'react-redux'
-
 import { media } from '../design/Responsive'
 
 import firebase from 'firebase/app'
 import 'firebase/auth'
-import { IAppState } from '../redux'
+import { useUser } from './UserContext'
 
 const { Header } = Layout
 
@@ -53,9 +51,7 @@ export const Navigator: React.FunctionComponent<INavigatorProps> = (
   const locationReal = Router.pathname
   const location = locationReal.split('/')[1]
 
-  const user = useSelector((state: IAppState) => state.user.user)
-
-  const isAdmin = useSelector((state: IAppState) => state.user.admin)
+  const { user, isAdmin } = useUser()
 
   const [visible, setVisibility] = useState<boolean>(false)
   const [top, setTop] = useState<number>(0)

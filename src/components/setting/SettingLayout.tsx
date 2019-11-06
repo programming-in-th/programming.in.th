@@ -1,16 +1,15 @@
 import React from 'react'
 import { Menu } from 'antd'
 import styled from 'styled-components'
-import { useSelector } from 'react-redux'
 
 import { media } from '../../design/Responsive'
 
 import { NotAuthorized } from '../error/403'
 
-import { IAppState } from '../../redux'
 import Link from 'next/link'
 import { PageLayout } from '../Layout'
 import { useRouter } from 'next/router'
+import { useUser } from '../UserContext'
 
 const SettingLayoutWrapper = styled.div`
   margin: 64px;
@@ -55,7 +54,7 @@ const Right = styled.div`
 `
 
 export const SettingPageLayout: React.FunctionComponent = props => {
-  const user = useSelector((state: IAppState) => state.user.user)
+  const { user } = useUser()
   const router = useRouter()
   const path = router.pathname
 

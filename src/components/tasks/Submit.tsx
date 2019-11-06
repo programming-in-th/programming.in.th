@@ -1,17 +1,15 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { Row, Icon, Result, Button, Select, Switch } from 'antd'
 import styled from 'styled-components'
-
-import { useSelector, useDispatch } from 'react-redux'
-import * as actionCreators from '../../redux/actions/index'
+import firebase from '../../lib/firebase'
 
 import { SubFilterWrapper } from '../../design/Atomics'
 
 import { Upload } from '../upload'
 
 import { Code } from '../CodeEditor'
-import { IAppState } from '../../redux'
+import { useUser } from '../UserContext'
 
 const OptionsWrapper = styled.div`
   display: flex;
@@ -46,11 +44,6 @@ interface ISubmitProps {
   canSubmit: boolean
 }
 
-interface ISubmitProps {
-  problem_id: string
-  canSubmit: boolean
-}
-
 interface ISubmitSetting {
   language: string
   theme: string
@@ -68,18 +61,49 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
 
   const [codeValue, setCode] = useState<string>('')
   const [codeFromUpload, setCodeFromUpload] = useState<string>('')
+  const [responseState, setResponse] = useState({
+    data: undefined,
+    status: 0
+  })
 
-  const dispatch = useDispatch()
+  useEffect(() => {
+    console.log(responseState)
+  }, [responseState])
 
-  const submissionResponse = useSelector(
-    (state: IAppState) => state.submissions.submissionResponse
-  )
-  const submissionUID = useSelector(
-    (state: IAppState) => state.submissions.submission_uid
-  )
-  const user = useSelector(
-    (state: IAppState) => state.user.user
-  ) as firebase.User
+  const submitCode = async (
+    uid: string,
+    problem_id: string,
+    code: string,
+    language: string,
+    hideCode: boolean
+  ) => {
+    if (!user) return
+
+    const params = {
+      uid,
+      problem_id,
+      code,
+      language,
+      hideCode
+    }
+
+    setResponse({
+      ...responseState,
+      status: -1
+    })
+
+    const response = await firebase
+      .app()
+      .functions('asia-east2')
+      .httpsCallable('makeSubmission')(params)
+
+    setResponse({
+      data: response.data,
+      status: 200
+    })
+  }
+
+  const { user } = useUser()
 
   const changeLanguage = (value: string) => {
     setSetting({ ...setting, language: value })
@@ -109,51 +133,56 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
     setSetting({ ...setting, hideCode: value })
   }
 
-  const submitCode = () => {
-    if (!user) {
-      dispatch(actionCreators.errorSubmit())
-      return
-    }
-
-    dispatch(
-      actionCreators.makeSubmission(
-        user.uid,
-        props.problem_id,
-        codeValue,
-        mapLanguage[setting.language],
-        setting.hideCode
-      )
-    )
-  }
-
-  const reSubmit = () => {
-    dispatch(actionCreators.resubmitSubmission())
-  }
-
   return (
     <React.Fragment>
-      {submissionResponse === -1 ? (
+      {responseState.status === -1 ? (
         <Result
           status="success"
           icon={<Icon type="loading" />}
           title="Submiting"
         />
-      ) : submissionResponse === 200 ? (
+      ) : responseState.status === 200 ? (
         <Result
           title="Submission Successful"
           status="success"
           extra={[
-            <Link href={'/submissions/' + submissionUID}>
+            <Link href={'/submissions/' + responseState.data}>
               <Button type="primary">View Submission</Button>
             </Link>,
-            <Button onClick={reSubmit}>Resubmit</Button>
+            <Button
+              onClick={() => {
+                submitCode(
+                  user.uid,
+                  props.problem_id,
+                  codeValue,
+                  mapLanguage[setting.language],
+                  setting.hideCode
+                )
+              }}
+            >
+              Resubmit
+            </Button>
           ]}
         />
-      ) : submissionResponse !== 0 ? (
+      ) : responseState.status !== 0 ? (
         <Result
           status="error"
           title="Submission Failed"
-          extra={[<Button onClick={reSubmit}>Resubmit</Button>]}
+          extra={[
+            <Button
+              onClick={() => {
+                submitCode(
+                  user.uid,
+                  props.problem_id,
+                  codeValue,
+                  mapLanguage[setting.language],
+                  setting.hideCode
+                )
+              }}
+            >
+              Resubmit
+            </Button>
+          ]}
         />
       ) : (
         <React.Fragment>
@@ -210,7 +239,15 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
             />
             <Button
               type="primary"
-              onClick={submitCode}
+              onClick={() => {
+                submitCode(
+                  user.uid,
+                  props.problem_id,
+                  codeValue,
+                  mapLanguage[setting.language],
+                  setting.hideCode
+                )
+              }}
               disabled={!props.canSubmit}
             >
               Submit

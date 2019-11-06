@@ -3,20 +3,41 @@ import { Table, Input, Switch, Icon, message } from 'antd'
 import useSWR from 'swr'
 import axios from 'axios'
 
-import { ISubmissionPage, ISubmission } from '../../redux/types/submission'
-import { useSelector, useDispatch } from 'react-redux'
-import * as actionCreators from '../../redux/actions/index'
 import {
   WhiteContainerWrapper,
   FilterWrapper,
   SubFilterWrapper
 } from '../../design/Atomics'
 import { ColumnProps } from 'antd/lib/table'
-import { IAppState } from '../../redux'
 import { useRouter } from 'next/router'
 import { PageLayout } from '../../components/Layout'
+import { useUser } from '../../components/UserContext'
 
 const Search = Input.Search
+
+interface ISubmissionPage {
+  currentPage: number
+  currentPageSize: number | undefined
+  searchWord: string
+  pointFilter: boolean
+}
+
+interface ISubmission {
+  uid: string
+  submission_id: string
+  username: string
+  problem_id: string
+  problem_name: string
+  language: string
+  status: string
+  points: number
+  time: number
+  memory: number
+  timestamp: Date
+  humanTimestamp: string
+  code?: string
+  hideCode: boolean
+}
 
 export default () => {
   const { data } = useSWR(
@@ -28,20 +49,19 @@ export default () => {
     ISubmission[]
   >([])
 
-  const submissionsPage = useSelector(
-    (state: IAppState) => state.submissions.submissionsPage
-  )
+  const [submissionsPage, setSubmissionsPage] = useState<ISubmissionPage>({
+    currentPage: 1,
+    currentPageSize: 20,
+    searchWord: '',
+    pointFilter: false
+  })
 
-  const user = useSelector((state: IAppState) => state.user.user)
-
-  const dispatch = useDispatch()
+  const { user, isAdmin } = useUser()
   const router = useRouter()
 
   const setPage = (setting: ISubmissionPage) => {
-    dispatch(actionCreators.setSubPageConfig(setting))
+    setSubmissionsPage(setting)
   }
-
-  const isAdmin = useSelector((state: IAppState) => state.user.admin)
 
   useEffect(() => {
     const updateTask = () => {

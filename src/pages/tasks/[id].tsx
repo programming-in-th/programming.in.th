@@ -2,14 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 
-import { useSelector } from 'react-redux'
-
 import { Submit } from '../../components/tasks/Submit'
-import { IAppState } from '../../redux'
 import { NextPage } from 'next'
 import { PageLayout } from '../../components/Layout'
 import { Row, Col, Skeleton } from 'antd'
 import useSWR from 'swr'
+import { useUser } from '../../components/UserContext'
 
 const Wrapper = styled.div`
   margin: 15px 0;
@@ -44,7 +42,7 @@ const StatementComponent = styled.div`
 `
 
 const TaskDetail: NextPage = () => {
-  const user = useSelector((state: IAppState) => state.user.user)
+  const { user } = useUser()
 
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''

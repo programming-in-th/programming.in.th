@@ -2,13 +2,11 @@ import React from 'react'
 
 import { SettingPageLayout } from '../../components/setting/SettingLayout'
 import { SocialSetting } from '../../components/setting/Social'
-import { useSelector } from 'react-redux'
-import { IAppState } from '../../redux'
+
+import { useUser } from '../../components/UserContext'
 
 export default () => {
-  const user = useSelector(
-    (state: IAppState) => state.user.user
-  ) as firebase.User
+  const { user } = useUser()
 
   return (
     <SettingPageLayout>

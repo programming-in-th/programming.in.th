@@ -4,12 +4,11 @@ import { Select, Skeleton } from 'antd'
 
 import { transformStatus } from '../../utils/transform'
 import { CodeDisplay } from '../../components/CodeEditor'
-import { ContainerWrapper, Center } from '../../design/Atomics'
+import { ContainerWrapper } from '../../design/Atomics'
 
 import { NextPage } from 'next'
 import { PageLayout } from '../../components/Layout'
 import useSWR from 'swr'
-import { useRouter } from 'next/router'
 import { fetchSubmissionData } from '../../utils/fetchSubmissionData'
 
 const { Option } = Select
@@ -40,8 +39,9 @@ const mapLanguage: TPlot = {
 
 const SubmissionDetail: NextPage = () => {
   const [current, setCurrent] = useState<any>({})
-  const router = useRouter()
-  const { id } = router.query
+
+  const id =
+    typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
   const { data } = useSWR(`${id}`, fetchSubmissionData)
 
