@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import axios from 'axios'
 
@@ -7,7 +7,6 @@ import { useSelector } from 'react-redux'
 import { Submit } from '../../components/tasks/Submit'
 import { IAppState } from '../../redux'
 import { NextPage } from 'next'
-import { useRouter } from 'next/router'
 import { PageLayout } from '../../components/Layout'
 import { Row, Col, Skeleton } from 'antd'
 import useSWR from 'swr'
@@ -45,10 +44,10 @@ const StatementComponent = styled.div`
 `
 
 const TaskDetail: NextPage = () => {
-  const router = useRouter()
   const user = useSelector((state: IAppState) => state.user.user)
 
-  const { id } = router.query
+  const id =
+    typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
   const { data: metadata } = useSWR(
     () =>
