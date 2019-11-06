@@ -13,21 +13,10 @@ import { FilterComponent, IFilter } from '../../components/tasks/Filter'
 
 import { WhiteContainerWrapper } from '../../design/Atomics'
 import { PageLayout } from '../../components/Layout'
+import { ITask } from '../../@types/task'
 
 const { Panel } = Collapse
 
-interface ITask {
-  problem_id: string
-  author: string
-  path: string
-  url: string
-  title: string
-  time_limit: number
-  memory_limit: number
-  difficulty: number
-  tags: ReadonlyArray<string>
-  source: string
-}
 interface ITaskPage {
   currentPage: number
   currentPageSize: number | undefined

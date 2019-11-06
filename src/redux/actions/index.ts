@@ -1,1 +1,0 @@
-export { fetchUser } from './user'
