@@ -9,6 +9,7 @@ import { media } from '../design/Responsive'
 import firebase from 'firebase/app'
 import 'firebase/auth'
 import { useUser } from './UserContext'
+import { Fonts } from '../design'
 
 const { Header } = Layout
 
@@ -24,6 +25,7 @@ const NavHeader = styled(Header)<{
   width: 100%;
   box-shadow: ${props => enableBoxShadow(props.location, props.top)};
   display: ${props => (props.hidden ? 'none' : 'block')};
+  padding: 0 100px;
 
   ${media('TABLET')} {
     padding-left: 25px;
@@ -36,7 +38,7 @@ interface IItem {
   location: string
   hideDrawer?: () => void
   isAdmin?: boolean
-  user?: firebase.User | 'LOADING'
+  user?: firebase.User
   mode?: 'vertical' | 'horizontal'
 }
 
@@ -82,7 +84,7 @@ export const Navigator: React.FunctionComponent<INavigatorProps> = (
       <React.Fragment>
         <Logo>
           <Link href="/">
-            <a>programming.in.th</a>
+            <a>PROGRAMMING.IN.TH</a>
           </Link>
         </Logo>
         <LeftMenu mode="horizontal" location={location} isAdmin={isAdmin} />
@@ -180,7 +182,7 @@ const Main = (props: IItem) => {
 }
 
 const Login = (props: IItem) => {
-  if (props.user === 'LOADING') {
+  if (!props.user) {
     return null
   }
 
@@ -272,10 +274,15 @@ const Login = (props: IItem) => {
 
 const Logo = styled.div`
   float: left;
+
   & a {
+    margin-top: 1px;
+    font-family: ${Fonts.display};
+    font-weight: 800;
     display: inline-block;
     font-size: 17px;
     margin-right: 15px;
+    color: #1890ff;
   }
 `
 
