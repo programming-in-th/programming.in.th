@@ -12,6 +12,7 @@ import { ColumnProps } from 'antd/lib/table'
 import { useRouter } from 'next/router'
 import { PageLayout } from '../../components/Layout'
 import { useUser } from '../../components/UserContext'
+import { ISubmission } from '../../@types/submission'
 
 const Search = Input.Search
 
@@ -20,23 +21,6 @@ interface ISubmissionPage {
   currentPageSize: number | undefined
   searchWord: string
   pointFilter: boolean
-}
-
-interface ISubmission {
-  uid: string
-  submission_id: string
-  username: string
-  problem_id: string
-  problem_name: string
-  language: string
-  status: string
-  points: number
-  time: number
-  memory: number
-  timestamp: Date
-  humanTimestamp: string
-  code?: string
-  hideCode: boolean
 }
 
 export default () => {
@@ -204,8 +188,10 @@ export default () => {
             return {
               onClick: () => {
                 let status = false
-                if (user && user !== 'LOADING')
-                  if (user.uid === record.uid) status = true
+                if (user && user !== undefined) {
+                  user.uid === record.uid ? (status = true) : (status = false)
+                }
+
                 if (!record.hideCode || status || isAdmin) {
                   router.push('/submissions/' + record.submission_id)
                 } else {
