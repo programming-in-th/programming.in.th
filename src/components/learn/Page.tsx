@@ -85,6 +85,16 @@ const Nav = styled.div`
   width: 70%;
 `
 
+const ContentWrapper = styled.div`
+  margin: 0px auto 30px;
+  max-width: 768px;
+
+  ${media('TABLET')} {
+    max-width: 100%;
+    padding: 0px 20px 50px;
+  }
+`
+
 interface IMeta {
   title: string
 }
@@ -123,13 +133,11 @@ export const Learn: NextPage<IInitailLearnProps> = props => {
           </SubTitle>
         </Header>
         <div>
-          <Row>
-            <Col lg={{ span: 12, offset: 6 }} xs={{ span: 18, offset: 3 }}>
-              <MDXProvider components={Components}>
-                <article>{props.children}</article>
-              </MDXProvider>
-            </Col>
-          </Row>
+          <ContentWrapper>
+            <MDXProvider components={Components}>
+              <article>{props.children}</article>
+            </MDXProvider>
+          </ContentWrapper>
         </div>
       </PageLayout>
     </React.Fragment>
