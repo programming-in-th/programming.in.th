@@ -341,7 +341,7 @@ const UserWrapper = styled.div`
 `
 
 const enableTransparency = (location: string, top: number): string => {
-  if (location === '/') {
+  if (location === '/' || location === '/login' || location === '/register') {
     return `rgba(255, 255, 255,${top > 60 ? 1 : 0})`
   }
 
@@ -349,7 +349,7 @@ const enableTransparency = (location: string, top: number): string => {
 }
 
 const enableBoxShadow = (location: string, top: number): string => {
-  if (location === '/') {
+  if (location === '/' || location === '/login' || location === '/register') {
     return `0 2px 8px rgba(0,0,0,${top > 120 ? 0.15 : 0})`
   }
 

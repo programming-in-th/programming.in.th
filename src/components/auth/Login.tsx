@@ -27,7 +27,6 @@ const Login = (props: FormComponentProps) => {
     e.preventDefault()
     props.form.validateFields((err, values) => {
       if (!err) {
-        console.log('Received values of form: ', values)
         submitLogin(router, values.email, values.password, values.remember)
       }
     })
@@ -74,7 +73,7 @@ const Login = (props: FormComponentProps) => {
   const { getFieldDecorator } = props.form
   return (
     <AuthContainer>
-      <h1>Log In to programming.in.th</h1>
+      <h1>Log in to programming.in.th</h1>
       <StyledForm onSubmit={handleSubmit}>
         <Form.Item>
           {getFieldDecorator('email', {

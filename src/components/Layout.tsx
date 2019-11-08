@@ -11,13 +11,14 @@ import { useUser, useUserDispatch } from './UserContext'
 
 const { Content, Footer } = Layout
 
-const CustomLayout = styled(Layout)`
+const CustomLayout = styled(Layout)<{ bg?: string }>`
   min-height: 100vh;
-  background-color: #fafafa;
+  background-color: ${props => (props.bg ? props.bg : '#fafafa')};
 `
 
 interface IPageLayoutProps {
   hideNav?: boolean
+  bg?: string
   children: React.ReactNode
 }
 
@@ -62,11 +63,16 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
 
   return (
     <React.Fragment>
-      <CustomLayout>
+      <CustomLayout bg={props.bg}>
         <GlobalStyle />
         <Navigator hidden={props.hideNav} />
         <Content style={{ marginTop: 64 }}>{props.children}</Content>
-        <Footer style={{ textAlign: 'center', backgroundColor: '#fafafa' }}>
+        <Footer
+          style={{
+            textAlign: 'center',
+            backgroundColor: props.bg ? props.bg : '#fafafa'
+          }}
+        >
           IPST ©2019 | Contribution: All the source code for this website is
           available on{' '}
           <a

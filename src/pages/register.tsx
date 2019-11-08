@@ -9,7 +9,7 @@ export default () => {
   const { user } = useUser()
 
   return (
-    <PageLayout>
+    <PageLayout bg="white">
       {user ? (
         <AlreadyLoggedIn></AlreadyLoggedIn>
       ) : (

@@ -36,8 +36,8 @@ export const StyledCard = styled(Card)`
 
 export const AuthContainer = styled.div`
   h1 {
-    font-size: 32px;
-    font-weight: 600;
+    font-size: 48px;
+    font-weight: 700;
   }
 
   ${media('PHONE')} {
@@ -49,7 +49,11 @@ export const AuthContainer = styled.div`
 
 export const StyledForm = styled(Form)`
   width: 368px;
-  margin-top: 15px;
+  margin: 20px auto;
+
+  ${media('IPAD_PRO')} {
+    width: 90%;
+  }
 
   ${media('TABLET')} {
     width: 100%;

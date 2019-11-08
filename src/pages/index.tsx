@@ -44,6 +44,10 @@ const MainContainer = styled(Container)`
   margin-top: 0;
   min-height: calc(100vh - 128px);
 
+  ${media('IPAD_PRO')} {
+    margin: 16px;
+  }
+
   ${media('TABLET')} {
     min-height: unset;
   }
