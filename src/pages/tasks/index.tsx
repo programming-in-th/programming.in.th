@@ -6,7 +6,7 @@ import { PaginationConfig } from 'antd/lib/pagination'
 
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
-import axios from 'axios'
+import api from '../../lib/api'
 
 import { DesktopOnly, MobileOnly } from '../../design/Responsive'
 import { FilterComponent, IFilter } from '../../components/tasks/Filter'
@@ -27,10 +27,7 @@ interface ITaskPage {
 }
 
 export default () => {
-  const { data } = useSWR(
-    'https://asia-east2-grader-ef0b5.cloudfunctions.net/getAllTasks',
-    axios
-  )
+  const { data } = useSWR('/getAllTasks', api)
 
   const [taskListState, setTaskListState] = useState<ITask[]>([])
   const [tagListState, setTagListState] = useState<string[]>([])

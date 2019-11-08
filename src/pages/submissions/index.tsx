@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Table, Input, Switch, Icon, message } from 'antd'
 import useSWR from 'swr'
-import axios from 'axios'
+import api from '../../lib/api'
 
 import {
   WhiteContainerWrapper,
@@ -24,10 +24,7 @@ interface ISubmissionPage {
 }
 
 export default () => {
-  const { data } = useSWR(
-    'https://asia-east2-grader-ef0b5.cloudfunctions.net/getRecentSubmissions',
-    axios
-  )
+  const { data } = useSWR('/getRecentSubmissions', api)
 
   const [submissionsListState, setSubmissionsListState] = useState<
     ISubmission[]

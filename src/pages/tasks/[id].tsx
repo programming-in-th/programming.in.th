@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
+import api from '../../lib/api'
 
 import { Submit } from '../../components/tasks/Submit'
 import { NextPage } from 'next'
@@ -51,10 +51,10 @@ const TaskDetail: NextPage = () => {
     () =>
       'https://asia-east2-grader-ef0b5.cloudfunctions.net/getProblemMetadata?id=' +
       id,
-    axios
+    api
   )
 
-  const { data: statement } = useSWR(() => metadata.data.url, axios)
+  const { data: statement } = useSWR(() => metadata.data.url, api)
 
   return (
     <PageLayout>
