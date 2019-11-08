@@ -14,7 +14,7 @@ import {
   Blockquote
 } from './elements'
 
-import { Col, Row, PageHeader } from 'antd'
+import { PageHeader } from 'antd'
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import styled from 'styled-components'

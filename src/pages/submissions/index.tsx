@@ -185,7 +185,8 @@ export default () => {
             return {
               onClick: () => {
                 let status = false
-                if (user && user !== undefined) {
+
+                if (user) {
                   user.uid === record.uid ? (status = true) : (status = false)
                 }
 

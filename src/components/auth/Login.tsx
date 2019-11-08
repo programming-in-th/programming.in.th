@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter, NextRouter } from 'next/router'
-import { Form, Icon, Input, Button, Checkbox, Row, Col } from 'antd'
+import { Form, Icon, Input, Button, Checkbox } from 'antd'
 import styled from 'styled-components'
 import { StyledForm, Others, AuthContainer } from './Style'
 

@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { PageLayout } from '../../components/Layout'
-import styled, { keyframes } from 'styled-components'
 
 import firebase from '../../lib/firebase'
 import useSWR from 'swr'
@@ -10,9 +9,9 @@ import { Table, Switch, Icon } from 'antd'
 import { useUser } from '../../components/UserContext'
 
 export default () => {
-  const { isAdmin } = useUser()
   const { data } = useSWR('getAllUser', fetchUserList)
   const [state, setState] = useState('')
+
   const columns = [
     {
       title: 'Display Name',
