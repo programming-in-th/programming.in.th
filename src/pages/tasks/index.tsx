@@ -47,6 +47,10 @@ export default () => {
   }
 
   useEffect(() => {
+    router.prefetch('/tasks/[id]')
+  }, [])
+
+  useEffect(() => {
     const updateTask = () => {
       if (data) {
         const filteredEvents = data.data.filter(
@@ -188,9 +192,6 @@ export default () => {
       return {
         onClick: () => {
           router.push('/tasks/' + record.problem_id)
-        },
-        onMouseEnter: () => {
-          router.prefetch('/tasks' + record.problem_id)
         }
       }
     },
