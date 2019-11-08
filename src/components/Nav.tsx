@@ -25,7 +25,7 @@ const NavHeader = styled(Header)<{
   width: 100%;
   box-shadow: ${props => enableBoxShadow(props.location, props.top)};
   display: ${props => (props.hidden ? 'none' : 'block')};
-  padding: 0 100px;
+  padding: 0 200px;
 
   ${media('TABLET')} {
     padding-left: 25px;
@@ -182,13 +182,13 @@ const Main = (props: IItem) => {
 }
 
 const Login = (props: IItem) => {
-  if (!props.user) {
+  if (props.user === undefined) {
     return null
   }
 
   return (
     <div className={props.className}>
-      {props.user ? (
+      {props.user !== null ? (
         <Menu
           mode={props.mode}
           style={{
@@ -210,7 +210,7 @@ const Login = (props: IItem) => {
                   }
                 />
                 <p style={{ marginLeft: '15px' }}>
-                  {props.user ? props.user.displayName : 'User'}
+                  {props.user.displayName ? props.user.displayName : 'User'}
                 </p>
               </UserWrapper>
             }
