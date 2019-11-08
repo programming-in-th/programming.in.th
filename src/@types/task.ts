@@ -9,4 +9,6 @@ export interface ITask {
   difficulty: number
   tags: ReadonlyArray<string>
   source: string
+  visible: boolean
+  submit: boolean
 }

@@ -1,12 +1,14 @@
 import React, { useState } from 'react'
-import { PageLayout } from '../../components/Layout'
+import { AdminLayout } from '../../components/admin/AdminLayout'
 import styled from 'styled-components'
 
 import firebase from '../../lib/firebase'
 import useSWR from 'swr'
 import { Table, Switch, Icon, Popover, Input, Button, message } from 'antd'
-import { WhiteContainerWrapper } from '../../design/Atomics'
 import { Router } from 'next/router'
+import { ITask } from '../../@types/task'
+import { ColumnProps } from 'antd/lib/table'
+import { fetchAdminTask } from '../../utils/fetchAdminTask'
 
 const WarningText = styled.p`
   color: red;
@@ -16,21 +18,12 @@ const ConfirmBox = styled(Input)`
   margin: 10px 0;
 `
 
-const fetchAdminTask = async (type: string) => {
-  const getAdminTask = firebase
-    .app()
-    .functions('asia-east2')
-    .httpsCallable(type)
-
-  return await getAdminTask({})
-}
-
 export default () => {
   const { data } = useSWR('getAdminTask', fetchAdminTask)
   const [state, setState] = useState('')
   const [deleteID, setDeleteID] = useState('')
 
-  const columns = [
+  const columns: ColumnProps<ITask>[] = [
     {
       title: 'Task ID',
       dataIndex: 'problem_id'
@@ -87,21 +80,20 @@ export default () => {
         </span>
       )
     }
-  ] as any
+  ]
 
   console.log(data)
   return (
-    <PageLayout>
-      <WhiteContainerWrapper>
-        {data ? (
-          <Table
-            columns={columns}
-            dataSource={data.data}
-            size="middle"
-            pagination={{ pageSize: 1000 }}
-          />
-        ) : null}
-      </WhiteContainerWrapper>
-    </PageLayout>
+    <AdminLayout>
+      {data ? (
+        <Table
+          columns={columns}
+          dataSource={data.data}
+          size="middle"
+          pagination={{ pageSize: 1000 }}
+          scroll={{ x: 100 }}
+        />
+      ) : null}
+    </AdminLayout>
   )
 }

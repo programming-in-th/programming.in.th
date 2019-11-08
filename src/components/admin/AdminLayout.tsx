@@ -7,13 +7,10 @@ import { media } from '../../design/Responsive'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useUser } from '../UserContext'
+import { WhiteContainerWrapper } from '../../design/Atomics'
 
-const SettingLayoutWrapper = styled.div`
-  margin: 64px;
-
-  ${media('TABLET')} {
-    margin: 8px;
-  }
+const SettingLayoutWrapper = styled(WhiteContainerWrapper)`
+  width: 90%;
 `
 
 const SettingLayout = styled.div`
@@ -43,7 +40,6 @@ const Left = styled.div`
 `
 
 const Right = styled.div`
-  padding: 5px;
   width: 100%;
 `
 
