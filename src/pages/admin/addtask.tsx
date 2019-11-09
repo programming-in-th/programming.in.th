@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
-import { Button, Input } from 'antd'
+import { Button, Input, Form, Icon } from 'antd'
 import { AdminLayout } from '../../components/admin/AdminLayout'
 import styled from 'styled-components'
 import firebase from '../../lib/firebase'
 
-const InlineWrapper = styled.div`
-  display: inline;
-  margin: 10px;
-`
-
 interface Item {
   name: string
+  holder: string
   update: (val: any) => void
 }
+
+const ButtonWrapper = styled.div`
+  text-align: center;
+`
 
 interface Submit {
   difficulty: number
@@ -22,19 +22,25 @@ interface Submit {
   url: string
   source: string
   problem_id: string
-  tag: Array<string>
+  tags: Array<string>
 }
+
 const LineItem = (props: Item) => {
+  const formItemLayout = {
+    labelCol: { span: 6 },
+    wrapperCol: { span: 12 }
+  }
   return (
-    <InlineWrapper>
-      <p>{props.name}</p>
-      <Input
-        onChange={(e: React.FormEvent<HTMLInputElement>) => {
-          props.update(e.currentTarget.value)
-        }}
-        placeholder={`${props.name}`}
-      />
-    </InlineWrapper>
+    <Form layout="horizontal">
+      <Form.Item label={`${props.name}`} {...formItemLayout}>
+        <Input
+          onChange={(e: React.FormEvent<HTMLInputElement>) => {
+            props.update(e.currentTarget.value)
+          }}
+          placeholder={`${props.holder}`}
+        />
+      </Form.Item>
+    </Form>
   )
 }
 
@@ -48,16 +54,12 @@ export default () => {
       url: url,
       source: source,
       problem_id: id,
-      tag: tag.split(',')
+      tags: tag.split(',')
     }
-    console.log(data)
-    console.log(typeof data.difficulty)
-    console.log(typeof diff)
     const response = await firebase
       .app()
       .functions('asia-east2')
       .httpsCallable('addTask')(data)
-    console.log(response)
   }
   const [name, setName] = useState<string>('')
   const [diff, setDiff] = useState<number>(0)
@@ -70,17 +72,25 @@ export default () => {
   return (
     <AdminLayout>
       <h1>ADD TASK</h1>
-      <LineItem name="Problem id" update={setId} />
-      <LineItem name="Task name" update={setName} />
-      <LineItem name="Time limit" update={setTime} />
-      <LineItem name="Memory limit" update={setMem} />
-      <LineItem name="Difficulty" update={setDiff} />
-      <LineItem name="Tag" update={setTag} />
-      <LineItem name="URL" update={setUrl} />
-      <LineItem name="Source" update={setSource} />
-      <Button onClick={addTask} type="primary">
-        Finish Add Task
-      </Button>
+      <LineItem name="Problem id" holder="Problem id" update={setId} />
+      <LineItem name="Task name" holder="Task name" update={setName} />
+      <LineItem name="Time limit" holder="Time limit" update={setTime} />
+      <LineItem name="Memory limit" holder="Memory limit" update={setMem} />
+      <LineItem name="Difficulty" holder="Difficulty" update={setDiff} />
+      <LineItem
+        name="Tags"
+        holder="Each tag should be separated by ',' and no space allowed"
+        update={setTag}
+      />
+      <LineItem name="URL" holder="URL" update={setUrl} />
+      <LineItem name="Source" holder="Source" update={setSource} />
+      <Form layout="horizontal">
+        <ButtonWrapper>
+          <Button onClick={addTask} type="primary">
+            Finish Adding Task
+          </Button>
+        </ButtonWrapper>
+      </Form>
     </AdminLayout>
   )
 }

@@ -85,7 +85,7 @@ export const AdminLayout: React.FunctionComponent = props => {
               <Menu.Item key="/admin/task">
                 <Link href="/admin/task">Task</Link>
               </Menu.Item>
-              <Menu.Item key="/admin/addtask" disabled>
+              <Menu.Item key="/admin/addtask">
                 <Link href="/admin/addtask">Add Task</Link>
               </Menu.Item>
             </Menu>
