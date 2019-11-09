@@ -55,7 +55,7 @@ const MainContainer = styled(Container)`
 
 const Title = styled.h1<{ color?: string }>`
   font-size: 42px;
-  font-family: Montserrat;
+  font-family: Montserrat, ${Fonts.display};
   font-weight: 800;
   display: inline;
   color: ${props => props.color || 'black'};
@@ -70,6 +70,10 @@ const SubTitle = styled.h2`
   font-size: 24px;
   font-family: ${Fonts.display};
   color: #262626;
+
+  ${media('PHABLET')} {
+    font-size: 20px;
+  }
 `
 
 const CustomLink = styled.a`
@@ -77,6 +81,10 @@ const CustomLink = styled.a`
   font-family: Montserrat;
   font-weight: 800;
   text-decoration: none;
+
+  ${media('PHABLET')} {
+    font-size: 20px;
+  }
 `
 
 const RightIllus = styled.div`
@@ -129,13 +137,15 @@ export default () => {
             </SubTitle>
           </div>
           {user ? (
-            <RightIllus>
-              <LazyLoadImage
-                src="/assets/svg/title.svg"
-                alt="title"
-                threshold={1000}
-              />
-            </RightIllus>
+            <DesktopOnly>
+              <RightIllus>
+                <LazyLoadImage
+                  src="/assets/svg/title.svg"
+                  alt="title"
+                  threshold={1000}
+                />
+              </RightIllus>
+            </DesktopOnly>
           ) : (
             <RegisterWrapper>
               <StyledCard>
@@ -144,8 +154,8 @@ export default () => {
             </RegisterWrapper>
           )}
         </MainContainer>
-        <DesktopOnly>
-          <Container>
+        <Container>
+          <DesktopOnly>
             <LeftIllus>
               <LazyLoadImage
                 src="/assets/svg/problem.svg"
@@ -153,27 +163,29 @@ export default () => {
                 threshold={1000}
               />
             </LeftIllus>
-            <div>
-              <Title>
-                With over 400 problems designed and curated by our specialists,
-                we strive to deliver the most comprehensive learning experience
-                possible.{' '}
-              </Title>
-              <Link href="/tasks/0000">
-                <CustomLink>(Take me to my first problem!)</CustomLink>
+          </DesktopOnly>
+          <div>
+            <Title>
+              With over 400 problems designed and curated by our specialists, we
+              strive to deliver the most comprehensive learning experience
+              possible.{' '}
+            </Title>
+            <Link href="/tasks/0000">
+              <CustomLink>(Take me to my first problem!)</CustomLink>
+            </Link>
+          </div>
+        </Container>
+        <Container>
+          <div>
+            <Title>
+              Our learning resources contain all the content you need to excel
+              at algorithmic problem-solving.{' '}
+              <Link href="/learn">
+                <CustomLink>(Start learning now!)</CustomLink>
               </Link>
-            </div>
-          </Container>
-          <Container>
-            <div>
-              <Title>
-                Our learning resources contain all the content you need to excel
-                at algorithmic problem-solving.{' '}
-                <Link href="/learn">
-                  <CustomLink>(Start learning now!)</CustomLink>
-                </Link>
-              </Title>
-            </div>
+            </Title>
+          </div>
+          <DesktopOnly>
             <RightIllus>
               <LazyLoadImage
                 src="/assets/svg/learn.svg"
@@ -181,13 +193,13 @@ export default () => {
                 threshold={1000}
               />
             </RightIllus>
-          </Container>
-          <Container>
-            <div>
-              <Title>Got a question? Ask away!</Title>
-            </div>
-          </Container>
-        </DesktopOnly>
+          </DesktopOnly>
+        </Container>
+        <Container>
+          <div>
+            <Title>Got a question? Ask away!</Title>
+          </div>
+        </Container>
       </Wrapper>
     </PageLayout>
   )
