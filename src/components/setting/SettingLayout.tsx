@@ -69,19 +69,29 @@ export const SettingPageLayout: React.FunctionComponent = props => {
           <LeftMenu>
             <Menu mode="inline" selectedKeys={[path]}>
               <Menu.Item key="/setting/basic">
-                <Link href="/setting/basic">Basic</Link>
+                <Link href="/setting/basic">
+                  <a>Basic</a>
+                </Link>
               </Menu.Item>
               <Menu.Item key="/setting/security">
-                <Link href="/setting/security">Security</Link>
+                <Link href="/setting/security">
+                  <a>Security</a>
+                </Link>
               </Menu.Item>
               <Menu.Item key="/setting/social">
-                <Link href="/setting/social">Social</Link>
+                <Link href="/setting/social">
+                  <a>Social</a>
+                </Link>
               </Menu.Item>
               <Menu.Item key="/setting/submissions">
-                <Link href="/setting/submissions">Submissions</Link>
+                <Link href="/setting/submissions">
+                  <a>Submissions</a>
+                </Link>
               </Menu.Item>
               <Menu.Item key="/setting/others">
-                <Link href="/setting/others">Others</Link>
+                <Link href="/setting/others">
+                  <a>Others</a>
+                </Link>
               </Menu.Item>
             </Menu>
           </LeftMenu>
