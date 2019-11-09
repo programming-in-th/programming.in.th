@@ -66,10 +66,6 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
     status: 0
   })
 
-  useEffect(() => {
-    console.log(responseState)
-  }, [responseState])
-
   const submitCode = async (
     uid: string,
     problem_id: string,
