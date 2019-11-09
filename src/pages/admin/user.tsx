@@ -52,6 +52,7 @@ export default () => {
           dataSource={data.data}
           size="middle"
           pagination={{ pageSize: 1000 }}
+          scroll={{ x: 100 }}
         />
       ) : (
         <CustomSpin />
