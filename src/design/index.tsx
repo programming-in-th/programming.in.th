@@ -23,7 +23,7 @@ export const Fonts = {
     'Montserrat',
     ...getSystemFonts()
   ].join(', '),
-  body: ['SF Pro Text', ...getSystemFonts()].join(', ')
+  body: [...getSystemFonts()].join(', ')
 }
 
 const TH_UNICODE_RANGE = 'U+0E01-0E5B, U+200C-200D, U+25CC'
@@ -40,6 +40,7 @@ export const GlobalStyle = createGlobalStyle`
 
 @font-face {
   font-family: 'Sukhumvit Set';
+  font-display: swap;
   src: local('Sukhumvit Set');
   unicode-range: ${TH_UNICODE_RANGE};
 }
