@@ -7,7 +7,7 @@ import useSWR from 'swr'
 import { Table, Switch, Icon, Input } from 'antd'
 import { ITask } from '../../@types/task'
 import { ColumnProps } from 'antd/lib/table'
-import { fetchAdminTask } from '../../utils/fetcher'
+import { fetchFromFirebase } from '../../utils/fetcher'
 import { CustomSpin } from '../../components/Spin'
 
 const WarningText = styled.p`
@@ -19,7 +19,7 @@ const ConfirmBox = styled(Input)`
 `
 
 export default () => {
-  const { data } = useSWR('getAdminTask', fetchAdminTask)
+  const { data } = useSWR('getAdminTask', fetchFromFirebase)
   const [state, setState] = useState('')
   const [deleteID, setDeleteID] = useState('')
 

@@ -1,14 +1,15 @@
 import React, { useState } from 'react'
 import firebase from '../../lib/firebase'
 import useSWR from 'swr'
-import { fetchUserList } from '../../utils/fetcher'
+import { fetchFromFirebase } from '../../utils/fetcher'
 import { Table, Switch, Icon } from 'antd'
 import { CustomSpin } from '../../components/Spin'
 import { AdminLayout } from '../../components/admin/AdminLayout'
 
 export default () => {
-  const { data } = useSWR('getAllUser', fetchUserList)
+  const { data } = useSWR('getAllUser', fetchFromFirebase)
   const [state, setState] = useState('')
+
   const columns = [
     {
       title: 'Display Name',

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import styled from 'styled-components'
 import { Select, Skeleton } from 'antd'
 
@@ -9,7 +9,7 @@ import { ContainerWrapper } from '../../design/Atomics'
 import { NextPage } from 'next'
 import { PageLayout } from '../../components/Layout'
 import useSWR from 'swr'
-import { fetchSubmissionData } from '../../utils/fetcher'
+import { fetchFromFirebase } from '../../utils/fetcher'
 
 const { Option } = Select
 
@@ -43,7 +43,11 @@ const SubmissionDetail: NextPage = () => {
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
-  const { data } = useSWR(`${id}`, fetchSubmissionData)
+  const param = useMemo(() => ({ submission_id: id }), [id])
+  const { data } = useSWR(
+    ['getDetailedSubmissionData', param],
+    fetchFromFirebase
+  )
 
   useEffect(() => {
     if (data) {
