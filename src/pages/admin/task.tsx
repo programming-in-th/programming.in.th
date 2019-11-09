@@ -9,6 +9,7 @@ import { Router } from 'next/router'
 import { ITask } from '../../@types/task'
 import { ColumnProps } from 'antd/lib/table'
 import { fetchAdminTask } from '../../utils/fetchAdminTask'
+import { CustomSpin } from '../../components/Spin'
 
 const WarningText = styled.p`
   color: red;
@@ -93,7 +94,9 @@ export default () => {
           pagination={{ pageSize: 1000 }}
           scroll={{ x: 100 }}
         />
-      ) : null}
+      ) : (
+        <CustomSpin />
+      )}
     </AdminLayout>
   )
 }
