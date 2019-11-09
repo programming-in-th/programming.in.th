@@ -205,8 +205,8 @@ export default () => {
   }
 
   const filterProps: IFilter = {
-    tagList: tagListState,
     searchWord: taskPage.searchWord,
+    tagList: tagListState,
     searchTag: taskPage.searchTag as string[],
     hideTag: taskPage.hideTag,
     searchDifficulty: taskPage.searchDifficulty as number[],

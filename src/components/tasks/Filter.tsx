@@ -42,7 +42,11 @@ export const FilterComponent: (props: IFilter) => any = props => {
           disabled={props.hideTag}
         >
           {props.tagList.map(value => {
-            return <Option key={value}>{value}</Option>
+            return (
+              <Option key={value} value={value}>
+                {value}
+              </Option>
+            )
           })}
         </Select>
       </SubFilterWrapper>
