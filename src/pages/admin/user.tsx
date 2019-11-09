@@ -22,6 +22,7 @@ export default () => {
     {
       title: 'Admin',
       dataIndex: 'admin',
+      width: '25%',
       render: (isadmin: boolean, row: any) => (
         <span>
           <Switch
@@ -49,6 +50,7 @@ export default () => {
     <AdminLayout>
       {data ? (
         <Table
+          bordered
           columns={columns}
           dataSource={data.data}
           size="middle"
