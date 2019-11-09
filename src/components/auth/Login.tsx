@@ -73,7 +73,7 @@ const Login = (props: FormComponentProps) => {
   const { getFieldDecorator } = props.form
   return (
     <AuthContainer>
-      <h1>Log in to programming.in.th</h1>
+      <h1>Log in to PROGRAMMING.IN.TH</h1>
       <StyledForm onSubmit={handleSubmit}>
         <Form.Item>
           {getFieldDecorator('email', {
