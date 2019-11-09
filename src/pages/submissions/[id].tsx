@@ -9,7 +9,7 @@ import { ContainerWrapper } from '../../design/Atomics'
 import { NextPage } from 'next'
 import { PageLayout } from '../../components/Layout'
 import useSWR from 'swr'
-import { fetchSubmissionData } from '../../utils/fetchSubmissionData'
+import { fetchSubmissionData } from '../../utils/fetcher'
 
 const { Option } = Select
 

@@ -4,11 +4,10 @@ import styled from 'styled-components'
 
 import firebase from '../../lib/firebase'
 import useSWR from 'swr'
-import { Table, Switch, Icon, Popover, Input, Button, message } from 'antd'
-import { Router } from 'next/router'
+import { Table, Switch, Icon, Input } from 'antd'
 import { ITask } from '../../@types/task'
 import { ColumnProps } from 'antd/lib/table'
-import { fetchAdminTask } from '../../utils/fetchAdminTask'
+import { fetchAdminTask } from '../../utils/fetcher'
 import { CustomSpin } from '../../components/Spin'
 
 const WarningText = styled.p`

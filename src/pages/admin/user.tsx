@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import firebase from '../../lib/firebase'
 import useSWR from 'swr'
-import { fetchUserList } from '../../utils/fetchUserList'
+import { fetchUserList } from '../../utils/fetcher'
 import { Table, Switch, Icon } from 'antd'
 import { CustomSpin } from '../../components/Spin'
 import { AdminLayout } from '../../components/admin/AdminLayout'
