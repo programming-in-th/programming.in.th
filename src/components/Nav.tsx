@@ -27,6 +27,10 @@ const NavHeader = styled(Header)<{
   display: ${props => (props.hidden ? 'none' : 'block')};
   padding: 0 200px;
 
+  ${media('DESKTOP_MD')} {
+    padding: 0 100px;
+  }
+
   ${media('DESKTOP')} {
     padding-left: 25px;
     padding-right: 25px;
