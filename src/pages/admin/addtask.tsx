@@ -34,7 +34,27 @@ const AddTaskForm: React.FC<FormComponentProps> = (
   const handleSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault()
     props.form.validateFields(async (err, values) => {
-      if (!err) {
+      if (isNaN(values.difficulty)) {
+        openNotificationWithIcon(
+          'error',
+          'An error occured',
+          'Difficulty is not a number!'
+        )
+      }
+      if (isNaN(values.timeLimit)) {
+        openNotificationWithIcon(
+          'error',
+          'An error occured',
+          'Time limit is not a number!'
+        )
+      }
+      if (isNaN(values.memoryLimit)) {
+        openNotificationWithIcon(
+          'error',
+          'An error occured',
+          'Memory limit is not a number!'
+        )
+      } else if (!err) {
         const data: Submit = {
           problem_id: values.problemID,
           title: values.title,
@@ -54,6 +74,12 @@ const AddTaskForm: React.FC<FormComponentProps> = (
           'success',
           'Success!',
           'New task has been Added!'
+        )
+      } else {
+        openNotificationWithIcon(
+          'error',
+          'An error occured',
+          "You can't add new task now!"
         )
       }
     })
@@ -95,7 +121,12 @@ const AddTaskForm: React.FC<FormComponentProps> = (
       </Form.Item>
       <Form.Item label="Title" {...formItemLayout}>
         {getFieldDecorator('title', {
-          rules: [{ required: true, message: 'Title is required.' }]
+          rules: [
+            {
+              required: true,
+              message: 'Title is required.'
+            }
+          ]
         })(
           <Input
             prefix={
@@ -107,10 +138,17 @@ const AddTaskForm: React.FC<FormComponentProps> = (
       </Form.Item>
       <Form.Item label="Difficulty" {...formItemLayout}>
         {getFieldDecorator('difficulty', {
-          rules: [{ required: true, message: 'Difficulty is required.(1-10)' }]
+          rules: [
+            {
+              required: true,
+              message: 'Difficulty is required.(1-10)'
+            }
+          ]
         })(
           <Input
             prefix={<Icon type="rise" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            min={1}
+            max={100000}
             placeholder="Difficulty(1-10)"
           />
         )}
