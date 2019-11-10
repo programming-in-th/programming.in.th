@@ -102,6 +102,7 @@ const AddTaskForm: React.FC<FormComponentProps> = (
       sm: { span: 14, offset: 4 }
     }
   }
+
   return (
     <Form layout="horizontal" onSubmit={handleSubmit}>
       <Form.Item label="Problem id" {...formItemLayout}>
@@ -188,10 +189,17 @@ const AddTaskForm: React.FC<FormComponentProps> = (
         )}
       </Form.Item>
       <Form.Item label="Tags" {...formItemLayout}>
-        {getFieldDecorator('tags', {})(
+        {getFieldDecorator('tags', {
+          rules: [
+            {
+              pattern: /^\w+(?:,\w+)*$/,
+              message: "Tag doesn't match required pattern."
+            }
+          ]
+        })(
           <Input
             prefix={<Icon type="tags" style={{ color: 'rgba(0,0,0,.25)' }} />}
-            placeholder="Each tag should be separated with ',' and no space allowed ( can be added later )"
+            placeholder="Each tag should be separated with ',' and no space allowed."
           />
         )}
       </Form.Item>
