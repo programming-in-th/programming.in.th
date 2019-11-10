@@ -4,15 +4,11 @@ import { AdminLayout } from '../../components/admin/AdminLayout'
 import styled from 'styled-components'
 import firebase from '../../lib/firebase'
 import { FormComponentProps } from 'antd/lib/form'
-import { PageLayout } from '../../components/Layout'
+import { openNotificationWithIcon } from '../../components/Notification'
 
 const ButtonWrapper = styled.div`
   text-align: center;
 `
-interface Item {
-  name: string
-  holder: string
-}
 interface Submit {
   difficulty: number
   memory_limit: number
@@ -47,14 +43,18 @@ const AddTaskForm: React.FC<FormComponentProps> = (
           memory_limit: Number(values.memoryLimit),
           url: values.url,
           source: values.source,
-
           tags: values.tags.split(',')
         }
-
+        props.form.resetFields()
         await firebase
           .app()
           .functions('asia-east2')
           .httpsCallable('addTask')(data)
+        openNotificationWithIcon(
+          'success',
+          'Success!',
+          'New task has been Added!'
+        )
       }
     })
   }
