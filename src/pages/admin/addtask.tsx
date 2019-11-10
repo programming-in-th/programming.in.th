@@ -3,17 +3,16 @@ import { Button, Input, Form, Icon } from 'antd'
 import { AdminLayout } from '../../components/admin/AdminLayout'
 import styled from 'styled-components'
 import firebase from '../../lib/firebase'
-
-interface Item {
-  name: string
-  holder: string
-  update: (val: any) => void
-}
+import { FormComponentProps } from 'antd/lib/form'
+import { PageLayout } from '../../components/Layout'
 
 const ButtonWrapper = styled.div`
   text-align: center;
 `
-
+interface Item {
+  name: string
+  holder: string
+}
 interface Submit {
   difficulty: number
   memory_limit: number
@@ -25,72 +24,195 @@ interface Submit {
   tags: Array<string>
 }
 
-const LineItem = (props: Item) => {
+function hasErrors(fieldsError: Record<string, string[] | undefined>) {
+  return Object.keys(fieldsError).some(field => fieldsError[field])
+}
+
+const AddTaskForm: React.FC<FormComponentProps> = (
+  props: FormComponentProps
+) => {
+  const {
+    form: { getFieldDecorator, getFieldsError }
+  } = props
+
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault()
+    props.form.validateFields(async (err, values) => {
+      if (!err) {
+        const data: Submit = {
+          problem_id: values.problemID,
+          title: values.title,
+          difficulty: Number(values.difficulty),
+          time_limit: Number(values.timeLimit),
+          memory_limit: Number(values.memoryLimit),
+          url: values.url,
+          source: values.source,
+
+          tags: values.tags.split(',')
+        }
+
+        await firebase
+          .app()
+          .functions('asia-east2')
+          .httpsCallable('addTask')(data)
+      }
+    })
+  }
+
   const formItemLayout = {
-    labelCol: { span: 6 },
-    wrapperCol: { span: 12 }
+    labelCol: {
+      xs: { span: 24 },
+      sm: { span: 5 }
+    },
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 14 }
+    }
+  }
+
+  const formButtonLayout = {
+    wrapperCol: {
+      xs: { span: 24 },
+      sm: { span: 14, offset: 4 }
+    }
   }
   return (
-    <Form layout="horizontal">
-      <Form.Item label={`${props.name}`} {...formItemLayout}>
-        <Input
-          onChange={(e: React.FormEvent<HTMLInputElement>) => {
-            props.update(e.currentTarget.value)
-          }}
-          placeholder={`${props.holder}`}
-        />
+    <Form layout="horizontal" onSubmit={handleSubmit}>
+      <Form.Item label="Problem id" {...formItemLayout}>
+        {getFieldDecorator('problemID', {
+          rules: [
+            {
+              required: true,
+              message: 'Problem id is required.'
+            }
+          ]
+        })(
+          <Input
+            prefix={<Icon type="number" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="Problem id"
+          />
+        )}
+      </Form.Item>
+      <Form.Item label="Title" {...formItemLayout}>
+        {getFieldDecorator('title', {
+          rules: [{ required: true, message: 'Title is required.' }]
+        })(
+          <Input
+            prefix={
+              <Icon type="font-colors" style={{ color: 'rgba(0,0,0,.25)' }} />
+            }
+            placeholder="Title"
+          />
+        )}
+      </Form.Item>
+      <Form.Item label="Difficulty" {...formItemLayout}>
+        {getFieldDecorator('difficulty', {
+          rules: [{ required: true, message: 'Difficulty is required.(1-10)' }]
+        })(
+          <Input
+            prefix={<Icon type="rise" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="Difficulty(1-10)"
+          />
+        )}
+      </Form.Item>
+      <Form.Item label="Time limit" {...formItemLayout}>
+        {getFieldDecorator('timeLimit', {
+          rules: [
+            {
+              required: true,
+              message: 'Time limit is required.'
+            }
+          ]
+        })(
+          <Input
+            prefix={
+              <Icon type="history" style={{ color: 'rgba(0,0,0,.25)' }} />
+            }
+            placeholder="Time limit"
+          />
+        )}
+      </Form.Item>
+      <Form.Item label="Memory limit" {...formItemLayout}>
+        {getFieldDecorator('memoryLimit', {
+          rules: [
+            {
+              required: true,
+              message: 'Memory limit is required.'
+            }
+          ]
+        })(
+          <Input
+            prefix={
+              <Icon type="cluster" style={{ color: 'rgba(0,0,0,.25)' }} />
+            }
+            placeholder="Memory limit"
+          />
+        )}
+      </Form.Item>
+      <Form.Item label="Tags" {...formItemLayout}>
+        {getFieldDecorator('tags', {})(
+          <Input
+            prefix={<Icon type="tags" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="Each tag should be separated with ',' and no space allowed ( can be added later )"
+          />
+        )}
+      </Form.Item>
+      <Form.Item label="URL" {...formItemLayout}>
+        {getFieldDecorator('url', {
+          rules: [
+            {
+              required: true,
+              message: 'url is required.',
+              type: 'url'
+            }
+          ]
+        })(
+          <Input
+            prefix={<Icon type="link" style={{ color: 'rgba(0,0,0,.25)' }} />}
+            placeholder="URL"
+          />
+        )}
+      </Form.Item>
+      <Form.Item label="Source" {...formItemLayout}>
+        {getFieldDecorator('source', {
+          rules: [
+            {
+              required: true,
+              message: 'source is required.',
+              type: 'string'
+            }
+          ]
+        })(
+          <Input
+            prefix={
+              <Icon type="share-alt" style={{ color: 'rgba(0,0,0,.25)' }} />
+            }
+            placeholder="source"
+          />
+        )}
+      </Form.Item>
+      <Form.Item {...formButtonLayout}>
+        <ButtonWrapper>
+          <Button
+            type="primary"
+            htmlType="submit"
+            disabled={hasErrors(getFieldsError())}
+          >
+            Save
+          </Button>
+        </ButtonWrapper>
       </Form.Item>
     </Form>
   )
 }
 
+const TaskForm = Form.create({ name: 'TaskForm' })(AddTaskForm)
+
 export default () => {
-  const addTask = async () => {
-    const data: Submit = {
-      difficulty: Number(diff),
-      memory_limit: Number(memory),
-      title: name,
-      time_limit: Number(time),
-      url: url,
-      source: source,
-      problem_id: id,
-      tags: tag.split(',')
-    }
-    const response = await firebase
-      .app()
-      .functions('asia-east2')
-      .httpsCallable('addTask')(data)
-  }
-  const [name, setName] = useState<string>('')
-  const [diff, setDiff] = useState<number>(0)
-  const [memory, setMem] = useState<number>(0)
-  const [time, setTime] = useState<number>(0)
-  const [tag, setTag] = useState<string>('')
-  const [id, setId] = useState<string>('')
-  const [source, setSource] = useState<string>('')
-  const [url, setUrl] = useState<string>('')
   return (
     <AdminLayout>
       <h1>ADD TASK</h1>
-      <LineItem name="Problem id" holder="Problem id" update={setId} />
-      <LineItem name="Task name" holder="Task name" update={setName} />
-      <LineItem name="Time limit" holder="Time limit" update={setTime} />
-      <LineItem name="Memory limit" holder="Memory limit" update={setMem} />
-      <LineItem name="Difficulty" holder="Difficulty" update={setDiff} />
-      <LineItem
-        name="Tags"
-        holder="Each tag should be separated by ',' and no space allowed"
-        update={setTag}
-      />
-      <LineItem name="URL" holder="URL" update={setUrl} />
-      <LineItem name="Source" holder="Source" update={setSource} />
-      <Form layout="horizontal">
-        <ButtonWrapper>
-          <Button onClick={addTask} type="primary">
-            Finish Adding Task
-          </Button>
-        </ButtonWrapper>
-      </Form>
+      <TaskForm></TaskForm>
     </AdminLayout>
   )
 }
