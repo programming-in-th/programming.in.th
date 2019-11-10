@@ -37,6 +37,19 @@ export const CustomHead = () => (
       rel="preconnect"
       href="https://asia-east2-grader-ef0b5.cloudfunctions.net/"
     />
+    <link
+      rel="preload"
+      href="https://asia-east2-grader-ef0b5.cloudfunctions.net/getAllTasks"
+      as="fetch"
+      crossOrigin="anonymous"
+    />
+    <link
+      rel="preload"
+      href="https://asia-east2-grader-ef0b5.cloudfunctions.net/getRecentSubmissions"
+      as="fetch"
+      crossOrigin="anonymous"
+    />
+
     <title>programming.in.th | β</title>
   </React.Fragment>
 )
