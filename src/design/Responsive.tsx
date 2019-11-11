@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import throttle from 'lodash/throttle'
 
 interface IOnlyProps {
   breakpoint?: number
@@ -55,10 +56,16 @@ export const MobileOnly = ({ breakpoint = 1070, children }: IOnlyProps) => {
 function useWindowWidth() {
   const [width, setWidth] = useState(0)
   useEffect(() => {
-    const listener = () => setWidth(window.innerWidth)
+    const width =
+      window.innerWidth ||
+      document.documentElement.clientWidth ||
+      document.body.clientWidth
+
+    const listener = throttle(() => setWidth(width), 20)
     window.addEventListener('resize', listener)
     listener()
     return () => window.removeEventListener('resize', listener)
   }, [])
+
   return width
 }

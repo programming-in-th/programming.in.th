@@ -10,6 +10,7 @@ import firebase from 'firebase/app'
 import 'firebase/auth'
 import { useUser } from './UserContext'
 import { Fonts } from '../design'
+import throttle from 'lodash/throttle'
 
 const { Header } = Layout
 
@@ -63,10 +64,10 @@ export const Navigator: React.FunctionComponent<INavigatorProps> = (
   const [top, setTop] = useState<number>(0)
 
   useEffect(() => {
-    const checkScrollPosition = () => {
+    const checkScrollPosition = throttle(() => {
       const { pageYOffset } = window
       setTop(pageYOffset)
-    }
+    }, 30)
 
     window.addEventListener('scroll', checkScrollPosition)
 

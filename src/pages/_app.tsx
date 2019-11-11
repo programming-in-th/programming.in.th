@@ -8,7 +8,7 @@ import { UserProvider } from '../components/UserContext'
 let timeout: number
 
 const start = () => {
-  timeout = setTimeout(NProgress.start, 100)
+  timeout = setTimeout(NProgress.start, 300)
 }
 
 const done = () => {
