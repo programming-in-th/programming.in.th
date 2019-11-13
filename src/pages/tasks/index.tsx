@@ -5,6 +5,7 @@ import { SliderValue } from 'antd/lib/slider'
 import { PaginationConfig } from 'antd/lib/pagination'
 
 import { useRouter } from 'next/router'
+import Head from 'next/head'
 import useSWR from 'swr'
 import api from '../../lib/api'
 
@@ -29,6 +30,7 @@ interface ITaskPage {
 export default () => {
   const { data } = useSWR('/getAllTasks', api)
 
+  const [preloadHead, setPreloadHead] = useState<React.ReactNode[]>([])
   const [taskListState, setTaskListState] = useState<ITask[]>([])
   const [tagListState, setTagListState] = useState<string[]>([])
   const [taskPage, setTaskPage] = useState<ITaskPage>({
@@ -44,6 +46,17 @@ export default () => {
 
   const setPage: (page: ITaskPage) => void = page => {
     setTaskPage(page)
+  }
+
+  const getPreloadElement = (id: string) => {
+    return (
+      <link
+        rel="preload"
+        as="fetch"
+        crossOrigin="anonymous"
+        href={`https://asia-east2-grader-ef0b5.cloudfunctions.net/getProblemMetadata?id=${id}`}
+      />
+    )
   }
 
   useEffect(() => {
@@ -192,6 +205,9 @@ export default () => {
       return {
         onClick: () => {
           router.push('/tasks/' + record.problem_id)
+        },
+        onMouseEnter: () => {
+          setPreloadHead([...preloadHead, getPreloadElement(record.problem_id)])
         }
       }
     },
@@ -217,20 +233,23 @@ export default () => {
   }
 
   return (
-    <PageLayout>
-      <WhiteContainerWrapper>
-        <DesktopOnly>
-          <FilterComponent {...filterProps} />
-        </DesktopOnly>
-        <MobileOnly>
-          <Collapse bordered={false}>
-            <Panel key="1" header="Filter">
-              <FilterComponent {...filterProps} />
-            </Panel>
-          </Collapse>
-        </MobileOnly>
-        <Table {...tableConfig} />
-      </WhiteContainerWrapper>
-    </PageLayout>
+    <React.Fragment>
+      <Head>{preloadHead}</Head>
+      <PageLayout>
+        <WhiteContainerWrapper>
+          <DesktopOnly>
+            <FilterComponent {...filterProps} />
+          </DesktopOnly>
+          <MobileOnly>
+            <Collapse bordered={false}>
+              <Panel key="1" header="Filter">
+                <FilterComponent {...filterProps} />
+              </Panel>
+            </Collapse>
+          </MobileOnly>
+          <Table {...tableConfig} />
+        </WhiteContainerWrapper>
+      </PageLayout>
+    </React.Fragment>
   )
 }
