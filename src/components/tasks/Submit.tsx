@@ -10,13 +10,28 @@ import { Upload } from '../upload'
 
 import { Code } from '../CodeEditor'
 import { useUser } from '../UserContext'
+import { media } from '../../design/Responsive'
 
 const OptionsWrapper = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  @media (max-width: 1020px) {
-    display: block;
+
+  ${media('TABLET')} {
+    flex-direction: column;
+  }
+`
+
+const SubOptionWrapper = styled.div`
+  margin-left: 10px;
+
+  :first-child {
+    margin-left: 0px;
+  }
+
+  ${media('TABLET')} {
+    margin-left: 0px;
+    margin-top: 10px;
   }
 `
 
@@ -56,7 +71,7 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
   const [setting, setSetting] = useState<ISubmitSetting>({
     language: 'text/x-csrc',
     theme: 'material',
-    hideCode: true
+    hideCode: false
   })
 
   const [codeValue, setCode] = useState<string>('')
@@ -125,10 +140,6 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
     setSetting({ ...setting, theme: value })
   }
 
-  const handleHideCode = (value: boolean) => {
-    setSetting({ ...setting, hideCode: value })
-  }
-
   return (
     <React.Fragment>
       {responseState.status === -1 ? (
@@ -182,9 +193,9 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
         />
       ) : (
         <React.Fragment>
-          <h1 style={{ marginBottom: 15 }}>Submit Code</h1>
+          <h1>Submit</h1>
           <OptionsWrapper>
-            <SubFilterWrapper>
+            <SubOptionWrapper>
               <Select
                 defaultValue={languageData[0][0]}
                 style={{ width: 120 }}
@@ -194,8 +205,8 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
                   <Option key={data[0]}>{data[1]}</Option>
                 ))}
               </Select>
-            </SubFilterWrapper>
-            <SubFilterWrapper>
+            </SubOptionWrapper>
+            <SubOptionWrapper>
               <Select
                 defaultValue={themeData[0][0]}
                 style={{ width: 120 }}
@@ -205,20 +216,10 @@ export const Submit: React.FunctionComponent<ISubmitProps> = (
                   <Option key={data[0]}>{data[1]}</Option>
                 ))}
               </Select>
-            </SubFilterWrapper>
-            <SubFilterWrapper>
+            </SubOptionWrapper>
+            <SubOptionWrapper>
               <Upload getCodeFromUpload={getCodeFromUpload}></Upload>
-            </SubFilterWrapper>
-            <SubFilterWrapper>
-              <p>Hide Code: </p>
-              <Switch
-                style={{ marginLeft: 10 }}
-                checkedChildren={<Icon type="check" />}
-                unCheckedChildren={<Icon type="close" />}
-                defaultChecked={setting.hideCode}
-                onChange={handleHideCode}
-              />
-            </SubFilterWrapper>
+            </SubOptionWrapper>
           </OptionsWrapper>
           <Row>
             <Code
