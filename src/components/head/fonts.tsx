@@ -7,6 +7,6 @@ export const Fonts = () => (
         __html: `@import url('https://fonts.googleapis.com/css?family=Fira+Code|Montserrat:400,800|Roboto&display=swap');`
       }}
     ></style>
-    <link rel="preload" href="/assets/fonts/Kanit-Regular.woff2" as="font" />
+    <link rel="preload" href="/assets/fonts/Kanit-Regular.woff2" as="font" crossOrigin="anonymous"/>
   </React.Fragment>
 )
