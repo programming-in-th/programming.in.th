@@ -1,12 +1,11 @@
-import React from 'react'
-import Link from 'next/link'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import api from '../../lib/api'
 
 import { Submit } from '../../components/tasks/Submit'
 import { NextPage } from 'next'
 import { PageLayout } from '../../components/Layout'
-import { Button, Row, Col, Skeleton } from 'antd'
+import { Radio, Row, Col, Skeleton } from 'antd'
 import useSWR from 'swr'
 import { useUser } from '../../components/UserContext'
 
@@ -56,36 +55,56 @@ const TaskDetail: NextPage = () => {
   )
 
   const { data: statement } = useSWR(() => metadata.data.url, api)
+  const [state, setState] = useState<boolean>(true)
 
+  const Statement = () => {
+    return (
+      <React.Fragment>
+        <Wrapper>
+          {metadata && statement ? (
+            <React.Fragment>
+              <h1>{metadata.data.title}</h1>
+              <p> Time Limit : {metadata.data.time_limit} second(s)</p>
+              <p> Memory Limit : {metadata.data.memory_limit} MB(s)</p>
+
+              <StatementComponent
+                dangerouslySetInnerHTML={{ __html: statement.data }}
+              />
+            </React.Fragment>
+          ) : (
+            <Skeleton loading={true}></Skeleton>
+          )}
+        </Wrapper>
+        <Wrapper>
+          <Submit problem_id={id as string} canSubmit={!!user} />
+        </Wrapper>
+      </React.Fragment>
+    )
+  }
+  const Solution = () => {
+    return (
+      <React.Fragment>
+        <Wrapper>this is solution of {id}!. </Wrapper>
+      </React.Fragment>
+    )
+  }
   return (
     <PageLayout>
       <Row>
         <Col lg={{ span: 17, offset: 1 }} xs={{ span: 22, offset: 1 }}>
-          <Wrapper>
-            {metadata && statement ? (
-              <React.Fragment>
-                <h1>{metadata.data.title}</h1>
-                <p> Time Limit : {metadata.data.time_limit} second(s)</p>
-                <p> Memory Limit : {metadata.data.memory_limit} MB(s)</p>
-
-                <StatementComponent
-                  dangerouslySetInnerHTML={{ __html: statement.data }}
-                />
-              </React.Fragment>
-            ) : (
-              <Skeleton loading={true}></Skeleton>
-            )}
-          </Wrapper>
-          <Wrapper>
-            <Submit problem_id={id as string} canSubmit={!!user} />
-          </Wrapper>
+          {state ? <Statement /> : <Solution />}
         </Col>
         <Col lg={{ span: 4, offset: 1 }} xs={{ span: 22, offset: 1 }}>
           <Wrapper>
             <h1>Information</h1>
-            <Link href={`/solution/${id}`}>
-              <Button size="large">View Solution</Button>
-            </Link>
+            <Radio.Group
+              defaultValue="statement"
+              size="large"
+              onChange={e => setState(e.target.value === 'statement')}
+            >
+              <Radio.Button value="statement">Statement</Radio.Button>
+              <Radio.Button value="solution">Solution</Radio.Button>
+            </Radio.Group>
           </Wrapper>
           <Wrapper>
             <h1>Statistic</h1>
