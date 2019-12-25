@@ -1,11 +1,12 @@
 import React from 'react'
+import Link from 'next/link'
 import styled from 'styled-components'
 import api from '../../lib/api'
 
 import { Submit } from '../../components/tasks/Submit'
 import { NextPage } from 'next'
 import { PageLayout } from '../../components/Layout'
-import { Row, Col, Skeleton } from 'antd'
+import { Button, Row, Col, Skeleton } from 'antd'
 import useSWR from 'swr'
 import { useUser } from '../../components/UserContext'
 
@@ -82,6 +83,9 @@ const TaskDetail: NextPage = () => {
         <Col lg={{ span: 4, offset: 1 }} xs={{ span: 22, offset: 1 }}>
           <Wrapper>
             <h1>Information</h1>
+            <Link href={`/solution/${id}`}>
+              <Button size="large">View Solution</Button>
+            </Link>
           </Wrapper>
           <Wrapper>
             <h1>Statistic</h1>
