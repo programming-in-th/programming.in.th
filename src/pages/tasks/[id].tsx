@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
 import api from '../../lib/api'
 
@@ -9,7 +9,7 @@ import { Radio, Row, Col, Skeleton } from 'antd'
 import useSWR from 'swr'
 import { useUser } from '../../components/UserContext'
 
-import { MarkdownRenderer } from './MarkdownRenderer'
+import { MarkdownRenderer } from '../../components/tasks/MarkdownRenderer'
 import Head from 'next/head'
 
 const Wrapper = styled.div`
@@ -59,13 +59,20 @@ const TaskDetail: NextPage = () => {
 
   const { data: statement } = useSWR(() => metadata.data.url, api)
 
-  const { data: solutionMD } = useSWR(
+  const { data: solutionMD, error } = useSWR(
     () =>
       'https://raw.githubusercontent.com/programming-in-th/solutions/master/md/' +
       metadata.data.problem_id +
       '.md',
     api
   )
+
+  useEffect(() => {
+    console.log(error)
+    if (error) {
+      console.log()
+    }
+  }, [error])
 
   const [state, setState] = useState<boolean>(true)
 
@@ -93,7 +100,16 @@ const TaskDetail: NextPage = () => {
       </React.Fragment>
     )
   }
+
   const Solution = () => {
+    if (error) {
+      return (
+        <Wrapper>
+          <h1>Solution does not exist!</h1>
+        </Wrapper>
+      )
+    }
+
     return (
       <React.Fragment>
         <Head>
@@ -105,8 +121,11 @@ const TaskDetail: NextPage = () => {
           />
         </Head>
         <Wrapper>
-          {solutionMD.data ? (
-            <MarkdownRenderer content={solutionMD.data} />
+          {metadata && statement && solutionMD.data ? (
+            <React.Fragment>
+              <h1>{metadata.data.title}</h1>
+              <MarkdownRenderer content={solutionMD.data} />
+            </React.Fragment>
           ) : (
             <Skeleton loading={true}></Skeleton>
           )}
@@ -114,6 +133,7 @@ const TaskDetail: NextPage = () => {
       </React.Fragment>
     )
   }
+
   return (
     <PageLayout>
       <Row>
