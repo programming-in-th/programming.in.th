@@ -9,6 +9,9 @@ import { Radio, Row, Col, Skeleton } from 'antd'
 import useSWR from 'swr'
 import { useUser } from '../../components/UserContext'
 
+import { MarkdownRenderer } from './MarkdownRenderer'
+import Head from 'next/head'
+
 const Wrapper = styled.div`
   margin: 15px 0;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
@@ -55,6 +58,15 @@ const TaskDetail: NextPage = () => {
   )
 
   const { data: statement } = useSWR(() => metadata.data.url, api)
+
+  const { data: solutionMD } = useSWR(
+    () =>
+      'https://raw.githubusercontent.com/programming-in-th/solutions/master/md/' +
+      metadata.data.problem_id +
+      '.md',
+    api
+  )
+
   const [state, setState] = useState<boolean>(true)
 
   const Statement = () => {
@@ -84,7 +96,21 @@ const TaskDetail: NextPage = () => {
   const Solution = () => {
     return (
       <React.Fragment>
-        <Wrapper>this is solution of {id}!. </Wrapper>
+        <Head>
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
+            integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+            crossOrigin="anonymous"
+          />
+        </Head>
+        <Wrapper>
+          {solutionMD.data ? (
+            <MarkdownRenderer content={solutionMD.data} />
+          ) : (
+            <Skeleton loading={true}></Skeleton>
+          )}
+        </Wrapper>
       </React.Fragment>
     )
   }
