@@ -1424,10 +1424,10 @@
     "@types/long" "*"
     "@types/node" "*"
 
-"@types/codemirror@^0.0.81":
-  version "0.0.81"
-  resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-0.0.81.tgz#3cea2c1006406973d4aad212e617638cbfc2965b"
-  integrity sha512-QoeIb9tn/TZp0IzNyMKlcwHR6pHxNoIW9mKqF7asAsj+AWqpFOEUsxia756L6WKBQNk2psHpu+aFuIFqo3Ac0A==
+"@types/codemirror@^0.0.82":
+  version "0.0.82"
+  resolved "https://registry.yarnpkg.com/@types/codemirror/-/codemirror-0.0.82.tgz#6d0c50036a023980318a6ed9f85ff5cc6b24172a"
+  integrity sha512-EVlPrt1rB256CRTlhNCXXLYaN24n3qZNStM6dRWaV6sUYyJA1SC5hvDSCHEHDg1SB93X8TwAGWRjEVdmUWPHmQ==
   dependencies:
     "@types/tern" "*"
 
@@ -1528,16 +1528,10 @@
     "@types/prop-types" "*"
     csstype "^2.2.0"
 
-"@types/source-list-map@*":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@types/source-list-map/-/source-list-map-0.1.2.tgz#0078836063ffaf17412349bba364087e0ac02ec9"
-  integrity sha512-K5K+yml8LTo9bWJI/rECfIPrGgxdpeNbj+d53lwN4QjW1MCwlkhUms+gtdzigTeUyBr09+u8BwOIY3MXvHdcsA==
-
 "@types/styled-components@^4.4.1":
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/@types/styled-components/-/styled-components-4.4.1.tgz#bc40cf5ce0708032f4b148b04ab3c470d3e74026"
   integrity sha512-cQXT4pkAkM0unk/s26UBrJx9RmJ2rNUn2aDTgzp1rtu+tTkScebE78jbxNWhlqkA43XF3d41CcDlyl9Ldotm2g==
-
   dependencies:
     "@types/hoist-non-react-statics" "*"
     "@types/react" "*"
