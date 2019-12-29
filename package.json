@@ -62,7 +62,7 @@
     "babel-plugin-inline-react-svg": "^1.1.0",
     "babel-plugin-styled-components": "^1.10.6",
     "husky": "^3.0.9",
-    "prettier": "^1.18.2",
+    "prettier": "^1.19.1",
     "pretty-quick": "^2.0.0",
     "typescript": "^3.7.2",
     "rehype-highlight": "^3.0.0",
