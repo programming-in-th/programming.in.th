@@ -30,7 +30,7 @@
     "@zeit/next-mdx": "^1.2.0",
     "antd": "^3.26.4",
     "axios": "^0.19.0",
-    "babel-plugin-import": "^1.12.2",
+    "babel-plugin-import": "^1.13.0",
     "codemirror": "^5.49.2",
     "firebase": "^7.6.1",
     "intersection-observer": "^0.7.0",
