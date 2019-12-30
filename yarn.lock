@@ -1513,10 +1513,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-syntax-highlighter@^11.0.1":
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/@types/react-syntax-highlighter/-/react-syntax-highlighter-11.0.1.tgz#37215d91c23c556d8b369cd7d9a2d8756ec8c9c5"
-  integrity sha512-SQfkfKoSOQE1RLSJtPzo/uguliluNNt9tmjENca6+wZ1jfojUM3jNOQ2c6KCzQVtIknOZWrJTCoJMy4RSQcGOA==
+"@types/react-syntax-highlighter@^11.0.3":
+  version "11.0.3"
+  resolved "https://registry.yarnpkg.com/@types/react-syntax-highlighter/-/react-syntax-highlighter-11.0.3.tgz#ae1dac83010e4a7ca04a470bc1ca3c2df33decbb"
+  integrity sha512-vdT3fuApIM+b9IQgW1EgOyol4A0H3z+19+aOdU0T5PUiSzY24VqBfIlYrzvAotE6xOvfAZfjuF/L1QPNUSmgDw==
   dependencies:
     "@types/react" "*"
 
