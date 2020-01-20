@@ -22,7 +22,7 @@
   "dependencies": {
     "@mapbox/rehype-prism": "^0.3.1",
     "@mdx-js/loader": "^1.5.1",
-    "@mdx-js/react": "^1.5.1",
+    "@mdx-js/react": "^1.5.5",
     "@next/mdx": "^9.1.6",
     "@researchgate/react-intersection-observer": "^1.0.1",
     "@zeit/next-bundle-analyzer": "^0.1.2",
