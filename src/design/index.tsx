@@ -17,10 +17,9 @@ export function getSystemFonts() {
 
 export const Fonts = {
   display: [
+    'SF Pro Display',
     'Sukhumvit Set',
     'Kanit',
-    'SF Pro Display',
-    'Montserrat',
     ...getSystemFonts()
   ].join(', '),
   body: [...getSystemFonts()].join(', ')
@@ -82,7 +81,6 @@ h6 {
 }
 
 body {
-	/* This will automatic fallback Thai font which Roboto can't handle. In other words, this will support Thai font by default. */
 	font-family : ${Fonts.body};
 	font-display: swap;
 	box-sizing: border-box;

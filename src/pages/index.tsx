@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { SimpleImg } from 'react-simple-img'
 
 import { PageLayout } from '../components/Layout'
 
@@ -118,8 +118,9 @@ const RegisterWrapper = styled.div`
 
 export default () => {
   const { user } = useUser()
+
   return (
-    <PageLayout>
+    <PageLayout bg="white">
       <Wrapper id="scrolling-container">
         <MainContainer>
           <div>
@@ -139,10 +140,11 @@ export default () => {
           {user ? (
             <DesktopOnly>
               <RightIllus>
-                <LazyLoadImage
+                <SimpleImg
                   src="/assets/svg/title.svg"
                   alt="title"
-                  threshold={1000}
+                  width={660}
+                  height={795}
                 />
               </RightIllus>
             </DesktopOnly>
@@ -157,10 +159,11 @@ export default () => {
         <Container>
           <DesktopOnly>
             <LeftIllus>
-              <LazyLoadImage
+              <SimpleImg
                 src="/assets/svg/problem.svg"
                 alt="problem"
-                threshold={1000}
+                width={660}
+                height={795}
               />
             </LeftIllus>
           </DesktopOnly>
@@ -187,10 +190,11 @@ export default () => {
           </div>
           <DesktopOnly>
             <RightIllus>
-              <LazyLoadImage
+              <SimpleImg
                 src="/assets/svg/learn.svg"
                 alt="learn"
-                threshold={1000}
+                width={660}
+                height={795}
               />
             </RightIllus>
           </DesktopOnly>
