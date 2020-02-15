@@ -86,7 +86,8 @@ export async function unstable_getStaticProps({ params: { slug } }) {
       statementMetadata: statementMetadata.data,
       statement: statement.data,
       solution: renderedSolution ? renderedSolution : undefined
-    }
+    },
+    revalidate: 10
   }
 }
 
