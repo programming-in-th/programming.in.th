@@ -59,6 +59,8 @@ module.exports = withPlugins(
         })
       }
 
+      process.env.USE_CACHE = 'true'
+
       return config
     }
   }

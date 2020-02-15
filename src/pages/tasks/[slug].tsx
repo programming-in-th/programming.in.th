@@ -12,6 +12,7 @@ import { renderMarkdown } from '../../utils/renderMarkdown'
 import { Wrapper } from '../../components/tasks/Wrapper'
 import { Statement } from '../../components/tasks/Statement'
 import { Solution } from '../../components/tasks/Solution'
+import { getProblemIDs } from '../../utils/getProblemIDs'
 
 const TaskDetail = ({ statementMetadata, statement, solution }) => {
   const { user } = useUser()
@@ -53,12 +54,7 @@ const TaskDetail = ({ statementMetadata, statement, solution }) => {
 }
 
 export async function unstable_getStaticPaths() {
-  const res = await api.get('/getAllProblemIDs')
-  const { data } = res
-
-  const paths = data.map((slug: string) => {
-    return { params: { slug } }
-  })
+  const paths = await getProblemIDs()
 
   return {
     paths
