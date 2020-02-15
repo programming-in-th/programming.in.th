@@ -5,8 +5,6 @@ import { SliderValue } from 'antd/lib/slider'
 import { PaginationConfig } from 'antd/lib/pagination'
 
 import { useRouter } from 'next/router'
-import Head from 'next/head'
-import useSWR from 'swr'
 import api from '../../lib/api'
 
 import { DesktopOnly, MobileOnly } from '../../design/Responsive'
@@ -27,10 +25,7 @@ interface ITaskPage {
   hideTag: boolean
 }
 
-export default () => {
-  const { data } = useSWR('/getAllTasks', api)
-
-  const [preloadHead, setPreloadHead] = useState<React.ReactNode[]>([])
+export default ({ tasks }) => {
   const [taskListState, setTaskListState] = useState<ITask[]>([])
   const [tagListState, setTagListState] = useState<string[]>([])
   const [taskPage, setTaskPage] = useState<ITaskPage>({
@@ -48,25 +43,10 @@ export default () => {
     setTaskPage(page)
   }
 
-  const getPreloadElement = (id: string) => {
-    return (
-      <link
-        rel="preload"
-        as="fetch"
-        crossOrigin="anonymous"
-        href={`https://asia-east2-grader-ef0b5.cloudfunctions.net/getProblemMetadata?id=${id}`}
-      />
-    )
-  }
-
-  useEffect(() => {
-    router.prefetch('/tasks/[id]')
-  }, [])
-
   useEffect(() => {
     const updateTask = () => {
-      if (data) {
-        const filteredEvents = data.data.filter(
+      if (tasks) {
+        const filteredEvents = tasks.filter(
           ({ problem_id, title, tags, difficulty }) => {
             const textLowerCase = taskPage.searchWord.toLowerCase()
             title = title.toLowerCase()
@@ -93,12 +73,12 @@ export default () => {
     }
 
     updateTask()
-  }, [taskPage, data])
+  }, [taskPage, tasks])
 
   useEffect(() => {
     let tagNow: string[] = []
-    if (data) {
-      data.data.forEach(val => {
+    if (tasks) {
+      tasks.forEach(val => {
         val.tags.forEach(tag => {
           tagNow.push(tag)
         })
@@ -106,7 +86,7 @@ export default () => {
     }
 
     setTagListState(Array.from(new Set(tagNow)))
-  }, [data])
+  }, [tasks])
 
   const handleSearch: (e: React.FormEvent<HTMLInputElement>) => void = e => {
     setPage({
@@ -205,9 +185,6 @@ export default () => {
       return {
         onClick: () => {
           router.push('/tasks/' + record.problem_id)
-        },
-        onMouseEnter: () => {
-          setPreloadHead([...preloadHead, getPreloadElement(record.problem_id)])
         }
       }
     },
@@ -216,8 +193,7 @@ export default () => {
       ITask
     >[],
     pagination: CustomPagination,
-    dataSource: taskListState,
-    loading: !data
+    dataSource: taskListState
   }
 
   const filterProps: IFilter = {
@@ -234,7 +210,6 @@ export default () => {
 
   return (
     <React.Fragment>
-      <Head>{preloadHead}</Head>
       <PageLayout>
         <WhiteContainerWrapper>
           <DesktopOnly>
@@ -252,4 +227,15 @@ export default () => {
       </PageLayout>
     </React.Fragment>
   )
+}
+
+export async function unstable_getStaticProps() {
+  const tasks = await api.get('/getAllTasks')
+
+  return {
+    props: {
+      tasks: tasks.data
+    },
+    revalidate: 10
+  }
 }
