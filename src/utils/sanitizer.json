@@ -87,7 +87,10 @@
   "attributes": {
     "a": ["href"],
     "img": ["src", "longDesc"],
-    "input": [["type", "checkbox"], ["disabled", true]],
+    "input": [
+      ["type", "checkbox"],
+      ["disabled", true]
+    ],
     "li": [["className", "task-list-item"]],
     "div": ["itemScope", "itemType"],
     "blockquote": ["cite"],

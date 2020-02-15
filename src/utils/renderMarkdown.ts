@@ -1,4 +1,3 @@
-import React from 'react'
 import unified from 'unified'
 import { VFileCompatible } from 'vfile'
 import parse from 'remark-parse'
@@ -8,18 +7,10 @@ import katex from 'rehype-katex'
 import stringify from 'rehype-stringify'
 import sanitize from 'rehype-sanitize'
 import highlight from 'rehype-highlight'
-import 'highlight.js/styles/atom-one-dark.css'
 
 import sanitizeSetting from './sanitizer.json'
-import { MarkDownStyle } from '../../design'
 
-interface IMarkdownRenderProps {
-  content: string
-}
-
-export const MarkdownRenderer: React.FunctionComponent<
-  IMarkdownRenderProps
-> = props => {
+export const renderMarkdown = (content: string) => {
   const processor = unified()
     .use(parse)
     .use(math)
@@ -31,12 +22,8 @@ export const MarkdownRenderer: React.FunctionComponent<
 
   const processMarkdown = (content: VFileCompatible) => {
     const result = processor.processSync(content).contents
-    return { __html: String(result) }
+    return String(result)
   }
 
-  return (
-    <MarkDownStyle>
-      <div dangerouslySetInnerHTML={processMarkdown(`${props.content}`)} />
-    </MarkDownStyle>
-  )
+  return processMarkdown(content)
 }
