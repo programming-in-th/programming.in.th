@@ -13,6 +13,7 @@ import {
 } from '../components/UserContext'
 import firebase from '../lib/firebase'
 import user from './admin/user'
+import { CustomSpin } from '../components/Spin'
 
 let timeout: number
 
@@ -64,6 +65,11 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 
     fetchAdmin()
   }, [user])
+
+  // Waiting for dashboard implementation, so we use this as placeholder
+  if (user === undefined) {
+    return <CustomSpin />
+  }
 
   return (
     <UserStateContext.Provider value={userState}>
