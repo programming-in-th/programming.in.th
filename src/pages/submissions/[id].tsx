@@ -101,7 +101,7 @@ const SubmissionDetail: NextPage = () => {
                       ],
                       lineWrapping: true
                     }}
-                    onBeforeChange={(editor, data, value) => {}}
+                    onBeforeChange={{}}
                     value={current.code as string}
                   />
                 </React.Fragment>
