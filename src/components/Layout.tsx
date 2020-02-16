@@ -4,6 +4,8 @@ import { Layout } from 'antd'
 
 import { Navigator } from './Nav'
 import { GlobalStyle } from '../design'
+import { useUser } from './UserContext'
+import { CustomSpin } from './Spin'
 
 const { Content, Footer } = Layout
 
@@ -21,6 +23,13 @@ interface IPageLayoutProps {
 export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
   props: IPageLayoutProps
 ) => {
+  const { user } = useUser()
+
+  // Waiting for dashboard implementation, so we use this as placeholder
+  if (user === undefined) {
+    return <CustomSpin />
+  }
+
   return (
     <React.Fragment>
       <CustomLayout bg={props.bg}>
