@@ -38,12 +38,20 @@ export const AuthContainer = styled.div`
   h1 {
     font-size: 48px;
     font-weight: 700;
+    max-width: 100%;
+    word-wrap: break-word;
   }
 
   ${media('PHONE')} {
     width: 90vw;
     padding: 0px 0px 0px;
     height: unset;
+
+    h1 {
+      font-size: 24px;
+      font-weight: 700;
+      max-width: 100%;
+    }
   }
 `
 
