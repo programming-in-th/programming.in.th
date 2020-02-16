@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { LazyLoadImage } from 'react-lazy-load-image-component'
+import { SimpleImg } from 'react-simple-img'
 
-export const Img = styled(LazyLoadImage)`
+export const Img = styled(SimpleImg)`
   max-width: 100%;
 `
