@@ -4,6 +4,7 @@ const remarkMath = require('remark-math')
 const rehypeKatex = require('rehype-katex')
 const rehypePrism = require('@mapbox/rehype-prism')
 const withPlugins = require('next-compose-plugins')
+const withOffline = require('next-offline')
 
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
@@ -22,7 +23,8 @@ module.exports = withPlugins(
         pageExtensions: ['tsx', 'mdx']
       }
     ],
-    withBundleAnalyzer
+    withBundleAnalyzer,
+    withOffline
   ],
   {
     analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
@@ -36,6 +38,29 @@ module.exports = withPlugins(
         analyzerMode: 'static',
         reportFilename: '../bundles/client.html'
       }
+    },
+    target: 'serverless',
+    transformManifest: manifest => ['/'].concat(manifest),
+    generateInDevMode: true,
+    workboxOpts: {
+      swDest: 'static/service-worker.js',
+      runtimeCaching: [
+        {
+          urlPattern: /^https?.*/,
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'https-calls',
+            networkTimeoutSeconds: 15,
+            expiration: {
+              maxEntries: 150,
+              maxAgeSeconds: 30 * 24 * 60 * 60 // 1 month
+            },
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        }
+      ]
     },
     webpack: (config, { isServer }) => {
       if (isServer) {

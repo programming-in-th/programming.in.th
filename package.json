@@ -36,6 +36,7 @@
     "lodash": "^4.17.15",
     "next": "^9.2.2-canary.20",
     "next-compose-plugins": "^2.2.0",
+    "next-offline": "^5.0.0",
     "nprogress": "^0.2.0",
     "null-loader": "^3.0.0",
     "react": "^16.10.2",
