@@ -25,11 +25,11 @@ export const StyledCard = styled(Card)`
 
   ${media('TABLET')} {
     margin-top: 32px;
-    width: 60vw;
+    width: 80vw;
   }
 
   ${media('PHONE')} {
-    width: 80vw;
+    width: 90vw;
     padding: 0;
   }
 `

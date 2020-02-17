@@ -110,7 +110,7 @@ const RegisterWrapper = styled.div`
   }
 
   ${media('PHONE')} {
-    min-width: 50vw;
+    width: 100%;
     padding: 0px;
     padding-top: 15px;
   }
