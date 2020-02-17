@@ -34,7 +34,7 @@
     "firebase": "^7.6.1",
     "intersection-observer": "^0.7.0",
     "lodash": "^4.17.15",
-    "next": "^9.2.2-canary.20",
+    "next": "^9.2.2-canary.21",
     "next-compose-plugins": "^2.2.0",
     "nprogress": "^0.2.0",
     "null-loader": "^3.0.0",
