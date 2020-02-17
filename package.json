@@ -42,7 +42,7 @@
     "react-codemirror2": "^6.0.0",
     "react-dom": "^16.10.2",
     "react-simple-img": "^2.3.9",
-    "react-syntax-highlighter": "^11.0.2",
+    "react-syntax-highlighter": "^12.2.1",
     "reading-time": "^1.2.0",
     "rehype-katex": "^2.0.0",
     "remark-math": "^2.0.0",
