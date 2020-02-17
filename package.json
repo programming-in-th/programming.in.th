@@ -40,7 +40,7 @@
     "null-loader": "^3.0.0",
     "react": "^16.10.2",
     "react-codemirror2": "^6.0.0",
-    "react-dom": "^16.10.2",
+    "react-dom": "^16.12.0",
     "react-simple-img": "^2.3.9",
     "react-syntax-highlighter": "^12.2.1",
     "reading-time": "^1.2.0",
