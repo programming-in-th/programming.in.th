@@ -47,7 +47,7 @@
     "rehype-katex": "^2.0.0",
     "remark-math": "^2.0.0",
     "styled-components": "^4.4.1",
-    "swr": "^0.1.9",
+    "swr": "^0.1.17",
     "util": "^0.12.1"
   },
   "devDependencies": {
