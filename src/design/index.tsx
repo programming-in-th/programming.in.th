@@ -84,7 +84,9 @@ body {
 	font-family : ${Fonts.body};
 	font-display: swap;
 	box-sizing: border-box;
-	-webkit-tap-highlight-color: transparent !important;
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 #nprogress {
