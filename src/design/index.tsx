@@ -146,9 +146,10 @@ export const MarkDownStyle = styled.div`
   }
 
   /* Code */
-  code:not(.hljs) {
+
+  code {
     background-color: rgba(27, 31, 35, 0.1);
-    font-size: 85%;
+    font-size: 90%;
     padding: 0.2em 0.4em;
     margin: 0;
   }
