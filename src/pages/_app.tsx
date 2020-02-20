@@ -4,13 +4,7 @@ import React, { useReducer, useEffect } from 'react'
 import NProgress from 'nprogress'
 
 import Router from 'next/router'
-import {
-  UserState,
-  UserAction,
-  reducer,
-  initialState,
-  UserStateContext
-} from '../components/UserContext'
+import { UserAction, UserStateContext } from '../components/UserContext'
 import firebase from '../lib/firebase'
 import user from './admin/user'
 
@@ -28,6 +22,24 @@ const done = () => {
 Router.events.on('routeChangeStart', start)
 Router.events.on('routeChangeComplete', done)
 Router.events.on('routeChangeError', done)
+
+export type UserState = typeof initialState
+const initialState = { user: undefined, isAdmin: false }
+
+export const reducer = (state: UserState, action: UserAction): UserState => {
+  switch (action.type) {
+    case 'RECEIVE_USER':
+      return Object.assign({}, state, {
+        user: action.payload.user
+      })
+    case 'RECEIVE_ADMIN':
+      return Object.assign({}, state, {
+        isAdmin: action.payload.isAdmin
+      })
+    default:
+      return state
+  }
+}
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
   const [userState, userDispatch] = useReducer<
