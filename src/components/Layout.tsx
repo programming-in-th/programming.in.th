@@ -42,8 +42,8 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
             backgroundColor: props.bg ? props.bg : '#fafafa'
           }}
         >
-          IPST ©2019 | Contribution: All the source code for this website is
-          available on{' '}
+          IPST ©2019-{new Date().getFullYear()} | Contribution: All the source
+          code for this website is available on{' '}
           <a
             href="https://github.com/programming-in-th/programming.in.th"
             target="_blank"
