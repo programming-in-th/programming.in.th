@@ -13,7 +13,6 @@ import {
 } from '../components/UserContext'
 import firebase from '../lib/firebase'
 import user from './admin/user'
-import { CustomSpin } from '../components/Spin'
 
 let timeout: number
 
