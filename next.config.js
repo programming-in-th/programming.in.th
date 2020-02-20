@@ -6,6 +6,10 @@ const rehypePrism = require('@mapbox/rehype-prism')
 const withPlugins = require('next-compose-plugins')
 const withOffline = require('next-offline')
 
+try {
+  fs.unlinkSync('PROBLEM_ID_CACHE')
+} catch (e) {}
+
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
   options: {
