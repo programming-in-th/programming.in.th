@@ -10,7 +10,7 @@ import 'codemirror/theme/monokai.css'
 import 'codemirror/theme/solarized.css'
 import 'codemirror/theme/material.css'
 
-if (typeof window?.navigator !== 'undefined') {
+if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
   require('codemirror/mode/clike/clike.js')
   require('codemirror/mode/python/python.js')
 
