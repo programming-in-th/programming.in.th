@@ -2,7 +2,7 @@ import {
   UnControlled as CodeMirror,
   Controlled as CodeMirrorDisplay
 } from 'react-codemirror2'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import 'codemirror/lib/codemirror.css'
 
@@ -21,7 +21,7 @@ if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
   require('codemirror/addon/fold/indent-fold.js')
 }
 
-export const Code = styled(CodeMirror)`
+const codeStyle = css`
   font-family: Fira Code !important;
   margin: 15px 0;
   span {
@@ -33,14 +33,10 @@ export const Code = styled(CodeMirror)`
   }
 `
 
-export const CodeDisplay = styled(CodeMirrorDisplay)`
-  font-family: Fira Code !important;
-  margin: 15px 0;
-  span {
-    font-family: Fira Code !important;
-  }
+export const Code = styled(CodeMirror)`
+  ${codeStyle}
+`
 
-  .CodeMirror {
-    height: 500px !important;
-  }
+export const CodeDisplay = styled(CodeMirrorDisplay)`
+  ${codeStyle}
 `
