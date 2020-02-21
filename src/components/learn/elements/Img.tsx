@@ -1,6 +1,8 @@
 import styled from 'styled-components'
-import { SimpleImg } from 'react-simple-img'
+import { SimpleImg, Props as SimpleImgProps } from 'react-simple-img'
 
-export const Img = styled(SimpleImg)`
+const Image = (props: SimpleImgProps) => <SimpleImg height="100%" {...props} />
+
+export const Img = styled(Image)`
   max-width: 100%;
 `
