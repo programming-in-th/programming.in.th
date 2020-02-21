@@ -30,7 +30,7 @@
     "antd": "^3.26.4",
     "axios": "^0.19.2",
     "babel-plugin-import": "^1.12.2",
-    "codemirror": "^5.49.2",
+    "codemirror": "^5.52.0",
     "firebase": "^7.6.1",
     "intersection-observer": "^0.7.0",
     "lodash": "^4.17.15",
