@@ -55,7 +55,7 @@ const MainContainer = styled(Container)`
 
 const Title = styled.h1<{ color?: string }>`
   font-size: 42px;
-  font-family: Montserrat, ${Fonts.display};
+  font-family: ${Fonts.display};
   font-weight: 800;
   display: inline;
   color: ${props => props.color || 'black'};
@@ -78,7 +78,7 @@ const SubTitle = styled.h2`
 
 const CustomLink = styled.a`
   font-size: 36px;
-  font-family: Montserrat;
+  font-family: ${Fonts.display};
   font-weight: 800;
   text-decoration: none;
 
