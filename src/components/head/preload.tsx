@@ -9,6 +9,13 @@ export const Preload = () => (
       crossOrigin="anonymous"
       as="style"
     />
+    <link
+      rel="preload"
+      as="font"
+      href="/assets/fonts/Kanit-Regular.woff2"
+      type="font/woff2"
+      crossOrigin="anonymous"
+    />
     <link rel="preconnect" href="https://www.googleapis.com/" />
     <link
       rel="preconnect"
