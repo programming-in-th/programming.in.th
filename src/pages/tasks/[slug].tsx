@@ -9,7 +9,7 @@ import { useUser } from '../../components/UserContext'
 
 import 'highlight.js/styles/atom-one-dark.css'
 import { renderMarkdown } from '../../utils/renderMarkdown'
-import { Wrapper } from '../../components/tasks/Wrapper'
+import { Wrapper } from '../../components/tasks/Common'
 import { Statement } from '../../components/tasks/Statement'
 import { Solution } from '../../components/tasks/Solution'
 import { getProblemIDs } from '../../utils/getProblemIDs'
