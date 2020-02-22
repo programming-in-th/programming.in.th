@@ -1,15 +1,6 @@
 import styled, { keyframes } from 'styled-components'
 import { media } from './Responsive'
 
-export const ContainerWrapper = styled.div`
-  width: 70%;
-  margin: 20px auto;
-
-  ${media('TABLET')} {
-    width: calc(100% - 10px * 2);
-  }
-`
-
 const fade = keyframes`
     from {
         opacity: 0;
@@ -23,17 +14,19 @@ const fade = keyframes`
     }
 `
 
-export const WhiteContainerWrapper = styled(ContainerWrapper)`
+export const WhiteContainerWrapper = styled.div`
   animation: ${fade} 0.5s ease;
   width: 75%;
+  margin: 20px auto;
+
   background-color: white;
   border-radius: 8px;
   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-`
 
-export const Padding = styled.div`
-  padding: 15px 0;
+  ${media('TABLET')} {
+    width: calc(100% - 10px * 2);
+  }
 `
 
 export const FilterWrapper = styled.div`
@@ -53,12 +46,4 @@ export const SubFilterWrapper = styled.div`
   padding: 5px;
   width: 100%;
   justify-content: center;
-`
-
-export const Center = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  min-height: calc(100vh - 128px);
 `

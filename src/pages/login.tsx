@@ -2,7 +2,7 @@ import React from 'react'
 
 import { PageLayout } from '../components/Layout'
 import { LoginPage } from '../components/auth/Login'
-import { Container } from '../components/auth/Style'
+import { Container } from '../components/auth/Common'
 import { AlreadyLoggedIn } from '../components/auth/Already'
 
 import { useUser } from '../components/UserContext'

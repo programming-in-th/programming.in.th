@@ -4,7 +4,7 @@ import { WithGoogle, WithFacebook, WithGithub } from './OAuth'
 
 import { Form, Icon, Input, Button, Divider } from 'antd'
 import styled from 'styled-components'
-import { StyledForm, Others } from './Style'
+import { StyledForm, Others } from './Common'
 
 import firebase from '../../lib/firebase'
 

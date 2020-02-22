@@ -1,6 +1,6 @@
 import React from 'react'
 import { NextRouter } from 'next/router'
-import { StyledIcon } from './Style'
+import { StyledIcon } from './Common'
 
 import firebase from '../../lib/firebase'
 

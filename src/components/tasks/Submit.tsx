@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
-import { Row, Icon, Result, Button, Select, Switch } from 'antd'
+import { Row, Icon, Result, Button, Select } from 'antd'
 import styled from 'styled-components'
-import firebase from '../../lib/firebase'
 
-import { SubFilterWrapper } from '../../design/Atomics'
+import firebase from '../../lib/firebase'
 
 import { Upload } from '../upload'
 
@@ -37,7 +36,10 @@ const SubOptionWrapper = styled.div`
 
 const { Option } = Select
 
-const languageData = [['text/x-csrc', 'C / C++'], ['python', 'Python']]
+const languageData = [
+  ['text/x-csrc', 'C / C++'],
+  ['python', 'Python']
+]
 
 type TPlot = {
   [key: string]: string

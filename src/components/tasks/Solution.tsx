@@ -1,6 +1,7 @@
 import React from 'react'
 import Head from 'next/head'
-import { Wrapper } from './Wrapper'
+
+import { Wrapper } from './Common'
 import { MarkDownStyle } from '../../design'
 
 export const Solution = ({ statementMetadata, solution }) => {

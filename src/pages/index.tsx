@@ -7,7 +7,7 @@ import { PageLayout } from '../components/Layout'
 import styled, { keyframes } from 'styled-components'
 import { DesktopOnly, media } from '../design/Responsive'
 import { RegisterPage } from '../components/auth/Register'
-import { StyledCard } from '../components/auth/Style'
+import { StyledCard } from '../components/auth/Common'
 import { Fonts } from '../design'
 import { useUser } from '../components/UserContext'
 

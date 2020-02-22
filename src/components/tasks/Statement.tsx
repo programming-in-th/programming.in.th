@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Wrapper } from './Wrapper'
+import { Wrapper } from './Common'
 import { Submit } from './Submit'
 
 const StatementComponent = styled.div`
