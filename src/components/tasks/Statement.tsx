@@ -31,16 +31,16 @@ export const Statement = ({ statementMetadata, statement, user }) => {
   return (
     <React.Fragment>
       <Wrapper>
-        <h1>{statementMetadata.title}</h1>
-        <p> Time Limit : {statementMetadata.time_limit} second(s)</p>
-        <p> Memory Limit : {statementMetadata.memory_limit} MB(s)</p>
+        <h1>{statementMetadata?.title}</h1>
+        <p> Time Limit : {statementMetadata?.time_limit} second(s)</p>
+        <p> Memory Limit : {statementMetadata?.memory_limit} MB(s)</p>
 
         <StatementComponent dangerouslySetInnerHTML={{ __html: statement }} />
       </Wrapper>
       <Wrapper>
         <Submit
-          problem_id={statementMetadata.problem_id as string}
-          canSubmit={!!user}
+          problem_id={statementMetadata?.problem_id as string}
+          canSubmit={user && !!user}
         />
       </Wrapper>
     </React.Fragment>

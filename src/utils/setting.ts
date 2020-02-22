@@ -3,7 +3,7 @@ import firebase from '../lib/firebase'
 export const extractProviderList = (user: firebase.User): string[] => {
   const result = []
 
-  if (user.providerData) {
+  if (user?.providerData) {
     for (let i = 0; i < user.providerData.length; i++) {
       result.push(user.providerData[i]!.providerId)
     }
