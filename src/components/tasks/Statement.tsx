@@ -1,8 +1,14 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 import styled from 'styled-components'
+import { Spin } from 'antd'
 
 import { Wrapper } from './Common'
-import { Submit } from './Submit'
+
+const Submit = dynamic(() => import('./Submit').then(mod => mod.Submit), {
+  loading: () => <Spin />,
+  ssr: false
+})
 
 const StatementComponent = styled.div`
   & table,
