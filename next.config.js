@@ -73,7 +73,6 @@ module.exports = withPlugins(
           handler: 'CacheFirst',
           options: {
             cacheName: 'images',
-            networkTimeoutSeconds: 15,
             expiration: {
               maxEntries: 150,
               maxAgeSeconds: 30 * 24 * 60 * 60 // 1 month
@@ -89,7 +88,6 @@ module.exports = withPlugins(
           handler: 'CacheFirst',
           options: {
             cacheName: 'google-fonts',
-            networkTimeoutSeconds: 15,
             expiration: {
               maxAgeSeconds: 60 * 60 * 24 * 365 // 1 years
             },
