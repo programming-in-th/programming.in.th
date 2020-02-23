@@ -1,10 +1,10 @@
-import { Learn } from '../../../components/learn/Page.tsx'
+import { withContent } from '../../../components/learn/Page.tsx'
 
 export const meta = {
   title: 'Advanced Graphs Theory'
 }
 
-export default ({ children }) => <Learn meta={meta}>{children}</Learn>
+export default withContent({ ...meta })
 
 - General graphs: [Algorithms Gym](https://codeforces.com/blog/entry/16221)
 - Maximum flow

@@ -25,7 +25,7 @@ import { copyToClipboard } from '../../utils/copyToClipboard'
 import { PageLayout } from '../Layout'
 import Head from 'next/head'
 
-const Components = {
+export const LearnComponents = {
   p: P,
   h1: H1,
   h2: H2,
@@ -99,12 +99,7 @@ interface IMeta {
   title: string
 }
 
-interface IInitailLearnProps {
-  children: React.ReactNode
-  meta: IMeta
-}
-
-export const Learn: NextPage<IInitailLearnProps> = props => {
+export const withContent = (meta: IMeta) => ({ children }) => {
   const router = useRouter()
   return (
     <React.Fragment>
@@ -125,7 +120,7 @@ export const Learn: NextPage<IInitailLearnProps> = props => {
           />
         </Nav>
         <Header>
-          <Heading>{props.meta.title}</Heading>
+          <Heading>{meta.title}</Heading>
           <SubTitle>
             <Clipboard onClick={() => copyToClipboard(window.location.href)}>
               Link
@@ -134,8 +129,8 @@ export const Learn: NextPage<IInitailLearnProps> = props => {
         </Header>
         <div>
           <ContentWrapper>
-            <MDXProvider components={Components}>
-              <article>{props.children}</article>
+            <MDXProvider components={LearnComponents}>
+              <article>{children}</article>
             </MDXProvider>
           </ContentWrapper>
         </div>
