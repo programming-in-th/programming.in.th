@@ -1,10 +1,10 @@
-import { Learn } from '../../../components/learn/Page.tsx'
+import { withContent } from '../../../components/learn/Page.tsx'
 
 export const meta = {
   title: 'C++ tricks'
 }
 
-export default ({ children }) => <Learn meta={meta}>{children}</Learn>
+export default withContent({ ...meta })
 
 สำหรับบทความนี้ จะพูดถึงในเรื่องของเทคนิต่างๆในภาษา C++ โดยใช้ C++11 standard ที่ทำให้การเขียนโปรแกรมสะดวกยิ่งขึ้น โดยเฉพาะอย่างยิ่งในสนามแข่งขัน
 

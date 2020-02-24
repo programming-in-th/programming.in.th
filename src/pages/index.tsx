@@ -7,7 +7,7 @@ import { PageLayout } from '../components/Layout'
 import styled, { keyframes } from 'styled-components'
 import { DesktopOnly, media } from '../design/Responsive'
 import { RegisterPage } from '../components/auth/Register'
-import { StyledCard } from '../components/auth/Style'
+import { StyledCard } from '../components/auth/Common'
 import { Fonts } from '../design'
 import { useUser } from '../components/UserContext'
 
@@ -55,7 +55,7 @@ const MainContainer = styled(Container)`
 
 const Title = styled.h1<{ color?: string }>`
   font-size: 42px;
-  font-family: Montserrat, ${Fonts.display};
+  font-family: ${Fonts.display};
   font-weight: 800;
   display: inline;
   color: ${props => props.color || 'black'};
@@ -78,7 +78,7 @@ const SubTitle = styled.h2`
 
 const CustomLink = styled.a`
   font-size: 36px;
-  font-family: Montserrat;
+  font-family: ${Fonts.display};
   font-weight: 800;
   text-decoration: none;
 

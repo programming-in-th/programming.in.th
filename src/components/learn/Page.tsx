@@ -1,4 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
+import Head from 'next/head'
+
+import { PageHeader } from 'antd'
+import { useRouter } from 'next/router'
+import styled from 'styled-components'
+
 import { MDXProvider } from '@mdx-js/react'
 import {
   P,
@@ -14,18 +20,11 @@ import {
   Blockquote
 } from './elements'
 
-import { PageHeader } from 'antd'
-import { NextPage } from 'next'
-import { useRouter } from 'next/router'
-import styled from 'styled-components'
-
 import { media } from '../../design/Responsive'
-import { copyToClipboard } from '../../utils/copyToClipboard'
 
 import { PageLayout } from '../Layout'
-import Head from 'next/head'
 
-const Components = {
+export const LearnComponents = {
   p: P,
   h1: H1,
   h2: H2,
@@ -39,17 +38,16 @@ const Components = {
   blockquote: Blockquote
 }
 
-const Clipboard = styled.p`
-  margin-right: 5px;
-  cursor: grab;
-`
-
 const Header = styled.header`
-  position: relative;
+  position: sticky;
+  top: 0px;
+  background-color: white;
+
   z-index: 10;
-  margin: 60px auto 70px;
-  padding-left: 68px;
-  max-width: 749px;
+  margin: 48px auto;
+  padding-top: 16px;
+  max-width: 100%;
+  text-align: center;
 
   ${media('TABLET')} {
     margin: 50px auto 50px;
@@ -58,15 +56,24 @@ const Header = styled.header`
   }
 
   @media (max-height: 700px) {
-    margin: 100px auto;
+    margin: 48px auto;
   }
 `
 
-const Heading = styled.h1`
-  font-size: 48px;
+const Heading = styled.h1<{ scroll: number }>`
+  font-size: ${props => Math.max(16, 40 - 3.2 * props.scroll)}px;
   margin-bottom: 25px;
-  font-weight: bold;
+  display: inline-block;
+  font-weight: 600;
   line-height: 1.32;
+  color: rgba(19, 20, 21, 0.3);
+  /* transition: all 0.1s; */
+
+  background-clip: text;
+  -webkit-background-clip: text;
+
+  background-image: ${props =>
+    `linear-gradient(to right, #000 ${props.scroll}%, transparent ${props.scroll}%)`};
 
   ${media('TABLET')} {
     font-size: 32px;
@@ -99,13 +106,30 @@ interface IMeta {
   title: string
 }
 
-interface IInitailLearnProps {
-  children: React.ReactNode
-  meta: IMeta
-}
-
-export const Learn: NextPage<IInitailLearnProps> = props => {
+export const withContent = (meta: IMeta) => ({ children }) => {
   const router = useRouter()
+  const [percentage, setPercentage] = useState(0)
+
+  const handleScroll = useCallback(() => {
+    window.requestAnimationFrame(() => {
+      const target = document.documentElement || document.body
+      const vh = target.clientHeight
+
+      const percentage = (target.scrollTop / (target.scrollHeight - vh)) * 100
+      setPercentage(percentage)
+    })
+  }, [])
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll)
+    window.addEventListener('resize', handleScroll)
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      window.removeEventListener('resize', handleScroll)
+    }
+  }, [])
+
   return (
     <React.Fragment>
       <Head>
@@ -116,7 +140,7 @@ export const Learn: NextPage<IInitailLearnProps> = props => {
           crossOrigin="anonymous"
         />
       </Head>
-      <PageLayout hideNav={true}>
+      <PageLayout hideNav={true} bg="white">
         <Nav>
           <PageHeader
             onBack={() => router.push('/learn')}
@@ -125,17 +149,17 @@ export const Learn: NextPage<IInitailLearnProps> = props => {
           />
         </Nav>
         <Header>
-          <Heading>{props.meta.title}</Heading>
+          <Heading scroll={percentage}>{meta.title}</Heading>
           <SubTitle>
-            <Clipboard onClick={() => copyToClipboard(window.location.href)}>
+            {/* <Clipboard onClick={() => copyToClipboard(window.location.href)}>
               Link
-            </Clipboard>
+            </Clipboard> */}
           </SubTitle>
         </Header>
         <div>
           <ContentWrapper>
-            <MDXProvider components={Components}>
-              <article>{props.children}</article>
+            <MDXProvider components={LearnComponents}>
+              <article>{children}</article>
             </MDXProvider>
           </ContentWrapper>
         </div>

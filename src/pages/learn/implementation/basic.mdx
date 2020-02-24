@@ -1,10 +1,10 @@
-import { Learn } from '../../../components/learn/Page.tsx'
+import { withContent } from '../../../components/learn/Page.tsx'
 
 export const meta = {
   title: 'การเขียนโปรแกรมสำหรับการแข่งขันเบื้องต้น'
 }
 
-export default ({ children }) => <Learn meta={meta}>{children}</Learn>
+export default withContent({ ...meta })
 
 # ภาษาในการเขียนโปรแกรม
 

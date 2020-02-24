@@ -1,8 +1,14 @@
 import React from 'react'
+import dynamic from 'next/dynamic'
 import styled from 'styled-components'
+import { Spin } from 'antd'
 
-import { Wrapper } from './Wrapper'
-import { Submit } from './Submit'
+import { Wrapper } from './Common'
+
+const Submit = dynamic(() => import('./Submit').then(mod => mod.Submit), {
+  loading: () => <Spin />,
+  ssr: false
+})
 
 const StatementComponent = styled.div`
   & table,
@@ -31,16 +37,16 @@ export const Statement = ({ statementMetadata, statement, user }) => {
   return (
     <React.Fragment>
       <Wrapper>
-        <h1>{statementMetadata.title}</h1>
-        <p> Time Limit : {statementMetadata.time_limit} second(s)</p>
-        <p> Memory Limit : {statementMetadata.memory_limit} MB(s)</p>
+        <h1>{statementMetadata?.title}</h1>
+        <p> Time Limit : {statementMetadata?.time_limit} second(s)</p>
+        <p> Memory Limit : {statementMetadata?.memory_limit} MB(s)</p>
 
         <StatementComponent dangerouslySetInnerHTML={{ __html: statement }} />
       </Wrapper>
       <Wrapper>
         <Submit
-          problem_id={statementMetadata.problem_id as string}
-          canSubmit={!!user}
+          problem_id={statementMetadata?.problem_id as string}
+          canSubmit={user && !!user}
         />
       </Wrapper>
     </React.Fragment>

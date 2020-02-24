@@ -5,13 +5,13 @@ import { Layout } from 'antd'
 import { Navigator } from './Nav'
 import { GlobalStyle } from '../design'
 import { useUser } from './UserContext'
-import { CustomSpin } from './Spin'
 
 const { Content, Footer } = Layout
 
-const CustomLayout = styled(Layout)<{ bg?: string }>`
+const CustomLayout = styled(Layout)<{ bg?: string; loading?: boolean }>`
   min-height: 100vh;
   background-color: ${props => (props.bg ? props.bg : '#fafafa')};
+  display: ${props => (props.loading ? 'none' : 'flex')};
 `
 
 interface IPageLayoutProps {
@@ -25,16 +25,11 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
 ) => {
   const { user } = useUser()
 
-  // Waiting for dashboard implementation, so we use this as placeholder
-  if (user === undefined) {
-    return <CustomSpin />
-  }
-
   return (
     <React.Fragment>
-      <CustomLayout bg={props.bg}>
+      <CustomLayout bg={props.bg} loading={user === undefined}>
         <GlobalStyle />
-        <Navigator hidden={props.hideNav} />
+        {!props.hideNav && <Navigator />}
         <Content style={{ marginTop: 64 }}>{props.children}</Content>
         <Footer
           style={{

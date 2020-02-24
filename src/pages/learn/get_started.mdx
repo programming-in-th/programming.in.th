@@ -1,10 +1,10 @@
-import { Learn } from '../../components/learn/Page.tsx'
+import { withContent } from '../../components/learn/Page.tsx'
 
 export const meta = {
   title: 'การติดตั้ง Compiler ภาษา C/C++'
 }
 
-export default ({ children }) => <Learn meta={meta}>{children}</Learn>
+export default withContent({ ...meta })
 
 การที่เราจะรันโปรแกรมที่เขียนด้วยภาษา C++ ได้นั้นเราต้องมีสิ่งที่เรียกว่า compiler เสียก่อน ซึ่ง compiler จะทำหน้าที่ในการแปลงโค้ดที่เราเขียนไปเป็น binary file ทำให้ OS เราสามารถรันได้นั่นเอง
 Compiler นั้นมีหลายตัวให้เราใช้ แต่ตัวที่ฮิตที่สุดน่าจะหนีไม่พ้น [GCC](https://gcc.gnu.org/) หรือ GNU Compiler Collection นั่นเอง (Default ใน macOS ใช้ clang) ซึ่งเราจะมาดูวิธีการติดตั้ง GCC กันทั้งใน macOS และ Windows

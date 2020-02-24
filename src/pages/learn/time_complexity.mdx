@@ -1,10 +1,10 @@
-import { Learn } from '../../components/learn/Page.tsx'
+import { withContent } from '../../components/learn/Page.tsx'
 
 export const meta = {
   title: 'การวัดประสิทธิภาพของอัลกอริทึม'
 }
 
-export default ({ children }) => <Learn meta={meta}>{children}</Learn>
+export default withContent({ ...meta })
 
 อัลกอริทึมที่มีประสิทธิภาพเป็นส่วนที่สำคัญในการแข่งขันเขียนโปรแกรม โดยทั่วไปเป็นเรื่องที่ง่ายที่จะออกแบบอัลกอริทึม ที่แก้ปัญหาโดยที่ใช้เวลามาก แต่ความจริงเราต้องการอัลกอริทึมที่สามารถแก้ปัญหาได้รวดเร็ว ถ้าอัลกอริทึมนั้นช้าจะได้คะแนนเพียงบางส่วนเท่านั้น
 

@@ -1,6 +1,5 @@
-import styled from 'styled-components'
-import { SimpleImg } from 'react-simple-img'
+import { SimpleImg, Props as SimpleImgProps } from 'react-simple-img'
 
-export const Img = styled(SimpleImg)`
-  max-width: 100%;
-`
+export const Img = (props: SimpleImgProps) => (
+  <SimpleImg imgStyle={{ maxWidth: '100%', objectFit: 'contain' }} {...props} />
+)

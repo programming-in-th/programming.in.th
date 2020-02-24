@@ -41,9 +41,8 @@ interface IBasicSettingsProps {
   user: firebase.User
 }
 
-const Basic: React.FunctionComponent<
-  FormComponentProps & IBasicSettingsProps
-> = (props: FormComponentProps & IBasicSettingsProps) => {
+const Basic: React.FunctionComponent<FormComponentProps &
+  IBasicSettingsProps> = (props: FormComponentProps & IBasicSettingsProps) => {
   const {
     user,
     form: { getFieldDecorator, getFieldsError }
@@ -87,7 +86,7 @@ const Basic: React.FunctionComponent<
   }
 
   const getAvatar = () => {
-    return props.user.photoURL as string
+    return props.user?.photoURL as string
   }
 
   return (
