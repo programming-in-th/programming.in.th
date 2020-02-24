@@ -29,7 +29,7 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
     <React.Fragment>
       <CustomLayout bg={props.bg} loading={user === undefined}>
         <GlobalStyle />
-        <Navigator hidden={props.hideNav} />
+        {!props.hideNav && <Navigator />}
         <Content style={{ marginTop: 64 }}>{props.children}</Content>
         <Footer
           style={{

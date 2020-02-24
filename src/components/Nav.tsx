@@ -17,7 +17,6 @@ const { Header } = Layout
 const NavHeader = styled(Header)<{
   top: number
   location: string
-  hidden: boolean
 }>`
   background: ${props => enableTransparency(props.location, props.top)};
   transition: background 0.2s cubic-bezier(0.645, 0.045, 0.355, 1);
@@ -25,7 +24,6 @@ const NavHeader = styled(Header)<{
   z-index: 100;
   width: 100%;
   box-shadow: ${props => enableBoxShadow(props.location, props.top)};
-  display: ${props => (props.hidden ? 'none' : 'block')};
   padding: 0 200px;
 
   ${media('DESKTOP_MD')} {
@@ -47,13 +45,7 @@ interface IItem {
   mode?: 'vertical' | 'horizontal'
 }
 
-interface INavigatorProps {
-  hidden: boolean
-}
-
-export const Navigator: React.FunctionComponent<INavigatorProps> = (
-  props: INavigatorProps
-) => {
+export const Navigator: React.FunctionComponent = () => {
   const Router = useRouter()
   const locationReal = Router.pathname
   const location = locationReal.split('/')[1]
@@ -85,7 +77,7 @@ export const Navigator: React.FunctionComponent<INavigatorProps> = (
   }
 
   return (
-    <NavHeader top={top} location={locationReal} hidden={props.hidden}>
+    <NavHeader top={top} location={locationReal}>
       <React.Fragment>
         <Logo>
           <Link href="/">

@@ -21,7 +21,6 @@ import {
 } from './elements'
 
 import { media } from '../../design/Responsive'
-import { copyToClipboard } from '../../utils/copyToClipboard'
 
 import { PageLayout } from '../Layout'
 
