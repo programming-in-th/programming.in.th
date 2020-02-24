@@ -49,25 +49,18 @@ const Header = styled.header`
   max-width: 100%;
   text-align: center;
 
-  ${media('TABLET')} {
-    margin: 50px auto 50px;
-    padding: 0 40px;
-    max-width: 100%;
-  }
-
   @media (max-height: 700px) {
     margin: 48px auto;
   }
 `
 
 const Heading = styled.h1<{ scroll: number }>`
-  font-size: ${props => Math.max(16, 40 - 3.2 * props.scroll)}px;
+  font-size: ${props => Math.max(16, 40 - 4.8 * props.scroll)}px;
   margin-bottom: 25px;
   display: inline-block;
   font-weight: 600;
   line-height: 1.32;
   color: rgba(19, 20, 21, 0.3);
-  /* transition: all 0.1s; */
 
   background-clip: text;
   -webkit-background-clip: text;
@@ -78,7 +71,7 @@ const Heading = styled.h1<{ scroll: number }>`
     }%, transparent ${isNaN(props.scroll) ? 100 : props.scroll}%)`};
 
   ${media('TABLET')} {
-    font-size: 32px;
+    font-size: ${props => Math.max(16, 32 - 3.2 * props.scroll)}px;
   }
 `
 
