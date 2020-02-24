@@ -52,7 +52,7 @@
     "remark-math": "^2.0.0",
     "remark-parse": "^7.0.1",
     "remark-rehype": "^5.0.0",
-    "styled-components": "^4.4.1",
+    "styled-components": "^5.0.1",
     "swr": "^0.1.17",
     "util": "^0.12.1"
   },
@@ -64,7 +64,8 @@
     "@types/react": "^16.9.9",
     "@types/react-dom": "^16.9.4",
     "@types/react-syntax-highlighter": "^11.0.1",
-    "@types/styled-components": "^4.4.1",
+    "@types/styled-components": "^5.0.0",
+    "@types/webpack-env": "^1.15.1",
     "babel-eslint": "^10.0.3",
     "babel-plugin-inline-react-svg": "^1.1.1",
     "babel-plugin-styled-components": "^1.10.6",
