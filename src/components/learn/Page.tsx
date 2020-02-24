@@ -73,7 +73,9 @@ const Heading = styled.h1<{ scroll: number }>`
   -webkit-background-clip: text;
 
   background-image: ${props =>
-    `linear-gradient(to right, #000 ${props.scroll}%, transparent ${props.scroll}%)`};
+    `linear-gradient(to right, #000 ${
+      isNaN(props.scroll) ? 100 : props.scroll
+    }%, transparent ${isNaN(props.scroll) ? 100 : props.scroll}%)`};
 
   ${media('TABLET')} {
     font-size: 32px;
