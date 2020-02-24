@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@mapbox/rehype-prism": "^0.4.0",
-    "@mdx-js/loader": "^1.5.1",
+    "@mdx-js/loader": "^1.5.7",
     "@mdx-js/react": "^1.5.1",
     "@next/mdx": "^9.2.2",
     "@zeit/next-bundle-analyzer": "^0.1.2",
