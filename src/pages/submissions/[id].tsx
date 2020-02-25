@@ -22,17 +22,21 @@ const CodeDisplay = dynamic(
 const { Option } = Select
 
 const Wrapper = styled.div`
-  padding: 20px 3%;
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  padding: 1.5rem;
+  box-shadow: var(--shadow);
   border-radius: 8px;
   background-color: white;
 
   width: 70%;
-  margin: 24px auto 0 auto;
+  margin: 24px auto 24px auto;
 
   ${media('TABLET')} {
     width: calc(100% - 10px * 2);
   }
+`
+
+const Detail = styled.div`
+  margin-bottom: 16px;
 `
 
 const themeData = [
@@ -80,7 +84,7 @@ const SubmissionDetail: NextPage = () => {
       <Wrapper>
         {data ? (
           <React.Fragment>
-            <div style={{ margin: '15px 0' }}>
+            <Detail>
               <h1>
                 [{current.problem_id}] {current.problem_name}
               </h1>
@@ -89,7 +93,7 @@ const SubmissionDetail: NextPage = () => {
               <p>Memory: {current.memory} KB</p>
               <p>Time: {current.time} second</p>
               <p>User: {current.username}</p>
-            </div>
+            </Detail>
             {current.code !== '' ? (
               <React.Fragment>
                 <Select
