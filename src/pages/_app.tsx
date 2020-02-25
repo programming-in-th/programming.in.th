@@ -7,6 +7,7 @@ import Router from 'next/router'
 import { UserAction, UserStateContext } from '../components/UserContext'
 import firebase from '../lib/firebase'
 import user from './admin/user'
+import { fetchFromFirebase } from '../utils/fetcher'
 
 let timeout: number
 
@@ -63,10 +64,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
 
   useEffect(() => {
     const fetchAdmin = async () => {
-      const response = await firebase
-        .app()
-        .functions('asia-east2')
-        .httpsCallable('getIsAdmin')({})
+      const response = await fetchFromFirebase('getIsAdmin')
 
       userDispatch({
         type: 'RECEIVE_ADMIN',
