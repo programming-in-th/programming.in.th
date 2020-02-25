@@ -37,6 +37,8 @@ const Wrapper = styled.div`
 
 const Detail = styled.div`
   margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
 `
 
 const themeData = [
@@ -85,14 +87,18 @@ const SubmissionDetail: NextPage = () => {
         {data ? (
           <React.Fragment>
             <Detail>
-              <h1>
-                [{current.problem_id}] {current.problem_name}
-              </h1>
-              <p>Status: {current.status}</p>
-              <p>Points: {current.points}</p>
-              <p>Memory: {current.memory} KB</p>
-              <p>Time: {current.time} second</p>
-              <p>User: {current.username}</p>
+              <div>
+                <h1>
+                  [{current.problem_id}] {current.problem_name}
+                </h1>
+                <a href={`/tasks/${current.problem_id}`}>Statement</a>
+                <p>Status: {current.status}</p>
+                <p>Points: {current.points}</p>
+                <p>Memory: {current.memory} KB</p>
+                <p>Time: {current.time} second</p>
+                <p>User: {current.username}</p>
+              </div>
+              <div></div>
             </Detail>
             {current.code !== '' ? (
               <React.Fragment>
