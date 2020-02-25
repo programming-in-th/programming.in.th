@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import firebase from '../../lib/firebase'
-import useSWR from 'swr'
-import { fetchFromFirebase } from '../../utils/fetcher'
 import { Table, Switch, Icon } from 'antd'
+import useSWR from 'swr'
+
+import firebase from '../../lib/firebase'
+import { fetchFromFirebase } from '../../utils/fetcher'
 import { CustomSpin } from '../../components/Spin'
 import { AdminLayout } from '../../components/admin/AdminLayout'
 
@@ -33,12 +34,15 @@ export default () => {
             onChange={async (checked: boolean) => {
               setState(row.uid)
               const param = { uid: row.uid, checked }
+
               const response = await firebase
                 .app()
                 .functions('asia-east2')
                 .httpsCallable('updateAdmin')(param)
-              if (response.data) setState('')
-              else console.log('ERROR')
+
+              if (response.data) {
+                setState('')
+              }
             }}
           />
         </span>
