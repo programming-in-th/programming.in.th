@@ -1,15 +1,23 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import { NextPage } from 'next'
+import dynamic from 'next/dynamic'
 import useSWR from 'swr'
 import styled from 'styled-components'
-import { Select, Skeleton } from 'antd'
+import { Select, Skeleton, Spin } from 'antd'
 
 import { transformStatus } from '../../utils/transform'
-import { CodeDisplay } from '../../components/CodeEditor'
 
 import { PageLayout } from '../../components/Layout'
 import { fetchFromFirebase } from '../../utils/fetcher'
 import { media } from '../../design/Responsive'
+
+const CodeDisplay = dynamic(
+  () => import('../../components/CodeEditor').then(mod => mod.CodeDisplay),
+  {
+    loading: () => <Spin />,
+    ssr: false
+  }
+) as any
 
 const { Option } = Select
 
