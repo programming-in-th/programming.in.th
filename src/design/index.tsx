@@ -28,6 +28,14 @@ export const Fonts = {
 const TH_UNICODE_RANGE = 'U+0E01-0E5B, U+200C-200D, U+25CC'
 
 export const GlobalStyle = createGlobalStyle`
+
+:root {
+  --shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
+  --font-display: ${Fonts.display};
+  --font-body: ${Fonts.body};
+}
+
 @font-face {
   font-family: 'Kanit';
   font-style: normal;
@@ -72,7 +80,7 @@ h3,
 h4,
 h5,
 h6 {
-	font-family: ${Fonts.display};
+	font-family: var(--font-display);
 }
 
 ::selection,
@@ -81,7 +89,7 @@ h6 {
 }
 
 body {
-	font-family : ${Fonts.body};
+	font-family : var(--font-body);
 	font-display: swap;
 	box-sizing: border-box;
   -webkit-tap-highlight-color: transparent !important;
@@ -163,14 +171,14 @@ export const MarkDownStyle = styled.div`
   p,
   ol {
     margin-bottom: ${MARGIN_BOTTOM};
-    font-family: ${getSystemFonts().join(', ')} !important;
+    font-family: var(--font-body) !important;
   }
 
   p,
   ul,
   ol {
     font-size: 16px;
-    font-family: ${getSystemFonts().join(', ')} !important;
+    font-family: var(--font-body) !important;
     color: #24292e;
   }
 
@@ -180,7 +188,7 @@ export const MarkDownStyle = styled.div`
   h4,
   h5,
   h6 {
-    font-family: ${Fonts.display} !important;
+    font-family: var(--font-display) !important;
     border-bottom: 1px solid #d9d9d9;
     margin-top: 24px;
     margin-bottom: ${MARGIN_BOTTOM};
