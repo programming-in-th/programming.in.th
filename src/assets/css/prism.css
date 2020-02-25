@@ -1,3 +1,5 @@
+/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.26, autoprefixer: v9.7.3) */
+
 code[class*='language-'],
 code > code,
 pre[class*='language-'] {
@@ -17,10 +19,16 @@ pre[class*='language-'] {
   tab-size: 4;
 
   -webkit-hyphens: none;
-  -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
   text-shadow: none;
+}
+
+code[class*='language-']::-moz-selection,
+pre[class*='language-']::-moz-selection,
+code[class*='language-'] ::-moz-selection,
+pre[class*='language-'] ::-moz-selection {
+  background: #363636;
 }
 
 code[class*='language-']::-moz-selection,
