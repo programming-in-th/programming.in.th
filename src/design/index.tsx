@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components'
+import { nprogress } from './nprogress'
 
 export function getSystemFonts() {
   return [
@@ -22,123 +23,99 @@ export const Fonts = {
     'Kanit',
     ...getSystemFonts()
   ].join(', '),
-  body: [...getSystemFonts()].join(', ')
+  body: getSystemFonts().join(', ')
 }
 
 const TH_UNICODE_RANGE = 'U+0E01-0E5B, U+200C-200D, U+25CC'
 
 export const GlobalStyle = createGlobalStyle`
-
-:root {
-  --shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
-  --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
-  --font-display: ${Fonts.display};
-  --font-body: ${Fonts.body};
-}
-
-@font-face {
-  font-family: 'Kanit';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/assets/fonts/Kanit-Regular.woff2') format('woff2');
-  unicode-range: ${TH_UNICODE_RANGE};
-}
-
-@font-face {
-  font-family: 'Sukhumvit Set';
-  font-display: swap;
-  src: local('Sukhumvit Set');
-  unicode-range: ${TH_UNICODE_RANGE};
-}
-
-body {
-	margin: 0;
-	width: 100%;
-	background-color: #f1f5fa;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-span,
-b,
-u,
-i,
-div {
-	cursor: default;
-	margin: 0;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-	font-family: var(--font-display);
-}
-
-::selection,
-::-webkit-selection {
-	background-color: rgba(0, 123, 255, 0.25);
-}
-
-body {
-	font-family : var(--font-body);
-	font-display: swap;
-	box-sizing: border-box;
-  -webkit-tap-highlight-color: transparent !important;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
-}
-
-#nprogress {
-  pointer-events: none;
-}
-
-#nprogress .bar {
-  background: #0070f3;
-  position: fixed;
-  z-index: 99999;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 3px;
-}
-  /* Fancy blur effect */
-#nprogress .peg {
-  display: block;
-  position: absolute;
-  right: 0px;
-  width: 100px;
-  height: 100%;
-  box-shadow: 0 0 10px #0070f3, 0 0 5px #0070f3;
-  opacity: 1;
-  -webkit-transform: rotate(3deg) translate(0px, -4px);
-  -ms-transform: rotate(3deg) translate(0px, -4px);
-  transform: rotate(3deg) translate(0px, -4px);
-}
-
-
-pre {
-  font-size: 14px;
-  line-height: 1.4em;
-  margin: 0 0 1.5em;
-  overflow-x: auto;
-  padding: 1.5em;
-  white-space: pre;
-  background: #011627;
-  border-radius: 4px;
-  code {
-    padding: 0;
-    text-shadow: none;
+  :root {
+    --shadow-main: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+    --shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
+    --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
+    --font-display: ${Fonts.display};
+    --font-body: ${Fonts.body};
   }
-}
+
+  @font-face {
+    font-family: 'Kanit';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: url('/assets/fonts/Kanit-Regular.woff2') format('woff2');
+    unicode-range: ${TH_UNICODE_RANGE};
+  }
+
+  @font-face {
+    font-family: 'Sukhumvit Set';
+    font-display: swap;
+    src: local('Sukhumvit Set');
+    unicode-range: ${TH_UNICODE_RANGE};
+  }
+
+  html,
+  body,
+  #__next {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fafafa;
+
+    font-family: var(--font-body);
+    font-display: swap;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent !important;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  span,
+  b,
+  u,
+  i,
+  div {
+    cursor: default;
+    margin: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-display);
+  }
+
+  ::selection,
+  ::-webkit-selection {
+    background-color: rgba(0, 123, 255, 0.25);
+  }
+
+  pre {
+    font-size: 14px;
+    line-height: 1.4em;
+    margin: 0 0 1.5em;
+    overflow-x: auto;
+    padding: 1.5em;
+    white-space: pre;
+    background: #011627;
+    border-radius: 4px;
+    code {
+      padding: 0;
+      text-shadow: none;
+    }
+  }
+
+  ${nprogress}
 `
 
 export const MARGIN_BOTTOM: string = '16px'
@@ -218,7 +195,7 @@ export const MarkDownStyle = styled.div`
 
   /* Table  */
   table {
-    font-family: ${getSystemFonts().join(', ')} !important;
+    font-family: var(--font-body) !important;
     border-collapse: collapse;
     text-align: center;
     margin-bottom: ${MARGIN_BOTTOM};
