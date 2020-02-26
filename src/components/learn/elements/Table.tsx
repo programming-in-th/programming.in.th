@@ -1,11 +1,10 @@
 import styled from 'styled-components'
-import { getSystemFonts, MARGIN_BOTTOM } from '../../../design'
 
 export const Table = styled.table`
-  font-family: ${getSystemFonts().join(', ')};
+  font-family: var(--font-body);
   border-collapse: collapse;
   text-align: center;
-  margin-bottom: ${MARGIN_BOTTOM};
+  margin-bottom: var(--gap-bottom);
 
   th {
     padding: 6px 13px;

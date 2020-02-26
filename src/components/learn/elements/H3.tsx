@@ -1,10 +1,9 @@
 import styled from 'styled-components'
-import { Fonts, MARGIN_TOP, MARGIN_BOTTOM } from '../../../design'
 
 export const H3 = styled.h3`
-  font-family: ${Fonts.display};
+  font-family: var(--font-display);
   font-size: 20px;
   border-bottom: 1px solid #d9d9d9;
-  margin-top: ${MARGIN_TOP};
-  margin-bottom: ${MARGIN_BOTTOM};
+  margin-top: var(--gap-top);
+  margin-bottom: var(--gap-bottom);
 `

@@ -36,6 +36,10 @@ export const GlobalStyle = createGlobalStyle`
     --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
     --font-display: ${Fonts.display};
     --font-body: ${Fonts.body};
+    --font-size: 16px;
+    --gap-top: 24px;
+    --gap-bottom: 16px;
+    --text-color: #24292e;
   }
 
   @font-face {
@@ -119,11 +123,6 @@ export const GlobalStyle = createGlobalStyle`
   ${nprogress}
 `
 
-export const MARGIN_BOTTOM: string = '16px'
-export const MARGIN_TOP: string = '24px'
-export const TEXT_COLOR: string = '#24292e'
-export const BASE_FONT_SIZE: string = '16px'
-
 export const MarkDownStyle = styled.div`
   font-size: 16px;
 
@@ -148,7 +147,7 @@ export const MarkDownStyle = styled.div`
   /* Text  */
   p,
   ol {
-    margin-bottom: ${MARGIN_BOTTOM};
+    margin-bottom: var(--gap-bottom);
     font-family: var(--font-body) !important;
   }
 
@@ -169,7 +168,7 @@ export const MarkDownStyle = styled.div`
     font-family: var(--font-display) !important;
     border-bottom: 1px solid #d9d9d9;
     margin-top: 24px;
-    margin-bottom: ${MARGIN_BOTTOM};
+    margin-bottom: var(--gap-bottom);
   }
 
   h1 {
@@ -199,7 +198,7 @@ export const MarkDownStyle = styled.div`
     font-family: var(--font-body) !important;
     border-collapse: collapse;
     text-align: center;
-    margin-bottom: ${MARGIN_BOTTOM};
+    margin-bottom: var(--gap-bottom);
   }
 
   table th {
