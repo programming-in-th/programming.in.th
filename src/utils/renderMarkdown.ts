@@ -6,7 +6,7 @@ import math from 'remark-math'
 import katex from 'rehype-katex'
 import stringify from 'rehype-stringify'
 import sanitize from 'rehype-sanitize'
-import highlight from 'rehype-highlight'
+import highlight from '@mapbox/rehype-prism'
 
 import sanitizeSetting from './sanitizer.json'
 

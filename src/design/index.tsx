@@ -109,6 +109,7 @@ export const GlobalStyle = createGlobalStyle`
     white-space: pre;
     background: #011627;
     border-radius: 4px;
+
     code {
       padding: 0;
       text-shadow: none;
