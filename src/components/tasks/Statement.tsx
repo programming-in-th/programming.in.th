@@ -33,6 +33,11 @@ const StatementComponent = styled.div`
   }
 `
 
+const Embed = styled.embed`
+  width: 100% !important;
+  margin-top: 20px;
+`
+
 export const Statement = ({ statementMetadata, statement, user }) => {
   return (
     <React.Fragment>
@@ -40,8 +45,16 @@ export const Statement = ({ statementMetadata, statement, user }) => {
         <h1>{statementMetadata?.title}</h1>
         <p> Time Limit : {statementMetadata?.time_limit} second(s)</p>
         <p> Memory Limit : {statementMetadata?.memory_limit} MB(s)</p>
-
-        <StatementComponent dangerouslySetInnerHTML={{ __html: statement }} />
+        {statement === '' ? (
+          <Embed
+            src={`https://programming-in-th.github.io/statement/${statementMetadata?.problem_id}.pdf`}
+            type="application/pdf"
+            width="100%"
+            height="800px"
+          />
+        ) : (
+          <StatementComponent dangerouslySetInnerHTML={{ __html: statement }} />
+        )}
       </Wrapper>
       <Wrapper>
         <Submit

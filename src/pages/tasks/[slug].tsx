@@ -64,7 +64,10 @@ export async function unstable_getStaticPaths() {
 
 export async function unstable_getStaticProps({ params: { slug } }) {
   const statementMetadata = await api.get(`/getProblemMetadata?id=${slug}`)
-  const statement = await axios.get(statementMetadata.data.url)
+  const statement =
+    statementMetadata.data.url === ''
+      ? ''
+      : await axios.get(statementMetadata.data.url)
   let solution: AxiosResponse<any>
   let renderedSolution: string
 
@@ -81,7 +84,7 @@ export async function unstable_getStaticProps({ params: { slug } }) {
   return {
     props: {
       statementMetadata: statementMetadata.data,
-      statement: statement.data,
+      statement: statement === '' ? '' : statement.data,
       solution: renderedSolution ? renderedSolution : undefined
     },
     revalidate: 10
