@@ -87,7 +87,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
     props: {
       statementMetadata: statementMetadata.data,
       statement: statement === '' ? '' : statement.data,
-      solution: renderedSolution ? renderedSolution : undefined
+      solution: renderedSolution ? renderedSolution : null
     },
     revalidate: 10
   }
