@@ -17,7 +17,7 @@ export const AvatarUploader: React.FunctionComponent<IAvatarUploaderProps> = (
       contentType: 'image/jpeg'
     }
 
-    const storageRef = await storage.ref()
+    const storageRef = storage.ref()
     const imgFile = storageRef.child(`profilePic/${props.user.uid}/image.png`)
 
     try {
