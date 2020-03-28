@@ -13,6 +13,7 @@ import { FilterComponent, IFilter } from '../../components/tasks/Filter'
 import { WhiteContainerWrapper } from '../../design/Atomics'
 import { PageLayout } from '../../components/Layout'
 import { ITask } from '../../@types/task'
+import { GetStaticProps } from 'next'
 
 const { Panel } = Collapse
 
@@ -229,7 +230,7 @@ export default ({ tasks }) => {
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps: GetStaticProps = async () => {
   const tasks = await api.get('/getAllTasks')
 
   return {

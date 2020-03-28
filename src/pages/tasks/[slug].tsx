@@ -14,6 +14,7 @@ import { Solution } from '../../components/tasks/Solution'
 import { getProblemIDs } from '../../utils/getProblemIDs'
 
 import '../../assets/css/prism.css'
+import { GetStaticPaths, GetStaticProps } from 'next'
 
 const TaskDetail = ({ statementMetadata, statement, solution }) => {
   const { user } = useUser()
@@ -54,15 +55,16 @@ const TaskDetail = ({ statementMetadata, statement, solution }) => {
   )
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getProblemIDs()
 
   return {
-    paths
+    paths,
+    fallback: true
   }
 }
 
-export async function getStaticProps({ params: { slug } }) {
+export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
   const statementMetadata = await api.get(`/getProblemMetadata?id=${slug}`)
   const statement =
     statementMetadata.data.url === ''
