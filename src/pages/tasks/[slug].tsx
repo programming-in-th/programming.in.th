@@ -54,7 +54,7 @@ const TaskDetail = ({ statementMetadata, statement, solution }) => {
   )
 }
 
-export async function unstable_getStaticPaths() {
+export async function getStaticPaths() {
   const paths = await getProblemIDs()
 
   return {
@@ -62,7 +62,7 @@ export async function unstable_getStaticPaths() {
   }
 }
 
-export async function unstable_getStaticProps({ params: { slug } }) {
+export async function getStaticProps({ params: { slug } }) {
   const statementMetadata = await api.get(`/getProblemMetadata?id=${slug}`)
   const statement =
     statementMetadata.data.url === ''
