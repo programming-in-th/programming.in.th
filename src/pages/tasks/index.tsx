@@ -229,7 +229,7 @@ export default ({ tasks }) => {
   )
 }
 
-export async function unstable_getStaticProps() {
+export async function getStaticProps() {
   const tasks = await api.get('/getAllTasks')
 
   return {
