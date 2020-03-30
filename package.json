@@ -53,7 +53,7 @@
     "remark-rehype": "^5.0.0",
     "styled-components": "^5.0.1",
     "swr": "^0.1.17",
-    "util": "^0.12.1"
+    "util": "^0.12.2"
   },
   "devDependencies": {
     "@types/codemirror": "^0.0.85",
