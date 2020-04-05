@@ -66,10 +66,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
   const statementMetadata = await api.get(`/getProblemMetadata?id=${slug}`)
+
   const statement =
     statementMetadata.data.url === ''
       ? ''
       : await axios.get(statementMetadata.data.url)
+
   let solution: AxiosResponse<any>
   let renderedSolution: string
 
@@ -77,7 +79,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
     solution = await axios.get(
       `https://raw.githubusercontent.com/programming-in-th/solutions/master/md/${statementMetadata.data.problem_id}.md`
     )
-  } catch (e) {}
+  } catch (_) {}
 
   if (solution) {
     renderedSolution = renderMarkdown(solution.data)
@@ -89,7 +91,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { slug } }) => {
       statement: statement === '' ? '' : statement.data,
       solution: renderedSolution ? renderedSolution : null
     },
-    revalidate: 10
+    revalidate: 60 * 60
   }
 }
 
