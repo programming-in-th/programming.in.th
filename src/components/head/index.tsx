@@ -2,7 +2,7 @@ import React from 'react'
 import { Fonts } from './fonts'
 import { Preload } from './preload'
 
-export const CustomHead = () => (
+export const Head = () => (
   <React.Fragment>
     <Fonts />
     <Preload />

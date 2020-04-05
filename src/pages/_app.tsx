@@ -1,16 +1,19 @@
 import { NextPage } from 'next'
 import { AppProps } from 'next/app'
+import Router from 'next/router'
 import React, { useReducer, useEffect } from 'react'
 import NProgress from 'nprogress'
+import { ThemeProvider, CSSReset, ColorModeProvider } from '@chakra-ui/core'
 
-import Router from 'next/router'
-import { UserAction, UserStateContext } from '../components/UserContext'
 import firebase from '../lib/firebase'
-import user from './admin/user'
-import { GlobalStyle } from '../design'
+
+import { UserAction, UserStateContext } from '../components/UserContext'
 import { fetchFromFirebase } from '../utils/fetcher'
 
-let timeout: number
+import { GlobalStyle } from '../design'
+import { customTheme } from '../design/theme'
+
+let timeout: any
 
 const start = () => {
   timeout = setTimeout(NProgress.start, 300)
@@ -74,13 +77,18 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
     }
 
     fetchAdmin()
-  }, [user])
+  }, [userState.user])
 
   return (
-    <UserStateContext.Provider value={userState}>
-      <GlobalStyle />
-      <Component {...pageProps} />
-    </UserStateContext.Provider>
+    <ThemeProvider theme={customTheme}>
+      <UserStateContext.Provider value={userState}>
+        <CSSReset />
+        <GlobalStyle />
+        <ColorModeProvider>
+          <Component {...pageProps} />
+        </ColorModeProvider>
+      </UserStateContext.Provider>
+    </ThemeProvider>
   )
 }
 

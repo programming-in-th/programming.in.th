@@ -1,4 +1,6 @@
-import styled, { createGlobalStyle } from 'styled-components'
+import { Global, css } from '@emotion/core'
+import styled from '@emotion/styled'
+
 import { nprogress } from './nprogress'
 
 export function getSystemFonts() {
@@ -28,100 +30,62 @@ export const Fonts = {
 
 const TH_UNICODE_RANGE = 'U+0E01-0E5B, U+200C-200D, U+25CC'
 
-export const GlobalStyle = createGlobalStyle`
-  :root {
-    --shadow-main: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-      0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
-    --shadow: 0 5px 10px rgba(0, 0, 0, 0.12);
-    --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
-    --font-display: ${Fonts.display};
-    --font-body: ${Fonts.body};
-    --font-size: 16px;
-    --gap-top: 24px;
-    --gap-bottom: 16px;
-    --text-color: #24292e;
-  }
+export const GlobalStyle = () => (
+  <Global
+    styles={css`
+      :root {
+        /* Based on TailwindCSS(https://github.com/tailwindcss/tailwindcss/blob/master/stubs/defaultConfig.stub.js) */
 
-  @font-face {
-    font-family: 'Kanit';
-    font-style: normal;
-    font-weight: 400;
-    font-display: swap;
-    src: url('/assets/fonts/Kanit-Regular.woff2') format('woff2');
-    unicode-range: ${TH_UNICODE_RANGE};
-  }
+        --shadow-xs: 0 0 0 1px rgba(0, 0, 0, 0.05);
+        --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+        --shadow-default: 0 1px 3px 0 rgba(0, 0, 0, 0.1),
+          0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        --shadow-2xl: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);
+        --shadow-outline: 0 0 0 3px rgba(66, 153, 225, 0.5);
 
-  @font-face {
-    font-family: 'Sukhumvit Set';
-    font-display: swap;
-    src: local('Sukhumvit Set');
-    unicode-range: ${TH_UNICODE_RANGE};
-  }
+        --font-display: ${Fonts.display};
+        --font-body: ${Fonts.body};
+        --font-size: 16px;
+        --gap-top: 24px;
+        --gap-bottom: 16px;
+        --text-color: #24292e;
+      }
 
-  html,
-  body,
-  #__next {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #fafafa;
+      @font-face {
+        font-family: 'Kanit';
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+        src: url('/assets/fonts/Kanit-Regular.woff2') format('woff2');
+        unicode-range: ${TH_UNICODE_RANGE};
+      }
 
-    font-family: var(--font-body);
-    font-display: swap;
-    box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent !important;
-    -webkit-user-select: none;
-    -webkit-touch-callout: none;
-  }
+      @font-face {
+        font-family: 'Sukhumvit Set';
+        font-display: swap;
+        src: local('Sukhumvit Set');
+        unicode-range: ${TH_UNICODE_RANGE};
+      }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  span,
-  b,
-  u,
-  i,
-  div {
-    cursor: default;
-    margin: 0;
-  }
+      html,
+      body,
+      #__next {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+      }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    font-family: var(--font-display);
-  }
-
-  ::selection,
-  ::-webkit-selection {
-    background-color: rgba(0, 123, 255, 0.25);
-  }
-
-  pre {
-    font-size: 14px;
-    line-height: 1.4em;
-    margin: 0 0 1.5em;
-    overflow-x: auto;
-    padding: 1.5em;
-    white-space: pre;
-    background: #011627;
-    border-radius: 4px;
-
-    code {
-      padding: 0;
-      text-shadow: none;
-    }
-  }
-
-  ${nprogress}
-`
+      ${nprogress}
+    `}
+  />
+)
 
 export const MarkDownStyle = styled.div`
   font-size: 16px;

@@ -1,10 +1,12 @@
-const withCss = require('@zeit/next-css')
+const withPlugins = require('next-compose-plugins')
+
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
+
 const remarkMath = require('remark-math')
 const rehypeKatex = require('rehype-katex')
 const rehypePrism = require('@mapbox/rehype-prism')
-const withPlugins = require('next-compose-plugins')
 const withOffline = require('next-offline')
+
 const fs = require('fs')
 
 /* eslint-disable */
@@ -23,7 +25,6 @@ const withMDX = require('@zeit/next-mdx')({
 
 module.exports = withPlugins(
   [
-    withCss,
     [
       withMDX,
       {
@@ -98,28 +99,7 @@ module.exports = withPlugins(
         }
       ]
     },
-    webpack: (config, { isServer }) => {
-      if (isServer) {
-        const antStyles = /antd\/.*?\/style\/css.*?/
-        const origExternals = [...config.externals]
-        config.externals = [
-          (context, request, callback) => {
-            if (request.match(antStyles)) return callback()
-            if (typeof origExternals[0] === 'function') {
-              origExternals[0](context, request, callback)
-            } else {
-              callback()
-            }
-          },
-          ...(typeof origExternals[0] === 'function' ? [] : origExternals)
-        ]
-
-        config.module.rules.unshift({
-          test: antStyles,
-          use: 'null-loader'
-        })
-      }
-
+    webpack: config => {
       process.env.USE_CACHE = 'true'
 
       return config
