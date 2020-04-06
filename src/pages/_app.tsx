@@ -4,14 +4,14 @@ import Router from 'next/router'
 import React, { useReducer, useEffect } from 'react'
 import NProgress from 'nprogress'
 import { ThemeProvider, CSSReset, ColorModeProvider } from '@chakra-ui/core'
-
 import firebase from '../lib/firebase'
-
 import { UserAction, UserStateContext } from '../components/UserContext'
 import { fetchFromFirebase } from '../utils/fetcher'
+import { onetap } from '../components/auth/onetap'
 
 import { GlobalStyle } from '../design'
 import { customTheme } from '../design/theme'
+import { on } from 'codemirror'
 
 let timeout: any
 
@@ -50,7 +50,6 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
   const [userState, userDispatch] = useReducer<
     React.Reducer<UserState, UserAction>
   >(reducer, initialState)
-
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       userDispatch({
@@ -65,6 +64,12 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
       unsubscribe()
     }
   }, [])
+
+  useEffect(() => {
+    if (userState.user === null) {
+      onetap()
+    }
+  }, [userState.user])
 
   useEffect(() => {
     const fetchAdmin = async () => {
