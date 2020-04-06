@@ -7,8 +7,20 @@ import {
   Text,
   List,
   ListItem,
-  Link as ChakraLink
+  Link as ChakraLink,
+  Menu,
+  MenuButton,
+  Button,
+  MenuList,
+  MenuItem,
+  MenuDivider,
+  Avatar,
+  Stack
 } from '@chakra-ui/core'
+
+import firebase from '../lib/firebase'
+
+import { useUser } from './UserContext'
 
 interface IMenu {
   key: string
@@ -49,6 +61,7 @@ const generateMenuItems = (menu: IMenu[], pathname: string) => {
 }
 
 export const Nav = () => {
+  const { user } = useUser()
   const router = useRouter()
 
   return (
@@ -85,7 +98,32 @@ export const Nav = () => {
           </Box>
 
           <Box>
-            <List>{generateMenuItems(rightMenu, router.pathname)}</List>
+            {user === undefined ? null : user !== null ? (
+              <Menu>
+                <MenuButton as={Box}>
+                  <Stack isInline mt="16px">
+                    <Avatar
+                      size="xs"
+                      src={
+                        user.photoURL === ''
+                          ? '/assets/img/default-user.png'
+                          : `${user.photoURL}`
+                      }
+                    />
+                    <Text color="gray.500">{user?.displayName}</Text>
+                  </Stack>
+                </MenuButton>
+                <MenuList>
+                  <MenuItem>Dashboard</MenuItem>
+                  <MenuDivider></MenuDivider>
+                  <MenuItem onClick={() => firebase.auth().signOut()}>
+                    Logout
+                  </MenuItem>
+                </MenuList>
+              </Menu>
+            ) : (
+              <List>{generateMenuItems(rightMenu, router.pathname)}</List>
+            )}
           </Box>
         </Flex>
       </Box>
