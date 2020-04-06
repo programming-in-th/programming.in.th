@@ -101,7 +101,7 @@ export const Nav = () => {
             {user === undefined ? null : user !== null ? (
               <Menu>
                 <MenuButton as={Box}>
-                  <Stack isInline mt="16px">
+                  <Stack isInline mt={['16px', '0px']}>
                     <Avatar
                       size="xs"
                       src={
