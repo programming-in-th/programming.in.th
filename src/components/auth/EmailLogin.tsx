@@ -28,7 +28,7 @@ const Login = () => {
 
   return (
     <React.Fragment>
-      <Heading as="h1" size="xl" py={5}>
+      <Heading as="h1" size="xl" mb={5}>
         Login
       </Heading>
       <Formik
