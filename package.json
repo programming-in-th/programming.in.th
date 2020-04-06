@@ -52,7 +52,7 @@
     "remark-parse": "^7.0.1",
     "remark-rehype": "^5.0.0",
     "styled-components": "^5.0.1",
-    "swr": "^0.1.17",
+    "swr": "^0.2.0",
     "util": "^0.12.1"
   },
   "devDependencies": {
