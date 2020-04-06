@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 import {
   Button,
@@ -14,7 +13,7 @@ import {
   Input,
   Text
 } from '@chakra-ui/core'
-import * as Icon from 'react-feather'
+import { Mail, Lock } from 'react-feather'
 import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 import firebase from '../../lib/firebase'
@@ -38,11 +37,13 @@ const Login = () => {
         onSubmit={async (values, actions) => {
           try {
             actions.setSubmitting(true)
+
             if (values.remember) {
               await firebase
                 .auth()
                 .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
             }
+
             return firebase
               .auth()
               .signInWithEmailAndPassword(values.email, values.pass)
@@ -56,12 +57,14 @@ const Login = () => {
                     router.push('/')
                   }
               })
+
               .catch(error => {
                 setErrorMessage(error.message)
               })
           } catch (error) {
             setErrorMessage(error.message)
           }
+
           actions.setSubmitting(false)
         }}
       >
@@ -76,9 +79,11 @@ const Login = () => {
                   <InputGroup>
                     <InputLeftElement
                       children={
-                        <Icon.Mail
-                          style={{ color: 'rgba(0,0,0,.25)', height: '16px' }}
-                        />
+                        <Box
+                          as={Mail}
+                          color="rgba(0,0,0,.25)"
+                          height="16px"
+                        ></Box>
                       }
                     />
                     <Input
@@ -101,9 +106,11 @@ const Login = () => {
                   <InputGroup>
                     <InputLeftElement
                       children={
-                        <Icon.Lock
-                          style={{ color: 'rgba(0,0,0,.25)', height: '16px' }}
-                        />
+                        <Box
+                          as={Lock}
+                          color="rgba(0,0,0,.25)"
+                          height="16px"
+                        ></Box>
                       }
                     />
                     <Input
