@@ -7,6 +7,14 @@ import { EmailLogin } from '../components/auth/EmailLogin'
 import { OAuthLogin } from '../components/auth/OAuthLogin'
 
 export default () => {
+  const { user } = useUser()
+
+  useEffect(() => {
+    if (user !== null) {
+      Router.push('/')
+    }
+  }, [user])
+
   return (
     <PageLayout>
       <Box h={500} px={6} m="0 auto">
