@@ -6,8 +6,8 @@ import { PageLayout } from '../components/Layout'
 export default () => (
   <PageLayout>
     <Flex align="center" justify="center" width="100%">
-      <Text fontSize={['24px', '72px']} fontWeight="800" textAlign="center">
-        PROGRAMMING.IN.TH
+      <Text fontSize="72px" fontWeight="800" textAlign="center">
+        TASKS
       </Text>
     </Flex>
   </PageLayout>

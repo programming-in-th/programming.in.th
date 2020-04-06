@@ -1,8 +1,9 @@
 import React from 'react'
 
 import { useUser } from './UserContext'
-import { Flex, Link, Box, Text, List, ListItem } from '@chakra-ui/core'
+import { Flex } from '@chakra-ui/core'
 import { Footer } from './Footer'
+import { Nav } from './Nav'
 
 interface IPageLayoutProps {
   hideNav?: boolean
@@ -22,6 +23,7 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
       bg={props.bg}
       display={user === undefined ? 'none' : 'flex'}
     >
+      <Nav></Nav>
       <Flex mt={'64px'} as="main" flex="auto">
         {props.children}
       </Flex>

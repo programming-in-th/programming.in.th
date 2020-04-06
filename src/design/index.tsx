@@ -82,6 +82,10 @@ export const GlobalStyle = () => (
         margin: 0;
       }
 
+      svg {
+        display: inline;
+      }
+
       ${nprogress}
     `}
   />
