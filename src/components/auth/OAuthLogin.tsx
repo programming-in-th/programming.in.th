@@ -1,19 +1,7 @@
 import React, { useState } from 'react'
 import Router from 'next/router'
-import {
-  Button,
-  Box,
-  Checkbox,
-  Heading,
-  FormControl,
-  FormLabel,
-  FormErrorMessage,
-  InputGroup,
-  InputLeftElement,
-  Input,
-  Text
-} from '@chakra-ui/core'
-import { Mail, Lock } from 'react-feather'
+import { Button, Text } from '@chakra-ui/core'
+
 import firebase from '../../lib/firebase'
 
 const loginWithGmail = async (setError: (msg: string) => void) => {
