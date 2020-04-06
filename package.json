@@ -34,6 +34,7 @@
     "codemirror": "^5.52.0",
     "emotion-theming": "^10.0.27",
     "firebase": "^7.9.0",
+    "formik": "^2.1.4",
     "intersection-observer": "^0.7.0",
     "lodash": "^4.17.15",
     "next": "^9.3.2",
@@ -54,7 +55,8 @@
     "remark-parse": "^7.0.1",
     "remark-rehype": "^5.0.0",
     "swr": "^0.1.17",
-    "util": "^0.12.1"
+    "util": "^0.12.1",
+    "yup": "^0.28.3"
   },
   "devDependencies": {
     "@types/codemirror": "^0.0.85",
