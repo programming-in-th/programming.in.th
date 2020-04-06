@@ -27,7 +27,7 @@ const Login = () => {
   })
 
   return (
-    <Box w={500} h={400} px={6} m="0 auto">
+    <React.Fragment>
       <Heading as="h1" size="xl" py={5}>
         Login
       </Heading>
@@ -146,8 +146,8 @@ const Login = () => {
       <Text color="red.500" mt={4}>
         {errorMessage}
       </Text>
-    </Box>
+    </React.Fragment>
   )
 }
 
-export const LoginPage = Login
+export const EmailLogin = Login
