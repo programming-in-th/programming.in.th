@@ -10,7 +10,10 @@ export type UserAction =
       payload: { isAdmin: boolean }
     }
 
-export const UserStateContext = React.createContext({
+export const UserStateContext = React.createContext<{
+  user: firebase.User | null | undefined
+  isAdmin: boolean
+}>({
   user: undefined,
   isAdmin: false
 })
