@@ -9,7 +9,7 @@ import { OAuthLogin } from '../components/auth/OAuthLogin'
 export default () => {
   return (
     <PageLayout>
-      <Box w={500} h={400} px={6} m="0 auto">
+      <Box h={500} px={6} m="0 auto">
         <EmailLogin />
         <OAuthLogin />
       </Box>

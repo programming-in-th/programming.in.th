@@ -91,8 +91,8 @@ const Login = () => {
   return (
     <React.Fragment>
       <Button
-        mt={4}
         isLoading={load === 1}
+        mt={2}
         width="100%"
         fontFamily="heading"
         onClick={() => {
