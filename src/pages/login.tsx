@@ -10,7 +10,7 @@ export default () => {
   const { user } = useUser()
 
   useEffect(() => {
-    if (user !== null) {
+    if (user !== null && user !== undefined) {
       Router.push('/')
     }
   }, [user])
