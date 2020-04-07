@@ -72,7 +72,11 @@ const Login = () => {
             <Field name="email">
               {({ field, form }) => (
                 <FormControl
-                  isInvalid={form.errors.email && form.touched.email}
+                  isInvalid={
+                    form.errors.email &&
+                    form.touched.email &&
+                    errorMessage === '\0'
+                  }
                 >
                   <FormLabel htmlFor="email">Email Address</FormLabel>
                   <InputGroup>
@@ -92,7 +96,11 @@ const Login = () => {
             <Field name="pass">
               {({ field, form }) => (
                 <FormControl
-                  isInvalid={form.errors.pass && form.touched.pass}
+                  isInvalid={
+                    form.errors.pass &&
+                    form.touched.pass &&
+                    errorMessage === '\0'
+                  }
                   mt={4}
                 >
                   <FormLabel htmlFor="pass">Password</FormLabel>
@@ -124,6 +132,9 @@ const Login = () => {
               type="submit"
               width="100%"
               fontFamily="heading"
+              onClick={() => {
+                setErrorMessage('\0')
+              }}
             >
               Login
             </Button>
