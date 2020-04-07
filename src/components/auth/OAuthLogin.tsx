@@ -71,20 +71,16 @@ const loginWithGithub = async (setError: (msg: string) => void) => {
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState<string>(null)
-  const [load, setLoad] = useState<number>(0)
   const setError = (err: string) => {
     setErrorMessage(err)
-    setLoad(0)
   }
   return (
     <React.Fragment>
       <Button
-        isLoading={load === 1}
         mt={2}
         width="100%"
         fontFamily="heading"
         onClick={() => {
-          setLoad(1)
           loginWithGmail(setError)
         }}
       >
@@ -92,11 +88,9 @@ const Login = () => {
       </Button>
       <Button
         mt={4}
-        isLoading={load === 2}
         width="100%"
         fontFamily="heading"
         onClick={() => {
-          setLoad(2)
           loginWithFacebook(setError)
         }}
       >
@@ -104,11 +98,9 @@ const Login = () => {
       </Button>
       <Button
         mt={4}
-        isLoading={load === 3}
         width="100%"
         fontFamily="heading"
         onClick={() => {
-          setLoad(3)
           loginWithGithub(setError)
         }}
       >
