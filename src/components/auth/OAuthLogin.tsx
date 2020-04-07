@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Router from 'next/router'
 import { Button, Text } from '@chakra-ui/core'
+import { FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa'
 
 import firebase from '../../lib/firebase'
 
@@ -83,6 +84,7 @@ const Login = () => {
         onClick={() => {
           loginWithGmail(setError)
         }}
+        leftIcon={FaGoogle}
       >
         Login With Google
       </Button>
@@ -93,6 +95,7 @@ const Login = () => {
         onClick={() => {
           loginWithFacebook(setError)
         }}
+        leftIcon={FaFacebook}
       >
         Login With Facebook
       </Button>
@@ -103,6 +106,7 @@ const Login = () => {
         onClick={() => {
           loginWithGithub(setError)
         }}
+        leftIcon={FaGithub}
       >
         Login With Github
       </Button>
