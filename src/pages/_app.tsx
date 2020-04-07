@@ -3,7 +3,8 @@ import { AppProps } from 'next/app'
 import Router from 'next/router'
 import React, { useReducer, useEffect } from 'react'
 import NProgress from 'nprogress'
-import { ThemeProvider, CSSReset, ColorModeProvider } from '@chakra-ui/core'
+import { ThemeProvider, CSSReset } from '@chakra-ui/core'
+
 import firebase from '../lib/firebase'
 import { UserAction, UserStateContext } from '../components/UserContext'
 import { fetchFromFirebase } from '../utils/fetcher'
@@ -11,7 +12,6 @@ import { onetap } from '../components/auth/onetap'
 
 import { GlobalStyle } from '../design'
 import { customTheme } from '../design/theme'
-import { on } from 'codemirror'
 
 let timeout: any
 

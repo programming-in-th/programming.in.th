@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import Router from 'next/router'
 import { useUser } from '../components/UserContext'
-import { Box } from '@chakra-ui/core'
+import { Box, Divider } from '@chakra-ui/core'
 import { PageLayout } from '../components/Layout'
 import { EmailLogin } from '../components/auth/EmailLogin'
 import { OAuthLogin } from '../components/auth/OAuthLogin'
@@ -17,8 +17,9 @@ export default () => {
 
   return (
     <PageLayout>
-      <Box h={550} px={6} m="0 auto">
+      <Box h={550} width="100%" px={6} m="0px auto">
         <EmailLogin />
+        <Divider></Divider>
         <OAuthLogin />
       </Box>
     </PageLayout>
