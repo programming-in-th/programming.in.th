@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useRouter } from 'next/router'
+import Router from 'next/router'
 import {
   Button,
   Box,
@@ -20,7 +20,6 @@ import firebase from '../../lib/firebase'
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState<string>(null)
-  const router = useRouter()
   const LoginSchema = Yup.object().shape({
     email: Yup.string().required('Please enter your email'),
     pass: Yup.string().required('Please enter your password')
@@ -54,7 +53,7 @@ const Login = () => {
                     firebase.auth().signOut()
                     window.alert('Please Verify Your Email')
                   } else {
-                    router.push('/')
+                    Router.push('/')
                   }
               })
 
