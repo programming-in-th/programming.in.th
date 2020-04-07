@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Router from 'next/router'
-import { Button, Text } from '@chakra-ui/core'
+import { Button, Text, Flex } from '@chakra-ui/core'
 import { FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa'
 
 import firebase from '../../lib/firebase'
@@ -72,14 +72,14 @@ const loginWithGithub = async (setError: (msg: string) => void) => {
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState<string>(null)
+
   const setError = (err: string) => {
     setErrorMessage(err)
   }
+
   return (
-    <React.Fragment>
+    <Flex mt={2} direction={['column', 'row']}>
       <Button
-        mt={4}
-        width="100%"
         fontFamily="heading"
         onClick={() => {
           loginWithGmail(setError)
@@ -89,8 +89,8 @@ const Login = () => {
         Login With Google
       </Button>
       <Button
-        mt={4}
-        width="100%"
+        mt={[2, 0]}
+        ml={[0, 2]}
         fontFamily="heading"
         onClick={() => {
           loginWithFacebook(setError)
@@ -100,8 +100,8 @@ const Login = () => {
         Login With Facebook
       </Button>
       <Button
-        mt={4}
-        width="100%"
+        mt={[2, 0]}
+        ml={[0, 2]}
         fontFamily="heading"
         onClick={() => {
           loginWithGithub(setError)
@@ -113,7 +113,7 @@ const Login = () => {
       <Text color="red.500" mt={4}>
         {errorMessage}
       </Text>
-    </React.Fragment>
+    </Flex>
   )
 }
 
