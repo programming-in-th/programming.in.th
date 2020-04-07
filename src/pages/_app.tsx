@@ -89,9 +89,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
       <UserStateContext.Provider value={userState}>
         <CSSReset />
         <GlobalStyle />
-        <ColorModeProvider>
-          <Component {...pageProps} />
-        </ColorModeProvider>
+        <Component {...pageProps} />
       </UserStateContext.Provider>
     </ThemeProvider>
   )
