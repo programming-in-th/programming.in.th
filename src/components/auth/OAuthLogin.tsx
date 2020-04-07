@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Router from 'next/router'
-import { Button, Text, Flex } from '@chakra-ui/core'
+import { Button, Text, Flex, Box } from '@chakra-ui/core'
 import { FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa'
 
 import firebase from '../../lib/firebase'
@@ -78,42 +78,48 @@ const Login = () => {
   }
 
   return (
-    <Flex mt={2} direction={['column', 'row']}>
-      <Button
-        fontFamily="heading"
-        onClick={() => {
-          loginWithGmail(setError)
-        }}
-        leftIcon={FaGoogle}
+    <Box>
+      <Flex
+        mt={2}
+        w="100%"
+        direction={['column', 'row']}
+        display="flex"
+        justifyContent="space-between"
       >
-        Login With Google
-      </Button>
-      <Button
-        mt={[2, 0]}
-        ml={[0, 2]}
-        fontFamily="heading"
-        onClick={() => {
-          loginWithFacebook(setError)
-        }}
-        leftIcon={FaFacebook}
-      >
-        Login With Facebook
-      </Button>
-      <Button
-        mt={[2, 0]}
-        ml={[0, 2]}
-        fontFamily="heading"
-        onClick={() => {
-          loginWithGithub(setError)
-        }}
-        leftIcon={FaGithub}
-      >
-        Login With Github
-      </Button>
+        <Button
+          fontFamily="heading"
+          onClick={() => {
+            loginWithGmail(setError)
+          }}
+          leftIcon={FaGoogle}
+        >
+          Login With Google
+        </Button>
+        <Button
+          mt={[2, 0]}
+          fontFamily="heading"
+          onClick={() => {
+            loginWithFacebook(setError)
+          }}
+          leftIcon={FaFacebook}
+        >
+          Login With Facebook
+        </Button>
+        <Button
+          mt={[2, 0]}
+          fontFamily="heading"
+          onClick={() => {
+            loginWithGithub(setError)
+          }}
+          leftIcon={FaGithub}
+        >
+          Login With Github
+        </Button>
+      </Flex>
       <Text color="red.500" mt={4}>
         {errorMessage}
       </Text>
-    </Flex>
+    </Box>
   )
 }
 
