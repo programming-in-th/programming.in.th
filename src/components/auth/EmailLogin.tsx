@@ -13,7 +13,7 @@ import {
   Input,
   Text
 } from '@chakra-ui/core'
-import { Mail, Lock } from 'react-feather'
+import { FaRegEnvelope, FaLock } from 'react-icons/fa'
 import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 import firebase from '../../lib/firebase'
@@ -78,13 +78,7 @@ const Login = () => {
                   <FormLabel htmlFor="email">Email Address</FormLabel>
                   <InputGroup>
                     <InputLeftElement
-                      children={
-                        <Box
-                          as={Mail}
-                          color="rgba(0,0,0,.25)"
-                          height="16px"
-                        ></Box>
-                      }
+                      children={<Box as={FaRegEnvelope} color="gray.300" />}
                     />
                     <Input
                       {...field}
@@ -105,13 +99,7 @@ const Login = () => {
                   <FormLabel htmlFor="pass">Password</FormLabel>
                   <InputGroup>
                     <InputLeftElement
-                      children={
-                        <Box
-                          as={Lock}
-                          color="rgba(0,0,0,.25)"
-                          height="16px"
-                        ></Box>
-                      }
+                      children={<Box as={FaLock} color="gray.300" />}
                     />
                     <Input
                       {...field}
