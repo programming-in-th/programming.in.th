@@ -77,7 +77,7 @@ const Login = () => {
   return (
     <React.Fragment>
       <Button
-        mt={2}
+        mt={4}
         width="100%"
         fontFamily="heading"
         onClick={() => {

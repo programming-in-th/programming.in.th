@@ -17,7 +17,7 @@ export default () => {
 
   return (
     <PageLayout>
-      <Box h={500} px={6} m="0 auto">
+      <Box h={550} px={6} m="0 auto">
         <EmailLogin />
         <OAuthLogin />
       </Box>
