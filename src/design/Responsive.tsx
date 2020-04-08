@@ -53,7 +53,7 @@ export const MobileOnly = ({ breakpoint = 1070, children }: IOnlyProps) => {
   }
 }
 
-function useWindowWidth() {
+export function useWindowWidth() {
   const [width, setWidth] = useState(0)
   useEffect(() => {
     const width =
