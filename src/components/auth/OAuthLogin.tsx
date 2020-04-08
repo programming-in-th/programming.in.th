@@ -96,7 +96,7 @@ const Login = () => {
           Login With Google
         </Button>
         <Button
-          mt={[2, 0]}
+          mt={[4, 0]}
           fontFamily="heading"
           onClick={() => {
             loginWithFacebook(setError)
@@ -106,7 +106,7 @@ const Login = () => {
           Login With Facebook
         </Button>
         <Button
-          mt={[2, 0]}
+          mt={[4, 0]}
           fontFamily="heading"
           onClick={() => {
             loginWithGithub(setError)
