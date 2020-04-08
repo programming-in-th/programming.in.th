@@ -24,7 +24,7 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
       display={user === undefined ? 'none' : 'flex'}
     >
       <Nav></Nav>
-      <Flex mt={['0px', '64px']} as="main" flex="auto">
+      <Flex mt={['32px', '64px']} as="main" flex="auto">
         {props.children}
       </Flex>
       <Footer bg={props.bg}></Footer>
