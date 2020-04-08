@@ -52,12 +52,14 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
   >(reducer, initialState)
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
-      userDispatch({
-        type: 'RECEIVE_USER',
-        payload: {
-          user
-        }
-      })
+      if (user === null || user.emailVerified) {
+        userDispatch({
+          type: 'RECEIVE_USER',
+          payload: {
+            user
+          }
+        })
+      }
     })
 
     return () => {

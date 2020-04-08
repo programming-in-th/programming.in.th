@@ -3,7 +3,6 @@ import Router from 'next/router'
 import {
   Button,
   Box,
-  Checkbox,
   Heading,
   FormControl,
   FormLabel,
@@ -13,18 +12,19 @@ import {
   Input,
   Text
 } from '@chakra-ui/core'
-import { FaRegEnvelope, FaLock } from 'react-icons/fa'
+import { FaUserAlt, FaRegEnvelope, FaLock } from 'react-icons/fa'
 import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 import firebase from '../../lib/firebase'
-import { useUser } from '../UserContext'
 
 const LoginSchema = Yup.object().shape({
+  dname: Yup.string().required('Please enter your display name'),
   email: Yup.string().required('Please enter your email'),
-  pass: Yup.string().required('Please enter your password')
+  pass: Yup.string().required('Please enter your password'),
+  rpass: Yup.string().required('Please confirm your password')
 })
 
-const Login = () => {
+export const Register = () => {
   const [errorMessage, setErrorMessage] = useState<string>(null)
   const [isClick, setIsClick] = useState<boolean>(false)
 
@@ -36,45 +36,69 @@ const Login = () => {
   return (
     <React.Fragment>
       <Heading as="h1" size="xl" mb={5}>
-        Login
+        Register
       </Heading>
       <Formik
-        initialValues={{ email: '', pass: '', remember: false }}
+        initialValues={{ dname: '', email: '', pass: '', rpass: '' }}
         validationSchema={LoginSchema}
         onSubmit={async (values, actions) => {
           actions.setSubmitting(true)
-          if (values.remember) {
+          if (values.pass === values.rpass) {
             await firebase
               .auth()
-              .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-          }
-          await firebase
-            .auth()
-            .signInWithEmailAndPassword(values.email, values.pass)
-            .then(() => {
-              const currentUser = firebase.auth().currentUser
-              if (currentUser)
-                if (!currentUser.emailVerified) {
-                  firebase.auth().signOut()
-                  setError('Please Verify Your Email')
-                } else {
-                  Router.push('/')
+              .createUserWithEmailAndPassword(values.email, values.pass)
+              .then(() => {
+                const currentUser = firebase.auth().currentUser
+                if (currentUser) {
+                  currentUser.sendEmailVerification()
+                  return currentUser
+                    .updateProfile({ displayName: values.dname })
+                    .then(() => {
+                      firebase.auth().signOut()
+                      Router.push('/login')
+                    })
                 }
-            })
-            .catch(error => {
-              setError(error.message)
-            })
+              })
+              .catch(error => {
+                setError(error.message)
+              })
+          } else {
+            setError('Password not match')
+          }
           actions.setSubmitting(false)
         }}
       >
         {props => (
           <form onSubmit={props.handleSubmit}>
+            <Field name="dname">
+              {({ field, form }) => (
+                <FormControl
+                  isInvalid={
+                    form.errors.dname && form.touched.dname && isClick === true
+                  }
+                >
+                  <FormLabel htmlFor="dname">Display Name</FormLabel>
+                  <InputGroup>
+                    <InputLeftElement
+                      children={<Box as={FaUserAlt} color="gray.300" />}
+                    />
+                    <Input
+                      {...field}
+                      id="dname"
+                      placeholder="Enter Your Display Name"
+                    />
+                  </InputGroup>
+                  <FormErrorMessage>{form.errors.dname}</FormErrorMessage>
+                </FormControl>
+              )}
+            </Field>
             <Field name="email">
               {({ field, form }) => (
                 <FormControl
                   isInvalid={
                     form.errors.email && form.touched.email && isClick === true
                   }
+                  mt={4}
                 >
                   <FormLabel htmlFor="email">Email Address</FormLabel>
                   <InputGroup>
@@ -115,11 +139,28 @@ const Login = () => {
                 </FormControl>
               )}
             </Field>
-            <Field name="remember">
-              {({ field }) => (
-                <Checkbox {...field} mt={4}>
-                  Remember
-                </Checkbox>
+            <Field name="rpass">
+              {({ field, form }) => (
+                <FormControl
+                  isInvalid={
+                    form.errors.rpass && form.touched.rpass && isClick === true
+                  }
+                  mt={4}
+                >
+                  <FormLabel htmlFor="rpass">Confirm Password</FormLabel>
+                  <InputGroup>
+                    <InputLeftElement
+                      children={<Box as={FaLock} color="gray.300" />}
+                    />
+                    <Input
+                      {...field}
+                      id="rpass"
+                      type="password"
+                      placeholder="Confirm Your Password"
+                    />
+                  </InputGroup>
+                  <FormErrorMessage>{form.errors.rpass}</FormErrorMessage>
+                </FormControl>
               )}
             </Field>
             <Button
@@ -132,7 +173,7 @@ const Login = () => {
                 setIsClick(true)
               }}
             >
-              Login
+              Register
             </Button>
           </form>
         )}
@@ -143,5 +184,3 @@ const Login = () => {
     </React.Fragment>
   )
 }
-
-export const EmailLogin = Login
