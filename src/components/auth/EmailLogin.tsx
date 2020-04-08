@@ -17,7 +17,6 @@ import { FaRegEnvelope, FaLock } from 'react-icons/fa'
 import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 import firebase from '../../lib/firebase'
-import { useUser } from '../UserContext'
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required('Please enter your email'),

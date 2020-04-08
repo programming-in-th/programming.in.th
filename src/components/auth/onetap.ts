@@ -1,6 +1,6 @@
 import firebase from '../../lib/firebase'
 
-const PUBLIC_CLIENT_ID =
+const client_id =
   '408883593148-sm3fup3jg8b932h1lolml6cklu8ntlko.apps.googleusercontent.com'
 
 const callback = async res => {
@@ -13,8 +13,8 @@ const callback = async res => {
 
 export const onetap = () => {
   window.google.accounts.id.initialize({
-    client_id: PUBLIC_CLIENT_ID,
-    callback: callback
+    client_id,
+    callback
   })
 
   window.google.accounts.id.prompt()
