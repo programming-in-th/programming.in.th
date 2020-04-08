@@ -17,14 +17,19 @@ import { FaRegEnvelope, FaLock } from 'react-icons/fa'
 import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 import firebase from '../../lib/firebase'
+import { useUser } from '../UserContext'
 
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState<string>(null)
+  const [isClick, setIsClick] = useState<boolean>(false)
   const LoginSchema = Yup.object().shape({
     email: Yup.string().required('Please enter your email'),
     pass: Yup.string().required('Please enter your password')
   })
-
+  const setError = (err: string) => {
+    setErrorMessage(err)
+    setIsClick(false)
+  }
   return (
     <React.Fragment>
       <Heading as="h1" size="xl" mb={5}>
@@ -34,36 +39,30 @@ const Login = () => {
         initialValues={{ email: '', pass: '', remember: false }}
         validationSchema={LoginSchema}
         onSubmit={async (values, actions) => {
-          try {
-            actions.setSubmitting(true)
+          actions.setSubmitting(true)
 
-            if (values.remember) {
-              await firebase
-                .auth()
-                .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-            }
-
-            return firebase
+          if (values.remember) {
+            await firebase
               .auth()
-              .signInWithEmailAndPassword(values.email, values.pass)
-              .then(() => {
-                const currentUser = firebase.auth().currentUser
-                if (currentUser)
-                  if (!currentUser.emailVerified) {
-                    firebase.auth().signOut()
-                    window.alert('Please Verify Your Email')
-                  } else {
-                    Router.push('/')
-                  }
-              })
-
-              .catch(error => {
-                setErrorMessage(error.message)
-              })
-          } catch (error) {
-            setErrorMessage(error.message)
+              .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
           }
 
+          await firebase
+            .auth()
+            .signInWithEmailAndPassword(values.email, values.pass)
+            .then(() => {
+              const currentUser = firebase.auth().currentUser
+              if (currentUser)
+                if (!currentUser.emailVerified) {
+                  firebase.auth().signOut()
+                  setError('Please Verify Your Email')
+                } else {
+                  Router.push('/')
+                }
+            })
+            .catch(error => {
+              setError(error.message)
+            })
           actions.setSubmitting(false)
         }}
       >
@@ -73,9 +72,7 @@ const Login = () => {
               {({ field, form }) => (
                 <FormControl
                   isInvalid={
-                    form.errors.email &&
-                    form.touched.email &&
-                    errorMessage === '\0'
+                    form.errors.email && form.touched.email && isClick === true
                   }
                 >
                   <FormLabel htmlFor="email">Email Address</FormLabel>
@@ -97,9 +94,7 @@ const Login = () => {
               {({ field, form }) => (
                 <FormControl
                   isInvalid={
-                    form.errors.pass &&
-                    form.touched.pass &&
-                    errorMessage === '\0'
+                    form.errors.pass && form.touched.pass && isClick === true
                   }
                   mt={4}
                 >
@@ -133,7 +128,7 @@ const Login = () => {
               width="100%"
               fontFamily="heading"
               onClick={() => {
-                setErrorMessage('\0')
+                setIsClick(true)
               }}
             >
               Login
