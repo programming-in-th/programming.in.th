@@ -17,19 +17,22 @@ import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 import firebase from '../../lib/firebase'
 
+const LoginSchema = Yup.object().shape({
+  dname: Yup.string().required('Please enter your display name'),
+  email: Yup.string().required('Please enter your email'),
+  pass: Yup.string().required('Please enter your password'),
+  rpass: Yup.string().required('Please confirm your password')
+})
+
 export const Register = () => {
   const [errorMessage, setErrorMessage] = useState<string>(null)
   const [isClick, setIsClick] = useState<boolean>(false)
-  const LoginSchema = Yup.object().shape({
-    dname: Yup.string().required('Please enter your display name'),
-    email: Yup.string().required('Please enter your email'),
-    pass: Yup.string().required('Please enter your password'),
-    rpass: Yup.string().required('Please confirm your password')
-  })
+
   const setError = (err: string) => {
     setErrorMessage(err)
     setIsClick(false)
   }
+
   return (
     <React.Fragment>
       <Heading as="h1" size="xl" mb={5}>
@@ -40,31 +43,29 @@ export const Register = () => {
         validationSchema={LoginSchema}
         onSubmit={async (values, actions) => {
           actions.setSubmitting(true)
-          if (values.pass !== values.rpass) {
+          if (values.pass === values.rpass) {
+            await firebase
+              .auth()
+              .createUserWithEmailAndPassword(values.email, values.pass)
+              .then(() => {
+                const currentUser = firebase.auth().currentUser
+                if (currentUser) {
+                  currentUser.sendEmailVerification()
+                  return currentUser
+                    .updateProfile({ displayName: values.dname })
+                    .then(() => {
+                      firebase.auth().signOut()
+                      Router.push('/login')
+                    })
+                }
+              })
+              .catch(error => {
+                setError(error.message)
+              })
+          } else {
             setError('Password not match')
-            actions.setSubmitting(false)
-            return
           }
-
-          return firebase
-            .auth()
-            .createUserWithEmailAndPassword(values.email, values.pass)
-            .then(() => {
-              const currentUser = firebase.auth().currentUser
-              if (currentUser) {
-                currentUser.sendEmailVerification()
-                return currentUser
-                  .updateProfile({ displayName: values.dname })
-                  .then(() => {
-                    firebase.auth().signOut()
-                    Router.push('/login')
-                  })
-              }
-            })
-            .catch(error => {
-              setError(error.message)
-              actions.setSubmitting(false)
-            })
+          actions.setSubmitting(false)
         }}
       >
         {props => (

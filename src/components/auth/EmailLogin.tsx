@@ -19,17 +19,20 @@ import * as Yup from 'yup'
 import firebase from '../../lib/firebase'
 import { useUser } from '../UserContext'
 
+const LoginSchema = Yup.object().shape({
+  email: Yup.string().required('Please enter your email'),
+  pass: Yup.string().required('Please enter your password')
+})
+
 const Login = () => {
   const [errorMessage, setErrorMessage] = useState<string>(null)
   const [isClick, setIsClick] = useState<boolean>(false)
-  const LoginSchema = Yup.object().shape({
-    email: Yup.string().required('Please enter your email'),
-    pass: Yup.string().required('Please enter your password')
-  })
+
   const setError = (err: string) => {
     setErrorMessage(err)
     setIsClick(false)
   }
+
   return (
     <React.Fragment>
       <Heading as="h1" size="xl" mb={5}>
@@ -40,13 +43,11 @@ const Login = () => {
         validationSchema={LoginSchema}
         onSubmit={async (values, actions) => {
           actions.setSubmitting(true)
-
           if (values.remember) {
             await firebase
               .auth()
               .setPersistence(firebase.auth.Auth.Persistence.LOCAL)
           }
-
           await firebase
             .auth()
             .signInWithEmailAndPassword(values.email, values.pass)
