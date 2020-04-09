@@ -81,7 +81,7 @@ export const Nav = () => {
           px={6}
           direction="row"
           justify="space-between"
-          align="baseline"
+          align="center"
           display={['flex', 'none']}
         >
           <Text fontWeight="800" color="black">
@@ -89,9 +89,9 @@ export const Nav = () => {
           </Text>
 
           {isNavOpen ? (
-            <FiX onClick={() => setNavState(false)}></FiX>
+            <Box as={FiX} onClick={() => setNavState(false)} size={6}></Box>
           ) : (
-            <FiMenu onClick={() => setNavState(true)}></FiMenu>
+            <Box as={FiMenu} onClick={() => setNavState(true)} size={6}></Box>
           )}
         </Flex>
 
