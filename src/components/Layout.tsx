@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useUser } from './UserContext'
-import { Flex } from '@chakra-ui/core'
+import { Flex, Divider } from '@chakra-ui/core'
 import { Footer } from './Footer'
 import { Nav } from './Nav'
 
@@ -24,7 +24,8 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
       display={user === undefined ? 'none' : 'flex'}
     >
       <Nav></Nav>
-      <Flex mt={['32px', '64px']} as="main" flex="auto">
+      <Divider display={['block', 'none']} mt={4}></Divider>
+      <Flex mt={[8, 16]} as="main" flex="auto">
         {props.children}
       </Flex>
       <Footer bg={props.bg}></Footer>

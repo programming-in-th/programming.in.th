@@ -3,7 +3,7 @@ import { Box, Flex, Link, List, ListItem, Text } from '@chakra-ui/core'
 
 export const Footer = ({ bg }) => (
   <Box bg={bg} as="footer" borderTop="1px solid #EDF2F7" color="gray.600">
-    <Box margin="0 auto" p="24px">
+    <Box margin="0 auto" p={6}>
       <Flex width="100%" direction={['column', 'row']} justify="space-around">
         <Box maxWidth={['100%', '25%']}>
           <Text fontWeight="800" color="gray.500">
@@ -14,7 +14,7 @@ export const Footer = ({ bg }) => (
             การเขียนโปรแกรมเพื่อการแข่งขัน และวิทยาการคอมพิวเตอร์
           </Text>
 
-          <Box mt="8px" display={['none', 'block']}>
+          <Box mt={2} display={['none', 'block']}>
             <Text fontSize="xs">
               © 2019-{new Date().getFullYear()} the PROGRAMMING.IN.TH team
             </Text>
@@ -31,7 +31,7 @@ export const Footer = ({ bg }) => (
           </Box>
         </Box>
 
-        <Box mt={['8px', '0px']}>
+        <Box mt={[2, 0]}>
           <Text fontWeight="600">Resources</Text>
           <List fontSize="sm">
             <ListItem>Books</ListItem>
@@ -39,7 +39,7 @@ export const Footer = ({ bg }) => (
           </List>
         </Box>
 
-        <Box mt={['8px', '0px']}>
+        <Box mt={[2, 0]}>
           <Text fontWeight="600">Archives</Text>
           <List fontSize="sm">
             <ListItem>TOI</ListItem>
@@ -49,17 +49,17 @@ export const Footer = ({ bg }) => (
           </List>
         </Box>
 
-        <Box mt={['8px', '0px']}>
+        <Box mt={[2, 0]}>
           <Text fontWeight="600">About</Text>
         </Box>
 
-        <Box mt={['8px', '0px']}>
+        <Box mt={[2, 0]}>
           <Text fontWeight="600">Contact</Text>
         </Box>
       </Flex>
 
-      <Box fontSize="xs" textAlign="center" mt="16px">
-        <Box mt="8px" display={['block', 'none']}>
+      <Box fontSize="xs" textAlign="center" mt={4}>
+        <Box mt={2} display={['block', 'none']}>
           <Text fontSize="xs">
             © 2019-{new Date().getFullYear()} the PROGRAMMING.IN.TH team
           </Text>
@@ -74,7 +74,7 @@ export const Footer = ({ bg }) => (
             </Link>
           </Text>
         </Box>
-        <Box mt={['8px', '0px']}>
+        <Box mt={[2, 0]}>
           <Text>Made with ♥ by PROGRAMMING.IN.TH team</Text>
         </Box>
       </Box>

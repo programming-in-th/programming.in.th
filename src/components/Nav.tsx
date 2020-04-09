@@ -46,8 +46,8 @@ const generateMenuItems = (menu: IMenu[], pathname: string) => {
     <Link href={i.path} key={i.key}>
       <ChakraLink
         href={i.path}
-        mt={[2, '']}
-        ml={['0', '24px']}
+        mt={[2, 0]}
+        ml={[0, 6]}
         lineHeight="18px"
         color={pathname === i.path ? 'gray.800' : 'gray.500'}
       >
@@ -75,10 +75,10 @@ export const Nav = () => {
       <Box
         margin="0 auto"
         maxWidth={['100%', '480px', '700px', '768px', '1024px']}
-        pt="16px"
+        pt={4}
       >
         <Flex
-          px="24px"
+          px={6}
           direction="row"
           justify="space-between"
           align="baseline"
@@ -100,7 +100,7 @@ export const Nav = () => {
             const component = (
               <Flex
                 as="nav"
-                pr={['24px', '0px', '0px', '0px', '0px']}
+                pr={[6, 0, 0, 0, 0]}
                 direction={['column', 'row', 'row']}
                 justify={['', 'space-between']}
                 align={['flex-end', '']}
@@ -129,7 +129,7 @@ export const Nav = () => {
                   {user === undefined ? null : user !== null ? (
                     <Menu>
                       <MenuButton as={Box}>
-                        <Stack isInline mt={['16px', '0px']}>
+                        <Stack isInline mt={[4, 0]}>
                           <Avatar
                             size="xs"
                             src={
