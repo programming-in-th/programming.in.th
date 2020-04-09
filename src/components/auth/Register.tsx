@@ -10,7 +10,8 @@ import {
   InputGroup,
   InputLeftElement,
   Input,
-  Text
+  Text,
+  useToast
 } from '@chakra-ui/core'
 import { FaUserAlt, FaRegEnvelope, FaLock } from 'react-icons/fa'
 import { Formik, Field } from 'formik'
@@ -27,6 +28,7 @@ const LoginSchema = Yup.object().shape({
 export const Register = () => {
   const [errorMessage, setErrorMessage] = useState<string>(null)
   const [isClick, setIsClick] = useState<boolean>(false)
+  const toast = useToast()
 
   const setError = (err: string) => {
     setErrorMessage(err)
@@ -55,6 +57,14 @@ export const Register = () => {
                     .updateProfile({ displayName: values.dname })
                     .then(() => {
                       firebase.auth().signOut()
+                      toast({
+                        title: 'Account created.',
+                        description: 'Please Verify Your Email.',
+                        status: 'success',
+                        position: 'top',
+                        duration: 9000,
+                        isClosable: true
+                      })
                       Router.push('/login')
                     })
                 }
