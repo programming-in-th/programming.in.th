@@ -13,6 +13,13 @@ import { onetap } from '../components/auth/onetap'
 import { GlobalStyle } from '../design'
 import { customTheme } from '../design/theme'
 
+import 'codemirror/lib/codemirror.css'
+
+import 'codemirror/theme/monokai.css'
+import 'codemirror/theme/solarized.css'
+import 'codemirror/theme/material.css'
+import 'codemirror/addon/fold/foldgutter.css'
+
 let timeout: any
 
 const start = () => {
