@@ -9,6 +9,7 @@ export const CustomHead = () => (
     <meta charSet="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    <script src="https://accounts.google.com/gsi/client"></script>
     <link rel="icon" sizes="192x192" href="/assets/img/icon-512.png" />
     <link rel="manifest" href="/manifest.json" />
     <link rel="apple-touch-icon" href="/assets/img/icon-ios.png" />

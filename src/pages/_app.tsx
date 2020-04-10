@@ -9,6 +9,7 @@ import firebase from '../lib/firebase'
 import user from './admin/user'
 import { GlobalStyle } from '../design'
 import { fetchFromFirebase } from '../utils/fetcher'
+import { onetap } from '../components/auth/onetap'
 
 let timeout: number
 
@@ -62,6 +63,12 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
       unsubscribe()
     }
   }, [])
+
+  useEffect(() => {
+    if (userState.user === null) {
+      onetap()
+    }
+  }, [userState.user])
 
   useEffect(() => {
     const fetchAdmin = async () => {
