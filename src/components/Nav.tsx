@@ -95,76 +95,64 @@ export const Nav = () => {
           )}
         </Flex>
 
-        <Slide in={isNavOpen} from="left" items={[true]} duration={600}>
-          {(styles: any) => {
-            const component = (
-              <Flex
-                as="nav"
-                pr={[6, 0, 0, 0, 0]}
-                direction={['column', 'row', 'row']}
-                justify={['', 'space-between']}
-                align={['flex-end', '']}
-                fontWeight="500"
-                transform={styles.transform}
-                opacity={styles.opacity}
-              >
+        {isNavOpen && (
+          <Flex
+            as="nav"
+            pr={[6, 0, 0, 0, 0]}
+            direction={['column', 'row', 'row']}
+            justify={['', 'space-between']}
+            align={['flex-end', '']}
+            fontWeight="500"
+          >
+            <Flex
+              align={['flex-end', 'baseline']}
+              justify="flex-end"
+              direction={['column', 'row']}
+              textAlign={['end', 'unset']}
+            >
+              <Text fontWeight="800" color="black" display={['none', 'unset']}>
+                PROGRAMMING.IN.TH
+              </Text>
+
+              {generateMenuItems(leftMenu, router.pathname)}
+            </Flex>
+
+            <Box>
+              {user === undefined ? null : user !== null ? (
+                <Menu>
+                  <MenuButton as={Box}>
+                    <Stack isInline mt={[4, 0]}>
+                      <Avatar
+                        size="xs"
+                        src={
+                          user.photoURL === ''
+                            ? '/assets/img/default-user.png'
+                            : `${user.photoURL}`
+                        }
+                      />
+                      <Text color="gray.500">{user?.displayName}</Text>
+                    </Stack>
+                  </MenuButton>
+                  <MenuList>
+                    <MenuItem>Dashboard</MenuItem>
+                    <MenuDivider></MenuDivider>
+                    <MenuItem onClick={() => firebase.auth().signOut()}>
+                      Logout
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
+              ) : (
                 <Flex
+                  mt={[4, 0]}
                   align={['flex-end', 'baseline']}
-                  justify="flex-end"
                   direction={['column', 'row']}
-                  textAlign={['end', 'unset']}
                 >
-                  <Text
-                    fontWeight="800"
-                    color="black"
-                    display={['none', 'unset']}
-                  >
-                    PROGRAMMING.IN.TH
-                  </Text>
-
-                  {generateMenuItems(leftMenu, router.pathname)}
+                  {generateMenuItems(rightMenu, router.pathname)}
                 </Flex>
-
-                <Box>
-                  {user === undefined ? null : user !== null ? (
-                    <Menu>
-                      <MenuButton as={Box}>
-                        <Stack isInline mt={[4, 0]}>
-                          <Avatar
-                            size="xs"
-                            src={
-                              user.photoURL === ''
-                                ? '/assets/img/default-user.png'
-                                : `${user.photoURL}`
-                            }
-                          />
-                          <Text color="gray.500">{user?.displayName}</Text>
-                        </Stack>
-                      </MenuButton>
-                      <MenuList>
-                        <MenuItem>Dashboard</MenuItem>
-                        <MenuDivider></MenuDivider>
-                        <MenuItem onClick={() => firebase.auth().signOut()}>
-                          Logout
-                        </MenuItem>
-                      </MenuList>
-                    </Menu>
-                  ) : (
-                    <Flex
-                      mt={[4, 0]}
-                      align={['flex-end', 'baseline']}
-                      direction={['column', 'row']}
-                    >
-                      {generateMenuItems(rightMenu, router.pathname)}
-                    </Flex>
-                  )}
-                </Box>
-              </Flex>
-            ) as any
-
-            return component
-          }}
-        </Slide>
+              )}
+            </Box>
+          </Flex>
+        )}
       </Box>
     </Box>
   )
