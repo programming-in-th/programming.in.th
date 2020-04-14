@@ -16,7 +16,7 @@ export default () => {
 
   return (
     <PageLayout>
-      <Box h={550} w={650} px={6} m="0 auto">
+      <Box h={550} w={650} px={6} mx="auto" mt={8}>
         <Register />
       </Box>
     </PageLayout>

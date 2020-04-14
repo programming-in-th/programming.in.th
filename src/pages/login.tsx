@@ -17,7 +17,7 @@ export default () => {
 
   return (
     <PageLayout>
-      <Box h={550} w={650} px={6} m="0px auto">
+      <Box h={550} w={650} px={6} mx="auto" mt={8}>
         <EmailLogin />
         <Divider></Divider>
         <OAuthLogin />
