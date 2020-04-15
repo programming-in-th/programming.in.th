@@ -2,13 +2,7 @@ import React from 'react'
 import { Box, Flex, Link, List, ListItem, Text } from '@chakra-ui/core'
 
 export const Footer = ({ bg }) => (
-  <Box
-    bg={bg}
-    as="footer"
-    borderTop="1px solid #EDF2F7"
-    color="gray.600"
-    mt={8}
-  >
+  <Box bg={bg} as="footer" borderTop="1px solid #EDF2F7" color="gray.600">
     <Box margin="0 auto" p={6}>
       <Flex width="100%" direction={['column', 'row']} justify="space-around">
         <Box maxWidth={['100%', '25%']}>

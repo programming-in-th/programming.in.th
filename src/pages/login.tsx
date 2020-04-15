@@ -20,25 +20,18 @@ export default () => {
 
   return (
     <PageLayout>
-      <Box w="100%" mx="auto" mb={-8} mt={-2}>
-        <Flex
-          minH={['calc(100vh - 185px)', 'calc(100vh - 165px)']}
-          w={320}
-          minW="auto"
-          direction="column"
-          display="flex"
-          align="center"
-          justifyContent="center"
-          mx="auto"
-        >
+      <Flex align="center" justifyContent="center" flexGrow={1}>
+        <Box width={320} textAlign="center">
           <Text fontSize="5xl" mb={6}>
             Log in
           </Text>
+
           {loginMethod ? (
             <OAuthLogin setErrorMessage={setError} />
           ) : (
             <EmailLogin setErrorMessage={setError} />
           )}
+
           <Text mt={6}>
             You can also
             <ChakraLink
@@ -53,19 +46,22 @@ export default () => {
               {loginMethod ? 'continue with email' : 'continue with OAuth'}
             </ChakraLink>
           </Text>
+
           <Text color="red.500" mt={4}>
             {error}
           </Text>
-        </Flex>
-        <Divider mb={['50px', 0]} mt={0}></Divider>
-        <Flex display="flex" align="center" justifyContent="center" h={100}>
-          <Link href="/register">
-            <ChakraLink href="/register" lineHeight="18px" color="gray.500">
-              Don't have an account? Sign Up
-            </ChakraLink>
-          </Link>
-        </Flex>
-      </Box>
+        </Box>
+      </Flex>
+
+      <Divider m={0}></Divider>
+
+      <Flex display="flex" align="center" justifyContent="center" p={8}>
+        <Link href="/register">
+          <ChakraLink href="/register" lineHeight="18px" color="gray.500">
+            Don't have an account? Sign Up
+          </ChakraLink>
+        </Link>
+      </Flex>
     </PageLayout>
   )
 }

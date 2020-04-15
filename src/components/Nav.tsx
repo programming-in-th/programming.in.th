@@ -75,7 +75,7 @@ export const Nav = () => {
       <Box
         margin="0 auto"
         maxWidth={['100%', '480px', '700px', '768px', '1024px']}
-        pt={4}
+        py={4}
       >
         <Flex
           px={6}
