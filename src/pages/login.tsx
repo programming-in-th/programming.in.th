@@ -54,13 +54,14 @@ export default () => {
         </Box>
       </Flex>
 
+      <Divider m={0}></Divider>
+
       <Flex
         display="flex"
         align="center"
         justifyContent="center"
         p={8}
         height={100}
-        borderTop="1px solid #eaeaea"
       >
         <Link href="/register">
           <ChakraLink href="/register" lineHeight="18px" color="gray.500">
