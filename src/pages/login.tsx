@@ -20,7 +20,7 @@ export default () => {
 
   return (
     <PageLayout>
-      <Box w="100%" px={3} mx="auto" mb={-8} mt={-2}>
+      <Box w="100%" px={3} mx="auto" mb={-8} mt={[-12, -2]}>
         <Flex
           minH={['calc(100vh - 175px)', 'calc(100vh - 165px)']}
           w={320}
@@ -57,7 +57,7 @@ export default () => {
             {error}
           </Text>
         </Flex>
-        <Box borderTop="1px solid #EDF2F7" color="gray.600">
+        <Box borderTop="1px solid #EDF2F7" color="gray.600" mb={[10, 0]}>
           <Flex display="flex" align="center" justifyContent="center" h={100}>
             <Link href="/register">
               <ChakraLink href="/register" lineHeight="18px" color="gray.500">
