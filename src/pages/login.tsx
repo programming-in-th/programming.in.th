@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
-import { useUser } from '../components/UserContext'
 import { Box, Text, Flex, Divider, Link as ChakraLink } from '@chakra-ui/core'
+
+import { useUser } from '../components/UserContext'
 import { PageLayout } from '../components/Layout'
 import { EmailLogin } from '../components/auth/EmailLogin'
 import { OAuthLogin } from '../components/auth/OAuthLogin'
@@ -55,7 +56,13 @@ export default () => {
 
       <Divider m={0}></Divider>
 
-      <Flex display="flex" align="center" justifyContent="center" p={8}>
+      <Flex
+        display="flex"
+        align="center"
+        justifyContent="center"
+        p={8}
+        height={100}
+      >
         <Link href="/register">
           <ChakraLink href="/register" lineHeight="18px" color="gray.500">
             Don't have an account? Sign Up
