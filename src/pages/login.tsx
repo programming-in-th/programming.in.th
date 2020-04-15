@@ -20,7 +20,7 @@ export default () => {
 
   return (
     <PageLayout>
-      <Box w="100%" px={3} mx="auto" mb={-8} mt={-2}>
+      <Box w="100%" mx="auto" mb={-8} mt={-2}>
         <Flex
           minH={['calc(100vh - 255px)', 'calc(100vh - 165px)']}
           w={320}
