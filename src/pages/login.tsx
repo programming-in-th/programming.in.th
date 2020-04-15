@@ -9,6 +9,7 @@ import { OAuthLogin } from '../components/auth/OAuthLogin'
 
 export default () => {
   const [loginMethod, setLoginMethod] = useState<boolean>(true)
+  const [error, setError] = useState<string>(null)
   const { user } = useUser()
 
   useEffect(() => {
@@ -30,8 +31,14 @@ export default () => {
           justifyContent="center"
           mx="auto"
         >
-          <Text fontSize="5xl">Log in</Text>
-          {loginMethod ? <OAuthLogin /> : <EmailLogin />}
+          <Text fontSize="5xl" mb={6}>
+            Log in
+          </Text>
+          {loginMethod ? (
+            <OAuthLogin setErrorMessage={setError} />
+          ) : (
+            <EmailLogin setErrorMessage={setError} />
+          )}
           <Text mt={6}>
             You can also
             <ChakraLink
@@ -40,10 +47,14 @@ export default () => {
               color="gray.500"
               onClick={() => {
                 setLoginMethod(!loginMethod)
+                setError(null)
               }}
             >
               {loginMethod ? 'continue with email' : 'continue with OAuth'}
             </ChakraLink>
+          </Text>
+          <Text color="red.500" mt={4}>
+            {error}
           </Text>
         </Flex>
         <Box borderTop="1px solid #EDF2F7" color="gray.600">

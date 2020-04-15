@@ -76,7 +76,7 @@ const LButton = props => {
     <Button
       h={12}
       w="100%"
-      mt={props.m ? 4 : 10}
+      mt={4}
       fontFamily="heading"
       fontSize="lg"
       onClick={() => {
@@ -89,9 +89,7 @@ const LButton = props => {
   )
 }
 
-const Login = () => {
-  const [errorMessage, setErrorMessage] = useState<string>(null)
-
+const Login = ({ setErrorMessage }) => {
   const setError = (err: string) => {
     setErrorMessage(err)
   }
@@ -102,25 +100,19 @@ const Login = () => {
         setError={setError}
         icon={FaGoogle}
         text="Continue with Google"
-        m={false}
       />
       <LButton
         lfunc={loginWithFacebook}
         setError={setError}
         icon={FaFacebook}
         text="Continue with Facebook"
-        m={true}
       />
       <LButton
         lfunc={loginWithGithub}
         setError={setError}
         icon={FaGithub}
         text="Continue with Github"
-        m={true}
       />
-      {/* <Text color="red.500" mt={4}>
-        // {errorMessage}
-      </Text> */}
     </React.Fragment>
   )
 }
