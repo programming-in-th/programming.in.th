@@ -1,77 +1,41 @@
-import React, { useState } from 'react'
-import Link from 'next/link'
+import React from 'react'
 import Router from 'next/router'
-import { Button, Text, Flex, Box, Link as ChakraLink } from '@chakra-ui/core'
+import { Button } from '@chakra-ui/core'
 import { FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa'
-
+import { IconType } from 'react-icons/lib'
 import firebase from '../../lib/firebase'
 
-const loginWithGmail = async (setError: (msg: string) => void) => {
-  const provider = new firebase.auth.GoogleAuthProvider()
+type authtype =
+  | typeof firebase.auth.GoogleAuthProvider
+  | typeof firebase.auth.FacebookAuthProvider
+  | typeof firebase.auth.GithubAuthProvider
+
+const loginWith = async (
+  setError: (msg: string) => void,
+  fprovider: authtype
+) => {
+  const provider = new fprovider()
   try {
     await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-
     return firebase
       .auth()
       .signInWithPopup(provider)
       .then(() => {
         Router.push('/')
       })
-      .catch((error: any) => {
-        const { message } = error
-        setError(message)
-      })
   } catch (error) {
-    const { message } = error
-    setError(message)
+    setError(error.message)
   }
 }
 
-const loginWithFacebook = async (setError: (msg: string) => void) => {
-  const provider = new firebase.auth.FacebookAuthProvider()
-
-  try {
-    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-
-    return firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(() => {
-        Router.push('/')
-      })
-      .catch((error: any) => {
-        const { message } = error
-        setError(message)
-      })
-  } catch (error) {
-    const { message } = error
-    setError(message)
-  }
+interface IButton {
+  setError: (msg: string) => void
+  lfunc: authtype
+  icon: IconType
+  text: string
 }
 
-const loginWithGithub = async (setError: (msg: string) => void) => {
-  const provider = new firebase.auth.GithubAuthProvider()
-
-  try {
-    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-
-    return firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(() => {
-        Router.push('/')
-      })
-      .catch((error: any) => {
-        const { message } = error
-        setError(message)
-      })
-  } catch (error) {
-    const { message } = error
-    setError(message)
-  }
-}
-
-const LButton = props => {
+const LButton = (props: IButton) => {
   return (
     <Button
       h={12}
@@ -80,7 +44,7 @@ const LButton = props => {
       fontFamily="heading"
       fontSize="lg"
       onClick={() => {
-        props.lfunc(props.setError)
+        loginWith(props.setError, props.lfunc)
       }}
       leftIcon={props.icon}
     >
@@ -90,26 +54,24 @@ const LButton = props => {
 }
 
 const Login = ({ setErrorMessage }) => {
-  const setError = (err: string) => {
-    setErrorMessage(err)
-  }
+  const { auth } = firebase
   return (
     <React.Fragment>
       <LButton
-        lfunc={loginWithGmail}
-        setError={setError}
+        lfunc={auth.GoogleAuthProvider}
+        setError={setErrorMessage}
         icon={FaGoogle}
         text="Continue with Google"
       />
       <LButton
-        lfunc={loginWithFacebook}
-        setError={setError}
+        lfunc={auth.FacebookAuthProvider}
+        setError={setErrorMessage}
         icon={FaFacebook}
         text="Continue with Facebook"
       />
       <LButton
-        lfunc={loginWithGithub}
-        setError={setError}
+        lfunc={auth.GithubAuthProvider}
+        setError={setErrorMessage}
         icon={FaGithub}
         text="Continue with Github"
       />
