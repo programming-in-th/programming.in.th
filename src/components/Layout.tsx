@@ -25,7 +25,7 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
     >
       <Nav></Nav>
       <Divider mt={4}></Divider>
-      <Flex mt={[4, 8]} as="main" flex="auto">
+      <Flex mt={[4, 8]} as="main" flex="auto" direction="column">
         {props.children}
       </Flex>
       <Footer bg={props.bg}></Footer>
