@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 import Router from 'next/router'
-import { Button, Text, Flex, Box } from '@chakra-ui/core'
+import { Button, Text, Flex, Box, Link as ChakraLink } from '@chakra-ui/core'
 import { FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa'
 
 import firebase from '../../lib/firebase'
@@ -70,56 +71,49 @@ const loginWithGithub = async (setError: (msg: string) => void) => {
   }
 }
 
-const Login = () => {
-  const [errorMessage, setErrorMessage] = useState<string>(null)
+const LButton = props => {
+  return (
+    <Button
+      h={12}
+      w="100%"
+      mt={4}
+      fontFamily="heading"
+      fontSize="lg"
+      onClick={() => {
+        props.lfunc(props.setError)
+      }}
+      leftIcon={props.icon}
+    >
+      {props.text}
+    </Button>
+  )
+}
 
+const Login = ({ setErrorMessage }) => {
   const setError = (err: string) => {
     setErrorMessage(err)
   }
-
   return (
-    <Box>
-      <Flex
-        mt={2}
-        w="100%"
-        direction={['column', 'row']}
-        display="flex"
-        justifyContent="space-between"
-      >
-        <Button
-          fontFamily="heading"
-          onClick={() => {
-            loginWithGmail(setError)
-          }}
-          leftIcon={FaGoogle}
-        >
-          Login With Google
-        </Button>
-        <Button
-          mt={[4, 0]}
-          fontFamily="heading"
-          onClick={() => {
-            loginWithFacebook(setError)
-          }}
-          leftIcon={FaFacebook}
-        >
-          Login With Facebook
-        </Button>
-        <Button
-          mt={[4, 0]}
-          fontFamily="heading"
-          onClick={() => {
-            loginWithGithub(setError)
-          }}
-          leftIcon={FaGithub}
-        >
-          Login With Github
-        </Button>
-      </Flex>
-      <Text color="red.500" mt={4}>
-        {errorMessage}
-      </Text>
-    </Box>
+    <React.Fragment>
+      <LButton
+        lfunc={loginWithGmail}
+        setError={setError}
+        icon={FaGoogle}
+        text="Continue with Google"
+      />
+      <LButton
+        lfunc={loginWithFacebook}
+        setError={setError}
+        icon={FaFacebook}
+        text="Continue with Facebook"
+      />
+      <LButton
+        lfunc={loginWithGithub}
+        setError={setError}
+        icon={FaGithub}
+        text="Continue with Github"
+      />
+    </React.Fragment>
   )
 }
 

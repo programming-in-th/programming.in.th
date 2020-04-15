@@ -23,8 +23,7 @@ const LoginSchema = Yup.object().shape({
   pass: Yup.string().required('Please enter your password')
 })
 
-const Login = () => {
-  const [errorMessage, setErrorMessage] = useState<string>(null)
+const Login = ({ setErrorMessage }) => {
   const [isClick, setIsClick] = useState<boolean>(false)
 
   const setError = (err: string) => {
@@ -33,10 +32,7 @@ const Login = () => {
   }
 
   return (
-    <React.Fragment>
-      <Heading as="h1" size="xl" mb={5}>
-        Login
-      </Heading>
+    <Box w="100%">
       <Formik
         initialValues={{ email: '', pass: '', remember: false }}
         validationSchema={LoginSchema}
@@ -136,10 +132,7 @@ const Login = () => {
           </form>
         )}
       </Formik>
-      <Text color="red.500" mt={4}>
-        {errorMessage}
-      </Text>
-    </React.Fragment>
+    </Box>
   )
 }
 
