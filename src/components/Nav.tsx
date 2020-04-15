@@ -12,9 +12,7 @@ import {
   MenuItem,
   MenuDivider,
   Avatar,
-  Stack,
-  Slide,
-  theme
+  Stack
 } from '@chakra-ui/core'
 import { FiMenu, FiX } from 'react-icons/fi'
 
@@ -42,6 +40,8 @@ const rightMenu: IMenu[] = [
 ]
 
 const generateMenuItems = (menu: IMenu[], pathname: string) => {
+  const location = pathname.split('/')[1]
+
   return menu.map(i => (
     <Link href={i.path} key={i.key}>
       <ChakraLink
@@ -49,7 +49,7 @@ const generateMenuItems = (menu: IMenu[], pathname: string) => {
         mt={[2, 0]}
         ml={[0, 6]}
         lineHeight="18px"
-        color={pathname === i.path ? 'gray.800' : 'gray.500'}
+        color={`/${location}` === i.path ? 'gray.800' : 'gray.500'}
       >
         {i.name}
       </ChakraLink>
