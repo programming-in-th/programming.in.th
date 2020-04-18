@@ -10,7 +10,7 @@ import { OAuthLogin } from '../components/auth/OAuthLogin'
 
 export default () => {
   const [loginMethod, setLoginMethod] = useState<boolean>(true)
-  const [error, setError] = useState<string>(null)
+  const [error, setError] = useState<string>('\0')
   const { user } = useUser()
 
   useEffect(() => {
@@ -21,40 +21,37 @@ export default () => {
 
   return (
     <PageLayout>
-      <Flex align="center" justifyContent="center" flexGrow={1}>
-        <Box width={320} textAlign="center">
-          <Text fontSize="5xl" mb={6}>
-            Log in
-          </Text>
-
+      <Flex align="center" justify="center" flexGrow={1} flexDirection="column">
+        <Text fontSize="5xl" mb={4}>
+          Log in
+        </Text>
+        <Box w="360px" maxW="90%">
           {loginMethod ? (
             <OAuthLogin setErrorMessage={setError} />
           ) : (
             <EmailLogin setErrorMessage={setError} />
           )}
 
-          <Text mt={6}>
-            You can also
-            <ChakraLink
-              ml={1}
-              lineHeight="18px"
-              color="gray.500"
-              onClick={() => {
-                setLoginMethod(!loginMethod)
-                setError(null)
-              }}
-            >
-              {loginMethod ? 'continue with email' : 'continue with OAuth'}
-            </ChakraLink>
-          </Text>
-
-          <Text color="red.500" mt={4}>
+          <Text color="red.500" mt={1}>
             {error}
           </Text>
         </Box>
+        <Text mt={1}>
+          You can also
+          <ChakraLink
+            ml={1}
+            lineHeight="18px"
+            color="gray.500"
+            onClick={() => {
+              setLoginMethod(!loginMethod)
+              setError('\0')
+            }}
+          >
+            {loginMethod ? 'continue with email' : 'continue with OAuth'}
+          </ChakraLink>
+        </Text>
       </Flex>
-
-      <Divider m={0}></Divider>
+      <Divider m={0} />
 
       <Flex
         display="flex"
