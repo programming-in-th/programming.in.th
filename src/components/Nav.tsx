@@ -14,12 +14,12 @@ import {
   Avatar,
   Stack
 } from '@chakra-ui/core'
+import { useWindowSize } from 'react-use'
 import { FiMenu, FiX } from 'react-icons/fi'
 
 import firebase from '../lib/firebase'
 
 import { useUser } from './UserContext'
-import { useWindowWidth } from '../design/Responsive'
 
 interface IMenu {
   key: string
@@ -59,7 +59,11 @@ const generateMenuItems = (menu: IMenu[], pathname: string) => {
 
 export const Nav = () => {
   const [isNavOpen, setNavState] = useState(false)
-  const width = useWindowWidth()
+  const { width } = useWindowSize()
+
+  useEffect(() => {
+    console.log(width)
+  }, [width])
 
   const { user } = useUser()
   const router = useRouter()
