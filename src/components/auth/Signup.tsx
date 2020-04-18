@@ -37,9 +37,6 @@ export const Signup = () => {
 
   return (
     <React.Fragment>
-      <Heading as="h1" size="xl" mb={5}>
-        Register
-      </Heading>
       <Formik
         initialValues={{ dname: '', email: '', pass: '', rpass: '' }}
         validationSchema={LoginSchema}

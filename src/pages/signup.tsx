@@ -1,7 +1,8 @@
 import React, { useEffect } from 'react'
 import Router from 'next/router'
+import Link from 'next/link'
 import { useUser } from '../components/UserContext'
-import { Box } from '@chakra-ui/core'
+import { Box, Flex, Text, Link as ChakraLink, Divider } from '@chakra-ui/core'
 import { PageLayout } from '../components/Layout'
 import { Signup } from '../components/auth/Signup'
 
@@ -16,9 +17,29 @@ export default () => {
 
   return (
     <PageLayout>
-      <Box h={550} w={650} px={6} mx="auto" mt={8}>
-        <Signup />
-      </Box>
+      <Flex align="center" justify="center" flexGrow={1} flexDirection="column">
+        <Text fontSize="5xl" mb={4}>
+          Sign Up
+        </Text>
+        <Box w="360px" maxW="90%">
+          <Signup />
+        </Box>
+      </Flex>
+      <Divider m={0} />
+
+      <Flex
+        display="flex"
+        align="center"
+        justifyContent="center"
+        p={8}
+        height={100}
+      >
+        <Link href="/login">
+          <ChakraLink href="/login" lineHeight="18px" color="gray.500">
+            Have an account? Login
+          </ChakraLink>
+        </Link>
+      </Flex>
     </PageLayout>
   )
 }
