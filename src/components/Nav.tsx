@@ -61,12 +61,6 @@ export const Nav = () => {
   const [isNavOpen, setNavState] = useState(false)
   const width = useWindowWidth()
 
-  useEffect(() => {
-    if (width > 480) {
-      setNavState(true)
-    }
-  }, [width])
-
   const { user } = useUser()
   const router = useRouter()
 
@@ -95,7 +89,7 @@ export const Nav = () => {
           )}
         </Flex>
 
-        {isNavOpen && (
+        {(isNavOpen || width > 480) && (
           <Flex
             as="nav"
             pr={[6, 0, 0, 0, 0]}

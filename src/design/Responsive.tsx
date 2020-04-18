@@ -54,18 +54,13 @@ export const MobileOnly = ({ breakpoint = 1070, children }: IOnlyProps) => {
 }
 
 export function useWindowWidth() {
-  const [width, setWidth] = useState(0)
+  const [width, setWidth] = useState(20000)
   useEffect(() => {
-    const width =
-      window.innerWidth ||
-      document.documentElement.clientWidth ||
-      document.body.clientWidth
-
-    const listener = throttle(() => setWidth(width), 20)
+    const listener = () => setWidth(window.innerWidth)
     window.addEventListener('resize', listener)
     listener()
     return () => window.removeEventListener('resize', listener)
-  }, [])
+  })
 
   return width
 }
