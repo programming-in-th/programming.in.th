@@ -60,8 +60,8 @@ export default () => {
         p={8}
         height={100}
       >
-        <Link href="/register">
-          <ChakraLink href="/register" lineHeight="18px" color="gray.500">
+        <Link href="/signup">
+          <ChakraLink href="/signup" lineHeight="18px" color="gray.500">
             Don't have an account? Sign Up
           </ChakraLink>
         </Link>

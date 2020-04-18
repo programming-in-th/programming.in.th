@@ -35,7 +35,7 @@ const leftMenu: IMenu[] = [
 ]
 
 const rightMenu: IMenu[] = [
-  { key: 'register', name: 'Register', path: '/register' },
+  { key: 'signup', name: 'Sign Up', path: '/signup' },
   { key: 'login', name: 'Login', path: '/login' }
 ]
 

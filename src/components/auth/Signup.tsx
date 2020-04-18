@@ -25,7 +25,7 @@ const LoginSchema = Yup.object().shape({
   rpass: Yup.string().required('Please confirm your password')
 })
 
-export const Register = () => {
+export const Signup = () => {
   const [errorMessage, setErrorMessage] = useState<string>(null)
   const [isClick, setIsClick] = useState<boolean>(false)
   const toast = useToast()
