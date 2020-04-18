@@ -17,7 +17,5 @@ export const onetap = () => {
     callback
   })
 
-  window.google.accounts.id.prompt(msg => {
-    console.log(msg.getNotDisplayedReason())
-  })
+  window.google.accounts.id.prompt()
 }
