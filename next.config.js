@@ -1,19 +1,11 @@
 const withPlugins = require('next-compose-plugins')
 
+const withOffline = require('next-offline')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 
 const remarkMath = require('remark-math')
 const rehypeKatex = require('rehype-katex')
 const rehypePrism = require('@mapbox/rehype-prism')
-const withOffline = require('next-offline')
-
-const fs = require('fs')
-
-/* eslint-disable */
-try {
-  fs.unlinkSync('PROBLEM_ID_CACHE')
-} catch (_) {}
-/* eslint-enable */
 
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
@@ -99,11 +91,6 @@ module.exports = withPlugins(
           }
         }
       ]
-    },
-    webpack: config => {
-      process.env.USE_CACHE = 'true'
-
-      return config
     }
   }
 )
