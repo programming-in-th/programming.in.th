@@ -1,28 +1,12 @@
-import api from '../lib/api'
-import { readFile, writeFile } from './fs'
+import fetch from 'isomorphic-unfetch'
 
 export const getProblemIDs = async () => {
-  let problems: any = null
-  const useCache = process.env.USE_CACHE === 'true'
-  const cacheFile = 'PROBLEM_ID_CACHE'
+  const data = await fetch(
+    'https://asia-east2-prginth.cloudfunctions.net/getAllProblemIDs'
+  ).then(o => o.json())
 
-  if (useCache) {
-    try {
-      problems = JSON.parse(await readFile(cacheFile, 'utf8'))
-    } catch (_) {}
-  }
-
-  if (!problems) {
-    const res = await api.get('/getAllProblemIDs')
-    problems = res.data
-
-    if (useCache) {
-      writeFile(cacheFile, JSON.stringify(problems), 'utf8').catch(() => {})
-    }
-  }
-
-  const paths = problems.map((slug: string) => {
-    return { params: { slug } }
+  const paths = data.map((id: string) => {
+    return { params: { id } }
   })
 
   return paths
