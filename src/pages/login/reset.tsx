@@ -20,7 +20,7 @@ export default () => {
   return (
     <PageLayout>
       <Flex align="center" justify="center" flexGrow={1} flexDirection="column">
-        <Text fontSize="5xl" mb={4}>
+        <Text fontSize={['4xl', '5xl']} mb={4}>
           Reset Password
         </Text>
         <Box w="360px" maxW="90%">
@@ -30,7 +30,7 @@ export default () => {
           You can also
           <Link href="/login">
             <ChakraLink href="/login" ml={1} lineHeight="18px" color="gray.500">
-              go to login
+              login
             </ChakraLink>
           </Link>
         </Text>

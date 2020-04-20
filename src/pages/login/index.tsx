@@ -22,7 +22,7 @@ export default () => {
   return (
     <PageLayout>
       <Flex align="center" justify="center" flexGrow={1} flexDirection="column">
-        <Text fontSize="5xl" mb={4}>
+        <Text fontSize={['4xl', '5xl']} mb={4}>
           Log in
         </Text>
         <Box w="360px" maxW="90%">

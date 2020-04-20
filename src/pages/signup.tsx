@@ -17,8 +17,14 @@ export default () => {
 
   return (
     <PageLayout>
-      <Flex align="center" justify="center" flexGrow={1} flexDirection="column">
-        <Text fontSize="5xl" mb={4}>
+      <Flex
+        align="center"
+        justify="center"
+        flexGrow={1}
+        flexDirection="column"
+        mt={4}
+      >
+        <Text fontSize={['4xl', '5xl']} mb={4}>
           Sign Up
         </Text>
         <Box w="360px" maxW="90%">
