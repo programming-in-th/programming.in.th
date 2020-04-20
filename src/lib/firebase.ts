@@ -3,14 +3,14 @@ import 'firebase/auth'
 import 'firebase/functions'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyDCFpRluW6B4kVMZUDO08B9m8oxSWehqPk',
-  authDomain: 'prginth.firebaseapp.com',
-  databaseURL: 'https://prginth.firebaseio.com',
-  projectId: 'prginth',
-  storageBucket: 'prginth.appspot.com',
-  messagingSenderId: '368665051551',
-  appId: '1:368665051551:web:737f41c1d2271d6d9efdaa',
-  measurementId: 'G-RPP5SKLC6B'
+  apiKey: 'AIzaSyBcAEoDKxjVCLp6JzVu2yAOksxVrOA74YU',
+  authDomain: 'proginth.firebaseapp.com',
+  databaseURL: 'https://proginth.firebaseio.com',
+  projectId: 'proginth',
+  storageBucket: 'proginth.appspot.com',
+  messagingSenderId: '345170514263',
+  appId: '1:345170514263:web:b60cd3d015e4b4d464ee12',
+  measurementId: 'G-9KZEYQ24KD'
 }
 
 if (!firebase.apps.length) {
