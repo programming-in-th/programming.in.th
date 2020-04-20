@@ -59,7 +59,7 @@ export const Signup = () => {
                         description: 'Please Verify Your Email.',
                         status: 'success',
                         position: 'top',
-                        duration: 9000,
+                        duration: 3000,
                         isClosable: true
                       })
                       Router.push('/login')

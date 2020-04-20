@@ -1,17 +1,18 @@
 import React, { useState } from 'react'
+import Link from 'next/link'
 import Router from 'next/router'
 import {
   Button,
   Box,
   Checkbox,
-  Heading,
   FormControl,
   FormLabel,
   FormErrorMessage,
   InputGroup,
   InputLeftElement,
   Input,
-  Text
+  Link as ChakraLink,
+  Flex
 } from '@chakra-ui/core'
 import { FaRegEnvelope, FaLock } from 'react-icons/fa'
 import { Formik, Field } from 'formik'
@@ -110,13 +111,20 @@ const Login = ({ setErrorMessage }) => {
                 </FormControl>
               )}
             </Field>
-            <Field name="remember">
-              {({ field }) => (
-                <Checkbox {...field} mt={4}>
-                  Remember
-                </Checkbox>
-              )}
-            </Field>
+            <Flex justify="space-between" direction="row" align="center" mt={4}>
+              <Field name="remember">
+                {({ field }) => <Checkbox {...field}>Remember</Checkbox>}
+              </Field>
+              <Link href="/login/reset">
+                <ChakraLink
+                  href="/login/reset"
+                  lineHeight="18px"
+                  color="gray.500"
+                >
+                  forget password?
+                </ChakraLink>
+              </Link>
+            </Flex>
             <Button
               mt={4}
               isLoading={props.isSubmitting}
