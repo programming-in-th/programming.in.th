@@ -22,6 +22,7 @@ export default () => {
   return (
     <PageLayout>
       <Flex align="center" justify="center" flexGrow={1} flexDirection="column">
+        <Text />
         <Text fontSize={['4xl', '5xl']} mb={4}>
           Log in
         </Text>
