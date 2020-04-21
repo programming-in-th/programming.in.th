@@ -12,10 +12,11 @@ const callback = async res => {
 }
 
 export const onetap = () => {
-  window.google.accounts.id.initialize({
-    client_id,
-    callback
-  })
-
-  window.google.accounts.id.prompt()
+  if (window.google) {
+    window.google.accounts.id.initialize({
+      client_id,
+      callback
+    })
+    window.google.accounts.id.prompt()
+  }
 }
