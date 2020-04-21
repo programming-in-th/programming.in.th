@@ -20,6 +20,8 @@ import 'codemirror/theme/solarized.css'
 import 'codemirror/theme/material.css'
 import 'codemirror/addon/fold/foldgutter.css'
 
+import '../assets/css/prism.css'
+
 let timeout: any
 
 const start = () => {

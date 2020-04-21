@@ -63,7 +63,9 @@ export const GlobalStyle = () => (
         font-style: normal;
         font-weight: 400;
         font-display: swap;
-        src: url('/assets/fonts/Kanit-Regular.woff2') format('woff2');
+        src: local('Kanit Regular'), local('Kanit-Regular'),
+          url('https://fonts.gstatic.com/s/kanit/v5/nKKZ-Go6G5tXcraBGwCKd6xBDFs.woff2')
+            format('woff2');
         unicode-range: ${TH_UNICODE_RANGE};
       }
 
@@ -86,6 +88,22 @@ export const GlobalStyle = () => (
         display: inline;
       }
 
+      pre {
+        font-size: 14px;
+        line-height: 1.4em;
+        margin: 0 0 1.5em;
+        overflow-x: auto;
+        padding: 1.5em;
+        white-space: pre;
+        background: #011627;
+        border-radius: 4px;
+
+        code {
+          padding: 0;
+          text-shadow: none;
+        }
+      }
+
       ${nprogress}
     `}
   />
@@ -99,11 +117,9 @@ export const MarkDownStyle = styled.div`
   }
 
   /* Code */
-
   code {
     background-color: rgba(27, 31, 35, 0.1);
     font-size: 90%;
-    padding: 0.2em 0.4em;
     margin: 0;
   }
 
@@ -125,6 +141,10 @@ export const MarkDownStyle = styled.div`
     font-size: 16px;
     font-family: var(--font-body) !important;
     color: #24292e;
+  }
+
+  li {
+    list-style-position: inside;
   }
 
   h1,

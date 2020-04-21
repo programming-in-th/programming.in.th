@@ -1,14 +1,11 @@
 export interface ITask {
-  problem_id: string
-  author: string
+  id: string
   path: string
-  url: string
   title: string
-  time_limit: number
-  memory_limit: number
-  difficulty: number
+  timeLimit: number
+  memoryLimit: number
   tags: ReadonlyArray<string>
-  source: string
   visible: boolean
   submit: boolean
+  solved: number
 }
