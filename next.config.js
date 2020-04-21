@@ -39,10 +39,8 @@ module.exports = withPlugins(
         reportFilename: '../bundles/client.html'
       }
     },
-
     target: 'serverless',
     transformManifest: manifest => ['/'].concat(manifest),
-    generateInDevMode: true,
     workboxOpts: {
       swDest: 'static/service-worker.js',
       runtimeCaching: [
