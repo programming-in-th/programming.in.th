@@ -12,24 +12,18 @@ export const Preload = () => (
     <link
       rel="preload"
       as="font"
-      href="/assets/fonts/Kanit-Regular.woff2"
+      href="https://fonts.gstatic.com/s/kanit/v5/nKKZ-Go6G5tXcraBGwCKd6xBDFs.woff2"
       type="font/woff2"
       crossOrigin="anonymous"
     />
     <link rel="preconnect" href="https://www.googleapis.com/" />
     <link
       rel="preconnect"
-      href="https://asia-east2-grader-ef0b5.cloudfunctions.net/"
+      href="https://asia-east2-proginth.cloudfunctions.net/"
     />
     <link
       rel="preload"
-      href="https://asia-east2-grader-ef0b5.cloudfunctions.net/getAllTasks"
-      as="fetch"
-      crossOrigin="anonymous"
-    />
-    <link
-      rel="preload"
-      href="https://asia-east2-grader-ef0b5.cloudfunctions.net/getRecentSubmissions"
+      href="https://asia-east2-proginth.cloudfunctions.net/getAllTasks"
       as="fetch"
       crossOrigin="anonymous"
     />
