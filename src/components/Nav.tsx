@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import {
@@ -60,10 +60,6 @@ const generateMenuItems = (menu: IMenu[], pathname: string) => {
 export const Nav = () => {
   const [isNavOpen, setNavState] = useState(false)
   const { width } = useWindowSize()
-
-  useEffect(() => {
-    console.log(width)
-  }, [width])
 
   const { user } = useUser()
   const router = useRouter()
