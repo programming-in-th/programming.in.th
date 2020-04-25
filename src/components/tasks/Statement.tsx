@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { Flex, Box, Text, Link } from '@chakra-ui/core'
-import { Submit } from './Submit'
+import { Submit } from './Submit/Comm'
 
 const PDF = styled.object`
   width: 100%;
@@ -10,8 +10,8 @@ const PDF = styled.object`
 
 export const Statement = ({ metadata }) => {
   return (
-    <Flex direction={['column', 'row']}>
-      <Flex mt={4} mx={[4, 0]} flex="2 1 50%" direction="column" minH="750px">
+    <Flex direction={['column', 'row']} height="100%" flexGrow={1}>
+      <Flex mt={4} mx={[4, 0]} flex="2 1 50%" direction="column">
         <Box height="100%">
           <PDF
             data={`https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/${metadata?.id}.pdf`}
@@ -32,8 +32,8 @@ export const Statement = ({ metadata }) => {
         </Box>
       </Flex>
 
-      <Flex mt={4} mx={[4, 0]} flex="2 1 50%" direction="column" minH="750px">
-        <Submit problemID={metadata.id}></Submit>
+      <Flex mt={4} mx={[4, 0]} flex="2 1 50%" direction="column">
+        <Submit problemID={metadata.id} metadata={metadata}></Submit>
       </Flex>
     </Flex>
   )

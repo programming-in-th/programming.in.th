@@ -1,16 +1,14 @@
+import { ITask } from './task'
+import { IGroup } from './group'
+
 export interface ISubmission {
+  ID: string
+
+  problem: ITask
   uid: string
-  submission_id: string
-  username: string
-  problem_id: string
-  problem_name: string
   language: string
-  status: string
+  groups: IGroup[]
   points: number
-  time: number
-  memory: number
   timestamp: Date
   humanTimestamp: string
-  code?: string
-  hideCode: boolean
 }

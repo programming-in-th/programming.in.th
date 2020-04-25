@@ -1,43 +1,26 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useCallback } from 'react'
 import { Flex, Button, Select, Text } from '@chakra-ui/core'
 
-import { useUser } from '../UserContext'
+import { useUser } from '../../UserContext'
 
-import firebase from '../../lib/firebase'
-import { UploadCode } from '../Upload'
+import { UploadCode } from '../../Upload'
+import { submitCode } from './submitToFirebase'
 
 const languageData = [
-  ['text/x-csrc', 'C / C++'],
+  ['c', 'C'],
+  ['c++', 'C'],
   ['python', 'Python'],
   ['java', 'Java']
 ]
 
-type TPlot = {
-  [key: string]: string
-}
-
-const mapLanguage: TPlot = {
-  'text/x-csrc': 'cpp',
-  python: 'python'
-}
-
-interface ISubmitSetting {
-  language: string
-  hideCode: boolean
-}
-
 export const Submit = ({ problemID }) => {
   const { user } = useUser()
 
-  const [setting, setSetting] = useState<ISubmitSetting>({
-    language: 'text/x-csrc',
-    hideCode: false
-  })
+  const [language, setLanguage] = useState<string>('c++')
 
   const [codeFile, setCodeFile] = useState<File[]>()
   const [codeValue, setCode] = useState<string>('')
-  const [responseState, setResponse] = useState({
-    data: undefined,
+  const [responseStatus, setResponseStatus] = useState({
     status: 0
   })
 
@@ -48,52 +31,28 @@ export const Submit = ({ problemID }) => {
     reader.onerror = () => console.log('file reading has failed')
     reader.onload = () => {
       setCode(reader.result as string)
-      console.log(reader.result)
     }
 
     reader.readAsText(acceptedFiles[0])
   }, [])
 
-  const submitCode = async (id: string, code: string, lang: string) => {
-    if (!user) return
-
-    const params = {
-      id,
-      code,
-      lang
-    }
-
-    setResponse({
-      ...responseState,
-      status: -1
-    })
-
-    const response = await firebase
-      .app()
-      .functions('asia-east2')
-      .httpsCallable('makeSubmission')(params)
-
-    setResponse({
-      data: response.data,
-      status: 200
-    })
-  }
-
-  const changeLanguage = (value: string) => {
-    setSetting({ ...setting, language: value })
-  }
-
   return (
     <Flex direction="column" px={4}>
       {codeFile && <Text>You are submitting - {codeFile[0]?.name}</Text>}
       <Flex align="baseline" mt={4}>
-        <UploadCode setCodeFile={setCodeFile} onDrop={onDrop}></UploadCode>
+        <UploadCode
+          index={0}
+          codeFile={codeFile}
+          setCodeFile={setCodeFile}
+          onDrop={onDrop}
+          multiple={false}
+        ></UploadCode>
         <Select
           ml={8}
           width="120px"
           defaultValue={languageData[0][0]}
           onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-            changeLanguage(event.target.value)
+            setLanguage(event.target.value)
           }
         >
           {languageData.map((data: string[]) => (
@@ -106,7 +65,13 @@ export const Submit = ({ problemID }) => {
           width="200px"
           ml={8}
           onClick={() => {
-            submitCode(problemID, codeValue, mapLanguage[setting.language])
+            submitCode(
+              problemID,
+              [codeValue],
+              language,
+              user,
+              setResponseStatus
+            )
           }}
           isDisabled={user === null}
         >
