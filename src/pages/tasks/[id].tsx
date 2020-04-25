@@ -11,6 +11,7 @@ import { Solution } from '../../components/tasks/Solution'
 import { getProblemIDs } from '../../utils/getProblemIDs'
 import { renderMarkdown } from '../../utils/renderMarkdown'
 import { useRouter } from 'next/router'
+import { config } from '../../config'
 
 type pageIndex = 'statement' | 'statistics' | 'submissions' | 'solution'
 
@@ -130,7 +131,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
   const metadata = await fetch(
-    `https://asia-east2-proginth.cloudfunctions.net/getProblemMetadata?id=${id}`
+    `${config.baseURL}/getProblemMetadata?id=${id}`
   ).then(o => o.json())
 
   let solution: string
