@@ -1,7 +1,12 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { Flex, Box, Text, Link } from '@chakra-ui/core'
-import { Submit } from './Submit/Comm'
+
+import { Normal } from './Submit/Normal'
+import { Comm } from './Submit/Comm'
+import { OutputOnly } from './Submit/OutputOnly'
+
+import { ITask } from '../../@types/task'
 
 const PDF = styled.object`
   width: 100%;
@@ -9,6 +14,19 @@ const PDF = styled.object`
 `
 
 export const Statement = ({ metadata }) => {
+  const renderSubmit = (metadata: ITask) => {
+    switch (metadata.type) {
+      case 'normal':
+        return <Normal metadata={metadata}></Normal>
+
+      case 'communication':
+        return <Comm metadata={metadata}></Comm>
+
+      case 'output-only':
+        return <OutputOnly metadata={metadata}></OutputOnly>
+    }
+  }
+
   return (
     <Flex direction={['column', 'row']} height="100%" flexGrow={1}>
       <Flex mt={4} mx={[4, 0]} flex="2 1 50%" direction="column">
@@ -33,7 +51,7 @@ export const Statement = ({ metadata }) => {
       </Flex>
 
       <Flex mt={4} mx={[4, 0]} flex="2 1 50%" direction="column">
-        <Submit problemID={metadata.id} metadata={metadata}></Submit>
+        {renderSubmit(metadata)}
       </Flex>
     </Flex>
   )

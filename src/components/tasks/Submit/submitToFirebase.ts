@@ -5,10 +5,8 @@ export const submitCode = async (
   code: string[],
   lang: string,
   user: firebase.User,
-  setResponse: React.Dispatch<
-    React.SetStateAction<{
-      status: number
-    }>
+  setStatus: React.Dispatch<
+    React.SetStateAction<'WAIT' | 'LOADING' | 'OK' | 'ERROR'>
   >
 ) => {
   if (!user) return
@@ -19,9 +17,7 @@ export const submitCode = async (
     lang
   }
 
-  setResponse({
-    status: -1
-  })
+  setStatus('LOADING')
 
   const response = await firebase
     .app()
@@ -29,8 +25,6 @@ export const submitCode = async (
     .httpsCallable('makeSubmission')(params)
 
   if (response) {
-    setResponse({
-      status: 200
-    })
+    setStatus('OK')
   }
 }

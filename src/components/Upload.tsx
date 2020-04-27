@@ -5,7 +5,7 @@ import { Button } from '@chakra-ui/core'
 interface IUploadCode {
   index: number
   codeFile: File[]
-  setCodeFile: any
+  setCodeFile: React.Dispatch<React.SetStateAction<File[]>>
   onDrop<T extends File>(
     acceptedFiles: T[],
     rejectedFiles: T[],
@@ -21,13 +21,13 @@ export const UploadCode = (props: IUploadCode) => {
   })
 
   useEffect(() => {
-    const temp = { ...props.codeFile }
+    const temp = [...props.codeFile]
     temp[props.index] = acceptedFiles[0]
     props.setCodeFile(temp)
   }, [acceptedFiles])
 
   return (
-    <Button {...getRootProps()}>
+    <Button {...getRootProps()} mt={2} size="xs">
       <input {...getInputProps()} />
       Upload
     </Button>

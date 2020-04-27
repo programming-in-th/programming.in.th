@@ -7,7 +7,7 @@ import { UploadCode } from '../../Upload'
 import { useSubmit } from './useSubmit'
 import { languageData } from '.'
 
-export const Comm = ({ metadata }) => {
+export const OutputOnly = ({ metadata }) => {
   const { user } = useUser()
 
   const {
