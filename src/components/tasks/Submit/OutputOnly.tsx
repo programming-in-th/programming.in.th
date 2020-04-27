@@ -10,14 +10,7 @@ import { languageData } from '.'
 export const OutputOnly = ({ metadata }) => {
   const { user } = useUser()
 
-  const {
-    submit,
-    codeFile,
-    setCodeFile,
-    onDrop,
-    setLanguage,
-    status
-  } = useSubmit(metadata)
+  const { submit, codeFile, setCodeFile, onDrop, status } = useSubmit(metadata)
 
   return (
     <Flex direction="column" px={4}>
@@ -48,34 +41,15 @@ export const OutputOnly = ({ metadata }) => {
           ))}
         </Box>
 
-        <Flex>
-          <Select
-            mt={8}
-            width="120px"
-            size="sm"
-            defaultValue={languageData[0][0]}
-            onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-              setLanguage(event.target.value)
-            }
-          >
-            {languageData.map((data: string[]) => (
-              <option key={data[0]} value={data[0]}>
-                {data[1]}
-              </option>
-            ))}
-          </Select>
-
-          <Button
-            ml={8}
-            size="sm"
-            mt={8}
-            width="200px"
-            onClick={submit}
-            isDisabled={user === null}
-          >
-            Submit
-          </Button>
-        </Flex>
+        <Button
+          size="sm"
+          mt={8}
+          width="200px"
+          onClick={submit}
+          isDisabled={user === null}
+        >
+          Submit
+        </Button>
       </Flex>
     </Flex>
   )
