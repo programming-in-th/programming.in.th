@@ -36,7 +36,7 @@ export default ({ metadata, solution }) => {
     )
   }
 
-  if (!!metadata) {
+  if (!metadata) {
     return (
       <PageLayout>
         <Flex
