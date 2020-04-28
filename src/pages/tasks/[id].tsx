@@ -36,7 +36,7 @@ export default ({ metadata, solution }) => {
     )
   }
 
-  if (!metadata) {
+  if (!!metadata) {
     return (
       <PageLayout>
         <Flex
@@ -151,15 +151,6 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
   const metadata = await fetch(
     `${config.baseURL}/getProblemMetadata?id=${id}`
   ).then(o => o.json())
-
-  console.log(metadata)
-
-  if (!!metadata) {
-    return {
-      props: {},
-      revalidate: 60
-    }
-  }
 
   let solution: string
 
