@@ -36,9 +36,27 @@ export default ({ metadata, solution }) => {
     )
   }
 
+  if (!!metadata) {
+    return (
+      <PageLayout>
+        <Flex
+          my={8}
+          direction="column"
+          flexGrow={1}
+          w={['100%', 1400]}
+          mx="auto"
+        >
+          <Flex align="center" justify="center" flexGrow={1}>
+            <Heading>Task not found</Heading>
+          </Flex>
+        </Flex>
+      </PageLayout>
+    )
+  }
+
   const [currentPage, setCurrentPage] = useState<pageIndex>('statement')
 
-  const category = metadata.path.split('/')
+  const category = metadata?.path.split('/')
 
   const renderPage = (currentPage: pageIndex) => {
     switch (currentPage) {
