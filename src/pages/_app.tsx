@@ -6,7 +6,13 @@ import NProgress from 'nprogress'
 import { ThemeProvider, CSSReset } from '@chakra-ui/core'
 
 import firebase from '../lib/firebase'
-import { UserAction, UserStateContext } from '../components/UserContext'
+import {
+  UserState,
+  initialState,
+  reducer,
+  UserAction,
+  UserStateContext
+} from '../components/UserContext'
 import { fetchFromFirebase } from '../utils/fetcher'
 import { onetap } from '../components/auth/onetap'
 
@@ -36,24 +42,6 @@ const done = () => {
 Router.events.on('routeChangeStart', start)
 Router.events.on('routeChangeComplete', done)
 Router.events.on('routeChangeError', done)
-
-export type UserState = typeof initialState
-const initialState = { user: undefined, isAdmin: false }
-
-export const reducer = (state: UserState, action: UserAction): UserState => {
-  switch (action.type) {
-    case 'RECEIVE_USER':
-      return Object.assign({}, state, {
-        user: action.payload.user
-      })
-    case 'RECEIVE_ADMIN':
-      return Object.assign({}, state, {
-        isAdmin: action.payload.isAdmin
-      })
-    default:
-      return state
-  }
-}
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
   const [userState, userDispatch] = useReducer<
