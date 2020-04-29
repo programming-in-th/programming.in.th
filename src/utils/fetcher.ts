@@ -6,5 +6,5 @@ export const fetchFromFirebase = async (type: string, param?: Object) => {
     .functions('asia-east2')
     .httpsCallable(type)
 
-  return await get(param)
+  return (await get(param)).data
 }
