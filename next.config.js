@@ -7,6 +7,9 @@ const remarkMath = require('remark-math')
 const rehypeKatex = require('rehype-katex')
 const rehypePrism = require('@mapbox/rehype-prism')
 
+const withCSS = require('@zeit/next-css')
+const withStylus = require('@zeit/next-stylus')
+
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
   options: {
@@ -24,7 +27,9 @@ module.exports = withPlugins(
       }
     ],
     withBundleAnalyzer,
-    withOffline
+    withOffline,
+    withCSS,
+    withStylus
   ],
   {
     analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),

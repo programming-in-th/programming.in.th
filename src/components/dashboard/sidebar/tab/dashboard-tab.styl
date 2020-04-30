@@ -1,0 +1,27 @@
+@require '../../config'
+
+.dashboard-tab
+    display flex
+    flex-direction row
+    justify-content flex-start
+    align-items center
+    width calc(100% - 24px)
+    margin 0 8px
+    padding 8px 20px
+    color $detail
+    font-size 18px
+    font-weight 400
+    text-align left
+    border-left 4px solid transparent
+    border-right 4px solid transparent
+    outline none
+    transition color .2s ease-out, border-left-color .2s ease-out
+
+    &:hover,
+    &:focus
+        color $title
+        border-left-color $detail
+
+    &.-active
+        color $title
+        border-left-color $title

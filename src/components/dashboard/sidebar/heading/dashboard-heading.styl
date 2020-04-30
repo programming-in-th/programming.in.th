@@ -1,0 +1,32 @@
+@require '../../config'
+
+#dashboard-header
+    display block
+    width 100%
+    padding 20px
+
+    & > .cover
+        display block
+        width 96px
+        height 96px
+        margin 0 auto 12px auto
+        padding 0
+        background-color $preload
+        border-radius 120px
+
+        & > .image
+            width inherit
+            height inherit
+            object-fit cover
+            object-position center
+            border-radius inherit
+            margin 0
+            padding 0
+
+    & > .username
+        display block
+        width 100%
+        color $title
+        font-size 24px
+        font-weight 700
+        text-align center
