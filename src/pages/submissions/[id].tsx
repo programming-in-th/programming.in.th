@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
@@ -55,10 +55,9 @@ const SubmissionDetail: NextPage = () => {
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
-  const param = useMemo(() => ({ submissionID: id }), [id])
   const { data: submission } = useSWR(
-    ['getDetailedSubmissionData', param],
-    fetchFromFirebase
+    ['getDetailedSubmissionData', id],
+    (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
 
   const [theme, setTheme] = useState<string>('material')
@@ -81,7 +80,7 @@ const SubmissionDetail: NextPage = () => {
           p={4}
         >
           {submission ? (
-            <React.Fragment>
+            <Box>
               <Box>
                 <Heading fontSize="2xl">
                   [{submission.task.id}] {submission.task.title}
@@ -92,9 +91,10 @@ const SubmissionDetail: NextPage = () => {
                   </ChakraLink>
                 </Link>
                 <p>Points: {submission.points}</p>
-                <p> Submission time: {submission.humanTimestamp}</p>
+                <p>Submission time: {submission.humanTimestamp}</p>
                 <p>User: {submission.username}</p>
               </Box>
+
               {submission.code !== '' ? (
                 <React.Fragment>
                   <Select
@@ -184,16 +184,16 @@ const SubmissionDetail: NextPage = () => {
               ) : (
                 <Heading>Code Hidden</Heading>
               )}
-            </React.Fragment>
+            </Box>
           ) : (
-            <React.Fragment>
+            <Box>
               <Skeleton height="20px" my="10px" />
               <Skeleton height="20px" my="10px" />
               <Skeleton height="20px" my="10px" />
               <Skeleton height="20px" my="10px" />
               <Skeleton height="20px" my="10px" />
               <Skeleton height="20px" my="10px" />
-            </React.Fragment>
+            </Box>
           )}
         </Box>
       </Flex>
