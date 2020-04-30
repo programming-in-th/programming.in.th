@@ -7,7 +7,6 @@ import useSWR from 'swr'
 
 import {
   Spinner,
-  Select,
   Skeleton,
   Box,
   Flex,
@@ -21,6 +20,7 @@ import {
   Button
 } from '@chakra-ui/core'
 
+import { useUser } from '../../components/UserContext'
 import { PageLayout } from '../../components/Layout'
 import { fetchFromFirebase } from '../../utils/fetcher'
 import { IGroup } from '../../@types/group'
@@ -60,7 +60,8 @@ const SubmissionDetail: NextPage = () => {
     (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
 
-  const [theme, setTheme] = useState<string>('material')
+  const { codeTheme: theme } = useUser()
+
   const [currentCodeIndex, setCurrentCodeIndex] = useState<number>(0)
 
   return (
@@ -97,21 +98,6 @@ const SubmissionDetail: NextPage = () => {
 
               {submission.code !== '' ? (
                 <React.Fragment>
-                  <Select
-                    mt={4}
-                    width="120px"
-                    defaultValue={themeData[0][0]}
-                    onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
-                      setTheme(event.target.value)
-                    }
-                  >
-                    {themeData.map((data: string[]) => (
-                      <option key={data[0]} value={data[0]}>
-                        {data[1]}
-                      </option>
-                    ))}
-                  </Select>
-
                   <Box mt={4}>
                     {submission.task.type !== 'normal' &&
                       submission.task.fileName.map((name, index) => (

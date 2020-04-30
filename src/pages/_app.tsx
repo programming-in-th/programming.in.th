@@ -4,6 +4,7 @@ import Router from 'next/router'
 import React, { useReducer, useEffect } from 'react'
 import NProgress from 'nprogress'
 import { ThemeProvider, CSSReset } from '@chakra-ui/core'
+import useSWR, { mutate } from 'swr'
 
 import firebase from '../lib/firebase'
 import {
@@ -47,6 +48,18 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
   const [userState, userDispatch] = useReducer<
     React.Reducer<UserState, UserAction>
   >(reducer, initialState)
+
+  const { data: userContext } = useSWR('getUserContext', fetchFromFirebase)
+
+  useEffect(() => {
+    if (userContext) {
+      userDispatch({
+        type: 'RECEIVE_CONTEXT',
+        payload: userContext
+      })
+    }
+  }, [userContext])
+
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged(user => {
       if (user === null || user.emailVerified) {
@@ -56,6 +69,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
             user
           }
         })
+        mutate('getUserContext')
       }
     })
 
@@ -68,19 +82,6 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
     if (userState.user === null) {
       onetap()
     }
-  }, [userState.user])
-
-  useEffect(() => {
-    const fetchAdmin = async () => {
-      const response = await fetchFromFirebase('getIsAdmin')
-
-      userDispatch({
-        type: 'RECEIVE_ADMIN',
-        payload: { isAdmin: response.data }
-      })
-    }
-
-    fetchAdmin()
   }, [userState.user])
 
   return (
