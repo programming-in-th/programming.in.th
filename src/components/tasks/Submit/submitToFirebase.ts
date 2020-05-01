@@ -7,8 +7,7 @@ export const submitCode = async (
   user: firebase.User,
   setStatus: React.Dispatch<
     React.SetStateAction<'WAIT' | 'LOADING' | 'OK' | 'ERROR'>
-  >,
-  setSubmissionID: React.Dispatch<React.SetStateAction<string>>
+  >
 ) => {
   if (!user) return
 
@@ -26,7 +25,6 @@ export const submitCode = async (
     .httpsCallable('makeSubmission')(params)
 
   if (response) {
-    setSubmissionID(response.data)
     setStatus('OK')
   }
 }
