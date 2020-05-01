@@ -11,7 +11,8 @@ export const useSubmit = (metadata: ITask) => {
   const [language, setLanguage] = useState<string>('c++')
   const [codeFile, setCodeFile] = useState<File[]>([])
   const [codeValue, setCode] = useState<string[]>([])
-  const [status, setStatus] = useState<status>()
+  const [status, setStatus] = useState<status>('WAIT')
+  const [submissionID, setSubmissionID] = useState<string>('')
 
   const onDrop = (index: number) =>
     useCallback(
@@ -32,7 +33,22 @@ export const useSubmit = (metadata: ITask) => {
     )
 
   const submit = () =>
-    submitCode(metadata.id, codeValue, language, user, setStatus)
+    submitCode(
+      metadata.id,
+      codeValue,
+      language,
+      user,
+      setStatus,
+      setSubmissionID
+    )
 
-  return { submit, codeFile, setCodeFile, onDrop, setLanguage, status }
+  return {
+    submit,
+    codeFile,
+    setCodeFile,
+    onDrop,
+    setLanguage,
+    status,
+    submissionID
+  }
 }
