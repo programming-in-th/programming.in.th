@@ -32,7 +32,7 @@
     "@zeit/next-mdx": "^1.2.0",
     "codemirror": "^5.52.0",
     "emotion-theming": "^10.0.27",
-    "firebase": "^7.9.0",
+    "firebase": "^7.14.2",
     "formik": "^2.1.4",
     "intersection-observer": "^0.7.0",
     "isomorphic-unfetch": "^3.0.0",
