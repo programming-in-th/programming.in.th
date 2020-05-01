@@ -12,6 +12,7 @@ export const useSubmit = (metadata: ITask) => {
   const [codeFile, setCodeFile] = useState<File[]>([])
   const [codeValue, setCode] = useState<string[]>([])
   const [status, setStatus] = useState<status>()
+  const [submissionID, setSubmissionID] = useState<string>()
 
   const onDrop = (index: number) =>
     useCallback(
@@ -32,7 +33,22 @@ export const useSubmit = (metadata: ITask) => {
     )
 
   const submit = () =>
-    submitCode(metadata.id, codeValue, language, user, setStatus)
+    submitCode(
+      metadata.id,
+      codeValue,
+      language,
+      user,
+      setStatus,
+      setSubmissionID
+    )
 
-  return { submit, codeFile, setCodeFile, onDrop, setLanguage, status }
+  return {
+    submit,
+    codeFile,
+    setCodeFile,
+    onDrop,
+    setLanguage,
+    status,
+    submissionID
+  }
 }

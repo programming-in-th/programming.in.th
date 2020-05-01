@@ -1,16 +1,41 @@
-import React from 'react'
-import { Flex, Button, Select, Text, Box } from '@chakra-ui/core'
+import React, { useEffect } from 'react'
+import { useRouter } from 'next/router'
+
+import { Flex, Button, Text, Box, useToast } from '@chakra-ui/core'
 
 import { useUser } from '../../UserContext'
 
 import { UploadCode } from '../../Upload'
 import { useSubmit } from './useSubmit'
-import { languageData } from '.'
 
 export const OutputOnly = ({ metadata }) => {
+  const toast = useToast()
   const { user } = useUser()
+  const router = useRouter()
 
-  const { submit, codeFile, setCodeFile, onDrop, status } = useSubmit(metadata)
+  const {
+    submit,
+    codeFile,
+    setCodeFile,
+    onDrop,
+    setLanguage,
+    status,
+    submissionID
+  } = useSubmit(metadata)
+
+  useEffect(() => {
+    if (status === 'OK') {
+      router.push(`/submissions/${submissionID}`)
+    } else if (status === 'ERROR') {
+      toast({
+        title: 'Error!',
+        description: 'An unknown error occured.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true
+      })
+    }
+  }, [status, submissionID])
 
   return (
     <Flex direction="column" px={4}>

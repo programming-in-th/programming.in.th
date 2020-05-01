@@ -1,14 +1,17 @@
-import React from 'react'
-import { Flex, Button, Select, Text } from '@chakra-ui/core'
+import React, { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import { Flex, Button, Select, Text, useToast } from '@chakra-ui/core'
 
 import { useUser } from '../../UserContext'
 
 import { UploadCode } from '../../Upload'
-import { useSubmit, status } from './useSubmit'
+import { useSubmit } from './useSubmit'
 import { languageData } from '.'
 
 export const Normal = ({ metadata }) => {
+  const toast = useToast()
   const { user } = useUser()
+  const router = useRouter()
 
   const {
     submit,
@@ -16,8 +19,23 @@ export const Normal = ({ metadata }) => {
     setCodeFile,
     onDrop,
     setLanguage,
-    status
+    status,
+    submissionID
   } = useSubmit(metadata)
+
+  useEffect(() => {
+    if (status === 'OK') {
+      router.push(`/submissions/${submissionID}`)
+    } else if (status === 'ERROR') {
+      toast({
+        title: 'Error!',
+        description: 'An unknown error occured.',
+        status: 'error',
+        duration: 9000,
+        isClosable: true
+      })
+    }
+  }, [status, submissionID])
 
   return (
     <Flex direction="column" px={4}>
@@ -57,6 +75,7 @@ export const Normal = ({ metadata }) => {
         </Select>
 
         <Button
+          isLoading={status === 'LOADING'}
           ml={8}
           size="sm"
           mt={8}
