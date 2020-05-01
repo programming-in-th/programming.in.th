@@ -126,46 +126,52 @@ const SubmissionDetail: NextPage = () => {
                     onBeforeChange={(editor, data, value) => {}}
                     value={submission.code[currentCodeIndex]}
                   />
-                  <Accordion defaultIndex={[]} allowMultiple>
-                    {submission.groups.map((group: IGroup, index) => {
-                      return (
-                        <AccordionItem>
-                          <AccordionHeader>
-                            <Box flex="1" textAlign="left">
-                              Subtasks #{index + 1} [{group.score}/
-                              {group.fullScore}]
-                            </Box>
-                            <AccordionIcon />
-                          </AccordionHeader>
-                          <AccordionPanel pb={4} overflow="scroll">
-                            <Table>
-                              <thead>
-                                <tr>
-                                  <Th>#</Th>
-                                  <Th>Verdict</Th>
-                                  <Th>Time</Th>
-                                  <Th>Memory</Th>
-                                  <Th>Message</Th>
-                                </tr>
-                              </thead>
+                  {submission.groups && (
+                    <Accordion defaultIndex={[]} allowMultiple>
+                      {submission.groups.map((group: IGroup, index) => {
+                        return (
+                          <AccordionItem>
+                            <AccordionHeader>
+                              <Box flex="1" textAlign="left">
+                                Subtasks #{index + 1} [{group.score}/
+                                {group.fullScore}]
+                              </Box>
+                              <AccordionIcon />
+                            </AccordionHeader>
+                            <AccordionPanel pb={4} overflow="scroll">
+                              <Table>
+                                <thead>
+                                  <tr>
+                                    <Th>#</Th>
+                                    <Th>Verdict</Th>
+                                    <Th>Time</Th>
+                                    <Th>Memory</Th>
+                                    <Th>Message</Th>
+                                  </tr>
+                                </thead>
 
-                              <tbody>
-                                {group.status.map((status: IStatus, index) => (
-                                  <Tr correct={status.verdict === 'Correct'}>
-                                    <Td>{index + 1}</Td>
-                                    <Td>{status.verdict}</Td>
-                                    <Td>{status.time} ms</Td>
-                                    <Td>{status.memory} kB</Td>
-                                    <Td>{status.message}</Td>
-                                  </Tr>
-                                ))}
-                              </tbody>
-                            </Table>
-                          </AccordionPanel>
-                        </AccordionItem>
-                      )
-                    })}
-                  </Accordion>
+                                <tbody>
+                                  {group.status.map(
+                                    (status: IStatus, index) => (
+                                      <Tr
+                                        correct={status.verdict === 'Correct'}
+                                      >
+                                        <Td>{index + 1}</Td>
+                                        <Td>{status.verdict}</Td>
+                                        <Td>{status.time} ms</Td>
+                                        <Td>{status.memory} kB</Td>
+                                        <Td>{status.message}</Td>
+                                      </Tr>
+                                    )
+                                  )}
+                                </tbody>
+                              </Table>
+                            </AccordionPanel>
+                          </AccordionItem>
+                        )
+                      })}
+                    </Accordion>
+                  )}
                 </React.Fragment>
               ) : (
                 <Heading>Code Hidden</Heading>
