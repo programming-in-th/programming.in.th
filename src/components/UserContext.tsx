@@ -2,7 +2,21 @@ import React, { useContext } from 'react'
 
 export type UserState = typeof initialState
 
-export const initialState = { user: undefined, isAdmin: false }
+type ITheme = 'material' | 'monokai' | 'solarized'
+
+interface IContext {
+  user: firebase.User | null | undefined
+  displayName: string
+  admin: boolean
+  codeTheme: ITheme
+}
+
+export const initialState: IContext = {
+  user: undefined,
+  displayName: '',
+  admin: false,
+  codeTheme: 'material'
+}
 
 export type UserAction =
   | {
@@ -10,8 +24,8 @@ export type UserAction =
       payload: { user: firebase.User | null }
     }
   | {
-      type: 'RECEIVE_ADMIN'
-      payload: { isAdmin: boolean }
+      type: 'RECEIVE_CONTEXT'
+      payload: { displayName: string; admin: boolean; codeTheme: ITheme }
     }
 
 export const reducer = (state: UserState, action: UserAction): UserState => {
@@ -20,21 +34,17 @@ export const reducer = (state: UserState, action: UserAction): UserState => {
       return Object.assign({}, state, {
         user: action.payload.user
       })
-    case 'RECEIVE_ADMIN':
+    case 'RECEIVE_CONTEXT':
       return Object.assign({}, state, {
-        isAdmin: action.payload.isAdmin
+        displayName: action.payload.displayName,
+        admin: action.payload.admin,
+        codeTheme: action.payload.codeTheme
       })
     default:
       return state
   }
 }
 
-export const UserStateContext = React.createContext<{
-  user: firebase.User | null | undefined
-  isAdmin: boolean
-}>({
-  user: undefined,
-  isAdmin: false
-})
+export const UserStateContext = React.createContext<IContext>(initialState)
 
 export const useUser = () => useContext(UserStateContext)
