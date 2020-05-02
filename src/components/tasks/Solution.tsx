@@ -26,7 +26,7 @@ export const Solution = ({ solution }) => {
       <Box
         borderRadius={6}
         boxShadow="var(--shadow-xl)"
-        p={4}
+        p={[4, 6]}
         mt={4}
         mx={[4, 'auto']}
         w={['100%', 1400]}
