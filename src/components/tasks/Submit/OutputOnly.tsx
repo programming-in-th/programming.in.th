@@ -18,7 +18,6 @@ export const OutputOnly = ({ metadata }) => {
     codeFile,
     setCodeFile,
     onDrop,
-    setLanguage,
     status,
     submissionID
   } = useSubmit(metadata)

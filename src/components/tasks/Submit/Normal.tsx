@@ -6,7 +6,7 @@ import { useUser } from '../../UserContext'
 
 import { UploadCode } from '../../Upload'
 import { useSubmit } from './useSubmit'
-import { languageData } from '.'
+import { config } from '../../../config'
 
 export const Normal = ({ metadata }) => {
   const toast = useToast()
@@ -62,12 +62,12 @@ export const Normal = ({ metadata }) => {
           mt={8}
           width="120px"
           size="sm"
-          defaultValue={languageData[0][0]}
+          defaultValue={config.languageData[0][0]}
           onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
             setLanguage(event.target.value)
           }
         >
-          {languageData.map((data: string[]) => (
+          {config.languageData.map((data: string[]) => (
             <option key={data[0]} value={data[0]}>
               {data[1]}
             </option>
