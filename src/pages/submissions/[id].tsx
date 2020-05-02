@@ -6,7 +6,6 @@ import dynamic from 'next/dynamic'
 import useSWR from 'swr'
 
 import {
-  Spinner,
   Skeleton,
   Box,
   Flex,
@@ -33,12 +32,6 @@ const CodeDisplay = dynamic(
     ssr: false
   }
 ) as any
-
-const themeData = [
-  ['material', 'Material'],
-  ['monokai', 'Monokai'],
-  ['solarized', 'Solarized Light']
-]
 
 type TPlot = {
   [key: string]: string
