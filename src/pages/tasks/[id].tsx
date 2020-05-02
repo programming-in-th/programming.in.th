@@ -13,6 +13,7 @@ import { getProblemIDs } from '../../utils/getProblemIDs'
 import { renderMarkdown } from '../../utils/renderMarkdown'
 import { useRouter } from 'next/router'
 import { config } from '../../config'
+import { isObjectEmpty } from '../../utils/isEmpty'
 
 type pageIndex = 'statement' | 'statistics' | 'solution'
 
@@ -37,7 +38,7 @@ export default ({ metadata, solution }) => {
     )
   }
 
-  if (!metadata) {
+  if (isObjectEmpty(metadata)) {
     return (
       <PageLayout>
         <Flex
