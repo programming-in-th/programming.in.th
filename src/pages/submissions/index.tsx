@@ -9,6 +9,7 @@ import { config } from '../../config'
 import { PageLayout } from '../../components/Layout'
 import { Td, Table, Th, Tr } from '../../components/submissions/ListTable'
 import { ISubmissionList } from '../../@types/submission'
+import { arrToObj } from '../../utils/arrToObj'
 
 export default () => {
   const router = useRouter()
@@ -53,7 +54,7 @@ export default () => {
                 <Td>{submission.displayName}</Td>
                 <Td>{submission.taskID}</Td>
                 <Td>{submission.points}</Td>
-                <Td>{submission.language}</Td>
+                <Td>{arrToObj(config.languageData)[submission.language]}</Td>
                 <Td>{submission.time}</Td>
                 <Td>{submission.memory}</Td>
               </Tr>
