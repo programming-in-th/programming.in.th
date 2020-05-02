@@ -31,3 +31,6 @@ package-lock.json
 bundles
 
 PROBLEM_ID_CACHE
+
+#export file
+/out
