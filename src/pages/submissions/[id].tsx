@@ -30,7 +30,6 @@ import { Table, Th, Td, Tr } from '../../components/submissions/VerdictTable'
 const CodeDisplay = dynamic(
   () => import('../../components/Code').then(mod => mod.CodeDisplay),
   {
-    loading: () => <Spinner />,
     ssr: false
   }
 ) as any
