@@ -14,6 +14,7 @@ export interface ISubmission {
 }
 
 export interface ISubmissionList {
+  submissionID: string
   username: string
   timestamp: Date
   humanTimestamp: string

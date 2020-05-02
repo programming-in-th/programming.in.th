@@ -17,7 +17,15 @@ export const Th = styled.th`
   padding: 8px 16px;
 `
 
-export const Tr = styled.tr``
+export const Tr = styled.tr`
+  cursor: pointer;
+  transition: background-color 0.25s;
+
+  :hover {
+    background-color: #f7fafc;
+    border-left: 4px solid #e2e8f0;
+  }
+`
 
 export const Td = styled.td`
   text-align: left;

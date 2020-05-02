@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useRouter } from 'next/router'
 import { fetch } from '../../lib/fetch'
-import { Box, Flex, Button, Heading } from '@chakra-ui/core'
+import { Box, Flex, Button, Heading, Input, Text } from '@chakra-ui/core'
 import useSWR, { useSWRPages } from 'swr'
 import { config } from '../../config'
 
@@ -9,19 +10,38 @@ import { Td, Table, Th, Tr } from '../../components/submissions/ListTable'
 import { ISubmissionList } from '../../@types/submission'
 
 export default () => {
+  const router = useRouter()
+  const [displayName, setDisplayName] = useState('')
+  const [task, setTask] = useState('')
+
   const { pages, isLoadingMore, isReachingEnd, loadMore } = useSWRPages(
     'submission',
     ({ offset, withSWR }) => {
       const { data: submissions } = withSWR(
-        useSWR(`${config.baseURL}/getSubmissions?offset=${offset || 0}`, fetch)
+        useSWR(
+          `${config.baseURL}/getSubmissions?offset=${offset ||
+            0}&displayName=${displayName || ''}&taskID=${task || ''}`,
+          fetch,
+          { errorRetryCount: 3 }
+        )
       )
 
       if (!submissions) {
-        return null
+        return (
+          <Tr>
+            <td colSpan={7}>
+              <Text textAlign="center" p={4}>
+                Loading...
+              </Text>
+            </td>
+          </Tr>
+        )
       }
 
       return submissions.map((submission: ISubmissionList) => (
-        <Tr>
+        <Tr
+          onClick={() => router.push(`/submissions/${submission.submissionID}`)}
+        >
           <Td>{submission.humanTimestamp}</Td>
           <Td>{submission.username}</Td>
           <Td>{submission.taskTitle}</Td>
@@ -37,7 +57,7 @@ export default () => {
         ? submissions[submissions.length - 1].id + 1
         : null
     },
-    []
+    [displayName, task, router]
   )
 
   return (
@@ -45,6 +65,23 @@ export default () => {
       <Flex align="center" justify="center" flexGrow={1} p={4}>
         <Box>
           <Heading>Submissions</Heading>
+          <Flex mt={4}>
+            <Input
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setDisplayName(event.target.value)
+              }
+              placeholder="Username"
+              width="200px"
+            />
+            <Input
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+                setTask(event.target.value)
+              }
+              placeholder="Task"
+              width="200px"
+              ml={4}
+            />
+          </Flex>
           <Box
             mt={4}
             boxShadow="var(--shadow-default)"
