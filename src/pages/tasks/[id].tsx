@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
+import Link from 'next/link'
 import React, { useState } from 'react'
 import { Flex, Link as ChakraLink, Heading, Text } from '@chakra-ui/core'
 
@@ -13,7 +14,7 @@ import { renderMarkdown } from '../../utils/renderMarkdown'
 import { useRouter } from 'next/router'
 import { config } from '../../config'
 
-type pageIndex = 'statement' | 'statistics' | 'submissions' | 'solution'
+type pageIndex = 'statement' | 'statistics' | 'solution'
 
 export default ({ metadata, solution }) => {
   const router = useRouter()
@@ -110,15 +111,16 @@ export default ({ metadata, solution }) => {
               Statistics
             </ChakraLink>
 
-            <ChakraLink
-              mt={[2, 0]}
-              ml={[0, 6]}
-              lineHeight="18px"
-              color={currentPage === 'submissions' ? 'gray.800' : 'gray.500'}
-              onClick={() => setCurrentPage('submissions')}
-            >
-              Submissions
-            </ChakraLink>
+            <Link href={`/submissions?task=${metadata.id}`}>
+              <ChakraLink
+                mt={[2, 0]}
+                ml={[0, 6]}
+                lineHeight="18px"
+                href={`/submissions?task=${metadata.id}`}
+              >
+                Submissions
+              </ChakraLink>
+            </Link>
 
             <ChakraLink
               mt={[2, 0]}

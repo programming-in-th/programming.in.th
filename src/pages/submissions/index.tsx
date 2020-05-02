@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { fetch } from '../../lib/fetch'
 import { Box, Flex, Button, Heading, Input, Text } from '@chakra-ui/core'
 import useSWR, { useSWRPages } from 'swr'
@@ -13,6 +14,11 @@ export default () => {
   const router = useRouter()
   const [displayName, setDisplayName] = useState('')
   const [task, setTask] = useState('')
+
+  useEffect(() => {
+    setDisplayName((router.query.displayName as string) || '')
+    setTask((router.query.task as string) || '')
+  }, [router.query])
 
   const { pages, isLoadingMore, isReachingEnd, loadMore } = useSWRPages(
     'submission',
@@ -39,21 +45,19 @@ export default () => {
       }
 
       return submissions.map((submission: ISubmissionList) => (
-        <React.Fragment>
+        <React.Fragment key={submission.submissionID}>
           {submission ? (
-            <Tr
-              onClick={() =>
-                router.push(`/submissions/${submission.submissionID}`)
-              }
-            >
-              <Td>{submission.humanTimestamp}</Td>
-              <Td>{submission.username}</Td>
-              <Td>{submission.taskTitle}</Td>
-              <Td>{submission.points}</Td>
-              <Td>{submission.language}</Td>
-              <Td>{submission.time}</Td>
-              <Td>{submission.memory}</Td>
-            </Tr>
+            <Link href={`/submissions/${submission.submissionID}`}>
+              <Tr>
+                <Td>{submission.humanTimestamp}</Td>
+                <Td>{submission.displayName}</Td>
+                <Td>{submission.taskID}</Td>
+                <Td>{submission.points}</Td>
+                <Td>{submission.language}</Td>
+                <Td>{submission.time}</Td>
+                <Td>{submission.memory}</Td>
+              </Tr>
+            </Link>
           ) : (
             <Tr>
               <td colSpan={7}></td>
@@ -80,13 +84,15 @@ export default () => {
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setDisplayName(event.target.value)
               }
-              placeholder="Username"
+              value={displayName}
+              placeholder="Display Name"
               width="200px"
             />
             <Input
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setTask(event.target.value)
               }
+              value={task}
               placeholder="Task"
               width="200px"
               ml={4}
@@ -103,7 +109,7 @@ export default () => {
               <thead>
                 <tr>
                   <Th>SUBMISSION TIME</Th>
-                  <Th>USERNAME</Th>
+                  <Th>DISPLAYNAME</Th>
                   <Th>TASK</Th>
                   <Th>POINTS</Th>
                   <Th>LANGUAGE</Th>

@@ -30,8 +30,8 @@ interface IMenu {
 const leftMenu: IMenu[] = [
   { key: 'home', name: 'Home', path: '/' },
   { key: 'tasks', name: 'Tasks', path: '/tasks' },
-  { key: 'learn', name: 'Learn', path: '/learn' },
-  { key: 'contests', name: 'Contests', path: '/contests' }
+  { key: 'submissions', name: 'Submissions', path: '/submissions' },
+  { key: 'learn', name: 'Learn', path: '/learn' }
 ]
 
 const rightMenu: IMenu[] = [
