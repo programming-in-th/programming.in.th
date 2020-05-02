@@ -39,17 +39,27 @@ export default () => {
       }
 
       return submissions.map((submission: ISubmissionList) => (
-        <Tr
-          onClick={() => router.push(`/submissions/${submission.submissionID}`)}
-        >
-          <Td>{submission.humanTimestamp}</Td>
-          <Td>{submission.username}</Td>
-          <Td>{submission.taskTitle}</Td>
-          <Td>{submission.points}</Td>
-          <Td>{submission.language}</Td>
-          <Td>{submission.time}</Td>
-          <Td>{submission.memory}</Td>
-        </Tr>
+        <React.Fragment>
+          {submission ? (
+            <Tr
+              onClick={() =>
+                router.push(`/submissions/${submission.submissionID}`)
+              }
+            >
+              <Td>{submission.humanTimestamp}</Td>
+              <Td>{submission.username}</Td>
+              <Td>{submission.taskTitle}</Td>
+              <Td>{submission.points}</Td>
+              <Td>{submission.language}</Td>
+              <Td>{submission.time}</Td>
+              <Td>{submission.memory}</Td>
+            </Tr>
+          ) : (
+            <Tr>
+              <td colSpan={7}></td>
+            </Tr>
+          )}
+        </React.Fragment>
       ))
     },
     ({ data: submissions }) => {
