@@ -12,3 +12,14 @@ export interface ISubmission {
   timestamp: Date
   humanTimestamp: string
 }
+
+export interface ISubmissionList {
+  username: string
+  timestamp: Date
+  humanTimestamp: string
+  language: string
+  points: number
+  taskTitle: string
+  time: number
+  memory: number
+}

@@ -25,7 +25,7 @@ import { PageLayout } from '../../components/Layout'
 import { fetchFromFirebase } from '../../utils/fetcher'
 import { IGroup } from '../../@types/group'
 import { IStatus } from '../../@types/status'
-import { Table, Th, Td, Tr } from '../../components/submissions/Table'
+import { Table, Th, Td, Tr } from '../../components/submissions/VerdictTable'
 
 const CodeDisplay = dynamic(
   () => import('../../components/Code').then(mod => mod.CodeDisplay),
