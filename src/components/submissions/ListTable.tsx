@@ -23,7 +23,7 @@ export const Tr = styled.tr`
 
   :hover {
     background-color: #f7fafc;
-    border-left: 4px solid #e2e8f0;
+    border-left: 4px inset #e2e8f0;
   }
 `
 
