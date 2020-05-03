@@ -37,7 +37,7 @@ export default () => {
         return (
           <Tr>
             <td colSpan={7}>
-              <Text textAlign="center" p={4}>
+              <Text textAlign={['start', 'center']} p={4}>
                 Loading...
               </Text>
             </td>

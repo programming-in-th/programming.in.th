@@ -78,7 +78,7 @@ export default ({ metadata, solution }) => {
       <Flex my={8} direction="column" flexGrow={1} w={['100%', 1400]} mx="auto">
         <Flex direction="column">
           <Flex align="baseline" mx={[6, 0]}>
-            <Heading fontWeight="600" fontSize="3xl">
+            <Heading fontWeight="600" fontSize={['xl', '3xl']}>
               {metadata?.title}
             </Heading>
             <Text color="gray.600" ml={2}>

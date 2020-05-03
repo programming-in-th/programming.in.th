@@ -29,7 +29,7 @@ export const Statement = ({ metadata }) => {
 
   return (
     <Flex direction={['column', 'row']} height="100%" flexGrow={1}>
-      <Flex mt={4} mx={[4, 0]} flex="2 1 50%" direction="column">
+      <Flex mt={4} mx={[6, 0]} flex="2 1 50%" direction="column">
         <Box height="100%">
           <PDF
             data={`https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/${metadata?.id}.pdf`}

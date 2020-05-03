@@ -24,12 +24,11 @@ export const Solution = ({ solution }) => {
         />
       </Head>
       <Box
-        borderRadius={6}
-        boxShadow="var(--shadow-xl)"
-        borderBottom="4px solid #e2e8f0"
-        p={[4, 6]}
-        mt={4}
-        mx={[4, 'auto']}
+        borderRadius={[0, 6]}
+        boxShadow={['', 'var(--shadow-xl)']}
+        borderBottom={['', '"4px solid #e2e8f0"']}
+        p={6}
+        mx={[0, 'auto']}
         w={['100%', 1400]}
       >
         <MarkDownStyle>
