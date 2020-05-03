@@ -60,7 +60,7 @@
     "yup": "^0.28.3"
   },
   "devDependencies": {
-    "@types/codemirror": "^0.0.85",
+    "@types/codemirror": "^0.0.91",
     "@types/lodash": "^4.14.149",
     "@types/next": "^9.0.0",
     "@types/nprogress": "^0.2.0",
