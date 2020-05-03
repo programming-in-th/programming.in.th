@@ -78,9 +78,9 @@ export default () => {
   return (
     <PageLayout>
       <Flex align="center" justify="center" flexGrow={1} p={4}>
-        <Box>
+        <Box maxW="100%">
           <Heading>Submissions</Heading>
-          <Flex mt={4}>
+          <Flex mt={4} maxW="100%" direction={['column', 'row']}>
             <Input
               onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
                 setDisplayName(event.target.value)
@@ -96,7 +96,8 @@ export default () => {
               value={task}
               placeholder="Task"
               width="200px"
-              ml={4}
+              ml={[0, 4]}
+              mt={[4, 0]}
             />
           </Flex>
           <Box
@@ -104,6 +105,8 @@ export default () => {
             boxShadow="var(--shadow-default)"
             borderRadius={4}
             width="1000px"
+            maxW="100%"
+            overflowX="scroll"
             borderBottom="1px solid #E2E8F0"
           >
             <Table>
