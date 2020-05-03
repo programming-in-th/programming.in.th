@@ -1542,10 +1542,10 @@
   resolved "https://registry.yarnpkg.com/@mdx-js/util/-/util-1.5.7.tgz#335358feb2d511bfdb3aa46e31752a10aa51270a"
   integrity sha512-SV+V8A+Y33pmVT/LWk/2y51ixIyA/QH1XL+nrWAhoqre1rFtxOEZ4jr0W+bKZpeahOvkn/BQTheK+dRty9o/ig==
 
-"@next/mdx@^9.2.2":
-  version "9.2.2"
-  resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-9.2.2.tgz#ee49199691f6c74dd28e9968f127b33edc1dbfdd"
-  integrity sha512-TB7YJhYIu8DnpWYIkp4N7yaYTh92MGQ3tfeMOB/wLgB5y+W3ozgg5rA2y1RUTK4MQfUk4Ll7cm+4xhVpvrXMlA==
+"@next/mdx@^9.3.6":
+  version "9.3.6"
+  resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-9.3.6.tgz#a617ff3c70124bacfedb7c4092a8d2ce8595aa6f"
+  integrity sha512-gF+Op4wMow4HdN9KFLDgAoz/zEn34vpa5fgbMW9/n67FfBJ9OqZFCM43aKrR2EsI3ehDvkKNgksiSm4vrPt8zg==
 
 "@next/polyfill-nomodule@9.2.2":
   version "9.2.2"
