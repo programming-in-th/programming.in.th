@@ -39,7 +39,7 @@
     "lodash": "^4.17.15",
     "next": "^9.3.2",
     "next-compose-plugins": "^2.2.0",
-    "next-offline": "^5.0.0",
+    "next-offline": "^5.0.2",
     "nprogress": "^0.2.0",
     "react": "^16.13.1",
     "react-codemirror2": "^6.0.0",
