@@ -155,24 +155,21 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
     `${config.baseURL}/getProblemMetadata?id=${id}`
   ).then(o => o.json())
 
-  let solution: string
+  const solutionRes = await fetch(
+    `https://raw.githubusercontent.com/programming-in-th/solutions/master/md/${metadata.id}.md`
+  )
 
-  try {
-    solution = await fetch(
-      `https://raw.githubusercontent.com/programming-in-th/solutions/master/md/${metadata.id}.md`
-    ).then(o => o.text())
-  } catch (_) {}
+  let renderedSolution = null
 
-  let renderedSolution: string
-
-  if (solution) {
+  if (solutionRes.status === 200) {
+    const solution = await solutionRes.text()
     renderedSolution = renderMarkdown(solution)
   }
 
   return {
     props: {
       metadata,
-      solution: renderedSolution ? renderedSolution : null
+      solution: renderedSolution
     },
     revalidate: 60 * 60
   }
