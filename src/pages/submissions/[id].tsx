@@ -171,12 +171,11 @@ const SubmissionDetail: NextPage = () => {
             </Box>
           ) : (
             <Box>
+              <Skeleton height="20px" width="40%" my="10px" />
+              <Skeleton height="20px" width="25%" my="10px" />
+              <Skeleton height="20px" width="25%" my="10px" />
               <Skeleton height="20px" my="10px" />
-              <Skeleton height="20px" my="10px" />
-              <Skeleton height="20px" my="10px" />
-              <Skeleton height="20px" my="10px" />
-              <Skeleton height="20px" my="10px" />
-              <Skeleton height="20px" my="10px" />
+              <Skeleton height="20px" width="90%" my="10px" />
             </Box>
           )}
         </Box>
