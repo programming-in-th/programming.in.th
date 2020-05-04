@@ -34,7 +34,7 @@
     "emotion-theming": "^10.0.27",
     "firebase": "^7.14.2",
     "formik": "^2.1.4",
-    "intersection-observer": "^0.7.0",
+    "intersection-observer": "^0.10.0",
     "isomorphic-unfetch": "^3.0.0",
     "lodash": "^4.17.15",
     "next": "^9.3.2",
