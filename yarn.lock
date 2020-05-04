@@ -8321,10 +8321,10 @@ react-syntax-highlighter@^12.2.1:
     prismjs "^1.8.4"
     refractor "^2.4.1"
 
-react-use@^14.1.1:
-  version "14.1.1"
-  resolved "https://registry.yarnpkg.com/react-use/-/react-use-14.1.1.tgz#f6ba8a861ba76a3aba0684609e27eb633c7d858f"
-  integrity sha512-3BVJJg+OrbgWG3aiyVhCgJuhx91T7juIr75QvFlMS+pesRZUd+PQNqoDhI+9pXwrc9FjCptvTHzl/YFpul3HHA==
+react-use@^14.2.0:
+  version "14.2.0"
+  resolved "https://registry.yarnpkg.com/react-use/-/react-use-14.2.0.tgz#abac033fae5e358599b7e38084ff11b02e5d4868"
+  integrity sha512-vwC7jsBsiDENLrXGPqIH3W4mMS2j24h5jp4ol3jiiUQzZhCaG+ihumrShJxBI59hXso1pLHAePRQAg/fJjDcaQ==
   dependencies:
     "@types/js-cookie" "2.2.6"
     "@xobotyi/scrollbar-width" "1.9.5"
@@ -9883,15 +9883,10 @@ ts-pnp@^1.1.2:
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.1.5.tgz#840e0739c89fce5f3abd9037bb091dbff16d9dec"
   integrity sha512-ti7OGMOUOzo66wLF3liskw6YQIaSsBgc4GOAlWRnIEj8htCxJUxskanMUoJOD6MDCRAXo36goXJZch+nOS0VMA==
 
-tslib@1.11.1, tslib@^1.0.0, tslib@^1.10.0, tslib@^1.9.3:
+tslib@1.11.1, tslib@^1.0.0, tslib@^1.10.0, tslib@^1.9.0, tslib@^1.9.3:
   version "1.11.1"
   resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.11.1.tgz#eb15d128827fbee2841549e171f45ed338ac7e35"
   integrity sha512-aZW88SY8kQbU7gpV19lN24LtXh/yD4ZZg6qieAJDDg+YBsJcSmLGK9QpnUjAKVG/xefmvJGd1WUmfpT/g6AJGA==
-
-tslib@^1.9.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/tslib/-/tslib-1.10.0.tgz#c3c19f95973fb0a62973fb09d90d961ee43e5c8a"
-  integrity sha512-qOebF53frne81cf0S9B41ByenJ3/IuH8yJKngAX35CmiZySA0khhkovshKK+jGCaMnVomla7gVlIcc3EvKPbTQ==
 
 tty-browserify@0.0.0:
   version "0.0.0"
