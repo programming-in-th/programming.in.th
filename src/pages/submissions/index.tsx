@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { fetch } from '../../lib/fetch'
-import { Box, Flex, Button, Heading, Input, Text } from '@chakra-ui/core'
 import useSWR, { useSWRPages } from 'swr'
+import { Box, Flex, Button, Heading, Input, Text } from '@chakra-ui/core'
+
+import { fetch } from '../../lib/fetch'
 import { config } from '../../config'
+
+import { ISubmissionList } from '../../@types/submission'
 
 import { PageLayout } from '../../components/Layout'
 import { Td, Table, Th, Tr } from '../../components/submissions/ListTable'
-import { ISubmissionList } from '../../@types/submission'
+
 import { arrToObj } from '../../utils/arrToObj'
+import { insertQueryString } from '../../utils/insertQueryString'
 
 export default () => {
   const router = useRouter()
@@ -82,17 +86,19 @@ export default () => {
           <Heading>Submissions</Heading>
           <Flex mt={4} maxW="100%" direction={['column', 'row']}>
             <Input
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setDisplayName(event.target.value)
-              }
+                insertQueryString('displayName', event.target.value)
+              }}
               value={displayName}
               placeholder="Display Name"
               width="200px"
             />
             <Input
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setTask(event.target.value)
-              }
+                insertQueryString('task', event.target.value)
+              }}
               value={task}
               placeholder="Task"
               width="200px"
