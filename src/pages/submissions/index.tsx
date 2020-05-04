@@ -30,8 +30,9 @@ export default () => {
     ({ offset, withSWR }) => {
       const { data: submissions } = withSWR(
         useSWR(
-          `${config.baseURL}/getSubmissions?offset=${offset ||
-            0}&displayName=${displayName || ''}&taskID=${task || ''}`,
+          `${config.baseURL}/getSubmissions?offset=${offset || 0}&displayName=${
+            displayName || ''
+          }&taskID=${task || ''}`,
           fetch,
           { errorRetryCount: 3 }
         )
@@ -81,7 +82,7 @@ export default () => {
 
   return (
     <PageLayout>
-      <Flex align="center" justify="center" flexGrow={1} p={4}>
+      <Flex justify="center" flexGrow={1} p={4}>
         <Box maxW="100%">
           <Heading>Submissions</Heading>
           <Flex mt={4} maxW="100%" direction={['column', 'row']}>
