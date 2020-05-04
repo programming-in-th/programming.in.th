@@ -75,7 +75,14 @@ export default ({ metadata, solution }) => {
 
   return (
     <PageLayout>
-      <Flex my={8} direction="column" flexGrow={1} w={['100%', 1400]} mx="auto">
+      <Flex
+        my={8}
+        direction="column"
+        flexGrow={1}
+        w={['100%', currentPage === 'solution' ? 800 : 1400]}
+        mx="auto"
+        transition="width 1s"
+      >
         <Flex direction="column">
           <Flex align="baseline" mx={[6, 0]}>
             <Heading fontWeight="600" fontSize={['xl', '3xl']}>
@@ -146,14 +153,14 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   return {
     paths,
-    fallback: true
+    fallback: true,
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
   const metadata = await fetch(
     `${config.baseURL}/getProblemMetadata?id=${id}`
-  ).then(o => o.json())
+  ).then((o) => o.json())
 
   const solutionRes = await fetch(
     `https://raw.githubusercontent.com/programming-in-th/solutions/master/md/${metadata.id}.md`
@@ -169,8 +176,8 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
   return {
     props: {
       metadata,
-      solution: renderedSolution
+      solution: renderedSolution,
     },
-    revalidate: 60 * 60
+    revalidate: 60 * 60,
   }
 }
