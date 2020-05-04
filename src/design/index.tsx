@@ -14,7 +14,7 @@ export function getSystemFonts() {
     'Fira Sans',
     'Droid Sans',
     'Helvetica Neue',
-    'sans-serif'
+    'sans-serif',
   ]
 }
 
@@ -23,9 +23,9 @@ export const Fonts = {
     'SF Pro Display',
     'Sukhumvit Set',
     'Kanit',
-    ...getSystemFonts()
+    ...getSystemFonts(),
   ].join(', '),
-  body: getSystemFonts().join(', ')
+  body: getSystemFonts().join(', '),
 }
 
 const TH_UNICODE_RANGE = 'U+0E01-0E5B, U+200C-200D, U+25CC'
@@ -114,6 +114,7 @@ export const MarkDownStyle = styled.div`
 
   img {
     max-width: 100%;
+    margin: 0 auto;
   }
 
   /* Code */
