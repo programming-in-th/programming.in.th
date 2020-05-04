@@ -24,9 +24,7 @@ export default () => {
         flexDirection="column"
         mt={4}
       >
-        <Text fontSize={['4xl', '5xl']} mb={4}>
-          Sign Up
-        </Text>
+        <Text fontSize={['4xl', '5xl']}>Sign Up</Text>
         <Box w="360px" maxW="90%">
           <Signup />
         </Box>
