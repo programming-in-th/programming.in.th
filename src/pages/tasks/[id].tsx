@@ -79,7 +79,7 @@ export default ({ metadata, solution }) => {
         my={8}
         direction="column"
         flexGrow={1}
-        w={['100%', currentPage === 'solution' ? 800 : 1400]}
+        w={['100%', currentPage === 'solution' ? 800 : 1200]}
         mx="auto"
         transition="width 1s"
       >

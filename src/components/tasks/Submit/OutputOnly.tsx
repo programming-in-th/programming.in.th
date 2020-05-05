@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
 
-import { Flex, Button, Text, Box, useToast } from '@chakra-ui/core'
+import { Flex, Button, Text, Box, useToast, Heading } from '@chakra-ui/core'
 
 import { useUser } from '../../UserContext'
 
@@ -19,7 +19,7 @@ export const OutputOnly = ({ metadata }) => {
     setCodeFile,
     onDrop,
     status,
-    submissionID
+    submissionID,
   } = useSubmit(metadata)
 
   useEffect(() => {
@@ -31,13 +31,14 @@ export const OutputOnly = ({ metadata }) => {
         description: 'An unknown error occured.',
         status: 'error',
         duration: 9000,
-        isClosable: true
+        isClosable: true,
       })
     }
   }, [status, submissionID])
 
   return (
-    <Flex direction="column" px={4}>
+    <Flex direction="column" mt={4} p={4} boxShadow="var(--shadow-default)">
+      <Heading fontSize="xl">Submit</Heading>
       <Flex direction="column">
         <Box>
           {metadata.fileName.map((name, i) => (
@@ -67,7 +68,7 @@ export const OutputOnly = ({ metadata }) => {
 
         <Button
           size="sm"
-          mt={8}
+          mt={4}
           width="200px"
           onClick={submit}
           isDisabled={user === null}

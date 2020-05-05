@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Flex, Button, Select, Text, useToast } from '@chakra-ui/core'
+import { Flex, Button, Select, Text, useToast, Heading } from '@chakra-ui/core'
 
 import { useUser } from '../../UserContext'
 
@@ -20,7 +20,7 @@ export const Normal = ({ metadata }) => {
     onDrop,
     setLanguage,
     status,
-    submissionID
+    submissionID,
   } = useSubmit(metadata)
 
   useEffect(() => {
@@ -32,13 +32,14 @@ export const Normal = ({ metadata }) => {
         description: 'An unknown error occured.',
         status: 'error',
         duration: 9000,
-        isClosable: true
+        isClosable: true,
       })
     }
   }, [status, submissionID])
 
   return (
-    <Flex direction="column" px={4}>
+    <Flex direction="column" mt={4} p={4} boxShadow="var(--shadow-default)">
+      <Heading fontSize="xl">Submit</Heading>
       <Flex align="baseline">
         <UploadCode
           index={0}
@@ -57,9 +58,8 @@ export const Normal = ({ metadata }) => {
           </Text>
         )}
       </Flex>
-      <Flex>
+      <Flex mt={4}>
         <Select
-          mt={8}
           width="120px"
           size="sm"
           defaultValue={config.languageData[0][0]}
@@ -78,7 +78,6 @@ export const Normal = ({ metadata }) => {
           isLoading={status === 'LOADING'}
           ml={8}
           size="sm"
-          mt={8}
           width="200px"
           onClick={submit}
           isDisabled={user === null}
