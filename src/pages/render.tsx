@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { renderMarkdown } from '../utils/renderMarkdown'
-import { Flex, Textarea, Button, Box, Heading } from '@chakra-ui/core'
+import { Flex, Textarea, Box, Heading } from '@chakra-ui/core'
 import { PageLayout } from '../components/Layout'
 import { Solution } from '../components/tasks/Solution'
 
