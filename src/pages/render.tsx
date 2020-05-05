@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { renderMarkdown } from '../utils/renderMarkdown'
-import { Textarea, Button, Box, Heading } from '@chakra-ui/core'
+import { Flex, Textarea, Button, Box, Heading } from '@chakra-ui/core'
 import { PageLayout } from '../components/Layout'
 import { Solution } from '../components/tasks/Solution'
 
 export default () => {
-  const [state, setState] = useState<boolean>(false)
   const [solution, setSolution] = useState<string>('')
   const [input, setInput] = useState<string>('')
   useEffect(() => {
@@ -18,19 +17,21 @@ export default () => {
       <Heading mx="auto" my={6}>
         Rendering
       </Heading>
-      {state ? (
-        <Solution solution={solution}></Solution>
-      ) : (
-        <Box p={[6, 0]} mx={[0, 'auto']} w={['100%', 800]}>
-          <Textarea
-            onChange={(event) => setInput(event.target.value)}
-            h="400px"
-          />
+      <Flex direction={['column', 'row']} height="100%" flexGrow={1} mx={6}>
+        <Textarea
+          onChange={(event) => setInput(event.target.value)}
+          h="700px"
+          w="100%"
+          mx={10}
+        />
+        <Box w={['100%', 800]}>
+          {input ? (
+            <Solution solution={solution}></Solution>
+          ) : (
+            <Solution solution="."></Solution>
+          )}
         </Box>
-      )}
-      <Button onClick={() => setState(!state)} mt={4} w="200px" mx="auto">
-        {state ? 'Go back' : 'Compile'}
-      </Button>
+      </Flex>
     </PageLayout>
   )
 }
