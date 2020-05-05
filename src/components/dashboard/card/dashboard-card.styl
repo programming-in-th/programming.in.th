@@ -1,0 +1,19 @@
+@require "../config.styl"
+
+.dashboard-card
+    display flex
+    flex-direction column
+    justify-content flex-start
+    align-items flex-start
+    flex 1
+    min-height 200px
+    margin 0 8px 8px 8px
+    padding 12px
+    border 1px solid $border
+    border-radius 8px
+
+    &.-wide
+        flex 2
+
+    &.-fit
+        flex unset

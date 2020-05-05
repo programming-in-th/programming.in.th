@@ -1,0 +1,77 @@
+@require '../config'
+
+.landing-showcase
+    display flex
+    flex-direction row
+    justify-content flex-start
+    align-items flex-start
+    width 1060px
+    margin 60px auto
+
+    &.-reverse
+        flex-direction row-reverse
+
+        & > .cover
+            & > .image
+                padding 0 20px 0 0
+
+    & > .article
+        display flex
+        flex 2
+        flex-direction column
+        justify-content center
+        align-items flex-start
+        padding 48px 0 0 0
+
+        & > .title
+            font-size 32px
+            color $title
+            font-weight 700
+            margin 0 0 20px
+
+        & > .detail
+            font-size 21px
+            color $detail
+            margin 0
+
+    & > .cover
+        display flex
+        flex 3
+        overflow hidden
+
+        & > .image
+            display block
+            width 100%
+            padding 0 0 0 20px
+
+    @media screen and (max-width 767.9px)
+        &
+            width 100%
+            flex-direction column
+            padding 0 5%
+
+            &.-reverse
+                flex-direction column
+
+            & > .article
+                & > .title,
+                & > .detail
+                    width 100%
+                    text-align center
+
+            & > .cover
+                & > .image
+                    margin 40px 0 0 0
+                    padding 0 20px
+
+    @media screen and (min-width 768px) and (max-width 1119.9px)
+        &
+            width 100%
+            padding 0 28px
+
+            & > .article
+                padding-top 20px
+
+            & > .cover
+                margin-top 40px
+                flex 2
