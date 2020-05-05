@@ -28,7 +28,7 @@ export default () => {
           {input ? (
             <Solution solution={solution}></Solution>
           ) : (
-            <Solution solution="."></Solution>
+            <Solution solution="Solution will show up here"></Solution>
           )}
         </Box>
       </Flex>
