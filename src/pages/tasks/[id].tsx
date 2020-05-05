@@ -163,7 +163,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
   ).then((o) => o.json())
 
   const solutionRes = await fetch(
-    `https://raw.githubusercontent.com/programming-in-th/solutions/master/md/${metadata.id}.md`
+    `https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/solutions/md/${metadata.id}.md`
   )
 
   let renderedSolution = null
