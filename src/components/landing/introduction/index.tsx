@@ -15,8 +15,8 @@ const Introduction = () => (
         style={{ listStyleImage: 'url(/icon/check.svg)' }}
       >
         <li className="list">Data Structure & Algorithms</li>
-        <li className="list">Over 400 Challenge</li>
-        <li className="list">Join over 10,000 people.</li>
+        <li className="list">Over 400 Challenges</li>
+        <li className="list">Join over 10,000 programmers.</li>
       </ul>
       <footer className="action">
         <Link href="/dashboard">
@@ -29,7 +29,7 @@ const Introduction = () => (
           <a className="explore">Explore Challenge</a>
         </Link>
       </footer>
-      <a className="provider">No registration need for Github account.</a>
+      {/* <a className="provider">Get start now, it's free.</a> */}
     </article>
     <figure className="cover">
       <picture className="container">

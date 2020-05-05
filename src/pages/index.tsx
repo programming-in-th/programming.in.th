@@ -16,17 +16,17 @@ export default () => (
   <PageLayout>
     <Introduction />
     <Row>
-      <Detail title="Perfect Environment">
+      <Detail title="Integrated Environment">
         Go beyond code, syntax-highlighting, close an unused block, smart
         completions for the best exclusive experience.
       </Detail>
-      <Detail title="Crafted by Specialist">
+      <Detail title="Crafted by Specialists">
         Over 400 problems designed and curated by specialists. To deliver the
         most comprehensive learning experience possible.
       </Detail>
-      <Detail title="Trusted by thousand">
-        Join others 10,000 to craft, learn and practice, the most compromised
-        data-structure and algorithms platform.
+      <Detail title="Trusted by thousands">
+        Join other 10,000 to craft, learn and practice, on one of the best
+        data-structure and algorithms solving platform.
       </Detail>
     </Row>
 
