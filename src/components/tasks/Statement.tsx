@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
 import useSWR from 'swr'
 import styled from '@emotion/styled'
@@ -14,6 +14,7 @@ import { fetch } from '../../lib/fetch'
 import { config } from '../../config'
 import { useUser } from '../UserContext'
 import { ISubmissionList } from '../../@types/submission'
+import { isArrayEmpty } from '../../utils/isEmpty'
 
 const PDF = styled.object`
   width: 100%;
@@ -21,7 +22,7 @@ const PDF = styled.object`
 `
 
 export const Statement = ({ metadata }) => {
-  const { displayName } = useUser()
+  const { displayName, user } = useUser()
 
   const { data: submissions } = useSWR<ISubmissionList[]>(
     displayName !== ''
@@ -88,23 +89,43 @@ export const Statement = ({ metadata }) => {
               </tr>
             </thead>
             <tbody>
-              {submissions ? (
-                submissions.map((submission: ISubmissionList) => (
-                  <Link
-                    href={`/submissions/${submission.submissionID}`}
-                    key={submission.submissionID}
-                  >
+              {user ? (
+                submissions ? (
+                  isArrayEmpty(submissions) ? (
                     <Tr>
-                      <Td>{submission.humanTimestamp}</Td>
-                      <Td>{submission.points}</Td>
+                      <td colSpan={2}>
+                        <Text textAlign={['start', 'center']} p={4}>
+                          No recent submission
+                        </Text>
+                      </td>
                     </Tr>
-                  </Link>
-                ))
+                  ) : (
+                    submissions.map((submission: ISubmissionList) => (
+                      <Link
+                        href={`/submissions/${submission.submissionID}`}
+                        key={submission.submissionID}
+                      >
+                        <Tr>
+                          <Td>{submission.humanTimestamp}</Td>
+                          <Td>{submission.points}</Td>
+                        </Tr>
+                      </Link>
+                    ))
+                  )
+                ) : (
+                  <Tr>
+                    <td colSpan={2}>
+                      <Text textAlign={['start', 'center']} p={4}>
+                        Loading...
+                      </Text>
+                    </td>
+                  </Tr>
+                )
               ) : (
                 <Tr>
-                  <td colSpan={7}>
+                  <td colSpan={2}>
                     <Text textAlign={['start', 'center']} p={4}>
-                      Loading...
+                      No recent submission
                     </Text>
                   </td>
                 </Tr>
@@ -112,6 +133,7 @@ export const Statement = ({ metadata }) => {
             </tbody>
           </Table>
         </Box>
+
         {renderSubmit(metadata)}
       </Flex>
     </Flex>
