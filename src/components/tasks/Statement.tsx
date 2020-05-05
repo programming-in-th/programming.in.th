@@ -55,13 +55,13 @@ export const Statement = ({ metadata }) => {
       <Flex mt={4} mx={[6, 0]} flex="2 1 80%" direction="column">
         <Box height="100%">
           <PDF
-            data={`https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/${metadata?.id}.pdf`}
+            data={`https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/statements/${metadata?.id}.pdf`}
           >
             <Text>
               Your browser doesn't support embed PDF viewer please{' '}
               <ChakraLink
                 isExternal
-                href={`https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/${metadata?.id}.pdf`}
+                href={`https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/statements/${metadata?.id}.pdf`}
                 rel="noopener noreferrer"
                 target="_blank"
                 color="teal.600"
