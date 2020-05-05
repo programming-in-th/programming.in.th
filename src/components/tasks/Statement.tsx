@@ -24,7 +24,7 @@ export const Statement = ({ metadata }) => {
   const { displayName } = useUser()
 
   const { data: submissions } = useSWR<ISubmissionList[]>(
-    typeof window !== 'undefined'
+    displayName !== ''
       ? `${
           config.baseURL
         }/getSubmissions?offset=&displayName=${displayName}&taskID=${
