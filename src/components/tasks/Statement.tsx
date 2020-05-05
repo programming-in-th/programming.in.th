@@ -24,11 +24,13 @@ export const Statement = ({ metadata }) => {
   const { displayName } = useUser()
 
   const { data: submissions } = useSWR<ISubmissionList[]>(
-    `${
-      config.baseURL
-    }/getSubmissions?offset=&displayName=${displayName}&taskID=${
-      metadata.id || ''
-    }`,
+    typeof window !== 'undefined'
+      ? `${
+          config.baseURL
+        }/getSubmissions?offset=&displayName=${displayName}&taskID=${
+          metadata.id || ''
+        }`
+      : null,
     fetch,
     {
       errorRetryCount: 1,
