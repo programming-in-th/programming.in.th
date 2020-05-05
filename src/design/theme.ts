@@ -5,6 +5,8 @@ export const customTheme = {
   fonts: {
     ...theme.fonts,
     heading:
-      'SF Pro Display, Sukhumvit Set, Kanit, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif'
-  }
+      'Inter, SF Pro Display, Sukhumvit Set, Kanit, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+    body:
+      'Inter, -apple-system, BlinkMacSystemFont, Segoe UI, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif',
+  },
 }
