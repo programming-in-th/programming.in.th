@@ -38,8 +38,10 @@ export const OutputOnly = ({ metadata }) => {
 
   return (
     <Flex direction="column" mt={4} p={4} boxShadow="var(--shadow-default)">
-      <Heading fontSize="xl">Submit</Heading>
-      <Flex direction="column">
+      <Heading fontSize="xl" fontWeight="600">
+        Submit
+      </Heading>
+      <Flex direction="column" mt={2}>
         <Box>
           {metadata.fileName.map((name, i) => (
             <Box key={name} mt={i === 0 ? 0 : 8}>

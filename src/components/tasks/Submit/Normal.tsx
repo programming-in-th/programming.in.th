@@ -39,8 +39,10 @@ export const Normal = ({ metadata }) => {
 
   return (
     <Flex direction="column" mt={4} p={4} boxShadow="var(--shadow-default)">
-      <Heading fontSize="xl">Submit</Heading>
-      <Flex align="baseline">
+      <Heading fontSize="xl" fontWeight="600">
+        Submit
+      </Heading>
+      <Flex align="baseline" mt={2}>
         <UploadCode
           index={0}
           codeFile={codeFile}
@@ -73,7 +75,6 @@ export const Normal = ({ metadata }) => {
             </option>
           ))}
         </Select>
-
         <Button
           isLoading={status === 'LOADING'}
           ml={8}
