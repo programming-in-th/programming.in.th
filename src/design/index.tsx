@@ -120,7 +120,7 @@ export const MarkDownStyle = styled.div`
   /* Code */
   code {
     background-color: rgba(27, 31, 35, 0.1);
-    font-size: 90%;
+    font-size: 85%;
     margin: 0;
   }
 
@@ -140,6 +140,7 @@ export const MarkDownStyle = styled.div`
   ul,
   ol {
     font-size: 16px;
+    line-height: 1.625;
     font-family: var(--font-body) !important;
     color: #24292e;
   }
