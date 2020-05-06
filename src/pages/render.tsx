@@ -24,25 +24,29 @@ export default () => {
 
   return (
     <PageLayout>
-      <Heading mx="auto" my={6}>
+      <Heading mx="auto" mt={4} mb={2}>
         Rendering
       </Heading>
-      <Flex direction={['column', 'row']} height="100%" flexGrow={1} mx={6}>
+      <Flex direction={['column', 'row']} height="100%" flexGrow={1} mx={10}>
         <Textarea
           onChange={(event) => setInput(event.target.value)}
-          minHeight="700px"
+          h="calc(100vh - 230px)"
           w="100%"
-          mx={[0, 10]}
+          mr={4}
         />
-        <Box w={['100%', 800]}>
+        <Box
+          minW={['100%', 800]}
+          maxHeight="calc(100vh - 230px)"
+          overflow="scroll"
+        >
           {input ? (
-            <Solution solution={solution}></Solution>
+            <Solution solution={solution} />
           ) : (
-            <Solution solution="Solution will show up here"></Solution>
+            <Solution solution="Solution will show up here" />
           )}
         </Box>
       </Flex>
-      <Button onClick={handleClick} borderRadius="0" variantColor="green">
+      <Button onClick={handleClick} borderRadius="0" h={20} fontSize="lg">
         Save Markdown
       </Button>
     </PageLayout>
