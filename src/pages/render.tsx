@@ -3,7 +3,6 @@ import { renderMarkdown } from '../utils/renderMarkdown'
 import { Flex, Textarea, Box, Heading, Button } from '@chakra-ui/core'
 import { PageLayout } from '../components/Layout'
 import { Solution } from '../components/tasks/Solution'
-import { fetch } from '../lib/fetch'
 import { saveAs } from 'file-saver'
 
 export default () => {
