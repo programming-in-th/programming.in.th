@@ -24,7 +24,7 @@ export default () => {
 
   return (
     <PageLayout>
-      <Heading mx="auto" mt={4} mb={2}>
+      <Heading mx="auto" my={4}>
         Rendering
       </Heading>
       <Flex direction={['column', 'row']} height="100%" flexGrow={1} mx={10}>
