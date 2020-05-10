@@ -44,7 +44,7 @@ Simply run `yarn dev` will do the job.
 
 ## Contributing
 
-You too can help us improve our project by suggesting features, bug report, etc. via [create a pull request](https://github.com/programming-in-th/programming.in.th/pulls), or [open an issue](https://github.com/programming-in-th/programming.in.th/issues). And contributing w
+You too can help us improve our project by suggesting features, bug report, etc. via [create a pull request](https://github.com/programming-in-th/programming.in.th/pulls), or [open an issue](https://github.com/programming-in-th/programming.in.th/issues).
 
 ## Core team
 
