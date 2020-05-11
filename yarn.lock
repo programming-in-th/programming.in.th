@@ -8554,10 +8554,10 @@ rehype-parse@^6.0.0:
     parse5 "^5.0.0"
     xtend "^4.0.0"
 
-rehype-sanitize@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/rehype-sanitize/-/rehype-sanitize-3.0.0.tgz#d3d031fd683e47da732970b08b99e2b67a71e2dd"
-  integrity sha512-BE5MqgCXAY7sOfkdTvVvmi0/szcvC/qgOzETCia0QS9qQU6VqaUMTfmnucC1wR2XfKPJe3c6eOsHazqChrb6UA==
+rehype-sanitize@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/rehype-sanitize/-/rehype-sanitize-3.0.1.tgz#7494df68614fc528780a0c673d6cad6ad0c0df4d"
+  integrity sha512-tOXwIVmrFsjwFfhWPF2FYaIJ0LPEfGngQZvRfmqCsCGVCNbRlTMMcJPaLNwdUrNkKPNh/VdmA2ZzzivbQTfIMw==
   dependencies:
     hast-util-sanitize "^2.0.0"
 
