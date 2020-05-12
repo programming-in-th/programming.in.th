@@ -55,7 +55,7 @@
     "rehype-stringify": "^6.0.0",
     "remark-math": "^2.0.1",
     "remark-parse": "^8.0.2",
-    "remark-rehype": "^5.0.0",
+    "remark-rehype": "^6.0.0",
     "swr": "^0.2.0",
     "yup": "^0.28.5"
   },
