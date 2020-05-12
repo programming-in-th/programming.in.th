@@ -14,7 +14,7 @@ import { useUser } from '../../UserContext'
 
 import { UploadCode } from '../../Upload'
 import { useSubmit } from './useSubmit'
-import { config } from '../../../config'
+import { config } from 'config'
 
 export const Comm = ({ metadata }) => {
   const toast = useToast()

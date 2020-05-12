@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, Flex } from '@chakra-ui/core'
 
-import { PageLayout } from '../../components/Layout'
+import { PageLayout } from 'components/Layout'
 
 export default () => (
   <PageLayout>

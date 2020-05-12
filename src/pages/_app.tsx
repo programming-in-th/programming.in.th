@@ -6,19 +6,19 @@ import NProgress from 'nprogress'
 import { ThemeProvider, CSSReset } from '@chakra-ui/core'
 import useSWR, { mutate } from 'swr'
 
-import firebase from '../lib/firebase'
+import firebase from 'lib/firebase'
 import {
   UserState,
   initialState,
   reducer,
   UserAction,
-  UserStateContext
-} from '../components/UserContext'
-import { fetchFromFirebase } from '../utils/fetcher'
-import { onetap } from '../components/auth/onetap'
+  UserStateContext,
+} from 'components/UserContext'
+import { fetchFromFirebase } from 'utils/fetcher'
+import { onetap } from 'components/auth/onetap'
 
-import { GlobalStyle } from '../design'
-import { customTheme } from '../design/theme'
+import { GlobalStyle } from 'design'
+import { customTheme } from 'design/theme'
 
 import 'codemirror/lib/codemirror.css'
 
@@ -27,7 +27,7 @@ import 'codemirror/theme/solarized.css'
 import 'codemirror/theme/material.css'
 import 'codemirror/addon/fold/foldgutter.css'
 
-import '../assets/css/prism.css'
+import 'assets/css/prism.css'
 
 let timeout: any
 
@@ -55,19 +55,19 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
     if (userContext) {
       userDispatch({
         type: 'RECEIVE_CONTEXT',
-        payload: userContext
+        payload: userContext,
       })
     }
   }, [userContext])
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged(user => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user === null || user.emailVerified) {
         userDispatch({
           type: 'RECEIVE_USER',
           payload: {
-            user
-          }
+            user,
+          },
         })
         mutate('getUserContext')
       }

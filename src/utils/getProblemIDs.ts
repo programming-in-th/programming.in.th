@@ -1,8 +1,7 @@
-import fetch from 'isomorphic-unfetch'
 import { config } from '../config'
 
 export const getProblemIDs = async () => {
-  const data = await fetch(`${config.baseURL}/getAllProblemIDs`).then(o =>
+  const data = await fetch(`${config.baseURL}/getAllProblemIDs`).then((o) =>
     o.json()
   )
 

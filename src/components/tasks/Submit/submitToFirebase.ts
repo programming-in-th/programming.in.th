@@ -1,4 +1,4 @@
-import firebase from '../../../lib/firebase'
+import firebase from 'lib/firebase'
 
 export const submitCode = async (
   id: string,
@@ -15,7 +15,7 @@ export const submitCode = async (
   const params = {
     id,
     code,
-    lang
+    lang,
   }
 
   setStatus('LOADING')

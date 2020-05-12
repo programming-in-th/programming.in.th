@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react'
 import Router from 'next/router'
 import Link from 'next/link'
-import { useUser } from '../components/UserContext'
 import { Box, Flex, Text, Link as ChakraLink, Divider } from '@chakra-ui/core'
-import { PageLayout } from '../components/Layout'
-import { Signup } from '../components/auth/Signup'
+
+import { useUser } from 'components/UserContext'
+import { PageLayout } from 'components/Layout'
+import { Signup } from 'components/auth/Signup'
 
 export default () => {
   const { user } = useUser()

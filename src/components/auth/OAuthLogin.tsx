@@ -3,7 +3,8 @@ import Router from 'next/router'
 import { Button } from '@chakra-ui/core'
 import { FaGoogle, FaFacebook, FaGithub } from 'react-icons/fa'
 import { IconType } from 'react-icons/lib'
-import firebase from '../../lib/firebase'
+
+import firebase from 'lib/firebase'
 
 type authtype =
   | typeof firebase.auth.GoogleAuthProvider

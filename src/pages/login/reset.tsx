@@ -3,9 +3,9 @@ import Link from 'next/link'
 import Router from 'next/router'
 import { Box, Text, Flex, Divider, Link as ChakraLink } from '@chakra-ui/core'
 
-import { useUser } from '../../components/UserContext'
-import { PageLayout } from '../../components/Layout'
-import { Reset } from '../../components/auth/Reset'
+import { useUser } from 'components/UserContext'
+import { PageLayout } from 'components/Layout'
+import { Reset } from 'components/auth/Reset'
 
 export default () => {
   const [error, setError] = useState<string>('')

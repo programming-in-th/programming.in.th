@@ -3,10 +3,10 @@ import Document, {
   Html,
   Head as NextHead,
   Main,
-  NextScript
+  NextScript,
 } from 'next/document'
 
-import { Head } from '../components/head'
+import { Head } from 'components/head'
 
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {

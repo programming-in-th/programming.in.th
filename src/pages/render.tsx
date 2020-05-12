@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { renderMarkdown } from '../utils/renderMarkdown'
-import { Flex, Textarea, Box, Heading, Button } from '@chakra-ui/core'
-import { PageLayout } from '../components/Layout'
-import { Solution } from '../components/tasks/Solution'
 import { saveAs } from 'file-saver'
+
+import { Flex, Textarea, Box, Heading, Button } from '@chakra-ui/core'
+
+import { PageLayout } from 'components/Layout'
+import { Solution } from 'components/tasks/Solution'
+import { renderMarkdown } from 'utils/renderMarkdown'
 
 export default () => {
   const [solution, setSolution] = useState<string>('')

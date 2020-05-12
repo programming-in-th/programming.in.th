@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 
 import { Box, Heading, Flex } from '@chakra-ui/core'
-import { MarkDownStyle } from '../../design'
+import { MarkDownStyle } from 'design'
 
 export const Solution = ({ solution }) => {
   if (!solution) {

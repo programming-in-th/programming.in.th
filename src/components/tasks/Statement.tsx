@@ -1,8 +1,11 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import useSWR from 'swr'
 import styled from '@emotion/styled'
 import { Flex, Box, Text, Link as ChakraLink } from '@chakra-ui/core'
+
+import { fetch } from 'lib/fetch'
+import { config } from 'config'
 
 import { Normal } from './Submit/Normal'
 import { Comm } from './Submit/Comm'
@@ -10,11 +13,11 @@ import { OutputOnly } from './Submit/OutputOnly'
 
 import { ITask } from '../../@types/task'
 import { Th, Td, Table, Tr } from '../submissions/ListTable'
-import { fetch } from '../../lib/fetch'
-import { config } from '../../config'
+
 import { useUser } from '../UserContext'
 import { ISubmissionList } from '../../@types/submission'
-import { isArrayEmpty } from '../../utils/isEmpty'
+
+import { isArrayEmpty } from 'utils/isEmpty'
 
 const PDF = styled.object`
   width: 100%;

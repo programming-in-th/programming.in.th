@@ -16,20 +16,22 @@ import {
   AccordionHeader,
   AccordionIcon,
   AccordionPanel,
-  Button
+  Button,
 } from '@chakra-ui/core'
 
-import { useUser } from '../../components/UserContext'
-import { PageLayout } from '../../components/Layout'
-import { fetchFromFirebase } from '../../utils/fetcher'
+import { useUser } from 'components/UserContext'
+import { PageLayout } from 'components/Layout'
+import { Table, Th, Td, Tr } from 'components/submissions/VerdictTable'
+
+import { fetchFromFirebase } from 'utils/fetcher'
+
 import { IGroup } from '../../@types/group'
 import { IStatus } from '../../@types/status'
-import { Table, Th, Td, Tr } from '../../components/submissions/VerdictTable'
 
 const CodeDisplay = dynamic(
-  () => import('../../components/Code').then(mod => mod.CodeDisplay),
+  () => import('components/Code').then((mod) => mod.CodeDisplay),
   {
-    ssr: false
+    ssr: false,
   }
 ) as any
 
@@ -40,7 +42,7 @@ type TPlot = {
 const mapLanguage: TPlot = {
   'c++': 'text/x-csrc',
   c: 'text/x-csrc',
-  python: 'python'
+  python: 'python',
 }
 
 const SubmissionDetail: NextPage = () => {
@@ -111,9 +113,9 @@ const SubmissionDetail: NextPage = () => {
                       foldGutter: true,
                       gutters: [
                         'CodeMirror-linenumbers',
-                        'CodeMirror-foldgutter'
+                        'CodeMirror-foldgutter',
                       ],
-                      lineWrapping: true
+                      lineWrapping: true,
                     }}
                     onBeforeChange={(editor, data, value) => {}}
                     value={submission.code[currentCodeIndex]}

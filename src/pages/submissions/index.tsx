@@ -4,16 +4,16 @@ import Link from 'next/link'
 import useSWR, { useSWRPages } from 'swr'
 import { Box, Flex, Button, Heading, Input, Text } from '@chakra-ui/core'
 
-import { fetch } from '../../lib/fetch'
-import { config } from '../../config'
+import { fetch } from 'lib/fetch'
+import { config } from 'config'
 
 import { ISubmissionList } from '../../@types/submission'
 
-import { PageLayout } from '../../components/Layout'
-import { Td, Table, Th, Tr } from '../../components/submissions/ListTable'
+import { PageLayout } from 'components/Layout'
+import { Td, Table, Th, Tr } from 'components/submissions/ListTable'
 
-import { arrToObj } from '../../utils/arrToObj'
-import { insertQueryString } from '../../utils/insertQueryString'
+import { arrToObj } from 'utils/arrToObj'
+import { insertQueryString } from 'utils/insertQueryString'
 
 export default () => {
   const router = useRouter()

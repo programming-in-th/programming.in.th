@@ -12,12 +12,12 @@ import {
   MenuItem,
   MenuDivider,
   Avatar,
-  Stack
+  Stack,
 } from '@chakra-ui/core'
 import { useWindowSize } from 'react-use'
 import { FiMenu, FiX } from 'react-icons/fi'
 
-import firebase from '../lib/firebase'
+import firebase from 'lib/firebase'
 
 import { useUser } from './UserContext'
 
@@ -31,18 +31,18 @@ const leftMenu: IMenu[] = [
   { key: 'home', name: 'Home', path: '/' },
   { key: 'tasks', name: 'Tasks', path: '/tasks' },
   { key: 'submissions', name: 'Submissions', path: '/submissions' },
-  { key: 'learn', name: 'Learn', path: '/learn' }
+  { key: 'learn', name: 'Learn', path: '/learn' },
 ]
 
 const rightMenu: IMenu[] = [
   { key: 'signup', name: 'Sign Up', path: '/signup' },
-  { key: 'login', name: 'Login', path: '/login' }
+  { key: 'login', name: 'Login', path: '/login' },
 ]
 
 const generateMenuItems = (menu: IMenu[], pathname: string) => {
   const location = pathname.split('/')[1]
 
-  return menu.map(i => (
+  return menu.map((i) => (
     <Link href={i.path} key={i.key}>
       <ChakraLink
         href={i.path}

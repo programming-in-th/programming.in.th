@@ -1,19 +1,17 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import React, { useState } from 'react'
 import { Flex, Link as ChakraLink, Heading, Text } from '@chakra-ui/core'
 
-import fetch from 'isomorphic-unfetch'
+import { PageLayout } from 'components/Layout'
+import { Statement } from 'components/tasks/Statement'
+import { Solution } from 'components/tasks/Solution'
 
-import { PageLayout } from '../../components/Layout'
-import { Statement } from '../../components/tasks/Statement'
-import { Solution } from '../../components/tasks/Solution'
-
-import { getProblemIDs } from '../../utils/getProblemIDs'
-import { renderMarkdown } from '../../utils/renderMarkdown'
-import { useRouter } from 'next/router'
-import { config } from '../../config'
-import { isObjectEmpty } from '../../utils/isEmpty'
+import { getProblemIDs } from 'utils/getProblemIDs'
+import { renderMarkdown } from 'utils/renderMarkdown'
+import { config } from 'config'
+import { isObjectEmpty } from 'utils/isEmpty'
 
 type pageIndex = 'statement' | 'statistics' | 'solution'
 
@@ -178,6 +176,6 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
       metadata,
       solution: renderedSolution,
     },
-    revalidate: 60 * 60,
+    unstable_revalidate: 60 * 60,
   }
 }

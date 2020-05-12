@@ -6,7 +6,7 @@ import { useUser } from '../../UserContext'
 
 import { UploadCode } from '../../Upload'
 import { useSubmit } from './useSubmit'
-import { config } from '../../../config'
+import { config } from 'config'
 
 export const Normal = ({ metadata }) => {
   const toast = useToast()
