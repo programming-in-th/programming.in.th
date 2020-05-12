@@ -1,4 +1,4 @@
-import firebase from '../lib/firebase'
+import firebase from 'lib/firebase'
 
 export const extractProviderList = (user: firebase.User): string[] => {
   const result = []

@@ -1,4 +1,4 @@
-import { config } from '../config'
+import { config } from 'config'
 
 export const getProblemIDs = async () => {
   const data = await fetch(`${config.baseURL}/getAllProblemIDs`).then((o) =>

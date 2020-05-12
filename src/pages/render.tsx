@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { saveAs } from 'file-saver'
 
 import { Flex, Textarea, Box, Heading, Button } from '@chakra-ui/core'
