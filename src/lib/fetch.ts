@@ -1,4 +1,4 @@
-export const fetch = async <T = any>(
+export const SWRfetch = async <T = any>(
   input: RequestInfo,
   init?: RequestInit
 ): Promise<T> => {

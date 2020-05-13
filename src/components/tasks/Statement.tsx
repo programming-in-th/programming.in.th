@@ -4,7 +4,7 @@ import useSWR from 'swr'
 import styled from '@emotion/styled'
 import { Flex, Box, Text, Link as ChakraLink } from '@chakra-ui/core'
 
-import { fetch } from 'lib/fetch'
+import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
 
 import { Normal } from './Submit/Normal'
@@ -35,7 +35,7 @@ export const Statement = ({ metadata }) => {
           metadata.id || ''
         }`
       : null,
-    fetch,
+    SWRfetch,
     {
       errorRetryCount: 1,
     }

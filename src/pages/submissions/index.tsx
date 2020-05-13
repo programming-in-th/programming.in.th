@@ -4,7 +4,7 @@ import Link from 'next/link'
 import useSWR, { useSWRPages } from 'swr'
 import { Box, Flex, Button, Heading, Input, Text } from '@chakra-ui/core'
 
-import { fetch } from 'lib/fetch'
+import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
 
 import { ISubmissionList } from '../../@types/submission'
@@ -33,7 +33,7 @@ export default () => {
           `${config.baseURL}/getSubmissions?offset=${offset || 0}&displayName=${
             displayName || ''
           }&taskID=${task || ''}`,
-          fetch,
+          SWRfetch,
           { errorRetryCount: 3 }
         )
       )
