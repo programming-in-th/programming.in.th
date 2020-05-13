@@ -49,6 +49,6 @@ export const reducer = (state: UserState, action: UserAction): UserState => {
   }
 }
 
-export const UserStateContext = React.createContext<IContext>(initialState)
+export const UserStateContext = React.createContext<IUserContext>(initialState)
 
 export const useUser = () => useContext(UserStateContext)
