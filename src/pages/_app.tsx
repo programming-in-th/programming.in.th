@@ -4,7 +4,6 @@ import Router from 'next/router'
 import React, { useReducer, useEffect } from 'react'
 import NProgress from 'nprogress'
 import { ThemeProvider, CSSReset } from '@chakra-ui/core'
-import useSWR, { mutate } from 'swr'
 
 import firebase from 'lib/firebase'
 import {
@@ -13,8 +12,8 @@ import {
   reducer,
   UserAction,
   UserStateContext,
+  IContext,
 } from 'components/UserContext'
-import { fetchFromFirebase } from 'utils/fetcher'
 import { onetap } from 'components/auth/onetap'
 
 import { GlobalStyle } from 'design'
@@ -49,17 +48,6 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
     React.Reducer<UserState, UserAction>
   >(reducer, initialState)
 
-  const { data: userContext } = useSWR('getUserContext', fetchFromFirebase)
-
-  useEffect(() => {
-    if (userContext) {
-      userDispatch({
-        type: 'RECEIVE_CONTEXT',
-        payload: userContext,
-      })
-    }
-  }, [userContext])
-
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user === null || user.emailVerified) {
@@ -69,7 +57,18 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
             user,
           },
         })
-        mutate('getUserContext')
+        if (user) {
+          firebase
+            .firestore()
+            .collection('users')
+            .doc(user.uid)
+            .onSnapshot((doc) => {
+              const data = doc.data() as IContext
+              if (data) userDispatch({ type: 'RECEIVE_CONTEXT', payload: data })
+            })
+        } else {
+          userDispatch({ type: 'RECEIVE_CONTEXT', payload: initialState })
+        }
       }
     })
 
