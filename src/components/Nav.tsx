@@ -61,7 +61,7 @@ export const Nav = () => {
   const [isNavOpen, setNavState] = useState(false)
   const { width } = useWindowSize()
 
-  const { user, displayName } = useUser()
+  const { user, username } = useUser()
   const router = useRouter()
 
   return (
@@ -124,7 +124,7 @@ export const Nav = () => {
                             : `${user.photoURL}`
                         }
                       />
-                      <Text color="gray.500">{displayName}</Text>
+                      <Text color="gray.500">{username}</Text>
                     </Stack>
                   </MenuButton>
                   <MenuList>

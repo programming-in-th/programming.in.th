@@ -8,7 +8,7 @@ export type IUser = {
   user: firebase.User | null | undefined
 }
 export interface IContext {
-  displayName: string
+  username: string
   admin: boolean
   codeTheme: ITheme
 }
@@ -17,7 +17,7 @@ export type IUserContext = IUser & IContext
 
 export const initialState: IUserContext = {
   user: undefined,
-  displayName: '',
+  username: '',
   admin: false,
   codeTheme: 'material',
 }
@@ -40,7 +40,7 @@ export const reducer = (state: UserState, action: UserAction): UserState => {
       })
     case 'RECEIVE_CONTEXT':
       return Object.assign({}, state, {
-        displayName: action.payload.displayName,
+        username: action.payload.username,
         admin: action.payload.admin,
         codeTheme: action.payload.codeTheme,
       })

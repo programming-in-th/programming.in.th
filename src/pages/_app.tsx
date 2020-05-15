@@ -2,6 +2,7 @@ import { NextPage } from 'next'
 import { AppProps } from 'next/app'
 import Router from 'next/router'
 import React, { useReducer, useEffect } from 'react'
+import useSWR, { mutate } from 'swr'
 import NProgress from 'nprogress'
 import { ThemeProvider, CSSReset } from '@chakra-ui/core'
 
@@ -12,7 +13,6 @@ import {
   reducer,
   UserAction,
   UserStateContext,
-  IContext,
 } from 'components/UserContext'
 import { onetap } from 'components/auth/onetap'
 
@@ -27,6 +27,7 @@ import 'codemirror/theme/material.css'
 import 'codemirror/addon/fold/foldgutter.css'
 
 import 'assets/css/prism.css'
+import { fetchFromFirebase } from 'utils/fetcher'
 
 let timeout: any
 
@@ -48,6 +49,10 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
     React.Reducer<UserState, UserAction>
   >(reducer, initialState)
 
+  const { data: userContext } = useSWR('getUserContext', fetchFromFirebase, {
+    refreshInterval: 1000 * 60,
+  })
+
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user === null || user.emailVerified) {
@@ -57,18 +62,8 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
             user,
           },
         })
-        if (user) {
-          firebase
-            .firestore()
-            .collection('users')
-            .doc(user.uid)
-            .onSnapshot((doc) => {
-              const data = doc.data() as IContext
-              if (data) userDispatch({ type: 'RECEIVE_CONTEXT', payload: data })
-            })
-        } else {
-          userDispatch({ type: 'RECEIVE_CONTEXT', payload: initialState })
-        }
+
+        mutate('getUserContext')
       }
     })
 
@@ -76,6 +71,15 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
       unsubscribe()
     }
   }, [])
+
+  useEffect(() => {
+    if (userContext) {
+      userDispatch({
+        type: 'RECEIVE_CONTEXT',
+        payload: userContext,
+      })
+    }
+  }, [userContext])
 
   useEffect(() => {
     if (userState.user === null) {

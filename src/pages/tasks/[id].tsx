@@ -156,9 +156,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
-  const metadata = await fetch(
-    `${config.baseURL}/getProblemMetadata?id=${id}`
-  ).then((o) => o.json())
+  const metadata = await fetch(`${config.baseURL}/getTask?id=${id}`).then((o) =>
+    o.json()
+  )
 
   const solutionRes = await fetch(
     `https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/solutions/md/${metadata.id}.md`

@@ -49,9 +49,8 @@ const SubmissionDetail: NextPage = () => {
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
-  const { data: submission } = useSWR(
-    ['getDetailedSubmissionData', id],
-    (type, id) => fetchFromFirebase(type, { submissionID: id })
+  const { data: submission } = useSWR(['getSubmission', id], (type, id) =>
+    fetchFromFirebase(type, { submissionID: id })
   )
 
   const { codeTheme: theme } = useUser()

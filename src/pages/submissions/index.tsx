@@ -17,11 +17,11 @@ import { insertQueryString } from 'utils/insertQueryString'
 
 export default () => {
   const router = useRouter()
-  const [displayName, setDisplayName] = useState('')
+  const [username, setUsername] = useState('')
   const [task, setTask] = useState('')
 
   useEffect(() => {
-    setDisplayName((router.query.displayName as string) || '')
+    setUsername((router.query.username as string) || '')
     setTask((router.query.task as string) || '')
   }, [router.query])
 
@@ -30,8 +30,8 @@ export default () => {
     ({ offset, withSWR }) => {
       const { data: submissions } = withSWR(
         useSWR(
-          `${config.baseURL}/getSubmissions?offset=${offset || 0}&displayName=${
-            displayName || ''
+          `${config.baseURL}/getSubmissions?offset=${offset || 0}&username=${
+            username || ''
           }&taskID=${task || ''}`,
           SWRfetch,
           { errorRetryCount: 3 }
@@ -56,9 +56,9 @@ export default () => {
             <Link href={`/submissions/${submission.submissionID}`}>
               <Tr>
                 <Td>{submission.humanTimestamp}</Td>
-                <Td>{submission.displayName}</Td>
+                <Td>{submission.username}</Td>
                 <Td>{submission.taskID}</Td>
-                <Td>{submission.points}</Td>
+                <Td>{submission.score}</Td>
                 <Td>{arrToObj(config.languageData)[submission.language]}</Td>
                 <Td>{submission.time}</Td>
                 <Td>{submission.memory}</Td>
@@ -77,7 +77,7 @@ export default () => {
         ? submissions[submissions.length - 1].id + 1
         : null
     },
-    [displayName, task, router]
+    [username, task, router]
   )
 
   return (
@@ -88,11 +88,11 @@ export default () => {
           <Flex mt={4} maxW="100%" direction={['column', 'row']}>
             <Input
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setDisplayName(event.target.value)
-                insertQueryString('displayName', event.target.value)
+                setUsername(event.target.value)
+                insertQueryString('username', event.target.value)
               }}
-              value={displayName}
-              placeholder="Display Name"
+              value={username}
+              placeholder="Username"
               width="200px"
             />
             <Input
@@ -120,7 +120,7 @@ export default () => {
               <thead>
                 <tr>
                   <Th>SUBMISSION TIME</Th>
-                  <Th>DISPLAYNAME</Th>
+                  <Th>USERNAME</Th>
                   <Th>TASK</Th>
                   <Th>POINTS</Th>
                   <Th>LANGUAGE</Th>

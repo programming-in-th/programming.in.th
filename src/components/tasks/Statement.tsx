@@ -25,13 +25,11 @@ const PDF = styled.object`
 `
 
 export const Statement = ({ metadata }) => {
-  const { displayName, user } = useUser()
+  const { username, user } = useUser()
 
   const { data: submissions } = useSWR<ISubmissionList[]>(
-    displayName !== ''
-      ? `${
-          config.baseURL
-        }/getSubmissions?offset=&displayName=${displayName}&taskID=${
+    username !== ''
+      ? `${config.baseURL}/getSubmissions?offset=&username=${username}&taskID=${
           metadata.id || ''
         }`
       : null,
@@ -110,7 +108,7 @@ export const Statement = ({ metadata }) => {
                       >
                         <Tr>
                           <Td>{submission.humanTimestamp}</Td>
-                          <Td>{submission.points}</Td>
+                          <Td>{submission.score}</Td>
                         </Tr>
                       </Link>
                     ))
