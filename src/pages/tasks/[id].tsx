@@ -176,6 +176,6 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
       metadata,
       solution: renderedSolution,
     },
-    unstable_revalidate: 60 * 60,
+    unstable_revalidate: 60,
   }
 }
