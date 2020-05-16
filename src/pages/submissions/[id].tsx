@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
-import dynamic from 'next/dynamic'
 import useSWR from 'swr'
 
 import {
@@ -22,26 +21,20 @@ import {
 import { useUser } from 'components/UserContext'
 import { PageLayout } from 'components/Layout'
 import { Table, Th, Td, Tr } from 'components/submissions/VerdictTable'
+import { Code } from 'components/Code'
 
 import { fetchFromFirebase } from 'utils/fetcher'
 
 import { IGroup } from '../../@types/group'
 import { IStatus } from '../../@types/status'
 
-const CodeDisplay = dynamic(
-  () => import('components/Code').then((mod) => mod.CodeDisplay),
-  {
-    ssr: false,
-  }
-) as any
-
 type TPlot = {
-  [key: string]: string
+  [key: string]: 'c' | 'cpp' | 'python'
 }
 
 const mapLanguage: TPlot = {
-  'c++': 'text/x-csrc',
-  c: 'text/x-csrc',
+  'c++': 'cpp',
+  c: 'c',
   python: 'python',
 }
 
@@ -84,9 +77,11 @@ const SubmissionDetail: NextPage = () => {
                     Statement
                   </ChakraLink>
                 </Link>
-                <p>Points: {submission.points}</p>
-                <p>Submission time: {submission.humanTimestamp}</p>
-                <p>User: {submission.username}</p>
+                <Box mt={2}>
+                  <p>Points: {submission.points}</p>
+                  <p>Submission time: {submission.humanTimestamp}</p>
+                  <p>User: {submission.username}</p>
+                </Box>
               </Box>
 
               {submission.code !== '' ? (
@@ -104,21 +99,13 @@ const SubmissionDetail: NextPage = () => {
                       ))}
                   </Box>
 
-                  <CodeDisplay
-                    options={{
-                      mode: `${mapLanguage[submission.language]}`,
-                      theme: `${theme}`,
-                      lineNumbers: true,
-                      foldGutter: true,
-                      gutters: [
-                        'CodeMirror-linenumbers',
-                        'CodeMirror-foldgutter',
-                      ],
-                      lineWrapping: true,
-                    }}
-                    onBeforeChange={(editor, data, value) => {}}
-                    value={submission.code[currentCodeIndex]}
-                  />
+                  <Box mt={4}>
+                    <Code
+                      code={submission.code[currentCodeIndex]}
+                      language={mapLanguage[submission.language]}
+                    />
+                  </Box>
+
                   {submission.groups && (
                     <Accordion defaultIndex={[]} allowMultiple>
                       {submission.groups.map((group: IGroup, index) => {

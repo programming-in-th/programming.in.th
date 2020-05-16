@@ -1,35 +1,44 @@
-import {
-  UnControlled as CodeMirror,
-  Controlled as CodeMirrorDisplay
-} from 'react-codemirror2'
-import styled from '@emotion/styled'
-import { css } from '@emotion/core'
+import React from 'react'
+import Highlight, { Prism } from 'prism-react-renderer'
 
-if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
-  require('codemirror/mode/clike/clike.js')
-  require('codemirror/mode/python/python.js')
+import { Flex, Box } from '@chakra-ui/core'
 
-  require('codemirror/addon/selection/active-line.js')
-  require('codemirror/addon/fold/foldgutter.js')
-  require('codemirror/addon/fold/brace-fold.js')
-  require('codemirror/addon/fold/indent-fold.js')
+export interface CodeBlockProps {
+  code: string
+  language: 'c' | 'cpp' | 'python'
 }
 
-const codeStyle = css`
-  font-family: Fira Code !important;
-  margin: 15px 0;
-  span {
-    font-family: Fira Code !important;
-  }
-  .CodeMirror {
-    height: 500px !important;
-  }
-`
-
-export const Code = styled(CodeMirror)`
-  ${codeStyle}
-`
-
-export const CodeDisplay = styled(CodeMirrorDisplay)`
-  ${codeStyle}
-`
+export const Code = ({ code, language }: CodeBlockProps) => {
+  return (
+    <Highlight Prism={Prism} code={code} language={language as any}>
+      {({ style, tokens, getLineProps, getTokenProps }) => (
+        <Flex
+          as="pre"
+          overflowY="auto"
+          style={{ ...style }}
+          fontSize="13.6px !important"
+          className={`language-${language}`}
+        >
+          {tokens.length > 1 && (
+            <code>
+              {tokens.map((line, i) => (
+                <Box key={i + 'l'} color="gray.400" pr={2}>
+                  {i + 1}{' '}
+                </Box>
+              ))}
+            </code>
+          )}
+          <code className={`language-${language}`}>
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line, key: i })}>
+                {line.map((token, key) => (
+                  <span key={key} {...getTokenProps({ token, key })} />
+                ))}
+              </div>
+            ))}
+          </code>
+        </Flex>
+      )}
+    </Highlight>
+  )
+}

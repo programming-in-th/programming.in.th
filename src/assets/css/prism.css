@@ -65,6 +65,10 @@ pre[class*='language-'] ::selection {
   white-space: normal;
 }
 
+.token.plain {
+  color: white;
+}
+
 .token.attr-name {
   color: rgb(173, 219, 103);
   font-style: italic;
@@ -72,11 +76,6 @@ pre[class*='language-'] ::selection {
 
 .token.comment {
   color: rgb(128, 147, 147);
-}
-
-.token.string,
-.token.url {
-  color: rgb(173, 219, 103);
 }
 
 .token.variable {
@@ -108,6 +107,10 @@ pre[class*='language-'] ::selection {
   color: rgb(255, 203, 139);
 }
 
+.token.property {
+  color: rgb(128, 203, 196);
+}
+
 .token.tag,
 .token.operator,
 .token.keyword {
@@ -118,12 +121,13 @@ pre[class*='language-'] ::selection {
   color: rgb(255, 88, 116);
 }
 
-.token.property {
-  color: rgb(128, 203, 196);
-}
-
 .token.namespace {
   color: rgb(178, 204, 214);
+}
+
+.token.string,
+.token.url {
+  color: rgb(173, 219, 103);
 }
 
 pre[data-line] {
