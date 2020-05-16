@@ -18,7 +18,6 @@ import {
   Button,
 } from '@chakra-ui/core'
 
-import { useUser } from 'components/UserContext'
 import { PageLayout } from 'components/Layout'
 import { Table, Th, Td, Tr } from 'components/submissions/VerdictTable'
 import { Code } from 'components/Code'
@@ -27,6 +26,8 @@ import { fetchFromFirebase } from 'utils/fetcher'
 
 import { IGroup } from '../../@types/group'
 import { IStatus } from '../../@types/status'
+import { ISubmission } from '../../@types/submission'
+import { calculate } from 'utils/calculate'
 
 type TPlot = {
   [key: string]: 'c' | 'cpp' | 'python'
@@ -42,13 +43,14 @@ const SubmissionDetail: NextPage = () => {
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
-  const { data: submission } = useSWR(['getSubmission', id], (type, id) =>
-    fetchFromFirebase(type, { submissionID: id })
+  const { data: submission } = useSWR<ISubmission>(
+    ['getSubmission', id],
+    (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
 
-  const { codeTheme: theme } = useUser()
-
   const [currentCodeIndex, setCurrentCodeIndex] = useState<number>(0)
+
+  const { score, fullScore, time, memory } = calculate(submission?.groups)
 
   return (
     <PageLayout>
@@ -78,7 +80,9 @@ const SubmissionDetail: NextPage = () => {
                   </ChakraLink>
                 </Link>
                 <Box mt={2}>
-                  <p>Points: {submission.points}</p>
+                  <p>Score: {score}</p>
+                  <p>Time: {time}</p>
+                  <p>Memory: {memory} KB</p>
                   <p>Submission time: {submission.humanTimestamp}</p>
                   <p>User: {submission.username}</p>
                 </Box>
@@ -90,9 +94,10 @@ const SubmissionDetail: NextPage = () => {
                     {submission.task.type !== 'normal' &&
                       submission.task.fileName.map((name, index) => (
                         <Button
-                          key="name"
+                          key={name}
                           onClick={() => setCurrentCodeIndex(index)}
                           ml={index > 0 ? 4 : 0}
+                          size="sm"
                         >
                           {name}
                         </Button>
@@ -110,7 +115,7 @@ const SubmissionDetail: NextPage = () => {
                     <Accordion defaultIndex={[]} allowMultiple>
                       {submission.groups.map((group: IGroup, index) => {
                         return (
-                          <AccordionItem>
+                          <AccordionItem key={index}>
                             <AccordionHeader>
                               <Box flex="1" textAlign="left">
                                 Subtasks #{index + 1} [{group.score}/
@@ -135,6 +140,7 @@ const SubmissionDetail: NextPage = () => {
                                     (status: IStatus, index) => (
                                       <Tr
                                         correct={status.verdict === 'Correct'}
+                                        key={index}
                                       >
                                         <Td>{index + 1}</Td>
                                         <Td>{status.verdict}</Td>

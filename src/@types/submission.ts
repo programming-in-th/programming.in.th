@@ -2,15 +2,15 @@ import { ITask } from './task'
 import { IGroup } from './group'
 
 export interface ISubmission {
-  ID: string
-
-  problem: ITask
+  taskID: string
+  task: ITask
   uid: string
   language: string
   groups: IGroup[]
-  points: number
   timestamp: Date
   humanTimestamp: string
+  username: string
+  code: string
 }
 
 export interface ISubmissionList {
