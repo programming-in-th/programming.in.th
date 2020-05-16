@@ -11,8 +11,8 @@ const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex, rehypePrism]
-  }
+    rehypePlugins: [rehypeKatex, rehypePrism],
+  },
 })
 
 module.exports = withPlugins(
@@ -20,11 +20,11 @@ module.exports = withPlugins(
     [
       withMDX,
       {
-        pageExtensions: ['tsx', 'mdx']
-      }
+        pageExtensions: ['tsx', 'mdx'],
+      },
     ],
     withBundleAnalyzer,
-    withOffline
+    withOffline,
   ],
   {
     analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
@@ -32,15 +32,14 @@ module.exports = withPlugins(
     bundleAnalyzerConfig: {
       server: {
         analyzerMode: 'static',
-        reportFilename: '../bundles/server.html'
+        reportFilename: '../bundles/server.html',
       },
       browser: {
         analyzerMode: 'static',
-        reportFilename: '../bundles/client.html'
-      }
+        reportFilename: '../bundles/client.html',
+      },
     },
-    target: 'serverless',
-    transformManifest: manifest => ['/'].concat(manifest),
+    transformManifest: (manifest) => ['/'].concat(manifest),
     workboxOpts: {
       swDest: 'static/service-worker.js',
       runtimeCaching: [
@@ -52,12 +51,12 @@ module.exports = withPlugins(
             networkTimeoutSeconds: 15,
             expiration: {
               maxEntries: 150,
-              maxAgeSeconds: 30 * 24 * 60 * 60 // 1 month
+              maxAgeSeconds: 30 * 24 * 60 * 60, // 1 month
             },
             cacheableResponse: {
-              statuses: [0, 200]
-            }
-          }
+              statuses: [0, 200],
+            },
+          },
         },
         {
           urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
@@ -67,12 +66,12 @@ module.exports = withPlugins(
             cacheName: 'images',
             expiration: {
               maxEntries: 150,
-              maxAgeSeconds: 30 * 24 * 60 * 60 // 1 month
+              maxAgeSeconds: 30 * 24 * 60 * 60, // 1 month
             },
             cacheableResponse: {
-              statuses: [0, 200]
-            }
-          }
+              statuses: [0, 200],
+            },
+          },
         },
         {
           urlPattern: /^https:\/\/fonts\.gstatic\.com/,
@@ -81,14 +80,14 @@ module.exports = withPlugins(
           options: {
             cacheName: 'google-fonts',
             expiration: {
-              maxAgeSeconds: 60 * 60 * 24 * 365 // 1 years
+              maxAgeSeconds: 60 * 60 * 24 * 365, // 1 years
             },
             cacheableResponse: {
-              statuses: [0, 200]
-            }
-          }
-        }
-      ]
-    }
+              statuses: [0, 200],
+            },
+          },
+        },
+      ],
+    },
   }
 )
