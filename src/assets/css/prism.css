@@ -6,6 +6,7 @@ pre[class*='language-'] {
   color: white;
   background: #011627;
   font-family: Fira Code, Menlo, Monaco, source-code-pro, Courier New, monospace;
+  font-variant-ligatures: none;
   font-size: 1em;
   font-feature-settings: normal;
   text-align: left;

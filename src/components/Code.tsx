@@ -22,8 +22,8 @@ export const Code = ({ code, language }: CodeBlockProps) => {
           {tokens.length > 1 && (
             <code>
               {tokens.map((line, i) => (
-                <Box key={i + 'l'} color="gray.400" pr={2}>
-                  {i + 1}{' '}
+                <Box key={i + 'l'} color="gray.400" pr={2} width={8}>
+                  {i + 1}
                 </Box>
               ))}
             </code>
