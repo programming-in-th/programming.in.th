@@ -8,8 +8,7 @@ import { PageLayout } from 'components/Layout'
 import { Statement } from 'components/tasks/Statement'
 import { Solution } from 'components/tasks/Solution'
 
-import { getProblemIDs } from 'utils/getProblemIDs'
-import { renderMarkdown } from 'utils/renderMarkdown'
+import { renderMarkdown } from 'lib/renderMarkdown'
 import { config } from 'config'
 import { isObjectEmpty } from 'utils/isEmpty'
 
@@ -147,10 +146,12 @@ export default ({ metadata, solution }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const paths = await getProblemIDs()
+  const data = await fetch(`${config.baseURL}/getTaskIDs`).then((o) => o.json())
 
   return {
-    paths,
+    paths: data.map((id: string) => {
+      return { params: { id } }
+    }),
     fallback: true,
   }
 }
@@ -168,7 +169,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
 
   if (solutionRes.status === 200) {
     const solution = await solutionRes.text()
-    renderedSolution = renderMarkdown(solution)
+    renderedSolution = await renderMarkdown(solution)
   }
 
   return {

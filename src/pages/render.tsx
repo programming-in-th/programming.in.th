@@ -5,14 +5,15 @@ import { Flex, Textarea, Box, Heading, Button } from '@chakra-ui/core'
 
 import { PageLayout } from 'components/Layout'
 import { Solution } from 'components/tasks/Solution'
-import { renderMarkdown } from 'utils/renderMarkdown'
+import { renderMarkdown } from 'lib/renderMarkdown'
 
 export default () => {
   const [solution, setSolution] = useState<string>('')
   const [input, setInput] = useState<string>('')
-  const refetch = () => {
+
+  const refetch = async () => {
     try {
-      const sol = renderMarkdown(input)
+      const sol = await renderMarkdown(input)
       setSolution(sol)
     } catch (err) {
       setSolution('Markdown Rendering Error')

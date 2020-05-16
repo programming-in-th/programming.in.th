@@ -1,5 +1,4 @@
 import unified from 'unified'
-import { VFileCompatible } from 'vfile'
 import parse from 'remark-parse'
 import remark2rehype from 'remark-rehype'
 import math from 'remark-math'
@@ -10,8 +9,8 @@ import highlight from '@mapbox/rehype-prism'
 
 import sanitizeSetting from './sanitizer.json'
 
-export const renderMarkdown = (content: string) => {
-  const processor = unified()
+export const renderMarkdown = async (content: string) => {
+  const result = await unified()
     .use(parse)
     .use(math)
     .use(remark2rehype)
@@ -19,11 +18,7 @@ export const renderMarkdown = (content: string) => {
     .use(highlight)
     .use(stringify)
     .use(sanitize, sanitizeSetting)
+    .process(content)
 
-  const processMarkdown = (content: VFileCompatible) => {
-    const result = processor.processSync(content).contents
-    return String(result)
-  }
-
-  return processMarkdown(content)
+  return result.toString()
 }
