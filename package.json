@@ -26,10 +26,12 @@
     "@mapbox/rehype-prism": "^0.4.0",
     "@mdx-js/loader": "^1.5.7",
     "@mdx-js/react": "^1.6.1",
+    "@next/bundle-analyzer": "^9.4.0",
     "@next/mdx": "^9.3.6",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-mdx": "^1.2.0",
+    "cross-env": "^7.0.2",
     "emotion-theming": "^10.0.27",
     "file-saver": "^2.0.2",
     "firebase": "^7.14.3",
@@ -82,9 +84,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "analyze": "BUNDLE_ANALYZE=both next build",
-    "analyze:server": "BUNDLE_ANALYZE=server next build",
-    "analyze:browser": "BUNDLE_ANALYZE=browser next build",
+    "analyze": "cross-env ANALYZE=true yarn build",
     "lint": "eslint ."
   }
 }

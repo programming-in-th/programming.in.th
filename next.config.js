@@ -1,11 +1,14 @@
 const withPlugins = require('next-compose-plugins')
 
 const withOffline = require('next-offline')
-const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
 
 const remarkMath = require('remark-math')
 const rehypeKatex = require('rehype-katex')
 const rehypePrism = require('@mapbox/rehype-prism')
+
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+})
 
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/,
