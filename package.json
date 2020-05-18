@@ -27,7 +27,7 @@
     "@mdx-js/loader": "^1.5.7",
     "@mdx-js/react": "^1.6.1",
     "@next/bundle-analyzer": "^9.4.1",
-    "@next/mdx": "^9.3.6",
+    "@next/mdx": "^9.4.1",
     "cross-env": "^7.0.2",
     "emotion-theming": "^10.0.27",
     "file-saver": "^2.0.2",
