@@ -1965,10 +1965,10 @@
   dependencies:
     webpack-bundle-analyzer "3.6.1"
 
-"@next/mdx@^9.3.6":
-  version "9.3.6"
-  resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-9.3.6.tgz#a617ff3c70124bacfedb7c4092a8d2ce8595aa6f"
-  integrity sha512-gF+Op4wMow4HdN9KFLDgAoz/zEn34vpa5fgbMW9/n67FfBJ9OqZFCM43aKrR2EsI3ehDvkKNgksiSm4vrPt8zg==
+"@next/mdx@^9.4.1":
+  version "9.4.1"
+  resolved "https://registry.yarnpkg.com/@next/mdx/-/mdx-9.4.1.tgz#0a7044ba53003522fadffbe93769235606866965"
+  integrity sha512-W4XFeB5r4amqL0NQMhcmrtMsGgq98+x/bK0han+3EG6kljZe45JvdPoOOxxa5RPdG2kdqtJUhXA3nRxkPwnUVQ==
 
 "@next/polyfill-nomodule@9.2.2":
   version "9.2.2"
