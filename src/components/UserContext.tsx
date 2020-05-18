@@ -1,21 +1,19 @@
 import React, { useContext } from 'react'
 
-export type UserState = typeof initialState
+type Theme = 'material' | 'monokai' | 'solarized'
 
-type ITheme = 'material' | 'monokai' | 'solarized'
-
-export type IUser = {
+export type User = {
   user: firebase.User | null | undefined
 }
-export interface IContext {
+export interface Context {
   username: string
   admin: boolean
-  codeTheme: ITheme
+  codeTheme: Theme
 }
 
-export type IUserContext = IUser & IContext
+export type UserState = User & Context
 
-export const initialState: IUserContext = {
+export const initialState: UserState = {
   user: undefined,
   username: '',
   admin: false,
@@ -25,11 +23,11 @@ export const initialState: IUserContext = {
 export type UserAction =
   | {
       type: 'RECEIVE_USER'
-      payload: IUser
+      payload: User
     }
   | {
       type: 'RECEIVE_CONTEXT'
-      payload: IContext
+      payload: Context
     }
 
 export const reducer = (state: UserState, action: UserAction): UserState => {
@@ -49,6 +47,6 @@ export const reducer = (state: UserState, action: UserAction): UserState => {
   }
 }
 
-export const UserStateContext = React.createContext<IUserContext>(initialState)
+export const UserStateContext = React.createContext<UserState>(initialState)
 
 export const useUser = () => useContext(UserStateContext)
