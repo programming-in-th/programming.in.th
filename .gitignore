@@ -30,4 +30,4 @@ package-lock.json
 .next
 bundles
 
-PROBLEM_ID_CACHE
+.env
