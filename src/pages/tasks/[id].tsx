@@ -9,8 +9,9 @@ import { Statement } from 'components/tasks/Statement'
 import { Solution } from 'components/tasks/Solution'
 
 import { renderMarkdown } from 'lib/renderMarkdown'
-import { config } from 'config'
 import { isObjectEmpty } from 'utils/isEmpty'
+
+import db from 'lib/firebase-admin'
 
 type pageIndex = 'statement' | 'statistics' | 'solution'
 
@@ -105,7 +106,6 @@ export default ({ metadata, solution }) => {
             >
               Statement
             </ChakraLink>
-
             <ChakraLink
               mt={[2, 0]}
               ml={[0, 6]}
@@ -115,7 +115,6 @@ export default ({ metadata, solution }) => {
             >
               Statistics
             </ChakraLink>
-
             <Link href={`/submissions?task=${metadata.id}`}>
               <ChakraLink
                 mt={[2, 0]}
@@ -126,7 +125,6 @@ export default ({ metadata, solution }) => {
                 Submissions
               </ChakraLink>
             </Link>
-
             <ChakraLink
               mt={[2, 0]}
               ml={[0, 6]}
@@ -138,7 +136,6 @@ export default ({ metadata, solution }) => {
             </ChakraLink>
           </Flex>
         </Flex>
-
         {renderPage(currentPage)}
       </Flex>
     </PageLayout>
@@ -146,10 +143,19 @@ export default ({ metadata, solution }) => {
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data = await fetch(`${config.baseURL}/getTaskIDs`).then((o) => o.json())
+  const taskDocs = await db()
+    .collection('tasks')
+    .where('visible', '==', true)
+    .get()
+
+  const result: string[] = []
+
+  for (const doc of taskDocs.docs) {
+    result.push(doc.id)
+  }
 
   return {
-    paths: data.map((id: string) => {
+    paths: result.map((id: string) => {
       return { params: { id } }
     }),
     fallback: true,
@@ -157,9 +163,15 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
-  const metadata = await fetch(`${config.baseURL}/getTask?id=${id}`).then((o) =>
-    o.json()
-  )
+  let metadata: any = {}
+
+  const taskDoc = await db().doc(`tasks/${id}`).get()
+  const data = taskDoc.data()
+
+  if (data) {
+    data.id = taskDoc.id
+    metadata = data.visible ? data : {}
+  }
 
   const solutionRes = await fetch(
     `https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/solutions/md/${metadata.id}.md`
