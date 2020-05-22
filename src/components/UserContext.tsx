@@ -6,18 +6,18 @@ import { onetap } from './auth/onetap'
 
 type Theme = 'material' | 'monokai' | 'solarized'
 
-export type User = {
+type User = {
   user: firebase.User | null | undefined
 }
-export interface Context {
+interface Context {
   username: string
   admin: boolean
   codeTheme: Theme
 }
 
-export type UserState = User & Context & { loading: boolean }
+type UserState = User & Context & { loading: boolean }
 
-export const initialState: UserState = {
+const initialState: UserState = {
   user: undefined,
   username: '',
   admin: false,
@@ -25,7 +25,7 @@ export const initialState: UserState = {
   loading: true,
 }
 
-export type UserAction =
+type UserAction =
   | {
       type: 'RECEIVE_USER'
       payload: User
@@ -38,7 +38,7 @@ export type UserAction =
       type: 'LOADING_DONE'
     }
 
-export const reducer = (state: UserState, action: UserAction): UserState => {
+const reducer = (state: UserState, action: UserAction): UserState => {
   switch (action.type) {
     case 'RECEIVE_USER':
       return Object.assign({}, state, {
@@ -59,11 +59,11 @@ export const reducer = (state: UserState, action: UserAction): UserState => {
   }
 }
 
-export const UserStateContext = React.createContext<UserState>(initialState)
+const UserStateContext = React.createContext<UserState>(initialState)
 
 export const useUser = () => useContext(UserStateContext)
 
-export default function UserContextComp({ children }) {
+const userContextComp = ({ children }) => {
   const [userState, userDispatch] = useReducer<
     React.Reducer<UserState, UserAction>
   >(reducer, initialState)
@@ -112,3 +112,5 @@ export default function UserContextComp({ children }) {
     </UserStateContext.Provider>
   )
 }
+
+export default userContextComp
