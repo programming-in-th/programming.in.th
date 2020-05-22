@@ -1,7 +1,7 @@
 import React, { useContext, useReducer, useEffect } from 'react'
 import useSWR, { mutate } from 'swr'
 import { fetchFromFirebase } from 'utils/fetcher'
-import firebase from 'firebase'
+import firebase from 'lib/firebase'
 import { onetap } from './auth/onetap'
 
 type Theme = 'material' | 'monokai' | 'solarized'
