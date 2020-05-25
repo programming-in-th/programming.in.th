@@ -26,7 +26,7 @@
     "@mapbox/rehype-prism": "^0.4.0",
     "@mdx-js/loader": "^1.5.7",
     "@mdx-js/react": "^1.6.1",
-    "@next/bundle-analyzer": "^9.4.1",
+    "@next/bundle-analyzer": "^9.4.2",
     "@next/mdx": "^9.4.1",
     "cross-env": "^7.0.2",
     "emotion-theming": "^10.0.27",
