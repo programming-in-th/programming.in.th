@@ -1,10 +1,12 @@
 import React, { useContext, useReducer, useEffect } from 'react'
 import useSWR, { mutate } from 'swr'
 import { useRouter } from 'next/router'
-import { fetchFromFirebase } from 'utils/fetcher'
+
 import firebase from 'lib/firebase'
+import { onetap } from 'lib/onetap'
+
+import { fetchFromFirebase } from 'utils/fetcher'
 import { isObjectEmpty } from 'utils/isEmpty'
-import { onetap } from './auth/onetap'
 
 type User = firebase.User | null
 
