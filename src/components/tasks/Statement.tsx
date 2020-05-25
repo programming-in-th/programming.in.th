@@ -25,13 +25,13 @@ const PDF = styled.object`
 `
 
 export const Statement = ({ metadata }) => {
-  const { username, user } = useUser()
+  const { user } = useUser()
 
   const { data: submissions } = useSWR<ISubmissionList[]>(
-    username !== ''
-      ? `${config.baseURL}/getSubmissions?offset=&username=${username}&taskID=${
-          metadata.id || ''
-        }`
+    user.username !== ''
+      ? `${config.baseURL}/getSubmissions?offset=&username=${
+          user.username
+        }&taskID=${metadata.id || ''}`
       : null,
     SWRfetch,
     {
@@ -90,7 +90,7 @@ export const Statement = ({ metadata }) => {
               </tr>
             </thead>
             <tbody>
-              {user ? (
+              {user.user ? (
                 submissions ? (
                   isArrayEmpty(submissions) ? (
                     <Tr>
