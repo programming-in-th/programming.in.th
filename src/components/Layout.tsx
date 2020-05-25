@@ -21,7 +21,7 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
       direction="column"
       minHeight="100vh"
       bg={props.bg}
-      display={user === undefined ? 'none' : 'flex'}
+      display={user.user === undefined ? 'none' : 'flex'}
     >
       <Nav></Nav>
       <Divider m={0}></Divider>
@@ -34,5 +34,5 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
 }
 
 PageLayout.defaultProps = {
-  hideNav: false
+  hideNav: false,
 }

@@ -98,7 +98,7 @@ export const Comm = ({ metadata }) => {
             size="sm"
             width="200px"
             onClick={submit}
-            isDisabled={user === null}
+            isDisabled={user.user === null}
           >
             Submit
           </Button>

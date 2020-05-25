@@ -73,7 +73,7 @@ export const OutputOnly = ({ metadata }) => {
           mt={4}
           width="200px"
           onClick={submit}
-          isDisabled={user === null}
+          isDisabled={user.user === null}
         >
           Submit
         </Button>
