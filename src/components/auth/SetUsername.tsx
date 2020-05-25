@@ -25,7 +25,7 @@ const SetUsernameSchema = Yup.object().shape({
 export const SetUsernameComponent = ({ setErrorMessage }) => {
   const [isClick, setIsClick] = useState<boolean>(false)
   const toast = useToast()
-  const { user, userDispatch } = useUser()
+  const { userDispatch } = useUser()
   const setError = (err: string) => {
     setErrorMessage(err)
     setIsClick(false)
