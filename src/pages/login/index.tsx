@@ -14,10 +14,10 @@ export default () => {
   const { user } = useUser()
 
   useEffect(() => {
-    if (user !== null && user !== undefined) {
+    if (user.user !== null) {
       Router.push('/')
     }
-  }, [user])
+  }, [user.user])
 
   return (
     <PageLayout>

@@ -61,7 +61,7 @@ export const Nav = () => {
   const [isNavOpen, setNavState] = useState(false)
   const { width } = useWindowSize()
 
-  const { user, username } = useUser()
+  const { user, loading, userDispatch } = useUser()
   const router = useRouter()
 
   return (
@@ -112,25 +112,45 @@ export const Nav = () => {
             </Flex>
 
             <Box>
-              {user === undefined ? null : user !== null ? (
+              {(user.user !== null && loading === true) ||
+              user.user === undefined ? (
+                <Flex
+                  mt={[4, 0]}
+                  align={['flex-end', 'baseline']}
+                  direction={['column', 'row']}
+                >
+                  Loading...
+                </Flex>
+              ) : user.user !== null ? (
                 <Menu>
                   <MenuButton as={Box}>
                     <Stack isInline mt={[4, 0]}>
                       <Avatar
                         size="xs"
                         src={
-                          user.photoURL === ''
+                          user.user.photoURL === ''
                             ? '/assets/img/default-user.png'
-                            : `${user.photoURL}`
+                            : `${user.user.photoURL}`
                         }
                       />
-                      <Text color="gray.500">{username}</Text>
+                      <Text color="gray.500">{user.username}</Text>
                     </Stack>
                   </MenuButton>
                   <MenuList>
                     <MenuItem>Dashboard</MenuItem>
                     <MenuDivider></MenuDivider>
-                    <MenuItem onClick={() => firebase.auth().signOut()}>
+                    <MenuItem
+                      onClick={() => {
+                        firebase
+                          .auth()
+                          .signOut()
+                          .then(() => {
+                            userDispatch({
+                              type: 'LOADING_START',
+                            })
+                          })
+                      }}
+                    >
                       Logout
                     </MenuItem>
                   </MenuList>

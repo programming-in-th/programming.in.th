@@ -2,27 +2,19 @@ import React, { useContext, useReducer, useEffect } from 'react'
 import useSWR, { mutate } from 'swr'
 import { fetchFromFirebase } from 'utils/fetcher'
 import firebase from 'lib/firebase'
+import { isObjectEmpty } from 'utils/isEmpty'
 import { onetap } from './auth/onetap'
 
-type Theme = 'material' | 'monokai' | 'solarized'
-
-type User = {
-  user: firebase.User | null | undefined
-}
-interface Context {
+type User = firebase.User | null
+interface UserData {
+  user: User | undefined
   username: string
   admin: boolean
-  codeTheme: Theme
 }
 
-type UserState = User & Context & { loading: boolean }
-
-const initialState: UserState = {
-  user: undefined,
-  username: '',
-  admin: false,
-  codeTheme: 'material',
-  loading: true,
+interface UserState {
+  user: UserData
+  loading: boolean
 }
 
 type UserAction =
@@ -32,34 +24,58 @@ type UserAction =
     }
   | {
       type: 'RECEIVE_CONTEXT'
-      payload: Context
+      payload: UserData
     }
   | {
       type: 'LOADING_DONE'
     }
+  | {
+      type: 'LOADING_START'
+    }
+
+type userContext = UserState & { userDispatch: React.Dispatch<UserAction> }
+
+const initialState: UserState = {
+  user: {
+    user: undefined,
+    username: '',
+    admin: false,
+  },
+  loading: true,
+}
 
 const reducer = (state: UserState, action: UserAction): UserState => {
   switch (action.type) {
     case 'RECEIVE_USER':
       return Object.assign({}, state, {
-        user: action.payload.user,
+        user: Object.assign({}, state.user, {
+          user: action.payload,
+        }),
       })
     case 'RECEIVE_CONTEXT':
       return Object.assign({}, state, {
-        username: action.payload.username,
-        admin: action.payload.admin,
-        codeTheme: action.payload.codeTheme,
+        user: Object.assign({}, state.user, {
+          username: action.payload.username,
+          admin: action.payload.admin,
+        }),
       })
     case 'LOADING_DONE':
       return Object.assign({}, state, {
         loading: false,
+      })
+    case 'LOADING_START':
+      return Object.assign({}, state, {
+        loading: true,
       })
     default:
       return state
   }
 }
 
-const UserStateContext = React.createContext<UserState>(initialState)
+const UserStateContext = React.createContext<userContext>({
+  ...initialState,
+  userDispatch: null,
+})
 
 export const useUser = () => useContext(UserStateContext)
 
@@ -77,9 +93,7 @@ const userContextComp = ({ children }) => {
       if (user === null || user.emailVerified) {
         userDispatch({
           type: 'RECEIVE_USER',
-          payload: {
-            user,
-          },
+          payload: user,
         })
 
         mutate('getUserContext')
@@ -92,22 +106,30 @@ const userContextComp = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (userContext) {
+    if (userContext === undefined || isObjectEmpty(userContext)) {
+      userDispatch({
+        type: 'RECEIVE_CONTEXT',
+        payload: initialState.user,
+      })
+    } else {
       userDispatch({
         type: 'RECEIVE_CONTEXT',
         payload: userContext,
+      })
+      userDispatch({
+        type: 'LOADING_DONE',
       })
     }
   }, [userContext])
 
   useEffect(() => {
-    if (userState.user === null) {
+    if (userState.user.user === null) {
       onetap()
     }
-  }, [userState.user])
+  }, [userState.user.user])
 
   return (
-    <UserStateContext.Provider value={userState}>
+    <UserStateContext.Provider value={{ ...userState, userDispatch }}>
       {children}
     </UserStateContext.Provider>
   )

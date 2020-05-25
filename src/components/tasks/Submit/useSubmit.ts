@@ -16,7 +16,7 @@ export const useSubmit = (metadata: ITask) => {
 
   const onDrop = (index: number) =>
     useCallback(
-      acceptedFiles => {
+      (acceptedFiles) => {
         const reader = new FileReader()
 
         reader.onabort = () => console.log('file reading was aborted')
@@ -37,7 +37,7 @@ export const useSubmit = (metadata: ITask) => {
       metadata.id,
       codeValue,
       language,
-      user,
+      user.user,
       setStatus,
       setSubmissionID
     )
@@ -49,6 +49,6 @@ export const useSubmit = (metadata: ITask) => {
     onDrop,
     setLanguage,
     status,
-    submissionID
+    submissionID,
   }
 }
