@@ -1,6 +1,6 @@
 import React, { useContext, useReducer, useEffect } from 'react'
 import useSWR, { mutate } from 'swr'
-import Router, { useRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import { fetchFromFirebase } from 'utils/fetcher'
 import firebase from 'lib/firebase'
 import { isObjectEmpty } from 'utils/isEmpty'
@@ -26,10 +26,6 @@ type UserAction =
   | {
       type: 'RECEIVE_CONTEXT'
       payload: UserData
-    }
-  | {
-      type: 'SET_USERNAME'
-      payload: string
     }
   | {
       type: 'LOADING_DONE'
@@ -62,12 +58,6 @@ const reducer = (state: UserState, action: UserAction): UserState => {
         user: Object.assign({}, state.user, {
           username: action.payload.username,
           admin: action.payload.admin,
-        }),
-      })
-    case 'SET_USERNAME':
-      return Object.assign({}, state, {
-        user: Object.assign({}, state.user, {
-          username: action.payload,
         }),
       })
     case 'LOADING_DONE':
@@ -147,13 +137,13 @@ const userContextComp = ({ children }) => {
       userState.loading === false &&
       userState.user.username === ''
     ) {
-      Router.push('/setusername')
+      router.push('/setusername')
     }
   }, [userState, router.pathname])
 
   useEffect(() => {
     if (userState.user.user === null) {
-      Router.push('/')
+      router.push('/')
     }
   })
 

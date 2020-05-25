@@ -25,7 +25,7 @@ const SetUsernameSchema = Yup.object().shape({
 export const SetUsernameComponent = ({ setErrorMessage }) => {
   const [isClick, setIsClick] = useState<boolean>(false)
   const toast = useToast()
-  const { userDispatch } = useUser()
+  const { user, userDispatch } = useUser()
   const setError = (err: string) => {
     setErrorMessage(err)
     setIsClick(false)
@@ -51,11 +51,10 @@ export const SetUsernameComponent = ({ setErrorMessage }) => {
               duration: 3000,
               isClosable: true,
             })
-            userDispatch({
-              type: 'SET_USERNAME',
-              payload: values.username,
+            await mutate('getUserContext', {
+              ...user,
+              username: values.username,
             })
-            mutate('getUserContext')
             Router.push('/')
           } else {
             setError('Please use another Username')
