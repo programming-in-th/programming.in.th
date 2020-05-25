@@ -1,16 +1,19 @@
 import React, { useContext, useReducer, useEffect } from 'react'
 import useSWR, { mutate } from 'swr'
+import { useRouter } from 'next/router'
 import { fetchFromFirebase } from 'utils/fetcher'
 import firebase from 'lib/firebase'
 import { isObjectEmpty } from 'utils/isEmpty'
 import { onetap } from './auth/onetap'
 
 type User = firebase.User | null
-interface UserData {
-  user: User | undefined
+
+export interface Data {
   username: string
   admin: boolean
 }
+
+type UserData = { user: User | undefined } & Data
 
 interface UserState {
   user: UserData
@@ -24,7 +27,7 @@ type UserAction =
     }
   | {
       type: 'RECEIVE_CONTEXT'
-      payload: UserData
+      payload: Data
     }
   | {
       type: 'LOADING_DONE'
@@ -84,6 +87,8 @@ const userContextComp = ({ children }) => {
     React.Reducer<UserState, UserAction>
   >(reducer, initialState)
 
+  const router = useRouter()
+
   const { data: userContext } = useSWR('getUserContext', fetchFromFirebase, {
     refreshInterval: 1000 * 60,
   })
@@ -127,6 +132,22 @@ const userContextComp = ({ children }) => {
       onetap()
     }
   }, [userState.user.user])
+
+  useEffect(() => {
+    if (
+      userState.user.user !== null &&
+      userState.loading === false &&
+      userState.user.username === ''
+    ) {
+      router.push('/setusername')
+    }
+  }, [userState, router.pathname])
+
+  useEffect(() => {
+    if (userState.user.user === null) {
+      router.push('/')
+    }
+  })
 
   return (
     <UserStateContext.Provider value={{ ...userState, userDispatch }}>

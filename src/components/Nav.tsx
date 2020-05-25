@@ -138,6 +138,9 @@ export const Nav = () => {
                   </MenuButton>
                   <MenuList>
                     <MenuItem>Dashboard</MenuItem>
+                    <MenuItem onClick={() => router.push('/setusername')}>
+                      Change Username
+                    </MenuItem>
                     <MenuDivider></MenuDivider>
                     <MenuItem
                       onClick={() => {
