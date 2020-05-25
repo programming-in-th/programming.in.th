@@ -16,7 +16,6 @@ import { FaUser } from 'react-icons/fa'
 import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 import firebase from 'lib/firebase'
-import { useUser } from 'components/UserContext'
 import { Data } from 'components/UserContext'
 
 const SetUsernameSchema = Yup.object().shape({
@@ -26,7 +25,6 @@ const SetUsernameSchema = Yup.object().shape({
 export const SetUsernameComponent = ({ setErrorMessage }) => {
   const [isClick, setIsClick] = useState<boolean>(false)
   const toast = useToast()
-  const { user, userDispatch } = useUser()
   const setError = (err: string) => {
     setErrorMessage(err)
     setIsClick(false)
