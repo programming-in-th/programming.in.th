@@ -1,5 +1,6 @@
 import React, { useContext, useReducer, useEffect } from 'react'
 import useSWR, { mutate } from 'swr'
+import Router, { useRouter } from 'next/router'
 import { fetchFromFirebase } from 'utils/fetcher'
 import firebase from 'lib/firebase'
 import { isObjectEmpty } from 'utils/isEmpty'
@@ -25,6 +26,10 @@ type UserAction =
   | {
       type: 'RECEIVE_CONTEXT'
       payload: UserData
+    }
+  | {
+      type: 'SET_USERNAME'
+      payload: string
     }
   | {
       type: 'LOADING_DONE'
@@ -59,6 +64,12 @@ const reducer = (state: UserState, action: UserAction): UserState => {
           admin: action.payload.admin,
         }),
       })
+    case 'SET_USERNAME':
+      return Object.assign({}, state, {
+        user: Object.assign({}, state.user, {
+          username: action.payload,
+        }),
+      })
     case 'LOADING_DONE':
       return Object.assign({}, state, {
         loading: false,
@@ -83,6 +94,8 @@ const userContextComp = ({ children }) => {
   const [userState, userDispatch] = useReducer<
     React.Reducer<UserState, UserAction>
   >(reducer, initialState)
+
+  const router = useRouter()
 
   const { data: userContext } = useSWR('getUserContext', fetchFromFirebase, {
     refreshInterval: 1000 * 60,
@@ -127,6 +140,22 @@ const userContextComp = ({ children }) => {
       onetap()
     }
   }, [userState.user.user])
+
+  useEffect(() => {
+    if (
+      userState.user.user !== null &&
+      userState.loading === false &&
+      userState.user.username === ''
+    ) {
+      Router.push('/setusername')
+    }
+  }, [userState, router.pathname])
+
+  useEffect(() => {
+    if (userState.user.user === null) {
+      Router.push('/')
+    }
+  })
 
   return (
     <UserStateContext.Provider value={{ ...userState, userDispatch }}>

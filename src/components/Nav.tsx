@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import {
   Box,
   Flex,
@@ -138,6 +138,9 @@ export const Nav = () => {
                   </MenuButton>
                   <MenuList>
                     <MenuItem>Dashboard</MenuItem>
+                    <MenuItem onClick={() => Router.push('/setusername')}>
+                      Change Username
+                    </MenuItem>
                     <MenuDivider></MenuDivider>
                     <MenuItem
                       onClick={() => {
