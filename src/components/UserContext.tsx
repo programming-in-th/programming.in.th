@@ -7,11 +7,13 @@ import { isObjectEmpty } from 'utils/isEmpty'
 import { onetap } from './auth/onetap'
 
 type User = firebase.User | null
-interface UserData {
-  user: User | undefined
+
+export interface Data {
   username: string
   admin: boolean
 }
+
+type UserData = { user: User | undefined } & Data
 
 interface UserState {
   user: UserData
@@ -25,7 +27,7 @@ type UserAction =
     }
   | {
       type: 'RECEIVE_CONTEXT'
-      payload: UserData
+      payload: Data
     }
   | {
       type: 'LOADING_DONE'

@@ -17,6 +17,7 @@ import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 import firebase from 'lib/firebase'
 import { useUser } from 'components/UserContext'
+import { Data } from 'components/UserContext'
 
 const SetUsernameSchema = Yup.object().shape({
   username: Yup.string().required('Please Enter Your Username'),
@@ -51,9 +52,8 @@ export const SetUsernameComponent = ({ setErrorMessage }) => {
               duration: 3000,
               isClosable: true,
             })
-            await mutate('getUserContext', {
-              ...user,
-              username: values.username,
+            await mutate('getUserContext', async (user: Data) => {
+              return { ...user, username: values.username }
             })
             Router.push('/')
           } else {
