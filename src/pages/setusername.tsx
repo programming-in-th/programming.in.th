@@ -1,10 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
+import Router from 'next/router'
 import { Text, Flex, Box } from '@chakra-ui/core'
 import { PageLayout } from 'components/Layout'
 import { SetUsernameComponent } from 'components/auth/SetUsername'
+import { useUser } from 'components/UserContext'
 
 const SetUsername = () => {
   const [error, setError] = useState<string>(' ')
+  const { user } = useUser()
+  useEffect(() => {
+    if (user.user === null) {
+      Router.push('/')
+    }
+  }, [user.user])
+
   return (
     <PageLayout>
       <Flex align="center" justify="center" flexGrow={1} flexDirection="column">

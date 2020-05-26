@@ -145,12 +145,6 @@ const userContextComp = ({ children }) => {
     }
   }, [userState, router.pathname])
 
-  useEffect(() => {
-    if (userState.user.user === null) {
-      router.push('/')
-    }
-  })
-
   return (
     <UserStateContext.Provider value={{ ...userState, userDispatch }}>
       {children}
