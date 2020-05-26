@@ -12,7 +12,7 @@ const SetUsername = () => {
     if (user.user === null) {
       Router.push('/')
     }
-  })
+  }, [user.user])
 
   return (
     <PageLayout>
