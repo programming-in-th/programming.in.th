@@ -50,7 +50,9 @@ export default () => {
         )
       }
 
-      return submissions.map((submission: ISubmissionList) => (
+      const { results } = submissions
+
+      return results.map((submission: ISubmissionList) => (
         <React.Fragment key={submission.submissionID}>
           {submission ? (
             <Link href={`/submissions/${submission.submissionID}`}>
@@ -73,9 +75,7 @@ export default () => {
       ))
     },
     ({ data: submissions }) => {
-      return submissions && submissions.length
-        ? submissions[submissions.length - 1].id + 1
-        : null
+      return submissions.next
     },
     [username, task, router]
   )
@@ -139,11 +139,7 @@ export default () => {
             mt={4}
             width="100%"
           >
-            {isLoadingMore
-              ? '. . .'
-              : isReachingEnd
-              ? 'No more submission'
-              : 'Load more'}
+            {isReachingEnd ? 'No more submission' : 'Load more'}
           </Button>
         </Box>
       </Flex>
