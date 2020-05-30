@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useSWR, { useSWRPages } from 'swr'
@@ -25,61 +25,100 @@ export default () => {
     setTask((router.query.task as string) || '')
   }, [router.query])
 
-  const { pages, isLoadingMore, isReachingEnd, loadMore } = useSWRPages(
-    'submission',
-    ({ offset, withSWR }) => {
-      const { data: submissions } = withSWR(
-        useSWR(
-          `${config.baseURL}/getSubmissions?offset=${offset || 0}&username=${
-            username || ''
-          }&taskID=${task || ''}`,
-          SWRfetch,
-          { errorRetryCount: 3 }
+  const SubmissionsList = useCallback(() => {
+    const { pages, isLoadingMore, isReachingEnd, loadMore } = useSWRPages(
+      `submission-${username}-${task}`,
+      ({ offset, withSWR }) => {
+        const { data: submissions } = withSWR(
+          useSWR(
+            `${config.baseURL}/getSubmissions?offset=${
+              offset || 0
+            }&username=${username}&taskID=${task}`,
+            SWRfetch
+          )
         )
-      )
 
-      if (!submissions) {
-        return (
-          <Tr>
-            <td colSpan={7}>
-              <Text textAlign={['start', 'center']} p={4}>
-                Loading...
-              </Text>
-            </td>
-          </Tr>
-        )
-      }
-
-      const { results } = submissions
-
-      return results.map((submission: ISubmissionList) => (
-        <React.Fragment key={submission.submissionID}>
-          {submission ? (
-            <Link href={`/submissions/${submission.submissionID}`}>
-              <Tr>
-                <Td>{submission.humanTimestamp}</Td>
-                <Td>{submission.username}</Td>
-                <Td>{submission.taskID}</Td>
-                <Td>{submission.score}</Td>
-                <Td>{arrToObj(config.languageData)[submission.language]}</Td>
-                <Td>{submission.time}</Td>
-                <Td>{submission.memory}</Td>
-              </Tr>
-            </Link>
-          ) : (
+        if (!submissions) {
+          return (
             <Tr>
-              <td colSpan={7}></td>
+              <td colSpan={7}>
+                <Text textAlign={['start', 'center']} p={4}>
+                  Loading...
+                </Text>
+              </td>
             </Tr>
-          )}
-        </React.Fragment>
-      ))
-    },
-    ({ data: submissions }) => {
-      return submissions.next
-    },
-    [username, task, router]
-  )
+          )
+        }
 
+        const { results } = submissions
+
+        return results.map((submission: ISubmissionList) => (
+          <React.Fragment key={submission.submissionID}>
+            {submission ? (
+              <Link href={`/submissions/${submission.submissionID}`}>
+                <Tr>
+                  <Td>{submission.humanTimestamp}</Td>
+                  <Td>{submission.username}</Td>
+                  <Td>{submission.taskID}</Td>
+                  <Td>{submission.score}</Td>
+                  <Td>{arrToObj(config.languageData)[submission.language]}</Td>
+                  <Td>{submission.time}</Td>
+                  <Td>{submission.memory}</Td>
+                </Tr>
+              </Link>
+            ) : (
+              <Tr>
+                <td colSpan={7}></td>
+              </Tr>
+            )}
+          </React.Fragment>
+        ))
+      },
+      ({ data: submissions }) => {
+        return submissions.next
+      },
+      []
+    )
+
+    return (
+      <React.Fragment>
+        <Box
+          mt={4}
+          boxShadow="var(--shadow-default)"
+          borderRadius={4}
+          width="1000px"
+          maxW="100%"
+          overflowX="scroll"
+          borderBottom="1px solid #E2E8F0"
+        >
+          <Table>
+            <thead>
+              <tr>
+                <Th>SUBMISSION TIME</Th>
+                <Th>USERNAME</Th>
+                <Th>TASK</Th>
+                <Th>POINTS</Th>
+                <Th>LANGUAGE</Th>
+                <Th>TIME</Th>
+                <Th>MEMORY</Th>
+              </tr>
+            </thead>
+
+            <tbody>{pages}</tbody>
+          </Table>
+        </Box>
+        <Button
+          onClick={loadMore}
+          isLoading={isLoadingMore}
+          isDisabled={isReachingEnd || isLoadingMore}
+          mt={4}
+          width="100%"
+        >
+          {isReachingEnd ? 'No more submission' : 'Load more'}
+        </Button>
+      </React.Fragment>
+    )
+  }, [username, task])
   return (
     <PageLayout>
       <Flex justify="center" flexGrow={1} p={4}>
@@ -107,40 +146,7 @@ export default () => {
               mt={[4, 0]}
             />
           </Flex>
-          <Box
-            mt={4}
-            boxShadow="var(--shadow-default)"
-            borderRadius={4}
-            width="1000px"
-            maxW="100%"
-            overflowX="scroll"
-            borderBottom="1px solid #E2E8F0"
-          >
-            <Table>
-              <thead>
-                <tr>
-                  <Th>SUBMISSION TIME</Th>
-                  <Th>USERNAME</Th>
-                  <Th>TASK</Th>
-                  <Th>POINTS</Th>
-                  <Th>LANGUAGE</Th>
-                  <Th>TIME</Th>
-                  <Th>MEMORY</Th>
-                </tr>
-              </thead>
-
-              <tbody>{pages}</tbody>
-            </Table>
-          </Box>
-          <Button
-            onClick={loadMore}
-            isLoading={isLoadingMore}
-            isDisabled={isReachingEnd || isLoadingMore}
-            mt={4}
-            width="100%"
-          >
-            {isReachingEnd ? 'No more submission' : 'Load more'}
-          </Button>
+          <SubmissionsList />
         </Box>
       </Flex>
     </PageLayout>
