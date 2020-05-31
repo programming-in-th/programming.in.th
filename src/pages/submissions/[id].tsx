@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
@@ -22,6 +22,8 @@ import { PageLayout } from 'components/Layout'
 import { Table, Th, Td, Tr } from 'components/submissions/VerdictTable'
 import { Code } from 'components/Code'
 
+import firebase from 'lib/firebase'
+
 import { fetchFromFirebase } from 'utils/fetcher'
 
 import { IGroup } from '../../@types/group'
@@ -40,27 +42,61 @@ const mapLanguage: TPlot = {
 }
 
 const SubmissionDetail: NextPage = () => {
+  const [submission, setSubmission] = useState<ISubmission>(null)
+  const [exists, setExists] = useState<boolean>(true)
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
-  const { data: submission } = useSWR<ISubmission>(
+  const { data: cfSubmission } = useSWR<ISubmission>(
     ['getSubmission', id],
     (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
+
+  useEffect(() => {
+    setSubmission((oldSubmission: ISubmission) => {
+      return { ...oldSubmission, ...cfSubmission }
+    })
+  }, [cfSubmission])
+
+  useEffect(() => {
+    const unsubscribe = firebase
+      .firestore()
+      .doc(`submissions/${id}`)
+      .onSnapshot((doc) => {
+        setExists(doc.exists)
+        const data = doc.data()
+        setSubmission((oldSubmission: ISubmission) => {
+          return { ...oldSubmission, ...data }
+        })
+      })
+    return () => {
+      unsubscribe()
+    }
+  }, [])
 
   const [currentCodeIndex, setCurrentCodeIndex] = useState<number>(0)
 
   const { score, fullScore, time, memory } = calculate(submission?.groups)
 
+  if (!exists) {
+    return (
+      <PageLayout>
+        <Flex
+          align="center"
+          justify="center"
+          width="100%"
+          p={[4, 8]}
+          flexGrow={1}
+        >
+          <Heading>Submission doesn't exist</Heading>
+        </Flex>
+      </PageLayout>
+    )
+  }
+
   return (
     <PageLayout>
-      <Flex
-        align="center"
-        justify="center"
-        width="100%"
-        p={[4, 8]}
-        flexGrow={1}
-      >
+      <Flex align="top" justify="center" width="100%" p={[4, 8]} flexGrow={1}>
         <Box
           borderRadius={6}
           width="1000px"
@@ -68,17 +104,20 @@ const SubmissionDetail: NextPage = () => {
           boxShadow="var(--shadow-md)"
           p={4}
         >
-          {submission ? (
+          {submission && submission.task ? (
             <Box>
               <Box>
-                <Heading fontSize="2xl">
-                  [{submission.task.id}] {submission.task.title}
-                </Heading>
-                <Link href={`/tasks/${submission.task.id}`}>
-                  <ChakraLink href={`/tasks/${submission.task.id}`}>
-                    Statement
-                  </ChakraLink>
-                </Link>
+                <React.Fragment>
+                  <Heading fontSize="2xl">
+                    [{submission.task.id}] {submission.task.title}
+                  </Heading>
+                  <Link href={`/tasks/${submission.task.id}`}>
+                    <ChakraLink href={`/tasks/${submission.task.id}`}>
+                      Statement
+                    </ChakraLink>
+                  </Link>
+                </React.Fragment>
+
                 <Box mt={2}>
                   <p>Score: {score}</p>
                   <p>Time: {time}</p>
@@ -88,88 +127,83 @@ const SubmissionDetail: NextPage = () => {
                 </Box>
               </Box>
 
-              {submission.code !== '' ? (
-                <React.Fragment>
-                  <Box mt={4}>
-                    {submission.task.type !== 'normal' &&
-                      submission.task.fileName.map((name, index) => (
-                        <Button
-                          key={name}
-                          onClick={() => setCurrentCodeIndex(index)}
-                          ml={index > 0 ? 4 : 0}
-                          size="sm"
-                        >
-                          {name}
-                        </Button>
-                      ))}
-                  </Box>
+              <Box mt={4}>
+                {submission.task.type !== 'normal' &&
+                  submission.task.fileName.map((name, index) => (
+                    <Button
+                      key={name}
+                      onClick={() => setCurrentCodeIndex(index)}
+                      ml={index > 0 ? 4 : 0}
+                      size="sm"
+                    >
+                      {name}
+                    </Button>
+                  ))}
+              </Box>
 
-                  <Box mt={4}>
-                    <Code
-                      code={submission.code[currentCodeIndex]}
-                      language={mapLanguage[submission.language]}
-                    />
-                  </Box>
+              <Box mt={4}>
+                <Code
+                  code={submission.code[currentCodeIndex]}
+                  language={mapLanguage[submission.language]}
+                />
+              </Box>
 
-                  {submission.groups && (
-                    <Accordion defaultIndex={[]} allowMultiple>
-                      {submission.groups.map((group: IGroup, index) => {
-                        return (
-                          <AccordionItem key={index}>
-                            <AccordionHeader>
-                              <Box flex="1" textAlign="left">
-                                Subtasks #{index + 1} [{group.score}/
-                                {group.fullScore}]
-                              </Box>
-                              <AccordionIcon />
-                            </AccordionHeader>
-                            <AccordionPanel pb={4} overflow="scroll">
-                              <Table>
-                                <thead>
-                                  <tr>
-                                    <Th>#</Th>
-                                    <Th>Verdict</Th>
-                                    <Th>Time</Th>
-                                    <Th>Memory</Th>
-                                    <Th>Message</Th>
-                                  </tr>
-                                </thead>
+              {submission.groups && (
+                <Accordion defaultIndex={[]} allowMultiple>
+                  {submission.groups.map((group: IGroup, index) => {
+                    return (
+                      <AccordionItem key={index}>
+                        <AccordionHeader>
+                          <Box flex="1" textAlign="left">
+                            Subtasks #{index + 1} [{group.score}/
+                            {group.fullScore}]
+                          </Box>
+                          <AccordionIcon />
+                        </AccordionHeader>
+                        <AccordionPanel pb={4} overflow="scroll">
+                          <Table>
+                            <thead>
+                              <tr>
+                                <Th>#</Th>
+                                <Th>Verdict</Th>
+                                <Th>Time</Th>
+                                <Th>Memory</Th>
+                                <Th>Message</Th>
+                              </tr>
+                            </thead>
 
-                                <tbody>
-                                  {group.status.map(
-                                    (status: IStatus, index) => (
-                                      <Tr
-                                        correct={status.verdict === 'Correct'}
-                                        key={index}
-                                      >
-                                        <Td>{index + 1}</Td>
-                                        <Td>{status.verdict}</Td>
-                                        <Td>{status.time} ms</Td>
-                                        <Td>{status.memory} kB</Td>
-                                        <Td>{status.message}</Td>
-                                      </Tr>
-                                    )
-                                  )}
-                                </tbody>
-                              </Table>
-                            </AccordionPanel>
-                          </AccordionItem>
-                        )
-                      })}
-                    </Accordion>
-                  )}
-                </React.Fragment>
-              ) : (
-                <Heading>Code Hidden</Heading>
+                            <tbody>
+                              {group.status.map((status: IStatus, index) => (
+                                <Tr
+                                  correct={status.verdict === 'Correct'}
+                                  key={index}
+                                >
+                                  <Td>{index + 1}</Td>
+                                  <Td>{status.verdict}</Td>
+                                  <Td>{status.time} ms</Td>
+                                  <Td>{status.memory} kB</Td>
+                                  <Td>{status.message}</Td>
+                                </Tr>
+                              ))}
+                            </tbody>
+                          </Table>
+                        </AccordionPanel>
+                      </AccordionItem>
+                    )
+                  })}
+                </Accordion>
               )}
             </Box>
           ) : (
             <Box>
-              <Skeleton height="20px" width="40%" my="10px" />
-              <Skeleton height="20px" width="25%" my="10px" />
-              <Skeleton height="20px" width="25%" my="10px" />
-              <Skeleton height="20px" my="10px" />
-              <Skeleton height="20px" width="90%" my="10px" />
+              <Skeleton height="25px" width="40%" />
+              <Skeleton height="14px" width="10%" mt="10px" />
+              <Skeleton height="14px" width="10%" mt="20px" />
+              <Skeleton height="14px" width="10%" mt="10px" />
+              <Skeleton height="14px" width="20%" mt="10px" />
+              <Skeleton height="14px" width="40%" mt="10px" />
+              <Skeleton height="14px" width="15%" mt="10px" />
+              <Skeleton height="600px" mt="20px" />
             </Box>
           )}
         </Box>
