@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer } from 'react'
+import React, { useState, useEffect } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
@@ -30,7 +30,6 @@ import { IGroup } from '../../@types/group'
 import { IStatus } from '../../@types/status'
 import { ISubmission } from '../../@types/submission'
 import { calculate } from 'utils/calculate'
-import { Router } from 'next/router'
 
 type TPlot = {
   [key: string]: 'c' | 'cpp' | 'python'
@@ -129,79 +128,71 @@ const SubmissionDetail: NextPage = () => {
                 </Box>
               </Box>
 
-              {submission.code && submission.code !== '' ? (
-                <React.Fragment>
-                  <Box mt={4}>
-                    {submission.task.type !== 'normal' &&
-                      submission.task.fileName.map((name, index) => (
-                        <Button
-                          key={name}
-                          onClick={() => setCurrentCodeIndex(index)}
-                          ml={index > 0 ? 4 : 0}
-                          size="sm"
-                        >
-                          {name}
-                        </Button>
-                      ))}
-                  </Box>
+              <Box mt={4}>
+                {submission.task.type !== 'normal' &&
+                  submission.task.fileName.map((name, index) => (
+                    <Button
+                      key={name}
+                      onClick={() => setCurrentCodeIndex(index)}
+                      ml={index > 0 ? 4 : 0}
+                      size="sm"
+                    >
+                      {name}
+                    </Button>
+                  ))}
+              </Box>
 
-                  <Box mt={4}>
-                    <Code
-                      code={submission.code[currentCodeIndex]}
-                      language={mapLanguage[submission.language]}
-                    />
-                  </Box>
+              <Box mt={4}>
+                <Code
+                  code={submission.code[currentCodeIndex]}
+                  language={mapLanguage[submission.language]}
+                />
+              </Box>
 
-                  {submission.groups && (
-                    <Accordion defaultIndex={[]} allowMultiple>
-                      {submission.groups.map((group: IGroup, index) => {
-                        return (
-                          <AccordionItem key={index}>
-                            <AccordionHeader>
-                              <Box flex="1" textAlign="left">
-                                Subtasks #{index + 1} [{group.score}/
-                                {group.fullScore}]
-                              </Box>
-                              <AccordionIcon />
-                            </AccordionHeader>
-                            <AccordionPanel pb={4} overflow="scroll">
-                              <Table>
-                                <thead>
-                                  <tr>
-                                    <Th>#</Th>
-                                    <Th>Verdict</Th>
-                                    <Th>Time</Th>
-                                    <Th>Memory</Th>
-                                    <Th>Message</Th>
-                                  </tr>
-                                </thead>
+              {submission.groups && (
+                <Accordion defaultIndex={[]} allowMultiple>
+                  {submission.groups.map((group: IGroup, index) => {
+                    return (
+                      <AccordionItem key={index}>
+                        <AccordionHeader>
+                          <Box flex="1" textAlign="left">
+                            Subtasks #{index + 1} [{group.score}/
+                            {group.fullScore}]
+                          </Box>
+                          <AccordionIcon />
+                        </AccordionHeader>
+                        <AccordionPanel pb={4} overflow="scroll">
+                          <Table>
+                            <thead>
+                              <tr>
+                                <Th>#</Th>
+                                <Th>Verdict</Th>
+                                <Th>Time</Th>
+                                <Th>Memory</Th>
+                                <Th>Message</Th>
+                              </tr>
+                            </thead>
 
-                                <tbody>
-                                  {group.status.map(
-                                    (status: IStatus, index) => (
-                                      <Tr
-                                        correct={status.verdict === 'Correct'}
-                                        key={index}
-                                      >
-                                        <Td>{index + 1}</Td>
-                                        <Td>{status.verdict}</Td>
-                                        <Td>{status.time} ms</Td>
-                                        <Td>{status.memory} kB</Td>
-                                        <Td>{status.message}</Td>
-                                      </Tr>
-                                    )
-                                  )}
-                                </tbody>
-                              </Table>
-                            </AccordionPanel>
-                          </AccordionItem>
-                        )
-                      })}
-                    </Accordion>
-                  )}
-                </React.Fragment>
-              ) : (
-                <Box> </Box>
+                            <tbody>
+                              {group.status.map((status: IStatus, index) => (
+                                <Tr
+                                  correct={status.verdict === 'Correct'}
+                                  key={index}
+                                >
+                                  <Td>{index + 1}</Td>
+                                  <Td>{status.verdict}</Td>
+                                  <Td>{status.time} ms</Td>
+                                  <Td>{status.memory} kB</Td>
+                                  <Td>{status.message}</Td>
+                                </Tr>
+                              ))}
+                            </tbody>
+                          </Table>
+                        </AccordionPanel>
+                      </AccordionItem>
+                    )
+                  })}
+                </Accordion>
               )}
             </Box>
           ) : (
