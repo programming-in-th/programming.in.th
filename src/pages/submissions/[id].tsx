@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useReducer } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
@@ -22,12 +22,15 @@ import { PageLayout } from 'components/Layout'
 import { Table, Th, Td, Tr } from 'components/submissions/VerdictTable'
 import { Code } from 'components/Code'
 
+import firebase from 'lib/firebase'
+
 import { fetchFromFirebase } from 'utils/fetcher'
 
 import { IGroup } from '../../@types/group'
 import { IStatus } from '../../@types/status'
 import { ISubmission } from '../../@types/submission'
 import { calculate } from 'utils/calculate'
+import { Router } from 'next/router'
 
 type TPlot = {
   [key: string]: 'c' | 'cpp' | 'python'
@@ -40,27 +43,62 @@ const mapLanguage: TPlot = {
 }
 
 const SubmissionDetail: NextPage = () => {
+  const [submission, setSubmission] = useState<ISubmission>(null)
+  const [exists, setExists] = useState<boolean>(true)
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
-  const { data: submission } = useSWR<ISubmission>(
+  const { data: cfSubmission } = useSWR<ISubmission>(
     ['getSubmission', id],
     (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
+
+  useEffect(() => {
+    setSubmission((oldSubmission: ISubmission) => {
+      return { ...oldSubmission, ...cfSubmission }
+    })
+  }, [cfSubmission])
+
+  useEffect(() => {
+    const unsubscribe = firebase
+      .firestore()
+      .doc(`submissions/${id}`)
+      .onSnapshot((doc) => {
+        setExists(doc.exists)
+        const data = doc.data()
+        setSubmission((oldSubmission: ISubmission) => {
+          return { ...oldSubmission, ...data }
+        })
+      })
+    return () => {
+      unsubscribe()
+    }
+  }, [])
+  useEffect(() => {}, [submission])
 
   const [currentCodeIndex, setCurrentCodeIndex] = useState<number>(0)
 
   const { score, fullScore, time, memory } = calculate(submission?.groups)
 
+  if (!exists) {
+    return (
+      <PageLayout>
+        <Flex
+          align="center"
+          justify="center"
+          width="100%"
+          p={[4, 8]}
+          flexGrow={1}
+        >
+          <Heading>Submission doesn't exist</Heading>
+        </Flex>
+      </PageLayout>
+    )
+  }
+
   return (
     <PageLayout>
-      <Flex
-        align="center"
-        justify="center"
-        width="100%"
-        p={[4, 8]}
-        flexGrow={1}
-      >
+      <Flex align="top" justify="center" width="100%" p={[4, 8]} flexGrow={1}>
         <Box
           borderRadius={6}
           width="1000px"
@@ -68,17 +106,20 @@ const SubmissionDetail: NextPage = () => {
           boxShadow="var(--shadow-md)"
           p={4}
         >
-          {submission ? (
+          {submission && submission.task ? (
             <Box>
               <Box>
-                <Heading fontSize="2xl">
-                  [{submission.task.id}] {submission.task.title}
-                </Heading>
-                <Link href={`/tasks/${submission.task.id}`}>
-                  <ChakraLink href={`/tasks/${submission.task.id}`}>
-                    Statement
-                  </ChakraLink>
-                </Link>
+                <React.Fragment>
+                  <Heading fontSize="2xl">
+                    [{submission.task.id}] {submission.task.title}
+                  </Heading>
+                  <Link href={`/tasks/${submission.task.id}`}>
+                    <ChakraLink href={`/tasks/${submission.task.id}`}>
+                      Statement
+                    </ChakraLink>
+                  </Link>
+                </React.Fragment>
+
                 <Box mt={2}>
                   <p>Score: {score}</p>
                   <p>Time: {time}</p>
@@ -88,7 +129,7 @@ const SubmissionDetail: NextPage = () => {
                 </Box>
               </Box>
 
-              {submission.code !== '' ? (
+              {submission.code && submission.code !== '' ? (
                 <React.Fragment>
                   <Box mt={4}>
                     {submission.task.type !== 'normal' &&
@@ -160,16 +201,19 @@ const SubmissionDetail: NextPage = () => {
                   )}
                 </React.Fragment>
               ) : (
-                <Heading>Code Hidden</Heading>
+                <Box> </Box>
               )}
             </Box>
           ) : (
             <Box>
-              <Skeleton height="20px" width="40%" my="10px" />
-              <Skeleton height="20px" width="25%" my="10px" />
-              <Skeleton height="20px" width="25%" my="10px" />
-              <Skeleton height="20px" my="10px" />
-              <Skeleton height="20px" width="90%" my="10px" />
+              <Skeleton height="25px" width="40%" />
+              <Skeleton height="14px" width="10%" mt="10px" />
+              <Skeleton height="14px" width="10%" mt="20px" />
+              <Skeleton height="14px" width="10%" mt="10px" />
+              <Skeleton height="14px" width="20%" mt="10px" />
+              <Skeleton height="14px" width="40%" mt="10px" />
+              <Skeleton height="14px" width="15%" mt="10px" />
+              <Skeleton height="600px" mt="20px" />
             </Box>
           )}
         </Box>
