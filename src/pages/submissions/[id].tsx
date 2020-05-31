@@ -73,7 +73,6 @@ const SubmissionDetail: NextPage = () => {
       unsubscribe()
     }
   }, [])
-  useEffect(() => {}, [submission])
 
   const [currentCodeIndex, setCurrentCodeIndex] = useState<number>(0)
 
