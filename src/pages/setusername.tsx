@@ -14,6 +14,14 @@ const SetUsername = () => {
     }
   }, [user.user])
 
+  if (!user.user) {
+    return (
+      <PageLayout>
+        <React.Fragment></React.Fragment>
+      </PageLayout>
+    )
+  }
+
   return (
     <PageLayout>
       <Flex align="center" justify="center" flexGrow={1} flexDirection="column">
