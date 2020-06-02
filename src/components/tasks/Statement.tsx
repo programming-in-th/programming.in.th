@@ -27,7 +27,7 @@ const PDF = styled.object`
 export const Statement = ({ metadata }) => {
   const { user } = useUser()
 
-  const { data: submissions } = useSWR<ISubmissionList[]>(
+  const { data: submissions } = useSWR(
     user.username !== ''
       ? `${config.baseURL}/getSubmissions?offset=&username=${
           user.username
@@ -91,17 +91,11 @@ export const Statement = ({ metadata }) => {
             </thead>
             <tbody>
               {user.user ? (
-                submissions ? (
-                  isArrayEmpty(submissions) ? (
-                    <Tr>
-                      <td colSpan={2}>
-                        <Text textAlign={['start', 'center']} p={4}>
-                          No recent submission
-                        </Text>
-                      </td>
-                    </Tr>
+                submissions?.results ? (
+                  isArrayEmpty(submissions.results) ? (
+                    <NoRecentSubmission></NoRecentSubmission>
                   ) : (
-                    submissions.map((submission: ISubmissionList) => (
+                    submissions.results.map((submission: ISubmissionList) => (
                       <Link
                         href={`/submissions/${submission.submissionID}`}
                         key={submission.submissionID}
@@ -114,22 +108,16 @@ export const Statement = ({ metadata }) => {
                     ))
                   )
                 ) : (
-                  <Tr>
+                  <tr>
                     <td colSpan={2}>
                       <Text textAlign={['start', 'center']} p={4}>
                         Loading...
                       </Text>
                     </td>
-                  </Tr>
+                  </tr>
                 )
               ) : (
-                <Tr>
-                  <td colSpan={2}>
-                    <Text textAlign={['start', 'center']} p={4}>
-                      No recent submission
-                    </Text>
-                  </td>
-                </Tr>
+                <NoRecentSubmission></NoRecentSubmission>
               )}
             </tbody>
           </Table>
@@ -140,3 +128,13 @@ export const Statement = ({ metadata }) => {
     </Flex>
   )
 }
+
+const NoRecentSubmission = () => (
+  <tr>
+    <td colSpan={2}>
+      <Text textAlign={['start', 'center']} p={4}>
+        No recent submission
+      </Text>
+    </td>
+  </tr>
+)
