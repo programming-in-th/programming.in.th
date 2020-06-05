@@ -1,11 +1,12 @@
 import React from 'react'
 import Link from 'next/link'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 import styled from '@emotion/styled'
 import { Flex, Box, Text, Link as ChakraLink } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
+import { fetchFromFirebase } from 'utils/fetcher'
 
 import { Normal } from './Submit/Normal'
 import { Comm } from './Submit/Comm'
@@ -95,18 +96,26 @@ export const Statement = ({ metadata }) => {
                   isArrayEmpty(submissions.results) ? (
                     <NoRecentSubmission></NoRecentSubmission>
                   ) : (
-                    submissions.results.map((submission: ISubmissionList) => (
-                      <Link
-                        href="/submissions/[id]"
-                        as={`/submissions/${submission.submissionID}`}
-                        key={submission.submissionID}
-                      >
-                        <Tr>
-                          <Td>{submission.humanTimestamp}</Td>
-                          <Td>{submission.score}</Td>
-                        </Tr>
-                      </Link>
-                    ))
+                    submissions.results.map((submission: ISubmissionList) => {
+                      mutate(
+                        ['getSubmission', submission.submissionID],
+                        fetchFromFirebase('getSubmission', {
+                          submissionID: submission.submissionID,
+                        })
+                      )
+                      return (
+                        <Link
+                          href="/submissions/[id]"
+                          as={`/submissions/${submission.submissionID}`}
+                          key={submission.submissionID}
+                        >
+                          <Tr>
+                            <Td>{submission.humanTimestamp}</Td>
+                            <Td>{submission.score}</Td>
+                          </Tr>
+                        </Link>
+                      )
+                    })
                   )
                 ) : (
                   <tr>
