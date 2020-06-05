@@ -25,7 +25,7 @@ export const Normal = ({ metadata }) => {
 
   useEffect(() => {
     if (status === 'OK') {
-      router.push(`/submissions/${submissionID}`)
+      router.push('/submissions/[id]', `/submissions/${submissionID}`)
     } else if (status === 'ERROR') {
       toast({
         title: 'Error!',

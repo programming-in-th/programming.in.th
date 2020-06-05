@@ -55,7 +55,10 @@ export default () => {
         return results.map((submission: ISubmissionList) => (
           <React.Fragment key={submission.submissionID}>
             {submission ? (
-              <Link href={`/submissions/${submission.submissionID}`}>
+              <Link
+                href="/submissions/[id]"
+                as={`/submissions/${submission.submissionID}`}
+              >
                 <Tr>
                   <Td>{submission.humanTimestamp}</Td>
                   <Td>{submission.username}</Td>

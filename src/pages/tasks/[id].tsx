@@ -115,7 +115,9 @@ export default ({ metadata, solution }) => {
             >
               Statistics
             </ChakraLink>
-            <Link href={`/submissions?task=${metadata.id}`}>
+            <Link
+              href={{ pathname: '/submissions', query: { task: metadata.id } }}
+            >
               <ChakraLink
                 mt={[2, 0]}
                 ml={[0, 6]}

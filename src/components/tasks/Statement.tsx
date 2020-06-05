@@ -97,7 +97,8 @@ export const Statement = ({ metadata }) => {
                   ) : (
                     submissions.results.map((submission: ISubmissionList) => (
                       <Link
-                        href={`/submissions/${submission.submissionID}`}
+                        href="/submissions/[id]"
+                        as={`/submissions/${submission.submissionID}`}
                         key={submission.submissionID}
                       >
                         <Tr>
