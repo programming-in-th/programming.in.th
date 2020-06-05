@@ -111,7 +111,7 @@ const SubmissionDetail: NextPage = () => {
                   <Heading fontSize="2xl">
                     [{submission.task.id}] {submission.task.title}
                   </Heading>
-                  <Link href={`/tasks/${submission.task.id}`}>
+                  <Link href="/tasks/[id]" as={`/tasks/${submission.task.id}`}>
                     <ChakraLink href={`/tasks/${submission.task.id}`}>
                       Statement
                     </ChakraLink>
