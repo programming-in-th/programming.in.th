@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import useSWR, { useSWRPages } from 'swr'
+import useSWR, { useSWRPages, mutate } from 'swr'
 import { Box, Flex, Button, Heading, Input, Text } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
+import { fetchFromFirebase } from 'utils/fetcher'
 
 import { ISubmissionList } from '../../@types/submission'
 
@@ -52,32 +53,46 @@ export default () => {
 
         const { results } = submissions
 
-        return results.map((submission: ISubmissionList) => (
-          <React.Fragment key={submission.submissionID}>
-            {submission ? (
-              <Link
-                href="/submissions/[id]"
-                as={`/submissions/${submission.submissionID}`}
-              >
+        return results.map((submission: ISubmissionList) => {
+          mutate(
+            ['getSubmission', submission.submissionID],
+            fetchFromFirebase('getSubmission', {
+              submissionID: submission.submissionID,
+            })
+          )
+          return (
+            <React.Fragment key={submission.submissionID}>
+              {submission ? (
+                <Link
+                  href="/submissions/[id]"
+                  as={`/submissions/${submission.submissionID}`}
+                >
+                  <Tr>
+                    <Td>{submission.humanTimestamp}</Td>
+                    <Td>{submission.username}</Td>
+                    <Td>{submission.taskID}</Td>
+                    <Td>{submission.score}</Td>
+                    <Td>
+                      {arrToObj(config.languageData)[submission.language]}
+                    </Td>
+                    <Td>{submission.time}</Td>
+                    <Td>{submission.memory}</Td>
+                  </Tr>
+                </Link>
+              ) : (
                 <Tr>
-                  <Td>{submission.humanTimestamp}</Td>
-                  <Td>{submission.username}</Td>
-                  <Td>{submission.taskID}</Td>
-                  <Td>{submission.score}</Td>
-                  <Td>{arrToObj(config.languageData)[submission.language]}</Td>
-                  <Td>{submission.time}</Td>
-                  <Td>{submission.memory}</Td>
+                  <td colSpan={7}></td>
                 </Tr>
-              </Link>
-            ) : (
-              <Tr>
-                <td colSpan={7}></td>
-              </Tr>
-            )}
-          </React.Fragment>
-        ))
+              )}
+            </React.Fragment>
+          )
+        })
       },
       ({ data: submissions }) => {
+        if (submissions.next) {
+          const key = `${config.baseURL}/getSubmissions?offset=${submissions.next}&username=${username}&taskID=${task}`
+          mutate(key, SWRfetch(key))
+        }
         return submissions.next
       },
       []
