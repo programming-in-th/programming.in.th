@@ -89,6 +89,10 @@ export default () => {
         })
       },
       ({ data: submissions }) => {
+        if (submissions.next) {
+          const key = `${config.baseURL}/getSubmissions?offset=${submissions.next}&username=${username}&taskID=${task}`
+          mutate(key, SWRfetch(key))
+        }
         return submissions.next
       },
       []

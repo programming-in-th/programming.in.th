@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 
 import {
   Skeleton,
@@ -42,21 +42,14 @@ const mapLanguage: TPlot = {
 }
 
 const SubmissionDetail: NextPage = () => {
-  const [submission, setSubmission] = useState<ISubmission>(null)
   const [exists, setExists] = useState<boolean>(true)
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
-  const { data: cfSubmission } = useSWR<ISubmission>(
+  const { data: submission } = useSWR<ISubmission>(
     ['getSubmission', id],
     (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
-
-  useEffect(() => {
-    setSubmission((oldSubmission: ISubmission) => {
-      return { ...oldSubmission, ...cfSubmission }
-    })
-  }, [cfSubmission])
 
   useEffect(() => {
     const unsubscribe = firebase
@@ -65,7 +58,7 @@ const SubmissionDetail: NextPage = () => {
       .onSnapshot((doc) => {
         setExists(doc.exists)
         const data = doc.data()
-        setSubmission((oldSubmission: ISubmission) => {
+        mutate(['getSubmission', id], async (oldSubmission: ISubmission) => {
           return { ...oldSubmission, ...data }
         })
       })
