@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import useSWR, { useSWRPages, mutate } from 'swr'
+import useSWR, { useSWRPages, cache, mutate } from 'swr'
 import { Box, Flex, Button, Heading, Input, Text } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
@@ -11,10 +11,11 @@ import { fetchFromFirebase } from 'utils/fetcher'
 import { ISubmissionList } from '../../@types/submission'
 
 import { PageLayout } from 'components/Layout'
-import { Td, Table, Th, Tr } from 'components/submissions/ListTable'
+import { Td, Table, Th, Tr, TdHide } from 'components/submissions/ListTable'
 
 import { arrToObj } from 'utils/arrToObj'
 import { insertQueryString } from 'utils/insertQueryString'
+import { isObjectEmpty } from 'utils/isEmpty'
 
 export default () => {
   const router = useRouter()
@@ -54,15 +55,27 @@ export default () => {
         const { results } = submissions
 
         return results.map((submission: ISubmissionList) => {
-          mutate(
-            ['getSubmission', submission.submissionID],
-            fetchFromFirebase('getSubmission', {
-              submissionID: submission.submissionID,
-            })
-          )
+          if (
+            !(
+              isObjectEmpty(submission) ||
+              cache.has(['getSubmission', submission.submissionID])
+            )
+          ) {
+            cache.set(['getSubmission', submission.submissionID], null)
+            mutate(
+              ['getSubmission', submission.submissionID],
+              fetchFromFirebase('getSubmission', {
+                submissionID: submission.submissionID,
+              })
+            )
+          }
           return (
             <React.Fragment key={submission.submissionID}>
-              {submission ? (
+              {isObjectEmpty(submission) ? (
+                <Tr>
+                  <TdHide colSpan={7} />
+                </Tr>
+              ) : (
                 <Link
                   href="/submissions/[id]"
                   as={`/submissions/${submission.submissionID}`}
@@ -79,10 +92,6 @@ export default () => {
                     <Td>{submission.memory}</Td>
                   </Tr>
                 </Link>
-              ) : (
-                <Tr>
-                  <td colSpan={7}></td>
-                </Tr>
               )}
             </React.Fragment>
           )

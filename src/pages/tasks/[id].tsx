@@ -1,8 +1,12 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Flex, Link as ChakraLink, Heading, Text } from '@chakra-ui/core'
+import { mutate } from 'swr'
+
+import { SWRfetch } from 'lib/fetch'
+import { config } from 'config'
 
 import { PageLayout } from 'components/Layout'
 import { Statement } from 'components/tasks/Statement'
@@ -17,6 +21,11 @@ type pageIndex = 'statement' | 'statistics' | 'solution'
 
 export default ({ metadata, solution }) => {
   const router = useRouter()
+
+  useEffect(() => {
+    const key = `${config.baseURL}/getSubmissions?offset=0&username=&taskID=${metadata.id}`
+    mutate(key, SWRfetch(key))
+  }, [])
 
   if (router.isFallback) {
     return (
