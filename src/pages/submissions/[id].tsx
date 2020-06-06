@@ -30,6 +30,7 @@ import { IGroup } from '../../@types/group'
 import { IStatus } from '../../@types/status'
 import { ISubmission } from '../../@types/submission'
 import { calculate } from 'utils/calculate'
+import { isObjectEmpty } from 'utils/isEmpty'
 
 type TPlot = {
   [key: string]: 'c' | 'cpp' | 'python'
@@ -42,7 +43,6 @@ const mapLanguage: TPlot = {
 }
 
 const SubmissionDetail: NextPage = () => {
-  const [exists, setExists] = useState<boolean>(true)
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
@@ -56,7 +56,6 @@ const SubmissionDetail: NextPage = () => {
       .firestore()
       .doc(`submissions/${id}`)
       .onSnapshot((doc) => {
-        setExists(doc.exists)
         const data = doc.data()
         mutate(['getSubmission', id], async (oldSubmission: ISubmission) => {
           return { ...oldSubmission, ...data }
@@ -71,7 +70,7 @@ const SubmissionDetail: NextPage = () => {
 
   const { score, fullScore, time, memory } = calculate(submission?.groups)
 
-  if (!exists) {
+  if (isObjectEmpty(submission)) {
     return (
       <PageLayout>
         <Flex

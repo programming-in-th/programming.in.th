@@ -31,3 +31,7 @@ export const Td = styled.td`
   text-align: left;
   padding: 8px 16px;
 `
+
+export const TdHide = styled.td`
+  height: 40px;
+`

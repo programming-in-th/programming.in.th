@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import useSWR, { mutate } from 'swr'
+import useSWR, { mutate, cache } from 'swr'
 import styled from '@emotion/styled'
 import { Flex, Box, Text, Link as ChakraLink } from '@chakra-ui/core'
 
@@ -13,12 +13,12 @@ import { Comm } from './Submit/Comm'
 import { OutputOnly } from './Submit/OutputOnly'
 
 import { ITask } from '../../@types/task'
-import { Th, Td, Table, Tr } from '../submissions/ListTable'
+import { Th, Td, Table, Tr, TdHide } from '../submissions/ListTable'
 
 import { useUser } from '../UserContext'
 import { ISubmissionList } from '../../@types/submission'
 
-import { isArrayEmpty } from 'utils/isEmpty'
+import { isObjectEmpty, isArrayEmpty } from 'utils/isEmpty'
 
 const PDF = styled.object`
   width: 100%;
@@ -97,13 +97,24 @@ export const Statement = ({ metadata }) => {
                     <NoRecentSubmission></NoRecentSubmission>
                   ) : (
                     submissions.results.map((submission: ISubmissionList) => {
-                      mutate(
-                        ['getSubmission', submission.submissionID],
-                        fetchFromFirebase('getSubmission', {
-                          submissionID: submission.submissionID,
-                        })
-                      )
-                      return (
+                      if (
+                        !(
+                          isObjectEmpty(submission) ||
+                          cache.has(['getSubmission', submission.submissionID])
+                        )
+                      ) {
+                        mutate(
+                          ['getSubmission', submission.submissionID],
+                          fetchFromFirebase('getSubmission', {
+                            submissionID: submission.submissionID,
+                          })
+                        )
+                      }
+                      return isObjectEmpty(submission) ? (
+                        <Tr>
+                          <TdHide colSpan={2} />
+                        </Tr>
+                      ) : (
                         <Link
                           href="/submissions/[id]"
                           as={`/submissions/${submission.submissionID}`}
