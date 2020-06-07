@@ -1,4 +1,4 @@
-import React, { useReducer } from 'react'
+import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
 import { useRouter } from 'next/router'
