@@ -3,7 +3,6 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 
 import { TaskLayout } from 'components/tasks/TaskLayout'
 import { Solution } from 'components/tasks/Solution'
-import { Statement } from 'components/tasks/Statement'
 
 import { renderMarkdown } from 'lib/renderMarkdown'
 
@@ -12,7 +11,6 @@ import db from 'lib/firebase-admin'
 export default ({ type, metadata }) => {
   return (
     <TaskLayout type={type} metadata={metadata}>
-      {/* <Statement metadata={metadata} /> */}
       <Solution solution={metadata.solution} />
     </TaskLayout>
   )
