@@ -1,9 +1,9 @@
 import admin from 'firebase-admin'
 
-let firestore: FirebaseFirestore.Firestore = null
-
 export default function getDb() {
-  if (firestore === null) {
+  try {
+    return admin.firestore()
+  } catch {
     admin.initializeApp({
       credential: admin.credential.cert({
         projectId: process.env.FIREBASE_PROJECT_ID,
@@ -12,9 +12,6 @@ export default function getDb() {
       }),
       databaseURL: 'https://proginth.firebaseio.com',
     })
-
-    firestore = admin.firestore()
+    return admin.firestore()
   }
-
-  return firestore
 }
