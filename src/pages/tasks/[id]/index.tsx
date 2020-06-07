@@ -1,5 +1,7 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
+
+import { useRouter } from 'next/router'
 
 import { TaskLayout } from 'components/tasks/TaskLayout'
 import { Statement } from 'components/tasks/Statement'
@@ -7,9 +9,10 @@ import { Statement } from 'components/tasks/Statement'
 import db from 'lib/firebase-admin'
 
 export default ({ type, metadata }) => {
+  const router = useRouter()
   return (
     <TaskLayout type={type} metadata={metadata}>
-      <Statement metadata={metadata} />
+      {router.isFallback ? null : <Statement metadata={metadata} />}
     </TaskLayout>
   )
 }

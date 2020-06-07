@@ -1,6 +1,8 @@
 import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
+import { useRouter } from 'next/router'
+
 import { TaskLayout } from 'components/tasks/TaskLayout'
 import { Solution } from 'components/tasks/Solution'
 
@@ -9,9 +11,10 @@ import { renderMarkdown } from 'lib/renderMarkdown'
 import db from 'lib/firebase-admin'
 
 export default ({ type, metadata }) => {
+  const router = useRouter()
   return (
     <TaskLayout type={type} metadata={metadata}>
-      <Solution solution={metadata.solution} />
+      {router.isFallback ? null : <Solution solution={metadata.solution} />}
     </TaskLayout>
   )
 }
@@ -41,7 +44,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
-  let metadata: any = {}
+  let metadata: any = { solution: null }
 
   const taskDoc = await db().doc(`tasks/${id}`).get()
 
@@ -58,7 +61,6 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
   } else {
     type = 'null'
   }
-  metadata.solution = null
 
   if (type === 'solution') {
     const solutionRes = await fetch(
