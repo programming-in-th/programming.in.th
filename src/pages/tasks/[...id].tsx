@@ -68,7 +68,7 @@ export default ({ type, metadata, id }) => {
         return <Statement metadata={metadata}></Statement>
 
       case 'solution':
-        return <Solution solution={metadata}></Solution>
+        return <Solution solution={metadata.solution}></Solution>
 
       default:
         return <Statement metadata={metadata}></Statement>
@@ -176,7 +176,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  let metadata: any
+  let metadata: any = {}
 
   const path = params.id
   const id = path[0]
@@ -204,9 +204,9 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
     if (solutionRes.status === 200) {
       const solution = await solutionRes.text()
-      metadata = await renderMarkdown(solution)
+      metadata.solution = await renderMarkdown(solution)
     } else {
-      metadata = null
+      metadata.solution = null
     }
   }
 
