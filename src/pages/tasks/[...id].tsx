@@ -13,13 +13,10 @@ import { Statement } from 'components/tasks/Statement'
 import { Solution } from 'components/tasks/Solution'
 
 import { renderMarkdown } from 'lib/renderMarkdown'
-import { isObjectEmpty } from 'utils/isEmpty'
 
 import db from 'lib/firebase-admin'
 
-type pageIndex = 'statement' | 'statistics' | 'solution'
-
-export default ({ metadata, solution }) => {
+export default ({ type, metadata, id }) => {
   const router = useRouter()
 
   useEffect(() => {
@@ -45,7 +42,7 @@ export default ({ metadata, solution }) => {
     )
   }
 
-  if (isObjectEmpty(metadata)) {
+  if (type === 'null') {
     return (
       <PageLayout>
         <Flex
@@ -63,17 +60,15 @@ export default ({ metadata, solution }) => {
     )
   }
 
-  const [currentPage, setCurrentPage] = useState<pageIndex>('statement')
-
   const category = metadata?.path.split('/')
 
-  const renderPage = (currentPage: pageIndex) => {
-    switch (currentPage) {
+  const RenderPage = () => {
+    switch (type) {
       case 'statement':
         return <Statement metadata={metadata}></Statement>
 
       case 'solution':
-        return <Solution solution={solution}></Solution>
+        return <Solution solution={metadata}></Solution>
 
       default:
         return <Statement metadata={metadata}></Statement>
@@ -86,7 +81,7 @@ export default ({ metadata, solution }) => {
         my={8}
         direction="column"
         flexGrow={1}
-        w={['100%', currentPage === 'solution' ? 800 : 1200]}
+        w={['100%', type === 'solution' ? 800 : 1200]}
         mx="auto"
         transition="width 1s"
       >
@@ -107,20 +102,20 @@ export default ({ metadata, solution }) => {
             mt={[0, 2]}
             color="gray.500"
           >
-            <ChakraLink
-              mt={[2, 0]}
-              lineHeight="18px"
-              color={currentPage === 'statement' ? 'gray.800' : 'gray.500'}
-              onClick={() => setCurrentPage('statement')}
-            >
-              Statement
-            </ChakraLink>
+            <Link href="/tasks/[...id]" as={`/tasks/${id}`}>
+              <ChakraLink
+                mt={[2, 0]}
+                lineHeight="18px"
+                color={type === 'statement' ? 'gray.800' : 'gray.500'}
+              >
+                Statement
+              </ChakraLink>
+            </Link>
             <ChakraLink
               mt={[2, 0]}
               ml={[0, 6]}
               lineHeight="18px"
-              color={currentPage === 'statistics' ? 'gray.800' : 'gray.500'}
-              onClick={() => setCurrentPage('statistics')}
+              color={type === 'statistics' ? 'gray.800' : 'gray.500'}
             >
               Statistics
             </ChakraLink>
@@ -136,18 +131,19 @@ export default ({ metadata, solution }) => {
                 Submissions
               </ChakraLink>
             </Link>
-            <ChakraLink
-              mt={[2, 0]}
-              ml={[0, 6]}
-              lineHeight="18px"
-              color={currentPage === 'solution' ? 'gray.800' : 'gray.500'}
-              onClick={() => setCurrentPage('solution')}
-            >
-              Solution
-            </ChakraLink>
+            <Link href="/tasks/[...id]" as={`/tasks/${id}/solution`}>
+              <ChakraLink
+                mt={[2, 0]}
+                ml={[0, 6]}
+                lineHeight="18px"
+                color={type === 'solution' ? 'gray.800' : 'gray.500'}
+              >
+                Solution
+              </ChakraLink>
+            </Link>
           </Flex>
         </Flex>
-        {renderPage(currentPage)}
+        <RenderPage />
       </Flex>
     </PageLayout>
   )
@@ -159,46 +155,66 @@ export const getStaticPaths: GetStaticPaths = async () => {
     .where('visible', '==', true)
     .get()
 
-  const result: string[] = []
+  const paths = []
 
   for (const doc of taskDocs.docs) {
-    result.push(doc.id)
+    const id = doc.id
+    paths.push({ params: { id: [id] } })
+    const solutionRes = await fetch(
+      `https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/solutions/md/${id}.md`
+    )
+
+    if (solutionRes.status === 200) {
+      paths.push({ params: { id: [id, 'solution'] } })
+    }
   }
 
   return {
-    paths: result.map((id: string) => {
-      return { params: { id } }
-    }),
+    paths,
     fallback: true,
   }
 }
 
-export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
-  let metadata: any = {}
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  let metadata: any
+
+  const path = params.id
+  const id = path[0]
 
   const taskDoc = await db().doc(`tasks/${id}`).get()
-  const data = taskDoc.data()
 
-  if (data) {
-    data.id = taskDoc.id
-    metadata = data.visible ? data : {}
+  const exist = taskDoc.exists
+  let type = exist === false ? 'null' : path[1] ? path[1] : 'statement'
+
+  if (type === 'statement') {
+    const data = taskDoc.data()
+    if (data) {
+      data.id = taskDoc.id
+      metadata = data.visible ? data : {}
+      if (data.visible === false) {
+        type = 'null'
+      }
+    }
   }
 
-  const solutionRes = await fetch(
-    `https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/solutions/md/${metadata.id}.md`
-  )
+  if (type === 'solution') {
+    const solutionRes = await fetch(
+      `https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/solutions/md/${metadata.id}.md`
+    )
 
-  let renderedSolution = null
-
-  if (solutionRes.status === 200) {
-    const solution = await solutionRes.text()
-    renderedSolution = await renderMarkdown(solution)
+    if (solutionRes.status === 200) {
+      const solution = await solutionRes.text()
+      metadata = await renderMarkdown(solution)
+    } else {
+      metadata = null
+    }
   }
 
   return {
     props: {
+      type,
       metadata,
-      solution: renderedSolution,
+      id,
     },
     unstable_revalidate: 60,
   }
