@@ -55,7 +55,7 @@
     "remark-parse": "^8.0.2",
     "remark-rehype": "^6.0.0",
     "swr": "^0.2.2",
-    "yup": "^0.28.5"
+    "yup": "^0.29.1"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.155",
