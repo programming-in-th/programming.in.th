@@ -12,7 +12,7 @@ import { config } from 'config'
 
 export const TaskLayout = ({ type, metadata, children }) => {
   const router = useRouter()
-  const category = metadata?.path.split('/')
+  const category = metadata.path.split('/')
 
   useEffect(() => {
     const key = `${config.baseURL}/getSubmissions?offset=0&username=&taskID=${metadata.id}`
@@ -61,7 +61,10 @@ export const TaskLayout = ({ type, metadata, children }) => {
         my={8}
         direction="column"
         flexGrow={1}
-        w={['100%', type === 'solution' ? 800 : 1200]}
+        w={[
+          '100%',
+          type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
+        ]}
         mx="auto"
         transition="width 1s"
       >
@@ -91,22 +94,17 @@ export const TaskLayout = ({ type, metadata, children }) => {
                 Statement
               </ChakraLink>
             </Link>
-            <ChakraLink
-              mt={[2, 0]}
-              ml={[0, 6]}
-              lineHeight="18px"
-              color={type === 'statistics' ? 'gray.800' : 'gray.500'}
-            >
-              Statistics
-            </ChakraLink>
             <Link
-              href={{ pathname: '/submissions', query: { task: metadata.id } }}
+              href={{
+                pathname: '/submissions',
+                query: { task: metadata.id, onTask: 'true' },
+              }}
             >
               <ChakraLink
                 mt={[2, 0]}
                 ml={[0, 6]}
                 lineHeight="18px"
-                href={`/submissions?task=${metadata.id}`}
+                color={type === 'submissions' ? 'gray.800' : 'gray.500'}
               >
                 Submissions
               </ChakraLink>

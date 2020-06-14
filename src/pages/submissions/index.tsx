@@ -11,6 +11,7 @@ import { fetchFromFirebase } from 'utils/fetcher'
 import { ISubmissionList } from '../../@types/submission'
 
 import { PageLayout } from 'components/Layout'
+import { TaskLayout } from 'components/tasks/TaskLayout'
 import { Td, Table, Th, Tr, TdHide } from 'components/submissions/ListTable'
 
 import { arrToObj } from 'utils/arrToObj'
@@ -21,10 +22,12 @@ export default () => {
   const router = useRouter()
   const [username, setUsername] = useState('')
   const [task, setTask] = useState('')
+  const [onTask, setOnTask] = useState('')
 
   useEffect(() => {
     setUsername((router.query.username as string) || '')
     setTask((router.query.task as string) || '')
+    setOnTask((router.query.onTask as string) || '')
   }, [router.query])
 
   const SubmissionsList = useCallback(() => {
@@ -146,21 +149,21 @@ export default () => {
       </React.Fragment>
     )
   }, [username, task])
-  return (
-    <PageLayout>
-      <Flex justify="center" flexGrow={1} p={4}>
-        <Box maxW="100%">
-          <Heading>Submissions</Heading>
-          <Flex mt={4} maxW="100%" direction={['column', 'row']}>
-            <Input
-              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                setUsername(event.target.value)
-                insertQueryString('username', event.target.value)
-              }}
-              value={username}
-              placeholder="Username"
-              width="200px"
-            />
+
+  const ChildSubmission = () => {
+    return (
+      <React.Fragment>
+        <Flex mt={4} maxW="100%" direction={['column', 'row']}>
+          <Input
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+              setUsername(event.target.value)
+              insertQueryString('username', event.target.value)
+            }}
+            value={username}
+            placeholder="Username"
+            width="200px"
+          />
+          {onTask !== 'true' && (
             <Input
               onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
                 setTask(event.target.value)
@@ -172,8 +175,26 @@ export default () => {
               ml={[0, 4]}
               mt={[4, 0]}
             />
-          </Flex>
-          <SubmissionsList />
+          )}
+        </Flex>
+        <SubmissionsList />
+      </React.Fragment>
+    )
+  }
+
+  return onTask === 'true' ? (
+    <TaskLayout
+      type="submissions"
+      metadata={{ id: task, title: 'A+B Problem', path: '/00' }}
+    >
+      <ChildSubmission />
+    </TaskLayout>
+  ) : (
+    <PageLayout>
+      <Flex justify="center" flexGrow={1} p={4}>
+        <Box maxW="100%">
+          <Heading>Submissions</Heading>
+          <ChildSubmission />
         </Box>
       </Flex>
     </PageLayout>
