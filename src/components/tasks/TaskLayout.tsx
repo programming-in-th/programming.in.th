@@ -12,7 +12,6 @@ import { config } from 'config'
 
 export const TaskLayout = ({ type, metadata, children }) => {
   const router = useRouter()
-  const category = metadata.path.split('/')
 
   useEffect(() => {
     const key = `${config.baseURL}/getSubmissions?offset=0&username=&taskID=${metadata.id}`
@@ -36,6 +35,8 @@ export const TaskLayout = ({ type, metadata, children }) => {
       </PageLayout>
     )
   }
+
+  const category = metadata.path.split('/')
 
   if (type === 'null') {
     return (
