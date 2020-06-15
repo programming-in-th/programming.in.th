@@ -150,7 +150,7 @@ export default () => {
     )
   }, [username, task])
 
-  const ChildSubmission = () => {
+  const ChildSubmission = useCallback(() => {
     return (
       <React.Fragment>
         <Flex mt={4} maxW="100%" direction={['column', 'row']}>
@@ -180,7 +180,7 @@ export default () => {
         <SubmissionsList />
       </React.Fragment>
     )
-  }
+  }, [username, task])
 
   return onTask === 'true' ? (
     <TaskLayout
