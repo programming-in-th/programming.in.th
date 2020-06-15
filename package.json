@@ -54,7 +54,7 @@
     "remark-math": "^2.0.1",
     "remark-parse": "^8.0.2",
     "remark-rehype": "^7.0.0",
-    "swr": "^0.2.2",
+    "swr": "^0.2.3",
     "yup": "^0.29.1"
   },
   "devDependencies": {
