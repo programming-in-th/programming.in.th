@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -6,17 +6,8 @@ import { Flex, Link as ChakraLink, Heading, Text } from '@chakra-ui/core'
 
 import { PageLayout } from 'components/Layout'
 
-import { mutate } from 'swr'
-import { SWRfetch } from 'lib/fetch'
-import { config } from 'config'
-
 export const TaskLayout = ({ type, metadata, children }) => {
   const router = useRouter()
-
-  useEffect(() => {
-    const key = `${config.baseURL}/getSubmissions?offset=0&username=&taskID=${metadata.id}`
-    mutate(key, SWRfetch(key))
-  }, [])
 
   if (router.isFallback) {
     return (
@@ -96,10 +87,8 @@ export const TaskLayout = ({ type, metadata, children }) => {
               </ChakraLink>
             </Link>
             <Link
-              href={{
-                pathname: '/submissions',
-                query: { task: metadata.id, onTask: 'true' },
-              }}
+              href="/tasks/[id]/submissions"
+              as={`/tasks/${metadata.id}/submissions`}
             >
               <ChakraLink
                 mt={[2, 0]}
