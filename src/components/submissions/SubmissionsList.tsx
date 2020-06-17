@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useSWR, { useSWRPages, cache, mutate } from 'swr'
-import { Box, Flex, Button, Heading, Input, Text } from '@chakra-ui/core'
+import { Box, Flex, Button, Input, Text } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
