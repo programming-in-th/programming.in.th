@@ -10,7 +10,7 @@ export default () => {
       <Flex justify="center" flexGrow={1} p={4}>
         <Box maxW="100%">
           <Heading>Submissions</Heading>
-          <SubmissionsList taskFrom={undefined} />
+          <SubmissionsList id={undefined} />
         </Box>
       </Flex>
     </PageLayout>

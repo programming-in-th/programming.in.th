@@ -27,8 +27,6 @@ export const TaskLayout = ({ type, metadata, children }) => {
     )
   }
 
-  const category = metadata.path.split('/')
-
   if (type === 'null') {
     return (
       <PageLayout>
@@ -46,6 +44,8 @@ export const TaskLayout = ({ type, metadata, children }) => {
       </PageLayout>
     )
   }
+
+  const category = metadata.path.split('/')
 
   return (
     <PageLayout>
@@ -77,7 +77,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
             mt={[0, 2]}
             color="gray.500"
           >
-            <Link href="/tasks/[id]" as={`/tasks/${metadata.id}`}>
+            <Link href="/tasks/[...id]" as={`/tasks/${metadata.id}`}>
               <ChakraLink
                 mt={[2, 0]}
                 lineHeight="18px"
@@ -87,7 +87,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
               </ChakraLink>
             </Link>
             <Link
-              href="/tasks/[id]/submissions"
+              href="/tasks/[...id]"
               as={`/tasks/${metadata.id}/submissions`}
             >
               <ChakraLink
@@ -99,10 +99,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
                 Submissions
               </ChakraLink>
             </Link>
-            <Link
-              href="/tasks/[id]/solution"
-              as={`/tasks/${metadata.id}/solution`}
-            >
+            <Link href="/tasks/[...id]" as={`/tasks/${metadata.id}/solution`}>
               <ChakraLink
                 mt={[2, 0]}
                 ml={[0, 6]}

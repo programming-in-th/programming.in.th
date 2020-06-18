@@ -16,7 +16,7 @@ import { arrToObj } from 'utils/arrToObj'
 import { insertQueryString } from 'utils/insertQueryString'
 import { isObjectEmpty } from 'utils/isEmpty'
 
-export const SubmissionsList = ({ taskFrom }) => {
+export const SubmissionsList = ({ id: taskFrom }) => {
   const router = useRouter()
   const [username, setUsername] = useState('')
   const [task, setTask] = useState('')
