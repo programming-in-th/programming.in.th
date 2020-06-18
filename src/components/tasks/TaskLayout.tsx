@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -6,18 +6,8 @@ import { Flex, Link as ChakraLink, Heading, Text } from '@chakra-ui/core'
 
 import { PageLayout } from 'components/Layout'
 
-import { mutate } from 'swr'
-import { SWRfetch } from 'lib/fetch'
-import { config } from 'config'
-
 export const TaskLayout = ({ type, metadata, children }) => {
   const router = useRouter()
-  const category = metadata?.path.split('/')
-
-  useEffect(() => {
-    const key = `${config.baseURL}/getSubmissions?offset=0&username=&taskID=${metadata.id}`
-    mutate(key, SWRfetch(key))
-  }, [])
 
   if (router.isFallback) {
     return (
@@ -55,13 +45,18 @@ export const TaskLayout = ({ type, metadata, children }) => {
     )
   }
 
+  const category = metadata.path.split('/')
+
   return (
     <PageLayout>
       <Flex
         my={8}
         direction="column"
         flexGrow={1}
-        w={['100%', type === 'solution' ? 800 : 1200]}
+        w={[
+          '100%',
+          type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
+        ]}
         mx="auto"
         transition="width 1s"
       >
@@ -82,7 +77,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
             mt={[0, 2]}
             color="gray.500"
           >
-            <Link href="/tasks/[id]" as={`/tasks/${metadata.id}`}>
+            <Link href="/tasks/[...id]" as={`/tasks/${metadata.id}`}>
               <ChakraLink
                 mt={[2, 0]}
                 lineHeight="18px"
@@ -91,30 +86,20 @@ export const TaskLayout = ({ type, metadata, children }) => {
                 Statement
               </ChakraLink>
             </Link>
-            <ChakraLink
-              mt={[2, 0]}
-              ml={[0, 6]}
-              lineHeight="18px"
-              color={type === 'statistics' ? 'gray.800' : 'gray.500'}
-            >
-              Statistics
-            </ChakraLink>
             <Link
-              href={{ pathname: '/submissions', query: { task: metadata.id } }}
+              href="/tasks/[...id]"
+              as={`/tasks/${metadata.id}/submissions`}
             >
               <ChakraLink
                 mt={[2, 0]}
                 ml={[0, 6]}
                 lineHeight="18px"
-                href={`/submissions?task=${metadata.id}`}
+                color={type === 'submissions' ? 'gray.800' : 'gray.500'}
               >
                 Submissions
               </ChakraLink>
             </Link>
-            <Link
-              href="/tasks/[id]/solution"
-              as={`/tasks/${metadata.id}/solution`}
-            >
+            <Link href="/tasks/[...id]" as={`/tasks/${metadata.id}/solution`}>
               <ChakraLink
                 mt={[2, 0]}
                 ml={[0, 6]}
