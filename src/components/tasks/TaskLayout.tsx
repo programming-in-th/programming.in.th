@@ -31,7 +31,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
     return (
       <PageLayout>
         <Flex
-          my={8}
+          mt={8}
           direction="column"
           flexGrow={1}
           w={['100%', 1400]}
@@ -50,9 +50,8 @@ export const TaskLayout = ({ type, metadata, children }) => {
   return (
     <PageLayout>
       <Flex
-        my={8}
+        mt={8}
         direction="column"
-        flexGrow={1}
         w={[
           '100%',
           type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
@@ -111,17 +110,18 @@ export const TaskLayout = ({ type, metadata, children }) => {
             </Link>
           </Flex>
         </Flex>
-        <Flex
-          w={[
-            '100%',
-            type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
-          ]}
-          direction="column"
-          flexGrow={1}
-          mx="auto"
-        >
-          {children}
-        </Flex>
+      </Flex>
+      <Flex
+        mb={8}
+        w={[
+          '100%',
+          type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
+        ]}
+        direction="column"
+        flexGrow={1}
+        mx="auto"
+      >
+        {children}
       </Flex>
     </PageLayout>
   )
