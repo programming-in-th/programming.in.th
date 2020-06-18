@@ -114,14 +114,14 @@ export const MarkDownStyle = styled.div`
 
   img {
     max-width: 100%;
-    margin: 0 auto;
+    margin: 40px auto;
   }
 
   /* Code */
   code {
     background-color: rgba(27, 31, 35, 0.1);
     font-size: 85%;
-    margin: 0;
+    margin: 40px 0;
   }
 
   /* Math */
