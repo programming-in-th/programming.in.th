@@ -111,7 +111,17 @@ export const TaskLayout = ({ type, metadata, children }) => {
             </Link>
           </Flex>
         </Flex>
-        {children}
+        <Flex
+          w={[
+            '100%',
+            type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
+          ]}
+          direction="column"
+          flexGrow={1}
+          mx="auto"
+        >
+          {children}
+        </Flex>
       </Flex>
     </PageLayout>
   )
