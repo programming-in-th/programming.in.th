@@ -31,7 +31,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
     return (
       <PageLayout>
         <Flex
-          my={8}
+          mt={8}
           direction="column"
           flexGrow={1}
           w={['100%', 1400]}
@@ -45,14 +45,11 @@ export const TaskLayout = ({ type, metadata, children }) => {
     )
   }
 
-  const category = metadata.path.split('/')
-
   return (
     <PageLayout>
       <Flex
-        my={8}
+        mt={8}
         direction="column"
-        flexGrow={1}
         w={[
           '100%',
           type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
@@ -66,12 +63,12 @@ export const TaskLayout = ({ type, metadata, children }) => {
               {metadata.title}
             </Heading>
             <Text color="gray.600" ml={2}>
-              by {category[1]}
+              by {metadata.path ? metadata.path.split('/')[1] : ''}
             </Text>
           </Flex>
 
           <Flex
-            justify={['space-between', 'flex-start']}
+            justify={['space-around', 'flex-start']}
             textAlign={['end', 'unset']}
             mx={[6, 0]}
             mt={[0, 2]}
@@ -111,6 +108,17 @@ export const TaskLayout = ({ type, metadata, children }) => {
             </Link>
           </Flex>
         </Flex>
+      </Flex>
+      <Flex
+        mb={8}
+        w={[
+          '100%',
+          type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
+        ]}
+        direction="column"
+        flexGrow={1}
+        mx="auto"
+      >
         {children}
       </Flex>
     </PageLayout>

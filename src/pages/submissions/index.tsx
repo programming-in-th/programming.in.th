@@ -7,9 +7,9 @@ import { PageLayout } from 'components/Layout'
 export default () => {
   return (
     <PageLayout>
-      <Flex justify="center" flexGrow={1} p={4}>
+      <Flex justify="center" flexGrow={1} py={4}>
         <Box maxW="100%">
-          <Heading>Submissions</Heading>
+          <Heading px={4}>Submissions</Heading>
           <SubmissionsList id={undefined} />
         </Box>
       </Flex>

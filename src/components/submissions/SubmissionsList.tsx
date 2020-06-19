@@ -155,8 +155,8 @@ export const SubmissionsList = ({ id: taskFrom }) => {
   }, [username, task])
 
   return (
-    <React.Fragment>
-      <Flex mt={4} maxW="100%" direction={['column', 'row']}>
+    <Flex px={4} mt={4} direction="column">
+      <Flex maxW="100%" direction={['column', 'row']}>
         <Input
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
             setUsername(event.target.value)
@@ -181,6 +181,6 @@ export const SubmissionsList = ({ id: taskFrom }) => {
         )}
       </Flex>
       <Submissions />
-    </React.Fragment>
+    </Flex>
   )
 }
