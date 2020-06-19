@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
 import { useRouter } from 'next/router'
@@ -15,6 +15,12 @@ import db from 'lib/firebase-admin'
 export default ({ type, metadata }) => {
   const router = useRouter()
 
+  useEffect(() => {
+    if (type === 'wrong') {
+      router.push('/tasks/[...id]', `/tasks/${metadata.id}`)
+    }
+  }, [type])
+
   const RenderPage = ({ type: it }) => {
     switch (it) {
       case 'statement':
@@ -25,6 +31,9 @@ export default ({ type, metadata }) => {
 
       case 'submissions':
         return <SubmissionsList id={metadata.id} />
+
+      default:
+        return null
     }
   }
 
@@ -55,14 +64,25 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
-  let metadata: any = { solution: null }
+  let metadata: any = {}
 
   const taskDoc = await db().doc(`tasks/${id[0]}`).get()
 
   let type = id.length === 1 ? 'statement' : id[1]
 
-  const exist = taskDoc.exists
-  if (exist) {
+  if (
+    (type !== 'statement' && type !== 'submissions' && type !== 'solution') ||
+    id.length > 2
+  ) {
+    return {
+      props: {
+        type: 'wrong',
+        metadata: { id: id[0] },
+      },
+    }
+  }
+
+  if (taskDoc.exists) {
     const data = taskDoc.data()
     data.id = taskDoc.id
     metadata = data.visible ? data : {}

@@ -45,8 +45,6 @@ export const TaskLayout = ({ type, metadata, children }) => {
     )
   }
 
-  const category = metadata.path.split('/')
-
   return (
     <PageLayout>
       <Flex
@@ -65,7 +63,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
               {metadata.title}
             </Heading>
             <Text color="gray.600" ml={2}>
-              by {category[1]}
+              by {metadata.path ? metadata.path.split('/')[1] : ''}
             </Text>
           </Flex>
 
