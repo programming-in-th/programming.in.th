@@ -9,7 +9,7 @@ export default () => {
     <PageLayout>
       <Flex justify="center" flexGrow={1} py={4}>
         <Box maxW="100%">
-          <Heading>Submissions</Heading>
+          <Heading px={4}>Submissions</Heading>
           <SubmissionsList id={undefined} />
         </Box>
       </Flex>

@@ -68,7 +68,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
           </Flex>
 
           <Flex
-            justify={['space-between', 'flex-start']}
+            justify={['space-around', 'flex-start']}
             textAlign={['end', 'unset']}
             mx={[6, 0]}
             mt={[0, 2]}
