@@ -44,14 +44,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const result: string[][] = []
 
   for (const doc of taskDocs.docs) {
-    const solutionRes = await fetch(
-      `https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/solutions/md/${doc.id}.md`
-    )
     result.push([doc.id])
-    result.push([doc.id, 'submissions'])
-    if (solutionRes.status === 200) {
-      result.push([doc.id, 'solution'])
-    }
   }
   return {
     paths: result.map((id: string[]) => {
