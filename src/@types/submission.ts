@@ -3,11 +3,18 @@ import { IGroup } from './group'
 
 export interface ISubmission {
   taskID: string
-  task: ITask
-  uid: string
+  score: number
+  fullScore: number
+  time: number
+  memory: number
   language: string
   groups: IGroup[]
+  codelen: number
   timestamp: Date
+  uid: string
+  verdict: string
+
+  task: ITask
   humanTimestamp: string
   username: string
   code: string
