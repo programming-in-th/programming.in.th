@@ -37,7 +37,7 @@ type TPlot = {
 }
 
 const mapLanguage: TPlot = {
-  'c++': 'cpp',
+  cpp14: 'cpp',
   c: 'c',
   python: 'python',
 }
@@ -88,7 +88,7 @@ const SubmissionDetail: NextPage = () => {
 
   return (
     <PageLayout>
-      <Flex align="top" justify="center" width="100%" p={[4, 8]} flexGrow={1}>
+      <Flex align="top" justify="center" width="100%" p={[4, 8]}>
         <Box
           borderRadius={6}
           width="1000px"
@@ -119,6 +119,7 @@ const SubmissionDetail: NextPage = () => {
                   <p>Memory: {memory} KB</p>
                   <p>Submission time: {submission.humanTimestamp}</p>
                   <p>User: {submission.username}</p>
+                  <p>Verdict: {submission.verdict}</p>
                 </Box>
               </Box>
 
