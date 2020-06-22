@@ -16,6 +16,7 @@ import {
   AccordionIcon,
   AccordionPanel,
   Button,
+  Text,
 } from '@chakra-ui/core'
 
 import { PageLayout } from 'components/Layout'
@@ -107,19 +108,24 @@ const SubmissionDetail: NextPage = () => {
                     href="/tasks/[...id]"
                     as={`/tasks/${submission.task.id}`}
                   >
-                    <ChakraLink href={`/tasks/${submission.task.id}`}>
+                    <ChakraLink
+                      href={`/tasks/${submission.task.id}`}
+                      color="teal.600"
+                    >
                       Statement
                     </ChakraLink>
                   </Link>
                 </React.Fragment>
 
                 <Box mt={2}>
-                  <p>Score: {score}</p>
-                  <p>Time: {time}</p>
-                  <p>Memory: {memory} KB</p>
-                  <p>Submission time: {submission.humanTimestamp}</p>
-                  <p>User: {submission.username}</p>
-                  <p>Verdict: {submission.verdict}</p>
+                  <Text fontWeight={600}>Verdict: {submission.verdict}</Text>
+                  <Text>
+                    Score: {score}/{fullScore}
+                  </Text>
+                  <Text>Time: {time} ms</Text>
+                  <Text>Memory: {memory} KB</Text>
+                  <Text>Submitted at: {submission.humanTimestamp}</Text>
+                  <Text>User: {submission.username}</Text>
                 </Box>
               </Box>
 

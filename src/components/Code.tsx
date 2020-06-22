@@ -19,22 +19,28 @@ export const Code = ({ code, language }: CodeBlockProps) => {
           fontSize="13.6px !important"
           className={`language-${language}`}
         >
-          {tokens.length > 1 && (
-            <code>
-              {tokens.map((line, i) => (
-                <Box key={i + 'l'} color="gray.400" pr={2} width={8}>
-                  {i + 1}
-                </Box>
-              ))}
-            </code>
-          )}
           <code className={`language-${language}`}>
             {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token, key })} />
-                ))}
-              </div>
+              <Box
+                key={i}
+                {...getLineProps({ line, key: i })}
+                display="table-row"
+              >
+                <Box
+                  key={i + 'l'}
+                  color="gray.400"
+                  pr={2}
+                  width={8}
+                  display="table-cell"
+                >
+                  {i + 1}
+                </Box>
+                <Box display="table-cell">
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                </Box>
+              </Box>
             ))}
           </code>
         </Flex>
