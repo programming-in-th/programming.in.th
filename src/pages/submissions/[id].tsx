@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 
 import {
   Skeleton,
@@ -46,7 +46,7 @@ const SubmissionDetail: NextPage = () => {
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
-  const { data: submission } = useSWR<ISubmission>(
+  const { data: submission, mutate } = useSWR<ISubmission>(
     ['getSubmission', id],
     (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
@@ -57,7 +57,7 @@ const SubmissionDetail: NextPage = () => {
       .doc(`submissions/${id}`)
       .onSnapshot((doc) => {
         const data = doc.data()
-        mutate(['getSubmission', id], async (oldSubmission: ISubmission) => {
+        mutate(async (oldSubmission: ISubmission) => {
           return { ...oldSubmission, ...data }
         })
       })
