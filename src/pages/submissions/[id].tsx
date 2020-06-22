@@ -30,7 +30,6 @@ import { fetchFromFirebase } from 'utils/fetcher'
 import { IGroup } from '../../@types/group'
 import { IStatus } from '../../@types/status'
 import { ISubmission } from '../../@types/submission'
-import { calculate } from 'utils/calculate'
 import { isObjectEmpty } from 'utils/isEmpty'
 
 type TPlot = {

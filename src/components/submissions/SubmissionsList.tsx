@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import useSWR, { useSWRPages, cache, mutate } from 'swr'
+import useSWR, { useSWRPages, mutate } from 'swr'
 import { Box, Flex, Button, Input, Text } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
-import { fetchFromFirebase } from 'utils/fetcher'
 
 import { ISubmissionList } from '../../@types/submission'
 
