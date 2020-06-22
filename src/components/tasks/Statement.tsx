@@ -33,10 +33,7 @@ export const Statement = ({ metadata }) => {
           user.username
         }&taskID=${metadata.id || ''}`
       : null,
-    SWRfetch,
-    {
-      errorRetryCount: 1,
-    }
+    SWRfetch
   )
 
   const renderSubmit = (metadata: ITask) => {
