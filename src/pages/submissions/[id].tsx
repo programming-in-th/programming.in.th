@@ -94,26 +94,28 @@ const SubmissionDetail: NextPage = () => {
           boxShadow="var(--shadow-md)"
           p={4}
         >
-          {submission && submission.task ? (
+          {submission ? (
             <Box>
               <Box>
-                <React.Fragment>
-                  <Heading fontSize="2xl">
-                    [{submission.task.id}] {submission.task.title}
-                  </Heading>
-                  <Link
-                    href="/tasks/[...id]"
-                    as={`/tasks/${submission.task.id}`}
-                  >
-                    <ChakraLink
-                      href={`/tasks/${submission.task.id}`}
-                      color="teal.600"
+                {submission.task ? (
+                  <React.Fragment>
+                    <Heading fontSize="2xl">
+                      [{submission.task.id}] {submission.task.title}
+                    </Heading>
+                    <Link
+                      href="/tasks/[...id]"
+                      as={`/tasks/${submission.task.id}`}
+                      passHref
                     >
-                      Statement
-                    </ChakraLink>
-                  </Link>
-                </React.Fragment>
-
+                      <ChakraLink color="teal.600">Statement</ChakraLink>
+                    </Link>
+                  </React.Fragment>
+                ) : (
+                  <React.Fragment>
+                    <Skeleton height="25px" width="40%" />
+                    <Skeleton height="14px" width="10%" mt="10px" />
+                  </React.Fragment>
+                )}
                 <Box mt={2}>
                   <Text fontWeight={600}>Verdict: {submission.verdict}</Text>
                   <Text>
@@ -121,13 +123,22 @@ const SubmissionDetail: NextPage = () => {
                   </Text>
                   <Text>Time: {submission.time} ms</Text>
                   <Text>Memory: {submission.memory} KB</Text>
-                  <Text>Submitted at: {submission.humanTimestamp}</Text>
-                  <Text>User: {submission.username}</Text>
+                  {submission.humanTimestamp ? (
+                    <Text>Submitted at:{submission.humanTimestamp}</Text>
+                  ) : (
+                    <Skeleton height="14px" width="30%" mt="10px" />
+                  )}
+                  {submission.username ? (
+                    <Text>User: {submission.username}</Text>
+                  ) : (
+                    <Skeleton height="14px" width="15%" mt="10px" />
+                  )}
                 </Box>
               </Box>
 
               <Box mt={4}>
-                {submission.task.type !== 'normal' &&
+                {submission.task &&
+                  submission.task.type !== 'normal' &&
                   submission.task.fileName.map((name, index) => (
                     <Button
                       key={name}
@@ -139,14 +150,16 @@ const SubmissionDetail: NextPage = () => {
                     </Button>
                   ))}
               </Box>
-
-              <Box mt={4}>
-                <Code
-                  code={submission.code[currentCodeIndex]}
-                  language={mapLanguage[submission.language]}
-                />
-              </Box>
-
+              {submission.code ? (
+                <Box mt={4}>
+                  <Code
+                    code={submission.code[currentCodeIndex]}
+                    language={mapLanguage[submission.language]}
+                  />
+                </Box>
+              ) : (
+                <Skeleton height="600px" mt="20px" />
+              )}
               {submission.groups && (
                 <Accordion defaultIndex={[]} allowMultiple>
                   {submission.groups.map((group: IGroup, index) => {
