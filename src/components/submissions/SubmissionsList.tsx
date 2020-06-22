@@ -62,20 +62,6 @@ export const SubmissionsList = ({ id: taskFrom }) => {
         const { results } = submissions
 
         return results.map((submission: ISubmissionList) => {
-          if (
-            !(
-              isObjectEmpty(submission) ||
-              cache.has(['getSubmission', submission.submissionID])
-            )
-          ) {
-            cache.set(['getSubmission', submission.submissionID], null)
-            mutate(
-              ['getSubmission', submission.submissionID],
-              fetchFromFirebase('getSubmission', {
-                submissionID: submission.submissionID,
-              })
-            )
-          }
           return (
             <React.Fragment key={submission.submissionID}>
               {isObjectEmpty(submission) ? (

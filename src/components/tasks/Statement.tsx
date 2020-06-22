@@ -1,12 +1,11 @@
 import React from 'react'
 import Link from 'next/link'
-import useSWR, { mutate, cache } from 'swr'
+import useSWR from 'swr'
 import styled from '@emotion/styled'
 import { Flex, Box, Text, Link as ChakraLink } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
-import { fetchFromFirebase } from 'utils/fetcher'
 
 import { Normal } from './Submit/Normal'
 import { Comm } from './Submit/Comm'
@@ -76,7 +75,7 @@ export const Statement = ({ metadata }) => {
         </Box>
       </Flex>
 
-      <Flex mt={4} mx={[4, 0]} flex="2 1 20%" direction="column" pl={10}>
+      <Flex mt={4} mx={[4, 0]} flex="2 1 20%" direction="column" pl={[0, 10]}>
         <Box
           maxW="100%"
           overflow="scroll"
@@ -97,19 +96,6 @@ export const Statement = ({ metadata }) => {
                     <NoRecentSubmission></NoRecentSubmission>
                   ) : (
                     submissions.results.map((submission: ISubmissionList) => {
-                      if (
-                        !(
-                          isObjectEmpty(submission) ||
-                          cache.has(['getSubmission', submission.submissionID])
-                        )
-                      ) {
-                        mutate(
-                          ['getSubmission', submission.submissionID],
-                          fetchFromFirebase('getSubmission', {
-                            submissionID: submission.submissionID,
-                          })
-                        )
-                      }
                       return isObjectEmpty(submission) ? (
                         <Tr>
                           <TdHide colSpan={2} />

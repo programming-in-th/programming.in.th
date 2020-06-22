@@ -69,8 +69,6 @@ const SubmissionDetail: NextPage = () => {
 
   const [currentCodeIndex, setCurrentCodeIndex] = useState<number>(0)
 
-  const { score, fullScore, time, memory } = calculate(submission?.groups)
-
   if (isObjectEmpty(submission)) {
     return (
       <PageLayout>
@@ -120,10 +118,10 @@ const SubmissionDetail: NextPage = () => {
                 <Box mt={2}>
                   <Text fontWeight={600}>Verdict: {submission.verdict}</Text>
                   <Text>
-                    Score: {score}/{fullScore}
+                    Score: {submission.score}/{submission.fullScore}
                   </Text>
-                  <Text>Time: {time} ms</Text>
-                  <Text>Memory: {memory} KB</Text>
+                  <Text>Time: {submission.time} ms</Text>
+                  <Text>Memory: {submission.memory} KB</Text>
                   <Text>Submitted at: {submission.humanTimestamp}</Text>
                   <Text>User: {submission.username}</Text>
                 </Box>
