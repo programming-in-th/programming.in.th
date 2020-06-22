@@ -31,7 +31,7 @@
     "cross-env": "^7.0.2",
     "emotion-theming": "^10.0.27",
     "file-saver": "^2.0.2",
-    "firebase": "^7.15.0",
+    "firebase": "^7.15.3",
     "firebase-admin": "^8.12.1",
     "formik": "^2.1.4",
     "intersection-observer": "^0.10.0",
