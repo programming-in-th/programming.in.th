@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback } from 'react'
 import Router from 'next/router'
 import {
   Flex,
@@ -9,6 +9,7 @@ import {
   Select,
   Input,
 } from '@chakra-ui/core'
+import debounce from 'lodash/debounce'
 import { useTable, usePagination, useGlobalFilter } from 'react-table'
 import matchSorter from 'match-sorter'
 
@@ -21,7 +22,10 @@ function GlobalFilter({
 }) {
   const count = preGlobalFilteredRows.length
   const [value, setValue] = useState(globalFilter)
-  const onChange = (value) => setGlobalFilter(value || undefined)
+  const onChange = useCallback(
+    debounce((value: string) => setGlobalFilter(value || undefined), 100),
+    []
+  )
 
   return (
     <Input
