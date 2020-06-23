@@ -22,20 +22,23 @@ export const Code = ({ code, language }: CodeBlockProps) => {
           <code className={`language-${language}`}>
             {tokens.map((line, i) => (
               <Box
+                as="tr"
                 key={i}
                 {...getLineProps({ line, key: i })}
                 display="table-row"
               >
                 <Box
+                  as="td"
                   key={i + 'l'}
                   color="gray.400"
                   pr={2}
                   width={8}
                   display="table-cell"
+                  userSelect="none"
                 >
                   {i + 1}
                 </Box>
-                <Box display="table-cell">
+                <Box display="table-cell" as="td">
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}
