@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import useSWR, { useSWRPages, cache, mutate } from 'swr'
+import useSWR, { useSWRPages, mutate } from 'swr'
 import { Box, Flex, Button, Input, Text } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
-import { fetchFromFirebase } from 'utils/fetcher'
 
 import { ISubmissionList } from '../../@types/submission'
 
@@ -62,20 +61,6 @@ export const SubmissionsList = ({ id: taskFrom }) => {
         const { results } = submissions
 
         return results.map((submission: ISubmissionList) => {
-          if (
-            !(
-              isObjectEmpty(submission) ||
-              cache.has(['getSubmission', submission.submissionID])
-            )
-          ) {
-            cache.set(['getSubmission', submission.submissionID], null)
-            mutate(
-              ['getSubmission', submission.submissionID],
-              fetchFromFirebase('getSubmission', {
-                submissionID: submission.submissionID,
-              })
-            )
-          }
           return (
             <React.Fragment key={submission.submissionID}>
               {isObjectEmpty(submission) ? (

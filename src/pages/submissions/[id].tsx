@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 
 import {
   Skeleton,
@@ -30,7 +30,6 @@ import { fetchFromFirebase } from 'utils/fetcher'
 import { IGroup } from '../../@types/group'
 import { IStatus } from '../../@types/status'
 import { ISubmission } from '../../@types/submission'
-import { calculate } from 'utils/calculate'
 import { isObjectEmpty } from 'utils/isEmpty'
 
 type TPlot = {
@@ -47,7 +46,7 @@ const SubmissionDetail: NextPage = () => {
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
-  const { data: submission } = useSWR<ISubmission>(
+  const { data: submission, mutate } = useSWR<ISubmission>(
     ['getSubmission', id],
     (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
@@ -58,7 +57,7 @@ const SubmissionDetail: NextPage = () => {
       .doc(`submissions/${id}`)
       .onSnapshot((doc) => {
         const data = doc.data()
-        mutate(['getSubmission', id], async (oldSubmission: ISubmission) => {
+        mutate(async (oldSubmission: ISubmission) => {
           return { ...oldSubmission, ...data }
         })
       })
@@ -68,8 +67,6 @@ const SubmissionDetail: NextPage = () => {
   }, [])
 
   const [currentCodeIndex, setCurrentCodeIndex] = useState<number>(0)
-
-  const { score, fullScore, time, memory } = calculate(submission?.groups)
 
   if (isObjectEmpty(submission)) {
     return (
@@ -97,34 +94,27 @@ const SubmissionDetail: NextPage = () => {
           boxShadow="var(--shadow-md)"
           p={4}
         >
-          {submission && submission.task ? (
+          {submission && submission.task && submission.verdict ? (
             <Box>
               <Box>
-                <React.Fragment>
-                  <Heading fontSize="2xl">
-                    [{submission.task.id}] {submission.task.title}
-                  </Heading>
-                  <Link
-                    href="/tasks/[...id]"
-                    as={`/tasks/${submission.task.id}`}
-                  >
-                    <ChakraLink
-                      href={`/tasks/${submission.task.id}`}
-                      color="teal.600"
-                    >
-                      Statement
-                    </ChakraLink>
-                  </Link>
-                </React.Fragment>
-
+                <Heading fontSize="2xl">
+                  [{submission.task.id}] {submission.task.title}
+                </Heading>
+                <Link
+                  href="/tasks/[...id]"
+                  as={`/tasks/${submission.task.id}`}
+                  passHref
+                >
+                  <ChakraLink color="teal.600">Statement</ChakraLink>
+                </Link>
                 <Box mt={2}>
                   <Text fontWeight={600}>Verdict: {submission.verdict}</Text>
                   <Text>
-                    Score: {score}/{fullScore}
+                    Score: {submission.score}/{submission.fullScore}
                   </Text>
-                  <Text>Time: {time} ms</Text>
-                  <Text>Memory: {memory} KB</Text>
-                  <Text>Submitted at: {submission.humanTimestamp}</Text>
+                  <Text>Time: {submission.time} ms</Text>
+                  <Text>Memory: {submission.memory} KB</Text>
+                  <Text>Submitted at:{submission.humanTimestamp}</Text>
                   <Text>User: {submission.username}</Text>
                 </Box>
               </Box>
@@ -142,14 +132,12 @@ const SubmissionDetail: NextPage = () => {
                     </Button>
                   ))}
               </Box>
-
               <Box mt={4}>
                 <Code
                   code={submission.code[currentCodeIndex]}
                   language={mapLanguage[submission.language]}
                 />
               </Box>
-
               {submission.groups && (
                 <Accordion defaultIndex={[]} allowMultiple>
                   {submission.groups.map((group: IGroup, index) => {
