@@ -10,12 +10,11 @@ export interface ISubmission {
   language: string
   groups: IGroup[]
   codelen: number
-  timestamp: Date
+  timestamp: any
   uid: string
   verdict: string
 
   task: ITask
-  humanTimestamp: string
   username: string
   code: string
 }

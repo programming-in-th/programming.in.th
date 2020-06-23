@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 
 import { Flex, Button, Text, Box, useToast, Heading } from '@chakra-ui/core'
 
+import { mutate } from 'swr'
 import { useUser } from '../../UserContext'
 
 import { UploadCode } from '../../Upload'
@@ -20,10 +21,16 @@ export const OutputOnly = ({ metadata }) => {
     onDrop,
     status,
     submissionID,
+    codeValue,
   } = useSubmit(metadata)
 
   useEffect(() => {
     if (status === 'OK') {
+      mutate(['getSubmission', submissionID], {
+        username: user.username,
+        task: metadata,
+        code: codeValue,
+      })
       router.push('/submissions/[id]', `/submissions/${submissionID}`)
     } else if (status === 'ERROR') {
       toast({

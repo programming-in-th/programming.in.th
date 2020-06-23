@@ -58,7 +58,6 @@ const SubmissionDetail: NextPage = () => {
       .doc(`submissions/${id}`)
       .onSnapshot((doc) => {
         const data = doc.data()
-        data.humanTimestamp = getTimestamp(data.timestamp.seconds)
         mutate(async (oldSubmission: ISubmission) => {
           return { ...oldSubmission, ...data }
         })
@@ -116,7 +115,9 @@ const SubmissionDetail: NextPage = () => {
                   </Text>
                   <Text>Time: {submission.time} ms</Text>
                   <Text>Memory: {submission.memory} KB</Text>
-                  <Text>Submitted at: {submission.humanTimestamp}</Text>
+                  <Text>
+                    Submitted at: {getTimestamp(submission.timestamp)}
+                  </Text>
                   <Text>User: {submission.username}</Text>
                 </Box>
               </Box>
