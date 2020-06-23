@@ -26,6 +26,7 @@ import { Code } from 'components/Code'
 import firebase from 'lib/firebase'
 
 import { fetchFromFirebase } from 'utils/fetcher'
+import { getTimestamp } from 'utils/getTimestamp'
 
 import { IGroup } from '../../@types/group'
 import { IStatus } from '../../@types/status'
@@ -114,7 +115,9 @@ const SubmissionDetail: NextPage = () => {
                   </Text>
                   <Text>Time: {submission.time} ms</Text>
                   <Text>Memory: {submission.memory} KB</Text>
-                  <Text>Submitted at:{submission.humanTimestamp}</Text>
+                  <Text>
+                    Submitted at: {getTimestamp(submission.timestamp)}
+                  </Text>
                   <Text>User: {submission.username}</Text>
                 </Box>
               </Box>
