@@ -74,7 +74,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
             mt={[0, 2]}
             color="gray.500"
           >
-            <Link href="/tasks/[...id]" as={`/tasks/${metadata.id}`}>
+            <Link href="/tasks/[...id]" as={`/tasks/${metadata.id}`} passHref>
               <ChakraLink
                 mt={[2, 0]}
                 lineHeight="18px"
@@ -86,6 +86,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
             <Link
               href="/tasks/[...id]"
               as={`/tasks/${metadata.id}/submissions`}
+              passHref
             >
               <ChakraLink
                 mt={[2, 0]}
@@ -96,7 +97,11 @@ export const TaskLayout = ({ type, metadata, children }) => {
                 Submissions
               </ChakraLink>
             </Link>
-            <Link href="/tasks/[...id]" as={`/tasks/${metadata.id}/solution`}>
+            <Link
+              href="/tasks/[...id]"
+              as={`/tasks/${metadata.id}/solution`}
+              passHref
+            >
               <ChakraLink
                 mt={[2, 0]}
                 ml={[0, 6]}
