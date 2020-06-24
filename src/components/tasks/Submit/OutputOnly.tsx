@@ -1,18 +1,14 @@
-import React, { useEffect } from 'react'
-import { useRouter } from 'next/router'
+import React from 'react'
+import { Flex, Button, Text, Box, Heading } from '@chakra-ui/core'
 
-import { Flex, Button, Text, Box, useToast, Heading } from '@chakra-ui/core'
-
-import { mutate } from 'swr'
 import { useUser } from '../../UserContext'
 
 import { UploadCode } from '../../Upload'
+import { useStatus } from './useStatus'
 import { useSubmit } from './useSubmit'
 
 export const OutputOnly = ({ metadata }) => {
-  const toast = useToast()
   const { user } = useUser()
-  const router = useRouter()
 
   const {
     submit,
@@ -24,24 +20,7 @@ export const OutputOnly = ({ metadata }) => {
     codeValue,
   } = useSubmit(metadata)
 
-  useEffect(() => {
-    if (status === 'OK') {
-      mutate(['getSubmission', submissionID], {
-        username: user.username,
-        task: metadata,
-        code: codeValue,
-      })
-      router.push('/submissions/[id]', `/submissions/${submissionID}`)
-    } else if (status === 'ERROR') {
-      toast({
-        title: 'Error!',
-        description: 'An unknown error occured.',
-        status: 'error',
-        duration: 9000,
-        isClosable: true,
-      })
-    }
-  }, [status, submissionID])
+  useStatus({ metadata, status, submissionID, codeValue })
 
   return (
     <Flex direction="column" mt={4} p={4} boxShadow="var(--shadow-default)">
