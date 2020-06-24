@@ -34,7 +34,7 @@
     "firebase": "^7.15.3",
     "firebase-admin": "^8.12.1",
     "formik": "^2.1.4",
-    "intersection-observer": "^0.10.0",
+    "intersection-observer": "^0.11.0",
     "lodash": "^4.17.15",
     "match-sorter": "^4.1.0",
     "next": "^9.4.4",
