@@ -14,6 +14,7 @@ import { Td, Table, Th, Tr, TdHide } from 'components/submissions/ListTable'
 import { arrToObj } from 'utils/arrToObj'
 import { insertQueryString } from 'utils/insertQueryString'
 import { isObjectEmpty } from 'utils/isEmpty'
+import { getTimestamp } from 'utils/getTimestamp'
 
 export const SubmissionsList = ({ id: taskFrom }) => {
   const router = useRouter()
@@ -73,7 +74,7 @@ export const SubmissionsList = ({ id: taskFrom }) => {
                   as={`/submissions/${submission.submissionID}`}
                 >
                   <Tr>
-                    <Td>{submission.humanTimestamp}</Td>
+                    <Td>{getTimestamp(submission.timestamp)}</Td>
                     <Td>{submission.username}</Td>
                     <Td>{submission.taskID}</Td>
                     <Td>{submission.score}</Td>

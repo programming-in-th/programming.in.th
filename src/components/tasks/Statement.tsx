@@ -18,6 +18,7 @@ import { useUser } from '../UserContext'
 import { ISubmissionList } from '../../@types/submission'
 
 import { isObjectEmpty, isArrayEmpty } from 'utils/isEmpty'
+import { getTimestamp } from 'utils/getTimestamp'
 
 const PDF = styled.object`
   width: 100%;
@@ -104,7 +105,7 @@ export const Statement = ({ metadata }) => {
                           key={submission.submissionID}
                         >
                           <Tr>
-                            <Td>{submission.humanTimestamp}</Td>
+                            <Td>{getTimestamp(submission.timestamp)}</Td>
                             <Td>{submission.score}</Td>
                           </Tr>
                         </Link>

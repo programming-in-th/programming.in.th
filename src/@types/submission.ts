@@ -23,7 +23,6 @@ export interface ISubmissionList {
   submissionID: string
   username: string
   timestamp: Date
-  humanTimestamp: string
   language: string
   score: number
   fullScore: number
