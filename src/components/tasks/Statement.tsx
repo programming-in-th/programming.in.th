@@ -29,7 +29,7 @@ export const Statement = ({ metadata }) => {
 
   const { data: submissions } = useSWR(
     user.username !== ''
-      ? `${config.baseURL}/getSubmissions?offset=&username=${
+      ? `${config.baseURL}/getSubmissions?limit=5&username=${
           user.username
         }&taskID=${metadata.id || ''}`
       : null,
