@@ -6,12 +6,7 @@ import { useToast } from '@chakra-ui/core'
 import { mutate } from 'swr'
 import { useUser } from '../../UserContext'
 
-export const statusProvider = ({
-  metadata,
-  status,
-  submissionID,
-  codeValue,
-}) => {
+export const useStatus = ({ metadata, status, submissionID, codeValue }) => {
   const toast = useToast()
   const { user } = useUser()
   const router = useRouter()
