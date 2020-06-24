@@ -95,7 +95,7 @@ const SubmissionDetail: NextPage = () => {
           boxShadow="var(--shadow-md)"
           p={4}
         >
-          {submission && submission.task && submission.verdict ? (
+          {submission && submission.task && submission.status ? (
             <Box>
               <Box>
                 <Heading fontSize="2xl">
@@ -109,7 +109,7 @@ const SubmissionDetail: NextPage = () => {
                   <ChakraLink color="teal.600">Statement</ChakraLink>
                 </Link>
                 <Box mt={2}>
-                  <Text fontWeight={600}>Verdict: {submission.verdict}</Text>
+                  <Text fontWeight={600}>Status: {submission.status}</Text>
                   <Text>
                     Score: {submission.score}/{submission.fullScore}
                   </Text>
