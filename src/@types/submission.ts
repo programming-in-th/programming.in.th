@@ -12,7 +12,7 @@ export interface ISubmission {
   codelen: number
   timestamp: any
   uid: string
-  verdict: string
+  status: string
 
   task: ITask
   username: string
