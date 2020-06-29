@@ -76,7 +76,7 @@ export const Statement = ({ metadata }) => {
       <Flex mt={4} mx={[4, 0]} flex="2 1 20%" direction="column" pl={[0, 10]}>
         <Box
           maxW="100%"
-          overflow="scroll"
+          overflow="auto"
           boxShadow="var(--shadow-default)"
           maxHeight="400px"
         >
