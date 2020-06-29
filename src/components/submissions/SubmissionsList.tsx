@@ -108,7 +108,7 @@ export const SubmissionsList = ({ id: taskFrom }) => {
           borderRadius={4}
           width="1000px"
           maxW="100%"
-          overflowX="scroll"
+          overflowX="auto"
           borderBottom="1px solid #E2E8F0"
         >
           <Table>

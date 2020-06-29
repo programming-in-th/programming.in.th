@@ -153,7 +153,7 @@ const SubmissionDetail: NextPage = () => {
                           </Box>
                           <AccordionIcon />
                         </AccordionHeader>
-                        <AccordionPanel pb={4} overflow="scroll">
+                        <AccordionPanel pb={4} overflow="auto">
                           <Table>
                             <thead>
                               <tr>
