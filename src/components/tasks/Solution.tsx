@@ -1,5 +1,4 @@
 import React from 'react'
-import Head from 'next/head'
 
 import { Box, Heading, Flex } from '@chakra-ui/core'
 import { MarkDownStyle } from 'design'
