@@ -17,7 +17,7 @@ export const Head = () => (
       name="Description"
       content="Programming.in.th provides you with the fundamentals of algorithmic problem-solving, an important skill to differentiate yourself as a programmer in an increasingly technologically advanced world."
     />
-    <meta property="og:url" content="https://staging.programming.in.th" />
+    <meta property="og:url" content="https://beta.programming.in.th" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="programming.in.th" />
     <meta
