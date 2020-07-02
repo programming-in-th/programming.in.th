@@ -7,6 +7,7 @@ import useSWR from 'swr'
 import {
   Skeleton,
   Box,
+  IconButton,
   Flex,
   Heading,
   Link as ChakraLink,
@@ -18,6 +19,7 @@ import {
   Button,
   Text,
 } from '@chakra-ui/core'
+import { FaRedo } from 'react-icons/fa'
 
 import { PageLayout } from 'components/Layout'
 import { Table, Th, Td, Tr } from 'components/submissions/VerdictTable'
@@ -32,6 +34,8 @@ import { IGroup } from '../../@types/group'
 import { IStatus } from '../../@types/status'
 import { ISubmission } from '../../@types/submission'
 import { isObjectEmpty } from 'utils/isEmpty'
+
+import { useUser } from 'components/UserContext'
 
 type TPlot = {
   [key: string]: 'c' | 'cpp' | 'python'
@@ -51,6 +55,8 @@ const SubmissionDetail: NextPage = () => {
     ['getSubmission', id],
     (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
+
+  const { user } = useUser()
 
   useEffect(() => {
     const unsubscribe = firebase
@@ -85,6 +91,10 @@ const SubmissionDetail: NextPage = () => {
     )
   }
 
+  const rejudgeSubmission = async () => {
+    await fetchFromFirebase('rejudgeSubmission', { submissionID: id })
+  }
+
   return (
     <PageLayout>
       <Flex align="top" justify="center" width="100%" p={[4, 8]}>
@@ -98,9 +108,19 @@ const SubmissionDetail: NextPage = () => {
           {submission && submission.task && submission.status ? (
             <Box>
               <Box>
-                <Heading fontSize="2xl">
-                  [{submission.task.id}] {submission.task.title}
-                </Heading>
+                <Flex w="100%" align="center" justify="space-between">
+                  <Heading fontSize="2xl">
+                    [{submission.task.id}] {submission.task.title}
+                  </Heading>
+                  {user.admin && (
+                    <IconButton
+                      aria-label="rejudge"
+                      icon={FaRedo}
+                      onClick={() => rejudgeSubmission()}
+                      isLoading={submission.status !== 'Complete'}
+                    />
+                  )}
+                </Flex>
                 <Link
                   href="/tasks/[...id]"
                   as={`/tasks/${submission.task.id}`}
