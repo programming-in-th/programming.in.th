@@ -16,12 +16,16 @@ import {
   AccordionIcon,
   AccordionPanel,
   Button,
+  IconButton,
   Text,
 } from '@chakra-ui/core'
+import { FaRedo } from 'react-icons/fa'
 
 import { PageLayout } from 'components/Layout'
 import { Table, Th, Td, Tr } from 'components/submissions/VerdictTable'
 import { Code } from 'components/Code'
+
+import { useUser } from 'components/UserContext'
 
 import firebase from 'lib/firebase'
 
@@ -51,6 +55,8 @@ const SubmissionDetail: NextPage = () => {
     ['getSubmission', id],
     (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
+
+  const { user } = useUser()
 
   useEffect(() => {
     const unsubscribe = firebase
@@ -85,6 +91,10 @@ const SubmissionDetail: NextPage = () => {
     )
   }
 
+  const rejudgeSubmission = async () => {
+    await fetchFromFirebase('rejudgeSubmission', { submissionID: id })
+  }
+
   return (
     <PageLayout>
       <Flex align="top" justify="center" width="100%" p={[4, 8]}>
@@ -98,9 +108,19 @@ const SubmissionDetail: NextPage = () => {
           {submission && submission.task && submission.status ? (
             <Box>
               <Box>
-                <Heading fontSize="2xl">
-                  [{submission.task.id}] {submission.task.title}
-                </Heading>
+                <Flex align="center" justify="space-between">
+                  <Heading fontSize="2xl">
+                    [{submission.task.id}] {submission.task.title}
+                  </Heading>
+                  {user.admin && (
+                    <IconButton
+                      aria-label="rejudge"
+                      icon={FaRedo}
+                      isLoading={submission.status !== 'Complete'}
+                      onClick={() => rejudgeSubmission()}
+                    />
+                  )}
+                </Flex>
                 <Link
                   href="/tasks/[...id]"
                   as={`/tasks/${submission.task.id}`}
