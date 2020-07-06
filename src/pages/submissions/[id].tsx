@@ -57,7 +57,6 @@ const SubmissionDetail: NextPage = () => {
   )
 
   const { user } = useUser()
-  const [rejudgeStatus, setRejudgeStatus] = useState<boolean>(false)
 
   useEffect(() => {
     const unsubscribe = firebase
@@ -93,9 +92,7 @@ const SubmissionDetail: NextPage = () => {
   }
 
   const rejudgeSubmission = async () => {
-    setRejudgeStatus(true)
     await fetchFromFirebase('rejudgeSubmission', { submissionID: id })
-    setRejudgeStatus(false)
   }
 
   return (
@@ -119,7 +116,6 @@ const SubmissionDetail: NextPage = () => {
                     <IconButton
                       aria-label="rejudge"
                       icon={FaRedo}
-                      isLoading={rejudgeStatus}
                       onClick={() => rejudgeSubmission()}
                     />
                   )}
