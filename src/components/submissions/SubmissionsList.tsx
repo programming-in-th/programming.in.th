@@ -2,7 +2,8 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import useSWR, { useSWRPages, mutate } from 'swr'
-import { Box, Flex, Button, Input, Text } from '@chakra-ui/core'
+import { Box, Flex, Button, Input, Text, IconButton } from '@chakra-ui/core'
+import { FaRedo } from 'react-icons/fa'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
@@ -11,29 +12,20 @@ import { ISubmissionList } from '../../@types/submission'
 
 import { Td, Table, Th, Tr, TdHide } from 'components/submissions/ListTable'
 
+import { useUser } from 'components/UserContext'
+
 import { arrToObj } from 'utils/arrToObj'
 import { insertQueryString } from 'utils/insertQueryString'
 import { isObjectEmpty } from 'utils/isEmpty'
 import { getTimestamp } from 'utils/getTimestamp'
-
-const TdLink = ({ children, href, as }) => {
-  return (
-    <Td>
-      <Link href={href} as={as}>
-        <a>
-          <Box h="100%" w="100%" padding="8px 16px">
-            {children}
-          </Box>
-        </a>
-      </Link>
-    </Td>
-  )
-}
+import { fetchFromFirebase } from 'utils/fetcher'
 
 export const SubmissionsList = ({ id: taskFrom }) => {
   const router = useRouter()
   const [username, setUsername] = useState('')
   const [task, setTask] = useState('')
+
+  const { user } = useUser()
 
   useEffect(() => {
     setUsername((router.query.username as string) || '')
@@ -47,6 +39,10 @@ export const SubmissionsList = ({ id: taskFrom }) => {
       setTask(taskFrom)
     }
   }, [])
+
+  const rejudgeSubmission = async (id: string) => {
+    await fetchFromFirebase('rejudgeSubmission', { submissionID: id })
+  }
 
   const Submissions = useCallback(() => {
     const { pages, isLoadingMore, isReachingEnd, loadMore } = useSWRPages(
@@ -76,6 +72,23 @@ export const SubmissionsList = ({ id: taskFrom }) => {
         const { results } = submissions
 
         return results.map((submission: ISubmissionList) => {
+          const TdLink = ({ children }) => {
+            return (
+              <Td>
+                <Link
+                  href="/submissions/[id]"
+                  as={`/submissions/${submission.submissionID}`}
+                >
+                  <a>
+                    <Box h="100%" w="100%" padding="8px 16px">
+                      {children}
+                    </Box>
+                  </a>
+                </Link>
+              </Td>
+            )
+          }
+
           return (
             <React.Fragment key={submission.submissionID}>
               {isObjectEmpty(submission) ? (
@@ -84,48 +97,29 @@ export const SubmissionsList = ({ id: taskFrom }) => {
                 </Tr>
               ) : (
                 <Tr>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {getTimestamp(submission.timestamp)}
-                  </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {submission.username}
-                  </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {submission.taskID}
-                  </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {submission.score}
-                  </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
+                  <TdLink>{getTimestamp(submission.timestamp)}</TdLink>
+                  <TdLink>{submission.username}</TdLink>
+                  <TdLink>{submission.taskID}</TdLink>
+                  <TdLink>{submission.score}</TdLink>
+                  <TdLink>
                     {arrToObj(config.languageData)[submission.language]}
                   </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {submission.time}
-                  </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {submission.memory}
-                  </TdLink>
+                  <TdLink>{submission.time}</TdLink>
+                  <TdLink>{submission.memory}</TdLink>
+                  {user.admin && (
+                    <Td>
+                      <Box display="flex" justifyContent="center">
+                        <IconButton
+                          size="sm"
+                          aria-label="rejudge"
+                          icon={FaRedo}
+                          onClick={() =>
+                            rejudgeSubmission(submission.submissionID)
+                          }
+                        />
+                      </Box>
+                    </Td>
+                  )}
                 </Tr>
               )}
             </React.Fragment>
@@ -163,6 +157,7 @@ export const SubmissionsList = ({ id: taskFrom }) => {
                 <Th>LANGUAGE</Th>
                 <Th>TIME</Th>
                 <Th>MEMORY</Th>
+                {user.admin && <Th>REJUDGE</Th>}
               </tr>
             </thead>
 
