@@ -29,7 +29,6 @@ export const Tr = styled.tr`
 
 export const Td = styled.td`
   text-align: left;
-  padding: 8px 16px;
 `
 
 export const TdHide = styled.td`
