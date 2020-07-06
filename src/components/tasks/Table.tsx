@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from 'react'
-import Router from 'next/router'
+import Link from 'next/link'
 import {
   Flex,
   Box,
@@ -114,15 +114,21 @@ export const TaskTable = ({ result, columns }) => {
               {page.map((row) => {
                 prepareRow(row)
                 return (
-                  <Tr
-                    {...row.getRowProps()}
-                    onClick={() =>
-                      Router.push(`/tasks/[...id]`, `/tasks/${row.original.id}`)
-                    }
-                  >
+                  <Tr {...row.getRowProps()}>
                     {row.cells.map((cell) => {
                       return (
-                        <Td {...cell.getCellProps()}>{cell.render('Cell')}</Td>
+                        <Td {...cell.getCellProps()}>
+                          <Link
+                            href="/tasks/[...id]"
+                            as={`/tasks/${row.original.id}`}
+                          >
+                            <a>
+                              <Box h="100%" w="100%" padding="8px 16px">
+                                {cell.render('Cell')}
+                              </Box>
+                            </a>
+                          </Link>
+                        </Td>
                       )
                     })}
                   </Tr>
