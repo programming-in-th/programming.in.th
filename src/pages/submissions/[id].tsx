@@ -116,7 +116,6 @@ const SubmissionDetail: NextPage = () => {
                     <IconButton
                       aria-label="rejudge"
                       icon={FaRedo}
-                      isLoading={submission.status !== 'Complete'}
                       onClick={() => rejudgeSubmission()}
                     />
                   )}
