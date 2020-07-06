@@ -1766,11 +1766,6 @@
   resolved "https://registry.yarnpkg.com/@reach/visually-hidden/-/visually-hidden-0.1.4.tgz#0dc4ecedf523004337214187db70a46183bd945b"
   integrity sha512-QHbzXjflSlCvDd6vJwdwx16mSB+vUCCQMiU/wK/CgVNPibtpEiIbisyxkpZc55DyDFNUIqP91rSUsNae+ogGDQ==
 
-"@scarf/scarf@^1.0.4":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@scarf/scarf/-/scarf-1.0.6.tgz#52011dfb19187b53b75b7b6eac20da0810ddd88f"
-  integrity sha512-y4+DuXrAd1W5UIY3zTcsosi/1GyYT8k5jGnZ/wG7UUHVrU+MHlH4Mp87KK2/lvMW4+H7HVcdB+aJhqywgXksjA==
-
 "@styled-system/background@^5.1.2":
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/@styled-system/background/-/background-5.1.2.tgz#75c63d06b497ab372b70186c0bf608d62847a2ba"
@@ -8284,12 +8279,10 @@ react-spring@^8.0.27:
     "@babel/runtime" "^7.3.1"
     prop-types "^15.5.8"
 
-react-table@^7.2.1:
-  version "7.2.1"
-  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.2.1.tgz#d85f5a59b6441ccd9e0acddc93c288c54a7de7ee"
-  integrity sha512-cICU3w5yFWTDluz9yFePziEQXGt3PK5R1Va3InP7qMGnZOKm8kv0GiDMli+VOqE1uM1dBYPb9BEad15up1ac6g==
-  dependencies:
-    "@scarf/scarf" "^1.0.4"
+react-table@^7.2.2:
+  version "7.2.2"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.2.2.tgz#2978a903f0e367e1ceab25d60a6a40ae23498f77"
+  integrity sha512-JBE3QUyRQJkHRU72NKo7HRGtSGcrzIcVLDbsoZI+KhWkFEZ2t9UfpqeHBdbc3R5RRJZ6qC7+NzZZxJPSYWKPBQ==
 
 react-universal-interface@^0.6.2:
   version "0.6.2"
