@@ -16,6 +16,20 @@ import { insertQueryString } from 'utils/insertQueryString'
 import { isObjectEmpty } from 'utils/isEmpty'
 import { getTimestamp } from 'utils/getTimestamp'
 
+const TdLink = ({ children, href, as }) => {
+  return (
+    <Td>
+      <Link href={href} as={as}>
+        <a>
+          <Box h="100%" w="100%" padding="8px 16px">
+            {children}
+          </Box>
+        </a>
+      </Link>
+    </Td>
+  )
+}
+
 export const SubmissionsList = ({ id: taskFrom }) => {
   const router = useRouter()
   const [username, setUsername] = useState('')
@@ -69,22 +83,50 @@ export const SubmissionsList = ({ id: taskFrom }) => {
                   <TdHide colSpan={7} />
                 </Tr>
               ) : (
-                <Link
-                  href="/submissions/[id]"
-                  as={`/submissions/${submission.submissionID}`}
-                >
-                  <Tr>
-                    <Td>{getTimestamp(submission.timestamp)}</Td>
-                    <Td>{submission.username}</Td>
-                    <Td>{submission.taskID}</Td>
-                    <Td>{submission.score}</Td>
-                    <Td>
-                      {arrToObj(config.languageData)[submission.language]}
-                    </Td>
-                    <Td>{submission.time}</Td>
-                    <Td>{submission.memory}</Td>
-                  </Tr>
-                </Link>
+                <Tr>
+                  <TdLink
+                    href="/submissions/[id]"
+                    as={`/submissions/${submission.submissionID}`}
+                  >
+                    {getTimestamp(submission.timestamp)}
+                  </TdLink>
+                  <TdLink
+                    href="/submissions/[id]"
+                    as={`/submissions/${submission.submissionID}`}
+                  >
+                    {submission.username}
+                  </TdLink>
+                  <TdLink
+                    href="/submissions/[id]"
+                    as={`/submissions/${submission.submissionID}`}
+                  >
+                    {submission.taskID}
+                  </TdLink>
+                  <TdLink
+                    href="/submissions/[id]"
+                    as={`/submissions/${submission.submissionID}`}
+                  >
+                    {submission.score}
+                  </TdLink>
+                  <TdLink
+                    href="/submissions/[id]"
+                    as={`/submissions/${submission.submissionID}`}
+                  >
+                    {arrToObj(config.languageData)[submission.language]}
+                  </TdLink>
+                  <TdLink
+                    href="/submissions/[id]"
+                    as={`/submissions/${submission.submissionID}`}
+                  >
+                    {submission.time}
+                  </TdLink>
+                  <TdLink
+                    href="/submissions/[id]"
+                    as={`/submissions/${submission.submissionID}`}
+                  >
+                    {submission.memory}
+                  </TdLink>
+                </Tr>
               )}
             </React.Fragment>
           )
