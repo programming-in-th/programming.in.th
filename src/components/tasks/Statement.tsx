@@ -113,7 +113,7 @@ export const Statement = ({ metadata }) => {
                           <TdHide colSpan={2} />
                         </Tr>
                       ) : (
-                        <Tr>
+                        <Tr key={submission.submissionID}>
                           <TdLink
                             href="/submissions/[id]"
                             as={`/submissions/${submission.submissionID}`}
