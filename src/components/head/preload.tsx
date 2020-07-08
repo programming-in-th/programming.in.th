@@ -21,11 +21,5 @@ export const Preload = () => (
       rel="preconnect"
       href="https://asia-east2-proginth.cloudfunctions.net/"
     />
-    <link
-      rel="preload"
-      href="https://asia-east2-proginth.cloudfunctions.net/getAllTasks"
-      as="fetch"
-      crossOrigin="anonymous"
-    />
   </React.Fragment>
 )
