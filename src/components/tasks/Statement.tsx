@@ -25,6 +25,20 @@ const PDF = styled.object`
   height: 100%;
 `
 
+const TdLink = ({ children, href, as }) => {
+  return (
+    <Td>
+      <Link href={href} as={as}>
+        <a>
+          <Box h="100%" w="100%" padding="8px 16px">
+            {children}
+          </Box>
+        </a>
+      </Link>
+    </Td>
+  )
+}
+
 export const Statement = ({ metadata }) => {
   const { user } = useUser()
 
@@ -99,16 +113,20 @@ export const Statement = ({ metadata }) => {
                           <TdHide colSpan={2} />
                         </Tr>
                       ) : (
-                        <Link
-                          href="/submissions/[id]"
-                          as={`/submissions/${submission.submissionID}`}
-                          key={submission.submissionID}
-                        >
-                          <Tr>
-                            <Td>{getTimestamp(submission.timestamp)}</Td>
-                            <Td>{submission.score}</Td>
-                          </Tr>
-                        </Link>
+                        <Tr key={submission.submissionID}>
+                          <TdLink
+                            href="/submissions/[id]"
+                            as={`/submissions/${submission.submissionID}`}
+                          >
+                            {getTimestamp(submission.timestamp)}
+                          </TdLink>
+                          <TdLink
+                            href="/submissions/[id]"
+                            as={`/submissions/${submission.submissionID}`}
+                          >
+                            {submission.score}
+                          </TdLink>
+                        </Tr>
                       )
                     })
                   )
