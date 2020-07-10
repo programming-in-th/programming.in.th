@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Link, List, ListItem, Text } from '@chakra-ui/core'
+import { Box, Flex, Link, Text } from '@chakra-ui/core'
 
 export const Footer = ({ bg }) => (
   <Box bg={bg} as="footer" borderTop="1px solid #EDF2F7" color="gray.600">
