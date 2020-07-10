@@ -33,20 +33,10 @@ export const Footer = ({ bg }) => (
 
         <Box mt={[2, 0]}>
           <Text fontWeight="600">Resources</Text>
-          <List fontSize="sm">
-            <ListItem>Books</ListItem>
-            <ListItem>Tutorials</ListItem>
-          </List>
         </Box>
 
         <Box mt={[2, 0]}>
           <Text fontWeight="600">Archives</Text>
-          <List fontSize="sm">
-            <ListItem>TOI</ListItem>
-            <ListItem>IOI</ListItem>
-            <ListItem>TUMSO</ListItem>
-            <ListItem>ICPC</ListItem>
-          </List>
         </Box>
 
         <Box mt={[2, 0]}>
