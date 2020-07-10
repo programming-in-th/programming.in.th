@@ -21,7 +21,7 @@
         flex-direction column
         justify-content center
         align-items flex-start
-        padding 48px 0 0 0
+        padding 28px 0
 
         & > .title
             font-size 32px
@@ -38,6 +38,34 @@
         display flex
         flex 3
         overflow hidden
+
+        &.-interactive
+            height 300px
+            flex-direction column
+            justify-content flex-end
+            align-items flex-start
+            opacity 0
+
+            & > .detail
+                font-size 28px
+                font-weight 600
+                color $detail
+                padding 0 0 0 96px
+
+            & > .title
+                font-size 92px
+                font-weight 800
+                color $title
+                padding 0 0 0 96px
+
+        &.interacted
+            opacity 1
+            animation showcase-interaction .4s 0s 1 ease-out
+
+            @keyframes showcase-interaction
+                from
+                    opacity 0
+                    transform translateY(24px)
 
         & > .image
             display block

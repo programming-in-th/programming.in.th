@@ -15,11 +15,10 @@ const Sidebar = () => {
   )
 
   let tabs = [
-    composeTab('Hello World', '/dashboard'),
-    composeTab('Umarun', '/Umarun'),
-    composeTab('Umarun', '/Umarun'),
-    composeTab('Umarun', '/Umarun'),
-    composeTab('Umarun', '/Umarun'),
+    composeTab('Ranking', '#ranking'),
+    composeTab('Progression', '#progress'),
+    composeTab('Discussion', '#discussion'),
+    composeTab('Analysis', '#analysis'),
     composeTab('Umarun', '/Umarun')
   ]
 

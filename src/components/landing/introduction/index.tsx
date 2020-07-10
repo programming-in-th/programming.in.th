@@ -29,7 +29,8 @@ const Introduction = () => {
           <li className="list">{list[2]}</li>
         </ul>
         <footer className="action">
-          <Link href="/dashboard">
+          {/* <Link href="/dashboard"> */}
+          <Link href="/signup">
             <a className="enroll">
               {action}
               <img
@@ -47,10 +48,7 @@ const Introduction = () => {
       </article>
       <figure className="cover">
         <picture className="container">
-          <img
-            className="image"
-            src="https://vignette.wikia.nocookie.net/himoto-umaruchan/images/a/a2/Umaru%27s_anime_design_%28chibi%29.png/revision/latest?cb=20200411195915"
-          />
+          <img className="image" src="/assets/img/landing@1.5x.jpg" />
         </picture>
       </figure>
     </section>

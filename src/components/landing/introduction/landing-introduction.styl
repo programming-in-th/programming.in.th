@@ -7,10 +7,12 @@ $bezier = cubic-bezier(.2,.88,.6,1.08)
     flex-direction row
     justify-content center
     align-items flex-start
-    min-height calc(100vh - 56px) // Minus navbar height
-    padding 0 0 56px 0
+    min-height 440px
+    height calc(100vh - 56px) // Minus navbar height
+    max-height 880px
     width 1080px
     margin 0 auto
+    padding 0 0 56px 0
 
     & > .article,
     & > .cover
@@ -20,10 +22,10 @@ $bezier = cubic-bezier(.2,.88,.6,1.08)
         justify-content center
         align-items flex-start
         min-height inherit
-        overflow hidden
 
     & > .article
         width 466px
+        margin auto 0
         padding 0 20px 0 46px
         flex unset
 
@@ -133,17 +135,21 @@ $bezier = cubic-bezier(.2,.88,.6,1.08)
 
     & > .cover
         & > .container
+            z-index -1
+            top 56px
+            position absolute
             display block
             margin-left auto
             animation image-fade-in 3.45s $bezier 0s 1
 
             & > .image
                 display block
-                max-width 100%
-                max-height calc(100vh - 56px)
+                height calc(100vh - 56px)
+                min-height 440px
+                max-height 740px
+                max-width auto
                 object-fit cover
-                object-position center
-                padding 40px
+                object-position left top
 
     @media screen and (max-width 413.9px)
         &
@@ -165,17 +171,27 @@ $bezier = cubic-bezier(.2,.88,.6,1.08)
                         &::marker
                             display none
 
-    @media screen and (max-width 767.9px)
+    @media screen and (max-width 567.9px)
         &
             width 100%
             flex-direction column
 
             & > .cover
-                min-height unset
+                position relative
+                width 100%
+                overflow hidden
+                display none
 
                 & > .container
                     & > .image
-                        padding 12px
+                        padding 0
+
+    @media screen and (min-width 568px) and (max-width 767.9px)
+        &
+            width 100%
+
+            & > .cover
+                min-height unset
 
     @media screen and (min-width 768px) and (max-width 991.9px)
         &
@@ -194,7 +210,7 @@ $bezier = cubic-bezier(.2,.88,.6,1.08)
                 & > .container
                     & > .image
                         padding 20px
-    
+
 @keyframes fade-in
     0%
         opacity 0

@@ -7,11 +7,11 @@ const Join = () => (
     <h3 className="title">Learn Together</h3>
     <p className="detail">
       We got you cover and help you get better for learning, experiencing and
-      experimenting. Over 10,000+ developer all over the community has joined
+      experimenting. Over 10,000 developers all over the community has joined
       Programming.in.th and sharpen their skills.
     </p>
-    <Link href="/sign-in">
-      <a className="link">Let's start</a>
+    <Link href="/signup">
+      <a className="link">Sign Up</a>
     </Link>
   </article>
 )

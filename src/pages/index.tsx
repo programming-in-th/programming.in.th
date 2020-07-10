@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useRef, useEffect, useReducer } from 'react'
 
 import { PageLayout } from '../components/Layout'
 
 import { Divider } from '@chakra-ui/core'
+
+import Countup from 'react-countup'
 
 import { Introduction, Join, Showcase } from '../components/landing'
 import { Row, Detail } from '../components/landing/detail'
@@ -17,7 +19,6 @@ import intl from '../intl/index.json'
 const Index = () => {
   // Transform this to state management engine.
   const lang = 'en'
-
   const translated = intl[lang]
 
   const contestData = [
@@ -58,11 +59,6 @@ const Index = () => {
   // If 'isReverse' is set to true, justifyContent is aliged as flex-end.
   const showcaseAssets = [
     {
-      src: '/assets/img/dashboard.png',
-      alt: 'Dashboard Demo',
-      isReverse: false
-    },
-    {
       src: '/assets/img/ide.png',
       alt: 'IDE Showcase',
       isReverse: true
@@ -74,9 +70,42 @@ const Index = () => {
     }
   ]
 
+  const { interactiveShowcase } = translated
+
+  const [isShowingInterative, showInteractive] = useReducer(() => true, false)
+  const interactive = useRef<HTMLElement>()
+
+  useEffect(() => {
+    let detectInteractive = () => {
+      if (
+        typeof interactive.current === 'undefined' ||
+        interactive.current === null
+      )
+        return
+
+      let interactivePosition = interactive.current.getBoundingClientRect().top
+
+      if (interactivePosition === 0) return
+
+      if (interactivePosition > window.innerHeight / 2) return
+
+      showInteractive()
+
+      window.removeEventListener('scroll', detectInteractive)
+    }
+
+    window.addEventListener('scroll', detectInteractive, {
+      passive: true
+    })
+
+    detectInteractive()
+  }, [])
+
   return (
     <PageLayout>
       <Introduction />
+
+      {/* Featured */}
       <Row>
         {translated.feature.map(({ title, detail }) => (
           <Detail title={title}>{detail}</Detail>
@@ -85,7 +114,6 @@ const Index = () => {
 
       {/* Featured Contest */}
       {/**
-       * ! The logic here should be real-time, sync with Firebase.
        * ? Shouldn't be displayed when there's no contest.
        *  */}
       <Featured>{translated.contest.title}</Featured>
@@ -111,9 +139,41 @@ const Index = () => {
             {detail}
           </Card>
         ))}
+
+        <Card title="More Problem" href="/tasks">
+          Explore various competitive problems.
+        </Card>
       </FeaturedRow>
 
       <Divider />
+
+      {/* InteractiveShowcase */}
+      <section ref={interactive} className="landing-showcase">
+        <article className="article">
+          <h3 className="title">{interactiveShowcase.title}</h3>
+          <p className="detail">{interactiveShowcase.detail}</p>
+        </article>
+        <section
+          className={`cover -interactive ${
+            isShowingInterative ? 'interacted' : ''
+          }`}
+        >
+          <p className="detail">Over</p>
+          {isShowingInterative ? (
+            <Countup
+              start={0}
+              end={10000}
+              duration={3}
+              delay={0}
+              useEasing={true}
+              separator=","
+            >
+              {({ countUpRef }) => <h1 className="title" ref={countUpRef} />}
+            </Countup>
+          ) : null}
+          <p className="detail">Programmers enrolled</p>
+        </section>
+      </section>
 
       {/* Showcase */}
       {translated.showcase.map(({ title, detail }, index) => (
@@ -130,17 +190,6 @@ const Index = () => {
 
       {/* Last Chance for asking to join the platform */}
       <Join />
-      {/* Some cool thing placeholder */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '500px'
-        }}
-      >
-        Put some cool artwork here
-      </div>
     </PageLayout>
   )
 }
