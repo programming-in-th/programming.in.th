@@ -1,0 +1,22 @@
+@require '../../../config.styl'
+
+#dashboard > .link,
+#dashboard > .row > .link
+    text-decoration none
+
+    & > .card > .footer
+        align-items center
+
+        & > .image
+            width 32px
+            height 32px
+            border-radius 16px
+            object-fit cover
+            object-position center
+            margin-right 8px
+            border 1px solid $border
+
+        & > .name
+            font-size 16px
+            color $detail
+            font-weight 300

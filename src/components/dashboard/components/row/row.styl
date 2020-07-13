@@ -1,0 +1,22 @@
+@require '../../config.styl'
+
+#dashboard > .row
+    display grid
+    grid-template-columns repeat(3, calc(33.33% - 12px))
+    grid-gap 20px
+    width 100%
+    margin 12px 0 16px 0
+
+    &.-wide
+        grid-template-columns repeat(2, calc(50% - 10px))
+
+    @media screen and (max-width $three-area-break-point)
+        &
+            grid-template-columns repeat(1, 100%)
+
+        &.-wide
+            grid-template-columns repeat(2, calc(50% - 10px))
+
+    @media screen and (max-width $two-area-break-point)
+        &, &.-wide
+            grid-template-columns repeat(1, 100%)

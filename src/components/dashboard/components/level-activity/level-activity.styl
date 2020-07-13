@@ -1,0 +1,28 @@
+@require '../../config.styl'
+
+#dashboard > .container > .activity-label
+    display flex
+    flex-direction row
+    justify-content center
+    align-items center
+    width 100%
+
+    & > .activity
+        display flex
+        flex-direction column
+        flex 1
+        justify-content center
+        align-items center
+        padding 20px
+
+        & > .percent
+            font-size 36px
+            color $title
+            font-weight 700
+            text-align center
+
+        & > .label
+            font-size 18px
+            color $detail
+            font-weight 300
+            text-align center

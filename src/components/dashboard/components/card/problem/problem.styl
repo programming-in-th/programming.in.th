@@ -1,0 +1,29 @@
+@require '../../../config.styl'
+
+#dashboard > .link,
+#dashboard > .row > .link
+    text-decoration none
+
+    & > .card > .footer
+        align-items center
+
+        & > .level
+            width 8px
+            height 8px
+            border-radius 8px
+            margin-right 8px
+
+            &.-easy
+                background-color #4cd964
+
+            &.-medium
+                background-color #ffcc00
+
+            &.-hard
+                background-color #ff2d55
+
+        & > .name
+            font-size 16px
+            color $detail
+            font-weight 300
+            text-transform capitalize

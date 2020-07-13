@@ -1,0 +1,46 @@
+@require '../../../config.styl'
+
+#dashboard > .link,
+#dashboard > .row > .link
+    text-decoration none
+
+    & > .card
+        display flex
+        flex-direction column
+        flex 1
+        min-height 120px
+        border 1px solid $border
+        border-radius 4px
+        transition background-color .2s ease-out, box-shadow .2s ease-out, border-color .2s ease-out
+
+        & > .title
+            color $title
+            font-size 28px
+            font-weight 600
+            margin 0 0 4px 0
+            padding 20px 20px 4px 20px
+            text-transform capitalize
+
+        & > .detail
+            color $detail
+            font-size 18px
+            font-weight 400
+            margin 4px 0
+            padding 4px 20px
+            text-transform capitalize
+
+        & > .footer
+            display flex
+            flex-direction row
+            width 100%
+            margin 8px 0 0 0
+            padding 4px 20px 12px 20px
+            font-size 16px
+            color $detail
+
+    &:hover,
+    &:focus
+        & > .card
+            background-color $active
+            box-shadow $shadow
+            border-color $active

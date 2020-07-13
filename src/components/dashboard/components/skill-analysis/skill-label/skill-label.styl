@@ -1,0 +1,13 @@
+@require '../../../config.styl'
+
+#dashboard > .row > .container > .skill-label
+    display grid
+    grid-template-columns repeat(3, calc(33.33% - 12px))
+    grid-gap 8px
+    align-items center
+
+    & > .label
+        padding 4px
+        font-size 16px
+        color $detail
+        font-weight 500

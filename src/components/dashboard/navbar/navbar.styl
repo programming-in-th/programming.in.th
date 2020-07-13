@@ -1,0 +1,31 @@
+@require '../config.styl'
+
+#dashboard > .navbar
+    position fixed
+    z-index 1
+    top 0
+    left 0
+    display none
+    flex-direction row
+    justify-content flex-start
+    align-items center
+    width 100%
+    height 60px
+    padding 0 2.5%
+    background-color $background
+    border-bottom 1px solid $border
+    
+    & > .toggler
+        appearance none
+        width 58px
+        height 58px
+        border 0
+        background-color transparent
+
+    & > .title
+        font-size 21px
+        font-weight 700
+        color $title
+
+    @media screen and (max-width $sidebar-break-point)
+        display flex

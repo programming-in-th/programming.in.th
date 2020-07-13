@@ -1,0 +1,62 @@
+@require '../../config.styl'
+
+#dashboard > .history
+    display grid
+    grid-auto-flow column
+    grid-template-rows repeat(7, 1fr)
+    grid-gap 4px
+    width 100%
+    padding 8px
+    border 1px solid $border
+    border-radius 4px
+    overflow-x auto
+    overflow-y hidden
+
+    & > .activity
+        width 16px
+        height 16px
+        position relative
+
+        &:hover,
+        &:focus
+            & > .tooltip
+                display flex
+
+        &:nth-child(7n - 6),
+        &:nth-child(7n - 5),
+        &:nth-child(7n - 4)
+            & > .tooltip
+                top 20px
+
+        &:nth-child(n + 309)
+            & > .tooltip
+                left -156px
+
+        & > .heat
+            width 16px
+            height 16px
+            background-color $primary
+
+        & > .tooltip
+            position absolute
+            z-index 1
+            top -60px
+            display none
+            flex-direction column
+            justify-content center
+            width 150px
+            height 56px
+            padding 8px 16px
+            background-color rgba(247,247,247,.75)
+            border-radius 4px
+            box-shadow 0 4px 25px rgba(0,0,0,.15)
+            backdrop-filter blur(8px)
+
+            & > .date
+                font-size 11px
+                color $detail
+
+            & > .detail
+                font-size 16px
+                font-weight 500
+                color $title

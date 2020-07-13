@@ -1,9 +1,11 @@
-import { FunctionComponent, ReactText } from 'react'
+import { FunctionComponent, ReactChild } from 'react'
 
-interface DashboardTabProps {
+interface TabProps {
+  icon: ReactChild
+  children: ReactChild | string
   href: string
-  children: ReactText
+  active?: boolean
 }
 
-type DashboardTabComponent = FunctionComponent<DashboardTabProps>
-export default DashboardTabComponent
+type TabComponent = FunctionComponent<TabProps>
+export default TabComponent

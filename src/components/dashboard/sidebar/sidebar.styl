@@ -1,0 +1,34 @@
+@require '../config.styl'
+
+#dashboard-sidebar
+    position fixed
+    z-index 15
+    top 0
+    left 0
+    display flex
+    flex-direction column
+    width $sidebar-width
+    height 100vh
+    border-right 1px solid $border
+    background-color $background
+    transition left .25s ease-out
+
+    .header
+        width 100%
+        padding 16px 28px
+        border-bottom 1px solid $border
+
+        & > .link
+            text-decoration none
+
+            & > .title
+                color $detail
+                font-size 18px
+                font-weight 500
+
+    @media screen and (max-width $sidebar-break-point)
+        &
+            left -($sidebar-width)
+
+        &.-show
+            left 0

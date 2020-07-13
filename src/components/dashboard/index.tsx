@@ -1,20 +1,23 @@
-import Sidebar from './sidebar'
-import Toolbar from './toolbar'
+import { useReducer } from 'react'
 
-import Row from './row'
-import Card from './card'
-import Header from './header'
+import Sidebar from './sidebar'
+import Navbar from './navbar'
 
 import './dashboard.styl'
 
-const Dashboard = ({ children }) => (
-  <main id="dashboard">
-    <Sidebar />
-    <Toolbar />
-    {children}
-  </main>
-)
+const Dashboard = ({ children }) => {
+  let [showingSidebar, toggleSidebar] = useReducer(state => !state, false)
 
-export { Row, Card, Header }
+  return (
+    <main id="dashboard">
+      <Sidebar show={showingSidebar} />
+      {showingSidebar ? (
+        <div className="overlay" onClick={toggleSidebar} />
+      ) : null}
+      <Navbar toggle={toggleSidebar} />
+      {children}
+    </main>
+  )
+}
 
 export default Dashboard

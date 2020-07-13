@@ -1,20 +1,21 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
 
-import DashboardTabComponent from './types'
+import './tab.styl'
 
-import './dashboard-tab.styl'
+import TabComponent from './types'
 
-const Tab: DashboardTabComponent = ({ href, children }) => {
-  let { route } = useRouter()
-
-  return (
-    <Link href={href}>
-      <a className={`dashboard-tab ${route === href ? '-active' : ''}`}>
-        {children}
-      </a>
-    </Link>
-  )
-}
+/**
+ * * Dashboard Tab Props
+ *
+ * Use to navigate between dashboard page via id.
+ */
+const Tab: TabComponent = ({ icon, children, href, active = false }) => (
+  <Link href={`${href}`}>
+    <a className={`tab ${active ? '-active' : ''}`}>
+      {icon}
+      {children}
+    </a>
+  </Link>
+)
 
 export default Tab

@@ -1,0 +1,37 @@
+@require '../../config.styl'
+
+#dashboard > .data-table 
+    width 100%
+    border 1px solid $border
+    border-radius 4px
+    
+    & > .table
+        width 100%
+
+        & > .head
+            height 40px
+            background-color $hover
+
+            & > .row
+                border-bottom 1px solid $border
+
+                & > .title
+                    font-size 16px
+                    font-weight 400
+                    color $detail
+                    text-align left
+                    padding 8px 16px
+
+        & > .body
+            & > .row
+                transition background-color .15s ease-out
+
+                & > .data
+                    padding 8px 16px
+
+                &:nth-child(even)
+                    background-color $hover
+
+                &:hover,
+                &:focus
+                    background-color $active
