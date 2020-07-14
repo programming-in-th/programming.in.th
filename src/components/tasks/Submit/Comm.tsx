@@ -1,11 +1,12 @@
 import React from 'react'
-import { Flex, Button, Select, Text, Box } from '@chakra-ui/core'
+import { Flex, Button, Select, Text, Box, Heading } from '@chakra-ui/core'
 
 import { useUser } from '../../UserContext'
 
 import { UploadCode } from '../../Upload'
+import { useStatus } from './useStatus'
 import { useSubmit } from './useSubmit'
-import { languageData } from '.'
+import { config } from 'config'
 
 export const Comm = ({ metadata }) => {
   const { user } = useUser()
@@ -16,12 +17,19 @@ export const Comm = ({ metadata }) => {
     setCodeFile,
     onDrop,
     setLanguage,
-    status
+    status,
+    submissionID,
+    codeValue,
   } = useSubmit(metadata)
 
+  useStatus({ metadata, status, submissionID, codeValue })
+
   return (
-    <Flex direction="column" px={4}>
-      <Flex direction="column">
+    <Flex direction="column" mt={4} p={4} boxShadow="var(--shadow-default)">
+      <Heading fontSize="xl" fontWeight="600">
+        Submit
+      </Heading>
+      <Flex direction="column" mt={2}>
         <Box>
           {metadata.fileName.map((name, i) => (
             <Box key={name} mt={i === 0 ? 0 : 8}>
@@ -48,17 +56,16 @@ export const Comm = ({ metadata }) => {
           ))}
         </Box>
 
-        <Flex>
+        <Flex mt={4}>
           <Select
-            mt={8}
             width="120px"
             size="sm"
-            defaultValue={languageData[0][0]}
+            defaultValue={config.languageData[0][0]}
             onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
               setLanguage(event.target.value)
             }
           >
-            {languageData.map((data: string[]) => (
+            {config.languageData.map((data: string[]) => (
               <option key={data[0]} value={data[0]}>
                 {data[1]}
               </option>
@@ -68,10 +75,9 @@ export const Comm = ({ metadata }) => {
           <Button
             ml={8}
             size="sm"
-            mt={8}
             width="200px"
             onClick={submit}
-            isDisabled={user === null}
+            isDisabled={user.user === null}
           >
             Submit
           </Button>

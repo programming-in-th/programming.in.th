@@ -1,11 +1,12 @@
 import React from 'react'
-import { Flex, Button, Select, Text } from '@chakra-ui/core'
+import { Flex, Button, Select, Text, Heading } from '@chakra-ui/core'
 
 import { useUser } from '../../UserContext'
 
 import { UploadCode } from '../../Upload'
+import { useStatus } from './useStatus'
 import { useSubmit } from './useSubmit'
-import { languageData } from '.'
+import { config } from 'config'
 
 export const Normal = ({ metadata }) => {
   const { user } = useUser()
@@ -16,12 +17,19 @@ export const Normal = ({ metadata }) => {
     setCodeFile,
     onDrop,
     setLanguage,
-    status
+    status,
+    submissionID,
+    codeValue,
   } = useSubmit(metadata)
 
+  useStatus({ metadata, status, submissionID, codeValue })
+
   return (
-    <Flex direction="column" px={4}>
-      <Flex align="baseline">
+    <Flex direction="column" mt={4} p={4} boxShadow="var(--shadow-default)">
+      <Heading fontSize="xl" fontWeight="600">
+        Submit
+      </Heading>
+      <Flex align="baseline" mt={2}>
         <UploadCode
           index={0}
           codeFile={codeFile}
@@ -39,30 +47,28 @@ export const Normal = ({ metadata }) => {
           </Text>
         )}
       </Flex>
-      <Flex>
+      <Flex mt={4}>
         <Select
-          mt={8}
           width="120px"
           size="sm"
-          defaultValue={languageData[0][0]}
+          defaultValue={config.languageData[0][0]}
           onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
             setLanguage(event.target.value)
           }
         >
-          {languageData.map((data: string[]) => (
+          {config.languageData.map((data: string[]) => (
             <option key={data[0]} value={data[0]}>
               {data[1]}
             </option>
           ))}
         </Select>
-
         <Button
+          isLoading={status === 'LOADING'}
           ml={8}
           size="sm"
-          mt={8}
           width="200px"
           onClick={submit}
-          isDisabled={user === null}
+          isDisabled={user.user === null}
         >
           Submit
         </Button>

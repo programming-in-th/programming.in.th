@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useDropzone, DropEvent } from 'react-dropzone'
+import { useDropzone, DropEvent, FileRejection } from 'react-dropzone'
 import { Button } from '@chakra-ui/core'
 
 interface IUploadCode {
@@ -8,7 +8,7 @@ interface IUploadCode {
   setCodeFile: React.Dispatch<React.SetStateAction<File[]>>
   onDrop<T extends File>(
     acceptedFiles: T[],
-    rejectedFiles: T[],
+    fileRejections: FileRejection[],
     event: DropEvent
   ): void
   multiple: boolean
@@ -17,7 +17,7 @@ interface IUploadCode {
 export const UploadCode = (props: IUploadCode) => {
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     onDrop: props.onDrop,
-    multiple: props.multiple
+    multiple: props.multiple,
   })
 
   useEffect(() => {

@@ -1,35 +1,53 @@
-import {
-  UnControlled as CodeMirror,
-  Controlled as CodeMirrorDisplay
-} from 'react-codemirror2'
-import styled from '@emotion/styled'
-import { css } from '@emotion/core'
+import React from 'react'
+import Highlight, { Prism } from 'prism-react-renderer'
 
-if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
-  require('codemirror/mode/clike/clike.js')
-  require('codemirror/mode/python/python.js')
+import { Flex, Box } from '@chakra-ui/core'
 
-  require('codemirror/addon/selection/active-line.js')
-  require('codemirror/addon/fold/foldgutter.js')
-  require('codemirror/addon/fold/brace-fold.js')
-  require('codemirror/addon/fold/indent-fold.js')
+export interface CodeBlockProps {
+  code: string
+  language: 'c' | 'cpp' | 'python'
 }
 
-const codeStyle = css`
-  font-family: Fira Code !important;
-  margin: 15px 0;
-  span {
-    font-family: Fira Code !important;
-  }
-  .CodeMirror {
-    height: 500px !important;
-  }
-`
-
-export const Code = styled(CodeMirror)`
-  ${codeStyle}
-`
-
-export const CodeDisplay = styled(CodeMirrorDisplay)`
-  ${codeStyle}
-`
+export const Code = ({ code, language }: CodeBlockProps) => {
+  return (
+    <Highlight Prism={Prism} code={code} language={language as any}>
+      {({ style, tokens, getLineProps, getTokenProps }) => (
+        <Flex
+          as="pre"
+          overflowY="auto"
+          style={{ ...style }}
+          fontSize="13.6px !important"
+          className={`language-${language}`}
+        >
+          <code className={`language-${language}`}>
+            {tokens.map((line, i) => (
+              <Box
+                as="tr"
+                key={i}
+                {...getLineProps({ line, key: i })}
+                display="table-row"
+              >
+                <Box
+                  as="td"
+                  key={i + 'l'}
+                  color="gray.400"
+                  pr={2}
+                  width={8}
+                  display="table-cell"
+                  userSelect="none"
+                >
+                  {i + 1}
+                </Box>
+                <Box display="table-cell" as="td">
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                </Box>
+              </Box>
+            ))}
+          </code>
+        </Flex>
+      )}
+    </Highlight>
+  )
+}

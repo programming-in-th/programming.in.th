@@ -8,6 +8,7 @@ export interface ITask {
   visible: boolean
   submit: boolean
   solved: number
+  fullScore: number
 
   type: 'normal' | 'output-only' | 'communication'
   fileName?: ReadonlyArray<string>

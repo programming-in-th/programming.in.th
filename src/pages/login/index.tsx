@@ -3,10 +3,10 @@ import Link from 'next/link'
 import Router from 'next/router'
 import { Box, Text, Flex, Divider, Link as ChakraLink } from '@chakra-ui/core'
 
-import { useUser } from '../../components/UserContext'
-import { PageLayout } from '../../components/Layout'
-import { EmailLogin } from '../../components/auth/EmailLogin'
-import { OAuthLogin } from '../../components/auth/OAuthLogin'
+import { useUser } from 'components/UserContext'
+import { PageLayout } from 'components/Layout'
+import { EmailLogin } from 'components/auth/EmailLogin'
+import { OAuthLogin } from 'components/auth/OAuthLogin'
 
 export default () => {
   const [loginMethod, setLoginMethod] = useState<boolean>(true)
@@ -14,10 +14,10 @@ export default () => {
   const { user } = useUser()
 
   useEffect(() => {
-    if (user !== null && user !== undefined) {
+    if (user.user !== null) {
       Router.push('/')
     }
-  }, [user])
+  }, [user.user])
 
   return (
     <PageLayout>

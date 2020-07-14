@@ -2,7 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 
 import { Box, Heading, Flex } from '@chakra-ui/core'
-import { MarkDownStyle } from '../../design'
+import { MarkDownStyle } from 'design'
 
 export const Solution = ({ solution }) => {
   if (!solution) {
@@ -23,14 +23,7 @@ export const Solution = ({ solution }) => {
           crossOrigin="anonymous"
         />
       </Head>
-      <Box
-        borderRadius={6}
-        boxShadow="var(--shadow-xl)"
-        p={4}
-        mt={4}
-        mx={[4, 'auto']}
-        w={['100%', 1400]}
-      >
+      <Box p={[6, 0]} mt={[0, 4]} mx={[0, 'auto']} w={['100%', 800]}>
         <MarkDownStyle>
           <div dangerouslySetInnerHTML={{ __html: solution }}></div>
         </MarkDownStyle>

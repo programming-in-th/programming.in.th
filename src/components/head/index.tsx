@@ -12,12 +12,12 @@ export const Head = () => (
     <script src="https://accounts.google.com/gsi/client"></script>
     <link rel="icon" sizes="192x192" href="/assets/img/icon-512.png" />
     <link rel="manifest" href="/manifest.json" />
-    <link rel="apple-touch-icon" href="/assets/img/icon-ios.png" />
+    <link rel="apple-touch-icon" href="/assets/img/icon-apple.png" />
     <meta
       name="Description"
       content="Programming.in.th provides you with the fundamentals of algorithmic problem-solving, an important skill to differentiate yourself as a programmer in an increasingly technologically advanced world."
     />
-    <meta property="og:url" content="https://staging.programming.in.th" />
+    <meta property="og:url" content="https://beta.programming.in.th" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="programming.in.th" />
     <meta

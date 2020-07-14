@@ -1,19 +1,56 @@
 import React from 'react'
+import Link from 'next/link'
+import useSWR from 'swr'
 import styled from '@emotion/styled'
-import { Flex, Box, Text, Link } from '@chakra-ui/core'
+import { Flex, Box, Text, Link as ChakraLink } from '@chakra-ui/core'
+
+import { SWRfetch } from 'lib/fetch'
+import { config } from 'config'
 
 import { Normal } from './Submit/Normal'
 import { Comm } from './Submit/Comm'
 import { OutputOnly } from './Submit/OutputOnly'
 
 import { ITask } from '../../@types/task'
+import { Th, Td, Table, Tr, TdHide } from '../submissions/ListTable'
+
+import { useUser } from '../UserContext'
+import { ISubmissionList } from '../../@types/submission'
+
+import { isObjectEmpty, isArrayEmpty } from 'utils/isEmpty'
+import { getTimestamp } from 'utils/getTimestamp'
 
 const PDF = styled.object`
   width: 100%;
   height: 100%;
 `
 
+const TdLink = ({ children, href, as }) => {
+  return (
+    <Td>
+      <Link href={href} as={as}>
+        <a>
+          <Box h="100%" w="100%" padding="8px 16px">
+            {children}
+          </Box>
+        </a>
+      </Link>
+    </Td>
+  )
+}
+
 export const Statement = ({ metadata }) => {
+  const { user } = useUser()
+
+  const { data: submissions } = useSWR(
+    user.username !== ''
+      ? `${config.baseURL}/getSubmissions?limit=5&username=${
+          user.username
+        }&taskID=${metadata.id || ''}`
+      : null,
+    SWRfetch
+  )
+
   const renderSubmit = (metadata: ITask) => {
     switch (metadata.type) {
       case 'normal':
@@ -29,30 +66,98 @@ export const Statement = ({ metadata }) => {
 
   return (
     <Flex direction={['column', 'row']} height="100%" flexGrow={1}>
-      <Flex mt={4} mx={[4, 0]} flex="2 1 50%" direction="column">
+      <Flex mt={4} mx={[6, 0]} flex="2 1 80%" direction="column">
         <Box height="100%">
           <PDF
-            data={`https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/${metadata?.id}.pdf`}
+            data={`https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/statements/${metadata?.id}.pdf`}
           >
             <Text>
               Your browser doesn't support embed PDF viewer please{' '}
-              <Link
+              <ChakraLink
                 isExternal
-                href={`https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/${metadata?.id}.pdf`}
+                href={`https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/statements/${metadata?.id}.pdf`}
                 rel="noopener noreferrer"
                 target="_blank"
                 color="teal.600"
               >
                 download Statement
-              </Link>
+              </ChakraLink>
             </Text>
           </PDF>
         </Box>
       </Flex>
 
-      <Flex mt={4} mx={[4, 0]} flex="2 1 50%" direction="column">
+      <Flex mt={4} mx={[4, 0]} flex="2 1 20%" direction="column" pl={[0, 10]}>
+        <Box
+          maxW="100%"
+          overflow="auto"
+          boxShadow="var(--shadow-default)"
+          maxHeight="400px"
+        >
+          <Table>
+            <thead>
+              <tr>
+                <Th>SUBMISSION TIME</Th>
+                <Th>POINTS</Th>
+              </tr>
+            </thead>
+            <tbody>
+              {user.user ? (
+                submissions?.results ? (
+                  isArrayEmpty(submissions.results) ? (
+                    <NoRecentSubmission></NoRecentSubmission>
+                  ) : (
+                    submissions.results.map((submission: ISubmissionList) => {
+                      return isObjectEmpty(submission) ? (
+                        <Tr>
+                          <TdHide colSpan={2} />
+                        </Tr>
+                      ) : (
+                        <Tr key={submission.submissionID}>
+                          <TdLink
+                            href="/submissions/[id]"
+                            as={`/submissions/${submission.submissionID}`}
+                          >
+                            {getTimestamp(submission.timestamp)}
+                          </TdLink>
+                          <TdLink
+                            href="/submissions/[id]"
+                            as={`/submissions/${submission.submissionID}`}
+                          >
+                            {submission.score}
+                          </TdLink>
+                        </Tr>
+                      )
+                    })
+                  )
+                ) : (
+                  <tr>
+                    <td colSpan={2}>
+                      <Text textAlign={['start', 'center']} p={4}>
+                        Loading...
+                      </Text>
+                    </td>
+                  </tr>
+                )
+              ) : (
+                <NoRecentSubmission></NoRecentSubmission>
+              )}
+            </tbody>
+          </Table>
+        </Box>
+
         {renderSubmit(metadata)}
       </Flex>
     </Flex>
   )
 }
+
+const NoRecentSubmission = () => (
+  <tr>
+    <td colSpan={2}>
+      <Text textAlign={['start', 'center']} p={4}>
+        No recent submission
+      </Text>
+    </td>
+  </tr>
+)
