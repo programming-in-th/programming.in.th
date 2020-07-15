@@ -91,7 +91,7 @@ export const GlobalStyle = () => (
       pre {
         font-size: 14px;
         line-height: 1.4em;
-        margin: 0 0 1.5em;
+        margin: 1.5em 0 !important;
         overflow-x: auto;
         padding: 1.5em;
         white-space: pre;
@@ -101,6 +101,7 @@ export const GlobalStyle = () => (
         code {
           padding: 0;
           text-shadow: none;
+          color: white;
         }
       }
 
@@ -136,17 +137,20 @@ export const MarkDownStyle = styled.div`
     font-family: var(--font-body) !important;
   }
 
-  p,
-  ul,
-  ol {
+  p {
     font-size: 16px;
     line-height: 1.625;
     font-family: var(--font-body) !important;
     color: #24292e;
   }
 
-  li {
-    list-style-position: inside;
+  ul,
+  ol {
+    font-size: 16px;
+    line-height: 1.625;
+    font-family: var(--font-body) !important;
+    color: #24292e;
+    margin-left: 40px;
   }
 
   h1,
