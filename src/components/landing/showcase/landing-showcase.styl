@@ -80,14 +80,27 @@
 
             &.-reverse
                 flex-direction column
-
+ 
             & > .article
                 & > .title,
                 & > .detail
                     width 100%
                     text-align center
+                    padding 0
 
             & > .cover
+                margin-left auto
+                margin-right auto
+                padding-top 40px
+
+                & > .title
+                    padding 0 !important
+                    font-size 60px !important
+
+                & > .detail
+                    padding 0 !important
+                    font-size 24px !important
+
                 & > .image
                     margin 40px 0 0 0
                     padding 0 20px
@@ -101,5 +114,13 @@
                 padding-top 20px
 
             & > .cover
-                margin-top 40px
+                margin-top 0
                 flex 2
+
+                & > .title
+                    padding-left 32px !important
+                    font-size 84px !important
+
+                & > .detail
+                    padding-left 32px !important
+                    font-size 28px !important

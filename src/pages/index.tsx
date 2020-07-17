@@ -145,7 +145,7 @@ const Index = () => {
         </Card>
       </FeaturedRow>
 
-      <Divider />
+      {/* <Divider /> */}
 
       {/* InteractiveShowcase */}
       <section ref={interactive} className="landing-showcase">
