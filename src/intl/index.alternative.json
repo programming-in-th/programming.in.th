@@ -1,0 +1,185 @@
+{
+  "introduction": {
+    "header": {
+      "en": ["It's time to", "Level Up"],
+      "th": ["ได้เวลา", "เลเวลอัพ"]
+    },
+    "list": {
+      "en": [
+        "Data Structure & Algorithms",
+        "Over 400 Challenges",
+        "Join over 10,000 programmers"
+      ],
+      "th": [
+        "โครงสร้างข้อมูลและอัลกอริทึ่ม",
+        "บททดสอบมากกว่า 400 โจทย์",
+        "ร่วมกับโปรแกรมเมอร์กว่า 10,000 คน"
+      ]
+    },
+    "action": {
+      "en": "Start today",
+      "th": "เริ่มวันนี้เลย"
+    },
+    "sub-action": {
+      "en": "Explore Challenge",
+      "th": "สำรวจโจทย์"
+    }
+  },
+  "feature": [
+    {
+      "title": {
+        "en": "Integrate Environment",
+        "th": ""
+      },
+      "detail": {
+        "en": "Go beyond code, syntax-highlighting, close an unused block, smart completions for the best exclusive experience.",
+        "th": ""
+      }
+    },
+    {
+      "title": {
+        "en": "Crafted by Specialists",
+        "th": ""
+      },
+      "detail": {
+        "en": "Over 400 problems designed and curated by specialists. To deliver the most comprehensive learning experience possible.",
+        "th": ""
+      }
+    },
+    {
+      "title": {
+        "en": "Trusted by thousands",
+        "th": ""
+      },
+      "detail": {
+        "en": "Join other 10,000 to craft, learn and practice, on one of the best data-structure and algorithms solving platform.",
+        "th": ""
+      }
+    }
+  ],
+  "contest": {
+    "title": {
+      "en": "Featured Contest",
+      "th": ""
+    },
+    "list": [
+      {
+        "title": {
+          "en": "Google Code Jam",
+          "th": ""
+        },
+        "detail": {
+          "en": "Put your coding skills to the test as you work your way through multiple rounds of algorithmic coding puzzles for the title of Code Jam Champ and 15,000 USD.",
+          "th": ""
+        }
+      },
+      {
+        "title": {
+          "en": "Microsoft Imagine Cup",
+          "th": ""
+        },
+        "detail": {
+          "en": "Global competition that empowers the next generation of computer science students to team up and use their creativity, passion and knowledge of technology.",
+          "th": ""
+        }
+      },
+      {
+        "title": {
+          "en": "Google Code In",
+          "th": ""
+        },
+        "detail": {
+          "en": "Google's contest introducing 13-17 year old pre-university students to open source software development.",
+          "th": ""
+        }
+      }
+    ]
+  },
+  "problems": [
+    {
+      "title": {
+        "en": "Tortoise and Hare",
+        "th": ""
+      },
+      "detail": {
+        "en": "Floyd's \"tortoise and hare\" cycle detection algorithm, applied to the sequence 2, 0, 6, 3, 1, 6, 3, 1",
+        "th": ""
+      }
+    },
+    {
+      "title": {
+        "en": "Permutation Sort",
+        "th": ""
+      },
+      "detail": {
+        "en": "Randomly Shuffle an entire array until it completely sorted.",
+        "th": ""
+      }
+    },
+    {
+      "title": {
+        "en": "Red Black Tree",
+        "th": ""
+      },
+      "detail": {
+        "en": "Every node is either red or black. Every leaf (NULL) is black. If a node is red, then both its children are black.",
+        "th": ""
+      }
+    },
+    {
+      "title": {
+        "en": "Instant Sort",
+        "th": ""
+      },
+      "detail": {
+        "en": "The fastest sorting algorithm ever with the speed of O(1).",
+        "th": ""
+      }
+    }
+  ],
+  "showcase": [
+    {
+      "title": {
+        "en": "Integrated Development Environment",
+        "th": ""
+      },
+      "detail": {
+        "en": "To enhance the best experience, tracking and analyzing is proven to be the best for planning future skills, and growth learning. Especially at programming.in.th, we crafted the finest dashboard for everyone.",
+        "th": ""
+      }
+    },
+    {
+      "title": {
+        "en": "Integrated Development Environment",
+        "th": ""
+      },
+      "detail": {
+        "en": "Beyond the thought, environment of programming.in.th is perfectly crafted for integrated development environment which result a perfect workspace for solving and experimenting an algorithm without a help of a code editor.",
+        "th": ""
+      }
+    },
+    {
+      "title": {
+        "en": "Exclusive Data-Science Level Analytic",
+        "th": ""
+      },
+      "detail": {
+        "en": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+        "th": ""
+      }
+    }
+  ],
+  "join": {
+    "title": {
+      "en": "Learn together"
+    },
+    "detail": {
+      "en": "We got you cover and help you get better for learning, experiencing and experimenting. Over 10,000 developers all over the community has joined Programming.in.th and sharpen their skills.",
+      "th": ""
+    },
+    "action": {
+      "en": "Let's start",
+      "th": "เริ่มกันเลย"
+    }
+  }
+}
