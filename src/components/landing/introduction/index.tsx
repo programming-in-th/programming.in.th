@@ -2,8 +2,6 @@ import Link from 'next/link'
 
 import './landing-introduction.styl'
 
-import intl from '../../../intl/index.json'
-
 const Introduction = ({ translated }) => {
   // Transform this to state management engine.
 
