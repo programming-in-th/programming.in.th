@@ -29,7 +29,6 @@
     "@next/bundle-analyzer": "^9.4.4",
     "@next/mdx": "^9.4.4",
     "cross-env": "^7.0.2",
-    "@next/mdx": "^9.2.2",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-css": "^1.0.1",
     "apexcharts": "^3.19.0",
@@ -71,12 +70,12 @@
     "@types/lodash": "^4.14.157",
     "@types/next": "^9.0.0",
     "@types/nprogress": "^0.2.0",
+    "@zeit/next-stylus": "^1.0.1",
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
     "@types/webpack-env": "^1.15.2",
     "babel-eslint": "^10.1.0",
     "@types/react-syntax-highlighter": "^11.0.1",
-    "@zeit/next-stylus": "^1.0.1",
     "babel-plugin-emotion": "^10.0.33",
     "babel-plugin-inline-react-svg": "^1.1.1",
     "eslint": "^7.4.0",
@@ -88,8 +87,8 @@
     "husky": "^4.2.5",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
-    "typescript": "^3.9.6",
-    "stylus": "^0.54.7"
+    "stylus": "^0.54.7",
+    "typescript": "^3.9.6"
   },
   "scripts": {
     "dev": "next",
