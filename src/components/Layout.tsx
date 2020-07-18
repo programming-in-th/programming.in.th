@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useUser } from './UserContext'
-import { Flex, Divider, Box, Link as ChakraLink, Text } from '@chakra-ui/core'
+import { Flex, Divider } from '@chakra-ui/core'
 import { Footer } from './Footer'
 import { Nav } from './Nav'
 

@@ -2,8 +2,6 @@ import React, { useRef, useEffect, useReducer } from 'react'
 
 import { PageLayout } from 'components/Layout'
 
-import { Divider } from '@chakra-ui/core'
-
 import Countup from 'react-countup'
 
 import { Introduction, Join, Showcase } from '../components/landing'
@@ -108,7 +106,9 @@ const Index = () => {
       {/* Featured */}
       <Row>
         {translated.feature.map(({ title, detail }) => (
-          <Detail title={title}>{detail}</Detail>
+          <Detail title={title} key={title}>
+            {detail}
+          </Detail>
         ))}
       </Row>
 
