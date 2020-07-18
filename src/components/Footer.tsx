@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Flex, Link, List, ListItem, Text } from '@chakra-ui/core'
+import { Box, Flex, Link, Text } from '@chakra-ui/core'
 
 export const Footer = ({ bg }) => (
   <Box bg={bg} as="footer" borderTop="1px solid #EDF2F7" color="gray.600">
@@ -33,20 +33,10 @@ export const Footer = ({ bg }) => (
 
         <Box mt={[2, 0]}>
           <Text fontWeight="600">Resources</Text>
-          <List fontSize="sm">
-            <ListItem>Books</ListItem>
-            <ListItem>Tutorials</ListItem>
-          </List>
         </Box>
 
         <Box mt={[2, 0]}>
           <Text fontWeight="600">Archives</Text>
-          <List fontSize="sm">
-            <ListItem>TOI</ListItem>
-            <ListItem>IOI</ListItem>
-            <ListItem>TUMSO</ListItem>
-            <ListItem>ICPC</ListItem>
-          </List>
         </Box>
 
         <Box mt={[2, 0]}>

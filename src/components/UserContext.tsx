@@ -1,40 +1,155 @@
-import React, { useContext } from 'react'
+import React, { useContext, useReducer, useEffect } from 'react'
+import useSWR, { mutate } from 'swr'
+import { useRouter } from 'next/router'
 
-export type UserState = typeof initialState
+import firebase from 'lib/firebase'
+import { onetap } from 'lib/onetap'
 
-export const initialState = { user: undefined, isAdmin: false }
+import { fetchFromFirebase } from 'utils/fetcher'
+import { isObjectEmpty } from 'utils/isEmpty'
 
-export type UserAction =
+type User = firebase.User | null
+
+export interface Data {
+  username: string
+  admin: boolean
+}
+
+type UserData = { user: User | undefined } & Data
+
+interface UserState {
+  user: UserData
+  loading: boolean
+}
+
+type UserAction =
   | {
       type: 'RECEIVE_USER'
-      payload: { user: firebase.User | null }
+      payload: User
     }
   | {
-      type: 'RECEIVE_ADMIN'
-      payload: { isAdmin: boolean }
+      type: 'RECEIVE_CONTEXT'
+      payload: Data
+    }
+  | {
+      type: 'LOADING_DONE'
+    }
+  | {
+      type: 'LOADING_START'
     }
 
-export const reducer = (state: UserState, action: UserAction): UserState => {
+type userContext = UserState & { userDispatch: React.Dispatch<UserAction> }
+
+const initialState: UserState = {
+  user: {
+    user: undefined,
+    username: '',
+    admin: false,
+  },
+  loading: true,
+}
+
+const reducer = (state: UserState, action: UserAction): UserState => {
   switch (action.type) {
     case 'RECEIVE_USER':
       return Object.assign({}, state, {
-        user: action.payload.user
+        user: Object.assign({}, state.user, {
+          user: action.payload,
+        }),
       })
-    case 'RECEIVE_ADMIN':
+    case 'RECEIVE_CONTEXT':
       return Object.assign({}, state, {
-        isAdmin: action.payload.isAdmin
+        user: Object.assign({}, state.user, {
+          username: action.payload.username,
+          admin: action.payload.admin,
+        }),
+      })
+    case 'LOADING_DONE':
+      return Object.assign({}, state, {
+        loading: false,
+      })
+    case 'LOADING_START':
+      return Object.assign({}, state, {
+        loading: true,
       })
     default:
       return state
   }
 }
 
-export const UserStateContext = React.createContext<{
-  user: firebase.User | null | undefined
-  isAdmin: boolean
-}>({
-  user: undefined,
-  isAdmin: false
+const UserStateContext = React.createContext<userContext>({
+  ...initialState,
+  userDispatch: null,
 })
 
 export const useUser = () => useContext(UserStateContext)
+
+const userContextComp = ({ children }) => {
+  const [userState, userDispatch] = useReducer<
+    React.Reducer<UserState, UserAction>
+  >(reducer, initialState)
+
+  const router = useRouter()
+
+  const { data: userContext } = useSWR('getUserContext', fetchFromFirebase, {
+    refreshInterval: 1000 * 60,
+  })
+
+  useEffect(() => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      if (user === null || user.emailVerified) {
+        userDispatch({
+          type: 'RECEIVE_USER',
+          payload: user,
+        })
+
+        mutate('getUserContext')
+      }
+    })
+
+    return () => {
+      unsubscribe()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (userContext === undefined || isObjectEmpty(userContext)) {
+      userDispatch({
+        type: 'RECEIVE_CONTEXT',
+        payload: initialState.user,
+      })
+    } else {
+      userDispatch({
+        type: 'RECEIVE_CONTEXT',
+        payload: userContext,
+      })
+      userDispatch({
+        type: 'LOADING_DONE',
+      })
+    }
+  }, [userContext])
+
+  useEffect(() => {
+    if (userState.user.user === null) {
+      onetap()
+    }
+  }, [userState.user.user])
+
+  useEffect(() => {
+    if (
+      userState.user.user !== null &&
+      userState.loading === false &&
+      userState.user.username === ''
+    ) {
+      router.push('/setusername')
+    }
+  }, [userState, router.pathname])
+
+  return (
+    <UserStateContext.Provider value={{ ...userState, userDispatch }}>
+      {children}
+    </UserStateContext.Provider>
+  )
+}
+
+export default userContextComp

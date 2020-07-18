@@ -9,15 +9,16 @@ import {
   FormErrorMessage,
   InputGroup,
   InputLeftElement,
-  Input
+  Input,
 } from '@chakra-ui/core'
-import { FaRegEnvelope, FaLock } from 'react-icons/fa'
+import { FaRegEnvelope } from 'react-icons/fa'
 import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
-import firebase from '../../lib/firebase'
+
+import firebase from 'lib/firebase'
 
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().required('Please enter your email')
+  email: Yup.string().required('Please enter your email'),
 })
 
 export const Reset = ({ setErrorMessage }) => {
@@ -46,17 +47,17 @@ export const Reset = ({ setErrorMessage }) => {
                 status: 'success',
                 position: 'top',
                 duration: 4000,
-                isClosable: true
+                isClosable: true,
               })
               Router.push('/login')
             })
-            .catch(error => {
+            .catch((error) => {
               setError(error.message)
             })
           actions.setSubmitting(false)
         }}
       >
-        {props => (
+        {(props) => (
           <form onSubmit={props.handleSubmit}>
             <Field name="email">
               {({ field, form }) => (

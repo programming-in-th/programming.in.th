@@ -1,217 +1,137 @@
-/* prefixed by https://autoprefixer.github.io (PostCSS: v7.0.26, autoprefixer: v9.7.3) */
-
+/**
+ * Based on copypasta from Remy Bach and Sarah Drasner
+ */
 code[class*='language-'],
-code > code,
 pre[class*='language-'] {
+  color: white;
+  background: #011627;
+  font-family: Fira Code, Menlo, Monaco, source-code-pro, Courier New, monospace;
+  font-variant-ligatures: none;
+  font-size: 1em;
+  font-feature-settings: normal;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
   word-break: normal;
   word-wrap: normal;
-  color: #eee !important;
-  background: #011627;
-  font-family: Fira Code, monospace;
-  font-size: 1em;
-  line-height: 1.5em;
+  line-height: 1.5;
+  margin-bottom: 0;
 
   -moz-tab-size: 4;
   -o-tab-size: 4;
   tab-size: 4;
 
   -webkit-hyphens: none;
+  -moz-hyphens: none;
   -ms-hyphens: none;
   hyphens: none;
-  text-shadow: none;
 }
 
-code[class*='language-']::-moz-selection,
-pre[class*='language-']::-moz-selection,
-code[class*='language-'] ::-moz-selection,
-pre[class*='language-'] ::-moz-selection {
-  background: #363636;
-}
-
-code[class*='language-']::-moz-selection,
-pre[class*='language-']::-moz-selection,
-code[class*='language-'] ::-moz-selection,
-pre[class*='language-'] ::-moz-selection {
-  background: #363636;
-}
-
-code[class*='language-']::selection,
-pre[class*='language-']::selection,
-code[class*='language-'] ::selection,
-pre[class*='language-'] ::selection {
-  background: #363636;
-}
-
-:not(pre) > code {
-  color: black;
-  background: rgba(27, 31, 35, 0.05);
-  font-size: 0.9rem;
-  padding: 4px;
-  border-radius: 3px;
-}
-
+/* Code blocks */
 pre[class*='language-'] {
   overflow: auto;
-  position: relative;
   margin: 0.5em 0;
-  padding: 1.25em 1em;
+  padding: 1.3125rem;
 }
 
-.language-css > code,
-.language-sass > code,
-.language-scss > code {
-  color: #fd9170;
+pre[class*='language-']::-moz-selection {
+  /* Firefox */
+  background: hsl(207, 4%, 16%);
 }
 
-[class*='language-'] .namespace {
-  opacity: 0.7;
+pre[class*='language-']::selection {
+  /* Safari */
+  background: hsl(207, 4%, 16%);
 }
 
-.token.atrule {
-  color: #c792ea;
+/* Text Selection colour */
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection {
+  text-shadow: none;
+  background: hsla(0, 0%, 100%, 0.15);
+}
+
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection {
+  text-shadow: none;
+  background: hsla(0, 0%, 100%, 0.15);
+}
+
+/* Inline code */
+:not(pre) > code {
+  border-radius: 3px;
+  background: rgba(27, 31, 35, 0.05);
+  color: #24292e;
+  padding: 0.15em 0.2em 0.05em;
+  white-space: normal;
+}
+
+.token.plain {
+  color: white;
 }
 
 .token.attr-name {
-  color: #ffcb6b;
-}
-
-.token.attr-value {
-  color: #a5e844;
-}
-
-.token.attribute {
-  color: #a5e844;
-}
-
-.token.boolean {
-  color: #c792ea;
-}
-
-.token.builtin {
-  color: #ffcb6b;
-}
-
-.token.cdata {
-  color: #80cbc4;
-}
-
-.token.char {
-  color: #80cbc4;
-}
-
-.token.class {
-  color: #ffcb6b;
-}
-
-.token.class-name {
-  color: #f2ff00;
+  color: rgb(173, 219, 103);
+  font-style: italic;
 }
 
 .token.comment {
-  color: #616161;
-}
-
-.token.constant {
-  color: #c792ea;
-}
-
-.token.deleted {
-  color: #ff6666;
-}
-
-.token.doctype {
-  color: #616161;
-}
-
-.token.entity {
-  color: #ff6666;
-}
-
-.token.function {
-  color: #c792ea;
-}
-
-.token.hexcode {
-  color: #f2ff00;
-}
-
-.token.id {
-  color: #c792ea;
-  font-weight: bold;
-}
-
-.token.important {
-  color: #c792ea;
-  font-weight: bold;
-}
-
-.token.inserted {
-  color: #80cbc4;
-}
-
-.token.keyword {
-  color: #c792ea;
-}
-
-.token.number {
-  color: #fd9170;
-}
-
-.token.operator {
-  color: #89ddff;
-}
-
-.token.prolog {
-  color: #616161;
-}
-
-.token.property {
-  color: #80cbc4;
-}
-
-.token.pseudo-class {
-  color: #a5e844;
-}
-
-.token.pseudo-element {
-  color: #a5e844;
-}
-
-.token.punctuation {
-  color: #89ddff;
-}
-
-.token.regex {
-  color: #f2ff00;
-}
-
-.token.selector {
-  color: #ff6666;
-}
-
-.token.string {
-  color: #a5e844;
-}
-
-.token.symbol {
-  color: #c792ea;
-}
-
-.token.tag {
-  color: #ff6666;
-}
-
-.token.unit {
-  color: #fd9170;
-}
-
-.token.url {
-  color: #ff6666;
+  color: rgb(128, 147, 147);
 }
 
 .token.variable {
-  color: #ff6666;
+  color: rgb(214, 222, 235);
+}
+
+.token.number {
+  color: rgb(247, 140, 108);
+}
+
+.token.builtin,
+.token.char,
+.token.constant,
+.token.function {
+  color: rgb(130, 170, 255);
+}
+
+.token.punctuation {
+  color: rgb(199, 146, 234);
+}
+
+.token.selector,
+.token.doctype {
+  color: rgb(199, 146, 234);
+  font-style: 'italic';
+}
+
+.token.class-name {
+  color: rgb(255, 203, 139);
+}
+
+.token.property {
+  color: rgb(128, 203, 196);
+}
+
+.token.tag,
+.token.operator,
+.token.keyword {
+  color: #ffa7c4;
+}
+
+.token.boolean {
+  color: rgb(255, 88, 116);
+}
+
+.token.namespace {
+  color: rgb(178, 204, 214);
+}
+
+.token.string,
+.token.url {
+  color: rgb(173, 219, 103);
+}
+
+pre[data-line] {
+  padding: 1em 0 1em 3em;
+  position: relative;
 }

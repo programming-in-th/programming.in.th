@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useReducer } from 'react'
 
-import { PageLayout } from '../components/Layout'
+import { PageLayout } from 'components/Layout'
 
 import { Divider } from '@chakra-ui/core'
 

@@ -1,20 +1,33 @@
 import React from 'react'
-import { Flex, Button, Select, Text, Box } from '@chakra-ui/core'
+import { Flex, Button, Text, Box, Heading } from '@chakra-ui/core'
 
 import { useUser } from '../../UserContext'
 
 import { UploadCode } from '../../Upload'
+import { useStatus } from './useStatus'
 import { useSubmit } from './useSubmit'
-import { languageData } from '.'
 
 export const OutputOnly = ({ metadata }) => {
   const { user } = useUser()
 
-  const { submit, codeFile, setCodeFile, onDrop, status } = useSubmit(metadata)
+  const {
+    submit,
+    codeFile,
+    setCodeFile,
+    onDrop,
+    status,
+    submissionID,
+    codeValue,
+  } = useSubmit(metadata)
+
+  useStatus({ metadata, status, submissionID, codeValue })
 
   return (
-    <Flex direction="column" px={4}>
-      <Flex direction="column">
+    <Flex direction="column" mt={4} p={4} boxShadow="var(--shadow-default)">
+      <Heading fontSize="xl" fontWeight="600">
+        Submit
+      </Heading>
+      <Flex direction="column" mt={2}>
         <Box>
           {metadata.fileName.map((name, i) => (
             <Box key={name} mt={i === 0 ? 0 : 8}>
@@ -43,10 +56,10 @@ export const OutputOnly = ({ metadata }) => {
 
         <Button
           size="sm"
-          mt={8}
+          mt={4}
           width="200px"
           onClick={submit}
-          isDisabled={user === null}
+          isDisabled={user.user === null}
         >
           Submit
         </Button>

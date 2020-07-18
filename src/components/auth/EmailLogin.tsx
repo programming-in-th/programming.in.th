@@ -12,16 +12,17 @@ import {
   InputLeftElement,
   Input,
   Link as ChakraLink,
-  Flex
+  Flex,
 } from '@chakra-ui/core'
 import { FaRegEnvelope, FaLock } from 'react-icons/fa'
 import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
-import firebase from '../../lib/firebase'
+
+import firebase from 'lib/firebase'
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().required('Please enter your email'),
-  pass: Yup.string().required('Please enter your password')
+  pass: Yup.string().required('Please enter your password'),
 })
 
 const Login = ({ setErrorMessage }) => {
@@ -57,13 +58,13 @@ const Login = ({ setErrorMessage }) => {
                   Router.push('/')
                 }
             })
-            .catch(error => {
+            .catch((error) => {
               setError(error.message)
             })
           actions.setSubmitting(false)
         }}
       >
-        {props => (
+        {(props) => (
           <form onSubmit={props.handleSubmit}>
             <Field name="email">
               {({ field, form }) => (

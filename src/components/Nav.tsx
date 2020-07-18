@@ -12,12 +12,12 @@ import {
   MenuItem,
   MenuDivider,
   Avatar,
-  Stack
+  Stack,
 } from '@chakra-ui/core'
 import { useWindowSize } from 'react-use'
 import { FiMenu, FiX } from 'react-icons/fi'
 
-import firebase from '../lib/firebase'
+import firebase from 'lib/firebase'
 
 import { useUser } from './UserContext'
 
@@ -30,19 +30,19 @@ interface IMenu {
 const leftMenu: IMenu[] = [
   { key: 'home', name: 'Home', path: '/' },
   { key: 'tasks', name: 'Tasks', path: '/tasks' },
+  { key: 'submissions', name: 'Submissions', path: '/submissions' },
   { key: 'learn', name: 'Learn', path: '/learn' },
-  { key: 'contests', name: 'Contests', path: '/contests' }
 ]
 
 const rightMenu: IMenu[] = [
   { key: 'signup', name: 'Sign Up', path: '/signup' },
-  { key: 'login', name: 'Login', path: '/login' }
+  { key: 'login', name: 'Login', path: '/login' },
 ]
 
 const generateMenuItems = (menu: IMenu[], pathname: string) => {
   const location = pathname.split('/')[1]
 
-  return menu.map(i => (
+  return menu.map((i) => (
     <Link href={i.path} key={i.key}>
       <ChakraLink
         href={i.path}
@@ -61,7 +61,7 @@ export const Nav = () => {
   const [isNavOpen, setNavState] = useState(false)
   const { width } = useWindowSize()
 
-  const { user } = useUser()
+  const { user, loading, userDispatch } = useUser()
   const router = useRouter()
 
   return (
@@ -112,25 +112,48 @@ export const Nav = () => {
             </Flex>
 
             <Box>
-              {user === undefined ? null : user !== null ? (
+              {(user.user !== null && loading === true) ||
+              user.user === undefined ? (
+                <Flex
+                  mt={[4, 0]}
+                  align={['flex-end', 'baseline']}
+                  direction={['column', 'row']}
+                >
+                  Loading...
+                </Flex>
+              ) : user.user !== null ? (
                 <Menu>
                   <MenuButton as={Box}>
                     <Stack isInline mt={[4, 0]}>
                       <Avatar
                         size="xs"
                         src={
-                          user.photoURL === ''
+                          user.user.photoURL === ''
                             ? '/assets/img/default-user.png'
-                            : `${user.photoURL}`
+                            : `${user.user.photoURL}`
                         }
                       />
-                      <Text color="gray.500">{user?.displayName}</Text>
+                      <Text color="gray.500">{user.username}</Text>
                     </Stack>
                   </MenuButton>
                   <MenuList>
                     <MenuItem>Dashboard</MenuItem>
+                    <MenuItem onClick={() => router.push('/setusername')}>
+                      Change Username
+                    </MenuItem>
                     <MenuDivider></MenuDivider>
-                    <MenuItem onClick={() => firebase.auth().signOut()}>
+                    <MenuItem
+                      onClick={() => {
+                        firebase
+                          .auth()
+                          .signOut()
+                          .then(() => {
+                            userDispatch({
+                              type: 'LOADING_START',
+                            })
+                          })
+                      }}
+                    >
                       Logout
                     </MenuItem>
                   </MenuList>

@@ -1,19 +1,20 @@
 import React, { useEffect } from 'react'
 import Router from 'next/router'
 import Link from 'next/link'
-import { useUser } from '../components/UserContext'
 import { Box, Flex, Text, Link as ChakraLink, Divider } from '@chakra-ui/core'
-import { PageLayout } from '../components/Layout'
-import { Signup } from '../components/auth/Signup'
+
+import { useUser } from 'components/UserContext'
+import { PageLayout } from 'components/Layout'
+import { Signup } from 'components/auth/Signup'
 
 export default () => {
   const { user } = useUser()
 
   useEffect(() => {
-    if (user !== null && user !== undefined) {
+    if (user.user !== null) {
       Router.push('/')
     }
-  }, [user])
+  }, [user.user])
 
   return (
     <PageLayout>
@@ -24,9 +25,7 @@ export default () => {
         flexDirection="column"
         mt={4}
       >
-        <Text fontSize={['4xl', '5xl']} mb={4}>
-          Sign Up
-        </Text>
+        <Text fontSize={['4xl', '5xl']}>Sign Up</Text>
         <Box w="360px" maxW="90%">
           <Signup />
         </Box>

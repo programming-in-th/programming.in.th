@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { useUser } from './UserContext'
-import { Flex, Divider } from '@chakra-ui/core'
+import { Flex, Divider, Box, Link as ChakraLink, Text } from '@chakra-ui/core'
 import { Footer } from './Footer'
 import { Nav } from './Nav'
 
@@ -21,8 +21,29 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
       direction="column"
       minHeight="100vh"
       bg={props.bg}
-      display={user === undefined ? 'none' : 'flex'}
+      display={user.user === undefined ? 'none' : 'flex'}
     >
+      <Box width="100%" backgroundColor="black">
+        <Box
+          maxWidth={['100%', '480px', '700px', '768px', '1024px']}
+          color="white"
+          backgroundColor="black"
+          margin="0 auto"
+          py={4}
+        >
+          <Text margin="0 auto" fontWeight="600">
+            Switch to old version at{' '}
+            <ChakraLink
+              href="https://old.programming.in.th"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              old.programming.in.th
+            </ChakraLink>
+          </Text>
+        </Box>
+      </Box>
+
       <Nav></Nav>
       <Divider m={0}></Divider>
       <Flex as="main" flex="auto" direction="column" minH="calc(100vh - 56px)">
@@ -34,5 +55,5 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
 }
 
 PageLayout.defaultProps = {
-  hideNav: false
+  hideNav: false,
 }
