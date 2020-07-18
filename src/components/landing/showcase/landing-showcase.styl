@@ -11,9 +11,13 @@
     &.-reverse
         flex-direction row-reverse
 
-        & > .cover
-            & > .image
-                padding 0 20px 0 0
+    & > .cover
+        & > .image
+            width 100%
+            height intrinsic
+            padding 0 20px 0 0
+            object-fit cover
+            object-position contain
 
     & > .article
         display flex
@@ -36,7 +40,7 @@
 
     & > .cover
         display flex
-        flex 3
+        flex 3 0
         overflow hidden
 
         &.-interactive
@@ -67,11 +71,6 @@
                     opacity 0
                     transform translateY(24px)
 
-        & > .image
-            display block
-            width 100%
-            padding 0 0 0 20px
-
     @media screen and (max-width 767.9px)
         &
             width 100%
@@ -89,21 +88,25 @@
                     padding 0
 
             & > .cover
+                width 100% !important
                 margin-left auto
                 margin-right auto
                 padding-top 40px
 
                 & > .title
+                    margin 0 auto
                     padding 0 !important
                     font-size 60px !important
 
                 & > .detail
+                    margin 0 auto
                     padding 0 !important
                     font-size 24px !important
 
                 & > .image
-                    margin 40px 0 0 0
-                    padding 0 20px
+                    width 100% !important
+                    margin 0
+                    padding 0 !important
 
     @media screen and (min-width 768px) and (max-width 1119.9px)
         &
@@ -115,7 +118,7 @@
 
             & > .cover
                 margin-top 0
-                flex 2
+                flex 2 0
 
                 & > .title
                     padding-left 32px !important
@@ -124,3 +127,6 @@
                 & > .detail
                     padding-left 32px !important
                     font-size 28px !important
+
+                & > .image
+                    margin 40px 0 0 0 !important
