@@ -4,11 +4,8 @@ import './landing-introduction.styl'
 
 import intl from '../../../intl/index.json'
 
-const Introduction = () => {
+const Introduction = ({ translated }) => {
   // Transform this to state management engine.
-  const lang = 'en'
-
-  const translated = intl[lang]
 
   const { header, list, action, subAction } = translated.introduction
 

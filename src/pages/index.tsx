@@ -1,8 +1,11 @@
 import React, { useRef, useEffect, useReducer } from 'react'
+import { GetStaticProps } from 'next'
 
 import { PageLayout } from 'components/Layout'
 
 import Countup from 'react-countup'
+
+import db from 'lib/firebase-admin'
 
 import { Introduction, Join, Showcase } from '../components/landing'
 import { Row, Detail } from '../components/landing/detail'
@@ -14,10 +17,8 @@ import {
 
 import intl from '../intl/index.json'
 
-const Index = () => {
+const Index = ({ translated }) => {
   // Transform this to state management engine.
-  const lang = 'en'
-  const translated = intl[lang]
 
   const contestData = [
     {
@@ -101,7 +102,7 @@ const Index = () => {
 
   return (
     <PageLayout>
-      <Introduction />
+      <Introduction translated={translated} />
 
       {/* Featured */}
       <Row>
@@ -192,6 +193,52 @@ const Index = () => {
       <Join />
     </PageLayout>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  const taskDocs = await db()
+    .collection('tasks')
+    .where('visible', '==', true)
+    .get()
+
+  const userDocs = await db().collection('users').get()
+
+  const taskCount = taskDocs.size
+  const userCount = userDocs.size
+
+  const returnChangeValue = (value: string) => {
+    return value
+      .replace('$taskCount$', `${taskCount}`)
+      .replace('$userCount$', `${userCount}`)
+  }
+
+  const recursive = (props: any) => {
+    if (Array.isArray(props)) {
+      const temp = []
+      for (const x of props) {
+        temp.push(recursive(x))
+      }
+      return temp
+    } else if (typeof props === 'string') {
+      return returnChangeValue(props)
+    } else {
+      const temp = {}
+      for (const key in props) {
+        temp[key] = recursive(props[key])
+      }
+      return temp
+    }
+  }
+
+  const lang = 'th'
+  const translated = recursive(intl[lang])
+
+  return {
+    props: {
+      translated,
+    },
+    unstable_revalidate: 60 * 60 * 24,
+  }
 }
 
 export default Index
