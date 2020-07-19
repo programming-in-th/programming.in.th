@@ -17,26 +17,27 @@ import {
 
 import intl from '../intl/index.json'
 
-const Index = ({ translated }) => {
+const Index = ({ translated, userCount }) => {
   // Transform this to state management engine.
 
   const contestData = [
     {
       href: '/',
       src:
-        'https://cdn-0.tierlistmania.com/wp-content/uploads/2019/07/Best-Ships-Tier-List-Azur-Lane.png',
-      alt: 'アズールレーン',
-    },
-    {
-      href: '/',
-      src: 'https://pbs.twimg.com/media/DundVDVUUAA89c8.jpg',
-      alt: 'Houkai Impact 3rd',
+        'https://github.com/programming-in-th/programming.in.th/raw/dev/public/assets/img/og.jpg',
+      alt: 'og',
     },
     {
       href: '/',
       src:
-        'http://i0.wp.com/smartgamecap.net/wp-content/uploads/2020/02/photo.jpg?fit=1050%2C590%2C590&ssl=1',
-      alt: 'アークナイツ',
+        'https://github.com/programming-in-th/programming.in.th/raw/dev/public/assets/img/og.jpg',
+      alt: 'og',
+    },
+    {
+      href: '/',
+      src:
+        'https://github.com/programming-in-th/programming.in.th/raw/dev/public/assets/img/og.jpg',
+      alt: 'og',
     },
   ]
 
@@ -133,8 +134,8 @@ const Index = ({ translated }) => {
       </FeaturedRow>
 
       {/* Latest Problems */}
-      <Featured>{translated.problems.title}</Featured>
-      <FeaturedRow>
+      {/* <Featured>{translated.problems.title}</Featured> */}
+      {/* <FeaturedRow>
         {translated.problems.list.map(({ title, detail }, index) => (
           <Card title={title} href={problemData[index].href} key={title}>
             {detail}
@@ -144,7 +145,7 @@ const Index = ({ translated }) => {
         <Card title="More Problem" href="/tasks">
           Explore various competitive problems.
         </Card>
-      </FeaturedRow>
+      </FeaturedRow> */}
 
       {/* <Divider /> */}
 
@@ -159,11 +160,11 @@ const Index = ({ translated }) => {
             isShowingInterative ? 'interacted' : ''
           }`}
         >
-          <p className="detail">Over</p>
+          <p className="detail">กว่า</p>
           {isShowingInterative ? (
             <Countup
               start={0}
-              end={10000}
+              end={userCount}
               duration={3}
               delay={0}
               useEasing={true}
@@ -172,7 +173,7 @@ const Index = ({ translated }) => {
               {({ countUpRef }) => <h1 className="title" ref={countUpRef} />}
             </Countup>
           ) : null}
-          <p className="detail">Programmers enrolled</p>
+          <p className="detail">คนได้เข้าร่วมกับเรา</p>
         </section>
       </section>
 
@@ -190,7 +191,7 @@ const Index = ({ translated }) => {
       ))}
 
       {/* Last Chance for asking to join the platform */}
-      <Join />
+      <Join translated={translated} />
     </PageLayout>
   )
 }
@@ -236,6 +237,7 @@ export const getStaticProps: GetStaticProps = async () => {
   return {
     props: {
       translated,
+      userCount,
     },
     unstable_revalidate: 60 * 60 * 24,
   }

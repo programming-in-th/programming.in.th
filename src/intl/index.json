@@ -108,24 +108,24 @@
       }
     ],
     "contest": {
-      "title": "Featured Contest",
+      "title": "เนื้อหาล่าสุด",
       "list": [
         {
-          "title": "Google Code Jam",
-          "detail": "Put your coding skills to the test as you work your way through multiple rounds of algorithmic coding puzzles for the title of Code Jam Champ and 15,000 USD."
+          "title": "กำหนดการเชิงพลวัตขั้นพื้นฐาน",
+          "detail": "Coming Soon"
         },
         {
-          "title": "Microsoft Imagine Cup",
-          "detail": "Global competition that empowers the next generation of computer science students to team up and use their creativity, passion and knowledge of technology."
+          "title": "การแบ่งแยกและเอาชนะ",
+          "detail": "Coming Soon"
         },
         {
-          "title": "Google Code In",
-          "detail": "Google's contest introducing 13-17 year old pre-university students to open source software development."
+          "title": "การหาคำตอบด้วยการแบ่งแบบทวิภาค",
+          "detail": "Coming Soon"
         }
       ]
     },
     "problems": {
-      "title": "New Problems",
+      "title": "โจทย์ปัญหาล่าสุด",
       "list": [
         {
           "title": "Tortoise and Hare",
@@ -146,23 +146,23 @@
       ]
     },
     "interactiveShowcase": {
-      "title": "Trusted by communities.",
-      "detail": "Data-structure and Algorithms is one of the essential potential in both software development and competitve programming. Our goal of programming.in.th is to help you get better in competitive programming, that's why there's over 10,000 programmers have enrolled."
+      "title": "เชื่อมั่นโดยผู้ใช้มากมาย",
+      "detail": "เว็บไซต์ของเราประกอบไปด้วยโจทย์ปัญหาคุณภาพนับร้อย ที่ให้คุณได้ฝึกฝนตั้งแต่ระดับ สอวน. จนถึงระดับ OI"
     },
     "showcase": [
       {
-        "title": "Integrated Development Environment",
-        "detail": "Beyond the thought, environment of programming.in.th is perfectly crafted for integrated development environment which result a perfect workspace for solving and experimenting an algorithm without a help of a code editor."
+        "title": "สภาพแวดล้อมที่เหมาะสมต่อการฝึกฝน",
+        "detail": "Coming Soon"
       },
       {
-        "title": "Exclusive Dashboard with Data-Science Analytic",
-        "detail": "At Programming.in.th, we care about your progression. That's why we created a data-science level analytic just for Competitive Programming progression for you to determined your next step."
+        "title": "วิเคราะห์ความสามารถของคุณ",
+        "detail": "Coming Soon"
       }
     ],
     "join": {
-      "title": "Learn together",
-      "detail": "We got you cover and help you get better for learning, experiencing and experimenting. Over 10,000 developers all over the community has joined Programming.in.th and sharpen their skills.",
-      "action": "Let's start"
+      "title": "มาเรียนรู้ไปพร้อม ๆ กับเรา",
+      "detail": "เรามีแหล่งเรียนรู้ขนาดใหญ่ ที่สร้างโดยผู้เชี่ยวชาญ เพื่อ ☭",
+      "action": "เริ่มกันเลย"
     }
   }
 }
