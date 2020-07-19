@@ -41,21 +41,6 @@ const Index = ({ translated, userCount }) => {
     },
   ]
 
-  const problemData = [
-    {
-      href: '/',
-    },
-    {
-      href: '/',
-    },
-    {
-      href: '/',
-    },
-    {
-      href: 'https://www.npmjs.com/package/instant-sort',
-    },
-  ]
-
   // If 'isReverse' is set to true, justifyContent is aliged as flex-end.
   const showcaseAssets = [
     {
