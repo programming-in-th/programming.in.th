@@ -12,6 +12,20 @@ import { customTheme } from 'design/theme'
 
 import 'assets/css/prism.css'
 
+import 'codemirror/lib/codemirror.css'
+import 'codemirror/theme/material.css'
+
+if (typeof window !== 'undefined' && typeof window.navigator !== 'undefined') {
+  require('codemirror/mode/clike/clike.js')
+  require('codemirror/mode/python/python.js')
+
+  require('codemirror/addon/selection/active-line.js')
+  require('codemirror/addon/fold/foldgutter.css')
+  require('codemirror/addon/fold/foldgutter.js')
+  require('codemirror/addon/fold/brace-fold.js')
+  require('codemirror/addon/fold/indent-fold.js')
+}
+
 let timeout: any
 
 const start = () => {

@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { useUser } from '../../UserContext'
 import { submitCode } from './submitToFirebase'
+import { useStatus } from './useStatus'
 import { ITask } from '../../../@types/task'
 import { config } from 'config'
 
@@ -14,6 +15,8 @@ export const useSubmit = (metadata: ITask) => {
   const [codeValue, setCode] = useState<string[]>([])
   const [status, setStatus] = useState<status>()
   const [submissionID, setSubmissionID] = useState<string>()
+
+  useStatus({ metadata, status, submissionID, codeValue })
 
   const onDrop = (index: number) =>
     useCallback(
@@ -45,6 +48,7 @@ export const useSubmit = (metadata: ITask) => {
 
   return {
     submit,
+    setCode,
     codeFile,
     setCodeFile,
     onDrop,

@@ -4,7 +4,6 @@ import { Flex, Button, Select, Text, Heading } from '@chakra-ui/core'
 import { useUser } from '../../UserContext'
 
 import { UploadCode } from '../../Upload'
-import { useStatus } from './useStatus'
 import { useSubmit } from './useSubmit'
 import { config } from 'config'
 
@@ -18,11 +17,7 @@ export const Normal = ({ metadata }) => {
     onDrop,
     setLanguage,
     status,
-    submissionID,
-    codeValue,
   } = useSubmit(metadata)
-
-  useStatus({ metadata, status, submissionID, codeValue })
 
   return (
     <Flex direction="column" mt={4} p={4} boxShadow="var(--shadow-default)">

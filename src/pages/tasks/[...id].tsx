@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 
 import { TaskLayout } from 'components/tasks/TaskLayout'
+import { Submit } from 'components/tasks/Submit'
 import { Statement } from 'components/tasks/Statement'
 import { Solution } from 'components/tasks/Solution'
 import { SubmissionsList } from 'components/submissions/SubmissionsList'
@@ -25,6 +26,9 @@ export default ({ type, metadata }) => {
     switch (it) {
       case 'statement':
         return <Statement metadata={metadata} />
+
+      case 'submit':
+        return <Submit metadata={metadata} />
 
       case 'solution':
         return <Solution solution={metadata.solution} />
@@ -71,7 +75,10 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
   let type = id.length === 1 ? 'statement' : id[1]
 
   if (
-    (type !== 'statement' && type !== 'submissions' && type !== 'solution') ||
+    (type !== 'statement' &&
+      type !== 'submissions' &&
+      type !== 'solution' &&
+      type !== 'submit') ||
     id.length > 2
   ) {
     return {

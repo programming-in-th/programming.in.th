@@ -105,6 +105,15 @@ export const GlobalStyle = () => (
         }
       }
 
+      .CodeMirror {
+        font-family: Fira Code !important;
+        height: 500px !important;
+        width: auto;
+        pre {
+          margin: 0 !important;
+        }
+      }
+
       ${nprogress}
     `}
   />

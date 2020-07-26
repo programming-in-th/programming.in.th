@@ -52,7 +52,13 @@ export const TaskLayout = ({ type, metadata, children }) => {
         direction="column"
         w={[
           '100%',
-          type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
+          type === 'submit'
+            ? 600
+            : type === 'solution'
+            ? 800
+            : type === 'submissions'
+            ? 1000
+            : 1200,
         ]}
         mx="auto"
         transition="width 1s"
@@ -81,6 +87,20 @@ export const TaskLayout = ({ type, metadata, children }) => {
                 color={type === 'statement' ? 'gray.800' : 'gray.500'}
               >
                 Statement
+              </ChakraLink>
+            </Link>
+            <Link
+              href="/tasks/[...id]"
+              as={`/tasks/${metadata.id}/submit`}
+              passHref
+            >
+              <ChakraLink
+                mt={[2, 0]}
+                ml={[0, 6]}
+                lineHeight="18px"
+                color={type === 'submit' ? 'gray.800' : 'gray.500'}
+              >
+                Submit
               </ChakraLink>
             </Link>
             <Link
@@ -118,7 +138,13 @@ export const TaskLayout = ({ type, metadata, children }) => {
         mb={8}
         w={[
           '100%',
-          type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
+          type === 'submit'
+            ? 600
+            : type === 'solution'
+            ? 800
+            : type === 'submissions'
+            ? 1000
+            : 1200,
         ]}
         direction="column"
         flexGrow={1}
