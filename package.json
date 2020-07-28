@@ -47,7 +47,7 @@
     "react-dropzone": "^11.0.1",
     "react-icons": "^3.10.0",
     "react-simple-img": "^2.3.9",
-    "react-table": "^7.2.2",
+    "react-table": "^7.3.2",
     "react-use": "^15.3.2",
     "reading-time": "^1.2.0",
     "rehype-katex": "^3.0.0",
