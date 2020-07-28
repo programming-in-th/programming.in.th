@@ -33,7 +33,7 @@
     "file-saver": "^2.0.2",
     "firebase-admin": "^8.13.0",
     "firebase": "^7.15.5",
-    "formik": "^2.1.4",
+    "formik": "^2.1.5",
     "intersection-observer": "^0.11.0",
     "lodash": "^4.17.15",
     "match-sorter": "^4.1.0",
