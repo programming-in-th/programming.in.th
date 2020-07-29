@@ -8,7 +8,7 @@ import { PageLayout } from 'components/Layout'
 import { EmailLogin } from 'components/auth/EmailLogin'
 import { OAuthLogin } from 'components/auth/OAuthLogin'
 
-export default () => {
+const Login = () => {
   const [loginMethod, setLoginMethod] = useState<boolean>(true)
   const [error, setError] = useState<string>(' ')
   const { user } = useUser()
@@ -69,3 +69,5 @@ export default () => {
     </PageLayout>
   )
 }
+
+export default Login

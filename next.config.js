@@ -30,6 +30,14 @@ module.exports = withPlugins(
     withOffline,
   ],
   {
+    async rewrites() {
+      return [
+        {
+          source: '/service-worker.js',
+          destination: '/_next/static/service-worker.js',
+        },
+      ]
+    },
     transformManifest: (manifest) => ['/'].concat(manifest),
     workboxOpts: {
       swDest: process.env.NEXT_EXPORT
@@ -81,16 +89,6 @@ module.exports = withPlugins(
           },
         },
       ],
-    },
-    experimental: {
-      async rewrites() {
-        return [
-          {
-            source: '/service-worker.js',
-            destination: '/_next/static/service-worker.js',
-          },
-        ]
-      },
     },
   }
 )
