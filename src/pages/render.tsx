@@ -7,7 +7,7 @@ import { PageLayout } from 'components/Layout'
 import { Solution } from 'components/tasks/Solution'
 import { renderMarkdown } from 'lib/renderMarkdown'
 
-export default () => {
+const Render = () => {
   const [solution, setSolution] = useState<string>('')
   const [input, setInput] = useState<string>('')
 
@@ -59,3 +59,5 @@ export default () => {
     </PageLayout>
   )
 }
+
+export default Render

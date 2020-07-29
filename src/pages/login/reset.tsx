@@ -7,7 +7,7 @@ import { useUser } from 'components/UserContext'
 import { PageLayout } from 'components/Layout'
 import { Reset } from 'components/auth/Reset'
 
-export default () => {
+const ResetPassword = () => {
   const [error, setError] = useState<string>('')
   const { user } = useUser()
 
@@ -55,3 +55,5 @@ export default () => {
     </PageLayout>
   )
 }
+
+export default ResetPasswords

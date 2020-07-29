@@ -12,7 +12,7 @@ import { renderMarkdown } from 'lib/renderMarkdown'
 
 import db from 'lib/firebase-admin'
 
-export default ({ type, metadata }) => {
+const Task = ({ type, metadata }) => {
   const router = useRouter()
 
   useEffect(() => {
@@ -111,3 +111,5 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
     revalidate: 60,
   }
 }
+
+export default Task
