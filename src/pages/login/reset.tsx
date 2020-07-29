@@ -56,4 +56,4 @@ const ResetPassword = () => {
   )
 }
 
-export default ResetPasswords
+export default ResetPassword
