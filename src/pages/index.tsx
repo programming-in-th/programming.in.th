@@ -103,7 +103,7 @@ const Index = ({ translated, userCount }) => {
       {/**
        * ? Shouldn't be displayed when there's no contest.
        *  */}
-      <Featured>{translated.contest.title}</Featured>
+      {/* <Featured>{translated.contest.title}</Featured>
       <FeaturedRow>
         {translated.contest.list.map(({ title, detail }, index) => (
           <Card
@@ -116,7 +116,7 @@ const Index = ({ translated, userCount }) => {
             {detail}
           </Card>
         ))}
-      </FeaturedRow>
+      </FeaturedRow> */}
 
       {/* Latest Problems */}
       {/* <Featured>{translated.problems.title}</Featured> */}
@@ -163,7 +163,7 @@ const Index = ({ translated, userCount }) => {
       </section>
 
       {/* Showcase */}
-      {translated.showcase.map(({ title, detail }, index) => (
+      {/* {translated.showcase.map(({ title, detail }, index) => (
         <Showcase
           title={title}
           src={showcaseAssets[index].src}
@@ -173,7 +173,7 @@ const Index = ({ translated, userCount }) => {
         >
           {detail}
         </Showcase>
-      ))}
+      ))} */}
 
       {/* Last Chance for asking to join the platform */}
       <Join translated={translated} />
