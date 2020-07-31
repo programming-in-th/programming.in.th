@@ -7,49 +7,50 @@ import Countup from 'react-countup'
 
 import db from 'lib/firebase-admin'
 
-import { Introduction, Join, Showcase } from 'components/landing'
+import { Introduction, Join } from 'components/landing'
+// import { Introduction, Join, Showcase } from 'components/landing'
 import { Row, Detail } from 'components/landing/detail'
-import { Row as FeaturedRow, Card, Featured } from 'components/landing/featured'
+// import { Row as FeaturedRow, Card, Featured } from 'components/landing/featured'
 
 import intl from 'intl/index.json'
 
 const Index = ({ translated, userCount }) => {
   // Transform this to state management engine.
 
-  const contestData = [
-    {
-      href: '/',
-      src:
-        'https://github.com/programming-in-th/programming.in.th/raw/dev/public/assets/img/og.jpg',
-      alt: 'og',
-    },
-    {
-      href: '/',
-      src:
-        'https://github.com/programming-in-th/programming.in.th/raw/dev/public/assets/img/og.jpg',
-      alt: 'og',
-    },
-    {
-      href: '/',
-      src:
-        'https://github.com/programming-in-th/programming.in.th/raw/dev/public/assets/img/og.jpg',
-      alt: 'og',
-    },
-  ]
+  // const contestData = [
+  //   {
+  //     href: '/',
+  //     src:
+  //       'https://github.com/programming-in-th/programming.in.th/raw/dev/public/assets/img/og.jpg',
+  //     alt: 'og',
+  //   },
+  //   {
+  //     href: '/',
+  //     src:
+  //       'https://github.com/programming-in-th/programming.in.th/raw/dev/public/assets/img/og.jpg',
+  //     alt: 'og',
+  //   },
+  //   {
+  //     href: '/',
+  //     src:
+  //       'https://github.com/programming-in-th/programming.in.th/raw/dev/public/assets/img/og.jpg',
+  //     alt: 'og',
+  //   },
+  // ]
 
   // If 'isReverse' is set to true, justifyContent is aliged as flex-end.
-  const showcaseAssets = [
-    {
-      src: '/assets/img/ide.png',
-      alt: 'IDE Showcase',
-      isReverse: true,
-    },
-    {
-      src: '/assets/img/dashboard.png',
-      alt: 'IDK what to put here yet, so...',
-      isReverse: false,
-    },
-  ]
+  // const showcaseAssets = [
+  //   {
+  //     src: '/assets/img/ide.png',
+  //     alt: 'IDE Showcase',
+  //     isReverse: true,
+  //   },
+  //   {
+  //     src: '/assets/img/dashboard.png',
+  //     alt: 'IDK what to put here yet, so...',
+  //     isReverse: false,
+  //   },
+  // ]
 
   const { interactiveShowcase } = translated
 
