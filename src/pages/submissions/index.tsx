@@ -4,7 +4,7 @@ import { Box, Flex, Heading } from '@chakra-ui/core'
 import { SubmissionsList } from 'components/submissions/SubmissionsList'
 import { PageLayout } from 'components/Layout'
 
-export default () => {
+const Submissions = () => {
   return (
     <PageLayout>
       <Flex justify="center" flexGrow={1} py={4}>
@@ -16,3 +16,5 @@ export default () => {
     </PageLayout>
   )
 }
+
+export default Submissions

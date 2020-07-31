@@ -224,7 +224,7 @@ export const getStaticProps: GetStaticProps = async () => {
       translated,
       userCount,
     },
-    unstable_revalidate: 60 * 60 * 24,
+    unstable_revalidate: 60 * 60,
   }
 }
 
