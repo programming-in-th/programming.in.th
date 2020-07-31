@@ -1,9 +1,10 @@
 export const config = {
   baseURL: 'https://asia-east2-proginth.cloudfunctions.net',
   languageData: [
-    // ['c', 'C'],
-    ['cpp14', 'C++'],
-    // ['python', 'Python'],
-    //['java', 'Java'],
+    ['cpp14', 'C++', 'cpp'],
+    ['c11', 'C', 'c'],
+    ['python3', 'Python 3', 'python'],
+    ['java8', 'Java', 'java'],
+    ['rust', 'Rust', 'rust'],
   ],
 }

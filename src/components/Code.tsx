@@ -5,7 +5,7 @@ import { Flex, Box } from '@chakra-ui/core'
 
 export interface CodeBlockProps {
   code: string
-  language: 'c' | 'cpp' | 'python'
+  language: string
 }
 
 export const Code = ({ code, language }: CodeBlockProps) => {
