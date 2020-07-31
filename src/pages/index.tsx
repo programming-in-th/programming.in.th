@@ -7,15 +7,11 @@ import Countup from 'react-countup'
 
 import db from 'lib/firebase-admin'
 
-import { Introduction, Join, Showcase } from '../components/landing'
-import { Row, Detail } from '../components/landing/detail'
-import {
-  Row as FeaturedRow,
-  Card,
-  Featured,
-} from '../components/landing/featured'
+import { Introduction, Join, Showcase } from 'components/landing'
+import { Row, Detail } from 'components/landing/detail'
+import { Row as FeaturedRow, Card, Featured } from 'components/landing/featured'
 
-import intl from '../intl/index.json'
+import intl from 'intl/index.json'
 
 const Index = ({ translated, userCount }) => {
   // Transform this to state management engine.
@@ -224,7 +220,7 @@ export const getStaticProps: GetStaticProps = async () => {
       translated,
       userCount,
     },
-    unstable_revalidate: 60 * 60,
+    revalidate: 60 * 60,
   }
 }
 
