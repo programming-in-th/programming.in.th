@@ -7,7 +7,7 @@ import { useUser } from 'components/UserContext'
 import { PageLayout } from 'components/Layout'
 import { Signup } from 'components/auth/Signup'
 
-export default () => {
+const SignUp = () => {
   const { user } = useUser()
 
   useEffect(() => {
@@ -48,3 +48,5 @@ export default () => {
     </PageLayout>
   )
 }
+
+export default SignUp

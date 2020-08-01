@@ -10,6 +10,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
+const withCSS = require('@zeit/next-css')
+const withStylus = require('@zeit/next-stylus')
+
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
   options: {
@@ -28,8 +31,18 @@ module.exports = withPlugins(
     ],
     withBundleAnalyzer,
     withOffline,
+    withCSS,
+    withStylus,
   ],
   {
+    async rewrites() {
+      return [
+        {
+          source: '/service-worker.js',
+          destination: '/_next/static/service-worker.js',
+        },
+      ]
+    },
     transformManifest: (manifest) => ['/'].concat(manifest),
     workboxOpts: {
       swDest: process.env.NEXT_EXPORT
@@ -81,16 +94,6 @@ module.exports = withPlugins(
           },
         },
       ],
-    },
-    experimental: {
-      async rewrites() {
-        return [
-          {
-            source: '/service-worker.js',
-            destination: '/_next/static/service-worker.js',
-          },
-        ]
-      },
     },
   }
 )
