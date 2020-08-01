@@ -10,6 +10,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true',
 })
 
+const withCSS = require('@zeit/next-css')
+const withStylus = require('@zeit/next-stylus')
+
 const withMDX = require('@next/mdx')({
   extension: /\.mdx?$/,
   options: {
@@ -28,6 +31,8 @@ module.exports = withPlugins(
     ],
     withBundleAnalyzer,
     withOffline,
+    withCSS,
+    withStylus,
   ],
   {
     async rewrites() {

@@ -1,0 +1,56 @@
+@require '../../config'
+
+$border-radius = 4px
+
+.landing-card-link
+    text-decoration none
+    outline none
+
+    &:hover,
+    &:focus
+        & > .landing-card
+            background-color rgba(0,0,0,.05)
+            box-shadow 0 4px 8px rgba(0,0,0,.1)
+
+.landing-card
+    display flex
+    flex-direction column
+    justify-content flex-start
+    align-items flex-start
+    width 100%
+    height 100%
+    padding 0 0 8px 0
+    border-radius $border-radius
+    border 1px solid $border
+    transition background-color .2s ease-out, box-shadow .2s ease-out
+    
+    & > .cover
+        display block
+        width 100%
+        padding 0
+        background-color $preload
+        overflow hidden
+        border-top-left-radius $border-radius
+        border-top-right-radius $border-radius
+
+        & > .image
+            width 100%
+            border-top-left-radius inherit
+            border-top-right-radius inherit
+
+    & > .body
+        width 100%
+        padding 20px
+
+        & > .title
+            display block
+            font-size 28px
+            color $title
+            font-weight 700
+            margin 0 0 16px 0
+
+        & > .detail
+            font-size 16px
+            color $detail
+            font-weight 400
+            margin 0
