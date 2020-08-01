@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { cache, useSWRInfinite } from 'swr'
+import { useSWRInfinite } from 'swr'
 import { Box, Flex, Button, Input } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
