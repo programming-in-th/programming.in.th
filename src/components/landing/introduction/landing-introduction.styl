@@ -1,0 +1,244 @@
+@require '../config'
+
+$bezier = cubic-bezier(.2,.88,.6,1.08)
+
+#landing-introduction
+    font-family $font
+    display flex
+    flex-direction row
+    justify-content center
+    align-items flex-start
+    height calc(100vh + 6.75vw)
+    max-height 960px
+    width 1080px
+    margin 0 auto
+    padding 0 0 56px 0
+
+    & > .article,
+    & > .cover
+        display flex
+        flex 1
+        flex-direction column
+        justify-content center
+        align-items flex-start
+        min-height inherit
+
+    & > .article
+        margin 0
+        min-height 0
+        height calc(100vh - 56px)
+        max-height 960px
+        padding 0 20px 0 46px
+        flex unset
+
+        @media screen and (max-width 567.9px)
+            &
+                width 100%
+
+        & > .brand
+            font-size 18px
+            color $detail
+            font-weight 700
+            margin 0
+            animation fade-in .65s $bezier 0s 1
+
+        & > .title
+            font-size 60px
+            color $title
+            font-weight 700
+            line-height 1.375em
+            margin 8px 0 20px 0
+            animation fade-in .95s $bezier 0s 1
+
+            & > .keyword
+                display block
+                font-size 73px
+                animation fade-in 1.25s $bezier 0s 1
+
+        & > .unorder
+            list-style-position center
+            // padding-left 36px
+            margin 0 0 20px 0
+
+            & > .list
+                color $detail
+                font-size 28px
+                font-weight normal
+                font-weight 300
+
+                &:nth-child(1)
+                    animation fade-in 1.55s $bezier 0s 1
+
+                &:nth-child(2)
+                    animation fade-in 1.85s $bezier 0s 1
+
+                &:nth-child(3)
+                    animation fade-in 2.15s $bezier 0s 1
+
+        & > .action
+            display flex
+            flex-direction row
+            justify-content flex-start
+            align-items center
+            width 100%
+
+            @media screen and (max-width 567.9px)
+                &
+                    flex-direction column
+                    align-items flex-start
+
+            & > .enroll
+                display flex
+                flex-direction row
+                justify-content flex-start
+                align-items center
+                font-size 24px
+                font-weight 500
+                color #fff
+                background-color $accent
+                padding 6px 24px
+                border-radius 6px
+                transition opacity .2s ease-out
+                cursor pointer
+                animation fade-in 2.45s $bezier 0s 1
+
+                &:hover,
+                &:focus
+                    opacity .9
+
+                    & > .icon
+                        margin-left 8px
+                        margin-right 0
+
+                & > .icon
+                    margin 0 4px 0 4px
+                    transition margin .2s ease-out
+                    transform scale(1.375)
+
+            & > .explore
+                font-size 21px
+                font-weight 500
+                color $detail
+                margin 0 0 0 20px
+                padding 12px 0
+                transition opacity .2s ease-out
+                cursor pointer
+                animation fade-in 2.75s $bezier 0s 1
+
+                &:hover,
+                &:focus
+                    color $accent
+
+        & > .provider
+            margin 12px 0 0 0
+            color $detail
+            font-weight 500
+            animation fade-in 3.05s $bezier 0s 1
+
+    & > .cover
+        max-height 1330px
+
+        & > .container
+            z-index -1
+            top 56px
+            position absolute
+            display block
+            margin-left auto
+            animation image-fade-in 3.45s $bezier 0s 1
+
+            & > .image
+                display block
+                width 980px
+                min-height 440px
+                // max-height 740px
+                max-width auto
+                object-fit cover
+                object-position left top
+
+    @media screen and (max-width 413.9px)
+        &
+            & > .article
+                & > .brand
+                    font-size 16px
+
+                & > .title
+                    font-size 48px
+
+                    & > .keyword
+                        font-size 57px
+
+                & > .unorder
+                    & > .list
+                        font-size 21px
+                        line-height 2em
+
+                        &::marker
+                            display none
+
+    @media screen and (max-width 567.9px)
+        &
+            width 100%
+            flex-direction column
+
+            & > .cover
+                position relative
+                display none
+                width 100%
+
+                & > .container
+                    & > .image
+                        padding 0
+
+    @media screen and (min-width 568px) and (max-width 767.9px)
+        &
+            width 100%
+            min-height calc(100vh - 56px)
+
+            & > .cover
+                min-height unset
+
+    @media screen and (min-width 768px) and (max-width 991.9px)
+        &
+            width 95%
+            min-height calc(100vh - 56px)
+
+            & > .cover                
+                & > .container
+                    & > .image
+                        padding 0
+
+    @media screen and (min-width 992px) and (max-width 1112.9px)
+        &
+            width 880px
+            min-height calc(100vh - 56px)
+
+            & > .cover
+                & > .container
+                    & > .image
+                        padding 20px
+
+@keyframes fade-in
+    0%
+        opacity 0
+        transform translateY(24px)
+
+    20%
+        opacity 0
+        transform translateY(24px)
+
+@keyframes image-fade-in
+    0%
+        opacity 0
+        transform translateY(24px)
+
+    40%
+        opacity 0
+
+@media (prefers-reduced-motion: reduce)
+    @keyframes fade-in
+        from
+            opacity 1
+
+    @keyframes image-fade-in
+        from
+            opacity 1
