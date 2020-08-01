@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import useSWR, { useSWRPages, mutate } from 'swr'
-import { Box, Flex, Button, Input, Text } from '@chakra-ui/core'
+import { useSWRInfinite } from 'swr'
+import { Box, Flex, Button, Input } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
@@ -15,20 +15,6 @@ import { arrToObj } from 'utils/arrToObj'
 import { insertQueryString } from 'utils/insertQueryString'
 import { isObjectEmpty } from 'utils/isEmpty'
 import { getTimestamp } from 'utils/getTimestamp'
-
-const TdLink = ({ children, href, as }) => {
-  return (
-    <Td>
-      <Link href={href} as={as}>
-        <a>
-          <Box h="100%" w="100%" padding="8px 16px">
-            {children}
-          </Box>
-        </a>
-      </Link>
-    </Td>
-  )
-}
 
 export const SubmissionsList = ({ id: taskFrom }) => {
   const router = useRouter()
@@ -48,99 +34,23 @@ export const SubmissionsList = ({ id: taskFrom }) => {
     }
   }, [])
 
-  const Submissions = useCallback(() => {
-    const { pages, isLoadingMore, isReachingEnd, loadMore } = useSWRPages(
-      `submission-${username}-${task}`,
-      ({ offset, withSWR }) => {
-        const { data: submissions } = withSWR(
-          useSWR(
-            `${config.baseURL}/getSubmissions?offset=${
-              offset || 0
-            }&username=${username}&taskID=${task}`,
-            SWRfetch
-          )
-        )
-
-        if (!submissions) {
-          return (
-            <Tr>
-              <td colSpan={7}>
-                <Text textAlign={['start', 'center']} p={4}>
-                  Loading...
-                </Text>
-              </td>
-            </Tr>
-          )
-        }
-
-        const { results } = submissions
-
-        return results.map((submission: ISubmissionList) => {
-          return (
-            <React.Fragment key={submission.submissionID}>
-              {isObjectEmpty(submission) ? (
-                <Tr>
-                  <TdHide colSpan={7} />
-                </Tr>
-              ) : (
-                <Tr>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {getTimestamp(submission.timestamp)}
-                  </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {submission.username}
-                  </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {submission.taskID}
-                  </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {submission.score}
-                  </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {arrToObj(config.languageData)[submission.language]}
-                  </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {submission.time}
-                  </TdLink>
-                  <TdLink
-                    href="/submissions/[id]"
-                    as={`/submissions/${submission.submissionID}`}
-                  >
-                    {submission.memory}
-                  </TdLink>
-                </Tr>
-              )}
-            </React.Fragment>
-          )
-        })
+  const Submissions = () => {
+    const pageSize = 10
+    const { data, error, size, setSize } = useSWRInfinite(
+      (index, previousData) => {
+        return `${config.baseURL}/getSubmissions?limit=${pageSize}&next=${
+          previousData ? previousData.next : ''
+        }&username=${username}&taskID=${task}`
       },
-      ({ data: submissions }) => {
-        if (submissions.next) {
-          const key = `${config.baseURL}/getSubmissions?offset=${submissions.next}&username=${username}&taskID=${task}`
-          mutate(key, SWRfetch(key))
-        }
-        return submissions.next
-      },
-      []
+      SWRfetch
     )
+
+    const isLoadingInitialData = !data && !error
+    const isLoadingMore =
+      isLoadingInitialData || (data && typeof data[size - 1] === 'undefined')
+    const isEmpty = data?.[0]?.length === 0
+    const isReachingEnd =
+      isEmpty || (data && data[data.length - 1]?.next === null)
 
     return (
       <React.Fragment>
@@ -166,13 +76,70 @@ export const SubmissionsList = ({ id: taskFrom }) => {
               </tr>
             </thead>
 
-            <tbody>{pages}</tbody>
+            <tbody>
+              {data &&
+                data.map(
+                  (submissions: { data: ISubmissionList[]; next: string }) => {
+                    return submissions.data.map(
+                      (submission: ISubmissionList) => {
+                        const TdLink = ({ children }) => {
+                          return (
+                            <Td>
+                              <Link
+                                href="/submissions/[id]"
+                                as={`/submissions/${submission.submissionID}`}
+                              >
+                                <a>
+                                  <Box h="100%" w="100%" padding="8px 16px">
+                                    {children}
+                                  </Box>
+                                </a>
+                              </Link>
+                            </Td>
+                          )
+                        }
+                        return (
+                          <React.Fragment key={submission.submissionID}>
+                            {isObjectEmpty(submission) ? (
+                              <Tr>
+                                <TdHide colSpan={7} />
+                              </Tr>
+                            ) : (
+                              <Tr>
+                                <TdLink>
+                                  {getTimestamp(submission.timestamp)}
+                                </TdLink>
+                                <TdLink>{submission.username}</TdLink>
+                                <TdLink>{submission.taskID}</TdLink>
+                                <TdLink>{submission.score}</TdLink>
+                                <TdLink>
+                                  {
+                                    arrToObj(config.languageData)[
+                                      submission.language
+                                    ]
+                                  }
+                                </TdLink>
+                                <TdLink>{submission.time}</TdLink>
+                                <TdLink>{submission.memory}</TdLink>
+                              </Tr>
+                            )}
+                          </React.Fragment>
+                        )
+                      }
+                    )
+                  }
+                )}
+            </tbody>
           </Table>
         </Box>
         <Button
-          onClick={loadMore}
+          onClick={() => {
+            if (!isReachingEnd) {
+              setSize((size) => size + 1)
+            }
+          }}
           isLoading={isLoadingMore}
-          isDisabled={isReachingEnd || isLoadingMore}
+          isDisabled={isLoadingMore || isReachingEnd}
           mt={4}
           width="100%"
         >
@@ -180,7 +147,7 @@ export const SubmissionsList = ({ id: taskFrom }) => {
         </Button>
       </React.Fragment>
     )
-  }, [username, task])
+  }
 
   return (
     <Flex px={4} mt={4} direction="column">
@@ -208,6 +175,7 @@ export const SubmissionsList = ({ id: taskFrom }) => {
           />
         )}
       </Flex>
+
       <Submissions />
     </Flex>
   )
