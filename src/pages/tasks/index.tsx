@@ -6,7 +6,7 @@ import { PageLayout } from 'components/Layout'
 import db from 'lib/firebase-admin'
 import { TaskTable } from 'components/tasks/Table'
 
-export default ({ result }) => {
+const Tasks = ({ result }) => {
   const columns = React.useMemo(
     () => [
       {
@@ -48,6 +48,8 @@ export const getStaticProps: GetStaticProps = async () => {
     props: {
       result,
     },
-    unstable_revalidate: 60,
+    revalidate: 60,
   }
 }
+
+export default Tasks
