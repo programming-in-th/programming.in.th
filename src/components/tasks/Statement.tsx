@@ -103,11 +103,11 @@ export const Statement = ({ metadata }) => {
             </thead>
             <tbody>
               {user.user ? (
-                submissions?.results ? (
-                  isArrayEmpty(submissions.results) ? (
+                submissions?.data ? (
+                  isArrayEmpty(submissions.data) ? (
                     <NoRecentSubmission></NoRecentSubmission>
                   ) : (
-                    submissions.results.map((submission: ISubmissionList) => {
+                    submissions.data.map((submission: ISubmissionList) => {
                       return isObjectEmpty(submission) ? (
                         <Tr>
                           <TdHide colSpan={2} />
