@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import { NextPage } from 'next'
 import Link from 'next/link'
 
@@ -37,17 +37,16 @@ import { IStatus } from '../../@types/status'
 import { ISubmission } from '../../@types/submission'
 import { isObjectEmpty } from 'utils/isEmpty'
 
-type TPlot = {
-  [key: string]: 'c' | 'cpp' | 'python'
-}
-
-const mapLanguage: TPlot = {
-  cpp14: 'cpp',
-  c: 'c',
-  python: 'python',
-}
+import { config } from 'config'
 
 const SubmissionDetail: NextPage = () => {
+  const mapLanguage = useMemo(() => {
+    return config.languageData.reduce(
+      (o, item) => Object.assign(o, { [item[0]]: item[2] }),
+      {}
+    )
+  }, [])
+
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
