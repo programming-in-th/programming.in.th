@@ -2,6 +2,9 @@ import React from 'react'
 import Highlight, { Prism } from 'prism-react-renderer'
 
 import { Flex, Box } from '@chakra-ui/core'
+;((typeof global !== 'undefined' ? global : window) as any).Prism = Prism
+
+require('prismjs/components/prism-rust')
 
 export interface CodeBlockProps {
   code: string
