@@ -9103,10 +9103,10 @@ react-spring@^8.0.27:
     "@babel/runtime" "^7.3.1"
     prop-types "^15.5.8"
 
-react-table@^7.2.2:
-  version "7.3.0"
-  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.3.0.tgz#f9c78f3a6c7ba5efdea3414b8e5dc54a3cf69466"
-  integrity sha512-VQlVgvKItkpO+tAtWf/xdn9a8RU8gVqG25Ymrw9PczyBrM2Cr+HivHVQ2VsYWy8SieL0bcCNk3C++mbtWgXLfQ==
+react-table@^7.3.3:
+  version "7.3.3"
+  resolved "https://registry.yarnpkg.com/react-table/-/react-table-7.3.3.tgz#34bdde5f0f2363b923d1fd93c321a3f2c0aa20c3"
+  integrity sha512-FG28N93kZ3DtMzeKtyFxKAebQ+WPF9ayGAGEaoaE9hA7F9vrhsTeU1ReKe/nBEs9uc3zm1n/fwDeBUBkZyAK9g==
 
 react-universal-interface@^0.6.2:
   version "0.6.2"
