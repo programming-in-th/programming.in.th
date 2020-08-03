@@ -62,9 +62,6 @@ export const TaskLayout = ({ type, metadata, children }) => {
             <Heading fontWeight="600" fontSize={['xl', '3xl']}>
               {metadata.title}
             </Heading>
-            <Text color="gray.600" ml={2}>
-              by {metadata.path ? metadata.path.split('/')[1] : ''}
-            </Text>
           </Flex>
 
           <Flex
