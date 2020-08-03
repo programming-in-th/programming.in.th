@@ -87,7 +87,7 @@
     "husky": "^4.2.5",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
-    "stylus": "^0.54.7",
+    "stylus": "^0.54.8",
     "typescript": "^3.9.6"
   },
   "scripts": {
