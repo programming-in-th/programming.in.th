@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Flex, Link as ChakraLink, Heading, Text } from '@chakra-ui/core'
+import { Flex, Link as ChakraLink, Heading } from '@chakra-ui/core'
 
 import { PageLayout } from 'components/Layout'
 
@@ -62,9 +62,6 @@ export const TaskLayout = ({ type, metadata, children }) => {
             <Heading fontWeight="600" fontSize={['xl', '3xl']}>
               {metadata.title}
             </Heading>
-            <Text color="gray.600" ml={2}>
-              by {metadata.path ? metadata.path.split('/')[1] : ''}
-            </Text>
           </Flex>
 
           <Flex
