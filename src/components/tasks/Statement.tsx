@@ -68,12 +68,12 @@ export const Statement = ({ metadata }) => {
     <Flex direction={['column', 'row']} height="100%" flexGrow={1}>
       <Flex mt={4} mx={[6, 0]} flex="2 1 80%" direction="column">
         <Box height="100%">
-          <PDF data={`${config.awsURL}/statements/${metadata?.id}.pdf`}>
+          <PDF data={`${config.awsURL}/statements/${metadata.id}.pdf`}>
             <Text>
               Your browser doesn't support embed PDF viewer please{' '}
               <ChakraLink
                 isExternal
-                href={`${config.awsURL}/statements/${metadata?.id}.pdf`}
+                href={`${config.awsURL}/statements/${metadata.id}.pdf`}
                 rel="noopener noreferrer"
                 target="_blank"
                 color="teal.600"
