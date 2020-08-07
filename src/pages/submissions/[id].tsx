@@ -59,6 +59,9 @@ const SubmissionDetail: NextPage = () => {
     if (rawSubmission === undefined) {
       return undefined
     }
+    if (rawSubmission.groups === undefined) {
+      return rawSubmission
+    }
     let groups = rawSubmission.groups
     let index = 1
     for (let i = 0; i < groups.length; ++i) {
