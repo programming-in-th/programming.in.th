@@ -10,6 +10,8 @@ import { SubmissionsList } from 'components/submissions/SubmissionsList'
 
 import { renderMarkdown } from 'lib/renderMarkdown'
 
+import { config } from 'config'
+
 import db from 'lib/firebase-admin'
 
 const Task = ({ type, metadata }) => {
@@ -95,7 +97,7 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
 
   if (type === 'solution') {
     const solutionRes = await fetch(
-      `https://beta-programming-in-th.s3-ap-southeast-1.amazonaws.com/solutions/md/${metadata.id}.md`
+      `${config.awsURL}/solutions/md/${metadata.id}.md`
     )
     if (solutionRes.status === 200) {
       const solution = await solutionRes.text()
