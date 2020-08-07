@@ -6,7 +6,7 @@ import { PageLayout } from 'components/Layout'
 import db from 'lib/firebase-admin'
 import { TaskTable } from 'components/tasks/Table'
 
-const Tasks = ({ result }) => {
+const Tasks = ({ data }) => {
   const columns = React.useMemo(
     () => [
       {
@@ -24,31 +24,40 @@ const Tasks = ({ result }) => {
   return (
     <PageLayout>
       <Flex justify="center" flexGrow={1} py={4} px={4}>
-        <TaskTable result={result} columns={columns} />
+        <TaskTable result={data} columns={columns} />
       </Flex>
     </PageLayout>
   )
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const taskDocs = await db()
-    .collection('tasks')
-    .where('visible', '==', true)
-    .get()
+  const manifestRef = db().doc('tasks/$manifest')
 
-  const result = []
+  const manifest = (await manifestRef.get()).data()
 
-  for (const doc of taskDocs.docs) {
-    const data = doc.data()
-    data.id = doc.id
-    result.push(data)
+  let data = []
+
+  if (manifest.newTask === true) {
+    const taskDocs = await db()
+      .collection('tasks')
+      .where('visible', '==', true)
+      .get()
+
+    for (const doc of taskDocs.docs) {
+      const docData = doc.data()
+      docData.id = doc.id
+      data.push(docData)
+    }
+    await manifestRef.update({ newTask: false, data })
+  } else {
+    data = manifest.data
   }
 
   return {
     props: {
-      result,
+      data,
     },
-    revalidate: 60,
+    revalidate: manifest.revalidate,
   }
 }
 
