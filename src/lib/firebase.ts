@@ -4,19 +4,19 @@ import 'firebase/functions'
 import 'firebase/firestore'
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBcAEoDKxjVCLp6JzVu2yAOksxVrOA74YU',
-  authDomain: 'proginth.firebaseapp.com',
-  databaseURL: 'https://proginth.firebaseio.com',
-  projectId: 'proginth',
-  storageBucket: 'proginth.appspot.com',
-  messagingSenderId: '345170514263',
-  appId: '1:345170514263:web:b60cd3d015e4b4d464ee12',
-  measurementId: 'G-9KZEYQ24KD',
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID,
 }
 
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig)
-  firebase.app().functions('asia-east2')
+  firebase.app().functions(process.env.NEXT_PUBLIC_FIREBASE_REGION)
 }
 
 export default firebase
