@@ -10,6 +10,7 @@ import * as gtag from 'lib/gtag'
 import { GlobalStyle } from 'design'
 import { customTheme } from 'design/theme'
 
+import 'assets/css/tailwind.css'
 import 'assets/css/prism.css'
 
 let timeout: any
