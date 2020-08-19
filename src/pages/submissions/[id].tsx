@@ -50,10 +50,29 @@ const SubmissionDetail: NextPage = () => {
   const id =
     typeof window !== 'undefined' ? window.location.pathname.split('/')[2] : ''
 
-  const { data: submission, mutate } = useSWR<ISubmission>(
+  const { data: rawSubmission, mutate } = useSWR<ISubmission>(
     ['getSubmission', id],
     (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
+
+  const submission = useMemo<ISubmission | undefined>(() => {
+    if (rawSubmission === undefined) {
+      return undefined
+    }
+
+    if (rawSubmission.groups === undefined) {
+      return rawSubmission
+    }
+
+    let groups = rawSubmission.groups
+    let index = 1
+    for (let i = 0; i < groups.length; ++i) {
+      for (let j = 0; j < groups[i].status.length; ++j) {
+        groups[i].status[j].index = index++
+      }
+    }
+    return { ...rawSubmission, groups }
+  }, [rawSubmission])
 
   const { user } = useUser()
 
@@ -161,12 +180,12 @@ const SubmissionDetail: NextPage = () => {
               </Box>
               {submission.groups && (
                 <Accordion defaultIndex={[]} allowMultiple>
-                  {submission.groups.map((group: IGroup, index) => {
+                  {submission.groups.map((group: IGroup, index: number) => {
                     return (
                       <AccordionItem key={index}>
                         <AccordionHeader>
                           <Box flex="1" textAlign="left">
-                            Subtasks #{index + 1} [{group.score}/
+                            Subtask #{index + 1} [{group.score}/
                             {group.fullScore}]
                           </Box>
                           <AccordionIcon />
@@ -184,12 +203,12 @@ const SubmissionDetail: NextPage = () => {
                             </thead>
 
                             <tbody>
-                              {group.status.map((status: IStatus, index) => (
+                              {group.status.map((status: IStatus) => (
                                 <Tr
                                   correct={status.verdict === 'Correct'}
                                   key={index}
                                 >
-                                  <Td>{index + 1}</Td>
+                                  <Td>{status.index}</Td>
                                   <Td>{status.verdict}</Td>
                                   <Td>{status.time} ms</Td>
                                   <Td>{status.memory} kB</Td>
