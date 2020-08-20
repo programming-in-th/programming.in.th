@@ -12,17 +12,11 @@ export const TaskLayout = ({ type, metadata, children }) => {
   if (router.isFallback) {
     return (
       <PageLayout>
-        <Flex
-          my={8}
-          direction="column"
-          flexGrow={1}
-          w={['100%', 1400]}
-          mx="auto"
-        >
-          <Flex align="center" justify="center" flexGrow={1}>
+        <div className="flex my-8 flex-col flex-grow w-full max-w-full sm:max-w-6xl mx-auto">
+          <div className="flex items-center justify-center flex-grow">
             <Heading>Loading tasks...</Heading>
-          </Flex>
-        </Flex>
+          </div>
+        </div>
       </PageLayout>
     )
   }
@@ -30,17 +24,11 @@ export const TaskLayout = ({ type, metadata, children }) => {
   if (type === 'null') {
     return (
       <PageLayout>
-        <Flex
-          mt={8}
-          direction="column"
-          flexGrow={1}
-          w={['100%', 1400]}
-          mx="auto"
-        >
-          <Flex align="center" justify="center" flexGrow={1}>
+        <div className="flex my-8 flex-col flex-grow w-full max-w-full sm:max-w-6xl mx-auto">
+          <div className="flex items-center justify-center flex-grow">
             <Heading>Task not found</Heading>
-          </Flex>
-        </Flex>
+          </div>
+        </div>
       </PageLayout>
     )
   }

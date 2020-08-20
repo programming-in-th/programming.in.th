@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Button, Select, Text, Heading } from '@chakra-ui/core'
+import { Button, Select } from '@chakra-ui/core'
 
 import { useUser } from '../../UserContext'
 
@@ -25,11 +25,9 @@ export const Normal = ({ metadata }) => {
   useStatus({ metadata, status, submissionID, codeValue })
 
   return (
-    <Flex direction="column" mt={4} p={4} boxShadow="var(--shadow-default)">
-      <Heading fontSize="xl" fontWeight="600">
-        Submit
-      </Heading>
-      <Flex align="baseline" mt={2}>
+    <div className="flex flex-col mt-4 p-4 shadow">
+      <div className="text-xl font-semibold">Submit</div>
+      <div className="flex items-baseline mt-2">
         <UploadCode
           index={0}
           codeFile={codeFile}
@@ -38,16 +36,12 @@ export const Normal = ({ metadata }) => {
           multiple={false}
         />
         {codeFile[0] ? (
-          <Text ml={4} fontSize="sm">
-            {codeFile[0]?.name}
-          </Text>
+          <div className="ml-4 text-sm">{codeFile[0]?.name}</div>
         ) : (
-          <Text ml={4} fontSize="sm">
-            No file chosen
-          </Text>
+          <div className="ml-4 text-sm">No file chosen</div>
         )}
-      </Flex>
-      <Flex mt={4}>
+      </div>
+      <div className="flex mt-4">
         <Select
           width="120px"
           size="sm"
@@ -72,7 +66,7 @@ export const Normal = ({ metadata }) => {
         >
           Submit
         </Button>
-      </Flex>
-    </Flex>
+      </div>
+    </div>
   )
 }

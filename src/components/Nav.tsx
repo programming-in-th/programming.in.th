@@ -44,15 +44,14 @@ const generateMenuItems = (menu: IMenu[], pathname: string) => {
 
   return menu.map((i) => (
     <Link href={i.path} key={i.key}>
-      <ChakraLink
+      <a
+        className={`hover:underline mt-2 sm:mt-0 ml-0 sm:ml-6 leading-6 ${
+          `/${location}` === i.path ? 'text-gray-800' : 'text-gray-500'
+        }`}
         href={i.path}
-        mt={[2, 0]}
-        ml={[0, 6]}
-        lineHeight="18px"
-        color={`/${location}` === i.path ? 'gray.800' : 'gray.500'}
       >
         {i.name}
-      </ChakraLink>
+      </a>
     </Link>
   ))
 }
@@ -65,62 +64,38 @@ export const Nav = () => {
   const router = useRouter()
 
   return (
-    <Box as="header">
-      <Box
-        margin="0 auto"
-        maxWidth={['100%', '480px', '700px', '768px', '1024px']}
-        py={4}
-      >
-        <Flex
-          px={6}
-          direction="row"
-          justify="space-between"
-          align="center"
-          display={['flex', 'none']}
-        >
-          <Text fontWeight="800" color="black">
-            PROGRAMMING.IN.TH
-          </Text>
+    <header>
+      <div className="mx-auto max-w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl py-4">
+        <div className="flex sm:hidden px-6 flex-row justify-between items-center">
+          <div className="font-extrabold text-black">PROGRAMMING.IN.TH</div>
 
           {isNavOpen ? (
-            <Box as={FiX} onClick={() => setNavState(false)} size={6}></Box>
+            <div className="w-6 h-6" onClick={() => setNavState(false)}>
+              <FiX />
+            </div>
           ) : (
-            <Box as={FiMenu} onClick={() => setNavState(true)} size={6}></Box>
+            <div className="w-6 h-6" onClick={() => setNavState(true)}>
+              <FiMenu />
+            </div>
           )}
-        </Flex>
+        </div>
 
         {(isNavOpen || width > 480) && (
-          <Flex
-            as="nav"
-            pr={[6, 0, 0, 0, 0]}
-            direction={['column', 'row', 'row']}
-            justify={['', 'space-between']}
-            align={['flex-end', '']}
-            fontWeight="500"
-          >
-            <Flex
-              align={['flex-end', 'baseline']}
-              justify="flex-end"
-              direction={['column', 'row']}
-              textAlign={['end', 'unset']}
-            >
-              <Text fontWeight="800" color="black" display={['none', 'unset']}>
+          <nav className="flex pr-6 sm:pr-0 flex-col sm:flex-row justify-start sm:justify-between items-end sm:items-start font-medium">
+            <div className="flex items-end sm:items-baseline justify-end flex-col sm:flex-row text-right sm:text-left">
+              <div className="font-extrabold text-black hidden sm:block">
                 PROGRAMMING.IN.TH
-              </Text>
+              </div>
 
               {generateMenuItems(leftMenu, router.pathname)}
-            </Flex>
+            </div>
 
-            <Box>
+            <div>
               {(user.user !== null && loading === true) ||
               user.user === undefined ? (
-                <Flex
-                  mt={[4, 0]}
-                  align={['flex-end', 'baseline']}
-                  direction={['column', 'row']}
-                >
+                <div className="flex mt-4 sm:mt-0 items-end sm:items-baseline flex-col sm:flex-row">
                   Loading...
-                </Flex>
+                </div>
               ) : user.user !== null ? (
                 <Menu>
                   <MenuButton as={Box}>
@@ -159,18 +134,14 @@ export const Nav = () => {
                   </MenuList>
                 </Menu>
               ) : (
-                <Flex
-                  mt={[4, 0]}
-                  align={['flex-end', 'baseline']}
-                  direction={['column', 'row']}
-                >
+                <div className="flex mt-4 sm:mt-0 items-end sm:items-baseline flex-col sm:flex-row">
                   {generateMenuItems(rightMenu, router.pathname)}
-                </Flex>
+                </div>
               )}
-            </Box>
-          </Flex>
+            </div>
+          </nav>
         )}
-      </Box>
-    </Box>
+      </div>
+    </header>
   )
 }

@@ -1,15 +1,15 @@
 import React from 'react'
 import Head from 'next/head'
 
-import { Box, Heading, Flex } from '@chakra-ui/core'
+import { Heading } from '@chakra-ui/core'
 import { MarkDownStyle } from 'design'
 
 export const Solution = ({ solution }) => {
   if (!solution) {
     return (
-      <Flex align="center" justify="center" flexGrow={1}>
+      <div className="flex items-center justify-center flex-grow">
         <Heading>Solution does not exist!</Heading>
-      </Flex>
+      </div>
     )
   }
 
@@ -23,11 +23,11 @@ export const Solution = ({ solution }) => {
           crossOrigin="anonymous"
         />
       </Head>
-      <Box p={[6, 0]} mt={[0, 4]} mx={[0, 'auto']} w={['100%', 800]}>
+      <div className="p-6 sm:p-0 mt-0 sm:mt-4 mx-0 sm:mx-auto w-full max-w-full sm:max-w-4xl">
         <MarkDownStyle>
           <div dangerouslySetInnerHTML={{ __html: solution }}></div>
         </MarkDownStyle>
-      </Box>
+      </div>
     </React.Fragment>
   )
 }

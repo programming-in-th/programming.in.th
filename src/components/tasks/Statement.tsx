@@ -2,7 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import useSWR from 'swr'
 import styled from '@emotion/styled'
-import { Flex, Box, Text, Link as ChakraLink } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
@@ -20,19 +19,16 @@ import { ISubmissionList } from '../../@types/submission'
 import { isObjectEmpty, isArrayEmpty } from 'utils/isEmpty'
 import { getTimestamp } from 'utils/getTimestamp'
 
-const PDF = styled.object`
-  width: 100%;
-  height: 100%;
-`
+const PDF: React.FC<React.ObjectHTMLAttributes<HTMLObjectElement>> = (
+  props
+) => <object className="w-full h-full" {...props} />
 
 const TdLink = ({ children, href, as }) => {
   return (
     <Td>
       <Link href={href} as={as}>
         <a>
-          <Box h="100%" w="100%" padding="8px 16px">
-            {children}
-          </Box>
+          <div className="w-full h-full py-2 px-4">{children}</div>
         </a>
       </Link>
     </Td>
@@ -65,32 +61,35 @@ export const Statement = ({ metadata }) => {
   }
 
   return (
-    <Flex direction={['column', 'row']} height="100%" flexGrow={1}>
-      <Flex mt={4} mx={[6, 0]} flex="2 1 80%" direction="column">
-        <Box height="100%">
+    <div className="flex flex-col sm:flex-row h-full flex-grow">
+      <div
+        className="flex mt-4 mx-6 sm:mx-0 flex-col"
+        style={{ flex: '2 1 80%' }}
+      >
+        <div className="h-full">
           <PDF data={`${config.awsURL}/statements/${metadata.id}.pdf`}>
-            <Text>
+            <div>
               Your browser doesn't support embed PDF viewer please{' '}
-              <ChakraLink
-                isExternal
+              <a
+                className="text-teal-600 hover:underline"
                 href={`${config.awsURL}/statements/${metadata.id}.pdf`}
                 rel="noopener noreferrer"
                 target="_blank"
-                color="teal.600"
               >
                 download Statement
-              </ChakraLink>
-            </Text>
+              </a>
+            </div>
           </PDF>
-        </Box>
-      </Flex>
+        </div>
+      </div>
 
-      <Flex mt={4} mx={[4, 0]} flex="2 1 20%" direction="column" pl={[0, 10]}>
-        <Box
-          maxW="100%"
-          overflow="auto"
-          boxShadow="var(--shadow-default)"
-          maxHeight="400px"
+      <div
+        className="flex mt-4 mx-4 sm:mx-0 flex-col pl-0 sm:pl-10"
+        style={{ flex: '2 1 20%' }}
+      >
+        <div
+          className="max-w-full overflow-auto shadow"
+          style={{ maxHeight: '400px' }}
         >
           <Table>
             <thead>
@@ -131,9 +130,9 @@ export const Statement = ({ metadata }) => {
                 ) : (
                   <tr>
                     <td colSpan={2}>
-                      <Text textAlign={['start', 'center']} p={4}>
+                      <div className="text-left sm:text-center p-4">
                         Loading...
-                      </Text>
+                      </div>
                     </td>
                   </tr>
                 )
@@ -142,20 +141,18 @@ export const Statement = ({ metadata }) => {
               )}
             </tbody>
           </Table>
-        </Box>
+        </div>
 
         {renderSubmit(metadata)}
-      </Flex>
-    </Flex>
+      </div>
+    </div>
   )
 }
 
 const NoRecentSubmission = () => (
   <tr>
     <td colSpan={2}>
-      <Text textAlign={['start', 'center']} p={4}>
-        No recent submission
-      </Text>
+      <div className="text-left sm:text-center p-4">No recent submission</div>
     </td>
   </tr>
 )

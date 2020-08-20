@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Button, Select, Text, Box, Heading } from '@chakra-ui/core'
+import { Button, Select } from '@chakra-ui/core'
 
 import { useUser } from '../../UserContext'
 
@@ -25,16 +25,14 @@ export const Comm = ({ metadata }) => {
   useStatus({ metadata, status, submissionID, codeValue })
 
   return (
-    <Flex direction="column" mt={4} p={4} boxShadow="var(--shadow-default)">
-      <Heading fontSize="xl" fontWeight="600">
-        Submit
-      </Heading>
-      <Flex direction="column" mt={2}>
-        <Box>
+    <div className="flex flex-col mt-4 p-4 shadow">
+      <div className="font-semibold text-xl">Submit</div>
+      <div className="flex flex-col mt-2">
+        <div>
           {metadata.fileName.map((name, i) => (
-            <Box key={name} mt={i === 0 ? 0 : 8}>
-              <Text>File: {name}</Text>
-              <Flex align="baseline">
+            <div className={i === 0 ? 'mt-0' : 'mt-8'} key={name}>
+              <div>File: {name}</div>
+              <div className="items-baseline">
                 <UploadCode
                   index={i}
                   codeFile={codeFile}
@@ -43,20 +41,16 @@ export const Comm = ({ metadata }) => {
                   multiple={false}
                 />
                 {codeFile[i] ? (
-                  <Text ml={4} fontSize="sm">
-                    {codeFile[i]?.name}
-                  </Text>
+                  <div className="ml-4 text-sm">{codeFile[i]?.name}</div>
                 ) : (
-                  <Text ml={4} fontSize="sm">
-                    No file chosen
-                  </Text>
+                  <div className="ml-4 text-sm">No file chosen</div>
                 )}
-              </Flex>
-            </Box>
+              </div>
+            </div>
           ))}
-        </Box>
+        </div>
 
-        <Flex mt={4}>
+        <div className="flex mt-4">
           <Select
             width="120px"
             size="sm"
@@ -81,8 +75,8 @@ export const Comm = ({ metadata }) => {
           >
             Submit
           </Button>
-        </Flex>
-      </Flex>
-    </Flex>
+        </div>
+      </div>
+    </div>
   )
 }

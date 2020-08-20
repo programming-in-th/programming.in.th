@@ -21,11 +21,8 @@ const Login = () => {
 
   return (
     <PageLayout>
-      <Flex align="center" justify="center" flexGrow={1} flexDirection="column">
-        <Text />
-        <Text fontSize={['4xl', '5xl']} mb={4}>
-          Log in
-        </Text>
+      <div className="flex items-center justify-center flex-grow flex-col">
+        <div className="text-4xl sm:text-5xl mb-4">Log in</div>
         <Box w="360px" maxW="90%">
           {loginMethod ? (
             <OAuthLogin setErrorMessage={setError} />
@@ -33,39 +30,29 @@ const Login = () => {
             <EmailLogin setErrorMessage={setError} />
           )}
         </Box>
-        <Text mt={4}>
+        <div className="mt-4">
           You can also
-          <ChakraLink
-            ml={1}
-            lineHeight="18px"
-            color="gray.500"
+          <a
+            className="hover:underline ml-1 leading-6 text-gray-500"
             onClick={() => {
               setLoginMethod(!loginMethod)
               setError(' ')
             }}
           >
             {loginMethod ? 'continue with email' : 'continue with OAuth'}
-          </ChakraLink>
-        </Text>
-        <Text color="red.500" mt={2}>
-          {error}
-        </Text>
-      </Flex>
+          </a>
+        </div>
+        <div className="text-red-500 mt-2">{error}</div>
+      </div>
       <Divider m={0} />
 
-      <Flex
-        display="flex"
-        align="center"
-        justifyContent="center"
-        p={8}
-        height={100}
-      >
+      <div className="flex items-center justify-center p-8 h-24">
         <Link href="/signup">
-          <ChakraLink href="/signup" lineHeight="18px" color="gray.500">
+          <a className="hover:underline leading-6 text-gray-500" href="/signup">
             Don't have an account? Sign Up
-          </ChakraLink>
+          </a>
         </Link>
-      </Flex>
+      </div>
     </PageLayout>
   )
 }
