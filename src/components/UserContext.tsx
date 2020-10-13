@@ -13,6 +13,7 @@ type User = firebase.User | null
 export interface Data {
   username: string
   admin: boolean
+  passedTask: string[]
 }
 
 type UserData = { user: User | undefined } & Data
@@ -45,6 +46,7 @@ const initialState: UserState = {
     user: undefined,
     username: '',
     admin: false,
+    passedTask: [],
   },
   loading: true,
 }
@@ -62,6 +64,9 @@ const reducer = (state: UserState, action: UserAction): UserState => {
         user: Object.assign({}, state.user, {
           username: action.payload.username,
           admin: action.payload.admin,
+          passedTask: action.payload.passedTask
+            ? action.payload.passedTask
+            : [],
         }),
       })
     case 'LOADING_DONE':

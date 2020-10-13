@@ -27,6 +27,16 @@ export const Tr = styled.tr`
   }
 `
 
+export const TrP = styled.tr`
+  cursor: pointer;
+  transition: background-color 0.25s;
+  background-color: #f0fff4;
+  :hover {
+    background-color: #c6f6d5;
+    border-left: 4px inset #276749;
+  }
+`
+
 export const Td = styled.td`
   text-align: left;
 `
