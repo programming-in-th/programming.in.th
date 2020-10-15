@@ -37,6 +37,16 @@ export const TrP = styled.tr`
   }
 `
 
+export const TrF = styled.tr`
+  cursor: pointer;
+  transition: background-color 0.25s;
+  background-color: #fff5f5;
+  :hover {
+    background-color: #fed7d7;
+    border-left: 4px inset #9b2c2c;
+  }
+`
+
 export const Td = styled.td`
   text-align: left;
 `

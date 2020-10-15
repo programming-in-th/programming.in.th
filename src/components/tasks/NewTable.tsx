@@ -1,12 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { Heading, Input, Flex, Box } from '@chakra-ui/core'
+import { Heading, Input, Box } from '@chakra-ui/core'
 
 import { useUser } from 'components/UserContext'
 
 import { insertQueryString } from 'utils/insertQueryString'
-import { Td, Table, Th, Tr, TrP } from 'components/submissions/ListTable'
+import { Td, Table, Th, Tr, TrP, TrF } from 'components/submissions/ListTable'
 
 import { ITask } from '../../@types/task'
 
@@ -17,8 +17,17 @@ export const TaskTable = ({ result, columns }) => {
   const router = useRouter()
 
   const {
-    user: { passedTask },
+    user: { user, passedTask },
   } = useUser()
+
+  const realResult = useMemo(() => {
+    return result.map((task: ITask) => {
+      return {
+        ...task,
+        passed: passedTask[task[columns[0].accessor]],
+      }
+    })
+  }, [passedTask])
 
   useEffect(() => {
     setQuery((router.query.q as string) || '')
@@ -26,27 +35,21 @@ export const TaskTable = ({ result, columns }) => {
 
   useEffect(() => {
     setState(
-      result
-        .filter((task: ITask) => {
-          return (
-            task[columns[0].accessor].includes(query) ||
-            task[columns[1].accessor].includes(query) ||
-            query === ''
-          )
-        })
-        .map((task: ITask) => {
-          return {
-            ...task,
-            passed: passedTask.includes(task[columns[0].accessor]),
-          }
-        })
+      realResult.filter((task: ITask) => {
+        return (
+          task[columns[0].accessor].includes(query) ||
+          task[columns[1].accessor].includes(query) ||
+          query === ''
+        )
+      })
     )
-  }, [query])
+  }, [user, realResult, query])
 
   return (
     <Box maxW="100%">
       <Heading>Task</Heading>
       <Input
+        mt={4}
         width="200px"
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setQuery(event.target.value)
@@ -68,17 +71,17 @@ export const TaskTable = ({ result, columns }) => {
           <thead>
             <tr>
               {columns.map((data) => (
-                <Th>{data.Header}</Th>
+                <Th key={data.Header}>{data.Header}</Th>
               ))}
             </tr>
           </thead>
           <tbody>
             {state.map((data: ITask) => {
-              if (data.passed) {
+              if (data.passed === true) {
                 return (
-                  <TrP>
+                  <TrP key={data.id}>
                     {columns.map((col: any) => (
-                      <Td>
+                      <Td key={col.accessor}>
                         <Link href={`/tasks/${data.id}`}>
                           <a>
                             <Box h="100%" w="100%" padding="8px 16px">
@@ -90,11 +93,27 @@ export const TaskTable = ({ result, columns }) => {
                     ))}
                   </TrP>
                 )
+              } else if (data.passed === false) {
+                return (
+                  <TrF key={data.id}>
+                    {columns.map((col: any) => (
+                      <Td key={col.accessor}>
+                        <Link href={`/tasks/${data.id}`}>
+                          <a>
+                            <Box h="100%" w="100%" padding="8px 16px">
+                              {data[col.accessor]}
+                            </Box>
+                          </a>
+                        </Link>
+                      </Td>
+                    ))}
+                  </TrF>
+                )
               } else {
                 return (
-                  <Tr>
+                  <Tr key={data.id}>
                     {columns.map((col: any) => (
-                      <Td>
+                      <Td key={col.accessor}>
                         <Link href={`/tasks/${data.id}`}>
                           <a>
                             <Box h="100%" w="100%" padding="8px 16px">
