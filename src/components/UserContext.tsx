@@ -1,12 +1,8 @@
 import React, { useContext, useReducer, useEffect } from 'react'
-import useSWR, { mutate } from 'swr'
 import { useRouter } from 'next/router'
 
 import firebase from 'lib/firebase'
 import { onetap } from 'lib/onetap'
-
-import { fetchFromFirebase } from 'utils/fetcher'
-import { isObjectEmpty } from 'utils/isEmpty'
 
 type User = firebase.User | null
 
@@ -101,8 +97,6 @@ const userContextComp = ({ children }) => {
           type: 'RECEIVE_USER',
           payload: user,
         })
-
-        mutate('getUserContext')
       }
     })
 
