@@ -27,7 +27,7 @@
     "@mdx-js/loader": "^1.6.6",
     "@mdx-js/react": "^1.6.6",
     "@next/bundle-analyzer": "^9.4.4",
-    "@next/mdx": "^9.4.4",
+    "@next/mdx": "^9.5.5",
     "cross-env": "^7.0.2",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "@zeit/next-css": "^1.0.1",
