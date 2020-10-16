@@ -1,18 +1,15 @@
 import React, { useContext, useReducer, useEffect } from 'react'
-import useSWR, { mutate } from 'swr'
 import { useRouter } from 'next/router'
 
 import firebase from 'lib/firebase'
 import { onetap } from 'lib/onetap'
-
-import { fetchFromFirebase } from 'utils/fetcher'
-import { isObjectEmpty } from 'utils/isEmpty'
 
 type User = firebase.User | null
 
 export interface Data {
   username: string
   admin: boolean
+  passedTask: Object
 }
 
 type UserData = { user: User | undefined } & Data
@@ -45,6 +42,7 @@ const initialState: UserState = {
     user: undefined,
     username: '',
     admin: false,
+    passedTask: {},
   },
   loading: true,
 }
@@ -62,6 +60,7 @@ const reducer = (state: UserState, action: UserAction): UserState => {
         user: Object.assign({}, state.user, {
           username: action.payload.username,
           admin: action.payload.admin,
+          passedTask: action.payload.passedTask,
         }),
       })
     case 'LOADING_DONE':
@@ -91,10 +90,6 @@ const userContextComp = ({ children }) => {
 
   const router = useRouter()
 
-  const { data: userContext } = useSWR('getUserContext', fetchFromFirebase, {
-    refreshInterval: 1000 * 60,
-  })
-
   useEffect(() => {
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user === null || user.emailVerified) {
@@ -102,8 +97,6 @@ const userContextComp = ({ children }) => {
           type: 'RECEIVE_USER',
           payload: user,
         })
-
-        mutate('getUserContext')
       }
     })
 
@@ -113,25 +106,28 @@ const userContextComp = ({ children }) => {
   }, [])
 
   useEffect(() => {
-    if (userContext === undefined || isObjectEmpty(userContext)) {
+    if (userState.user.user === null) {
+      onetap()
       userDispatch({
         type: 'RECEIVE_CONTEXT',
         payload: initialState.user,
       })
-    } else {
-      userDispatch({
-        type: 'RECEIVE_CONTEXT',
-        payload: userContext,
-      })
-      userDispatch({
-        type: 'LOADING_DONE',
-      })
-    }
-  }, [userContext])
-
-  useEffect(() => {
-    if (userState.user.user === null) {
-      onetap()
+    } else if (userState.user.user) {
+      const unsubscribe = firebase
+        .firestore()
+        .doc(`users/${userState.user.user.uid}`)
+        .onSnapshot((doc) => {
+          userDispatch({
+            type: 'RECEIVE_CONTEXT',
+            payload: doc.data() as Data,
+          })
+          userDispatch({
+            type: 'LOADING_DONE',
+          })
+        })
+      return () => {
+        unsubscribe()
+      }
     }
   }, [userState.user.user])
 
