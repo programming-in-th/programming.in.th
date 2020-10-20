@@ -1,14 +1,6 @@
 import React, { useState, useCallback } from 'react'
 import Link from 'next/link'
-import {
-  Flex,
-  Box,
-  Heading,
-  Button,
-  Text,
-  Select,
-  Input,
-} from '@chakra-ui/core'
+import { Flex, Box, Button, Text, Select, Input } from '@chakra-ui/core'
 import debounce from 'lodash/debounce'
 import { useTable, usePagination, useGlobalFilter } from 'react-table'
 import matchSorter from 'match-sorter'
@@ -81,7 +73,7 @@ export const TaskTable = ({ result, columns }) => {
 
   return (
     <Box maxW="100%">
-      <Heading>Task</Heading>
+      <h2 className="font-bold leading-5 text-xl sm:text-4xl">Task</h2>
       <Box mt={4}>
         <GlobalFilter
           preGlobalFilteredRows={preGlobalFilteredRows}

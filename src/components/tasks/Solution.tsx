@@ -1,14 +1,15 @@
 import React from 'react'
 import Head from 'next/head'
 
-import { Heading } from '@chakra-ui/core'
 import { MarkDownStyle } from 'design'
 
 export const Solution = ({ solution }) => {
   if (!solution) {
     return (
       <div className="flex items-center justify-center flex-grow">
-        <Heading>Solution does not exist!</Heading>
+        <h2 className="font-bold leading-5 text-xl sm:text-4xl">
+          Solution does not exist!
+        </h2>
       </div>
     )
   }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { saveAs } from 'file-saver'
 
-import { Textarea, Box, Heading, Button } from '@chakra-ui/core'
+import { Textarea, Box, Button } from '@chakra-ui/core'
 
 import { PageLayout } from 'components/Layout'
 import { Solution } from 'components/tasks/Solution'
@@ -29,7 +29,7 @@ const Render = () => {
     <PageLayout>
       <div className="flex-col sm:flex-row justify-between mx-16">
         <div className="w-full my-4">
-          <Heading>Rendering</Heading>
+          <h2 className="font-bold leading-5 text-xl sm:text-4xl">Rendering</h2>
         </div>
         <div className="w-full mt-8">
           <Button onClick={refetch}>Compile</Button>
