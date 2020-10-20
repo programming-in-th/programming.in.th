@@ -24,6 +24,24 @@ export const Td: React.FC<React.TdHTMLAttributes<HTMLTableDataCellElement>> = (
   props
 ) => <td className="text-left" {...props} />
 
+export const TrP: React.FC<React.HTMLAttributes<HTMLTableRowElement>> = (
+  props
+) => (
+  <tr
+    className="cursor-pointer transition-colors duration-200 bg-green-100 hover:bg-green-200 hover:border-4 hover:border-green-800"
+    {...props}
+  />
+)
+
+export const TrF: React.FC<React.HTMLAttributes<HTMLTableRowElement>> = (
+  props
+) => (
+  <tr
+    className="cursor-pointer transition-colors duration-200 bg-red-100 hover:bg-red-200 hover:border-4 hover:border-red-800"
+    {...props}
+  />
+)
+
 export const TdHide: React.FC<React.TdHTMLAttributes<
   HTMLTableDataCellElement
->> = (props) => <td className="h-10" {...props} />
+>> = (props) => <td className="h-10" {...props}></td>

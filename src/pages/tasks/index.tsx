@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next'
 
 import { PageLayout } from 'components/Layout'
 import db from 'lib/firebase-admin'
-import { TaskTable } from 'components/tasks/Table'
+import { TaskTable } from 'components/tasks/NewTable'
 
 const Tasks = ({ data }) => {
   const columns = React.useMemo(

@@ -12,4 +12,5 @@ export interface ITask {
 
   type: 'normal' | 'output-only' | 'communication'
   fileName?: ReadonlyArray<string>
+  passed?: boolean
 }
