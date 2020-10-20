@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
-import { Box, Text, Flex, Divider, Link as ChakraLink } from '@chakra-ui/core'
+import { Box, Divider } from '@chakra-ui/core'
 
 import { useUser } from 'components/UserContext'
 import { PageLayout } from 'components/Layout'

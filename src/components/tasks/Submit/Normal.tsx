@@ -35,8 +35,8 @@ export const Normal = ({ metadata }) => {
           onDrop={onDrop(0)}
           multiple={false}
         />
-        {codeFile[0] ? (
-          <div className="ml-4 text-sm">{codeFile[0]?.name}</div>
+        {codeFile[0] !== undefined ? (
+          <div className="ml-4 text-sm">{codeFile[0].name}</div>
         ) : (
           <div className="ml-4 text-sm">No file chosen</div>
         )}

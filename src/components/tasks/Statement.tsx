@@ -1,7 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import useSWR from 'swr'
-import styled from '@emotion/styled'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
