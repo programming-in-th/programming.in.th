@@ -1,7 +1,5 @@
 import React from 'react'
 import Highlight, { Prism } from 'prism-react-renderer'
-
-import { Flex, Box } from '@chakra-ui/core'
 ;((typeof global !== 'undefined' ? global : window) as any).Prism = Prism
 
 require('prismjs/components/prism-rust')
@@ -15,41 +13,32 @@ export const Code = ({ code, language }: CodeBlockProps) => {
   return (
     <Highlight Prism={Prism} code={code} language={language as any}>
       {({ style, tokens, getLineProps, getTokenProps }) => (
-        <Flex
-          as="pre"
-          overflowY="auto"
+        <pre
+          className={`language-${language} overflow-y-auto text-sm`}
           style={{ ...style }}
-          fontSize="13.6px !important"
-          className={`language-${language}`}
         >
           <code className={`language-${language}`}>
             {tokens.map((line, i) => (
-              <Box
-                as="tr"
+              <tr
                 key={i}
+                className="table-row"
                 {...getLineProps({ line, key: i })}
-                display="table-row"
               >
-                <Box
-                  as="td"
+                <td
                   key={i + 'l'}
-                  color="gray.400"
-                  pr={2}
-                  width={8}
-                  display="table-cell"
-                  userSelect="none"
+                  className="table-cell pr-2 select-none w-8 text-gray-500"
                 >
                   {i + 1}
-                </Box>
-                <Box display="table-cell" as="td">
+                </td>
+                <td className="table-cell">
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}
-                </Box>
-              </Box>
+                </td>
+              </tr>
             ))}
           </code>
-        </Flex>
+        </pre>
       )}
     </Highlight>
   )

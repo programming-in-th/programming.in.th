@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
-import { Box, Text, Flex, Divider, Link as ChakraLink } from '@chakra-ui/core'
+import { Box, Divider } from '@chakra-ui/core'
 
 import { useUser } from 'components/UserContext'
 import { PageLayout } from 'components/Layout'
@@ -19,39 +19,32 @@ const ResetPassword = () => {
 
   return (
     <PageLayout>
-      <Flex align="center" justify="center" flexGrow={1} flexDirection="column">
-        <Text fontSize={['4xl', '5xl']} mb={4}>
-          Reset Password
-        </Text>
+      <div className="flex items-center justify-center flex-grow flex-col">
+        <div className="text-4xl sm:text-5xl mb-4">Reset Password</div>
         <Box w="360px" maxW="90%">
           <Reset setErrorMessage={setError} />
         </Box>
-        <Text mt={4}>
+        <div className="mt-4">
           You can also
           <Link href="/login">
-            <ChakraLink href="/login" ml={1} lineHeight="18px" color="gray.500">
+            <a
+              className="hover:underline ml-1 leading-6 text-gray-500"
+              href="/login"
+            >
               login
-            </ChakraLink>
+            </a>
           </Link>
-        </Text>
-        <Text color="red.500" mt={2}>
-          {error}
-        </Text>
-      </Flex>
+        </div>
+        <div className="text-red-500 mt-2">{error}</div>
+      </div>
       <Divider m={0} />
-      <Flex
-        display="flex"
-        align="center"
-        justifyContent="center"
-        p={8}
-        height={100}
-      >
+      <div className="flex items-center justify-center p-8 h-24">
         <Link href="/signup">
-          <ChakraLink href="/signup" lineHeight="18px" color="gray.500">
+          <a className="hover:underline leading-6 text-gray-500" href="/signup">
             Don't have an account? Sign Up
-          </ChakraLink>
+          </a>
         </Link>
-      </Flex>
+      </div>
     </PageLayout>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Flex, Link as ChakraLink, Heading } from '@chakra-ui/core'
+import { Flex, Link as ChakraLink } from '@chakra-ui/core'
 
 import { PageLayout } from 'components/Layout'
 
@@ -12,17 +12,13 @@ export const TaskLayout = ({ type, metadata, children }) => {
   if (router.isFallback) {
     return (
       <PageLayout>
-        <Flex
-          my={8}
-          direction="column"
-          flexGrow={1}
-          w={['100%', 1400]}
-          mx="auto"
-        >
-          <Flex align="center" justify="center" flexGrow={1}>
-            <Heading>Loading tasks...</Heading>
-          </Flex>
-        </Flex>
+        <div className="flex my-8 flex-col flex-grow w-full max-w-full sm:max-w-6xl mx-auto">
+          <div className="flex items-center justify-center flex-grow">
+            <h2 className="font-bold leading-5 text-xl sm:text-4xl">
+              Loading tasks...
+            </h2>
+          </div>
+        </div>
       </PageLayout>
     )
   }
@@ -30,17 +26,13 @@ export const TaskLayout = ({ type, metadata, children }) => {
   if (type === 'null') {
     return (
       <PageLayout>
-        <Flex
-          mt={8}
-          direction="column"
-          flexGrow={1}
-          w={['100%', 1400]}
-          mx="auto"
-        >
-          <Flex align="center" justify="center" flexGrow={1}>
-            <Heading>Task not found</Heading>
-          </Flex>
-        </Flex>
+        <div className="flex my-8 flex-col flex-grow w-full max-w-full sm:max-w-6xl mx-auto">
+          <div className="flex items-center justify-center flex-grow">
+            <h2 className="font-bold leading-5 text-xl sm:text-4xl">
+              Task not found
+            </h2>
+          </div>
+        </div>
       </PageLayout>
     )
   }
@@ -59,9 +51,9 @@ export const TaskLayout = ({ type, metadata, children }) => {
       >
         <Flex direction="column">
           <Flex align="baseline" mx={[6, 0]}>
-            <Heading fontWeight="600" fontSize={['xl', '3xl']}>
+            <h2 className="font-semibold text-xl sm:text-3xl">
               {metadata.title}
-            </Heading>
+            </h2>
           </Flex>
 
           <Flex

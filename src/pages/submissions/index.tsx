@@ -1,5 +1,4 @@
 import React from 'react'
-import { Box, Flex, Heading } from '@chakra-ui/core'
 
 import { SubmissionsList } from 'components/submissions/SubmissionsList'
 import { PageLayout } from 'components/Layout'
@@ -7,12 +6,14 @@ import { PageLayout } from 'components/Layout'
 const Submissions = () => {
   return (
     <PageLayout>
-      <Flex justify="center" flexGrow={1} py={4}>
-        <Box maxW="100%">
-          <Heading px={4}>Submissions</Heading>
+      <div className="flex justify-center flex-grow py-4">
+        <div className="max-w-full">
+          <h2 className="px-4 font-bold leading-5 text-xl sm:text-4xl">
+            Submissions
+          </h2>
           <SubmissionsList id={undefined} />
-        </Box>
-      </Flex>
+        </div>
+      </div>
     </PageLayout>
   )
 }

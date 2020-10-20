@@ -1,6 +1,5 @@
 import React from 'react'
 import { GetStaticProps } from 'next'
-import { Flex } from '@chakra-ui/core'
 
 import { PageLayout } from 'components/Layout'
 import db from 'lib/firebase-admin'
@@ -23,9 +22,9 @@ const Tasks = ({ data }) => {
 
   return (
     <PageLayout>
-      <Flex justify="center" flexGrow={1} py={4} px={4}>
+      <div className="flex justify-center flex-grow p-4">
         <TaskTable result={data} columns={columns} />
-      </Flex>
+      </div>
     </PageLayout>
   )
 }

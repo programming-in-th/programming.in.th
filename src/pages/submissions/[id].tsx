@@ -8,7 +8,6 @@ import {
   Skeleton,
   Box,
   Flex,
-  Heading,
   Link as ChakraLink,
   Accordion,
   AccordionItem,
@@ -103,7 +102,9 @@ const SubmissionDetail: NextPage = () => {
           p={[4, 8]}
           flexGrow={1}
         >
-          <Heading>Submission doesn't exist</Heading>
+          <h2 className="font-bold leading-5 text-xl sm:text-4xl">
+            Submission doesn't exist
+          </h2>
         </Flex>
       </PageLayout>
     )
@@ -127,9 +128,9 @@ const SubmissionDetail: NextPage = () => {
             <Box>
               <Box>
                 <Flex align="center" justify="space-between">
-                  <Heading fontSize="2xl">
+                  <h2 className="font-bold leading-5 text-2xl">
                     [{submission.task.id}] {submission.task.title}
-                  </Heading>
+                  </h2>
                   {user.admin && (
                     <IconButton
                       aria-label="rejudge"

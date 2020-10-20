@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { Heading, Input, Box } from '@chakra-ui/core'
+import { Input, Box } from '@chakra-ui/core'
 
 import { useUser } from 'components/UserContext'
 
@@ -47,7 +47,7 @@ export const TaskTable = ({ result, columns }) => {
 
   return (
     <Box maxW="100%">
-      <Heading>Task</Heading>
+      <h2 className="font-bold leading-5 text-xl sm:text-4xl">Task</h2>
       <Input
         mt={4}
         width="200px"
