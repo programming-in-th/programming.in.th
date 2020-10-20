@@ -62,23 +62,17 @@ export const Nav = () => {
   const router = useRouter()
 
   return (
-    <header>
-      <div className="mx-auto max-w-full sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl py-4">
+    <header className="bg-white z-50 border-b border-gray-300">
+      <div className="mx-auto max-w-6xl py-4 px-4">
         <div className="flex sm:hidden px-6 flex-row justify-between items-center">
           <div className="font-extrabold text-black">PROGRAMMING.IN.TH</div>
 
-          {isNavOpen ? (
-            <div className="w-6 h-6" onClick={() => setNavState(false)}>
-              <FiX />
-            </div>
-          ) : (
-            <div className="w-6 h-6" onClick={() => setNavState(true)}>
-              <FiMenu />
-            </div>
-          )}
+          <div className="w-6 h-6" onClick={() => setNavState((o) => !o)}>
+            {isNavOpen ? <FiX /> : <FiMenu />}
+          </div>
         </div>
 
-        {(isNavOpen || width > 480) && (
+        {(isNavOpen || width > 640) && (
           <nav className="flex pr-6 sm:pr-0 flex-col sm:flex-row justify-start sm:justify-between items-end sm:items-start font-medium">
             <div className="flex items-end sm:items-baseline justify-end flex-col sm:flex-row text-right sm:text-left">
               <div className="font-extrabold text-black hidden sm:block">
