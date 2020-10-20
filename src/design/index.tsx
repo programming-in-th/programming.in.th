@@ -1,5 +1,4 @@
 import { Global, css } from '@emotion/core'
-import styled from '@emotion/styled'
 
 import { nprogress } from './nprogress'
 
