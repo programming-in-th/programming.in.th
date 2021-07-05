@@ -73,7 +73,7 @@
     "@zeit/next-stylus": "^1.0.1",
     "@types/react": "^16.9.41",
     "@types/react-dom": "^16.9.8",
-    "@types/webpack-env": "^1.15.2",
+    "@types/webpack-env": "^1.16.2",
     "babel-eslint": "^10.1.0",
     "@types/react-syntax-highlighter": "^11.0.1",
     "babel-plugin-emotion": "^10.0.33",
