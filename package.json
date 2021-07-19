@@ -61,7 +61,7 @@
     "rehype-sanitize": "^3.0.1",
     "rehype-stringify": "^8.0.0",
     "remark-math": "^2.0.1",
-    "remark-parse": "^8.0.2",
+    "remark-parse": "^9.0.0",
     "remark-rehype": "^7.0.0",
     "swr": "0.3.0",
     "yup": "^0.29.1"
