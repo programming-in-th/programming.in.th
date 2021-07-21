@@ -3,14 +3,12 @@ import { AppProps } from 'next/app'
 import Router from 'next/router'
 import React, { useEffect } from 'react'
 import NProgress from 'nprogress'
-import { ThemeProvider, CSSReset } from '@chakra-ui/core'
+import { ThemeProvider } from '@chakra-ui/core'
 import UserProvider from 'components/UserContext'
 import * as gtag from 'lib/gtag'
 
-import { GlobalStyle } from 'design'
-import { customTheme } from 'design/theme'
-
-import 'assets/css/prism.css'
+import 'styles/index.css'
+import 'styles/prism.css'
 
 let timeout: any
 
@@ -39,10 +37,8 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
   }, [])
 
   return (
-    <ThemeProvider theme={customTheme}>
+    <ThemeProvider>
       <UserProvider>
-        <CSSReset />
-        <GlobalStyle />
         <Component {...pageProps} />
       </UserProvider>
     </ThemeProvider>
