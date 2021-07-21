@@ -1,0 +1,59 @@
+/* purgecss start ignore */
+@tailwind base;
+@tailwind components;
+/* purgecss end ignore */
+
+#nprogress {
+  pointer-events: none;
+}
+
+#nprogress .bar {
+  background: #1a202c;
+  position: fixed;
+  z-index: 99999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+/* Fancy blur effect */
+#nprogress .peg {
+  display: block;
+  position: absolute;
+  right: 0px;
+  width: 100px;
+  height: 100%;
+  box-shadow: 0 0 10px #1a202c, 0 0 5px #1a202c;
+  opacity: 1;
+  -webkit-transform: rotate(3deg) translate(0px, -4px);
+  -ms-transform: rotate(3deg) translate(0px, -4px);
+  transform: rotate(3deg) translate(0px, -4px);
+}
+
+html,
+body,
+#__next {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+svg {
+  display: inline;
+}
+
+pre {
+  font-size: 14px;
+  line-height: 1.4em;
+  margin: 1.5em 0 !important;
+  overflow-x: auto;
+  padding: 1.5em;
+  white-space: pre;
+  background: #011627;
+  border-radius: 4px;
+}
+
+/* purgecss start ignore */
+@tailwind utilities;
+/* purgecss end ignore */
