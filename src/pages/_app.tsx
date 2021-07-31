@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import { AppProps } from 'next/app'
-import Router from 'next/router'
+import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import NProgress from 'nprogress'
 import { ThemeProvider } from '@chakra-ui/core'
@@ -21,20 +21,26 @@ const done = () => {
   NProgress.done()
 }
 
-Router.events.on('routeChangeStart', start)
-Router.events.on('routeChangeComplete', done)
-Router.events.on('routeChangeError', done)
-
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
+  const router = useRouter()
+
   useEffect(() => {
     const handleRouteChange = (url) => {
       gtag.pageview(url)
     }
-    Router.events.on('routeChangeComplete', handleRouteChange)
+    router.events.on('routeChangeComplete', handleRouteChange)
+
+    router.events.on('routeChangeStart', start)
+    router.events.on('routeChangeComplete', done)
+    router.events.on('routeChangeError', done)
+
     return () => {
-      Router.events.off('routeChangeComplete', handleRouteChange)
+      router.events.off('routeChangeComplete', handleRouteChange)
+      router.events.off('routeChangeStart', start)
+      router.events.off('routeChangeComplete', done)
+      router.events.off('routeChangeError', done)
     }
-  }, [])
+  }, [router])
 
   return (
     <ThemeProvider>
