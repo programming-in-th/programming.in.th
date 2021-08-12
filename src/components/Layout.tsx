@@ -23,11 +23,10 @@ export const PageLayout: React.FunctionComponent<IPageLayoutProps> = (
       bg={props.bg}
       display={user.user === undefined ? 'none' : 'flex'}
     >
-      <Nav></Nav>
-      <Divider m={0}></Divider>
-      <Flex as="main" flex="auto" direction="column" minH="calc(100vh - 56px)">
+      <main className="flex flex-col min-h-screen">
+        <Nav />
         {props.children}
-      </Flex>
+      </main>
       <Footer bg={props.bg}></Footer>
     </Flex>
   )

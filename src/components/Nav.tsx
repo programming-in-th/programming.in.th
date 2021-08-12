@@ -1,176 +1,144 @@
-import React, { useState } from 'react'
+import React, { Fragment, useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import {
-  Box,
-  Flex,
-  Text,
-  Link as ChakraLink,
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-  Avatar,
-  Stack,
-} from '@chakra-ui/core'
-import { useWindowSize } from 'react-use'
-import { FiMenu, FiX } from 'react-icons/fi'
+import { Popover, Transition } from '@headlessui/react'
 
-import firebase from 'lib/firebase'
-
-import { useUser } from './UserContext'
-
-interface IMenu {
-  key: string
-  name: string
-  path: string
-}
-
-const leftMenu: IMenu[] = [
-  { key: 'home', name: 'Home', path: '/' },
-  { key: 'tasks', name: 'Tasks', path: '/tasks' },
-  { key: 'submissions', name: 'Submissions', path: '/submissions' },
-  { key: 'learn', name: 'Learn', path: '/learn' },
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'Tasks', href: '/tasks' },
+  { name: 'Submissions', href: '/submissions' },
+  { name: 'Learn', href: '/learn' },
 ]
-
-const rightMenu: IMenu[] = [
-  { key: 'signup', name: 'Sign Up', path: '/signup' },
-  { key: 'login', name: 'Login', path: '/login' },
-]
-
-const generateMenuItems = (menu: IMenu[], pathname: string) => {
-  const location = pathname.split('/')[1]
-
-  return menu.map((i) => (
-    <Link href={i.path} key={i.key}>
-      <ChakraLink
-        href={i.path}
-        mt={[2, 0]}
-        ml={[0, 6]}
-        lineHeight="18px"
-        color={`/${location}` === i.path ? 'gray.800' : 'gray.500'}
-      >
-        {i.name}
-      </ChakraLink>
-    </Link>
-  ))
-}
 
 export const Nav = () => {
-  const [isNavOpen, setNavState] = useState(false)
-  const { width } = useWindowSize()
-
-  const { user, loading, userDispatch } = useUser()
   const router = useRouter()
 
+  const location = useMemo(() => {
+    return router.pathname.split('/')[1]
+  }, [router])
+
   return (
-    <Box as="header">
-      <Box
-        margin="0 auto"
-        maxWidth={['100%', '480px', '700px', '768px', '1024px']}
-        py={4}
-      >
-        <Flex
-          px={6}
-          direction="row"
-          justify="space-between"
-          align="center"
-          display={['flex', 'none']}
+    <Popover as="header" className="relative">
+      <div className="bg-white py-3">
+        <nav
+          className="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6"
+          aria-label="Global"
         >
-          <Text fontWeight="800" color="black">
-            PROGRAMMING.IN.TH
-          </Text>
+          <div className="flex items-center flex-1">
+            <div className="flex items-center justify-between w-full md:w-auto">
+              <p className="font-extrabold">PROGRAMMING.IN.TH</p>
+              <div className="-mr-2 flex items-center md:hidden">
+                <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus-ring-inset focus:ring-white">
+                  <span className="sr-only">Open main menu</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 6h16M4 12h16M4 18h16"
+                    />
+                  </svg>
+                </Popover.Button>
+              </div>
+            </div>
+            <div className="hidden space-x-8 md:flex md:ml-10">
+              {navigation.map((item) => (
+                <Link href={item.href}>
+                  <a
+                    key={item.name}
+                    className={`text-base font-medium hover:text-gray-600 ${
+                      `/${location}` == item.href
+                        ? 'text-gray-600'
+                        : 'text-gray-400'
+                    }`}
+                  >
+                    {item.name}
+                  </a>
+                </Link>
+              ))}
+            </div>
+          </div>
+          <div className="hidden md:flex md:items-center md:space-x-6">
+            <Link href="/login">
+              <a className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-gray-100 from-gray-600 to-gray-700 bg-gradient-to-b hover:from-gray-800">
+                Login
+              </a>
+            </Link>
+          </div>
+        </nav>
+      </div>
 
-          {isNavOpen ? (
-            <Box as={FiX} onClick={() => setNavState(false)} size={6}></Box>
-          ) : (
-            <Box as={FiMenu} onClick={() => setNavState(true)} size={6}></Box>
-          )}
-        </Flex>
-
-        {(isNavOpen || width > 480) && (
-          <Flex
-            as="nav"
-            pr={[6, 0, 0, 0, 0]}
-            direction={['column', 'row', 'row']}
-            justify={['', 'space-between']}
-            align={['flex-end', '']}
-            fontWeight="500"
-          >
-            <Flex
-              align={['flex-end', 'baseline']}
-              justify="flex-end"
-              direction={['column', 'row']}
-              textAlign={['end', 'unset']}
-            >
-              <Text fontWeight="800" color="black" display={['none', 'unset']}>
-                PROGRAMMING.IN.TH
-              </Text>
-
-              {generateMenuItems(leftMenu, router.pathname)}
-            </Flex>
-
-            <Box>
-              {(user.user !== null && loading === true) ||
-              user.user === undefined ? (
-                <Flex
-                  mt={[4, 0]}
-                  align={['flex-end', 'baseline']}
-                  direction={['column', 'row']}
-                >
-                  Loading...
-                </Flex>
-              ) : user.user !== null ? (
-                <Menu>
-                  <MenuButton as={Box}>
-                    <Stack isInline mt={[4, 0]}>
-                      <Avatar
-                        size="xs"
-                        src={
-                          user.user.photoURL === ''
-                            ? '/assets/img/default-user.png'
-                            : `${user.user.photoURL}`
-                        }
-                      />
-                      <Text color="gray.500">{user.username}</Text>
-                    </Stack>
-                  </MenuButton>
-                  <MenuList>
-                    <MenuItem>Dashboard</MenuItem>
-                    <MenuItem onClick={() => router.push('/setusername')}>
-                      Change Username
-                    </MenuItem>
-                    <MenuDivider></MenuDivider>
-                    <MenuItem
-                      onClick={() => {
-                        firebase
-                          .auth()
-                          .signOut()
-                          .then(() => {
-                            userDispatch({
-                              type: 'LOADING_START',
-                            })
-                          })
-                      }}
-                    >
-                      Logout
-                    </MenuItem>
-                  </MenuList>
-                </Menu>
-              ) : (
-                <Flex
-                  mt={[4, 0]}
-                  align={['flex-end', 'baseline']}
-                  direction={['column', 'row']}
-                >
-                  {generateMenuItems(rightMenu, router.pathname)}
-                </Flex>
-              )}
-            </Box>
-          </Flex>
-        )}
-      </Box>
-    </Box>
+      <Transition
+        as={Fragment}
+        enter="duration-150 ease-out"
+        enterFrom="opacity-0 scale-95"
+        enterTo="opacity-100 scale-100"
+        leave="duration-100 ease-in"
+        leaveFrom="opacity-100 scale-100"
+        leaveTo="opacity-0 scale-95"
+      >
+        <Popover.Panel
+          focus
+          className="absolute top-0 inset-x-0 p-2 transition transform origin-top md:hidden"
+        >
+          <div className="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
+            <div className="px-5 pt-4 flex items-center justify-between">
+              <div>
+                <p className="font-extrabold">PROGRAMMING.IN.TH</p>
+              </div>
+              <div className="-mr-2">
+                <Popover.Button className="bg-white rounded-md p-2 inline-flex items-center justify-center text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600">
+                  <span className="sr-only">Close menu</span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M6 18L18 6M6 6l12 12"
+                    />
+                  </svg>
+                </Popover.Button>
+              </div>
+            </div>
+            <div className="pt-5 pb-6">
+              <div className="px-2 space-y-1">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className={`block px-3 py-2 rounded-md text-base font-sm ${
+                      `/${location}` == item.href
+                        ? 'text-gray-700 bg-gray-200'
+                        : 'text-gray-400'
+                    }`}
+                  >
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+              <div className="mt-6 px-5">
+                <Link href="/login">
+                  <a className="block text-center w-full py-3 px-4 rounded-md shadow text-gray-100 font-medium from-gray-600 to-gray-700 bg-gradient-to-b hover:from-gray-800">
+                    Login
+                  </a>
+                </Link>
+              </div>
+            </div>
+          </div>
+        </Popover.Panel>
+      </Transition>
+    </Popover>
   )
 }
