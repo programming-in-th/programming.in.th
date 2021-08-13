@@ -14,9 +14,6 @@ module.exports = withPlugins([withBundleAnalyzer, withOffline], {
       },
     ]
   },
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   transformManifest: (manifest) => ['/'].concat(manifest),
   workboxOpts: {
     swDest: process.env.NEXT_EXPORT
