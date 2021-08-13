@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import firebase from 'lib/firebase'
 import { onetap } from 'lib/onetap'
 
+import { Loading } from 'components/Loading'
+
 type User = firebase.User | null
 
 export interface Data {
@@ -140,6 +142,13 @@ const userContextComp = ({ children }) => {
       router.push('/setusername')
     }
   }, [userState, router.pathname])
+
+  if (
+    userState.user.user === undefined ||
+    (userState.user.user !== null && userState.loading === true)
+  ) {
+    return <Loading />
+  }
 
   return (
     <UserStateContext.Provider value={{ ...userState, userDispatch }}>
