@@ -1,73 +1,67 @@
 import React from 'react'
-import { Box, Flex, Link, Text } from '@chakra-ui/core'
 
-export const Footer = ({ bg }) => (
-  <Box bg={bg} as="footer" borderTop="1px solid #EDF2F7" color="gray.600">
-    <Box margin="0 auto" p={6}>
-      <Flex width="100%" direction={['column', 'row']} justify="space-around">
-        <Box maxWidth={['100%', '25%']}>
-          <Text fontWeight="800" color="gray.500">
-            PROGRAMMING.IN.TH
-          </Text>
-          <Text fontFamily="heading">
-            ยินดีต้อนรับสู่โปรแกรมมิ่งอินทีเอช ศูนย์รวมของโจทย์และเนื้อหาสำหรับ
-            การเขียนโปรแกรมเพื่อการแข่งขัน และวิทยาการคอมพิวเตอร์
-          </Text>
-
-          <Box mt={2} display={['none', 'block']}>
-            <Text fontSize="xs">
+export const Footer = () => {
+  return (
+    <footer className="border-t border-gray-200">
+      <div className="mx-0 my-auto p-6">
+        <div className="flex w-full justify-around flex-col md:flex-row">
+          <div className="w-full md:w-1/4">
+            <p className="text-gray-500 font-extrabold">PROGRAMMING.IN.TH</p>
+            <p className="text-gray-500 font-light font-display">
+              ยินดีต้อนรับสู่โปรแกรมมิ่งอินทีเอช
+              ศูนย์รวมของโจทย์และเนื้อหาสำหรับ การเขียนโปรแกรมเพื่อการแข่งขัน
+              และวิทยาการคอมพิวเตอร์
+            </p>
+            <div className="mt-2 hidden md:block">
+              <p className="text-xs">
+                © 2019-{new Date().getFullYear()} the PROGRAMMING.IN.TH team
+              </p>
+              <p className="text-xs">
+                The source code for this website is available on{' '}
+                <a
+                  href="https://github.com/programming-in-th"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  GitHub
+                </a>
+              </p>
+            </div>
+          </div>
+          <div className="mt-2 md:mt-0">
+            <p className="font-medium">Resources</p>
+          </div>
+          <div className="mt-2 md:mt-0">
+            <p className="font-medium">Archives</p>
+          </div>
+          <div className="mt-2 md:mt-0">
+            <p className="font-medium">About</p>
+          </div>
+          <div className="mt-2 md:mt-0">
+            <p className="font-medium">Contact</p>
+          </div>
+        </div>
+        <div className="text-xs text-center mt-4">
+          <div className="mt-2 block md:hidden">
+            <p className="text-xs">
               © 2019-{new Date().getFullYear()} the PROGRAMMING.IN.TH team
-            </Text>
-            <Text fontSize="xs">
+            </p>
+            <p className="text-xs">
               The source code for this website is available on{' '}
-              <Link
+              <a
                 href="https://github.com/programming-in-th"
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 GitHub
-              </Link>
-            </Text>
-          </Box>
-        </Box>
-
-        <Box mt={[2, 0]}>
-          <Text fontWeight="600">Resources</Text>
-        </Box>
-
-        <Box mt={[2, 0]}>
-          <Text fontWeight="600">Archives</Text>
-        </Box>
-
-        <Box mt={[2, 0]}>
-          <Text fontWeight="600">About</Text>
-        </Box>
-
-        <Box mt={[2, 0]}>
-          <Text fontWeight="600">Contact</Text>
-        </Box>
-      </Flex>
-
-      <Box fontSize="xs" textAlign="center" mt={4}>
-        <Box mt={2} display={['block', 'none']}>
-          <Text fontSize="xs">
-            © 2019-{new Date().getFullYear()} the PROGRAMMING.IN.TH team
-          </Text>
-          <Text fontSize="xs">
-            The source code for this website is available on{' '}
-            <Link
-              href="https://github.com/programming-in-th"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              GitHub
-            </Link>
-          </Text>
-        </Box>
-        <Box mt={[2, 0]}>
-          <Text>Made with ♥ by PROGRAMMING.IN.TH team</Text>
-        </Box>
-      </Box>
-    </Box>
-  </Box>
-)
+              </a>
+            </p>
+          </div>
+          <div className="mt-2 md:mt-0">
+            <p>Made with ♥ by PROGRAMMING.IN.TH team</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}

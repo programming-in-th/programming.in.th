@@ -1,15 +1,12 @@
 import React from 'react'
-import { Text, Flex } from '@chakra-ui/core'
 
 import { PageLayout } from 'components/Layout'
 
 const LearnPage = () => (
   <PageLayout>
-    <Flex align="center" justify="center" flexGrow={1}>
-      <Text fontSize="6xl" fontWeight="800" textAlign="center">
-        Coming Soon
-      </Text>
-    </Flex>
+    <div className="flex items-center justify-center flex-grow">
+      <p className="align-center text-6xl font-bold text-center">Coming Soon</p>
+    </div>
   </PageLayout>
 )
 
