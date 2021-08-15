@@ -1,8 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
 import useSWR from 'swr'
-import styled from '@emotion/styled'
-import { Flex, Box, Text, Link as ChakraLink } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
@@ -11,33 +9,11 @@ import { Normal } from './Submit/Normal'
 import { Comm } from './Submit/Comm'
 import { OutputOnly } from './Submit/OutputOnly'
 
-import { ITask } from '../../@types/task'
-import { Th, Td, Table, Tr, TdHide } from '../submissions/ListTable'
-
 import { useUser } from '../UserContext'
 import { ISubmissionList } from '../../@types/submission'
 
 import { isObjectEmpty, isArrayEmpty } from 'utils/isEmpty'
 import { getTimestamp } from 'utils/getTimestamp'
-
-const PDF = styled.object`
-  width: 100%;
-  height: 100%;
-`
-
-const TdLink = ({ children, href, as }) => {
-  return (
-    <Td>
-      <Link href={href} as={as}>
-        <a>
-          <Box h="100%" w="100%" padding="8px 16px">
-            {children}
-          </Box>
-        </a>
-      </Link>
-    </Td>
-  )
-}
 
 export const Statement = ({ metadata }) => {
   const { user } = useUser()
@@ -51,7 +27,7 @@ export const Statement = ({ metadata }) => {
     SWRfetch
   )
 
-  const renderSubmit = (metadata: ITask) => {
+  const Submit = ({ metadata }) => {
     switch (metadata.type) {
       case 'normal':
         return <Normal metadata={metadata}></Normal>
@@ -65,97 +41,112 @@ export const Statement = ({ metadata }) => {
   }
 
   return (
-    <Flex direction={['column', 'row']} height="100%" flexGrow={1}>
-      <Flex mt={4} mx={[6, 0]} flex="2 1 80%" direction="column">
-        <Box height="100%">
-          <PDF data={`${config.awsURL}/statements/${metadata.id}.pdf`}>
-            <Text>
+    <div className="flex flex-col md:flex-row h-full flex-grow">
+      <div
+        className={`flex mt-4 mx-6 md:mx-0 flex-col ${
+          user.user ? 'w-3/5' : 'w-full'
+        }`}
+      >
+        <div className="h-full">
+          <object
+            className="w-full h-full"
+            data={`${config.awsURL}/statements/${metadata.id}.pdf`}
+          >
+            <p>
               Your browser doesn't support embed PDF viewer please{' '}
-              <ChakraLink
-                isExternal
+              <a
+                className="text-gray-600"
                 href={`${config.awsURL}/statements/${metadata.id}.pdf`}
                 rel="noopener noreferrer"
                 target="_blank"
-                color="teal.600"
               >
                 download Statement
-              </ChakraLink>
-            </Text>
-          </PDF>
-        </Box>
-      </Flex>
-
-      <Flex mt={4} mx={[4, 0]} flex="2 1 20%" direction="column" pl={[0, 10]}>
-        <Box
-          maxW="100%"
-          overflow="auto"
-          boxShadow="var(--shadow-default)"
-          maxHeight="400px"
-        >
-          <Table>
-            <thead>
-              <tr>
-                <Th>SUBMISSION TIME</Th>
-                <Th>POINTS</Th>
-              </tr>
-            </thead>
-            <tbody>
-              {user.user ? (
-                submissions?.data ? (
+              </a>
+            </p>
+          </object>
+        </div>
+      </div>
+      {user.user && (
+        <div className="flex mt-4 mx-4 md:mx-0 flex-col md:pl-10 w-2/5">
+          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+            <table className="min-w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    SUBMISSION TIME
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    POINTS
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                {submissions?.data ? (
                   isArrayEmpty(submissions.data) ? (
-                    <NoRecentSubmission></NoRecentSubmission>
+                    <tr>
+                      <td
+                        className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center"
+                        colSpan={2}
+                      >
+                        No recent submission
+                      </td>
+                    </tr>
                   ) : (
                     submissions.data.map((submission: ISubmissionList) => {
                       return isObjectEmpty(submission) ? (
-                        <Tr>
-                          <TdHide colSpan={2} />
-                        </Tr>
+                        <tr key="empty">
+                          <td
+                            className="px-6 py-3 whitespace-nowrap text-sm font-medium text-gray-900 text-center"
+                            colSpan={2}
+                          >
+                            Hided submission
+                          </td>
+                        </tr>
                       ) : (
-                        <Tr key={submission.submissionID}>
-                          <TdLink
-                            href="/submissions/[id]"
-                            as={`/submissions/${submission.submissionID}`}
-                          >
-                            {getTimestamp(submission.timestamp)}
-                          </TdLink>
-                          <TdLink
-                            href="/submissions/[id]"
-                            as={`/submissions/${submission.submissionID}`}
-                          >
-                            {submission.score}
-                          </TdLink>
-                        </Tr>
+                        <tr
+                          className="cursor-pointer transition duration-150 hover:bg-gray-200"
+                          key={submission.submissionID}
+                        >
+                          <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
+                            <Link
+                              href={`/submissions/${submission.submissionID}`}
+                            >
+                              <a>{getTimestamp(submission.timestamp)}</a>
+                            </Link>
+                          </td>
+                          <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
+                            <Link
+                              href={`/submissions/${submission.submissionID}`}
+                            >
+                              <a>{submission.score}</a>
+                            </Link>
+                          </td>
+                        </tr>
                       )
                     })
                   )
                 ) : (
                   <tr>
-                    <td colSpan={2}>
-                      <Text textAlign={['start', 'center']} p={4}>
-                        Loading...
-                      </Text>
+                    <td
+                      className="px-6 py-3 whitespace-nowrap text-sm font-medium text-gray-900 text-center"
+                      colSpan={2}
+                    >
+                      Loading...
                     </td>
                   </tr>
-                )
-              ) : (
-                <NoRecentSubmission></NoRecentSubmission>
-              )}
-            </tbody>
-          </Table>
-        </Box>
-
-        {renderSubmit(metadata)}
-      </Flex>
-    </Flex>
+                )}
+              </tbody>
+            </table>
+          </div>
+          <Submit metadata={metadata} />
+        </div>
+      )}
+    </div>
   )
 }
-
-const NoRecentSubmission = () => (
-  <tr>
-    <td colSpan={2}>
-      <Text textAlign={['start', 'center']} p={4}>
-        No recent submission
-      </Text>
-    </td>
-  </tr>
-)

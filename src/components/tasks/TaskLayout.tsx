@@ -6,123 +6,86 @@ import { Flex, Link as ChakraLink, Heading } from '@chakra-ui/core'
 
 import { PageLayout } from 'components/Layout'
 
+import { Loading } from 'components/Loading'
+
 export const TaskLayout = ({ type, metadata, children }) => {
   const router = useRouter()
 
   if (router.isFallback) {
-    return (
-      <PageLayout>
-        <Flex
-          my={8}
-          direction="column"
-          flexGrow={1}
-          w={['100%', 1400]}
-          mx="auto"
-        >
-          <Flex align="center" justify="center" flexGrow={1}>
-            <Heading>Loading tasks...</Heading>
-          </Flex>
-        </Flex>
-      </PageLayout>
-    )
+    return <Loading />
   }
 
   if (type === 'null') {
     return (
       <PageLayout>
-        <Flex
-          mt={8}
-          direction="column"
-          flexGrow={1}
-          w={['100%', 1400]}
-          mx="auto"
-        >
-          <Flex align="center" justify="center" flexGrow={1}>
-            <Heading>Task not found</Heading>
-          </Flex>
-        </Flex>
+        <div className="flex mt-8 flex-col mx-auto w-full flex-grow">
+          <div className="flex items-center justify-center flex-grow">
+            <p className="text-6xl font-extrabold text-center p-8">
+              Task not found
+            </p>
+          </div>
+        </div>
       </PageLayout>
     )
   }
 
   return (
     <PageLayout>
-      <Flex
-        mt={8}
-        direction="column"
-        w={[
-          '100%',
-          type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
-        ]}
-        mx="auto"
-        transition="width 1s"
+      <div
+        className={`flex mt-8 mx-auto flex-col transition-all duration-1000 w-full ${
+          type === 'solution'
+            ? 'md:max-w-4xl'
+            : type === 'submissions'
+            ? 'md:max-w-5xl'
+            : 'md:max-w-6xl'
+        }`}
       >
-        <Flex direction="column">
-          <Flex align="baseline" mx={[6, 0]}>
-            <Heading fontWeight="600" fontSize={['xl', '3xl']}>
-              {metadata.title}
-            </Heading>
-          </Flex>
-
-          <Flex
-            justify={['space-around', 'flex-start']}
-            textAlign={['end', 'unset']}
-            mx={[6, 0]}
-            mt={[0, 2]}
-            color="gray.500"
-          >
-            <Link href="/tasks/[...id]" as={`/tasks/${metadata.id}`} passHref>
-              <ChakraLink
-                mt={[2, 0]}
-                lineHeight="18px"
-                color={type === 'statement' ? 'gray.800' : 'gray.500'}
+        <div className="flex flex-col">
+          <div className="flex items-baseline mx-6 md:mx-0">
+            <p className="font-medium text-xl md:text-3xl">{metadata.title}</p>
+          </div>
+          <div className="flex justify-around md:justify-start mx-6 md:mx-0 md:mt-2">
+            <Link href={`/tasks/${metadata.id}`}>
+              <a
+                className={`mt-2 md:mt-0 leading-5 ${
+                  type === 'statement' ? 'text-gray-700' : 'text-gray-400'
+                }`}
               >
                 Statement
-              </ChakraLink>
+              </a>
             </Link>
-            <Link
-              href="/tasks/[...id]"
-              as={`/tasks/${metadata.id}/submissions`}
-              passHref
-            >
-              <ChakraLink
-                mt={[2, 0]}
-                ml={[0, 6]}
-                lineHeight="18px"
-                color={type === 'submissions' ? 'gray.800' : 'gray.500'}
+            <Link href={`/tasks/${metadata.id}/submissions`}>
+              <a
+                className={`mt-2 md:ml-6 md:mt-0 leading-5 ${
+                  type === 'submissions' ? 'text-gray-700' : 'text-gray-400'
+                }`}
               >
                 Submissions
-              </ChakraLink>
+              </a>
             </Link>
-            <Link
-              href="/tasks/[...id]"
-              as={`/tasks/${metadata.id}/solution`}
-              passHref
-            >
-              <ChakraLink
-                mt={[2, 0]}
-                ml={[0, 6]}
-                lineHeight="18px"
-                color={type === 'solution' ? 'gray.800' : 'gray.500'}
+            <Link href={`/tasks/${metadata.id}/solution`}>
+              <a
+                className={`mt-2 md:ml-6 md:mt-0 leading-5 ${
+                  type === 'solution' ? 'text-gray-700' : 'text-gray-400'
+                }`}
               >
                 Solution
-              </ChakraLink>
+              </a>
             </Link>
-          </Flex>
-        </Flex>
-      </Flex>
-      <Flex
-        mb={8}
-        w={[
-          '100%',
-          type === 'solution' ? 800 : type === 'submissions' ? 1000 : 1200,
-        ]}
-        direction="column"
-        flexGrow={1}
-        mx="auto"
+          </div>
+        </div>
+      </div>
+      <div
+        className={`flex mb-8 w-full ${
+          type === 'solution'
+            ? 'md:max-w-4xl'
+            : type === 'submissions'
+            ? 'md:max-w-5xl'
+            : 'md:max-w-6xl'
+        } flex-col flex-grow mx-auto`}
       >
         {children}
-      </Flex>
+      </div>
     </PageLayout>
   )
 }

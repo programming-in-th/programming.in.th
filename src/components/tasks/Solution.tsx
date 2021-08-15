@@ -6,9 +6,11 @@ import { Box, Heading, Flex } from '@chakra-ui/core'
 export const Solution = ({ solution }) => {
   if (!solution) {
     return (
-      <Flex align="center" justify="center" flexGrow={1}>
-        <Heading>Solution does not exist!</Heading>
-      </Flex>
+      <div className="flex items-center justify-center flex-grow">
+        <p className="text-6xl font-extrabold text-center p-8">
+          Solution does not exist!
+        </p>
+      </div>
     )
   }
 
@@ -22,12 +24,12 @@ export const Solution = ({ solution }) => {
           crossOrigin="anonymous"
         />
       </Head>
-      <Box p={[6, 0]} mt={[0, 4]} mx={[0, 'auto']} w={['100%', 800]}>
+      <div className="p-6 md:p-0 md:mt-4 md:mx-auto w-full max-w-4xl">
         <div
           className="prose lg:prose-lg xl:prose-xl"
           dangerouslySetInnerHTML={{ __html: solution }}
-        ></div>
-      </Box>
+        />
+      </div>
     </React.Fragment>
   )
 }
