@@ -54,7 +54,7 @@ export const Nav = () => {
             </div>
             <div className="hidden space-x-8 md:flex md:ml-10">
               {navigation.map((item) => (
-                <Link href={item.href}>
+                <Link href={item.href} key={item.name}>
                   <a
                     key={item.name}
                     className={`text-base font-medium hover:text-gray-600 ${
@@ -143,7 +143,7 @@ export const Nav = () => {
             <div className="pt-5 pb-6">
               <div className="px-2 space-y-1">
                 {navigation.map((item) => (
-                  <Link href={item.href}>
+                  <Link href={item.href} key={item.name}>
                     <a
                       key={item.name}
                       className={`block px-3 py-2 rounded-md text-base font-sm ${

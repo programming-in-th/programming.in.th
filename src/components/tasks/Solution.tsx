@@ -1,8 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
 
-import { Box, Heading, Flex } from '@chakra-ui/core'
-
 export const Solution = ({ solution }) => {
   if (!solution) {
     return (

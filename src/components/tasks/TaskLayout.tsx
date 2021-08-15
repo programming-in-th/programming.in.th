@@ -2,8 +2,6 @@ import React from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { Flex, Link as ChakraLink, Heading } from '@chakra-ui/core'
-
 import { PageLayout } from 'components/Layout'
 
 import { Loading } from 'components/Loading'

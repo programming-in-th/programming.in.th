@@ -31,7 +31,7 @@ export const Normal = ({ metadata }) => {
           multiple={false}
         />
         {codeFile[0] ? (
-          <p className="ml-4 text-sm">{codeFile[0]?.name}</p>
+          <p className="ml-4 text-sm">{codeFile[0].name}</p>
         ) : (
           <p className="ml-4 text-sm">No file chosen</p>
         )}

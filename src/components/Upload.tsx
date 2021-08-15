@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react'
 import { useDropzone, DropEvent, FileRejection } from 'react-dropzone'
-import { Button } from '@chakra-ui/core'
-
 interface IUploadCode {
   index: number
   codeFile: File[]
