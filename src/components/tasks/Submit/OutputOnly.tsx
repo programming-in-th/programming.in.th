@@ -1,5 +1,4 @@
 import React from 'react'
-import { Flex, Button, Text, Box, Heading } from '@chakra-ui/core'
 
 import { useUser } from '../../UserContext'
 
