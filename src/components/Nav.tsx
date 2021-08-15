@@ -2,6 +2,9 @@ import React, { Fragment, useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Popover, Transition } from '@headlessui/react'
+import { useUser } from 'components/UserContext'
+
+import firebase from 'lib/firebase'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -17,11 +20,13 @@ export const Nav = () => {
     return router.pathname.split('/')[1]
   }, [router])
 
+  const { user, userDispatch } = useUser()
+
   return (
     <Popover as="header" className="relative">
       <div className="bg-white py-3">
         <nav
-          className="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6"
+          className="relative max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-14"
           aria-label="Global"
         >
           <div className="flex items-center flex-1">
@@ -64,13 +69,36 @@ export const Nav = () => {
               ))}
             </div>
           </div>
-          <div className="hidden md:flex md:items-center md:space-x-6">
-            <Link href="/login">
-              <a className="inline-flex items-center px-4 py-2 border border-transparent text-base font-medium rounded-md text-gray-100 from-gray-600 to-gray-700 bg-gradient-to-b hover:from-gray-800">
-                Login
-              </a>
-            </Link>
-          </div>
+          {user.user ? (
+            <div className="py-1 hidden md:block">
+              <img
+                className="inline-block h-8 w-8 rounded-full"
+                src={
+                  user.user.photoURL === ''
+                    ? '/assets/img/default-user.png'
+                    : `${user.user.photoURL}`
+                }
+                onClick={() => {
+                  firebase
+                    .auth()
+                    .signOut()
+                    .then(() => {
+                      userDispatch({
+                        type: 'LOADING_START',
+                      })
+                    })
+                }}
+              />
+            </div>
+          ) : (
+            <div className="hidden md:flex md:items-center md:space-x-6">
+              <Link href="/login">
+                <a className="inline-flex items-center px-4 py-2 text-base font-medium rounded-md text-white bg-gray-600 hover:bg-gray-700">
+                  Login
+                </a>
+              </Link>
+            </div>
+          )}
         </nav>
       </div>
 
@@ -115,22 +143,23 @@ export const Nav = () => {
             <div className="pt-5 pb-6">
               <div className="px-2 space-y-1">
                 {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className={`block px-3 py-2 rounded-md text-base font-sm ${
-                      `/${location}` == item.href
-                        ? 'text-gray-700 bg-gray-200'
-                        : 'text-gray-400'
-                    }`}
-                  >
-                    {item.name}
-                  </a>
+                  <Link href={item.href}>
+                    <a
+                      key={item.name}
+                      className={`block px-3 py-2 rounded-md text-base font-sm ${
+                        `/${location}` == item.href
+                          ? 'text-gray-700 bg-gray-200'
+                          : 'text-gray-400'
+                      }`}
+                    >
+                      {item.name}
+                    </a>
+                  </Link>
                 ))}
               </div>
               <div className="mt-6 px-5">
                 <Link href="/login">
-                  <a className="block text-center w-full py-3 px-4 rounded-md shadow text-gray-100 font-medium from-gray-600 to-gray-700 bg-gradient-to-b hover:from-gray-800">
+                  <a className="block text-center w-full py-3 px-4 rounded-md shadow text-white font-medium bg-gray-600 hover:bg-gray-700">
                     Login
                   </a>
                 </Link>

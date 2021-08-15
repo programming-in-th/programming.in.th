@@ -43,8 +43,8 @@ export const Statement = ({ metadata }) => {
   return (
     <div className="flex flex-col md:flex-row h-full flex-grow">
       <div
-        className={`flex mt-4 mx-6 md:mx-0 flex-col ${
-          user.user ? 'w-3/5' : 'w-full'
+        className={`flex mt-4 px-6 md:px-0 flex-col w-full ${
+          user.user ? 'md:w-2/3' : ''
         }`}
       >
         <div className="h-full">
@@ -67,7 +67,7 @@ export const Statement = ({ metadata }) => {
         </div>
       </div>
       {user.user && (
-        <div className="flex mt-4 mx-4 md:mx-0 flex-col md:pl-10 w-2/5">
+        <div className="flex mt-4 px-4 md:px-0 flex-col md:pl-10 w-full md:w-1/3">
           <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">

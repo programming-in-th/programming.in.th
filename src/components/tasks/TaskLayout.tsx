@@ -42,7 +42,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
       >
         <div className="flex flex-col">
           <div className="flex items-baseline mx-6 md:mx-0">
-            <p className="font-medium text-xl md:text-3xl">{metadata.title}</p>
+            <p className="font-medium text-2xl md:text-3xl">{metadata.title}</p>
           </div>
           <div className="flex justify-around md:justify-start mx-6 md:mx-0 md:mt-2">
             <Link href={`/tasks/${metadata.id}`}>
