@@ -24,7 +24,7 @@ export const Comm = ({ metadata }) => {
       <p className="font-semibold text-xl">Submit</p>
       <div className="flex flex-col">
         {metadata.fileName.map((name, i) => (
-          <div className="mt-4">
+          <div className="mt-4" key={name}>
             <p>File: {name}</p>
             <div className="flex align-baseline items-center mt-1">
               <UploadCode

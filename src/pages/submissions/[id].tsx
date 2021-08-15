@@ -10,8 +10,6 @@ import { PageLayout } from 'components/Layout'
 import { Code } from 'components/Code'
 import { Loading } from 'components/Loading'
 
-import { useUser } from 'components/UserContext'
-
 import firebase from 'lib/firebase'
 
 import { fetchFromFirebase } from 'utils/fetcher'
@@ -59,8 +57,6 @@ const SubmissionDetail: NextPage = () => {
     return { ...rawSubmission, groups }
   }, [rawSubmission])
 
-  const { user } = useUser()
-
   useEffect(() => {
     const unsubscribe = firebase
       .firestore()
@@ -88,10 +84,6 @@ const SubmissionDetail: NextPage = () => {
         </div>
       </PageLayout>
     )
-  }
-
-  const rejudgeSubmission = async () => {
-    await fetchFromFirebase('rejudgeSubmission', { submissionID: id })
   }
 
   if (!submission || !submission.task || !submission.status) {
@@ -126,6 +118,7 @@ const SubmissionDetail: NextPage = () => {
             <div className="flex flex-col mt-4">
               {submission.task.fileName.map((name, index) => (
                 <button
+                  key={index}
                   type="button"
                   className={`${
                     index > 0 ? 'ml-4' : ''
@@ -144,7 +137,7 @@ const SubmissionDetail: NextPage = () => {
           {submission.groups && (
             <React.Fragment>
               {submission.groups.map((group: IGroup, index: number) => (
-                <div className="shadow-sm">
+                <div className="shadow-sm" key={index}>
                   <Disclosure>
                     {({ open }) => (
                       <React.Fragment>
