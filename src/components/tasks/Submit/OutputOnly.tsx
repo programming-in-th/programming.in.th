@@ -1,14 +1,10 @@
 import React from 'react'
 
-import { useUser } from '../../UserContext'
-
 import { UploadCode } from '../../Upload'
 import { useStatus } from './useStatus'
 import { useSubmit } from './useSubmit'
 
 export const OutputOnly = ({ metadata }) => {
-  const { user } = useUser()
-
   const {
     submit,
     codeFile,
