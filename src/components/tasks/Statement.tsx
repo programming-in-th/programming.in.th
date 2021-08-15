@@ -41,7 +41,7 @@ export const Statement = ({ metadata }) => {
   }
 
   return (
-    <div className="flex flex-col md:flex-row h-full flex-grow">
+    <div className="flex flex-col flex-grow h-full md:flex-row">
       <div
         className={`flex mt-4 px-6 md:px-0 flex-col w-full ${
           user.user ? 'md:w-2/3' : ''
@@ -67,20 +67,20 @@ export const Statement = ({ metadata }) => {
         </div>
       </div>
       {user.user && (
-        <div className="flex mt-4 px-4 md:px-0 flex-col md:pl-10 w-full md:w-1/3">
-          <div className="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+        <div className="flex flex-col w-full px-4 mt-4 md:px-0 md:pl-10 md:w-1/3">
+          <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                   >
                     SUBMISSION TIME
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
                   >
                     POINTS
                   </th>
@@ -91,7 +91,7 @@ export const Statement = ({ metadata }) => {
                   isArrayEmpty(submissions.data) ? (
                     <tr>
                       <td
-                        className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900 text-center"
+                        className="px-6 py-4 text-sm font-medium text-center text-gray-900 whitespace-nowrap"
                         colSpan={2}
                       >
                         No recent submission
@@ -102,25 +102,25 @@ export const Statement = ({ metadata }) => {
                       return isObjectEmpty(submission) ? (
                         <tr key="empty">
                           <td
-                            className="px-6 py-3 whitespace-nowrap text-sm font-medium text-gray-900 text-center"
+                            className="px-6 py-3 text-sm font-medium text-center text-gray-900 whitespace-nowrap"
                             colSpan={2}
                           >
-                            Hided submission
+                            Hidden Submission
                           </td>
                         </tr>
                       ) : (
                         <tr
-                          className="cursor-pointer transition duration-150 hover:bg-gray-200"
+                          className="transition duration-150 cursor-pointer hover:bg-gray-200"
                           key={submission.submissionID}
                         >
-                          <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
+                          <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
                             <Link
                               href={`/submissions/${submission.submissionID}`}
                             >
                               <a>{getTimestamp(submission.timestamp)}</a>
                             </Link>
                           </td>
-                          <td className="px-6 py-3 whitespace-nowrap text-sm text-gray-700">
+                          <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
                             <Link
                               href={`/submissions/${submission.submissionID}`}
                             >
@@ -134,7 +134,7 @@ export const Statement = ({ metadata }) => {
                 ) : (
                   <tr>
                     <td
-                      className="px-6 py-3 whitespace-nowrap text-sm font-medium text-gray-900 text-center"
+                      className="px-6 py-3 text-sm font-medium text-center text-gray-900 whitespace-nowrap"
                       colSpan={2}
                     >
                       Loading...
