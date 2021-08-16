@@ -92,8 +92,8 @@ const SubmissionDetail: NextPage = () => {
 
   return (
     <PageLayout>
-      <div className="flex align-top justify-center width-full sm:px-4 md:px-8 md:pb-8">
-        <div className="flex flex-col p-4 md:p-8 w-full max-w-5xl md:shadow-lg overflow-hidden md:border-b border-gray-200 md:rounded-lg">
+      <div className="flex align-top justify-center width-full sm:px-4 md:p-8">
+        <div className="flex flex-col p-4 w-full max-w-5xl md:shadow-lg overflow-hidden md:border-b border-gray-200 md:rounded-lg">
           <div className="flex flex-col">
             <div className="flex align-center justify-between">
               <p className="font-semibold text-2xl">
@@ -176,7 +176,7 @@ const SubmissionDetail: NextPage = () => {
                         leaveTo="transform scale-95 opacity-0"
                       >
                         <Disclosure.Panel>
-                          <div className="border border-gray-100 rounded-lg shadow-md my-2 overflow-x-scroll">
+                          <div className="border border-gray-100 rounded-lg shadow-md my-2 overflow-auto">
                             <table className="min-w-full divide-y divide-gray-200">
                               <thead className="bg-gray-50">
                                 <tr>
