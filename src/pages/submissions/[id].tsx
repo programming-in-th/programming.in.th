@@ -78,7 +78,7 @@ const SubmissionDetail: NextPage = () => {
     return (
       <PageLayout>
         <div className="flex items-center justify-center flex-grow">
-          <p className="align-center text-6xl font-bold text-center">
+          <p className="text-6xl font-bold text-center align-center">
             Submission doesn't exist
           </p>
         </div>
@@ -92,16 +92,15 @@ const SubmissionDetail: NextPage = () => {
 
   return (
     <PageLayout>
-      <div className="flex align-top justify-center width-full sm:px-4 md:p-8">
-        <div className="flex flex-col p-4 w-full max-w-5xl md:shadow-lg overflow-hidden md:border-b border-gray-200 md:rounded-lg">
+      <div className="flex justify-center align-top width-full sm:px-4 md:p-8">
+        <div className="flex flex-col w-full max-w-5xl p-4 overflow-hidden border-gray-200 md:shadow-lg md:border-b md:rounded-lg">
           <div className="flex flex-col">
-            <div className="flex align-center justify-between">
-              <p className="font-semibold text-2xl">
-                [
+            <div className="flex justify-between align-center">
+              <p className="text-2xl font-semibold">
                 <Link href={`/tasks/${submission.task.id}`}>
-                  <a className="hover:text-gray-500">{submission.task.id}</a>
+                  <a className="hover:text-gray-500">[{submission.task.id}]</a>
                 </Link>
-                ] {submission.task.title}
+                {submission.task.title}
               </p>
             </div>
             <div className="mt-2">
@@ -176,7 +175,7 @@ const SubmissionDetail: NextPage = () => {
                         leaveTo="transform scale-95 opacity-0"
                       >
                         <Disclosure.Panel>
-                          <div className="border border-gray-100 rounded-lg shadow-md my-2 overflow-auto">
+                          <div className="my-2 overflow-auto border border-gray-100 rounded-lg">
                             <table className="min-w-full divide-y divide-gray-200">
                               <thead className="bg-gray-50">
                                 <tr>
