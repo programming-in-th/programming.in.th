@@ -92,17 +92,18 @@ const SubmissionDetail: NextPage = () => {
 
   return (
     <PageLayout>
-      <div className="flex align-top justify-center width-full p-4 md:p-8">
-        <div className="flex flex-col p-4 w-full max-w-5xl shadow-lg overflow-hidden border-b border-gray-200 sm:rounded-lg">
+      <div className="flex align-top justify-center width-full sm:px-4 md:px-8 md:pb-8">
+        <div className="flex flex-col p-4 md:p-8 w-full max-w-5xl md:shadow-lg overflow-hidden md:border-b border-gray-200 md:rounded-lg">
           <div className="flex flex-col">
             <div className="flex align-center justify-between">
               <p className="font-semibold text-2xl">
-                [{submission.task.id}] {submission.task.title}
+                [
+                <Link href={`/tasks/${submission.task.id}`}>
+                  <a className="hover:text-gray-500">{submission.task.id}</a>
+                </Link>
+                ] {submission.task.title}
               </p>
             </div>
-            <Link href={`/tasks/${submission.task.id}`}>
-              <a className="text-gray-500">Statement</a>
-            </Link>
             <div className="mt-2">
               <p className="font-medium">Status: {submission.status}</p>
               <p>
@@ -137,106 +138,100 @@ const SubmissionDetail: NextPage = () => {
           {submission.groups && (
             <React.Fragment>
               {submission.groups.map((group: IGroup, index: number) => (
-                <div className="shadow-sm" key={index}>
-                  <Disclosure>
-                    {({ open }) => (
-                      <React.Fragment>
-                        <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left">
-                          <span>
-                            Subtask #{index + 1} [{group.score}/
-                            {group.fullScore}]
-                          </span>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            className={`${
-                              open ? 'transform rotate-180' : ''
-                            } transition duration-300 h-6 w-6`}
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                          >
-                            <path
-                              strokeLinecap="round"
-                              strokeLinejoin="round"
-                              strokeWidth={2}
-                              d="M19 9l-7 7-7-7"
-                            />
-                          </svg>
-                        </Disclosure.Button>
-                        <Transition
-                          enter="transition duration-100 ease-out"
-                          enterFrom="transform scale-95 opacity-0"
-                          enterTo="transform scale-100 opacity-100"
-                          leave="transition duration-75 ease-out"
-                          leaveFrom="transform scale-100 opacity-100"
-                          leaveTo="transform scale-95 opacity-0"
+                <Disclosure>
+                  {({ open }) => (
+                    <div
+                      className={`${
+                        open && false ? '' : 'border-b'
+                      } border-gray-200 py-2`}
+                      key={index}
+                    >
+                      <Disclosure.Button className="flex justify-between w-full px-6 text-sm font-medium text-left">
+                        <p className="font-normal">
+                          Subtask #{index + 1} [{group.score}/{group.fullScore}]
+                        </p>
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          className={`${
+                            open ? 'transform rotate-180' : ''
+                          } transition duration-300 h-6 w-6`}
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke="currentColor"
                         >
-                          <Disclosure.Panel>
-                            <div className="rounded-lg">
-                              <table className="min-w-full divide-y divide-gray-200">
-                                <thead className="bg-gray-50">
-                                  <tr>
-                                    <th
-                                      scope="col"
-                                      className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
-                                    >
-                                      #
-                                    </th>
-                                    <th
-                                      scope="col"
-                                      className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
-                                    >
-                                      Verdict
-                                    </th>
-                                    <th
-                                      scope="col"
-                                      className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
-                                    >
-                                      Time
-                                    </th>
-                                    <th
-                                      scope="col"
-                                      className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
-                                    >
-                                      Memory
-                                    </th>
-                                    <th
-                                      scope="col"
-                                      className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
-                                    >
-                                      Message
-                                    </th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {group.status.map((status: IStatus) => (
-                                    <tr key={index}>
-                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
-                                        {status.index}
-                                      </td>
-                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
-                                        {status.verdict}
-                                      </td>
-                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
-                                        {status.time}
-                                      </td>
-                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
-                                        {status.memory}
-                                      </td>
-                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
-                                        {status.message}
-                                      </td>
-                                    </tr>
-                                  ))}
-                                </tbody>
-                              </table>
-                            </div>
-                          </Disclosure.Panel>
-                        </Transition>
-                      </React.Fragment>
-                    )}
-                  </Disclosure>
-                </div>
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={2}
+                            d="M19 9l-7 7-7-7"
+                          />
+                        </svg>
+                      </Disclosure.Button>
+
+                      <Disclosure.Panel>
+                        <div className="border border-gray-100 rounded-lg shadow-md my-2 overflow-x-scroll">
+                          <table className="min-w-full divide-y divide-gray-200">
+                            <thead className="bg-gray-50">
+                              <tr>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                                >
+                                  #
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                                >
+                                  Verdict
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                                >
+                                  Time
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                                >
+                                  Memory
+                                </th>
+                                <th
+                                  scope="col"
+                                  className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                                >
+                                  Message
+                                </th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {group.status.map((status: IStatus) => (
+                                <tr key={index}>
+                                  <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                    {status.index}
+                                  </td>
+                                  <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                    {status.verdict}
+                                  </td>
+                                  <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                    {status.time}
+                                  </td>
+                                  <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                    {status.memory}
+                                  </td>
+                                  <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                    {status.message}
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </Disclosure.Panel>
+                    </div>
+                  )}
+                </Disclosure>
               ))}
             </React.Fragment>
           )}

@@ -45,7 +45,7 @@ export const Comm = ({ metadata }) => {
       </div>
       <div className="flex mt-4">
         <select
-          className="mt-1 block w-full pl-3 pr-10 text-base border-gray-300 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm rounded-md"
+          className="block w-full pl-3 pr-10 text-base border border-gray-300 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm rounded-md"
           defaultValue={config.languageData[0][0]}
           onChange={(event: React.ChangeEvent<HTMLSelectElement>) =>
             setLanguage(event.target.value)
