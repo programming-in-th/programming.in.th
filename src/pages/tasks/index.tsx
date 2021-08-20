@@ -1,64 +1,52 @@
 import React from 'react'
-import { GetStaticProps } from 'next'
-import { Flex } from '@chakra-ui/core'
+import {
+  InstantSearch,
+  connectSearchBox,
+  connectHits,
+  PoweredBy,
+} from 'react-instantsearch-dom'
+import algoliasearch from 'algoliasearch/lite'
 
 import { PageLayout } from 'components/Layout'
-import db from 'lib/firebase-admin'
-import { TaskTable } from 'components/tasks/NewTable'
+import { CustomSearch, ProblemHits } from 'components/tasks/Search'
+import Head from 'next/head'
 
-const Tasks = ({ data }) => {
-  const columns = React.useMemo(
-    () => [
-      {
-        Header: 'PROBLEM ID',
-        accessor: 'id',
-      },
-      {
-        Header: 'PROBLEM TITLE',
-        accessor: 'title',
-      },
-    ],
-    []
-  )
+const CustomSearchBox = connectSearchBox(CustomSearch)
+const CustomHits = connectHits(ProblemHits)
 
+const indexName = 'TASKS'
+
+const searchClient = algoliasearch(
+  'XKEMCTNXIE',
+  'b9982af508b3c515987aa1249bed4617'
+)
+
+export default function Search() {
   return (
-    <PageLayout>
-      <Flex justify="center" flexGrow={1} py={4} px={4}>
-        <TaskTable result={data} columns={columns} />
-      </Flex>
-    </PageLayout>
+    <>
+      <Head>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.4.5/themes/satellite-min.css"
+          integrity="sha256-TehzF/2QvNKhGQrrNpoOb2Ck4iGZ1J/DI4pkd2oUsBc="
+          crossOrigin="anonymous"
+        />
+      </Head>
+      <PageLayout>
+        <div className="flex justify-center w-full min-h-screen mx-auto">
+          <InstantSearch searchClient={searchClient} indexName={indexName}>
+            <div className="flex flex-col w-1/2 my-10">
+              <div className="mx-auto">
+                <CustomSearchBox />
+                <div className="mx-auto mt-4 text-center">
+                  <PoweredBy />
+                </div>
+              </div>
+              <CustomHits />
+            </div>
+          </InstantSearch>
+        </div>
+      </PageLayout>
+    </>
   )
 }
-
-export const getStaticProps: GetStaticProps = async () => {
-  const manifestRef = db().doc('tasks/$manifest')
-
-  const manifest = (await manifestRef.get()).data()
-
-  let data = []
-
-  if (manifest.newTask === true) {
-    const taskDocs = await db()
-      .collection('tasks')
-      .where('visible', '==', true)
-      .get()
-
-    for (const doc of taskDocs.docs) {
-      const docData = doc.data()
-      docData.id = doc.id
-      data.push(docData)
-    }
-    await manifestRef.update({ newTask: false, data })
-  } else {
-    data = manifest.data
-  }
-
-  return {
-    props: {
-      data,
-    },
-    revalidate: manifest.revalidate,
-  }
-}
-
-export default Tasks
