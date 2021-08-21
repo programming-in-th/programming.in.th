@@ -74,15 +74,15 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
     return (
       <React.Fragment>
         <div className="mt-4">
-          <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
+          <div className="overflow-auto border-b border-gray-200 shadow sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
                   {submissionCiteria.map((value) => (
                     <th
                       scope="col"
-                      className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
-                      key={value}
+                      className="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                      key={`submission-head-${value}`}
                     >
                       {value}
                     </th>
@@ -100,11 +100,11 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
                         (submission: ISubmissionList) => (
                           <tr
                             className="transition duration-150 cursor-pointer hover:bg-gray-200"
-                            key={submission.submissionID}
+                            key={`submission-body-${submission.submissionID}`}
                           >
                             {isObjectEmpty(submission) ? (
                               <td
-                                className="px-6 py-3 text-sm text-center text-gray-700 whitespace-nowrap"
+                                className="px-3 py-3 text-sm text-center text-gray-700 whitespace-nowrap"
                                 colSpan={7}
                               >
                                 Hidden Submission
@@ -113,13 +113,13 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
                               <React.Fragment>
                                 {submissionToStr(submission).map((data) => (
                                   <td
-                                    key={`${submission.submissionID}-${data}`}
+                                    key={`submission-data-${submission.submissionID}-${data}`}
                                   >
                                     <Link
                                       href={`/submissions/${submission.submissionID}`}
                                     >
                                       <a>
-                                        <div className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                        <div className="px-3 py-3 text-sm text-gray-700 whitespace-nowrap">
                                           {data}
                                         </div>
                                       </a>
@@ -139,9 +139,9 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
         </div>
         <button
           type="button"
-          className={`font-semibold mt-4 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-md rounded-md ${
+          className={`transition duration-150 font-semibold mt-4 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-md rounded-md ${
             isLoadingMore || isReachingEnd
-              ? 'text-gray-500 bg-gray-50 hover:bg-gray-100'
+              ? 'text-gray-500 bg-gray-50 hover:bg-gray-100 cursor-not-allowed'
               : 'text-gray-700 bg-gray-100 hover:bg-gray-200'
           }`}
           onClick={() => {
@@ -153,7 +153,7 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
         >
           {isLoadingMore ? (
             <svg
-              className="animate-spin h-6 w-6 text-gray-800"
+              className="animate-spin h-6 w-6 p-1 text-gray-800"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"

@@ -45,7 +45,10 @@ export const Normal = ({ metadata }) => {
           }
         >
           {config.languageData.map((data: string[]) => (
-            <option key={data[0]} value={data[0]}>
+            <option
+              key={`submit-lang-${metadata.id}-${data[0]}`}
+              value={data[0]}
+            >
               {data[1]}
             </option>
           ))}

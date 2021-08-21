@@ -51,22 +51,22 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: [],
     fallback: true,
   }
-  const taskDocs = await db()
-    .collection('tasks')
-    .where('visible', '==', true)
-    .get()
+  // const taskDocs = await db()
+  //   .collection('tasks')
+  //   .where('visible', '==', true)
+  //   .get()
 
-  const result: string[][] = []
+  // const result: string[][] = []
 
-  for (const doc of taskDocs.docs) {
-    result.push([doc.id])
-  }
-  return {
-    paths: result.map((id: string[]) => {
-      return { params: { id } }
-    }),
-    fallback: true,
-  }
+  // for (const doc of taskDocs.docs) {
+  //   result.push([doc.id])
+  // }
+  // return {
+  //   paths: result.map((id: string[]) => {
+  //     return { params: { id } }
+  //   }),
+  //   fallback: true,
+  // }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {

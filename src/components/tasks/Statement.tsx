@@ -98,10 +98,10 @@ export const Statement = ({ metadata }) => {
                       </td>
                     </tr>
                   ) : (
-                    submissions.data.map((submission: ISubmissionList) => {
+                    submissions.data.map((submission: ISubmissionList, idx) => {
                       return isObjectEmpty(submission) ? (
                         <tr
-                          key="empty"
+                          key={`statement-submission-${metadata.id}-${idx}`}
                           className="transition duration-150 cursor-pointer hover:bg-gray-200"
                         >
                           <td
@@ -114,7 +114,7 @@ export const Statement = ({ metadata }) => {
                       ) : (
                         <tr
                           className="transition duration-150 cursor-pointer hover:bg-gray-200"
-                          key={submission.submissionID}
+                          key={`statement-submission-${metadata.id}-${idx}`}
                         >
                           <td>
                             <Link

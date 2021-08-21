@@ -48,7 +48,7 @@ export const ProblemHits = ({ hits }) => {
   return (
     <div className="h-full my-10">
       {hits.map((hit) => (
-        <ProblemHit hit={hit} key={hit.objectID} />
+        <ProblemHit hit={hit} key={`problemhit-${hit.objectID}`} />
       ))}
     </div>
   )

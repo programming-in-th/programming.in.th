@@ -23,7 +23,7 @@ export const OutputOnly = ({ metadata }) => {
       <div className="flex flex-col">
         <div>
           {metadata.fileName.map((name, i) => (
-            <div className="mt-4" key={name}>
+            <div className="mt-4" key={`submit-${metadata.id}-${name}`}>
               <p>File: {name}</p>
 
               <div className="flex align-baseline items-center mt-1">

@@ -118,7 +118,7 @@ const SubmissionDetail: NextPage = () => {
             <div className="flex flex-col mt-4">
               {submission.task.fileName.map((name, index) => (
                 <button
-                  key={index}
+                  key={`submission-filename-${id}-${index}`}
                   type="button"
                   className={`${
                     index > 0 ? 'ml-4' : ''
@@ -137,13 +137,13 @@ const SubmissionDetail: NextPage = () => {
           {submission.groups && (
             <React.Fragment>
               {submission.groups.map((group: IGroup, index: number) => (
-                <Disclosure key={index}>
+                <Disclosure key={`submission-disclosure-${id}-${index}`}>
                   {({ open }) => (
                     <div
                       className={`${
                         open && false ? '' : 'border-b'
                       } border-gray-200 py-2`}
-                      key={index}
+                      key={`submission-disclosure-detail-${id}-${index}`}
                     >
                       <Disclosure.Button className="flex justify-between w-full px-6 text-sm font-medium text-left">
                         <p className="font-normal">
@@ -212,25 +212,29 @@ const SubmissionDetail: NextPage = () => {
                                 </tr>
                               </thead>
                               <tbody>
-                                {group.status.map((status: IStatus) => (
-                                  <tr key={index}>
-                                    <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
-                                      {status.index}
-                                    </td>
-                                    <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
-                                      {status.verdict}
-                                    </td>
-                                    <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
-                                      {status.time}
-                                    </td>
-                                    <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
-                                      {status.memory}
-                                    </td>
-                                    <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
-                                      {status.message}
-                                    </td>
-                                  </tr>
-                                ))}
+                                {group.status.map(
+                                  (status: IStatus, groupIdx) => (
+                                    <tr
+                                      key={`submission-table-${id}-${index}-${groupIdx}`}
+                                    >
+                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                        {status.index}
+                                      </td>
+                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                        {status.verdict}
+                                      </td>
+                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                        {status.time}
+                                      </td>
+                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                        {status.memory}
+                                      </td>
+                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                        {status.message}
+                                      </td>
+                                    </tr>
+                                  )
+                                )}
                               </tbody>
                             </table>
                           </div>
