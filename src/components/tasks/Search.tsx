@@ -35,7 +35,7 @@ const ProblemHit = ({ hit }) => {
 
   return (
     <div className="w-full px-4 py-5 bg-white border-b border-gray-200 sm:px-6">
-      <Link href={`/tasks/${hit?.objectID}`}>
+      <Link href={`/tasks/${hit.objectID}`}>
         <a>
           [{hit.objectID}] <Highlight hit={hit} attribute="title" />
         </a>

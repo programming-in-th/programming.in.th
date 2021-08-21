@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useSWRInfinite } from 'swr'
-import { Box, Flex, Button, Input } from '@chakra-ui/core'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
@@ -113,7 +112,9 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
                             ) : (
                               <React.Fragment>
                                 {submissionToStr(submission).map((data) => (
-                                  <td>
+                                  <td
+                                    key={`${submission.submissionID}-${data}`}
+                                  >
                                     <Link
                                       href={`/submissions/${submission.submissionID}`}
                                     >
