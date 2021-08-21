@@ -100,9 +100,12 @@ export const Statement = ({ metadata }) => {
                   ) : (
                     submissions.data.map((submission: ISubmissionList) => {
                       return isObjectEmpty(submission) ? (
-                        <tr key="empty">
+                        <tr
+                          key="empty"
+                          className="transition duration-150 cursor-pointer hover:bg-gray-200"
+                        >
                           <td
-                            className="px-6 py-3 text-sm font-medium text-center text-gray-900 whitespace-nowrap"
+                            className="px-6 py-3 text-sm text-center text-gray-700 whitespace-nowrap"
                             colSpan={2}
                           >
                             Hidden Submission
@@ -113,18 +116,26 @@ export const Statement = ({ metadata }) => {
                           className="transition duration-150 cursor-pointer hover:bg-gray-200"
                           key={submission.submissionID}
                         >
-                          <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                          <td>
                             <Link
                               href={`/submissions/${submission.submissionID}`}
                             >
-                              <a>{getTimestamp(submission.timestamp)}</a>
+                              <a>
+                                <div className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                  {getTimestamp(submission.timestamp)}
+                                </div>
+                              </a>
                             </Link>
                           </td>
-                          <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                          <td>
                             <Link
                               href={`/submissions/${submission.submissionID}`}
                             >
-                              <a>{submission.score}</a>
+                              <a>
+                                <div className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                  {submission.score}
+                                </div>
+                              </a>
                             </Link>
                           </td>
                         </tr>
