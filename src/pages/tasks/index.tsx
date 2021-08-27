@@ -4,6 +4,7 @@ import {
   connectSearchBox,
   connectHits,
   PoweredBy,
+  HierarchicalMenu,
 } from 'react-instantsearch-dom'
 import algoliasearch from 'algoliasearch/lite'
 
@@ -42,6 +43,13 @@ export default function Search() {
                   <PoweredBy />
                 </div>
               </div>
+              <HierarchicalMenu
+                attributes={[
+                  'categories.lvl0',
+                  'categories.lvl1',
+                  'categories.lvl2',
+                ]}
+              />
               <CustomHits />
             </div>
           </InstantSearch>
