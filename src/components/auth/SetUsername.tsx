@@ -11,12 +11,10 @@ import {
   InputLeftElement,
   Input,
 } from '@chakra-ui/core'
-import { mutate } from 'swr'
 import { FaUser } from 'react-icons/fa'
 import { Formik, Field } from 'formik'
 import * as Yup from 'yup'
 import firebase from 'lib/firebase'
-import { Data } from 'components/UserContext'
 
 const SetUsernameSchema = Yup.object().shape({
   username: Yup.string().required('Please Enter Your Username'),
@@ -50,9 +48,7 @@ export const SetUsernameComponent = ({ setErrorMessage }) => {
               duration: 3000,
               isClosable: true,
             })
-            await mutate('getUserContext', async (user: Data) => {
-              return { ...user, username: values.username }
-            })
+
             Router.push('/')
           } else {
             setError('Please use another Username')
