@@ -9,19 +9,19 @@ import { Normal } from './Submit/Normal'
 import { Comm } from './Submit/Comm'
 import { OutputOnly } from './Submit/OutputOnly'
 
-import { useUser } from '../UserContext'
 import { ISubmissionList } from '../../@types/submission'
 
 import { isObjectEmpty, isArrayEmpty } from 'utils/isEmpty'
 import { getTimestamp } from 'utils/getTimestamp'
+import { useAuth } from 'lib/auth'
 
 export const Statement = ({ metadata }) => {
-  const { user } = useUser()
+  const { user, userData } = useAuth()
 
   const { data: submissions } = useSWR(
-    user.username !== ''
+    userData?.username !== ''
       ? `${config.baseURL}/getSubmissions?limit=5&username=${
-          user.username
+          userData?.username
         }&taskID=${metadata.id || ''}`
       : null,
     SWRfetch
@@ -44,7 +44,7 @@ export const Statement = ({ metadata }) => {
     <div className="flex flex-col flex-grow h-full md:flex-row">
       <div
         className={`flex mt-4 px-6 md:px-0 flex-col w-full ${
-          user.user ? 'md:w-2/3' : ''
+          user ? 'md:w-2/3' : ''
         }`}
       >
         <div className="h-full">
@@ -66,7 +66,7 @@ export const Statement = ({ metadata }) => {
           </object>
         </div>
       </div>
-      {user.user && (
+      {user && (
         <div className="flex flex-col w-full px-4 mt-4 md:px-0 md:pl-10 md:w-1/3">
           <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">

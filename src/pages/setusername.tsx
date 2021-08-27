@@ -3,19 +3,19 @@ import Router from 'next/router'
 import { Text, Flex, Box } from '@chakra-ui/core'
 import { PageLayout } from 'components/Layout'
 import { SetUsernameComponent } from 'components/auth/SetUsername'
-import { useUser } from 'components/UserContext'
+import { useAuth } from 'lib/auth'
 
 // @TODO Remove this file and use new onboarding logic
 const SetUsername = () => {
   const [error, setError] = useState<string>(' ')
-  const { user } = useUser()
+  const { user } = useAuth()
   useEffect(() => {
-    if (user.user === null) {
+    if (user === null) {
       Router.push('/')
     }
-  }, [user.user])
+  }, [user])
 
-  if (!user.user) {
+  if (!user) {
     return (
       <PageLayout>
         <React.Fragment></React.Fragment>

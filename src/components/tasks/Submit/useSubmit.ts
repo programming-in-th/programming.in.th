@@ -1,13 +1,13 @@
 import { useCallback, useState } from 'react'
-import { useUser } from '../../UserContext'
 import { submitCode } from './submitToFirebase'
 import { ITask } from '../../../@types/task'
 import { config } from 'config'
+import { useAuth } from 'lib/auth'
 
 export type status = 'WAIT' | 'LOADING' | 'OK' | 'ERROR'
 
 export const useSubmit = (metadata: ITask) => {
-  const { user } = useUser()
+  const { user } = useAuth()
 
   const [language, setLanguage] = useState<string>(config.languageData[0][0])
   const [codeFile, setCodeFile] = useState<File[]>([])
@@ -38,7 +38,7 @@ export const useSubmit = (metadata: ITask) => {
       metadata.id,
       codeValue,
       language,
-      user.user,
+      user,
       setStatus,
       setSubmissionID
     )

@@ -1,39 +1,17 @@
 import React, { useState, Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { PageLayout } from 'components/Layout'
-
-import firebase from 'lib/firebase'
-
-type authtype =
-  | typeof firebase.auth.GoogleAuthProvider
-  | typeof firebase.auth.FacebookAuthProvider
-  | typeof firebase.auth.GithubAuthProvider
-
-const loginWith = async (
-  setError: (msg: string) => void,
-  fprovider: authtype
-) => {
-  const provider = new fprovider()
-  try {
-    await firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL)
-    return firebase
-      .auth()
-      .signInWithPopup(provider)
-      .then(() => {})
-  } catch (error) {
-    setError(error.message)
-  }
-}
+import { useAuth } from 'lib/auth'
 
 const ErrorComp = ({ open, setOpen, errMsg }) => (
   <Transition.Root show={open} as={Fragment}>
     <Dialog
       as="div"
       auto-reopen="true"
-      className="fixed z-10 inset-0 overflow-y-auto"
+      className="fixed inset-0 z-10 overflow-y-auto"
       onClose={setOpen}
     >
-      <div className="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20 text-center sm:block sm:p-0">
         <Transition.Child
           as={Fragment}
           enter="ease-out duration-300"
@@ -43,7 +21,7 @@ const ErrorComp = ({ open, setOpen, errMsg }) => (
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <Dialog.Overlay className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
         </Transition.Child>
 
         {/* This element is to trick the browser into centering the modal contents. */}
@@ -62,12 +40,12 @@ const ErrorComp = ({ open, setOpen, errMsg }) => (
           leaveFrom="opacity-100 translate-y-0 sm:scale-100"
           leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
         >
-          <div className="inline-block align-bottom bg-white rounded-lg px-4 pt-5 pb-4 text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+          <div className="inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
             <div>
-              <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100">
+              <div className="flex items-center justify-center w-12 h-12 mx-auto bg-red-100 rounded-full">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  className="h-6 w-6 text-red-600"
+                  className="w-6 h-6 text-red-600"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -83,7 +61,7 @@ const ErrorComp = ({ open, setOpen, errMsg }) => (
               <div className="mt-3 text-center sm:mt-5">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg leading-6 font-medium text-gray-900"
+                  className="text-lg font-medium leading-6 text-gray-900"
                 >
                   Error
                 </Dialog.Title>
@@ -95,7 +73,7 @@ const ErrorComp = ({ open, setOpen, errMsg }) => (
             <div className="mt-5 sm:mt-6">
               <button
                 type="button"
-                className="inline-flex justify-center w-full rounded-md border border-transparent shadow-sm px-4 py-2 bg-gray-600 text-base font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-sm"
+                className="inline-flex justify-center w-full px-4 py-2 text-base font-medium text-white bg-gray-600 border border-transparent rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 sm:text-sm"
                 onClick={() => setOpen(false)}
               >
                 Close
@@ -114,6 +92,8 @@ const Login = () => {
   )
   const [open, setOpen] = useState<boolean>(false)
 
+  const { signinWithFacebook, signinWithGoogle, signinWithGitHub } = useAuth()
+
   const setError = (msg: string) => {
     setErrMsg(msg)
     setOpen(true)
@@ -122,17 +102,17 @@ const Login = () => {
   return (
     <PageLayout>
       <ErrorComp open={open} setOpen={setOpen} errMsg={errMsg} />
-      <div className="min-h-screen flex flex-col justify-center pb-32 sm:px-6 lg:px-8">
+      <div className="flex flex-col justify-center min-h-screen pb-32 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2
-            className="px-4 mt-6 text-center text-3xl font-extrabold text-gray-900"
+            className="px-4 mt-6 text-3xl font-extrabold text-center text-gray-900"
             onClick={() => setError(errMsg)}
           >
             Login to your account
           </h2>
         </div>
         <div className="px-4 mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+          <div className="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
             <form className="space-y-6" action="#" method="POST">
               <div>
                 <label
@@ -148,7 +128,7 @@ const Login = () => {
                     type="email"
                     autoComplete="email"
                     required
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                    className="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -167,7 +147,7 @@ const Login = () => {
                     type="password"
                     autoComplete="current-password"
                     required
-                    className="appearance-none block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+                    className="block w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md shadow-sm appearance-none focus:outline-none focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
                   />
                 </div>
               </div>
@@ -178,11 +158,11 @@ const Login = () => {
                     id="remember-me"
                     name="remember-me"
                     type="checkbox"
-                    className="h-4 w-4 text-gray-600 focus:ring-gray-500 border-gray-300 rounded"
+                    className="w-4 h-4 text-gray-600 border-gray-300 rounded focus:ring-gray-500"
                   />
                   <label
                     htmlFor="remember-me"
-                    className="ml-2 block text-sm text-gray-900"
+                    className="block ml-2 text-sm text-gray-900"
                   >
                     Remember me
                   </label>
@@ -201,7 +181,7 @@ const Login = () => {
               <div>
                 <button
                   type="submit"
-                  className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-gray-600 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                  className="flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-gray-600 border border-transparent rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
                 >
                   Sign in
                 </button>
@@ -214,21 +194,19 @@ const Login = () => {
                   <div className="w-full border-t border-gray-300" />
                 </div>
                 <div className="relative flex justify-center text-sm">
-                  <span className="px-2 bg-white text-gray-500">
+                  <span className="px-2 text-gray-500 bg-white">
                     Or continue with
                   </span>
                 </div>
               </div>
 
-              <div className="mt-6 grid grid-cols-3 gap-3">
+              <div className="grid grid-cols-3 gap-3 mt-6">
                 <div>
                   <a
-                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                    onClick={() =>
-                      loginWith(setError, firebase.auth.GoogleAuthProvider)
-                    }
+                    className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
+                    onClick={() => signinWithGoogle('/')}
                   >
-                    <span className="sr-only">Sign in with Facebook</span>
+                    <span className="sr-only">Sign in with Google</span>
                     <svg
                       className="w-5 h-5"
                       aria-hidden="true"
@@ -242,12 +220,10 @@ const Login = () => {
 
                 <div>
                   <a
-                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                    onClick={() =>
-                      loginWith(setError, firebase.auth.FacebookAuthProvider)
-                    }
+                    className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
+                    onClick={() => signinWithFacebook('/')}
                   >
-                    <span className="sr-only">Sign in with Twitter</span>
+                    <span className="sr-only">Sign in with Facebook</span>
                     <svg
                       className="w-5 h-5"
                       aria-hidden="true"
@@ -265,10 +241,8 @@ const Login = () => {
 
                 <div>
                   <a
-                    className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm bg-white text-sm font-medium text-gray-500 hover:bg-gray-50"
-                    onClick={() =>
-                      loginWith(setError, firebase.auth.GithubAuthProvider)
-                    }
+                    className="inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50"
+                    onClick={() => signinWithGitHub('/')}
                   >
                     <span className="sr-only">Sign in with GitHub</span>
                     <svg

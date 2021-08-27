@@ -4,20 +4,21 @@ import { useRouter } from 'next/router'
 import { useToast } from '@chakra-ui/core'
 
 import { mutate } from 'swr'
-import { useUser } from '../../UserContext'
+import { useAuth } from 'lib/auth'
 
 export const useStatus = ({ metadata, status, submissionID, codeValue }) => {
   const toast = useToast()
-  const { user } = useUser()
+  const { userData } = useAuth()
   const router = useRouter()
 
   useEffect(() => {
     if (status === 'OK') {
       mutate(['getSubmission', submissionID], {
-        username: user.username,
+        username: userData.username,
         task: metadata,
         code: codeValue,
       })
+
       router.push('/submissions/[id]', `/submissions/${submissionID}`)
     } else if (status === 'ERROR') {
       toast({

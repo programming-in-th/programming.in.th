@@ -51,6 +51,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: [],
     fallback: true,
   }
+
   // const taskDocs = await db()
   //   .collection('tasks')
   //   .where('visible', '==', true)

@@ -3,18 +3,18 @@ import Router from 'next/router'
 import Link from 'next/link'
 import { Box, Flex, Text, Link as ChakraLink, Divider } from '@chakra-ui/core'
 
-import { useUser } from 'components/UserContext'
 import { PageLayout } from 'components/Layout'
 import { Signup } from 'components/auth/Signup'
+import { useAuth } from 'lib/auth'
 
 const SignUp = () => {
-  const { user } = useUser()
+  const { user } = useAuth()
 
   useEffect(() => {
-    if (user.user !== null) {
+    if (user !== null) {
       Router.push('/')
     }
-  }, [user.user])
+  }, [user])
 
   return (
     <PageLayout>
