@@ -13,7 +13,6 @@ export interface ISubmission {
   timestamp: any
   uid: string
   status: string
-
   task: ITask
   username: string
   code: string

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { useSWRInfinite } from 'swr'
+import useSWRInfinite from 'swr/infinite'
 
 import { SWRfetch } from 'lib/fetch'
 import { config } from 'config'
@@ -55,7 +55,7 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
 
   const Submissions = () => {
     const pageSize = 10
-    const { data, error, size, setSize } = useSWRInfinite(
+    const { data, error, size, setSize } = useSWRInfinite<any>(
       (index, previousData) => {
         return `${config.baseURL}/getSubmissions?limit=${pageSize}&next=${
           previousData ? previousData.next : ''
@@ -153,7 +153,7 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
         >
           {isLoadingMore ? (
             <svg
-              className="animate-spin h-6 w-6 p-1 text-gray-800"
+              className="w-6 h-6 p-1 text-gray-800 animate-spin"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -184,7 +184,7 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
 
   return (
     <div className="flex flex-col mt-4">
-      <div className="flex max-w-full flex-col md:flex-row">
+      <div className="flex flex-col max-w-full md:flex-row">
         <input
           type="text"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,7 +193,7 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
           }}
           value={username}
           placeholder="Username"
-          className="flex items-center px-4 h-10 w-48 shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm border-gray-300 rounded-md"
+          className="flex items-center w-48 h-10 px-4 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
         />
         {taskFrom === undefined && (
           <input
@@ -204,7 +204,7 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
             }}
             value={task}
             placeholder="Task"
-            className="flex items-center px-4 h-10 w-48 md:ml-4 mt-4 md:mt-0 shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm border-gray-300 rounded-md"
+            className="flex items-center w-48 h-10 px-4 mt-4 border-gray-300 rounded-md shadow-sm md:ml-4 md:mt-0 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
           />
         )}
       </div>

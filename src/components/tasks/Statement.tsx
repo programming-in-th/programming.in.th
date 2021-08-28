@@ -18,7 +18,7 @@ import { useAuth } from 'lib/auth'
 export const Statement = ({ metadata }) => {
   const { user, userData } = useAuth()
 
-  const { data: submissions } = useSWR(
+  const { data: submissions } = useSWR<any>(
     userData?.username !== ''
       ? `${config.baseURL}/getSubmissions?limit=5&username=${
           userData?.username
