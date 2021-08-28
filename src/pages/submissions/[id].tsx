@@ -38,6 +38,22 @@ const SubmissionDetail: NextPage = () => {
     (type, id) => fetchFromFirebase(type, { submissionID: id })
   )
 
+  useEffect(() => {
+    const unsubscribe = firebase
+      .firestore()
+      .doc(`submissions/${id}`)
+      .onSnapshot((doc) => {
+        const data = doc.data()
+
+        mutate(async (oldSub: ISubmission) => {
+          return { ...oldSub, ...data }
+        })
+      })
+    return () => {
+      unsubscribe()
+    }
+  }, [])
+
   const submission = useMemo<ISubmission | undefined>(() => {
     if (rawSubmission === undefined) {
       return undefined
@@ -56,21 +72,6 @@ const SubmissionDetail: NextPage = () => {
     }
     return { ...rawSubmission, groups }
   }, [rawSubmission])
-
-  useEffect(() => {
-    const unsubscribe = firebase
-      .firestore()
-      .doc(`submissions/${id}`)
-      .onSnapshot((doc) => {
-        const data = doc.data()
-        mutate(async (oldSubmission: ISubmission) => {
-          return { ...oldSubmission, ...data }
-        })
-      })
-    return () => {
-      unsubscribe()
-    }
-  }, [])
 
   const [currentCodeIndex, setCurrentCodeIndex] = useState<number>(0)
 
