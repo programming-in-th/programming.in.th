@@ -94,13 +94,13 @@ const SubmissionDetail: NextPage = () => {
   return (
     <PageLayout>
       <div className="flex justify-center align-top width-full sm:px-4 md:p-8">
-        <div className="flex flex-col w-full max-w-5xl p-4 overflow-hidden border-gray-200 md:shadow-lg md:border-b md:rounded-lg">
+        <div className="flex flex-col w-full max-w-5xl p-4 overflow-hidden bg-white border-gray-200 md:shadow-lg md:border-b md:rounded-lg">
           <div className="flex flex-col">
             <div className="flex justify-between align-center">
-              <p className="text-2xl font-semibold">
+              <p className="text-2xl font-semibold font-display">
                 <Link href={`/tasks/${submission.task.id}`}>
                   <a className="hover:text-gray-500">[{submission.task.id}]</a>
-                </Link>
+                </Link>{' '}
                 {submission.task.title}
               </p>
             </div>

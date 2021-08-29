@@ -16,9 +16,9 @@ export const TaskLayout = ({ type, metadata, children }) => {
   if (type === 'null') {
     return (
       <PageLayout>
-        <div className="flex mt-8 flex-col mx-auto w-full flex-grow">
+        <div className="flex flex-col flex-grow w-full mx-auto mt-8">
           <div className="flex items-center justify-center flex-grow">
-            <p className="text-6xl font-extrabold text-center p-8">
+            <p className="p-8 text-6xl font-extrabold text-center">
               Task not found
             </p>
           </div>
@@ -40,9 +40,11 @@ export const TaskLayout = ({ type, metadata, children }) => {
       >
         <div className="flex flex-col">
           <div className="flex items-baseline mx-6 md:mx-0">
-            <p className="font-medium text-2xl md:text-3xl">{metadata.title}</p>
+            <p className="text-2xl font-medium md:text-3x font-display">
+              {metadata.title}
+            </p>
           </div>
-          <div className="flex justify-around md:justify-start mx-6 md:mx-0 md:mt-2">
+          <div className="flex justify-around mx-6 md:justify-start md:mx-0 md:mt-2">
             <Link href={`/tasks/${metadata.id}`}>
               <a
                 className={`mt-2 md:mt-0 leading-5 ${

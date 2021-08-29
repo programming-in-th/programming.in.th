@@ -22,7 +22,7 @@ export const Solution = ({ solution }) => {
           crossOrigin="anonymous"
         />
       </Head>
-      <div className="w-full max-w-4xl p-6 md:p-0 md:mt-4 md:mx-auto">
+      <div className="w-full max-w-2xl p-6 md:p-0 md:mt-6 md:mx-auto">
         <div
           className="prose lg:prose-lg xl:prose-xl"
           dangerouslySetInnerHTML={{ __html: solution }}

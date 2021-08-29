@@ -46,7 +46,7 @@ const ProblemHit = ({ hit }) => {
 
 export const ProblemHits = ({ hits }) => {
   return (
-    <div className="h-full my-10">
+    <div className="h-full my-10 font-medium font-display">
       {hits.map((hit) => (
         <ProblemHit hit={hit} key={`problemhit-${hit.objectID}`} />
       ))}
