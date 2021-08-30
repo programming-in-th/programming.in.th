@@ -5,6 +5,7 @@ import { Flex, Box } from '@chakra-ui/core'
 ;((typeof global !== 'undefined' ? global : window) as any).Prism = Prism
 
 require('prismjs/components/prism-rust')
+require('prismjs/components/prism-java')
 
 export interface CodeBlockProps {
   code: string
