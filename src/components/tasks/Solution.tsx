@@ -22,11 +22,13 @@ export const Solution = ({ solution }) => {
           crossOrigin="anonymous"
         />
       </Head>
-      <div className="w-full max-w-2xl p-6 md:p-0 md:mt-6 md:mx-auto">
-        <div
-          className="prose lg:prose-lg xl:prose-xl"
-          dangerouslySetInnerHTML={{ __html: solution }}
-        />
+      <div className="py-16 overflow-hidden bg-white">
+        <div className="px-4 sm:px-6 lg:px-8">
+          <div
+            className="mx-auto prose lg:prose-lg xl:prose-xl"
+            dangerouslySetInnerHTML={{ __html: solution }}
+          />
+        </div>
       </div>
     </React.Fragment>
   )
