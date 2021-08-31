@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 
 import { useRouter } from 'next/router'
@@ -16,12 +16,6 @@ import db from 'lib/firebase-admin'
 
 const Task = ({ type, metadata }) => {
   const router = useRouter()
-
-  useEffect(() => {
-    if (type === 'wrong') {
-      router.push('/tasks/[...id]', `/tasks/${metadata.id}`)
-    }
-  }, [type])
 
   const RenderPage = ({ type: it }) => {
     switch (it) {
@@ -76,18 +70,6 @@ export const getStaticProps: GetStaticProps = async ({ params: { id } }) => {
   const taskDoc = await db().doc(`tasks/${id[0]}`).get()
 
   let type = id.length === 1 ? 'statement' : id[1]
-
-  if (
-    (type !== 'statement' && type !== 'submissions' && type !== 'solution') ||
-    id.length > 2
-  ) {
-    return {
-      props: {
-        type: 'wrong',
-        metadata: { id: id[0] },
-      },
-    }
-  }
 
   if (taskDoc.exists) {
     const data = taskDoc.data()
