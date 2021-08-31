@@ -15,23 +15,19 @@ export const useSubmit = (metadata: ITask) => {
   const [status, setStatus] = useState<status>()
   const [submissionID, setSubmissionID] = useState<string>()
 
-  const onDrop = (index: number) =>
-    useCallback(
-      (acceptedFiles) => {
-        const reader = new FileReader()
+  const onDrop = (index: number) => (acceptedFiles) => {
+    const reader = new FileReader()
 
-        reader.onabort = () => console.log('file reading was aborted')
-        reader.onerror = () => console.log('file reading has failed')
-        reader.onload = () => {
-          const temp = [...codeValue]
-          temp[index] = reader.result as string
-          setCode(temp)
-        }
+    reader.onabort = () => console.log('file reading was aborted')
+    reader.onerror = () => console.log('file reading has failed')
+    reader.onload = () => {
+      const temp = [...codeValue]
+      temp[index] = reader.result as string
+      setCode(temp)
+    }
 
-        reader.readAsText(acceptedFiles[0])
-      },
-      [codeValue]
-    )
+    reader.readAsText(acceptedFiles[0])
+  }
 
   const submit = () =>
     submitCode(

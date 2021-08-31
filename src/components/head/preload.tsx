@@ -4,18 +4,12 @@ export const Preload = () => (
   <React.Fragment>
     <link
       rel="preload"
-      href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css"
-      integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq"
+      href="https://cdn.jsdelivr.net/npm/katex@0.13.13/dist/katex.min.css"
+      integrity="sha384-RZU/ijkSsFbcmivfdRBQDtwuwVqK7GMOw6IMvKyeWL2K5UAlyp6WonmB8m7Jd0Hn"
       crossOrigin="anonymous"
       as="style"
     />
-    <link
-      rel="preload"
-      as="font"
-      href="https://fonts.gstatic.com/s/kanit/v5/nKKZ-Go6G5tXcraBGwCKd6xBDFs.woff2"
-      type="font/woff2"
-      crossOrigin="anonymous"
-    />
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://www.googleapis.com/" />
     <link
       rel="preconnect"

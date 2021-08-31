@@ -1,6 +1,7 @@
 import React, { Fragment, useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import Image from 'next/image'
 import { Popover, Transition } from '@headlessui/react'
 
 import { useAuth } from 'lib/auth'
@@ -70,13 +71,16 @@ export const Nav = () => {
           </div>
           {user ? (
             <div className="hidden py-1 md:block">
-              <img
+              <Image
+                width="32px"
+                height="32px"
                 className="inline-block w-8 h-8 rounded-full"
                 src={
                   user.photoURL === ''
                     ? '/assets/img/default-user.png'
                     : `${user.photoURL}`
                 }
+                alt="User Image"
                 onClick={signout}
               />
             </div>

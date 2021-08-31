@@ -53,7 +53,7 @@ export const Statement = ({ metadata }) => {
             data={`${config.awsURL}/statements/${metadata.id}.pdf`}
           >
             <p>
-              Your browser doesn't support embed PDF viewer please{' '}
+              Your browser doesn&apos;t support embed PDF viewer please{' '}
               <a
                 className="text-gray-600"
                 href={`${config.awsURL}/statements/${metadata.id}.pdf`}

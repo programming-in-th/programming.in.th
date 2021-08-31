@@ -1,26 +1,31 @@
 import React from 'react'
 
 import Link from 'next/link'
+import Image from 'next/image'
 
 const FourZeroFour = () => (
-  <div className="min-h-screen pt-16 pb-12 flex flex-col bg-white">
-    <main className="flex-grow flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex-shrink-0 flex justify-center">
-        <a href="/" className="inline-flex">
-          <span className="sr-only">Workflow</span>
-          <img
-            className="h-12 w-auto"
-            src="https://tailwindui.com/img/logos/workflow-mark.svg?color=gray&shade=600"
-            alt=""
-          />
-        </a>
+  <div className="flex flex-col min-h-screen pt-16 pb-12 bg-white">
+    <main className="flex flex-col justify-center flex-grow w-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <div className="flex justify-center flex-shrink-0">
+        <Link href="/">
+          <a className="inline-flex">
+            <span className="sr-only">Workflow</span>
+            <Image
+              width="48px"
+              height="48px"
+              className="w-auto h-12"
+              src="https://tailwindui.com/img/logos/workflow-mark.svg?color=gray&shade=600"
+              alt=""
+            />
+          </a>
+        </Link>
       </div>
       <div className="py-16">
         <div className="text-center">
-          <p className="text-sm font-semibold text-gray-600 uppercase tracking-wide">
+          <p className="text-sm font-semibold tracking-wide text-gray-600 uppercase">
             404 error
           </p>
-          <h1 className="mt-2 text-4xl font-extrabold text-gray-900 tracking-tight sm:text-5xl">
+          <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
             Page not found.
           </h1>
           <p className="mt-2 text-base text-gray-500">
@@ -36,7 +41,7 @@ const FourZeroFour = () => (
         </div>
       </div>
     </main>
-    <footer className="flex-shrink-0 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
+    <footer className="flex-shrink-0 w-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
       <nav className="flex justify-center space-x-4">
         <a
           href="#"
@@ -50,6 +55,7 @@ const FourZeroFour = () => (
         />
         <a
           target="_blank"
+          rel="noopener noreferrer"
           href="https://www.facebook.com/programming.in.th"
           className="text-sm font-medium text-gray-500 hover:text-gray-600"
         >

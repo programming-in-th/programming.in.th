@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext, useCallback } from 'react'
 import Router from 'next/router'
 import cookie from 'js-cookie'
 
@@ -48,21 +48,20 @@ function useProvideAuth() {
   const [userData, setUserData] = useState<IUserData>(null)
   const [loading, setLoading] = useState(true)
 
-  const updateUserData = async () => {
+  const updateUserData = useCallback(async () => {
     const data = await getCurrentUserData(user.uid)
     if (data) {
       setUserData(data as IUserData)
     } else {
       setUserData(null)
     }
-  }
+  }, [user?.uid])
 
   useEffect(() => {
     if (user) {
       updateUserData()
     }
-    console.log(user)
-  }, [user])
+  }, [user, updateUserData])
 
   const handleUser = async (rawUser: firebase.User) => {
     if (rawUser) {
