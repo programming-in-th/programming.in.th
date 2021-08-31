@@ -49,10 +49,11 @@ const SubmissionDetail: NextPage = () => {
           return { ...oldSub, ...data }
         })
       })
+
     return () => {
       unsubscribe()
     }
-  }, [])
+  }, [id, mutate])
 
   const submission = useMemo<ISubmission | undefined>(() => {
     if (rawSubmission === undefined) {
@@ -80,7 +81,7 @@ const SubmissionDetail: NextPage = () => {
       <PageLayout>
         <div className="flex items-center justify-center flex-grow">
           <p className="text-6xl font-bold text-center align-center">
-            Submission doesn't exist
+            Submission doesn&apos;t exist
           </p>
         </div>
       </PageLayout>

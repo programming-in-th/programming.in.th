@@ -45,13 +45,13 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
     if (taskFrom === undefined) {
       setTask((router.query.task as string) || '')
     }
-  }, [router.query])
+  }, [router.query, taskFrom])
 
   useEffect(() => {
     if (taskFrom) {
       setTask(taskFrom)
     }
-  }, [])
+  }, [taskFrom])
 
   const Submissions = () => {
     const pageSize = 10

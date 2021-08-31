@@ -20,5 +20,5 @@ export const useStatus = ({ metadata, status, submissionID, codeValue }) => {
     } else if (status === 'ERROR') {
       // Handle error
     }
-  }, [status, submissionID])
+  }, [status, submissionID, codeValue, metadata, router, userData.username])
 }

@@ -22,7 +22,7 @@ export const UploadCode = (props: IUploadCode) => {
     const temp = [...props.codeFile]
     temp[props.index] = acceptedFiles[0]
     props.setCodeFile(temp)
-  }, [acceptedFiles])
+  }, [acceptedFiles, props])
 
   return (
     <button

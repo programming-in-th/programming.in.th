@@ -81,6 +81,8 @@
     "@types/webpack-env": "^1.15.2",
     "babel-eslint": "^10.1.0",
     "babel-plugin-inline-react-svg": "^1.1.1",
+    "eslint": "7.32.0",
+    "eslint-config-next": "11.1.2",
     "husky": "^4.2.5",
     "prettier": "^2.0.5",
     "pretty-quick": "^2.0.1",
@@ -91,6 +93,7 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "analyze": "cross-env ANALYZE=true yarn build"
+    "analyze": "cross-env ANALYZE=true yarn build",
+    "lint": "next lint"
   }
 }

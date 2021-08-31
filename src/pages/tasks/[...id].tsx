@@ -21,7 +21,7 @@ const Task = ({ type, metadata }) => {
     if (type === 'wrong') {
       router.push('/tasks/[...id]', `/tasks/${metadata.id}`)
     }
-  }, [type])
+  }, [type, metadata.id, router])
 
   const RenderPage = ({ type: it }) => {
     switch (it) {
