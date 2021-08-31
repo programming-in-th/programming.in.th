@@ -3,7 +3,6 @@ import { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 import React, { useEffect } from 'react'
 import NProgress from 'nprogress'
-import { ThemeProvider } from '@chakra-ui/core'
 import { AuthProvider } from 'lib/auth'
 import * as gtag from 'lib/gtag'
 
@@ -43,11 +42,9 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
   }, [router])
 
   return (
-    <ThemeProvider>
-      <AuthProvider>
-        <Component {...pageProps} />
-      </AuthProvider>
-    </ThemeProvider>
+    <AuthProvider>
+      <Component {...pageProps} />
+    </AuthProvider>
   )
 }
 
