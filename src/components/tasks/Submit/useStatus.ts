@@ -11,7 +11,7 @@ export const useStatus = ({ metadata, status, submissionID, codeValue }) => {
   useEffect(() => {
     if (status === 'OK') {
       mutate(['getSubmission', submissionID], {
-        username: userData.username,
+        username: userData?.username,
         task: metadata,
         code: codeValue,
       })
@@ -20,5 +20,5 @@ export const useStatus = ({ metadata, status, submissionID, codeValue }) => {
     } else if (status === 'ERROR') {
       // Handle error
     }
-  }, [status, submissionID, codeValue, metadata, router, userData.username])
+  }, [status, submissionID, codeValue, metadata, router, userData?.username])
 }
