@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext, useCallback } from 'react'
 import Router from 'next/router'
 import cookie from 'js-cookie'
 
+import { Loading } from 'components/Loading'
 import firebase from './firebase'
 import { createUser, getCurrentUserData } from './db'
 import { AUTH_COOKIE } from './constants'
@@ -40,6 +41,11 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }) => {
   const auth = useProvideAuth()
+
+  if (auth.loading) {
+    return <Loading />
+  }
+
   return <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
 }
 
