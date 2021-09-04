@@ -8,8 +8,8 @@ const parseOption = (language: string) => {
   let spilitLanguage = language
   let options = []
 
-  if (language.split(`{`).length > 1) {
-    ;[spilitLanguage, ...options] = language.split(`{`)
+  if (language.split('{').length > 1) {
+    ;[spilitLanguage, ...options] = language.split('{')
     options.forEach((option) => {
       option = option.slice(0, -1)
       const splitOption = option.replace(/ /g, ``).split(`:`)
@@ -65,7 +65,13 @@ const piper = (node, index, parent) => {
     } else {
       result = [...result, ...childElem]
     }
-    result = [...result, { type: 'text', value: '\n' }]
+    if (
+      !(
+        highlightLines.includes(index + 1) || highlightLines.includes(index + 2)
+      )
+    ) {
+      result = [...result, { type: 'text', value: '\n' }]
+    }
   })
 
   node.children = result
