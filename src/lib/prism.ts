@@ -52,6 +52,7 @@ const piper = (node, index, parent) => {
   const codeLine = nodeToString(node).split('\n')
   let result = []
   codeLine.slice(0, -1).forEach((element, index) => {
+    if (element === '') element = ' '
     const childElem = refractor.highlight(element, spilitLanguage)
     if (highlightLines.includes(index + 1)) {
       result.push({
