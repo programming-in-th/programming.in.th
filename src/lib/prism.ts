@@ -43,8 +43,6 @@ const piper = (node, index, parent) => {
     node.properties.className = ['language-']
   }
 
-  console.log(node)
-
   const language = getLanguage(node)
   const { highlightLines } = getOptions(node)
 
