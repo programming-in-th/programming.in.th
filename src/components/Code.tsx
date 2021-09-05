@@ -20,19 +20,23 @@ export const Code = ({ code, language }: CodeBlockProps) => {
         >
           <code className={`language-${language}`}>
             {tokens.map((line, i) => (
-              <tr key={i} {...getLineProps({ line, key: i })}>
-                <td
+              <div
+                className="table-row "
+                key={i}
+                {...getLineProps({ line, key: i })}
+              >
+                <span
                   key={i + 'l'}
-                  className="w-8 pr-2 text-gray-400 select-none"
+                  className="table-cell w-8 pr-2 text-gray-400 select-none"
                 >
                   {i + 1}
-                </td>
-                <td>
+                </span>
+                <div className="table-cell">
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />
                   ))}
-                </td>
-              </tr>
+                </div>
+              </div>
             ))}
           </code>
         </pre>
