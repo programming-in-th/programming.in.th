@@ -14,28 +14,30 @@ import { config } from 'config'
 
 import db from 'lib/firebase-admin'
 
+const RenderPage = ({ type, metadata }) => {
+  switch (type) {
+    case 'statement':
+      return <Statement metadata={metadata} />
+
+    case 'solution':
+      return <Solution solution={metadata.solution} />
+
+    case 'submissions':
+      return <SubmissionsList id={metadata.id} />
+
+    default:
+      return null
+  }
+}
+
 const Task = ({ type, metadata }) => {
   const router = useRouter()
 
-  const RenderPage = ({ type: it }) => {
-    switch (it) {
-      case 'statement':
-        return <Statement metadata={metadata} />
-
-      case 'solution':
-        return <Solution solution={metadata.solution} />
-
-      case 'submissions':
-        return <SubmissionsList id={metadata.id} />
-
-      default:
-        return null
-    }
-  }
-
   return (
     <TaskLayout type={type} metadata={metadata}>
-      {router.isFallback ? null : <RenderPage type={type} />}
+      {router.isFallback ? null : (
+        <RenderPage type={type} metadata={metadata} />
+      )}
     </TaskLayout>
   )
 }

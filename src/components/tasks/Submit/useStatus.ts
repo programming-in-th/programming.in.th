@@ -11,15 +11,27 @@ export const useStatus = ({ metadata, status, submissionID, codeValue }) => {
 
   useEffect(() => {
     if (status === 'OK') {
-      mutate(['getSubmission', submissionID], {
-        username: userData.username,
-        task: metadata,
-        code: codeValue,
-      }, false)
+      mutate(
+        ['getSubmission', submissionID],
+        {
+          username: userData.username,
+          task: metadata,
+          code: codeValue,
+        },
+        false
+      )
 
       router.push(`/submissions/${submissionID}`)
     } else if (status === 'ERROR') {
       // Handle error
     }
-  }, [status, submissionID, codeValue, metadata, router])
+  }, [
+    status,
+    submissionID,
+    codeValue,
+    metadata,
+    router,
+    mutate,
+    userData.username,
+  ])
 }
