@@ -1,122 +1,84 @@
-import { visit } from 'unist-util-visit'
-import { refractor } from 'refractor'
-import { toString } from 'hast-util-to-string'
-import rangeParser from 'parse-numeric-range'
+import Prism from 'prismjs'
 
-const getOptions = (node) => {
-  let highlightLines = []
-  let lineNumber = false
-  if (node.data) {
-    const data = node.data.meta
-    if (data.split('{').length > 1) {
-      const options = data.split('{')
-      options.forEach((option) => {
-        option = option.slice(0, -1)
-        const splitOption = option.replace(/ /g, ``).split(`:`)
+require(`prismjs/components/prism-c.js`)
+require(`prismjs/components/prism-cpp.js`)
+require(`prismjs/components/prism-python.js`)
+require(`prismjs/components/prism-java.js`)
+require(`prismjs/components/prism-rust.js`)
 
-        if (splitOption.length === 1 && rangeParser(option).length > 0) {
-          highlightLines = rangeParser(option).filter((n) => n > 0)
-        }
-
-        if (
-          splitOption.length === 2 &&
-          splitOption[0] === `lineNumber` &&
-          splitOption[1].trim() === `true`
-        ) {
-          lineNumber = true
-        }
-      })
-    }
+const escapeHtml = (code) => {
+  const htmlEscapes = {
+    '&': `&amp;`,
+    '>': `&gt;`,
+    '<': `&lt;`,
+    '"': `&quot;`,
+    "'": `&#39;`,
   }
 
-  return {
-    highlightLines,
-    lineNumber,
-  }
+  const escapedChars = (char) => htmlEscapes[char]
+  const chars = Object.keys(htmlEscapes)
+  const charsRe = new RegExp(`[${chars.join(``)}]`, `g`)
+  const rehasUnescapedChars = new RegExp(charsRe.source)
+
+  return code && rehasUnescapedChars.test(code)
+    ? code.replace(charsRe, escapedChars)
+    : code
 }
 
-const getLanguage = (node) => {
-  const className = node.properties.className
-  for (const classListItem of className) {
-    if (classListItem.slice(0, 9) === 'language-') {
-      return classListItem.slice(9).toLowerCase()
-    }
-  }
-}
+export const generateHtml = ({
+  code = '',
+  language = 'text',
+  highlightLines = [],
+  lineNumber = false,
+}) => {
+  let highlightCode = ''
 
-const piper = (node, index, parent) => {
-  if (!parent || parent.tagName !== 'pre' || node.tagName !== 'code') {
-    return
-  }
-
-  if (!node.properties.className) {
-    node.properties.className = ['language-']
+  try {
+    highlightCode = Prism.highlight(code, Prism.languages[language], language)
+  } catch {
+    highlightCode = escapeHtml(code)
   }
 
-  const language = getLanguage(node)
-  const { highlightLines, lineNumber } = getOptions(node)
+  const codeLine = highlightCode.split('\n').slice(0, -1)
 
-  parent.properties.className = (parent.properties.className || []).concat(
-    'language-' + language
-  )
-  for (let i = 0; i < node.properties.className.length; ++i) {
-    if (node.properties.className[i].slice(0, 9) === 'language-') {
-      node.properties.className = 'language-' + language
-    }
-  }
-  const codeLine = toString(node).split('\n')
-  let result = []
-  codeLine.slice(0, -1).forEach((element, index) => {
-    if (element === '') element = ' '
-    let childElem
-    try {
-      childElem = refractor.highlight(element, language).children
-    } catch {
-      childElem = [{ type: 'text', value: element }]
+  let result = ``
+
+  codeLine.forEach((element, index) => {
+    if (element == '') {
+      element = ' '
     }
 
     if (highlightLines.includes(index + 1)) {
-      result.push({
-        type: 'element',
-        tagName: 'span',
-        properties: {
-          className: ['highlight-code-line'],
-        },
-        children: childElem,
-      })
-    } else {
-      result = [...result, ...childElem]
+      // prettier-ignore
+      element = ``
+      + `<span class="highlight-code-line">`
+      +   element
+      + `</span>`
     }
+
+    result += element
+
     if (
       !(
         highlightLines.includes(index + 1) || highlightLines.includes(index + 2)
       )
     ) {
-      result = [...result, { type: 'text', value: '\n' }]
+      result += '\n'
     }
   })
-  node.children = result
+  // prettier-ignore
+  result = ``
+  + `<code class="language-${language}">`
+  +   result
+  + `</code>`
 
   if (lineNumber) {
-    parent.properties.className.push('line-numbers')
-    parent.children.push({
-      type: 'element',
-      tagName: 'span',
-      properties: {
-        className: ['line-numbers-rows'],
-      },
-      children: codeLine.slice(0, -1).map(() => ({
-        type: 'element',
-        tagName: 'span',
-      })),
-    })
+    // prettier-ignore
+    result += `` 
+    + `<span class="line-numbers-rows">`
+    +   codeLine.map(() => `<span></span>`).join('')
+    + `</span>`
   }
-}
 
-const highlight: () => any = () => {
-  return (tree) => {
-    visit(tree, 'element', piper)
-  }
+  return result
 }
-
-export default highlight

@@ -3,7 +3,7 @@ import parse from 'remark-parse'
 import remark2rehype from 'remark-rehype'
 import math from 'remark-math'
 import katex from 'rehype-katex'
-import highlight from 'lib/prism'
+import highlight from 'lib/highlight'
 import html from 'rehype-stringify'
 
 export const renderMarkdown = async (content: string) => {
@@ -14,7 +14,7 @@ export const renderMarkdown = async (content: string) => {
       .use(remark2rehype)
       .use(katex)
       .use(highlight)
-      .use(html)
+      .use(html, { allowDangerousHtml: true })
       .process(content)
 
     return result.toString()
