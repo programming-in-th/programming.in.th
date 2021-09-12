@@ -39,7 +39,11 @@ export const generateHtml = ({
     highlightCode = escapeHtml(code)
   }
 
-  const codeLine = highlightCode.split('\n').slice(0, -1)
+  if (highlightCode[highlightCode.length - 1] == '\n') {
+    highlightCode = highlightCode.slice(0, -1)
+  }
+
+  const codeLine = highlightCode.split('\n')
 
   let result = ``
 
