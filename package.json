@@ -63,7 +63,7 @@
     "remark-math": "^2.0.1",
     "remark-parse": "^8.0.2",
     "remark-rehype": "^7.0.0",
-    "swr": "0.3.0",
+    "swr": "1.1.1",
     "yup": "^0.29.1"
   },
   "devDependencies": {
