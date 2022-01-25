@@ -1,6 +1,6 @@
-import firebase from 'lib/firebase'
+import { User } from 'firebase/auth'
 
-export const extractProviderList = (user: firebase.User): string[] => {
+export const extractProviderList = (user: User): string[] => {
   const result = []
 
   if (user?.providerData) {
@@ -19,7 +19,7 @@ export const checkProvider = (
   return providerList.includes(providerName)
 }
 
-export const getDescriptionText = (user: firebase.User, providerId: string) => {
+export const getDescriptionText = (user: User, providerId: string) => {
   if (checkProvider(extractProviderList(user), providerId)) {
     return `Currently bound to ${providerId} account`
   } else {

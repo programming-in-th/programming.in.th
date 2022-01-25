@@ -10,7 +10,8 @@ import { PageLayout } from 'components/Layout'
 import { Code } from 'components/Code'
 import { Loading } from 'components/Loading'
 
-import firebase from 'lib/firebase'
+import { doc, getFirestore, onSnapshot } from 'firebase/firestore'
+import firebaseApp from 'lib/firebase'
 
 import { fetchFromFirebase } from 'utils/fetcher'
 import { getTimestamp } from 'utils/getTimestamp'
@@ -21,6 +22,8 @@ import { ISubmission } from '../../@types/submission'
 import { isObjectEmpty } from 'utils/isEmpty'
 
 import { config } from 'config'
+
+const db = getFirestore(firebaseApp)
 
 const SubmissionDetail: NextPage = () => {
   const mapLanguage = useMemo(() => {
@@ -39,16 +42,13 @@ const SubmissionDetail: NextPage = () => {
   )
 
   useEffect(() => {
-    const unsubscribe = firebase
-      .firestore()
-      .doc(`submissions/${id}`)
-      .onSnapshot((doc) => {
-        const data = doc.data()
+    const unsubscribe = onSnapshot(doc(db, 'submissions', id), (doc) => {
+      const data = doc.data()
 
-        mutate(async (oldSub: ISubmission) => {
-          return { ...oldSub, ...data }
-        })
+      mutate(async (oldSub: ISubmission) => {
+        return { ...oldSub, ...data }
       })
+    })
 
     return () => {
       unsubscribe()

@@ -1,31 +1,38 @@
-import firebase from './firebase'
+import {
+  DocumentData,
+  getFirestore,
+  doc,
+  setDoc,
+  updateDoc,
+  getDoc,
+} from 'firebase/firestore'
+import firebaseApp from './firebase'
 
-const firestore = firebase.firestore()
+const db = getFirestore(firebaseApp)
 
-export const updateUser = (
-  uid: string,
-  data: firebase.firestore.DocumentData
-): Promise<void> => {
-  return firestore.collection('users').doc(uid).update(data)
+export const getUserRef = (uid: string) => {
+  return doc(db, 'users', uid)
 }
 
-export const createUser = (
-  uid: string,
-  data: firebase.firestore.DocumentData
-): Promise<void> => {
-  return firestore
-    .collection('users')
-    .doc(uid)
-    .set({ uid, ...data }, { merge: true })
+export const updateUser = (uid: string, data: DocumentData): Promise<void> => {
+  const userRef = getUserRef(uid)
+
+  return updateDoc(userRef, data)
+}
+
+export const createUser = (uid: string, data: DocumentData): Promise<void> => {
+  const userRef = getUserRef(uid)
+
+  return setDoc(userRef, data, { merge: true })
 }
 
 export const getCurrentUserData = async (
   uid: string
-): Promise<null | firebase.firestore.DocumentData> => {
-  const ref = firestore.collection('users').doc(uid)
+): Promise<null | DocumentData> => {
+  const userRef = getUserRef(uid)
+  const doc = await getDoc(userRef)
 
-  const doc = await ref.get()
-  if (doc.exists) {
+  if (doc.exists()) {
     return doc.data()
   } else {
     return null

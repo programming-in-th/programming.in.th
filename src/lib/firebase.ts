@@ -1,7 +1,4 @@
-import firebase from 'firebase/app'
-import 'firebase/auth'
-import 'firebase/functions'
-import 'firebase/firestore'
+import { initializeApp } from 'firebase/app'
 
 const firebaseConfig = {
   apiKey: 'AIzaSyBcAEoDKxjVCLp6JzVu2yAOksxVrOA74YU',
@@ -14,9 +11,6 @@ const firebaseConfig = {
   measurementId: 'G-9KZEYQ24KD',
 }
 
-if (!firebase.apps.length) {
-  firebase.initializeApp(firebaseConfig)
-  firebase.app().functions('asia-east2')
-}
+const firebaseApp = initializeApp(firebaseConfig)
 
-export default firebase
+export default firebaseApp

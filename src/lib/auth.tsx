@@ -3,7 +3,18 @@ import Router from 'next/router'
 import cookie from 'js-cookie'
 
 import { Loading } from 'components/Loading'
-import firebase from './firebase'
+import {
+  getAuth,
+  User,
+  FacebookAuthProvider,
+  GoogleAuthProvider,
+  GithubAuthProvider,
+  signInWithPopup,
+  signOut,
+  onIdTokenChanged,
+  signInWithEmailLink,
+} from 'firebase/auth'
+import firebaseApp from './firebase'
 import { createUser, getCurrentUserData } from './db'
 import { AUTH_COOKIE } from './constants'
 
@@ -22,8 +33,8 @@ interface IInitialUserData {
 }
 
 interface IAuthContext {
-  user: firebase.User | null
-  userData: IUserData
+  user: User | null
+  userData: IUserData | null
   loading: boolean
   signinWithFacebook: (redirect: string) => Promise<void>
   signinWithGoogle: (redirect: string) => Promise<void>
@@ -32,6 +43,8 @@ interface IAuthContext {
   signout: () => void
   updateUserData: () => Promise<void>
 }
+
+const auth = getAuth(firebaseApp)
 
 const AuthContext = React.createContext<IAuthContext | null>(null)
 
@@ -50,7 +63,7 @@ export const AuthProvider = ({ children }) => {
 }
 
 function useProvideAuth() {
-  const [user, setUser] = useState<firebase.User | null>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [userData, setUserData] = useState<IUserData>(null)
   const [loading, setLoading] = useState(true)
 
@@ -69,7 +82,7 @@ function useProvideAuth() {
     }
   }, [user, updateUserData])
 
-  const handleUser = async (rawUser: firebase.User) => {
+  const handleUser = async (rawUser: User) => {
     if (rawUser) {
       const user = formatUser(rawUser)
       createUser(user.uid, user)
@@ -88,12 +101,18 @@ function useProvideAuth() {
     }
   }
 
+  const signinWithEmail = async (email: string, emaillink: string) => {
+    setLoading(true)
+
+    const response = await signInWithEmailLink(auth, email, emaillink)
+
+    handleUser(response.user)
+  }
+
   const signinWithFacebook = async (redirect: string) => {
     setLoading(true)
 
-    const response = await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.FacebookAuthProvider())
+    const response = await signInWithPopup(auth, new FacebookAuthProvider())
 
     handleUser(response.user)
 
@@ -102,20 +121,10 @@ function useProvideAuth() {
     }
   }
 
-  const signinWithEmail = async (email: string, emaillink: string) => {
-    setLoading(true)
-
-    const response = await firebase.auth().signInWithEmailLink(email, emaillink)
-
-    handleUser(response.user)
-  }
-
   const signinWithGoogle = async (redirect: string) => {
     setLoading(true)
 
-    const response = await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.GoogleAuthProvider())
+    const response = await signInWithPopup(auth, new GoogleAuthProvider())
 
     handleUser(response.user)
 
@@ -127,9 +136,7 @@ function useProvideAuth() {
   const signinWithGitHub = async (redirect: string) => {
     setLoading(true)
 
-    const response = await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.GithubAuthProvider())
+    const response = await signInWithPopup(auth, new GithubAuthProvider())
 
     handleUser(response.user)
 
@@ -141,12 +148,12 @@ function useProvideAuth() {
   const signout = async () => {
     Router.push('/')
 
-    await firebase.auth().signOut()
+    await signOut(auth)
     return await handleUser(null)
   }
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onIdTokenChanged(handleUser)
+    const unsubscribe = onIdTokenChanged(auth, handleUser)
 
     return () => unsubscribe()
   }, [])
@@ -164,7 +171,7 @@ function useProvideAuth() {
   }
 }
 
-const formatUser = (user: firebase.User): IInitialUserData => {
+const formatUser = (user: User): IInitialUserData => {
   return {
     uid: user.uid,
     email: user.email,

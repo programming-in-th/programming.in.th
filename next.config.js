@@ -6,6 +6,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 })
 
 module.exports = withPlugins([withBundleAnalyzer, withOffline], {
+  swcMinify: true,
   images: {
     domains: ['lh3.googleusercontent.com', 'tailwindui.com'],
   },
