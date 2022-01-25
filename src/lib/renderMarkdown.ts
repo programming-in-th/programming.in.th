@@ -3,7 +3,7 @@ import parse from 'remark-parse'
 import remark2rehype from 'remark-rehype'
 import math from 'remark-math'
 import katex from 'rehype-katex'
-import highlight from 'lib/highlight'
+import highlight from 'rehype-prism-plus'
 import html from 'rehype-stringify'
 
 export const renderMarkdown = async (content: string) => {

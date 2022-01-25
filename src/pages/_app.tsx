@@ -6,7 +6,6 @@ import { AuthProvider } from 'lib/auth'
 import * as gtag from 'lib/gtag'
 
 import 'styles/index.css'
-import 'styles/prism.css'
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
   const router = useRouter()
