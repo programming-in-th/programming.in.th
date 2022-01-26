@@ -27,7 +27,7 @@ export const Code = ({ code, language }: CodeBlockProps) => {
               >
                 <span
                   key={i + 'l'}
-                  className="table-cell w-8 pr-2 text-gray-400 select-none"
+                  className="table-cell w-8 select-none pr-2 text-gray-400"
                 >
                   {i + 1}
                 </span>

@@ -4,8 +4,8 @@ import { PageLayout } from 'components/Layout'
 
 const LearnPage = () => (
   <PageLayout>
-    <div className="flex items-center justify-center flex-grow">
-      <p className="align-center text-6xl font-bold text-center">Coming Soon</p>
+    <div className="flex flex-grow items-center justify-center">
+      <p className="align-center text-center text-6xl font-bold">Coming Soon</p>
     </div>
   </PageLayout>
 )

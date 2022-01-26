@@ -6,7 +6,7 @@ export const insertQueryString = (key: string, value: string) => {
 
     Router.replace({
       pathname: window.location.pathname,
-      query: { ...Object.fromEntries(queryString), [key]: value }
+      query: { ...Object.fromEntries(queryString), [key]: value },
     })
   }
 }

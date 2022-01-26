@@ -4,16 +4,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 
 const FourZeroFour = () => (
-  <div className="flex flex-col min-h-screen pt-16 pb-12 bg-white">
-    <main className="flex flex-col justify-center flex-grow w-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-      <div className="flex justify-center flex-shrink-0">
+  <div className="flex min-h-screen flex-col bg-white pt-16 pb-12">
+    <main className="mx-auto flex w-full max-w-7xl flex-grow flex-col justify-center px-4 sm:px-6 lg:px-8">
+      <div className="flex flex-shrink-0 justify-center">
         <Link href="/">
           <a className="inline-flex">
             <span className="sr-only">Workflow</span>
             <Image
               width="48px"
               height="48px"
-              className="w-auto h-12"
+              className="h-12 w-auto"
               src="https://tailwindui.com/img/logos/workflow-mark.svg?color=gray&shade=600"
               alt=""
             />
@@ -22,7 +22,7 @@ const FourZeroFour = () => (
       </div>
       <div className="py-16">
         <div className="text-center">
-          <p className="text-sm font-semibold tracking-wide text-gray-600 uppercase">
+          <p className="text-sm font-semibold uppercase tracking-wide text-gray-600">
             404 error
           </p>
           <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-5xl">
@@ -41,7 +41,7 @@ const FourZeroFour = () => (
         </div>
       </div>
     </main>
-    <footer className="flex-shrink-0 w-full px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <footer className="mx-auto w-full max-w-7xl flex-shrink-0 px-4 sm:px-6 lg:px-8">
       <nav className="flex justify-center space-x-4">
         <a
           href="#"

@@ -4,8 +4,8 @@ import Head from 'next/head'
 export const Solution = ({ solution }) => {
   if (!solution) {
     return (
-      <div className="flex items-center justify-center flex-grow">
-        <p className="p-8 text-6xl font-extrabold text-center">
+      <div className="flex flex-grow items-center justify-center">
+        <p className="p-8 text-center text-6xl font-extrabold">
           Solution does not exist!
         </p>
       </div>
@@ -22,10 +22,10 @@ export const Solution = ({ solution }) => {
           crossOrigin="anonymous"
         />
       </Head>
-      <div className="py-16 overflow-hidden bg-white">
+      <div className="overflow-hidden bg-white py-16">
         <div className="px-4 sm:px-6 lg:px-8">
           <div
-            className="mx-auto prose lg:prose-lg xl:prose-xl"
+            className="prose mx-auto lg:prose-lg xl:prose-xl"
             dangerouslySetInnerHTML={{ __html: solution }}
           />
         </div>

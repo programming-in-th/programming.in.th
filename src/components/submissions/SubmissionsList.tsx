@@ -81,7 +81,7 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
                   {submissionCiteria.map((value) => (
                     <th
                       scope="col"
-                      className="px-3 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                      className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                       key={`submission-head-${value}`}
                     >
                       {value}
@@ -99,12 +99,12 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
                       return submissions.data.map(
                         (submission: ISubmissionList) => (
                           <tr
-                            className="transition duration-150 cursor-pointer hover:bg-gray-200"
+                            className="cursor-pointer transition duration-150 hover:bg-gray-200"
                             key={`submission-body-${submission.submissionID}`}
                           >
                             {isObjectEmpty(submission) ? (
                               <td
-                                className="px-3 py-3 text-sm text-center text-gray-700 whitespace-nowrap"
+                                className="whitespace-nowrap px-3 py-3 text-center text-sm text-gray-700"
                                 colSpan={7}
                               >
                                 Hidden Submission
@@ -119,7 +119,7 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
                                       href={`/submissions/${submission.submissionID}`}
                                     >
                                       <a>
-                                        <div className="px-3 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                        <div className="whitespace-nowrap px-3 py-3 text-sm text-gray-700">
                                           {data}
                                         </div>
                                       </a>
@@ -139,10 +139,10 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
         </div>
         <button
           type="button"
-          className={`transition duration-150 font-semibold mt-4 w-full inline-flex items-center justify-center px-4 py-2 border border-transparent text-md rounded-md ${
+          className={`text-md mt-4 inline-flex w-full items-center justify-center rounded-md border border-transparent px-4 py-2 font-semibold transition duration-150 ${
             isLoadingMore || isReachingEnd
-              ? 'text-gray-500 bg-gray-50 hover:bg-gray-100 cursor-not-allowed'
-              : 'text-gray-700 bg-gray-100 hover:bg-gray-200'
+              ? 'cursor-not-allowed bg-gray-50 text-gray-500 hover:bg-gray-100'
+              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
           }`}
           onClick={() => {
             if (!isReachingEnd) {
@@ -153,7 +153,7 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
         >
           {isLoadingMore ? (
             <svg
-              className="w-6 h-6 p-1 text-gray-800 animate-spin"
+              className="h-6 w-6 animate-spin p-1 text-gray-800"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
@@ -183,8 +183,8 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
   }
 
   return (
-    <div className="flex flex-col mt-4">
-      <div className="flex flex-col max-w-full md:flex-row">
+    <div className="mt-4 flex flex-col">
+      <div className="flex max-w-full flex-col md:flex-row">
         <input
           type="text"
           onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
@@ -193,7 +193,7 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
           }}
           value={username}
           placeholder="Username"
-          className="flex items-center w-48 h-10 px-4 border-gray-300 rounded-md shadow-sm focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+          className="flex h-10 w-48 items-center rounded-md border-gray-300 px-4 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
         />
         {taskFrom === undefined && (
           <input
@@ -204,7 +204,7 @@ export const SubmissionsList = ({ id: taskFrom = undefined }) => {
             }}
             value={task}
             placeholder="Task"
-            className="flex items-center w-48 h-10 px-4 mt-4 border-gray-300 rounded-md shadow-sm md:ml-4 md:mt-0 focus:ring-gray-500 focus:border-gray-500 sm:text-sm"
+            className="mt-4 flex h-10 w-48 items-center rounded-md border-gray-300 px-4 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm md:ml-4 md:mt-0"
           />
         )}
       </div>

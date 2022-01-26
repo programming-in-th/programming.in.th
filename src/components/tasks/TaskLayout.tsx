@@ -16,9 +16,9 @@ export const TaskLayout = ({ type, metadata, children }) => {
   if (type === 'null') {
     return (
       <PageLayout>
-        <div className="flex flex-col flex-grow w-full mx-auto mt-8">
-          <div className="flex items-center justify-center flex-grow">
-            <p className="p-8 text-6xl font-extrabold text-center">
+        <div className="mx-auto mt-8 flex w-full flex-grow flex-col">
+          <div className="flex flex-grow items-center justify-center">
+            <p className="p-8 text-center text-6xl font-extrabold">
               Task not found
             </p>
           </div>
@@ -30,7 +30,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
   return (
     <PageLayout>
       <div
-        className={`flex mt-8 mx-auto flex-col transition-all duration-1000 w-full ${
+        className={`mx-auto mt-8 flex w-full flex-col transition-all duration-1000 ${
           type === 'solution'
             ? 'md:max-w-4xl'
             : type === 'submissions'
@@ -39,15 +39,15 @@ export const TaskLayout = ({ type, metadata, children }) => {
         }`}
       >
         <div className="flex flex-col">
-          <div className="flex items-baseline mx-6 md:mx-0">
-            <p className="text-2xl font-medium md:text-3x font-display">
+          <div className="mx-6 flex items-baseline md:mx-0">
+            <p className="md:text-3x font-display text-2xl font-medium">
               {metadata.title}
             </p>
           </div>
-          <div className="flex justify-around mx-6 md:justify-start md:mx-0 md:mt-2">
+          <div className="mx-6 flex justify-around md:mx-0 md:mt-2 md:justify-start">
             <Link href={`/tasks/${metadata.id}`}>
               <a
-                className={`mt-2 md:mt-0 leading-5 ${
+                className={`mt-2 leading-5 md:mt-0 ${
                   type === 'statement' ? 'text-gray-700' : 'text-gray-400'
                 }`}
               >
@@ -56,7 +56,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
             </Link>
             <Link href={`/tasks/${metadata.id}/submissions`}>
               <a
-                className={`mt-2 md:ml-6 md:mt-0 leading-5 ${
+                className={`mt-2 leading-5 md:ml-6 md:mt-0 ${
                   type === 'submissions' ? 'text-gray-700' : 'text-gray-400'
                 }`}
               >
@@ -65,7 +65,7 @@ export const TaskLayout = ({ type, metadata, children }) => {
             </Link>
             <Link href={`/tasks/${metadata.id}/solution`}>
               <a
-                className={`mt-2 md:ml-6 md:mt-0 leading-5 ${
+                className={`mt-2 leading-5 md:ml-6 md:mt-0 ${
                   type === 'solution' ? 'text-gray-700' : 'text-gray-400'
                 }`}
               >
@@ -76,13 +76,13 @@ export const TaskLayout = ({ type, metadata, children }) => {
         </div>
       </div>
       <div
-        className={`flex mb-8 w-full ${
+        className={`mb-8 flex w-full ${
           type === 'solution'
             ? 'md:max-w-4xl'
             : type === 'submissions'
             ? 'md:max-w-5xl'
             : 'md:max-w-6xl'
-        } flex-col flex-grow mx-auto`}
+        } mx-auto flex-grow flex-col`}
       >
         {children}
       </div>

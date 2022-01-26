@@ -41,15 +41,15 @@ export const Statement = ({ metadata }) => {
   }
 
   return (
-    <div className="flex flex-col flex-grow h-full md:flex-row">
+    <div className="flex h-full flex-grow flex-col md:flex-row">
       <div
-        className={`flex mt-4 px-6 md:px-0 flex-col w-full ${
+        className={`mt-4 flex w-full flex-col px-6 md:px-0 ${
           user ? 'md:w-2/3' : ''
         }`}
       >
         <div className="h-full">
           <object
-            className="w-full h-full"
+            className="h-full w-full"
             data={`${config.awsURL}/statements/${metadata.id}.pdf`}
           >
             <p>
@@ -67,20 +67,20 @@ export const Statement = ({ metadata }) => {
         </div>
       </div>
       {user && (
-        <div className="flex flex-col w-full px-4 mt-4 md:px-0 md:pl-10 md:w-1/3">
+        <div className="mt-4 flex w-full flex-col px-4 md:w-1/3 md:px-0 md:pl-10">
           <div className="overflow-hidden border-b border-gray-200 shadow sm:rounded-lg">
             <table className="min-w-full divide-y divide-gray-200">
               <thead className="bg-gray-50">
                 <tr>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                   >
                     SUBMISSION TIME
                   </th>
                   <th
                     scope="col"
-                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                   >
                     POINTS
                   </th>
@@ -91,7 +91,7 @@ export const Statement = ({ metadata }) => {
                   isArrayEmpty(submissions.data) ? (
                     <tr>
                       <td
-                        className="px-6 py-4 text-sm font-medium text-center text-gray-900 whitespace-nowrap"
+                        className="whitespace-nowrap px-6 py-4 text-center text-sm font-medium text-gray-900"
                         colSpan={2}
                       >
                         No recent submission
@@ -102,10 +102,10 @@ export const Statement = ({ metadata }) => {
                       return isObjectEmpty(submission) ? (
                         <tr
                           key={`statement-submission-${metadata.id}-${idx}`}
-                          className="transition duration-150 cursor-pointer hover:bg-gray-200"
+                          className="cursor-pointer transition duration-150 hover:bg-gray-200"
                         >
                           <td
-                            className="px-6 py-3 text-sm text-center text-gray-700 whitespace-nowrap"
+                            className="whitespace-nowrap px-6 py-3 text-center text-sm text-gray-700"
                             colSpan={2}
                           >
                             Hidden Submission
@@ -113,7 +113,7 @@ export const Statement = ({ metadata }) => {
                         </tr>
                       ) : (
                         <tr
-                          className="transition duration-150 cursor-pointer hover:bg-gray-200"
+                          className="cursor-pointer transition duration-150 hover:bg-gray-200"
                           key={`statement-submission-${metadata.id}-${idx}`}
                         >
                           <td>
@@ -121,7 +121,7 @@ export const Statement = ({ metadata }) => {
                               href={`/submissions/${submission.submissionID}`}
                             >
                               <a>
-                                <div className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                <div className="whitespace-nowrap px-6 py-3 text-sm text-gray-700">
                                   {getTimestamp(submission.timestamp)}
                                 </div>
                               </a>
@@ -132,7 +132,7 @@ export const Statement = ({ metadata }) => {
                               href={`/submissions/${submission.submissionID}`}
                             >
                               <a>
-                                <div className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                <div className="whitespace-nowrap px-6 py-3 text-sm text-gray-700">
                                   {submission.score}
                                 </div>
                               </a>
@@ -145,7 +145,7 @@ export const Statement = ({ metadata }) => {
                 ) : (
                   <tr>
                     <td
-                      className="px-6 py-3 text-sm font-medium text-center text-gray-900 whitespace-nowrap"
+                      className="whitespace-nowrap px-6 py-3 text-center text-sm font-medium text-gray-900"
                       colSpan={2}
                     >
                       Loading...

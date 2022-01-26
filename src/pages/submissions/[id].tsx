@@ -79,8 +79,8 @@ const SubmissionDetail: NextPage = () => {
   if (isObjectEmpty(submission)) {
     return (
       <PageLayout>
-        <div className="flex items-center justify-center flex-grow">
-          <p className="text-6xl font-bold text-center align-center">
+        <div className="flex flex-grow items-center justify-center">
+          <p className="align-center text-center text-6xl font-bold">
             Submission doesn&apos;t exist
           </p>
         </div>
@@ -94,11 +94,11 @@ const SubmissionDetail: NextPage = () => {
 
   return (
     <PageLayout>
-      <div className="flex justify-center align-top width-full sm:px-4 md:p-8">
-        <div className="flex flex-col w-full max-w-5xl p-4 overflow-hidden bg-white border-gray-200 md:shadow-lg md:border-b md:rounded-lg">
+      <div className="width-full flex justify-center align-top sm:px-4 md:p-8">
+        <div className="flex w-full max-w-5xl flex-col overflow-hidden border-gray-200 bg-white p-4 md:rounded-lg md:border-b md:shadow-lg">
           <div className="flex flex-col">
-            <div className="flex justify-between align-center">
-              <p className="text-2xl font-semibold font-display">
+            <div className="align-center flex justify-between">
+              <p className="font-display text-2xl font-semibold">
                 <Link href={`/tasks/${submission.task.id}`}>
                   <a className="hover:text-gray-500">[{submission.task.id}]</a>
                 </Link>{' '}
@@ -117,14 +117,14 @@ const SubmissionDetail: NextPage = () => {
             </div>
           </div>
           {submission.task.type !== 'normal' && (
-            <div className="flex flex-col mt-4">
+            <div className="mt-4 flex flex-col">
               {submission.task.fileName.map((name, index) => (
                 <button
                   key={`submission-filename-${id}-${index}`}
                   type="button"
                   className={`${
                     index > 0 ? 'ml-4' : ''
-                  } inline-flex items-center justify-center px-2.5 py-1.5 border border-gray-300 shadow-sm text-xs font-medium rounded text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500`}
+                  } inline-flex items-center justify-center rounded border border-gray-300 bg-white px-2.5 py-1.5 text-xs font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2`}
                   onClick={() => setCurrentCodeIndex(index)}
                 >
                   {name}
@@ -147,15 +147,15 @@ const SubmissionDetail: NextPage = () => {
                       } border-gray-200 py-2`}
                       key={`submission-disclosure-detail-${id}-${index}`}
                     >
-                      <Disclosure.Button className="flex justify-between w-full px-6 text-sm font-medium text-left">
+                      <Disclosure.Button className="flex w-full justify-between px-6 text-left text-sm font-medium">
                         <p className="font-normal">
                           Subtask #{index + 1} [{group.score}/{group.fullScore}]
                         </p>
                         <svg
                           xmlns="http://www.w3.org/2000/svg"
                           className={`${
-                            open ? 'transform rotate-180' : ''
-                          } transition duration-300 h-6 w-6`}
+                            open ? 'rotate-180 transform' : ''
+                          } h-6 w-6 transition duration-300`}
                           fill="none"
                           viewBox="0 0 24 24"
                           stroke="currentColor"
@@ -177,37 +177,37 @@ const SubmissionDetail: NextPage = () => {
                         leaveTo="transform scale-95 opacity-0"
                       >
                         <Disclosure.Panel>
-                          <div className="my-2 overflow-auto border border-gray-100 rounded-lg">
+                          <div className="my-2 overflow-auto rounded-lg border border-gray-100">
                             <table className="min-w-full divide-y divide-gray-200">
                               <thead className="bg-gray-50">
                                 <tr>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                                   >
                                     #
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                                   >
                                     Verdict
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                                   >
                                     Time
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                                   >
                                     Memory
                                   </th>
                                   <th
                                     scope="col"
-                                    className="px-6 py-3 text-xs font-medium tracking-wider text-left text-gray-500 uppercase"
+                                    className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider text-gray-500"
                                   >
                                     Message
                                   </th>
@@ -219,19 +219,19 @@ const SubmissionDetail: NextPage = () => {
                                     <tr
                                       key={`submission-table-${id}-${index}-${groupIdx}`}
                                     >
-                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                      <td className="whitespace-nowrap px-6 py-3 text-sm text-gray-700">
                                         {status.index}
                                       </td>
-                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                      <td className="whitespace-nowrap px-6 py-3 text-sm text-gray-700">
                                         {status.verdict}
                                       </td>
-                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                      <td className="whitespace-nowrap px-6 py-3 text-sm text-gray-700">
                                         {status.time}
                                       </td>
-                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                      <td className="whitespace-nowrap px-6 py-3 text-sm text-gray-700">
                                         {status.memory}
                                       </td>
-                                      <td className="px-6 py-3 text-sm text-gray-700 whitespace-nowrap">
+                                      <td className="whitespace-nowrap px-6 py-3 text-sm text-gray-700">
                                         {status.message}
                                       </td>
                                     </tr>

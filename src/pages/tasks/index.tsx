@@ -34,9 +34,9 @@ export default function Search() {
         />
       </Head>
       <PageLayout>
-        <div className="flex justify-center w-full min-h-screen mx-auto">
+        <div className="mx-auto flex min-h-screen w-full justify-center">
           <InstantSearch searchClient={searchClient} indexName={indexName}>
-            <div className="flex flex-col w-1/2 my-10">
+            <div className="my-10 flex w-1/2 flex-col">
               <div className="mx-auto">
                 <CustomSearchBox />
                 <div className="mx-auto mt-4 text-center">

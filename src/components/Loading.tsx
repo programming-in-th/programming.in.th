@@ -1,10 +1,10 @@
 import React from 'react'
 
 export const Loading = () => (
-  <div className="flex items-center justify-center flex-col w-screen h-screen">
-    <p className="text-3xl md:text-6xl font-extrabold p-8">PROGRAMMING.IN.TH</p>
+  <div className="flex h-screen w-screen flex-col items-center justify-center">
+    <p className="p-8 text-3xl font-extrabold md:text-6xl">PROGRAMMING.IN.TH</p>
     <svg
-      className="animate-spin h-20 w-20 text-gray-800"
+      className="h-20 w-20 animate-spin text-gray-800"
       xmlns="http://www.w3.org/2000/svg"
       fill="none"
       viewBox="0 0 24 24"
