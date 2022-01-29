@@ -1,10 +1,10 @@
-import React from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import React from 'react'
+import { useSession, signIn, signOut } from 'next-auth/react'
 
-import { PageLayout } from "components/Layout";
+import { PageLayout } from 'components/Layout'
 
 const Index = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession()
 
   return (
     <PageLayout>
@@ -21,7 +21,7 @@ const Index = () => {
         <p className="text-6xl">PROGRAMMING.IN.TH</p>
       </div>
     </PageLayout>
-  );
-};
+  )
+}
 
-export default Index;
+export default Index

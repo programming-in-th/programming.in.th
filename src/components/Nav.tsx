@@ -1,28 +1,28 @@
-import React, { Fragment, useEffect, useMemo } from "react";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Popover, Transition } from "@headlessui/react";
-import { useSession, signOut } from "next-auth/react";
+import React, { Fragment, useEffect, useMemo } from 'react'
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+import { Popover, Transition } from '@headlessui/react'
+import { useSession, signOut } from 'next-auth/react'
 
 const navigation = [
-  { name: "Home", href: "/" },
-  { name: "Tasks", href: "/tasks" },
-  { name: "Submissions", href: "/submissions" },
-  { name: "Learn", href: "/learn" },
-];
+  { name: 'Home', href: '/' },
+  { name: 'Tasks', href: '/tasks' },
+  { name: 'Submissions', href: '/submissions' },
+  { name: 'Learn', href: '/learn' }
+]
 
 export const Nav = () => {
-  const router = useRouter();
+  const router = useRouter()
 
   const location = useMemo(() => {
-    return router.pathname.split("/")[1];
-  }, [router]);
+    return router.pathname.split('/')[1]
+  }, [router])
 
-  const { data: session } = useSession();
+  const { data: session } = useSession()
 
   useEffect(() => {
-    console.log(session);
-  }, [session]);
+    console.log(session)
+  }, [session])
 
   return (
     <Popover as="header" className="relative">
@@ -55,14 +55,14 @@ export const Nav = () => {
               </div>
             </div>
             <div className="hidden space-x-8 md:ml-10 md:flex">
-              {navigation.map((item) => (
+              {navigation.map(item => (
                 <Link href={item.href} key={item.name}>
                   <a
                     key={item.name}
                     className={`text-base font-medium hover:text-gray-600 ${
                       `/${location}` == item.href
-                        ? "text-gray-600"
-                        : "text-gray-400"
+                        ? 'text-gray-600'
+                        : 'text-gray-400'
                     }`}
                   >
                     {item.name}
@@ -132,14 +132,14 @@ export const Nav = () => {
             </div>
             <div className="pt-5 pb-6">
               <div className="space-y-1 px-2">
-                {navigation.map((item) => (
+                {navigation.map(item => (
                   <Link href={item.href} key={item.name}>
                     <a
                       key={item.name}
                       className={`font-sm block rounded-md px-3 py-2 text-base ${
                         `/${location}` == item.href
-                          ? "bg-gray-200 text-gray-700"
-                          : "text-gray-400"
+                          ? 'bg-gray-200 text-gray-700'
+                          : 'text-gray-400'
                       }`}
                     >
                       {item.name}
@@ -159,5 +159,5 @@ export const Nav = () => {
         </Popover.Panel>
       </Transition>
     </Popover>
-  );
-};
+  )
+}

@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react'
 
 export const Footer = () => {
   return (
@@ -17,7 +17,7 @@ export const Footer = () => {
                 © 2019-{new Date().getFullYear()} the PROGRAMMING.IN.TH team
               </p>
               <p className="text-xs">
-                The source code for this website is available on{" "}
+                The source code for this website is available on{' '}
                 <a
                   href="https://github.com/programming-in-th"
                   target="_blank"
@@ -47,7 +47,7 @@ export const Footer = () => {
               © 2019-{new Date().getFullYear()} the PROGRAMMING.IN.TH team
             </p>
             <p className="text-xs">
-              The source code for this website is available on{" "}
+              The source code for this website is available on{' '}
               <a
                 href="https://github.com/programming-in-th"
                 target="_blank"
@@ -63,5 +63,5 @@ export const Footer = () => {
         </div>
       </div>
     </footer>
-  );
-};
+  )
+}

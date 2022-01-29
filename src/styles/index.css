@@ -17,8 +17,8 @@ svg {
 /**
  * Based on copypasta from Remy Bach and Sarah Drasner
  */
-code[class*="language-"],
-pre[class*="language-"] {
+code[class*='language-'],
+pre[class*='language-'] {
   color: white;
   background: #011627;
   font-family: Fira Code, Menlo, Monaco, source-code-pro, Courier New, monospace;
@@ -44,32 +44,32 @@ pre[class*="language-"] {
 }
 
 /* Code blocks */
-pre[class*="language-"] {
+pre[class*='language-'] {
   overflow: auto;
   margin: 0.5em 0;
   padding: 1.3125rem;
   font-size: 14px;
 }
 
-pre[class*="language-"]::-moz-selection {
+pre[class*='language-']::-moz-selection {
   /* Firefox */
   background: hsl(207, 4%, 16%);
 }
 
-pre[class*="language-"]::selection {
+pre[class*='language-']::selection {
   /* Safari */
   background: hsl(207, 4%, 16%);
 }
 
 /* Text Selection colour */
-pre[class*="language-"]::-moz-selection,
-pre[class*="language-"] ::-moz-selection {
+pre[class*='language-']::-moz-selection,
+pre[class*='language-'] ::-moz-selection {
   text-shadow: none;
   background: hsla(0, 0%, 100%, 0.15);
 }
 
-pre[class*="language-"]::selection,
-pre[class*="language-"] ::selection {
+pre[class*='language-']::selection,
+pre[class*='language-'] ::selection {
   text-shadow: none;
   background: hsla(0, 0%, 100%, 0.15);
 }
@@ -109,7 +109,7 @@ pre[class*="language-"] ::selection {
 .token.selector,
 .token.doctype {
   color: rgb(199, 146, 234);
-  font-style: "italic";
+  font-style: 'italic';
 }
 
 .token.class-name {

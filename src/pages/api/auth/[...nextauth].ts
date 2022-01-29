@@ -1,7 +1,7 @@
-import NextAuth from "next-auth";
-import GithubProvider from "next-auth/providers/github";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import prisma from "lib/prisma";
+import NextAuth from 'next-auth'
+import GithubProvider from 'next-auth/providers/github'
+import { PrismaAdapter } from '@next-auth/prisma-adapter'
+import prisma from 'lib/prisma'
 
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -15,10 +15,10 @@ export default NextAuth({
           name: profile.name || profile.login,
           username: profile.login,
           email: profile.email,
-          image: profile.avatar_url,
-        };
-      },
-    }),
+          image: profile.avatar_url
+        }
+      }
+    })
   ],
   callbacks: {
     session: ({ session, user }) => ({
@@ -26,8 +26,8 @@ export default NextAuth({
       user: {
         ...session.user,
         id: user.id,
-        username: user.username,
-      },
-    }),
-  },
-});
+        username: user.username
+      }
+    })
+  }
+})

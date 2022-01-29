@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-import { PageLayout } from "components/Layout";
+import { PageLayout } from 'components/Layout'
 
 const Index = () => {
   return (
@@ -9,7 +9,7 @@ const Index = () => {
         <p className="text-6xl">Tasks</p>
       </div>
     </PageLayout>
-  );
-};
+  )
+}
 
-export default Index;
+export default Index

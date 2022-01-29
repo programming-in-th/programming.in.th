@@ -1,7 +1,7 @@
-import React, { useState, Fragment } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { PageLayout } from "components/Layout";
-import { signIn } from "next-auth/react";
+import React, { useState, Fragment } from 'react'
+import { Dialog, Transition } from '@headlessui/react'
+import { PageLayout } from 'components/Layout'
+import { signIn } from 'next-auth/react'
 
 const ErrorComp = ({ open, setOpen, errMsg }) => (
   <Transition.Root show={open} as={Fragment}>
@@ -84,18 +84,18 @@ const ErrorComp = ({ open, setOpen, errMsg }) => (
       </div>
     </Dialog>
   </Transition.Root>
-);
+)
 
 const Login = () => {
   const [errMsg, setErrMsg] = useState<string>(
-    "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent accumsan, velit quis cursus molestie, lorem neque accumsan ipsum, at fringilla quam eros a nisl. Etiam nec interdum augue. Suspendisse ipsum elit, condimentum vel rutrum quis, elementum scelerisque diam. Suspendisse lorem augue, condimentum a iaculis ut, finibus et leo. Vestibulum aliquet sed lacus eu interdum. Nunc eu molestie dolor. Ut nibh mi, lobortis vitae scelerisque sit amet, pellentesque et magna. "
-  );
-  const [open, setOpen] = useState<boolean>(false);
+    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent accumsan, velit quis cursus molestie, lorem neque accumsan ipsum, at fringilla quam eros a nisl. Etiam nec interdum augue. Suspendisse ipsum elit, condimentum vel rutrum quis, elementum scelerisque diam. Suspendisse lorem augue, condimentum a iaculis ut, finibus et leo. Vestibulum aliquet sed lacus eu interdum. Nunc eu molestie dolor. Ut nibh mi, lobortis vitae scelerisque sit amet, pellentesque et magna. '
+  )
+  const [open, setOpen] = useState<boolean>(false)
 
   const setError = (msg: string) => {
-    setErrMsg(msg);
-    setOpen(true);
-  };
+    setErrMsg(msg)
+    setOpen(true)
+  }
 
   return (
     <PageLayout>
@@ -235,7 +235,7 @@ const Login = () => {
                 <div>
                   <a
                     className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
-                    onClick={() => signIn("github")}
+                    onClick={() => signIn('github')}
                   >
                     <span className="sr-only">Sign in with GitHub</span>
                     <svg
@@ -258,7 +258,7 @@ const Login = () => {
         </div>
       </div>
     </PageLayout>
-  );
-};
+  )
+}
 
-export default Login;
+export default Login

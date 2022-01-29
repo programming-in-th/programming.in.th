@@ -28,6 +28,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "format": "prettier --write ./src/**/*.{ts,tsx,css}",
     "prebuild": "prisma generate",
     "predev": "prisma generate",
     "prepare": "husky install"
