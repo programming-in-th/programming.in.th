@@ -90,6 +90,7 @@ model Submission {
   time        Int
   memory      Int
   codeLength  Int
+  score       Int
   fullScore   Int
   groups      Json
   language    String
