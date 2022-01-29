@@ -46,16 +46,17 @@ model Session {
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            String       @id @default(cuid())
   username      String?
   name          String?
-  email         String?   @unique
+  email         String?      @unique
   emailVerified DateTime?
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
   accounts      Account[]
   sessions      Session[]
+  submissions   Submission[]
 }
 
 model VerificationToken {
@@ -64,4 +65,36 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+model Task {
+  id          String  @id @unique
+  title       String  @db.Text
+  fullScore   Int
+  memoryLimit Int
+  timeLimit   Int
+  path        String  @db.Text
+  solved      Int
+  private     Boolean
+  type        String  @db.Text
+  tags        Json
+
+  @@index([id])
+}
+
+model Submission {
+  id          Int      @id @default(autoincrement())
+  taskId      String
+  status      String
+  submittedAt DateTime @default(now())
+  time        Int
+  memory      Int
+  codeLength  Int
+  fullScore   Int
+  groups      Json
+  language    String
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: SetNull)
+
+  @@index([id])
 }
