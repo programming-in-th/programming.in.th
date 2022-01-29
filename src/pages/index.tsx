@@ -8,17 +8,17 @@ const Index = () => {
 
   return (
     <PageLayout>
-      <div className="flex h-screen items-center justify-center">
+      <div className="flex h-screen flex-col items-center justify-center">
+        <p className="text-6xl">PROGRAMMING.IN.TH</p>
         {session ? (
           <div>
-            Signed in as {session.user.email} <br />
+            Signed in as {session.user.name} <br />
           </div>
         ) : (
           <div>
             Not signed in <br />
           </div>
         )}
-        <p className="text-6xl">PROGRAMMING.IN.TH</p>
       </div>
     </PageLayout>
   )
