@@ -22,7 +22,7 @@
   "dependencies": {
     "@headlessui/react": "^1.4.0",
     "@heroicons/react": "^1.0.3",
-    "@next/bundle-analyzer": "^9.4.4",
+    "@next/bundle-analyzer": "^12.0.9",
     "@zeit/next-bundle-analyzer": "^0.1.2",
     "algoliasearch": "^4.10.3",
     "cross-env": "^7.0.2",
