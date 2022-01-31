@@ -5545,16 +5545,17 @@ mdast-util-math@^2.0.0:
     longest-streak "^3.0.0"
     mdast-util-to-markdown "^1.0.0"
 
-mdast-util-to-hast@^11.0.0:
-  version "11.3.0"
-  resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-11.3.0.tgz#ea9220617a710e80aa5cc3ac7cc9d4bb0440ae7a"
-  integrity sha512-4o3Cli3hXPmm1LhB+6rqhfsIUBjnKFlIUZvudaermXB+4/KONdd/W4saWWkC+LBLbPMqhFSSTSRgafHsT5fVJw==
+mdast-util-to-hast@^12.1.0:
+  version "12.1.1"
+  resolved "https://registry.yarnpkg.com/mdast-util-to-hast/-/mdast-util-to-hast-12.1.1.tgz#89a2bb405eaf3b05eb8bf45157678f35eef5dbca"
+  integrity sha512-qE09zD6ylVP14jV4mjLIhDBOrpFdShHZcEsYvvKGABlr9mGbV7mTlRWdoFxL/EYSTNDiC9GZXy7y8Shgb9Dtzw==
   dependencies:
     "@types/hast" "^2.0.0"
     "@types/mdast" "^3.0.0"
     "@types/mdurl" "^1.0.0"
     mdast-util-definitions "^5.0.0"
     mdurl "^1.0.0"
+    micromark-util-sanitize-uri "^1.0.0"
     unist-builder "^3.0.0"
     unist-util-generated "^2.0.0"
     unist-util-position "^4.0.0"
@@ -7065,14 +7066,14 @@ remark-parse@^10.0.0:
     mdast-util-from-markdown "^1.0.0"
     unified "^10.0.0"
 
-remark-rehype@^9.0.0:
-  version "9.1.0"
-  resolved "https://registry.yarnpkg.com/remark-rehype/-/remark-rehype-9.1.0.tgz#e4b5b6e19c125b3780343eb66c3e9b99b0f06a81"
-  integrity sha512-oLa6YmgAYg19zb0ZrBACh40hpBLteYROaPLhBXzLgjqyHQrN+gVP9N/FJvfzuNNuzCutktkroXEZBrxAxKhh7Q==
+remark-rehype@^10.1.0:
+  version "10.1.0"
+  resolved "https://registry.yarnpkg.com/remark-rehype/-/remark-rehype-10.1.0.tgz#32dc99d2034c27ecaf2e0150d22a6dcccd9a6279"
+  integrity sha512-EFmR5zppdBp0WQeDVZ/b66CWJipB2q2VLNFMabzDSGR66Z2fQii83G5gTBbgGEnEEA0QRussvrFHxk1HWGJskw==
   dependencies:
     "@types/hast" "^2.0.0"
     "@types/mdast" "^3.0.0"
-    mdast-util-to-hast "^11.0.0"
+    mdast-util-to-hast "^12.1.0"
     unified "^10.0.0"
 
 require-directory@^2.1.1:
