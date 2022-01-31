@@ -68,11 +68,11 @@ model VerificationToken {
 }
 
 model Task {
-  id          String  @id @unique
+  id          String  @id
   title       String  @db.Text
   fullScore   Int
   memoryLimit Int
-  timeLimit   Int
+  timeLimit   Float
   path        String  @db.Text
   solved      Int
   private     Boolean
@@ -87,7 +87,7 @@ model Submission {
   taskId      String
   status      String
   submittedAt DateTime @default(now())
-  time        Int
+  time        Float
   memory      Int
   codeLength  Int
   score       Int
