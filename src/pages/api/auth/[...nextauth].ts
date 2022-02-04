@@ -1,6 +1,9 @@
 import NextAuth from 'next-auth'
 import GithubProvider from 'next-auth/providers/github'
+import GoogleProvider from 'next-auth/providers/google'
+
 import { PrismaAdapter } from '@next-auth/prisma-adapter'
+
 import prisma from 'lib/prisma'
 
 export default NextAuth({
@@ -16,6 +19,19 @@ export default NextAuth({
           username: profile.login,
           email: profile.email,
           image: profile.avatar_url
+        }
+      }
+    }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.name,
+          username: profile.name,
+          email: profile.email,
+          image: profile.picture
         }
       }
     })

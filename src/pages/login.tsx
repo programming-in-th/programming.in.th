@@ -201,7 +201,10 @@ const Login = () => {
 
               <div className="mt-6 grid grid-cols-3 gap-3">
                 <div>
-                  <a className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
+                  <a
+                    className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
+                    onClick={() => signIn('google')}
+                  >
                     <span className="sr-only">Sign in with Google</span>
                     <svg
                       className="h-5 w-5"
