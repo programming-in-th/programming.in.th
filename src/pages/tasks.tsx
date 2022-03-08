@@ -36,10 +36,18 @@ type Task = {
   solved: number
   score: number
   fullScore: number
+  showTags: string[] | boolean
 }
 
 const TaskItem = (context: Task) => {
   const [bookmark, setBookmark] = useState<boolean>(false)
+  const [tagStatus, setTag] = useState<boolean>(false)
+
+  useEffect(() => {
+    if (typeof context.showTags === 'boolean') {
+      setTag(context.showTags)
+    }
+  }, [context.showTags])
   return (
     <div className="group flex w-full items-center justify-between p-2">
       <div className="flex w-full rounded-xl py-3 px-6 font-display shadow-sm transition group-hover:shadow-md">
@@ -48,11 +56,25 @@ const TaskItem = (context: Task) => {
           <p className="text-sm text-gray-400">{context.id}</p>
         </div>
         <div className="flex w-full items-center justify-center">
-          {context.tags.map((tag: string) => (
-            <div className="mx-1 rounded-lg bg-gray-100 px-2 text-sm text-gray-500">
-              {tag}
-            </div>
-          ))}
+          {context.tags.map((tag: string) => {
+            if (
+              tagStatus === true ||
+              (Array.isArray(context.showTags) &&
+                context.showTags.includes(tag))
+            ) {
+              return (
+                <div className="mx-1 rounded-lg bg-gray-100 px-2 text-sm text-gray-500">
+                  {tag}
+                </div>
+              )
+            }
+          })}
+          {tagStatus !== true && (
+            <p
+              className="cursor-pointer text-sm text-gray-400"
+              onClick={() => setTag(true)}
+            >{`show all tag >`}</p>
+          )}
         </div>
         <div className="flex w-full items-center justify-center">
           <p className="text-sm text-gray-500">{context.solved}</p>
@@ -63,7 +85,7 @@ const TaskItem = (context: Task) => {
               <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
               <div className="absolute h-1.5 w-1/2 rounded-full bg-gray-500" />
             </div>
-            <p className="mt-2 text-sm text-gray-400">{context.score} points</p>
+            <p className="mt-2 text-sm text-gray-500">{context.score} points</p>
           </div>
         </div>
       </div>
@@ -94,6 +116,7 @@ const TaskItem = (context: Task) => {
 
 const Index = () => {
   const [task, setTask] = useState<Task[]>([])
+  const [tag, setTag] = useState<boolean>(false)
 
   const fetchMoreData = () => {
     fetch(
@@ -144,8 +167,15 @@ const Index = () => {
                     Problem Title
                   </p>
                 </div>
-                <div className="flex w-full justify-center">
-                  <p className="text-sm font-medium text-gray-400">Show tag</p>
+                <div className="flex w-full items-center justify-center">
+                  <input
+                    type="checkbox"
+                    onChange={() => setTag(!tag)}
+                    className="h-4 w-4 rounded border-gray-300"
+                  />
+                  <p className="ml-2 text-sm font-medium text-gray-400">
+                    Show tag
+                  </p>
                 </div>
                 <div className="flex w-full shrink items-center justify-center">
                   <p className="text-sm text-gray-400">Solved</p>
@@ -164,7 +194,7 @@ const Index = () => {
               loader={<div className="text-center">Loading...</div>}
             >
               {task.map(context => (
-                <TaskItem {...context} />
+                <TaskItem {...context} showTags={tag} />
               ))}
             </InfiniteScroll>
           </div>
