@@ -60,7 +60,7 @@
     "eslint-config-next": "11.1.2",
     "husky": "^4.2.5",
     "postcss": "^8.4.5",
-    "prettier": "^2.0.5",
+    "prettier": "^2.6.1",
     "prettier-plugin-tailwindcss": "^0.1.4",
     "pretty-quick": "^2.0.1",
     "tailwindcss": "^3.0.16",
