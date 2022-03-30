@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import InfiniteScroll from 'react-infinite-scroll-component'
+import Link from 'next/link'
+import prisma from 'lib/prisma'
 import { PageLayout } from 'components/Layout'
 import { triggerAsyncId } from 'async_hooks'
 
@@ -50,45 +51,65 @@ const TaskItem = (context: Task) => {
   }, [context.showTags])
   return (
     <div className="group flex w-full items-center justify-between p-2">
-      <div className="flex w-full rounded-xl py-3 px-6 font-display shadow-sm transition group-hover:shadow-md">
-        <div className="flex w-full flex-col">
-          <p className="text-sm font-medium text-gray-500">{context.title}</p>
-          <p className="text-sm text-gray-400">{context.id}</p>
-        </div>
-        <div className="flex w-full items-center justify-center">
-          {context.tags.map((tag: string) => {
-            if (
-              tagStatus === true ||
-              (Array.isArray(context.showTags) &&
-                context.showTags.includes(tag))
-            ) {
-              return (
-                <div className="mx-1 rounded-lg bg-gray-100 px-2 text-sm text-gray-500">
-                  {tag}
-                </div>
-              )
-            }
-          })}
-          {tagStatus !== true && (
-            <p
-              className="cursor-pointer text-sm text-gray-400"
-              onClick={() => setTag(true)}
-            >{`show all tag >`}</p>
-          )}
-        </div>
-        <div className="flex w-full items-center justify-center">
-          <p className="text-sm text-gray-500">{context.solved}</p>
-        </div>
-        <div className="mx-3 flex h-auto w-28 flex-none items-center justify-center">
-          <div className="flex h-auto w-full flex-col items-center justify-around">
-            <div className="relative h-full w-full">
-              <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
-              <div className="absolute h-1.5 w-1/2 rounded-full bg-gray-500" />
-            </div>
-            <p className="mt-2 text-sm text-gray-500">{context.score} points</p>
+      <Link href={`/tasks/${context.id}`}>
+        <a className="flex w-full rounded-xl py-3 px-6 font-display shadow-sm transition group-hover:shadow-md">
+          <div className="flex w-full flex-col">
+            <p className="text-sm font-medium text-gray-500">{context.title}</p>
+            <p className="text-sm text-gray-400">{context.id}</p>
           </div>
-        </div>
-      </div>
+          <div className="flex w-full items-center justify-center">
+            {context.tags.map((tag: string) => {
+              if (
+                tagStatus === true ||
+                (Array.isArray(context.showTags) &&
+                  context.showTags.includes(tag))
+              ) {
+                return (
+                  <div
+                    className="mx-1 rounded-lg bg-gray-100 px-2 text-sm text-gray-500"
+                    key={`tag-${context.id}-${tag}`}
+                  >
+                    {tag}
+                  </div>
+                )
+              }
+            })}
+            {tagStatus !== true && (
+              <p
+                className="text-sm text-gray-400"
+                onClick={event => {
+                  event.preventDefault()
+                  event.stopPropagation()
+                  setTag(true)
+                }}
+              >{`show all tag >`}</p>
+            )}
+          </div>
+          <div className="flex w-full items-center justify-center">
+            <p className="text-sm text-gray-500">{context.solved}</p>
+          </div>
+          <div className="mx-3 flex h-auto w-28 flex-none items-center justify-center">
+            <div className="flex h-auto w-full flex-col items-center justify-around">
+              <div className="relative h-full w-full">
+                <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
+                <div
+                  className={`absolute h-1.5 rounded-full ${
+                    context.score === context.fullScore
+                      ? 'bg-blue-500'
+                      : 'bg-gray-500'
+                  }`}
+                  style={{
+                    width: `${(context.score / context.fullScore) * 100}%`
+                  }}
+                />
+              </div>
+              <p className="mt-2 text-sm text-gray-500">
+                {context.score} points
+              </p>
+            </div>
+          </div>
+        </a>
+      </Link>
       <div className="w-14 p-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -114,41 +135,12 @@ const TaskItem = (context: Task) => {
   )
 }
 
-const Index = () => {
-  const [task, setTask] = useState<Task[]>([])
+const Index = ({ tasks }) => {
   const [tag, setTag] = useState<boolean>(false)
 
-  const fetchMoreData = () => {
-    fetch(
-      `/api/task?cursor=${
-        task.length === 0 ? '' : task[task.length - 1].id
-      }&limit=10`
-    )
-      .then(res => res.json())
-      .then(res =>
-        res.map((item: any) => {
-          return {
-            id: item.id,
-            title: item.title,
-            tags: item.tags,
-            solved: item.solved,
-            score: 50,
-            fullScore: item.fullScore
-          }
-        })
-      )
-      .then(res => {
-        setTask([...task, ...res])
-      })
-  }
-
-  useEffect(() => {
-    fetchMoreData()
-  }, [])
-
   return (
-    <>
-      <div className="flex h-screen flex-col items-center">
+    <div className="flex w-auto justify-center">
+      <div className="flex min-h-screen w-full max-w-7xl flex-col items-center">
         <div className="flex w-full flex-col items-center py-16">
           <p className="text-3xl text-gray-500">Tasks</p>
           <p className="text-md text-gray-500">browse over 700+ tasks</p>
@@ -157,7 +149,7 @@ const Index = () => {
             placeholder="search..."
           ></input>
         </div>
-        <div className="flex w-full max-w-7xl">
+        <div className="flex w-full">
           <LeftBar />
           <div className="h-full w-full">
             <div className="group flex w-full items-center justify-between px-2">
@@ -186,22 +178,38 @@ const Index = () => {
               </div>
               <div className="w-14 px-4" />
             </div>
-            <InfiniteScroll
-              className="flex w-full flex-col"
-              dataLength={task.length}
-              next={fetchMoreData}
-              hasMore={true}
-              loader={<div className="text-center">Loading...</div>}
-            >
-              {task.map(context => (
-                <TaskItem {...context} showTags={tag} />
-              ))}
-            </InfiniteScroll>
+            {tasks.map(context => (
+              <TaskItem
+                {...context}
+                showTags={tag}
+                key={`task-${context.id}`}
+              />
+            ))}
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 
 export default Index
+
+export async function getStaticProps() {
+  const tasks = await prisma.task.findMany()
+  return {
+    props: {
+      tasks: tasks.map((item: any) => {
+        let x = Math.floor(Math.random() * item.fullScore)
+        if (x > 80) x = item.fullScore
+        return {
+          id: item.id,
+          title: item.title,
+          tags: [],
+          solved: item.solved,
+          score: x,
+          fullScore: item.fullScore
+        }
+      })
+    }
+  }
+}
