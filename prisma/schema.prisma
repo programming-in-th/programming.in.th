@@ -77,7 +77,7 @@ model Task {
   solved      Int
   private     Boolean
   type        String  @db.Text
-  tags        Tag[] @relation(references: [id]) 
+  tags        Tag[]   @relation(references: [id])
 
   @@index([id])
 }
@@ -89,6 +89,7 @@ model Submission {
   submittedAt DateTime @default(now())
   time        Float
   memory      Int
+  code        Bytes
   codeLength  Int
   score       Int
   fullScore   Int
@@ -101,8 +102,9 @@ model Submission {
 }
 
 model Tag {
-  id    Int     @id @default(autoincrement())
-  name  String  @unique
-  tasks Task[]  @relation(references: [id])
+  id    Int    @id @default(autoincrement())
+  name  String @unique
+  tasks Task[] @relation(references: [id])
+
   @@index([id])
 }
