@@ -57,6 +57,7 @@ model User {
   accounts      Account[]
   sessions      Session[]
   submissions   Submission[]
+  bookmarks     Bookmark[]
 }
 
 model VerificationToken {
@@ -67,17 +68,26 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model Bookmark {
+  id     String  @id @default(cuid())
+  user   User    @relation(fields: [userId], references: [id])
+  userId String
+  Task   Task?   @relation(fields: [taskId], references: [id])
+  taskId String?
+}
+
 model Task {
-  id          String  @id
-  title       String  @db.Text
+  id          String     @id
+  title       String     @db.Text
   fullScore   Int
   memoryLimit Int
   timeLimit   Float
-  path        String  @db.Text
+  path        String     @db.Text
   solved      Int
   private     Boolean
-  type        String  @db.Text
-  tags        Tag[]   @relation(references: [id])
+  type        String     @db.Text
+  tags        Tag[]      @relation(references: [id])
+  bookmarks   Bookmark[]
 
   @@index([id])
 }
