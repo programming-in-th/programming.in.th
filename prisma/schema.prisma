@@ -87,7 +87,7 @@ model Submission {
   taskId      String
   status      String
   submittedAt DateTime @default(now())
-  time        Float
+  time        Int
   memory      Int
   code        Bytes
   codeLength  Int
