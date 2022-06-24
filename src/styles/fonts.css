@@ -22,7 +22,7 @@
   font-weight: 400;
   font-display: swap;
   src: local('IBM Plex Sans Thai'), local('IBMPlexSansThai'),
-    url('/fonts/IBMPlexSansThai-Regular.woff2') format('woff2');
+    url('../fonts/IBMPlexSansThai-Regular.woff2') format('woff2');
 }
 
 @font-face {
@@ -31,7 +31,7 @@
   font-weight: 450;
   font-display: swap;
   src: local('IBM Plex Sans Thai Text'), local('IBMPlexSansThai-Text'),
-    url('/fonts/IBMPlexSansThai-Text.woff2') format('woff2');
+    url('../fonts/IBMPlexSansThai-Text.woff2') format('woff2');
 }
 
 @font-face {
@@ -40,7 +40,7 @@
   font-weight: 500;
   font-display: swap;
   src: local('IBM Plex Sans Thai Medium'), local('IBMPlexSansThai-Medium'),
-    url('/fonts/IBMPlexSansThai-Medium.woff2') format('woff2');
+    url('../fonts/IBMPlexSansThai-Medium.woff2') format('woff2');
 }
 
 @font-face {
@@ -49,7 +49,7 @@
   font-weight: 600;
   font-display: swap;
   src: local('IBM Plex Sans Thai SemiBold'), local('IBMPlexSansThai-SemiBold'),
-    url('/fonts/IBMPlexSansThai-SemiBold.woff2') format('woff2');
+    url('../fonts/IBMPlexSansThai-SemiBold.woff2') format('woff2');
 }
 
 @font-face {
@@ -58,7 +58,7 @@
   font-weight: 700;
   font-display: swap;
   src: local('IBM Plex Sans Thai Bold'), local('IBMPlexSansThai-Bold'),
-    url('/fonts/IBMPlexSansThai-Bold.woff2') format('woff2');
+    url('../fonts/IBMPlexSansThai-Bold.woff2') format('woff2');
 }
 
 @font-face {
@@ -67,7 +67,7 @@
   font-weight: 100;
   font-display: swap;
   src: local('IBM Plex Sans Thai Thin'), local('IBMPlexSansThai-Thin'),
-    url('/fonts/IBMPlexSansThai-Thin.woff2') format('woff2');
+    url('../fonts/IBMPlexSansThai-Thin.woff2') format('woff2');
 }
 
 @font-face {
@@ -77,7 +77,7 @@
   font-display: swap;
   src: local('IBM Plex Sans Thai ExtraLight'),
     local('IBMPlexSansThai-ExtraLight'),
-    url('/fonts/IBMPlexSansThai-ExtraLight.woff2') format('woff2');
+    url('../fonts/IBMPlexSansThai-ExtraLight.woff2') format('woff2');
 }
 
 @font-face {
@@ -86,12 +86,12 @@
   font-weight: 300;
   font-display: swap;
   src: local('IBM Plex Sans Thai Light'), local('IBMPlexSansThai-Light'),
-    url('/fonts/IBMPlexSansThai-Light.woff2') format('woff2');
+    url('../fonts/IBMPlexSansThai-Light.woff2') format('woff2');
 }
 
 @font-face {
   font-family: 'Sukhumvit Set';
   font-display: swap;
   src: local('Sukhumvit Set');
-  unicoderange: 'U+0E01-0E5B, U+200C-200D, U+25CC';
+  unicode-range: 'U+0E01-0E5B, U+200C-200D, U+25CC';
 }
