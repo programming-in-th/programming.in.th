@@ -1,5 +1,6 @@
 import { SessionProvider } from 'next-auth/react'
 import 'styles/index.css'
+import 'styles/fonts.css'
 
 export default function App({
   Component,
