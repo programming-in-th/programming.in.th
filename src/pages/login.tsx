@@ -1,7 +1,8 @@
 import React, { useState, Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { PageLayout } from 'components/Layout'
 import { signIn } from 'next-auth/react'
+
+import { PageLayout } from '@/components/Layout'
 
 const ErrorComp = ({ open, setOpen, errMsg }) => (
   <Transition.Root show={open} as={Fragment}>

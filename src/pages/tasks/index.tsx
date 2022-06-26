@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Link from 'next/link'
-import prisma from 'lib/prisma'
-import { PageLayout } from 'components/Layout'
-import { triggerAsyncId } from 'async_hooks'
+import prisma from '@/lib/prisma'
+import { PageLayout } from '@/components/Layout'
 
 const Filter = () => {
   return <></>
@@ -52,7 +51,7 @@ const TaskItem = (context: Task) => {
   return (
     <div className="group flex w-full items-center justify-between p-2">
       <Link href={`/tasks/${context.id}`}>
-        <a className="flex w-full rounded-xl py-3 px-6 font-display shadow-sm transition group-hover:shadow-md">
+        <a className="flex w-full rounded-xl px-6 py-3 font-display shadow-sm transition group-hover:shadow-md">
           <div className="flex w-full flex-col">
             <p className="text-sm font-medium text-gray-500">{context.title}</p>
             <p className="text-sm text-gray-400">{context.id}</p>
@@ -145,7 +144,7 @@ const Index = ({ tasks }) => {
           <p className="text-3xl text-gray-500">Tasks</p>
           <p className="text-md text-gray-500">browse over 700+ tasks</p>
           <input
-            className="my-4 w-60 rounded-md border-gray-300 bg-gray-100 py-1 px-2 text-sm shadow-sm"
+            className="my-4 w-60 rounded-md border-gray-300 bg-gray-100 px-2 py-1 text-sm shadow-sm"
             placeholder="search..."
           ></input>
         </div>

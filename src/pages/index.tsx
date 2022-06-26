@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
-import { PageLayout } from 'components/Layout'
+import { PageLayout } from '@/components/Layout'
 
 const Index = () => {
   const { data: session } = useSession()
