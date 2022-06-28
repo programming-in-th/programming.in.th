@@ -87,7 +87,7 @@ model Task {
   solved      Int
   private     Boolean
   type        String     @db.Text
-  tags        Tag[]      @relation(references: [id])
+  tags        Tag[]
   bookmarks   Bookmark[]
 
   @@index([id])
@@ -115,7 +115,7 @@ model Submission {
 model Tag {
   id    Int    @id @default(autoincrement())
   name  String @unique
-  tasks Task[] @relation(references: [id])
+  tasks Task[]
 
   @@index([id])
 }

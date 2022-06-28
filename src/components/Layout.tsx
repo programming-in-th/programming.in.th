@@ -5,7 +5,7 @@ import { Nav } from './Nav'
 
 export const PageLayout = ({ children }) => {
   return (
-    <div className="flex min-h-screen flex-col">
+    <div>
       <Nav />
       <main className="flex min-h-screen flex-col">{children}</main>
       <Footer />
