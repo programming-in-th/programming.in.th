@@ -1,6 +1,8 @@
-[![programming.in.th](https://raw.githubusercontent.com/programming-in-th/artworks/master/png/readme_banner.png)](https://betabeta.programming.in.th)
+[![programming.in.th](https://raw.githubusercontent.com/programming-in-th/artworks/master/png/readme_banner.png)](https://beta.programming.in.th)
 
 # programming.in.th
+
+[![Powered by Vercel](https://raw.githubusercontent.com/programming-in-th/programming.in.th/0.2/powered-by-vercel.svg)](https://vercel.com/?utm_source=proginth&utm_campaign=oss)
 
 ## What is programming.in.th
 
