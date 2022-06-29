@@ -1,6 +1,6 @@
 [![programming.in.th](https://raw.githubusercontent.com/programming-in-th/artworks/master/png/readme_banner.png)](https://betabeta.programming.in.th)
 
-# programming.in.th [![DeepScan grade](https://deepscan.io/api/teams/4940/projects/6738/branches/57818/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=4940&pid=6738&bid=57818)
+# programming.in.th
 
 ## What is programming.in.th
 
