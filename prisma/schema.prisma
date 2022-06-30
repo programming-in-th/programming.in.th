@@ -69,12 +69,13 @@ model VerificationToken {
 }
 
 model Bookmark {
-  id        String   @id @default(cuid())
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  Task      Task?    @relation(fields: [taskId], references: [id])
-  taskId    String?
+  Task      Task     @relation(fields: [taskId], references: [id])
+  taskId    String
+
+  @@id([taskId, userId])
 }
 
 model Task {
