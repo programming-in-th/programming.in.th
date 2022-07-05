@@ -77,8 +77,7 @@ module.exports = {
       display: [
         'Inter var',
         'SF Pro Display',
-        'Sukhumvit Set',
-        'IBM Plex Sans Thai',
+        'Noto Sans Thai',
         ...defaultTheme.fontFamily.sans
       ]
     }
