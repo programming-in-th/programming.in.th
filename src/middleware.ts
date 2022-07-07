@@ -5,14 +5,17 @@ import { NextResponse } from 'next/server'
 export default function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
 
-  const url = req.nextUrl.clone()
-  url.pathname = '/'
   if (
     pathname === '/login' &&
-    (req.cookies['next-auth.session-token'] ||
-      req.cookies['__Secure-next-auth.session-token']) &&
+    (req.cookies.get('next-auth.session-token') ||
+      req.cookies.get('__Secure-next-auth.session-token')) &&
     !pathname.startsWith('/api')
   ) {
-    return NextResponse.redirect(url)
+    req.nextUrl.pathname = '/'
+    return NextResponse.redirect(req.nextUrl)
   }
+}
+
+export const config = {
+  matcher: ['/login']
 }
