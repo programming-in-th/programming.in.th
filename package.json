@@ -9,7 +9,7 @@
     "@prisma/client": "^4.0.0",
     "concurrently": "^7.2.2",
     "next": "^12.2.0",
-    "next-auth": "^4.2.1",
+    "next-auth": "^4.10.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-infinite-scroll-component": "^6.1.0"

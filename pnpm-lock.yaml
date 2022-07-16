@@ -11,7 +11,7 @@ specifiers:
   concurrently: ^7.2.2
   husky: ^8.0.1
   next: ^12.2.0
-  next-auth: ^4.2.1
+  next-auth: ^4.10.0
   postcss: ^8.4.5
   prettier: ^2.5.1
   prettier-plugin-tailwindcss: ^0.1.4
@@ -26,11 +26,11 @@ specifiers:
 
 dependencies:
   '@headlessui/react': 1.6.4_biqbaboplfbrettd7655fr4n2y
-  '@next-auth/prisma-adapter': 1.0.3_n7u6stkqded6gjkc3mdt2lhxl4
+  '@next-auth/prisma-adapter': 1.0.3_zob7yjotprasnemw6nqlbdjhia
   '@prisma/client': 4.0.0_prisma@4.0.0
   concurrently: 7.2.2
   next: 12.2.0_biqbaboplfbrettd7655fr4n2y
-  next-auth: 4.5.0_biqbaboplfbrettd7655fr4n2y
+  next-auth: 4.10.0_biqbaboplfbrettd7655fr4n2y
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-infinite-scroll-component: 6.1.0_react@18.2.0
@@ -110,7 +110,7 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
 
-  /@next-auth/prisma-adapter/1.0.3_n7u6stkqded6gjkc3mdt2lhxl4:
+  /@next-auth/prisma-adapter/1.0.3_zob7yjotprasnemw6nqlbdjhia:
     resolution:
       {
         integrity: sha512-3Lq1cD3ytKM3EGKJZ4UZvlqshLtlPvYxLeCrUV9ifYwYlq51kmDaHjsIawlp8EbH5pE1UhlsvtlXMery7RghtA==
@@ -120,7 +120,7 @@ packages:
       next-auth: ^4.0.1
     dependencies:
       '@prisma/client': 4.0.0_prisma@4.0.0
-      next-auth: 4.5.0_biqbaboplfbrettd7655fr4n2y
+      next-auth: 4.10.0_biqbaboplfbrettd7655fr4n2y
     dev: false
 
   /@next/env/12.2.0:
@@ -1255,10 +1255,10 @@ packages:
     engines: { node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1 }
     hasBin: true
 
-  /next-auth/4.5.0_biqbaboplfbrettd7655fr4n2y:
+  /next-auth/4.10.0_biqbaboplfbrettd7655fr4n2y:
     resolution:
       {
-        integrity: sha512-B6gYRIbqtj8nlDsx3y2Ruwp/mvZnItPs7VUULY43QYw+M9xtDPIM9EBZ3ryd/wNYA3MDteBJlzGm/ivseXcmJA==
+        integrity: sha512-4CKZbv9VeCaqfDAXyqFThZy05ApbLd0bhXEB+DCq9aD43h6Rkvz0QgM7QOCJXESy0QKJUXHzopkBq+iaGxdc0g==
       }
     engines: { node: ^12.19.0 || ^14.15.0 || ^16.13.0 }
     peerDependencies:
