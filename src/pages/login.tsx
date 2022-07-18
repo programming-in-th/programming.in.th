@@ -22,7 +22,7 @@ const ErrorComp = ({ open, setOpen, errMsg }) => (
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <Dialog.Overlay className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <Dialog.Overlay className="fixed inset-0 bg-prog-gray-500 bg-opacity-75 transition-opacity" />
         </Transition.Child>
 
         {/* This element is to trick the browser into centering the modal contents. */}
@@ -104,7 +104,7 @@ const Login = () => {
       <div className="flex min-h-screen flex-col justify-center pb-32 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2
-            className="mt-6 px-4 text-center text-3xl font-extrabold text-gray-900"
+            className="mt-6 px-4 text-center text-3xl font-extrabold text-prog-primary-500"
             onClick={() => setError(errMsg)}
           >
             Login to your account
@@ -170,7 +170,7 @@ const Login = () => {
                 <div className="text-sm">
                   <a
                     href="#"
-                    className="font-medium text-gray-600 hover:text-gray-500"
+                    className="font-medium text-prog-primary-500 hover:text-prog-primary-600"
                   >
                     Forgot your password?
                   </a>
@@ -180,7 +180,7 @@ const Login = () => {
               <div>
                 <button
                   type="submit"
-                  className="flex w-full justify-center rounded-md border border-transparent bg-gray-600 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2"
+                  className="flex w-full justify-center rounded-md border border-transparent bg-prog-primary-500 px-4 py-2 text-sm font-medium text-white shadow-sm hover:bg-prog-primary-600 focus:outline-none focus:ring-2 focus:ring-prog-primary-500 focus:ring-offset-2"
                   disabled
                 >
                   Sign in
@@ -202,7 +202,7 @@ const Login = () => {
 
               <div className="mt-6 grid grid-cols-3 gap-3">
                 <div>
-                  <a
+                  <button
                     className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
                     onClick={() => signIn('google')}
                   >
@@ -215,11 +215,11 @@ const Login = () => {
                     >
                       <path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"></path>
                     </svg>
-                  </a>
+                  </button>
                 </div>
 
                 <div>
-                  <a className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
+                  <button className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50">
                     <span className="sr-only">Sign in with Facebook</span>
                     <svg
                       className="h-5 w-5"
@@ -233,11 +233,11 @@ const Login = () => {
                         clipRule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </button>
                 </div>
 
                 <div>
-                  <a
+                  <button
                     className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-500 shadow-sm hover:bg-gray-50"
                     onClick={() => signIn('github')}
                   >
@@ -254,7 +254,7 @@ const Login = () => {
                         clipRule="evenodd"
                       />
                     </svg>
-                  </a>
+                  </button>
                 </div>
               </div>
             </div>
