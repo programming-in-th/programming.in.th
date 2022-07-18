@@ -100,7 +100,7 @@ model Submission {
   submittedAt DateTime @default(now())
   time        Int
   memory      Int
-  code        Bytes
+  code        String[]
   codeLength  Int
   score       Int
   fullScore   Int
