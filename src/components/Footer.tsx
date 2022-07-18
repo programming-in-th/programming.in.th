@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 
 export const Footer = () => {
+  const currentYear = useMemo(() => +new Date().getFullYear(), [])
+
   return (
     <footer className="flex w-full flex-col items-center font-display">
       <div className="flex w-full max-w-5xl flex-col items-center">
@@ -52,9 +54,9 @@ export const Footer = () => {
               fill="#64748B"
             />
           </svg>
-          <p className="w-80 text-sm leading-4 text-gray-500">
-            © 2019-2021 the PROGRAMMING.IN.TH team{'\n'} The source code for
-            this website is available on GitHub
+          <p className="w-full sm:w-80 text-sm leading-4 text-gray-500">
+            © 2019-{currentYear} the PROGRAMMING.IN.TH team{'\n'} The source
+            code for this website is available on GitHub
           </p>
         </div>
       </div>
