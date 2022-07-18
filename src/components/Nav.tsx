@@ -26,7 +26,7 @@ export const Nav = () => {
 
   return (
     <Popover as="header" className="relative">
-      <div className="bg-white py-3">
+      <div className="py-3">
         <nav
           className="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-14"
           aria-label="Global"
