@@ -10,7 +10,8 @@ module.exports = {
       colors: {
         prog: {
           primary: {
-            500: '#3584FB'
+            500: '#3584FB',
+            600: '#3171D9'
           },
           gray: {
             500: '#64748B'

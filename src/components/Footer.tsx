@@ -27,7 +27,7 @@ export const Footer = () => {
               โปรแกรมมิ่งอินทีเอช ศูนย์รวมของโจทย์และเนื้อหาสำหรับ
               การเขียนโปรแกรมเพื่อการแข่งขัน และวิทยาการคอมพิวเตอร์
             </p>
-            <button className="mt-4 rounded-md bg-blue-500 py-2.5 px-9 text-white">
+            <button className="mt-4 rounded-md bg-prog-primary-500 trasition-colors hover:bg-prog-primary-600 py-2.5 px-9 text-white">
               เข้าร่วม
             </button>
           </div>

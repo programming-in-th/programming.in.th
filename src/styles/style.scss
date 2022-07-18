@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .landing-btn {
+    @apply mt-4 rounded-md font-semibold py-3 px-9 transition-colors shadow-md;
+
+    &.--primary {
+      @apply bg-prog-primary-500 text-white hover:bg-prog-primary-600;
+    }
+
+    &.--normal {
+      @apply bg-white text-prog-gray-500 hover:bg-slate-100;
+    }
+  }
+}
