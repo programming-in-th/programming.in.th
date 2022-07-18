@@ -7,6 +7,16 @@ module.exports = {
   content: ['./src/**/*.{ts,tsx}'],
   theme: {
     extend: {
+      colors: {
+        prog: {
+          primary: {
+            500: '#3584FB'
+          },
+          gray: {
+            500: '#64748B'
+          }
+        }
+      },
       typography: theme => ({
         DEFAULT: {
           css: {
