@@ -4,7 +4,7 @@ export const Footer = () => {
   const currentYear = useMemo(() => +new Date().getFullYear(), [])
 
   return (
-    <footer className="flex w-full flex-col items-center font-display">
+    <footer className="flex bg-white w-full flex-col items-center font-display">
       <div className="flex w-full max-w-5xl flex-col items-center">
         <div className="flex w-full max-w-md justify-between p-8 font-display">
           <p className="text-blue-500">Home</p>
