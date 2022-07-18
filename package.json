@@ -39,7 +39,6 @@
     "prebuild": "prisma generate",
     "predev": "prisma generate",
     "prepare": "husky install",
-    "ps:switch": "pscale org switch proginth",
-    "ps:connect": "concurrently \"pscale connect proginth dev --port 3309\" \"pscale connect proginth shadow --port 3310\""
+    "vercel-build": "prisma generate && prisma migrate deploy && next build"
   }
 }
