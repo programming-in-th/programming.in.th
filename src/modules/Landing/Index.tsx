@@ -10,6 +10,9 @@ import {
   HeartIcon
 } from '@heroicons/react/solid'
 import { FeatureCard } from './components/FeatureCard'
+import { PeopleVector } from '@/vectors/Illustrations/People'
+import { TestimonyCard } from './components/TestimonyCard'
+import Link from 'next/link'
 
 const Index = () => {
   const { data: session } = useSession()
@@ -33,8 +36,12 @@ const Index = () => {
         </section>
 
         <section className="flex items-center justify-center gap-4">
-          <button className="landing-btn --primary">เข้าร่วม</button>
-          <button className="landing-btn --normal">ค้นหาโจทย์</button>
+          <Link href="/login" passHref>
+            <a className="landing-btn --primary">เข้าร่วม</a>
+          </Link>
+          <Link href="/tasks" passHref>
+            <a className="landing-btn --normal">ค้นหาโจทย์</a>
+          </Link>
         </section>
 
         <section className="relative my-6">
@@ -82,6 +89,73 @@ const Index = () => {
               description="เว็บได้รับการออกแบบมาเพื่อความสะดวกและรวดเร็ว ทำให้การทำโจทย์เป็นไปได้อย่างราบรื่น"
               Icon={FireIcon}
             />
+          </div>
+        </section>
+
+        <section className="bg-white w-full px-10 py-10 sm:py-24">
+          <div
+            style={{
+              background:
+                'linear-gradient(180deg, #FFF 0%, #FFF 29%, #F8FAFC 30%, #F8FAFC 100%)'
+            }}
+            className="max-w-6xl lg:px-8 xl:px-36 mx-auto grid grid-cols-1 sm:grid-cols-2 items-center justify-center"
+          >
+            <PeopleVector className="mx-auto w-full px-12" />
+            <div className="flex flex-col items-center pb-6 sm:pb-0 sm:pt-20 justify-center text-center">
+              <p className="text-prog-gray-500 font-light">จำนวนผู้ใช้กว่า</p>
+              <p className="text-6xl text-prog-primary-500 font-semibold">
+                10,036
+              </p>
+              <p className="text-2xl text-prog-gray-500 font-semibold">คน</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white w-full p-10">
+          <div className="grid gap-4 grid-cols-1 max-w-6xl mx-auto sm:grid-cols-2">
+            <TestimonyCard
+              title="Iammarkps"
+              description="programming.in.th เป็นเว็บที่เปลี่ยนชีวิตผม ผมเข้ามาใช้ทุกวัน ดีมากจริง ๆ ครับ แนะนำเลย เหมาะกับทุกคน ไม่ว่าจะมือใหม่หรือมือโปรก็ใช้ได้ใช้ดี"
+              imgURL="/assets/img/landing/iammark.jpg"
+              role="user"
+            />
+            <TestimonyCard
+              title="Iammarkps"
+              description="programming.in.th เป็นเว็บที่เปลี่ยนชีวิตผม ผมเข้ามาใช้ทุกวัน ดีมากจริง ๆ ครับ แนะนำเลย เหมาะกับทุกคน ไม่ว่าจะมือใหม่หรือมือโปรก็ใช้ได้ใช้ดี"
+              imgURL="/assets/img/landing/iammark.jpg"
+              role="user"
+            />
+            <TestimonyCard
+              title="Iammarkps"
+              description="programming.in.th เป็นเว็บที่เปลี่ยนชีวิตผม ผมเข้ามาใช้ทุกวัน ดีมากจริง ๆ ครับ แนะนำเลย เหมาะกับทุกคน ไม่ว่าจะมือใหม่หรือมือโปรก็ใช้ได้ใช้ดี"
+              imgURL="/assets/img/landing/iammark.jpg"
+              role="user"
+            />
+            <TestimonyCard
+              title="Iammarkps"
+              description="programming.in.th เป็นเว็บที่เปลี่ยนชีวิตผม ผมเข้ามาใช้ทุกวัน ดีมากจริง ๆ ครับ แนะนำเลย เหมาะกับทุกคน ไม่ว่าจะมือใหม่หรือมือโปรก็ใช้ได้ใช้ดี"
+              imgURL="/assets/img/landing/iammark.jpg"
+              role="user"
+            />
+          </div>
+        </section>
+
+        <section className="w-full py-20 px-16 flex flex-col justify-center text-center">
+          <p className="font-semibold leading-tight">
+            <span className="text-xl sm:text-2xl block mb-1 text-prog-gray-500">
+              วันนี้
+            </span>
+            <span className="text-3xl sm:text-4xl text-prog-primary-500">
+              คุณทำโจทย์แล้วหรือยัง
+            </span>
+          </p>
+
+          <div className="mt-12">
+            <Link href="/tasks" passHref>
+              <a className="inline mt-4 rounded-md bg-prog-primary-500 trasition-colors hover:bg-prog-primary-600 py-2.5 px-9 text-white">
+                เริ่มเลย
+              </a>
+            </Link>
           </div>
         </section>
       </div>
