@@ -72,7 +72,7 @@ const Index = () => {
           </p>
         </section>
 
-        <section className="bg-white w-full p-16">
+        <section className="bg-white w-full p-6 sm:p-16">
           <div className="grid gap-x-6 gap-y-14 grid-cols-1 max-w-6xl mx-auto sm:grid-cols-2">
             <FeatureCard
               title="ระบบตรวจ Submission สุดทันสมัย"
