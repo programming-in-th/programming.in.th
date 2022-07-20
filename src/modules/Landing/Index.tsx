@@ -45,7 +45,7 @@ const Index = () => {
           </Link>
         </section>
 
-        <section className="relative py-6 flex justify-center w-full">
+        <section className="relative py-6 overflow-hidden flex justify-center w-full">
           <div className="relative z-10">
             <Image
               src="/assets/img/landing/coding.png"
