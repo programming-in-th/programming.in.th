@@ -13,6 +13,7 @@ import { FeatureCard } from './components/FeatureCard'
 import { PeopleVector } from '@/vectors/Illustrations/People'
 import { TestimonyCard } from './components/TestimonyCard'
 import Link from 'next/link'
+import { BGCurve } from '@/vectors/BGCurve'
 
 const Index = () => {
   const { data: session } = useSession()
@@ -20,15 +21,15 @@ const Index = () => {
   return (
     <PageLayout>
       <div className="flex min-h-screen flex-col items-center justify-start pt-12">
-        <section className="text-center mb-12 px-10">
-          <p className="text-2xl sm:text-5xl font-semibold leading-tight">
+        <section className="text-center mb-8 px-10">
+          <p className="text-2xl sm:text-4xl font-semibold leading-[1]">
             <span className="block text-prog-primary-500 mb-3">
               ฝึกฝนทักษะการเขียนโปรแกรม
             </span>
             <span className="text-prog-gray-500">ด้วยโจทย์ที่หลากหลาย</span>
           </p>
 
-          <p className="text-sm sm:text-lg mt-4 text-prog-gray-500 leading-relaxed">
+          <p className="text-sm sm:text-base mt-4 text-prog-gray-500 leading-relaxed">
             เว็บไซต์ที่ผู้ใช้มากมายเชื่อมั่น ด้วยโจทย์ฝึกเขียนโปรแกรมถึง 726 ข้อ
             <br />
             และบทเรียนเกี่ยวกับ Data Structure & Algorithms
@@ -44,21 +45,25 @@ const Index = () => {
           </Link>
         </section>
 
-        <section className="relative my-6">
-          <Image
-            src="/assets/img/landing/coding.png"
-            alt="PROGRAMMING.IN.TH"
-            width={400}
-            height={400}
-            className="h-full w-full rounded-3xl object-cover"
-          />
+        <section className="relative py-6 flex justify-center w-full">
+          <div className="relative z-10">
+            <Image
+              src="/assets/img/landing/coding.png"
+              alt="PROGRAMMING.IN.TH"
+              width={400}
+              height={400}
+              className="h-full w-full rounded-3xl object-cover"
+            />
+          </div>
+
+          <BGCurve className="absolute bottom-0" />
         </section>
 
-        <section className="bg-white w-full p-10">
-          <h2 className="text-xl sm:text-2xl text-center font-semibol mb-8">
+        <section className="bg-white w-full pb-10">
+          <h2 className="text-xl sm:text-2xl text-center font-semibold mb-8">
             <span className="text-prog-primary-500">ทำไมต้อง</span>
             <br />
-            Programming.in.th
+            <span className="text-prog-gray-500">Programming.in.th</span>
           </h2>
 
           <p className="text-center text-prog-gray-500 font-light max-w-2xl mx-auto px-10">
