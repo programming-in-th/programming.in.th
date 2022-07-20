@@ -84,8 +84,9 @@ module.exports = {
       xl: '1280px'
     },
     fontFamily: {
-      sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       display: [
+        'Prompt',
+        'Roboto',
         'Inter var',
         'SF Pro Display',
         'Noto Sans Thai',

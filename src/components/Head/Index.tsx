@@ -7,7 +7,7 @@ export const Head = () => (
   <React.Fragment>
     <Preload />
     <link
-      href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Roboto:ital,wght@0,400;0,500;0,700;1,300;1,400&display=swap"
       rel="stylesheet"
     />
     <meta charSet="utf-8" />
