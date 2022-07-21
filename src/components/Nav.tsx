@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import { Popover, Transition } from '@headlessui/react'
 import { useSession, signOut } from 'next-auth/react'
 import { Logo } from '@/vectors/Logo'
+import Image from 'next/image'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -74,10 +75,16 @@ export const Nav = () => {
               {session ? (
                 <div className="hidden py-1 md:block">
                   <button
+                    //  should open tooltip on hover
                     onClick={() => signOut()}
-                    className="inline-flex items-center rounded-md bg-gray-600 px-4 py-2 text-base font-medium text-white hover:bg-gray-700"
+                    className="rounded-full w-8 h-8"
                   >
-                    Logout
+                    <Image
+                      src={session.user.image}
+                      width={32}
+                      height={32}
+                      className="rounded-full w-8 h-8"
+                    />
                   </button>
                 </div>
               ) : (
