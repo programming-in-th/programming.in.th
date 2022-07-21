@@ -129,8 +129,6 @@ async function main() {
   const tasks = await prisma.task.createMany({
     data
   })
-
-  console.log(tasks)
 }
 
 main()

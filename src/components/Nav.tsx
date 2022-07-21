@@ -8,8 +8,8 @@ import { Logo } from '@/vectors/Logo'
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Tasks', href: '/tasks' },
-  { name: 'Submissions', href: '/submissions' },
-  { name: 'Learn', href: '/learn' }
+  { name: 'Learn', href: '/learn' },
+  { name: 'About', href: '/about' }
 ]
 
 export const Nav = () => {
@@ -20,10 +20,6 @@ export const Nav = () => {
   }, [router])
 
   const { data: session } = useSession()
-
-  useEffect(() => {
-    console.log(session)
-  }, [session])
 
   return (
     <Popover as="header" className="relative">

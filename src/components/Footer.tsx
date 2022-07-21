@@ -3,6 +3,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
 
+const navigation = [
+  { name: 'Home', href: '/' },
+  { name: 'Tasks', href: '/tasks' },
+  { name: 'Learn', href: '/learn' },
+  { name: 'About', href: '/about' }
+]
+
 export const Footer = () => {
   const currentYear = useMemo(() => +new Date().getFullYear(), [])
 
@@ -15,10 +22,20 @@ export const Footer = () => {
     <footer className="flex bg-white w-full flex-col items-center font-display">
       <div className="flex w-full max-w-5xl flex-col items-center">
         <div className="flex w-full max-w-md justify-between p-8 font-display">
-          <p className="text-prog-primary-500">Home</p>
-          <p className="text-prog-gray-500">Tasks</p>
-          <p className="text-prog-gray-500">Learn</p>
-          <p className="text-prog-gray-500">About</p>
+          {navigation.map(item => (
+            <Link href={item.href} key={item.name} passHref>
+              <a
+                key={item.name}
+                className={`${
+                  `/${location}` == item.href
+                    ? 'text-prog-primary-500 hover:text-blue-600'
+                    : 'text-prog-gray-500 hover:text-gray-600'
+                }`}
+              >
+                {item.name}
+              </a>
+            </Link>
+          ))}
         </div>
         <div className="flex w-full justify-center border-y-[0.5px]">
           <div className="flex max-w-sm flex-col items-center py-12">
