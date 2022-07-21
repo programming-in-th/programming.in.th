@@ -2,35 +2,34 @@ import { Task } from '@/types/tasks'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-export const TaskItem = (context: Task) => {
+export const TaskItem = (task: Task) => {
   const [bookmark, setBookmark] = useState<boolean>(false)
   const [tagStatus, setTag] = useState<boolean>(false)
 
   useEffect(() => {
-    if (typeof context.showTags === 'boolean') {
-      setTag(context.showTags)
+    if (typeof task.showTags === 'boolean') {
+      setTag(task.showTags)
     }
-  }, [context.showTags])
+  }, [task.showTags])
 
   return (
     <div className="group flex w-full items-center justify-between p-2">
-      <Link href={`/tasks/${context.id}`}>
+      <Link href={`/tasks/${task.id}`}>
         <a className="flex w-full rounded-xl px-6 py-3 font-display shadow-sm transition group-hover:shadow-md">
           <div className="flex w-full flex-col">
-            <p className="text-sm font-medium text-gray-500">{context.title}</p>
-            <p className="text-sm text-gray-400">{context.id}</p>
+            <p className="text-sm font-medium text-gray-500">{task.title}</p>
+            <p className="text-sm text-gray-400">{task.id}</p>
           </div>
           <div className="flex w-full items-center justify-center">
-            {context.tags.map((tag: string) => {
+            {task.tags.map((tag: string) => {
               if (
                 tagStatus === true ||
-                (Array.isArray(context.showTags) &&
-                  context.showTags.includes(tag))
+                (Array.isArray(task.showTags) && task.showTags.includes(tag))
               ) {
                 return (
                   <div
                     className="mx-1 rounded-lg bg-gray-100 px-2 text-sm text-gray-500"
-                    key={`tag-${context.id}-${tag}`}
+                    key={`tag-${task.id}-${tag}`}
                   >
                     {tag}
                   </div>
@@ -49,7 +48,7 @@ export const TaskItem = (context: Task) => {
             )}
           </div>
           <div className="flex w-full items-center justify-center">
-            <p className="text-sm text-gray-500">{context.solved}</p>
+            <p className="text-sm text-gray-500">{task.solved}</p>
           </div>
           <div className="mx-3 flex h-auto w-28 flex-none items-center justify-center">
             <div className="flex h-auto w-full flex-col items-center justify-around">
@@ -57,18 +56,16 @@ export const TaskItem = (context: Task) => {
                 <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
                 <div
                   className={`absolute h-1.5 rounded-full ${
-                    context.score === context.fullScore
+                    task.score === task.fullScore
                       ? 'bg-blue-500'
                       : 'bg-gray-500'
                   }`}
                   style={{
-                    width: `${(context.score / context.fullScore) * 100}%`
+                    width: `${(task.score / task.fullScore) * 100}%`
                   }}
                 />
               </div>
-              <p className="mt-2 text-sm text-gray-500">
-                {context.score} points
-              </p>
+              <p className="mt-2 text-sm text-gray-500">{task.score} points</p>
             </div>
           </div>
         </a>
