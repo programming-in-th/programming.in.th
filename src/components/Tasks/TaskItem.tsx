@@ -1,6 +1,6 @@
+import { Task } from '@/types/tasks'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import { Task } from '../types'
 
 export const TaskItem = (context: Task) => {
   const [bookmark, setBookmark] = useState<boolean>(false)
