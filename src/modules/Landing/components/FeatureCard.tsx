@@ -15,7 +15,7 @@ export const FeatureCard: FC<{
 
       <div className="flex text-center flex-col px-12 items-center justify-center py-6">
         <h3 className="mb-4 pt-4 font-semibold">{title}</h3>
-        <p className="font-light">{description}</p>
+        <p className="font-light whitespace-pre-wrap">{description}</p>
       </div>
     </article>
   )
