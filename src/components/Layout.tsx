@@ -14,10 +14,6 @@ export const PageLayout = ({ children }) => {
 
   const { status } = useSession()
 
-  if (status === 'loading') {
-    return <Loading />
-  }
-
   const backgroundColor = useMemo(() => {
     switch (`/${location}`) {
       case '/':
@@ -26,6 +22,10 @@ export const PageLayout = ({ children }) => {
         return '#FFFFFF'
     }
   }, [location])
+
+  if (status === 'loading') {
+    return <Loading />
+  }
 
   return (
     <div style={{ backgroundColor }} className="w-full font-display">
