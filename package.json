@@ -12,6 +12,7 @@
     "next": "^12.2.0",
     "next-auth": "^4.10.0",
     "react": "^18.2.0",
+    "react-countup": "^6.3.0",
     "react-dom": "^18.2.0",
     "react-infinite-scroll-component": "^6.1.0"
   },

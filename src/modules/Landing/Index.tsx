@@ -14,6 +14,7 @@ import { PeopleVector } from '@/vectors/Illustrations/People'
 import { TestimonyCard } from './components/TestimonyCard'
 import Link from 'next/link'
 import { BGCurve } from '@/vectors/BGCurve'
+import { IncrementalNumber } from './components/IncrementalNumber'
 
 const Index = () => {
   const { data: session } = useSession()
@@ -108,9 +109,9 @@ const Index = () => {
             <PeopleVector className="mx-auto w-full px-12" />
             <div className="flex flex-col items-center pb-6 sm:pb-0 sm:pt-20 justify-center text-center">
               <p className="text-prog-gray-500 font-light">จำนวนผู้ใช้กว่า</p>
-              <p className="text-6xl text-prog-primary-500 font-semibold">
-                10,036
-              </p>
+              <div className="text-6xl text-prog-primary-500 font-semibold">
+                <IncrementalNumber start={1} end={10036} />
+              </div>
               <p className="text-2xl text-prog-gray-500 font-semibold">คน</p>
             </div>
           </div>
