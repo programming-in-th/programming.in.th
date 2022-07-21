@@ -81,6 +81,7 @@ export const Nav = () => {
                   >
                     <Image
                       src={session.user.image}
+                      alt={session.user.name}
                       width={32}
                       height={32}
                       className="rounded-full w-8 h-8"
