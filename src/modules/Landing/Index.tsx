@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
 
 import { PageLayout } from '@/components/Layout'
@@ -81,7 +81,7 @@ const Index = () => {
               Icon={DocumentSearchIcon}
             />
             <FeatureCard
-              title="เชื่อมันโดยผู้ใช้มากมาย"
+              title="เชื่อมั่นโดยผู้ใช้มากมาย"
               description="เว็บไซต์ของเราประกอบไปด้วยโจทย์ปัญหาคุณภาพสูงนับร้อยข้อที่ให้คุณได้ฝึกฝนตั้งแต่ระดับมือใหม่ จนถึงการแข่งขันนานาชาติ"
               Icon={HeartIcon}
             />
