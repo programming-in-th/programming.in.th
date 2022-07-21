@@ -4,11 +4,19 @@ import { useRouter } from 'next/router'
 import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next'
 
 import prisma from '@/lib/prisma'
+import { PageLayout } from '@/components/Layout'
+import { LeftBar } from '@/components/ViewTask/LeftBar'
 
 const Tasks = ({ task }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter()
 
-  return router.isFallback ? null : <p>{task.id}</p>
+  return router.isFallback ? null : (
+    <PageLayout>
+      <div className="flex min-h-screen pt-12 px-10 text-prog-gray-500">
+        <LeftBar task={task} />
+      </div>
+    </PageLayout>
+  )
 }
 
 export default Tasks
