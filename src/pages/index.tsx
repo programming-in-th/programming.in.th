@@ -1,3 +1,3 @@
-import Index from '@/modules/Landing/Index'
+import Landing from '@/modules/Landing/Index'
 
-export default Index
+export default Landing
