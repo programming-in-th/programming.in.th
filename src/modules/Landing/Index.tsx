@@ -97,7 +97,7 @@ const Index = () => {
           </div>
         </section>
 
-        <section className="bg-white w-full px-10 py-10 sm:py-24">
+        <section className="bg-white w-full px-6 sm:px-10 py-10 sm:py-24">
           <div
             style={{
               background:
