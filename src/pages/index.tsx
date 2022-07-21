@@ -151,7 +151,7 @@ const Landing = () => {
             <span className="text-xl sm:text-2xl block mb-1 text-prog-gray-500">
               วันนี้
             </span>
-            <span className="text-3xl sm:text-4xl text-prog-primary-500">
+            <span className="text-2xl sm:text-4xl text-prog-primary-500">
               คุณทำโจทย์แล้วหรือยัง
             </span>
           </p>
