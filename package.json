@@ -8,6 +8,7 @@
     "@heroicons/react": "^1.0.6",
     "@next-auth/prisma-adapter": "^1.0.1",
     "@prisma/client": "^4.0.0",
+    "classnames": "^2.3.1",
     "concurrently": "^7.2.2",
     "framer-motion": "^6.5.1",
     "next": "^12.2.0",

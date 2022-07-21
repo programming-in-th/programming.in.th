@@ -6,6 +6,8 @@ import { Footer } from './Footer'
 import { Nav } from './Nav'
 import { Loading } from './Loading'
 
+import classNames from 'classnames'
+
 export const PageLayout = ({ children }) => {
   const router = useRouter()
   const location = useMemo(() => {
@@ -17,9 +19,9 @@ export const PageLayout = ({ children }) => {
   const backgroundColor = useMemo(() => {
     switch (`/${location}`) {
       case '/':
-        return '#F8FAFC'
+        return 'bg-prog-gray-100'
       default:
-        return '#FFFFFF'
+        return 'bg-white'
     }
   }, [location])
 
@@ -28,7 +30,7 @@ export const PageLayout = ({ children }) => {
   }
 
   return (
-    <div style={{ backgroundColor }} className="w-full font-display">
+    <div className={classNames('w-full font-display', backgroundColor)}>
       <Nav />
       <main className="flex flex-col min-h-screen">{children}</main>
       <Footer />

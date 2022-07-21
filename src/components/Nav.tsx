@@ -1,10 +1,11 @@
-import React, { Fragment, useEffect, useMemo } from 'react'
+import React, { Fragment, useEffect, useMemo, useRef } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Popover, Transition } from '@headlessui/react'
 import { useSession, signOut } from 'next-auth/react'
 import { Logo } from '@/vectors/Logo'
 import Image from 'next/image'
+import Modal from './common/Modal'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -21,6 +22,7 @@ export const Nav = () => {
   }, [router])
 
   const { data: session } = useSession()
+  const profileButtonRef = useRef<HTMLButtonElement>(null)
 
   return (
     <Popover as="header" className="relative">
@@ -75,9 +77,8 @@ export const Nav = () => {
               {session ? (
                 <div className="hidden py-1 md:block">
                   <button
-                    //  should open tooltip on hover
-                    onClick={() => signOut()}
-                    className="rounded-full w-8 h-8"
+                    ref={profileButtonRef}
+                    className="rounded-full flex justify-center items-center w-10 h-10 bg-transparent transition-colors hover:bg-slate-300 hover:bg-opacity-50"
                   >
                     <Image
                       src={session.user.image}
@@ -87,6 +88,25 @@ export const Nav = () => {
                       className="rounded-full w-8 h-8"
                     />
                   </button>
+
+                  <Modal
+                    TriggerRef={profileButtonRef}
+                    className="absolute rounded-lg shadow-md bg-white right-10 mt-2"
+                  >
+                    <div className="text-prog-gray-500 px-8 py-4 flex flex-col border-b border-gray-100">
+                      <p className="font-medium">{session.user.name}</p>
+                      <p className="font-light">{session.user.email}</p>
+                    </div>
+
+                    <div className="px-8 py-4">
+                      <button
+                        onClick={() => signOut()}
+                        className="text-prog-gray-500 hover:text-gray-700"
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  </Modal>
                 </div>
               ) : (
                 <div className="hidden md:flex md:items-center md:space-x-6">
@@ -141,6 +161,24 @@ export const Nav = () => {
               </div>
             </div>
             <div className="pt-5 pb-6">
+              {session && (
+                <div className="p-4 gap-4 flex items-center">
+                  <div>
+                    <Image
+                      src={session.user.image}
+                      alt={session.user.name}
+                      width={40}
+                      height={40}
+                      className="rounded-full w-10 h-10"
+                    />
+                  </div>
+
+                  <div className="text-prog-gray-500 flex flex-col">
+                    <p className="font-medium">{session.user.name}</p>
+                    <p className="font-light">{session.user.email}</p>
+                  </div>
+                </div>
+              )}
               <div className="space-y-1 px-2">
                 {navigation.map(item => (
                   <Link href={item.href} key={item.name} passHref>
@@ -157,13 +195,24 @@ export const Nav = () => {
                   </Link>
                 ))}
               </div>
-              <div className="mt-6 px-5">
-                <Link href="/login" passHref>
-                  <a className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700">
-                    Login
-                  </a>
-                </Link>
-              </div>
+              {session ? (
+                <div className="mt-6 px-5">
+                  <button
+                    onClick={() => signOut()}
+                    className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700"
+                  >
+                    Logout
+                  </button>
+                </div>
+              ) : (
+                <div className="mt-6 px-5">
+                  <Link href="/login" passHref>
+                    <a className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700">
+                      Login
+                    </a>
+                  </Link>
+                </div>
+              )}
             </div>
           </div>
         </Popover.Panel>
