@@ -33,7 +33,7 @@ export default async function handler(
   }
 }
 
-const getTask = async (filter: string = Filter.ALL, session: Session) => {
+const getTask = async (filter: string = Filter.ALL, session) => {
   if (session) {
     switch (filter) {
       case Filter.SOLVED:
@@ -45,7 +45,7 @@ const getTask = async (filter: string = Filter.ALL, session: Session) => {
                   equals: 100
                 },
                 user: {
-                  email: { equals: session.user.email }
+                  id: { equals: session.user.id }
                 }
               }
             }
@@ -63,7 +63,7 @@ const getTask = async (filter: string = Filter.ALL, session: Session) => {
               },
               some: {
                 user: {
-                  email: { equals: session.user.email }
+                  id: { equals: session.user.id }
                 }
               }
             }
