@@ -77,17 +77,16 @@ CREATE TABLE "Task" (
 CREATE TABLE "Submission" (
     "id" SERIAL NOT NULL,
     "taskId" TEXT NOT NULL,
-    "status" TEXT NOT NULL,
+    "status" TEXT NOT NULL DEFAULT 'In Queue',
     "submittedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "time" INTEGER NOT NULL,
-    "memory" INTEGER NOT NULL,
-    "code" BYTEA NOT NULL,
-    "codeLength" INTEGER NOT NULL,
-    "score" INTEGER NOT NULL,
-    "fullScore" INTEGER NOT NULL,
-    "groups" JSONB NOT NULL,
+    "time" INTEGER NOT NULL DEFAULT 0,
+    "memory" INTEGER NOT NULL DEFAULT 0,
+    "code" TEXT[],
+    "codeLength" INTEGER NOT NULL DEFAULT 0,
+    "score" INTEGER NOT NULL DEFAULT 0,
+    "groups" JSONB,
     "language" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
+    "userId" TEXT,
 
     CONSTRAINT "Submission_pkey" PRIMARY KEY ("id")
 );
@@ -117,6 +116,9 @@ CREATE UNIQUE INDEX "Session_sessionToken_key" ON "Session"("sessionToken");
 
 -- CreateIndex
 CREATE INDEX "Session_userId_idx" ON "Session"("userId");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_username_key" ON "User"("username");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
@@ -159,6 +161,9 @@ ALTER TABLE "Bookmark" ADD CONSTRAINT "Bookmark_taskId_fkey" FOREIGN KEY ("taskI
 
 -- AddForeignKey
 ALTER TABLE "Submission" ADD CONSTRAINT "Submission_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+
+-- AddForeignKey
+ALTER TABLE "Submission" ADD CONSTRAINT "Submission_taskId_fkey" FOREIGN KEY ("taskId") REFERENCES "Task"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_TagToTask" ADD CONSTRAINT "_TagToTask_A_fkey" FOREIGN KEY ("A") REFERENCES "Tag"("id") ON DELETE CASCADE ON UPDATE CASCADE;
