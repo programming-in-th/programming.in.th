@@ -11,7 +11,7 @@ const data = [
     path: 'prog/00',
     title: 'A+B Problem',
     type: 'normal',
-    id: '0000'
+    id: 'a_plus_b'
   },
   {
     type: 'normal',
