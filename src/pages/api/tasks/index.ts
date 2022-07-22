@@ -3,7 +3,7 @@ import { unstable_getServerSession } from 'next-auth/next'
 
 import prisma from '@/lib/prisma'
 import { authOptions } from '../auth/[...nextauth]'
-import { Session } from 'next-auth'
+import { Session } from '@/types/tasks'
 
 enum Filter {
   ALL = 'all',
@@ -20,7 +20,11 @@ export default async function handler(
     query: { filter }
   } = req
 
-  const session = await unstable_getServerSession(req, res, authOptions)
+  const session = (await unstable_getServerSession(
+    req,
+    res,
+    authOptions
+  )) as Session
 
   switch (method) {
     case 'GET':
@@ -33,13 +37,13 @@ export default async function handler(
   }
 }
 
-const getTask = async (filter: string = Filter.ALL, session) => {
+const getTask = async (filter: string = Filter.ALL, session: Session) => {
   if (session) {
     switch (filter) {
       case Filter.SOLVED:
         return await prisma.task.findMany({
           where: {
-            Submission: {
+            Submissions: {
               some: {
                 score: {
                   equals: 100
@@ -55,7 +59,7 @@ const getTask = async (filter: string = Filter.ALL, session) => {
       case Filter.TRIED:
         return await prisma.task.findMany({
           where: {
-            Submission: {
+            Submissions: {
               none: {
                 score: {
                   equals: 100
