@@ -34,7 +34,7 @@ Table Session {
 
 Table User {
   id String [pk]
-  username String
+  username String [unique]
   name String
   email String [unique]
   emailVerified DateTime
