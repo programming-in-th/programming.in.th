@@ -101,19 +101,18 @@ model Task {
 model Submission {
   id          Int      @id @default(autoincrement())
   taskId      String
-  status      String
+  status      String   @default("In Queue")
   submittedAt DateTime @default(now())
-  time        Int
-  memory      Int
+  time        Int      @default(0)
+  memory      Int      @default(0)
   code        String[]
-  codeLength  Int
-  score       Int
-  fullScore   Int
+  codeLength  Int      @default(0)
+  score       Int      @default(0)
   groups      Json
   language    String
   userId      String?
   user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
-  tasks       Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
   @@index([id])
 }
