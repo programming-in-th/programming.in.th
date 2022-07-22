@@ -12,6 +12,10 @@ generator client {
   previewFeatures = ["referentialIntegrity"]
 }
 
+generator dbml {
+  provider = "prisma-dbml-generator"
+}
+
 model Account {
   id                 String  @id @default(cuid())
   userId             String
@@ -78,17 +82,18 @@ model Bookmark {
 }
 
 model Task {
-  id          String     @id
-  title       String     @db.Text
+  id          String       @id
+  title       String       @db.Text
   fullScore   Int
   memoryLimit Int
   timeLimit   Float
-  path        String     @db.Text
+  path        String       @db.Text
   solved      Int
   private     Boolean
-  type        String     @db.Text
+  type        String       @db.Text
   tags        Tag[]
   bookmarks   Bookmark[]
+  Submission  Submission[]
 
   @@index([id])
 }
@@ -106,8 +111,9 @@ model Submission {
   fullScore   Int
   groups      Json
   language    String
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  tasks       Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
   @@index([id])
 }

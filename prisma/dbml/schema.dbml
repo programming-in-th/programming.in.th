@@ -1,0 +1,126 @@
+//// ------------------------------------------------------
+//// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+//// ------------------------------------------------------
+
+Table Account {
+  id String [pk]
+  userId String [not null]
+  type String [not null]
+  provider String [not null]
+  providerAccountId String [not null]
+  refresh_token String
+  access_token String
+  expires_at Int
+  token_type String
+  scope String
+  id_token String
+  session_state String
+  oauth_token_secret String
+  oauth_token String
+  user User [not null]
+
+  indexes {
+    (provider, providerAccountId) [unique]
+  }
+}
+
+Table Session {
+  id String [pk]
+  sessionToken String [unique, not null]
+  userId String [not null]
+  expires DateTime [not null]
+  user User [not null]
+}
+
+Table User {
+  id String [pk]
+  username String
+  name String
+  email String [unique]
+  emailVerified DateTime
+  image String
+  createdAt DateTime [default: `now()`, not null]
+  updatedAt DateTime [not null]
+  accounts Account [not null]
+  sessions Session [not null]
+  submissions Submission [not null]
+  bookmarks Bookmark [not null]
+}
+
+Table VerificationToken {
+  identifier String [not null]
+  token String [unique, not null]
+  expires DateTime [not null]
+
+  indexes {
+    (identifier, token) [unique]
+  }
+}
+
+Table Bookmark {
+  createdAt DateTime [default: `now()`, not null]
+  user User [not null]
+  userId String [not null]
+  Task Task [not null]
+  taskId String [not null]
+
+  indexes {
+    (taskId, userId) [pk]
+  }
+}
+
+Table Task {
+  id String [pk]
+  title String [not null]
+  fullScore Int [not null]
+  memoryLimit Int [not null]
+  timeLimit Float [not null]
+  path String [not null]
+  solved Int [not null]
+  private Boolean [not null]
+  type String [not null]
+  tags Tag [not null]
+  bookmarks Bookmark [not null]
+  Submission Submission [not null]
+}
+
+Table Submission {
+  id Int [pk, increment]
+  taskId String [not null]
+  status String [not null]
+  submittedAt DateTime [default: `now()`, not null]
+  time Int [not null]
+  memory Int [not null]
+  code String[] [not null]
+  codeLength Int [not null]
+  score Int [not null]
+  fullScore Int [not null]
+  groups Json [not null]
+  language String [not null]
+  userId String
+  user User
+  tasks Task [not null]
+}
+
+Table Tag {
+  id Int [pk, increment]
+  name String [unique, not null]
+  tasks Task [not null]
+}
+
+Table TagToTask {
+  tagsId Int [ref: > Tag.id]
+  tasksId String [ref: > Task.id]
+}
+
+Ref: Account.userId > User.id [delete: Cascade]
+
+Ref: Session.userId > User.id [delete: Cascade]
+
+Ref: Bookmark.userId > User.id
+
+Ref: Bookmark.taskId > Task.id
+
+Ref: Submission.userId > User.id [delete: Set Null]
+
+Ref: Submission.taskId > Task.id [delete: Cascade]
