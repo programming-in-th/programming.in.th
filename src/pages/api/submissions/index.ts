@@ -29,7 +29,8 @@ export default async function handler(
           task: { connect: { id: taskId } },
           code: code,
           language: language,
-          user: { connect: { id: session.user.id } }
+          user: { connect: { id: session.user.id } },
+          groups: []
         }
       })
       res.status(200).json(submission)
