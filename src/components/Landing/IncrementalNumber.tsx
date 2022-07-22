@@ -11,7 +11,7 @@ export const IncrementalNumber = ({ start, end }: IncrementalNumberProps) => {
   const [isShowingInterative, showInteractive] = useReducer(() => true, false)
 
   useEffect(() => {
-    let detectInteractive = () => {
+    const detectInteractive = () => {
       if (
         typeof interactive.current === 'undefined' ||
         interactive.current === null
@@ -23,10 +23,14 @@ export const IncrementalNumber = ({ start, end }: IncrementalNumberProps) => {
       showInteractive()
       window.removeEventListener('scroll', detectInteractive)
     }
+
     window.addEventListener('scroll', detectInteractive, {
       passive: true
     })
+
     detectInteractive()
+
+    return () => window.removeEventListener('scroll', detectInteractive)
   }, [])
 
   return (
@@ -35,7 +39,7 @@ export const IncrementalNumber = ({ start, end }: IncrementalNumberProps) => {
         <CountUp
           start={start}
           end={end}
-          duration={3}
+          duration={2}
           delay={0}
           useEasing={true}
           separator=","
