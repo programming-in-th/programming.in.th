@@ -25,7 +25,7 @@ export const SubmitElement: FC = () => {
 
       <div className="bg-prog-gray-100 px-8 py-4">
         <div className="flex justify-end">
-          <button className="bg-prog-gray-500 border text-white rounded-md px-8 py-2">
+          <button className="bg-prog-gray-500 transition-colors hover:bg-gray-600 border text-white rounded-md px-8 py-2">
             Submit
           </button>
         </div>

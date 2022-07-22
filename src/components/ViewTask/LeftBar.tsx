@@ -1,10 +1,36 @@
+import { TTabType } from './lib/types'
 import { Task } from '@/types/tasks'
 import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { DownloadIcon, StarIcon as StarIconSolid } from '@heroicons/react/solid'
+import classNames from 'classnames'
 import { FC, useState } from 'react'
 
-// add interfactions as function
-export const LeftBar: FC<{ task: Task }> = ({ task }) => {
+const Tabs = [
+  {
+    label: 'Statement',
+    value: 'statement'
+  },
+  {
+    label: 'Submissions',
+    value: 'submissions'
+  },
+  {
+    label: 'My Submissions',
+    value: 'mySubmissions'
+  },
+  {
+    label: 'Solution',
+    value: 'solution'
+  }
+]
+
+export const LeftBar: FC<{
+  task: Task
+  tab: TTabType
+  changeTab: (newTab: TTabType) => void
+}> = props => {
+  const { task, tab, changeTab } = props
+
   const [buttonPressed, setButtonPressed] = useState(false)
 
   return (
@@ -29,18 +55,20 @@ export const LeftBar: FC<{ task: Task }> = ({ task }) => {
       <hr className="my-8" />
 
       <div className="flex shrink flex-col font-display">
-        <div className="flex h-9 w-full items-center justify-center rounded-md bg-gray-100">
-          <p className="text-sm text-gray-500">Statement</p>
-        </div>
-        <div className="flex h-9 w-full items-center justify-center rounded-md hover:bg-gray-50">
-          <p className="text-sm text-gray-500">Submissions</p>
-        </div>
-        <div className="flex h-9 w-full items-center justify-center rounded-md hover:bg-gray-50">
-          <p className="text-sm text-gray-500">My Submissions</p>
-        </div>
-        <div className="flex h-9 w-full items-center justify-center rounded-md hover:bg-gray-50">
-          <p className="text-sm text-gray-500">Solution</p>
-        </div>
+        {Tabs.map(tabItem => {
+          return (
+            <button
+              key={tabItem.value}
+              onClick={() => changeTab(tabItem.value as TTabType)}
+              className={classNames(
+                'flex h-9 w-full items-center justify-center rounded-md transition-colors',
+                tab === tabItem.value ? 'bg-gray-100' : 'hover:bg-gray-50'
+              )}
+            >
+              <p className="text-sm text-gray-500">{tabItem.label}</p>
+            </button>
+          )
+        })}
       </div>
 
       <hr className="my-8" />
