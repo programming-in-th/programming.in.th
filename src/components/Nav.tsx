@@ -83,7 +83,10 @@ export const Nav = () => {
                       className="flex items-center justify-center w-10 h-10 transition-colors bg-transparent rounded-full hover:bg-slate-300 hover:bg-opacity-50"
                     >
                       <Image
-                        src={session.user.image}
+                        src={
+                          session.user.image ??
+                          '/assets/img/profile/default.svg'
+                        }
                         alt={session.user.name}
                         width={32}
                         height={32}
@@ -93,7 +96,7 @@ export const Nav = () => {
 
                     <Modal
                       TriggerRef={profileButtonRef}
-                      className="absolute mt-2 bg-white rounded-lg shadow-md right-10"
+                      className="absolute z-50 mt-2 bg-white rounded-lg shadow-md right-10"
                     >
                       <div className="flex flex-col px-8 py-4 border-b border-gray-100 text-prog-gray-500">
                         <p className="font-medium">{session.user.name}</p>
