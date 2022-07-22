@@ -6,14 +6,16 @@ import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next'
 import prisma from '@/lib/prisma'
 import { PageLayout } from '@/components/Layout'
 import { LeftBar } from '@/components/ViewTask/LeftBar'
+import { RightDisplay } from '@/components/ViewTask/RightDisplay'
 
 const Tasks = ({ task }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter()
 
   return router.isFallback ? null : (
     <PageLayout>
-      <div className="flex min-h-screen pt-12 px-10 text-prog-gray-500">
+      <div className="relative flex min-h-screen pt-12 text-prog-gray-500 gap-12 pb-14 w-full md:w-[55rem] xl:w-[72rem] mx-auto">
         <LeftBar task={task} />
+        <RightDisplay />
       </div>
     </PageLayout>
   )

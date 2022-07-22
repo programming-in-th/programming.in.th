@@ -18,7 +18,7 @@ export const LeftBar: FC<{ task: Task }> = ({ task }) => {
               <StarIconOutline className="w-5 h-5 text-gray-300" />
             )}
           </button>
-          <h1 className="font-medium text-lg">A+B problem</h1>
+          <h1 className="font-medium text-lg">{task.title}</h1>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-5 h-5" />
@@ -30,19 +30,16 @@ export const LeftBar: FC<{ task: Task }> = ({ task }) => {
 
       <div className="flex shrink flex-col font-display">
         <div className="flex h-9 w-full items-center justify-center rounded-md bg-gray-100">
-          <p className="text-sm text-gray-500">All</p>
+          <p className="text-sm text-gray-500">Statement</p>
         </div>
         <div className="flex h-9 w-full items-center justify-center rounded-md hover:bg-gray-50">
-          <p className="text-sm text-gray-500">Tried</p>
+          <p className="text-sm text-gray-500">Submissions</p>
         </div>
         <div className="flex h-9 w-full items-center justify-center rounded-md hover:bg-gray-50">
-          <p className="text-sm text-gray-500">Solved</p>
+          <p className="text-sm text-gray-500">My Submissions</p>
         </div>
         <div className="flex h-9 w-full items-center justify-center rounded-md hover:bg-gray-50">
-          <p className="text-sm text-gray-500">Archives</p>
-        </div>
-        <div className="flex h-9 w-full items-center justify-center rounded-md hover:bg-gray-50">
-          <p className="text-sm text-gray-500">Bookmarked</p>
+          <p className="text-sm text-gray-500">Solution</p>
         </div>
       </div>
 
