@@ -1,4 +1,5 @@
 import { FacebookLogo, GitHubLogo } from '@/vectors/Socials'
+import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import React, { useMemo } from 'react'
@@ -17,6 +18,8 @@ export const Footer = () => {
   const location = useMemo(() => {
     return router.pathname.split('/')[1]
   }, [router])
+
+  const { data: session } = useSession()
 
   return (
     <footer className="flex bg-white w-full flex-col items-center font-display">
@@ -44,9 +47,19 @@ export const Footer = () => {
               โปรแกรมมิ่งอินทีเอช ศูนย์รวมของโจทย์และเนื้อหาสำหรับ
               การเขียนโปรแกรมเพื่อการแข่งขัน และวิทยาการคอมพิวเตอร์
             </p>
-            <button className="mt-4 rounded-md bg-prog-primary-500 trasition-colors hover:bg-prog-primary-600 py-2.5 px-9 text-white">
-              เข้าร่วม
-            </button>
+            {session ? (
+              <Link passHref href="/tasks">
+                <a className="mt-4 rounded-md bg-prog-primary-500 trasition-colors hover:bg-prog-primary-600 py-2.5 px-9 text-white">
+                  ค้นหาโจทย์
+                </a>
+              </Link>
+            ) : (
+              <Link passHref href="/login">
+                <a className="mt-4 rounded-md bg-prog-primary-500 trasition-colors hover:bg-prog-primary-600 py-2.5 px-9 text-white">
+                  เข้าร่วม
+                </a>
+              </Link>
+            )}
           </div>
         </div>
         <div className="flex justify-between p-12 font-display">

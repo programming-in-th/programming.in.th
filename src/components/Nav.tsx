@@ -75,49 +75,51 @@ export const Nav = () => {
                 </Link>
               ))}
 
-              {session ? (
-                <div className="hidden py-1 md:block">
-                  <button
-                    ref={profileButtonRef}
-                    className="flex items-center justify-center w-10 h-10 transition-colors bg-transparent rounded-full hover:bg-slate-300 hover:bg-opacity-50"
-                  >
-                    <Image
-                      src={session.user.image}
-                      alt={session.user.name}
-                      width={32}
-                      height={32}
-                      className="w-8 h-8 rounded-full"
-                    />
-                  </button>
+              <div className="">
+                {session ? (
+                  <div className="hidden py-1 md:block">
+                    <button
+                      ref={profileButtonRef}
+                      className="flex items-center justify-center w-10 h-10 transition-colors bg-transparent rounded-full hover:bg-slate-300 hover:bg-opacity-50"
+                    >
+                      <Image
+                        src={session.user.image}
+                        alt={session.user.name}
+                        width={32}
+                        height={32}
+                        className="w-8 h-8 rounded-full"
+                      />
+                    </button>
 
-                  <Modal
-                    TriggerRef={profileButtonRef}
-                    className="absolute mt-2 bg-white rounded-lg shadow-md right-10"
-                  >
-                    <div className="flex flex-col px-8 py-4 border-b border-gray-100 text-prog-gray-500">
-                      <p className="font-medium">{session.user.name}</p>
-                      <p className="font-light">{session.user.email}</p>
-                    </div>
+                    <Modal
+                      TriggerRef={profileButtonRef}
+                      className="absolute mt-2 bg-white rounded-lg shadow-md right-10"
+                    >
+                      <div className="flex flex-col px-8 py-4 border-b border-gray-100 text-prog-gray-500">
+                        <p className="font-medium">{session.user.name}</p>
+                        <p className="font-light">{session.user.email}</p>
+                      </div>
 
-                    <div className="px-8 py-4">
-                      <button
-                        onClick={() => signOut()}
-                        className="text-prog-gray-500 hover:text-gray-700"
-                      >
-                        Logout
-                      </button>
-                    </div>
-                  </Modal>
-                </div>
-              ) : (
-                <div className="hidden md:flex md:items-center md:space-x-6">
+                      <div className="px-8 py-4">
+                        <button
+                          onClick={() => signOut()}
+                          className="text-prog-gray-500 hover:text-gray-700"
+                        >
+                          Logout
+                        </button>
+                      </div>
+                    </Modal>
+                  </div>
+                ) : (
                   <Link href="/login" passHref>
-                    <a className="inline-flex items-center px-4 py-2 text-base font-medium text-white bg-gray-600 rounded-md hover:bg-gray-700">
+                    <a
+                      className={`rounded-md shadow-md px-6 text-white bg-prog-primary-500 transition-colors hover:bg-prog-primary-600 py-2 text-base font-medium`}
+                    >
                       Login
                     </a>
                   </Link>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         </nav>
