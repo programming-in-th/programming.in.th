@@ -93,7 +93,7 @@ model Task {
   type        String       @db.Text
   tags        Tag[]
   bookmarks   Bookmark[]
-  Submission  Submission[]
+  Submissions Submission[]
 
   @@index([id])
 }
@@ -108,7 +108,7 @@ model Submission {
   code        String[]
   codeLength  Int      @default(0)
   score       Int      @default(0)
-  groups      Json
+  groups      Json     @default(dbgenerated())
   language    String
   userId      String?
   user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)

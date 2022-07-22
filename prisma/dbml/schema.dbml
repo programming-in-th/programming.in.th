@@ -81,25 +81,24 @@ Table Task {
   type String [not null]
   tags Tag [not null]
   bookmarks Bookmark [not null]
-  Submission Submission [not null]
+  Submissions Submission [not null]
 }
 
 Table Submission {
   id Int [pk, increment]
   taskId String [not null]
-  status String [not null]
+  status String [not null, default: 'In Queue']
   submittedAt DateTime [default: `now()`, not null]
-  time Int [not null]
-  memory Int [not null]
+  time Int [not null, default: 0]
+  memory Int [not null, default: 0]
   code String[] [not null]
-  codeLength Int [not null]
-  score Int [not null]
-  fullScore Int [not null]
+  codeLength Int [not null, default: 0]
+  score Int [not null, default: 0]
   groups Json [not null]
   language String [not null]
   userId String
   user User
-  tasks Task [not null]
+  task Task [not null]
 }
 
 Table Tag {
