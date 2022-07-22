@@ -7,21 +7,15 @@ export default async function taskHandler(
 ) {
   const {
     method,
-    query: { cursor, limit }
+    query: { id }
   } = req
 
   switch (method) {
     case 'GET':
-      const task = await prisma.task.findMany({
-        take: limit ? Number(limit) : undefined,
-        cursor: cursor
-          ? {
-              id: cursor as string
-            }
-          : undefined,
-        skip: cursor ? 1 : 0
+      const submission = await prisma.submission.findUnique({
+        where: { id: Number(id) }
       })
-      res.status(200).json(task)
+      res.status(200).json(submission)
       break
     default:
       res.setHeader('Allow', ['GET'])
