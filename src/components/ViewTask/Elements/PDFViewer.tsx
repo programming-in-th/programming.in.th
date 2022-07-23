@@ -193,7 +193,7 @@ const PDFViewer: React.FC<SearchSidebarDefaultLayoutProps> = ({
       onDocumentLoad={handleDocumentLoad}
       // Since we always open the sidebar, it's better to set the default scale
       // so the main body of `Viewer` fit in its container
-      defaultScale={0.75}
+      defaultScale={1.0}
       plugins={[defaultLayoutPluginInstance]}
     />
   )
