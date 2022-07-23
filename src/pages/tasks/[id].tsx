@@ -1,4 +1,4 @@
-import React from 'react'
+import { useCallback } from 'react'
 import { useRouter } from 'next/router'
 
 import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next'
@@ -9,13 +9,28 @@ import { LeftBar } from '@/components/ViewTask/LeftBar'
 import { RightDisplay } from '@/components/ViewTask/RightDisplay'
 import { Tab } from '@headlessui/react'
 
-const Tasks = ({ task }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const router = useRouter()
+const Tabs = ['statement', 'submissions', 'mysubmissions', 'solution']
 
-  return router.isFallback ? null : (
+const Tasks = ({ task }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { isFallback, query, replace } = useRouter()
+
+  const onTabChange = useCallback((index: number) => {
+    replace({ query: { ...query, type: Tabs[index] } }, null, {
+      shallow: true
+    })
+  }, [])
+
+  return isFallback ? null : (
     <PageLayout>
       <div className="relative flex min-h-screen pt-12 text-prog-gray-500 gap-12 pb-14 w-full md:w-[55rem] xl:w-[72rem] mx-auto">
-        <Tab.Group>
+        <Tab.Group
+          defaultIndex={
+            Tabs.includes(query?.type as string)
+              ? Tabs.findIndex(v => v === query?.type)
+              : 0
+          }
+          onChange={onTabChange}
+        >
           <LeftBar task={task} />
           <RightDisplay />
         </Tab.Group>
