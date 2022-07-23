@@ -33,7 +33,7 @@ export const PieChart: FC<{ points: number }> = memo(({ points }) => {
             {pie => {
               return pie.arcs.map(arc => {
                 return (
-                  <g key={arc.data.id} className="hover:cursor-pointer">
+                  <g key={arc.data.id}>
                     <path
                       d={pie.path(arc) as string}
                       fill={arc.data.color}
