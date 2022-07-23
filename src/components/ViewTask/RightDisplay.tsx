@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, Fragment } from 'react'
 import PDFViewer from './Elements/PDFViewer'
 import { SubmitElement } from './Elements/SubmitElement'
 import { Tab } from '@headlessui/react'
@@ -45,17 +45,17 @@ const SolutionTab: FC = () => {
 export const RightDisplay: FC = () => {
   return (
     <div className="w-full flex flex-col gap-8">
-      <Tab.Panels>
-        <Tab.Panel>
+      <Tab.Panels as={Fragment}>
+        <Tab.Panel as={Fragment}>
           <StatementTab />
         </Tab.Panel>
-        <Tab.Panel>
+        <Tab.Panel as={Fragment}>
           <SubmissionsTab />
         </Tab.Panel>
-        <Tab.Panel>
+        <Tab.Panel as={Fragment}>
           <MySubmissionsTab />
         </Tab.Panel>
-        <Tab.Panel>
+        <Tab.Panel as={Fragment}>
           <SolutionTab />
         </Tab.Panel>
       </Tab.Panels>
