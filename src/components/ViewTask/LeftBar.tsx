@@ -12,6 +12,10 @@ const Tabs = [
     value: 'statement'
   },
   {
+    label: 'Submit',
+    value: 'submit'
+  },
+  {
     label: 'Submissions',
     value: 'submissions'
   },
@@ -33,7 +37,7 @@ export const LeftBar: FC<{
   const [buttonPressed, setButtonPressed] = useState(false)
 
   return (
-    <section className="w-96">
+    <section className="w-90">
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
           <button onClick={() => setButtonPressed(v => !v)}>
@@ -84,18 +88,38 @@ export const LeftBar: FC<{
 
       <hr className="my-8" />
 
-      <h2 className="mb-3">Attatchments</h2>
-
-      <div className="flex flex-col border border-gray-300 rounded-md">
-        <button className="flex justify-between items-center px-5 py-4 border-b border-gray-200 transition-colors hover:bg-slate-50">
-          <p className="">attachmentsfilename...</p>
-          <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
-        </button>
-        <button className="flex justify-between items-center px-5 py-4 border-gray-200 transition-colors hover:bg-slate-50">
-          <p className="">attachmentsfilename...</p>
-          <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
-        </button>
+      <div className="flex flex-col justify-center items-center">
+        <a
+          target="_blank"
+          href="https://google.com"
+          className="font-light text-center w-full mb-4"
+        >
+          Report
+        </a>
       </div>
+
+      {/* <h2 className="mb-3">Attatchments</h2> */}
+
+      {/* <table className="table-auto border w-full border-gray-300 rounded-md border-collapse">
+        <tbody>
+          <tr>
+            <td className="border-gray-200 border transition-colors hover:bg-slate-50 px-5 py-4 w-full">
+              <button className="w-full flex justify-between items-center">
+                <p className="">attachmentsfilename...</p>
+                <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td className="border-gray-200 border transition-colors hover:bg-slate-50 px-5 py-4 w-full">
+              <button className="w-full flex justify-between items-center">
+                <p className="">attachmentsfilename...</p>
+                <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table> */}
     </section>
   )
 }
