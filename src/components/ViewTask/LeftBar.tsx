@@ -56,10 +56,9 @@ export const LeftBar: FC<{
         <Tab.List>
           {Tabs.map(tabItem => {
             return (
-              <Tab as={Fragment}>
+              <Tab key={tabItem.value} as={Fragment}>
                 {({ selected }) => (
                   <button
-                    key={tabItem.value}
                     // onClick={() => changeTab(tabItem.value as TTabType)}
                     className={classNames(
                       'flex h-9 w-full items-center justify-center rounded-md transition-colors',
