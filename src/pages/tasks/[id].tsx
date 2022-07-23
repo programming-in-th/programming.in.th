@@ -7,17 +7,18 @@ import prisma from '@/lib/prisma'
 import { PageLayout } from '@/components/Layout'
 import { LeftBar } from '@/components/ViewTask/LeftBar'
 import { RightDisplay } from '@/components/ViewTask/RightDisplay'
-import { useTab } from '@/components/ViewTask/lib/useTab'
+import { Tab } from '@headlessui/react'
 
 const Tasks = ({ task }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const router = useRouter()
-  const { tab, changeTab } = useTab()
 
   return router.isFallback ? null : (
     <PageLayout>
       <div className="relative flex min-h-screen pt-12 text-prog-gray-500 gap-12 pb-14 w-full md:w-[55rem] xl:w-[72rem] mx-auto">
-        <LeftBar tab={tab} changeTab={changeTab} task={task} />
-        <RightDisplay tab={tab} />
+        <Tab.Group>
+          <LeftBar task={task} />
+          <RightDisplay />
+        </Tab.Group>
       </div>
     </PageLayout>
   )

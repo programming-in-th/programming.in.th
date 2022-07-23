@@ -4,7 +4,7 @@
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
   },
   "dependencies": {
-    "@headlessui/react": "^1.4.3",
+    "@headlessui/react": "^1.6.4",
     "@heroicons/react": "^1.0.6",
     "@next-auth/prisma-adapter": "^1.0.1",
     "@prisma/client": "^4.0.0",

@@ -1,9 +1,9 @@
-import { TTabType } from './lib/types'
 import { Task } from '@/types/tasks'
 import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { DownloadIcon, StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import classNames from 'classnames'
-import { FC, useState } from 'react'
+import { FC, Fragment, useState } from 'react'
+import { Tab } from '@headlessui/react'
 
 const Tabs = [
   {
@@ -26,10 +26,8 @@ const Tabs = [
 
 export const LeftBar: FC<{
   task: Task
-  tab: TTabType
-  changeTab: (newTab: TTabType) => void
 }> = props => {
-  const { task, tab, changeTab } = props
+  const { task } = props
 
   const [buttonPressed, setButtonPressed] = useState(false)
 
@@ -55,20 +53,26 @@ export const LeftBar: FC<{
       <hr className="my-8" />
 
       <div className="flex shrink flex-col font-display">
-        {Tabs.map(tabItem => {
-          return (
-            <button
-              key={tabItem.value}
-              onClick={() => changeTab(tabItem.value as TTabType)}
-              className={classNames(
-                'flex h-9 w-full items-center justify-center rounded-md transition-colors',
-                tab === tabItem.value ? 'bg-gray-100' : 'hover:bg-gray-50'
-              )}
-            >
-              <p className="text-sm text-gray-500">{tabItem.label}</p>
-            </button>
-          )
-        })}
+        <Tab.List>
+          {Tabs.map(tabItem => {
+            return (
+              <Tab as={Fragment}>
+                {({ selected }) => (
+                  <button
+                    key={tabItem.value}
+                    // onClick={() => changeTab(tabItem.value as TTabType)}
+                    className={classNames(
+                      'flex h-9 w-full items-center justify-center rounded-md transition-colors',
+                      selected ? 'bg-gray-100' : 'hover:bg-gray-50'
+                    )}
+                  >
+                    <p className="text-sm text-gray-500">{tabItem.label}</p>
+                  </button>
+                )}
+              </Tab>
+            )
+          })}
+        </Tab.List>
       </div>
 
       <hr className="my-8" />
