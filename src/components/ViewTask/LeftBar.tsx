@@ -87,11 +87,11 @@ export const LeftBar: FC<{
       <h2 className="mb-3">Attatchments</h2>
 
       <div className="flex flex-col border border-gray-300 rounded-md">
-        <button className="flex justify-between items-center px-5 py-4 border-b border-gray-200">
+        <button className="flex justify-between items-center px-5 py-4 border-b border-gray-200 transition-colors hover:bg-slate-50">
           <p className="">attachmentsfilename...</p>
           <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
         </button>
-        <button className="flex justify-between items-center px-5 py-4 border-gray-200">
+        <button className="flex justify-between items-center px-5 py-4 border-gray-200 transition-colors hover:bg-slate-50">
           <p className="">attachmentsfilename...</p>
           <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
         </button>
