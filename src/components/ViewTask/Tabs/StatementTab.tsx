@@ -7,13 +7,11 @@ const pdfURL = `/assets/placeholder/statement.pdf`
 
 const StatementTab: FC = () => {
   return (
-    <>
-      <article className="h-96">
+    <div className="">
+      <article className="h-screen">
         <PDFViewer fileUrl={pdfURL} keywords={[]} />
       </article>
-
-      <SubmitElement />
-    </>
+    </div>
   )
 }
 

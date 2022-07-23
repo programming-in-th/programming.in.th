@@ -4,11 +4,16 @@ import { DownloadIcon, StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import { FC, Fragment, useState } from 'react'
 import { Tab } from '@headlessui/react'
+import { PieChart } from '../common/PieChart'
 
 const Tabs = [
   {
     label: 'Statement',
     value: 'statement'
+  },
+  {
+    label: 'Submit',
+    value: 'submit'
   },
   {
     label: 'Submissions',
@@ -32,7 +37,7 @@ export const LeftBar: FC<{
   const [buttonPressed, setButtonPressed] = useState(false)
 
   return (
-    <section className="w-96">
+    <section className="w-90">
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
           <button onClick={() => setButtonPressed(v => !v)}>
@@ -59,7 +64,6 @@ export const LeftBar: FC<{
               <Tab key={tabItem.value} as={Fragment}>
                 {({ selected }) => (
                   <button
-                    // onClick={() => changeTab(tabItem.value as TTabType)}
                     className={classNames(
                       'flex h-9 w-full items-center justify-center rounded-md transition-colors',
                       selected ? 'bg-gray-100' : 'hover:bg-gray-50'
@@ -77,25 +81,46 @@ export const LeftBar: FC<{
       <hr className="my-8" />
 
       <div className="flex flex-col justify-center items-center">
-        <p className="font-light mb-4">your score</p>
+        <p className="font-light mb-4">Your Score</p>
 
-        <div className="w-48 h-48 bg-slate-400 rounded-lg" />
+        <PieChart points={75} />
       </div>
 
       <hr className="my-8" />
 
-      <h2 className="mb-3">Attatchments</h2>
-
-      <div className="flex flex-col border border-gray-300 rounded-md">
-        <button className="flex justify-between items-center px-5 py-4 border-b border-gray-200">
-          <p className="">attachmentsfilename...</p>
-          <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
-        </button>
-        <button className="flex justify-between items-center px-5 py-4 border-gray-200">
-          <p className="">attachmentsfilename...</p>
-          <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
-        </button>
+      <div className="flex flex-col justify-center items-center">
+        <a
+          target="_blank"
+          href="https://google.com"
+          rel="noreferrer"
+          className="font-light text-center w-full mb-4"
+        >
+          Report
+        </a>
       </div>
+
+      {/* <h2 className="mb-3">Attatchments</h2> */}
+
+      {/* <table className="table-auto border w-full border-gray-300 rounded-md border-collapse">
+        <tbody>
+          <tr>
+            <td className="border-gray-200 border transition-colors hover:bg-slate-50 px-5 py-4 w-full">
+              <button className="w-full flex justify-between items-center">
+                <p className="">attachmentsfilename...</p>
+                <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
+              </button>
+            </td>
+          </tr>
+          <tr>
+            <td className="border-gray-200 border transition-colors hover:bg-slate-50 px-5 py-4 w-full">
+              <button className="w-full flex justify-between items-center">
+                <p className="">attachmentsfilename...</p>
+                <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table> */}
     </section>
   )
 }
