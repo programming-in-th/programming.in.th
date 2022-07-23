@@ -92,6 +92,7 @@ export const LeftBar: FC<{
         <a
           target="_blank"
           href="https://google.com"
+          rel="noreferrer"
           className="font-light text-center w-full mb-4"
         >
           Report
