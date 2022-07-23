@@ -9,7 +9,7 @@ export interface IPieData {
   color: string
 }
 
-export const PieChart: FC<{ points: number }> = memo(({ points }) => {
+const PieChart: FC<{ points: number }> = memo(function PieChart({ points }) {
   const size = 225
   const half = size / 2
 
@@ -70,3 +70,5 @@ export const PieChart: FC<{ points: number }> = memo(({ points }) => {
     </div>
   )
 })
+
+export { PieChart }
