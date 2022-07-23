@@ -4,6 +4,7 @@ import { DownloadIcon, StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import { FC, Fragment, useState } from 'react'
 import { Tab } from '@headlessui/react'
+import { PieChart } from '../common/PieChart'
 
 const Tabs = [
   {
@@ -59,7 +60,6 @@ export const LeftBar: FC<{
               <Tab key={tabItem.value} as={Fragment}>
                 {({ selected }) => (
                   <button
-                    // onClick={() => changeTab(tabItem.value as TTabType)}
                     className={classNames(
                       'flex h-9 w-full items-center justify-center rounded-md transition-colors',
                       selected ? 'bg-gray-100' : 'hover:bg-gray-50'
@@ -77,9 +77,9 @@ export const LeftBar: FC<{
       <hr className="my-8" />
 
       <div className="flex flex-col justify-center items-center">
-        <p className="font-light mb-4">your score</p>
+        <p className="font-light mb-4">Your Score</p>
 
-        <div className="w-48 h-48 bg-slate-400 rounded-lg" />
+        <PieChart points={75} />
       </div>
 
       <hr className="my-8" />
