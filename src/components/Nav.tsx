@@ -5,7 +5,6 @@ import { Popover, Transition } from '@headlessui/react'
 import { useSession, signOut } from 'next-auth/react'
 import { Logo } from '@/vectors/Logo'
 import Image from 'next/image'
-import Modal from './common/Modal'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -22,8 +21,6 @@ export const Nav = () => {
   }, [router])
 
   const { data: session } = useSession()
-
-  const profileButtonRef = useRef<HTMLButtonElement>(null)
 
   return (
     <Popover as="header" className="relative">
@@ -77,11 +74,8 @@ export const Nav = () => {
 
               <div className="">
                 {session ? (
-                  <div className="hidden py-1 md:block">
-                    <button
-                      ref={profileButtonRef}
-                      className="flex items-center justify-center w-10 h-10 transition-colors bg-transparent rounded-full hover:bg-slate-300 hover:bg-opacity-50"
-                    >
+                  <Popover className="relative hidden py-1 md:block">
+                    <Popover.Button className="flex items-center justify-center w-10 h-10 transition-colors bg-transparent rounded-full hover:bg-slate-300 hover:bg-opacity-50 active:ring-1 ring-slate-300">
                       <Image
                         src={
                           session.user.image ??
@@ -92,27 +86,34 @@ export const Nav = () => {
                         height={32}
                         className="w-8 h-8 rounded-full"
                       />
-                    </button>
+                    </Popover.Button>
 
-                    <Modal
-                      TriggerRef={profileButtonRef}
-                      className="absolute z-50 mt-2 bg-white rounded-lg shadow-md right-10"
+                    <Transition
+                      as={Fragment}
+                      enter="duration-150 ease-out"
+                      enterFrom="opacity-0 scale-95"
+                      enterTo="opacity-100 scale-100"
+                      leave="duration-100 ease-in"
+                      leaveFrom="opacity-100 scale-100"
+                      leaveTo="opacity-0 scale-95"
                     >
-                      <div className="flex flex-col px-8 py-4 border-b border-gray-100 text-prog-gray-500">
-                        <p className="font-medium">{session.user.name}</p>
-                        <p className="font-light">{session.user.email}</p>
-                      </div>
+                      <Popover.Panel className="absolute z-50 mt-2 bg-white rounded-lg shadow-md right-2">
+                        <div className="flex flex-col px-8 py-4 border-b border-gray-100 text-prog-gray-500">
+                          <p className="font-medium">{session.user.name}</p>
+                          <p className="font-light">{session.user.email}</p>
+                        </div>
 
-                      <div className="px-8 py-4">
-                        <button
-                          onClick={() => signOut()}
-                          className="text-prog-gray-500 hover:text-gray-700"
-                        >
-                          Logout
-                        </button>
-                      </div>
-                    </Modal>
-                  </div>
+                        <div className="px-8 py-4">
+                          <button
+                            onClick={() => signOut()}
+                            className="text-prog-gray-500 hover:text-gray-700"
+                          >
+                            Logout
+                          </button>
+                        </div>
+                      </Popover.Panel>
+                    </Transition>
+                  </Popover>
                 ) : (
                   <Link href="/login" passHref>
                     <a
