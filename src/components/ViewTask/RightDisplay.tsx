@@ -1,46 +1,9 @@
 import { FC, Fragment } from 'react'
-import PDFViewer from './Elements/PDFViewer'
-import { SubmitElement } from './Elements/SubmitElement'
 import { Tab } from '@headlessui/react'
-
-// const pdfURL = `${config.awsURL}/statements/${metadata.id}.pdf`
-const pdfURL = `/assets/placeholder/statement.pdf`
-
-const StatementTab: FC = () => {
-  return (
-    <>
-      <article className="h-96">
-        <PDFViewer fileUrl={pdfURL} keywords={[]} />
-      </article>
-
-      <SubmitElement />
-    </>
-  )
-}
-
-const SubmissionsTab: FC = () => {
-  return (
-    <>
-      <h2 className="text-prog-gray-500 font-light text-lg">Submissions</h2>
-    </>
-  )
-}
-
-const MySubmissionsTab: FC = () => {
-  return (
-    <>
-      <h2 className="text-prog-gray-500 font-light text-lg">My Submissions</h2>
-    </>
-  )
-}
-
-const SolutionTab: FC = () => {
-  return (
-    <>
-      <h2 className="text-prog-gray-500 font-light text-lg">Solution</h2>
-    </>
-  )
-}
+import StatementTab from './Tabs/StatementTab'
+import MySubmissionsTab from './Tabs/MySubmissionsTab'
+import SubmissionsTab from './Tabs/SubmissionsTab'
+import SolutionTab from './Tabs/SolutionTab'
 
 export const RightDisplay: FC = () => {
   return (
