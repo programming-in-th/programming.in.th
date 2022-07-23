@@ -28,6 +28,10 @@ export default async function handler(
 
   switch (method) {
     case 'GET':
+      if ((filter === Filter.SOLVED || filter === Filter.TRIED) && !session) {
+        res.status(401).end('Unauthorized')
+      }
+
       const task = await getTask(String(filter), session)
       res.status(200).json(task)
       break
@@ -73,7 +77,6 @@ const getTask = async (filter: string = Filter.ALL, session: Session) => {
             }
           }
         })
-      default:
     }
   }
 
