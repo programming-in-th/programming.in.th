@@ -22,7 +22,7 @@ const Tasks = ({ task }: InferGetStaticPropsType<typeof getStaticProps>) => {
 
   return isFallback ? null : (
     <PageLayout>
-      <div className="relative flex min-h-screen pt-4 text-prog-gray-500 gap-12 pb-14 w-full md:w-[55rem] xl:w-[72rem] mx-auto">
+      <div className="relative flex min-h-screen pt-8 text-prog-gray-500 gap-12 pb-14 w-full md:w-[55rem] xl:w-[72rem] mx-auto">
         <Tab.Group
           defaultIndex={
             Tabs.includes(query?.type as string)
