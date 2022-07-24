@@ -52,7 +52,7 @@ const SubmissionsTab: FC<{ task: Task }> = ({ task }) => {
         </tr>
       </thead>
       <tbody className="text-gray-500">
-        {Array.from({ length: 10 }, (_, i) => i + 1).map(v => (
+        {Array.from({ length: 10 }, (_, i) => i + 1).map((v, i) => (
           <tr
             key={v}
             className="shadow-md bg-white transition-colors hover:bg-slate-50"
@@ -73,16 +73,18 @@ const SubmissionsTab: FC<{ task: Task }> = ({ task }) => {
                     <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
                     <div
                       className={`absolute h-1.5 rounded-full ${
-                        task.score === task.fullScore
+                        (i + 1) * 10 === task.fullScore
                           ? 'bg-blue-500'
                           : 'bg-gray-500'
                       }`}
                       style={{
-                        width: `${(35 / 100) * 100}%`
+                        width: `${(((i + 1) * 10) / 100) * 100}%`
                       }}
                     />
                   </div>
-                  <p className="mt-2 text-xs text-gray-500">{35} points</p>
+                  <p className="mt-2 text-xs text-gray-500">
+                    {(i + 1) * 10} points
+                  </p>
                 </div>
               </div>
             </td>
