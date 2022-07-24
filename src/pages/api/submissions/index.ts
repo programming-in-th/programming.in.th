@@ -26,10 +26,8 @@ export default async function handler(
     authOptions
   )) as Session
 
-  let submission
-
   switch (method) {
-    case 'GET':
+    case 'GET': {
       if (
         (query.filter === Filter.OWN_TASK || query.filter === Filter.OWN) &&
         !session
@@ -37,20 +35,22 @@ export default async function handler(
         res.status(401).end('Unauthorized')
       }
 
-      submission = await getPersonalizedSubmission(
+      const submission = await getPersonalizedSubmission(
         String(query.filter),
         session,
         String(query.taskId)
       )
 
       res.status(200).json(submission)
-    case 'PUT':
+      break
+    }
+    case 'PUT': {
       if (!session) {
         res.status(401).end('Unauthorized')
       }
 
       try {
-        submission = await prisma.submission.create({
+        const submission = await prisma.submission.create({
           data: {
             task: { connect: { id: taskId } },
             code: code,
@@ -59,12 +59,13 @@ export default async function handler(
             groups: []
           }
         })
+
+        res.status(201).json(submission)
       } catch (_) {
         res.status(500)
       }
-
-      res.status(201).json(submission)
       break
+    }
     default:
       res.setHeader('Allow', ['PUT'])
       res.status(405).end(`Method ${method} Not Allowed`)
@@ -77,16 +78,16 @@ const getPersonalizedSubmission = async (
   taskId: string
 ) => {
   if (session) {
-    if (filter === Filter.OWN) {
-      return await prisma.submission.findMany({
-        where: {
-          user: {
-            id: { equals: session.user.id }
+    switch (filter) {
+      case Filter.OWN:
+        return await prisma.submission.findMany({
+          where: {
+            user: {
+              id: { equals: session.user.id }
+            }
           }
-        }
-      })
-    } else if (filter === Filter.OWN_TASK) {
-      if (taskId) {
+        })
+      case Filter.OWN_TASK:
         return await prisma.submission.findMany({
           where: {
             taskId: String(taskId),
@@ -95,13 +96,13 @@ const getPersonalizedSubmission = async (
             }
           }
         })
-      }
-    } else if (filter === Filter.TASK) {
-      return await prisma.submission.findMany({
-        where: {
-          taskId: String(taskId)
-        }
-      })
+
+      case Filter.TASK:
+        return await prisma.submission.findMany({
+          where: {
+            taskId: String(taskId)
+          }
+        })
     }
   }
 
