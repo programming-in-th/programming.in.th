@@ -62,7 +62,7 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
   return (
     <div className="flex flex-col gap-6 w-full rounded-md shadow-md text-prog-gray-500">
       <div className="bg-white px-8 py-4">
-        <div className="flex justify-between items-center mb-6">
+        <div className="flex gap-4 justify-between items-center mb-6">
           <h2 className="text-lg">Submit</h2>
           <div className="flex gap-2 ">
             {Languages.map(language => {
@@ -70,7 +70,7 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
                 <div
                   key={language.extension}
                   className={classNames(
-                    'border rounded-md px-8 py-2',
+                    'border text-sm rounded-md px-6 py-2',
                     file?.name?.toLowerCase()?.endsWith(language.extension)
                       ? 'bg-prog-gray-500 text-white'
                       : 'border-gray-300 text-prog-gray-500'
