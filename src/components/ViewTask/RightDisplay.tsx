@@ -22,7 +22,7 @@ export const RightDisplay: FC<{ task: Task }> = ({ task }) => {
       <Tab.Panel>
         <MySubmissionsTab task={task} />
       </Tab.Panel>
-      <Tab.Panel as={Fragment}>
+      <Tab.Panel>
         <SolutionTab task={task} />
       </Tab.Panel>
     </Tab.Panels>
