@@ -1,4 +1,4 @@
-import { Task } from '@/types/tasks'
+import { Task } from '@prisma/client'
 import { FC } from 'react'
 import { SubmitElement } from '../Elements/SubmitElement'
 

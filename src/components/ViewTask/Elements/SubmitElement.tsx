@@ -1,4 +1,4 @@
-import { Task } from '@/types/tasks'
+import { Task } from '@prisma/client'
 import { getFileExtension } from '@/utilities/getFileExtension'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'

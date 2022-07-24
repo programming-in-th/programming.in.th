@@ -1,4 +1,4 @@
-import { Task } from '@/types/tasks'
+import { Task } from '@prisma/client'
 import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { DownloadIcon, StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import classNames from 'classnames'

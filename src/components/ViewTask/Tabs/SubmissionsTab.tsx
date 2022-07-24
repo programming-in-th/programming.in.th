@@ -1,4 +1,4 @@
-import { Task } from '@/types/tasks'
+import { Task } from '@prisma/client'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
 import { FC } from 'react'
 

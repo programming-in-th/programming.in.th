@@ -5,7 +5,7 @@ import SubmitTab from './Tabs/SubmitTab'
 import MySubmissionsTab from './Tabs/MySubmissionsTab'
 import SubmissionsTab from './Tabs/SubmissionsTab'
 import SolutionTab from './Tabs/SolutionTab'
-import { Task } from '@/types/tasks'
+import { Task } from '@prisma/client'
 
 export const RightDisplay: FC<{ task: Task }> = ({ task }) => {
   return (
@@ -24,7 +24,7 @@ export const RightDisplay: FC<{ task: Task }> = ({ task }) => {
           <MySubmissionsTab />
         </Tab.Panel>
         <Tab.Panel>
-          <SolutionTab />
+          <SolutionTab task={task} />
         </Tab.Panel>
       </Tab.Panels>
     </div>

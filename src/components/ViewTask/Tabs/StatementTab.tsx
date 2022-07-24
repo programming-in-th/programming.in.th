@@ -1,4 +1,4 @@
-import { Task } from '@/types/tasks'
+import { Task } from '@prisma/client'
 import { FC, memo } from 'react'
 import PDFViewer from '../Elements/PDFViewer'
 
