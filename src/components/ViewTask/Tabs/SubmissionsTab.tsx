@@ -1,6 +1,6 @@
 import { Task } from '@prisma/client'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
-import { FC } from 'react'
+import { FC, memo } from 'react'
 
 const SubmissionsTab: FC<{ task: Task }> = ({ task }) => {
   return (
@@ -108,4 +108,4 @@ const SubmissionsTab: FC<{ task: Task }> = ({ task }) => {
   )
 }
 
-export default SubmissionsTab
+export default memo(SubmissionsTab)
