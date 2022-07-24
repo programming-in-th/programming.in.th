@@ -37,7 +37,7 @@ export const LeftBar: FC<{
   const [buttonPressed, setButtonPressed] = useState(false)
 
   return (
-    <section className="w-90">
+    <section className="w-80">
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
           <button onClick={() => setButtonPressed(v => !v)}>

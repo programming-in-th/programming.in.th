@@ -10,7 +10,7 @@ export interface IPieData {
 }
 
 const PieChart: FC<{ points: number }> = memo(function PieChart({ points }) {
-  const size = 225
+  const size = 150
   const half = size / 2
 
   const pieData: [IPieData, IPieData] = [
@@ -26,7 +26,7 @@ const PieChart: FC<{ points: number }> = memo(function PieChart({ points }) {
             data={pieData}
             pieValue={data => data.value}
             outerRadius={half}
-            innerRadius={({ data }) => half - 20}
+            innerRadius={({ data }) => half - 12}
             cornerRadius={10}
             padAngle={0.005}
           >
@@ -44,7 +44,7 @@ const PieChart: FC<{ points: number }> = memo(function PieChart({ points }) {
             }}
           </Pie>
 
-          <text textAnchor="middle" dy={5} fontSize={'1.75rem'}>
+          <text textAnchor="middle" dy={5} fontSize={'1.25rem'}>
             <tspan fill="#64748B" fontWeight={500}>
               {points}
             </tspan>
@@ -58,8 +58,8 @@ const PieChart: FC<{ points: number }> = memo(function PieChart({ points }) {
 
           <Text
             textAnchor="middle"
-            dy={30}
-            fontSize={'1rem'}
+            dy={25}
+            fontSize={'0.75rem'}
             fontWeight={300}
             fill="#64748B"
           >
