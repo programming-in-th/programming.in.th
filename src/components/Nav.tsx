@@ -144,7 +144,7 @@ export const Nav = () => {
       >
         <Popover.Panel
           focus
-          className="absolute inset-x-0 top-0 p-2 transition origin-top transform md:hidden"
+          className="absolute z-50 inset-x-0 top-0 p-2 transition origin-top transform md:hidden"
         >
           <div className="overflow-hidden bg-white rounded-lg shadow-md ring-1 ring-black ring-opacity-5">
             <div className="flex items-center justify-between px-5 pt-4">
