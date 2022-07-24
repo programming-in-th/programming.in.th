@@ -2,6 +2,25 @@ import classNames from 'classnames'
 import { FC, useCallback, useEffect, useState } from 'react'
 import { FileUpload } from './FileUpload'
 
+const Languages = [
+  {
+    title: 'C++',
+    extension: '.cpp'
+  },
+  {
+    title: 'Python',
+    extension: '.py'
+  },
+  {
+    title: 'Java',
+    extension: '.java'
+  },
+  {
+    title: 'Rust',
+    extension: '.rs'
+  }
+]
+
 export const SubmitElement: FC = () => {
   const [file, setFile] = useState<File>()
   const [fileText, setFileText] = useState<string>()
@@ -22,46 +41,21 @@ export const SubmitElement: FC = () => {
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-lg">Submit</h2>
           <div className="flex gap-2 ">
-            <button
-              className={classNames(
-                'border rounded-md px-8 py-2',
-                file?.name?.endsWith('.cpp')
-                  ? 'bg-prog-gray-500 text-white'
-                  : 'border-gray-300 text-prog-gray-500'
-              )}
-            >
-              C++
-            </button>
-            <button
-              className={classNames(
-                'border rounded-md px-8 py-2',
-                file?.name?.endsWith('.py')
-                  ? 'bg-prog-gray-500 text-white'
-                  : 'border-gray-300 text-prog-gray-500'
-              )}
-            >
-              Python
-            </button>
-            <button
-              className={classNames(
-                'border rounded-md px-8 py-2',
-                file?.name?.endsWith('.java')
-                  ? 'bg-prog-gray-500 text-white'
-                  : 'border-gray-300 text-prog-gray-500'
-              )}
-            >
-              Java
-            </button>
-            <button
-              className={classNames(
-                'border rounded-md px-8 py-2',
-                file?.name?.endsWith('.rs')
-                  ? 'bg-prog-gray-500 text-white'
-                  : 'border-gray-300 text-prog-gray-500'
-              )}
-            >
-              Rust
-            </button>
+            {Languages.map(language => {
+              return (
+                <button
+                  key={language.extension}
+                  className={classNames(
+                    'border rounded-md px-8 py-2',
+                    file?.name?.toLowerCase()?.endsWith(language.extension)
+                      ? 'bg-prog-gray-500 text-white'
+                      : 'border-gray-300 text-prog-gray-500'
+                  )}
+                >
+                  {language.title}
+                </button>
+              )
+            })}
           </div>
         </div>
 
