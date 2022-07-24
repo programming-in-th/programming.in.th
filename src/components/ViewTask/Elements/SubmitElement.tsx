@@ -1,4 +1,7 @@
+import { Task } from '@/types/tasks'
+import { getFileExtension } from '@/utilities/getFileExtension'
 import classNames from 'classnames'
+import { useRouter } from 'next/router'
 import { FC, useCallback, useEffect, useState } from 'react'
 import { FileUpload } from './FileUpload'
 
@@ -21,9 +24,11 @@ const Languages = [
   }
 ]
 
-export const SubmitElement: FC = () => {
+export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
   const [file, setFile] = useState<File>()
   const [fileText, setFileText] = useState<string>()
+
+  const router = useRouter()
 
   useEffect(() => {
     if (file) {
@@ -31,8 +36,27 @@ export const SubmitElement: FC = () => {
     }
   }, [file])
 
-  const onSubmit = () => {
+  const onSubmit = async () => {
     // submit to grader
+
+    if (file && fileText) {
+      const res = await fetch('/api/submissions', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          taskId: task.id,
+          code: fileText,
+          language: getFileExtension(file.name)
+        })
+      })
+
+      if (res.ok) {
+        const resJson = await res.json()
+        router.push(`/submissions/${resJson.id}`)
+      }
+    }
   }
 
   return (
@@ -72,7 +96,12 @@ export const SubmitElement: FC = () => {
         <div className="flex justify-end">
           <button
             onClick={onSubmit}
-            className="bg-prog-gray-500 transition-colors hover:bg-gray-600 border text-white rounded-md px-8 py-2"
+            className={classNames(
+              'transition-colors border rounded-md px-8 py-2',
+              file && fileText
+                ? 'bg-prog-gray-500 hover:bg-gray-600 text-white'
+                : 'bg-slate-50  text-gray-300 cursor-not-allowed'
+            )}
           >
             Submit
           </button>

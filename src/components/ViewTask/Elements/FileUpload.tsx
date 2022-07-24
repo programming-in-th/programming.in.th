@@ -1,3 +1,4 @@
+import { getFileExtension } from '@/utilities/getFileExtension'
 import { truncate } from '@/utilities/truncate'
 import { InboxInIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
@@ -20,9 +21,7 @@ export const FileUpload: FC<{
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragActive } =
     useDropzone({
       validator: currentFile => {
-        const extension = currentFile?.name
-          ?.toLowerCase()
-          ?.match(/\.[0-9a-z]+$/i)[0]
+        const extension = getFileExtension(currentFile?.name ?? '')
 
         if (['.cpp', '.py', '.java', '.rs'].includes(extension)) {
           return null

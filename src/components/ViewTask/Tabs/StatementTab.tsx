@@ -1,11 +1,11 @@
+import { Task } from '@/types/tasks'
 import { FC, memo } from 'react'
 import PDFViewer from '../Elements/PDFViewer'
-import { SubmitElement } from '../Elements/SubmitElement'
 
 // const pdfURL = `${config.awsURL}/statements/${metadata.id}.pdf`
 const pdfURL = `/assets/placeholder/statement.pdf`
 
-const StatementTab: FC = () => {
+const StatementTab: FC<{ task: Task }> = ({ task }) => {
   return (
     <div className="">
       <article className="h-screen">

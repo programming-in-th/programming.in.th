@@ -12,10 +12,10 @@ export const RightDisplay: FC<{ task: Task }> = ({ task }) => {
     <div className="w-full flex flex-col gap-8">
       <Tab.Panels as={Fragment}>
         <Tab.Panel>
-          <StatementTab />
+          <StatementTab task={task} />
         </Tab.Panel>
         <Tab.Panel>
-          <SubmitTab />
+          <SubmitTab task={task} />
         </Tab.Panel>
         <Tab.Panel>
           <SubmissionsTab task={task} />
