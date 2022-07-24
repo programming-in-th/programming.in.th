@@ -5,6 +5,7 @@ import { Popover, Transition } from '@headlessui/react'
 import { useSession, signOut } from 'next-auth/react'
 import { Logo } from '@/vectors/Logo'
 import Image from 'next/image'
+import classNames from 'classnames'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -23,7 +24,10 @@ export const Nav = () => {
   const { data: session } = useSession()
 
   return (
-    <Popover as="header" className="relative">
+    <Popover
+      as="header"
+      className={classNames('relative', location !== '' && 'shadow-sm')}
+    >
       <div className="py-3">
         <nav
           className="relative flex items-center justify-between px-4 mx-auto max-w-7xl sm:px-14"
@@ -61,7 +65,7 @@ export const Nav = () => {
                 <Link href={item.href} key={item.name} passHref>
                   <a
                     key={item.name}
-                    className={`text-base font-medium ${
+                    className={`text-sm font-medium ${
                       `/${location}` == item.href
                         ? 'text-prog-primary-500 hover:text-blue-600'
                         : 'text-prog-gray-500 hover:text-gray-600'
@@ -72,7 +76,7 @@ export const Nav = () => {
                 </Link>
               ))}
 
-              <div className="">
+              <div className="pl-6">
                 {session ? (
                   <Popover className="relative hidden py-1 md:block">
                     <Popover.Button className="flex items-center justify-center w-10 h-10 transition-colors bg-transparent rounded-full hover:bg-slate-300 hover:bg-opacity-50 active:ring-1 ring-slate-300">
