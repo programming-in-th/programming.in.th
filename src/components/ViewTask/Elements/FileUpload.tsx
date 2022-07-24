@@ -15,35 +15,29 @@ export const FileUpload: FC<{
   file: File
   setFile: Dispatch<SetStateAction<File>>
 }> = ({ file, setFile }) => {
-  const {
-    getRootProps,
-    getInputProps,
-    isFocused,
-    isDragAccept,
-    isDragReject,
-    isDragActive
-  } = useDropzone({
-    validator: currentFile => {
-      const extension = currentFile?.name
-        ?.toLowerCase()
-        ?.match(/\.[0-9a-z]+$/i)[0]
+  const { getRootProps, getInputProps, isFocused, isDragAccept, isDragActive } =
+    useDropzone({
+      validator: currentFile => {
+        const extension = currentFile?.name
+          ?.toLowerCase()
+          ?.match(/\.[0-9a-z]+$/i)[0]
 
-      if (['.cpp', '.py', '.java', '.rs'].includes(extension)) {
-        return null
-      } else {
-        return {
-          code: 'wrong-file-extension',
-          message:
-            'Only files with the extension .cpp .py .java .rs are accepted'
+        if (['.cpp', '.py', '.java', '.rs'].includes(extension)) {
+          return null
+        } else {
+          return {
+            code: 'wrong-file-extension',
+            message:
+              'Only files with the extension .cpp .py .java .rs are accepted'
+          }
+        }
+      },
+      onDrop(acceptedFiles, fileRejections, event) {
+        if (acceptedFiles.length > 0) {
+          setFile(acceptedFiles[0])
         }
       }
-    },
-    onDrop(acceptedFiles, fileRejections, event) {
-      if (acceptedFiles.length > 0) {
-        setFile(acceptedFiles[0])
-      }
-    }
-  })
+    })
 
   const formatBytes = useCallback(
     (bytes, decimals = 2) => {
@@ -63,14 +57,14 @@ export const FileUpload: FC<{
   return (
     <div className="overflow-hidden relative w-full">
       <div
-        {...getRootProps({
-          className: classNames(
-            'rounded-md w-full border cursor-pointer hover:bg-slate-50 border-dashed transition-colors border-gray-400 text-gray-400 p-6 gap-2 flex flex-col justify-center items-center',
-            isDragReject && 'border-red-400',
-            (isFocused || isDragAccept) && 'border-prog-primary-500',
-            isDragActive && 'bg-slate-800 bg-opacity-50 backdrop-blur-sm'
-          )
-        })}
+        {...getRootProps()}
+        className={classNames(
+          'rounded-md w-full border cursor-pointer h-48 border-dashed transition-colors border-gray-400 text-gray-400 p-6 gap-2 flex flex-col justify-center items-center',
+          (isFocused || isDragAccept) && 'border-prog-primary-500',
+          isDragActive
+            ? 'bg-slate-800 bg-opacity-50 backdrop-blur-sm'
+            : 'hover:bg-slate-50'
+        )}
       >
         <input {...getInputProps()} />
 
