@@ -12,6 +12,8 @@ import {
 } from 'react'
 import { useDropzone } from 'react-dropzone'
 
+const ACCEPTED_LANGUAGES = ['.cpp', '.py', '.java', '.rs']
+
 export const FileUpload: FC<{
   file: File
   setFile: Dispatch<SetStateAction<File>>
@@ -20,10 +22,13 @@ export const FileUpload: FC<{
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragActive } =
     useDropzone({
+      accept: {
+        'text/*': ACCEPTED_LANGUAGES
+      },
       validator: currentFile => {
         const extension = getFileExtension(currentFile?.name ?? '')
 
-        if (['.cpp', '.py', '.java', '.rs'].includes(extension)) {
+        if (ACCEPTED_LANGUAGES.includes(extension)) {
           return null
         } else {
           return {
