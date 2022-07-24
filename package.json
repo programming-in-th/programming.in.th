@@ -13,6 +13,7 @@
     "@react-pdf-viewer/search": "^3.6.0",
     "@react-pdf-viewer/toolbar": "^3.6.0",
     "@supabase/realtime-js": "^1.7.3",
+    "@tanstack/react-table": "^8.3.3",
     "@visx/group": "^2.10.0",
     "@visx/shape": "^2.11.1",
     "@visx/text": "^2.10.0",

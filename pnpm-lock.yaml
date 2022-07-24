@@ -11,6 +11,7 @@ specifiers:
   '@react-pdf-viewer/toolbar': ^3.6.0
   '@supabase/realtime-js': ^1.7.3
   '@tailwindcss/typography': ^0.5.1
+  '@tanstack/react-table': ^8.3.3
   '@types/node': ^18.0.0
   '@types/react': ^18.0.13
   '@visx/group': ^2.10.0
@@ -53,6 +54,7 @@ dependencies:
   '@react-pdf-viewer/search': 3.6.0_hx7cmb54hjio4hek6jqyxx46km
   '@react-pdf-viewer/toolbar': 3.6.0_hx7cmb54hjio4hek6jqyxx46km
   '@supabase/realtime-js': 1.7.3
+  '@tanstack/react-table': 8.3.3_biqbaboplfbrettd7655fr4n2y
   '@visx/group': 2.10.0_react@18.2.0
   '@visx/shape': 2.11.1_react@18.2.0
   '@visx/text': 2.10.0_react@18.2.0
@@ -1070,6 +1072,29 @@ packages:
       lodash.merge: 4.6.2
       tailwindcss: 3.1.3_ts-node@10.9.1
     dev: true
+
+  /@tanstack/react-table/8.3.3_biqbaboplfbrettd7655fr4n2y:
+    resolution:
+      {
+        integrity: sha512-Zvp40XmxJgage/GKzqQVH38gVRtF5rmLV7WIWE4WZUtKsZgPhU3ZUt7ijc2Nyej8v/KGkF4ja8FA/UITevZA4A==
+      }
+    engines: { node: '>=12' }
+    peerDependencies:
+      react: '>=16'
+      react-dom: '>=16'
+    dependencies:
+      '@tanstack/table-core': 8.3.3
+      react: 18.2.0
+      react-dom: 18.2.0_react@18.2.0
+    dev: false
+
+  /@tanstack/table-core/8.3.3:
+    resolution:
+      {
+        integrity: sha512-Y9lVatqOsQaQBmoKynWIkThC9MN+z4RCP8hSyGPlxI4K1MINFUBswpi3mEg157g0Q9UOXtmt13s7wnoHHfe+2Q==
+      }
+    engines: { node: '>=12' }
+    dev: false
 
   /@timsuchanek/copy/1.4.5:
     resolution:
