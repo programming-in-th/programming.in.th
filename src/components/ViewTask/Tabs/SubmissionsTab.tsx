@@ -1,7 +1,8 @@
+import { Task } from '@/types/tasks'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
 import { FC } from 'react'
 
-const SubmissionsTab: FC = () => {
+const SubmissionsTab: FC<{ task: Task }> = ({ task }) => {
   return (
     <table className="table-auto text-sm border-separate w-full border-spacing-y-3">
       <thead className="text-gray-500">
@@ -66,7 +67,24 @@ const SubmissionsTab: FC = () => {
               <p className="font-medium text-center">iammarkps</p>
             </td>
             <td className="py-4">
-              <p className="text-center"> 50 points</p>
+              <div className="flex mx-auto h-auto w-28 items-center justify-center">
+                <div className="flex h-auto w-full flex-col items-center justify-around">
+                  <div className="relative h-full w-full">
+                    <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
+                    <div
+                      className={`absolute h-1.5 rounded-full ${
+                        task.score === task.fullScore
+                          ? 'bg-blue-500'
+                          : 'bg-gray-500'
+                      }`}
+                      style={{
+                        width: `${(35 / 100) * 100}%`
+                      }}
+                    />
+                  </div>
+                  <p className="mt-2 text-xs text-gray-500">{35} points</p>
+                </div>
+              </div>
             </td>
             <td className="py-4">
               <p className="font-medium text-center">C++</p>

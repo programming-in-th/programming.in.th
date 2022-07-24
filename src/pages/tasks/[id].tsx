@@ -32,7 +32,7 @@ const Tasks = ({ task }: InferGetStaticPropsType<typeof getStaticProps>) => {
           onChange={onTabChange}
         >
           <LeftBar task={task} />
-          <RightDisplay />
+          <RightDisplay task={task} />
         </Tab.Group>
       </div>
     </PageLayout>
