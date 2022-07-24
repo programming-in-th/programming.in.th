@@ -68,8 +68,9 @@ const Landing = () => {
           </h2>
 
           <p className="text-center text-prog-gray-500 font-light max-w-2xl mx-auto px-10">
-            คำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรย
-            ำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรยคำโปรย
+            ทำไม programming.in.th จึงเป็นเว็บไซต์ที่ใช้ฝึกฝน
+            <br />
+            competitive programming อันดับ 1 ของประเทศไทย
           </p>
         </section>
 
@@ -110,7 +111,7 @@ const Landing = () => {
             <div className="flex flex-col items-center pb-6 sm:pb-0 sm:pt-20 justify-center text-center">
               <p className="text-prog-gray-500 font-light">จำนวนผู้ใช้กว่า</p>
               <div className="text-6xl text-prog-primary-500 font-semibold">
-                <IncrementalNumber start={1} end={10036} />
+                <IncrementalNumber start={1} end={13071} />
               </div>
               <p className="text-2xl text-prog-gray-500 font-semibold">คน</p>
             </div>
@@ -120,28 +121,28 @@ const Landing = () => {
         <section className="bg-white w-full p-10">
           <div className="grid gap-4 grid-cols-1 max-w-6xl mx-auto sm:grid-cols-2">
             <TestimonyCard
-              title="Iammarkps"
-              description="programming.in.th เป็นเว็บที่เปลี่ยนชีวิตผม ผมเข้ามาใช้ทุกวัน ดีมากจริง ๆ ครับ แนะนำเลย เหมาะกับทุกคน ไม่ว่าจะมือใหม่หรือมือโปรก็ใช้ได้ใช้ดี"
-              imgURL="/assets/img/landing/iammark.jpg"
-              role="user"
+              title="เขมนันท์ มณีศรี (จอม)"
+              description="ไม่ว่าคุณจะอยู่ระดับไหน เว็บไซต์ programming.in.th ก็พร้อมที่จะพาคุณไปสู่เป้าหมายได้อย่างง่ายดาย ด้วยโจทย์ที่หลากหลาย และความสะดวกสบายในการใช้งาน ซึ่งผมก็ต้องบอกว่า เว็บไซต์นี้สามารถทำให้ผมสามารถมาถึงจุดนี้ได้"
+              imgURL="/assets/img/landing/review-1.png"
+              role="ผู้แทนโอลิมปิกวิชาการ วิชาคอมพิวเตอร์ (IOI) ประจำปีการศึกษา 2565"
             />
             <TestimonyCard
-              title="Iammarkps"
-              description="programming.in.th เป็นเว็บที่เปลี่ยนชีวิตผม ผมเข้ามาใช้ทุกวัน ดีมากจริง ๆ ครับ แนะนำเลย เหมาะกับทุกคน ไม่ว่าจะมือใหม่หรือมือโปรก็ใช้ได้ใช้ดี"
-              imgURL="/assets/img/landing/iammark.jpg"
-              role="user"
+              title="พิทักษ์พงศ์ กปิญชรานนท์ (เต็ม)"
+              description="จากการที่ผมได้ใช้เว็บไซต์จำนวนมากในการทำโจทย์ competitive programming ผมบอกได้เลยว่าเว็บไซต์ programming.in.th ด้วยความสะดวกสบายในการใช้งาน การออกแบบที่สวยงาม และโจทย์ที่เป็นภาษาไทย เป็นเว็บไซต์อันดับ 1 ที่ผมแนะนำให้ทุกคนใช้ ตั้งแต่ระดับมือใหม่จนถึงมือโปร"
+              imgURL="/assets/img/landing/review-2.png"
+              role="ผู้แทนโอลิมปิกวิชาการ วิชาคอมพิวเตอร์ (IOI) ประจำปีการศึกษา 2565"
             />
             <TestimonyCard
-              title="Iammarkps"
-              description="programming.in.th เป็นเว็บที่เปลี่ยนชีวิตผม ผมเข้ามาใช้ทุกวัน ดีมากจริง ๆ ครับ แนะนำเลย เหมาะกับทุกคน ไม่ว่าจะมือใหม่หรือมือโปรก็ใช้ได้ใช้ดี"
-              imgURL="/assets/img/landing/iammark.jpg"
-              role="user"
+              title="โมกข์ วรรธนะโสภณ (โมกข์)"
+              description="programming.in.th เป็นแหล่งรวมโจทย์ competitive programming ที่มีความหลากหลายมากที่สุดในไทยแล้วครับ สำหรับใครที่กำลังตามหาโจทย์ในการเริ่มฝึกทักษะการเขียนโปรแกรมของตัวเองอยู่ ผมก็คงแนะนำเว็บไซต์ไหนไปไม่ได้นอกจากที่นี่เลยครับ"
+              imgURL="/assets/img/landing/review-3.png"
+              role="ผู้แทนโอลิมปิกวิชาการ วิชาคอมพิวเตอร์ (IOI) ประจำปีการศึกษา 2565"
             />
             <TestimonyCard
-              title="Iammarkps"
+              title="กฤษฏ์ สุวรรณไพบูลย์ (กฤษฏ์)"
               description="programming.in.th เป็นเว็บที่เปลี่ยนชีวิตผม ผมเข้ามาใช้ทุกวัน ดีมากจริง ๆ ครับ แนะนำเลย เหมาะกับทุกคน ไม่ว่าจะมือใหม่หรือมือโปรก็ใช้ได้ใช้ดี"
-              imgURL="/assets/img/landing/iammark.jpg"
-              role="user"
+              imgURL="/assets/img/landing/review-4.png"
+              role="ผู้แทนโอลิมปิกวิชาการ วิชาคอมพิวเตอร์ (IOI) ประจำปีการศึกษา 2565"
             />
           </div>
         </section>

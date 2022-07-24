@@ -13,7 +13,7 @@ export const TestimonyCard: FC<{
   return (
     <article className="text-center py-4 relative bg-white text-prog-gray-500 rounded-lg">
       <QuoteVector className="mx-auto mb-4" />
-      <p className="px-12 font-light">{description}</p>
+      <p className="px-12 font-light h-auto sm:h-48 md:h-36">{description}</p>
       <div className="flex gap-4 items-center justify-center py-6">
         <Image
           width={80}
@@ -24,8 +24,10 @@ export const TestimonyCard: FC<{
         />
 
         <div className="mb-4 pt-2 text-left flex flex-col">
-          <h3 className="font-semibold">{title}</h3>
-          <span className="text-prog-primary-500">{role}</span>
+          <h3 className="font-semibold mb-1">{title}</h3>
+          <span className="text-prog-primary-500 text-sm whitespace-pre-wrap w-48">
+            {role}
+          </span>
         </div>
       </div>
     </article>
