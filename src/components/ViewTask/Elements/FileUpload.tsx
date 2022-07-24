@@ -31,7 +31,11 @@ export const FileUpload: FC<{
         id="file"
         ref={inputRef}
         className="hidden"
-        onChange={e => setFile(e.target.files[0])}
+        onChange={e => {
+          if (e.target.files.length > 0) {
+            setFile(e.target.files[0])
+          }
+        }}
         accept=".cpp,.py,.java,.rs"
       />
       <button
