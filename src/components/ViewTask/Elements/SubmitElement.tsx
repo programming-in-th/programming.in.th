@@ -84,7 +84,7 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
         </div>
 
         {file && (
-          <pre className="text-sm my-4 p-4 bg-slate-50 rounded-mg">
+          <pre className="text-sm h-96 overflow-auto w-full my-4 p-4 bg-slate-50 rounded-mg">
             {fileText}
           </pre>
         )}

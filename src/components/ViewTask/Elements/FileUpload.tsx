@@ -75,7 +75,10 @@ export const FileUpload: FC<{
         <input {...getInputProps()} />
 
         <InboxInIcon
-          className={classNames('w-10 h-10', isDragActive && 'text-white')}
+          className={classNames(
+            'w-10 h-10',
+            isDragActive && 'text-white animate-pulse'
+          )}
         />
 
         {isDragActive ? (
