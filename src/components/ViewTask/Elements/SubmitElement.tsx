@@ -37,8 +37,6 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
   }, [file])
 
   const onSubmit = async () => {
-    // submit to grader
-
     if (file && fileText) {
       const res = await fetch('/api/submissions', {
         method: 'PUT',
@@ -55,6 +53,9 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
       if (res.ok) {
         const resJson = await res.json()
         router.push(`/submissions/${resJson.id}`)
+      } else {
+        // log error
+        console.error(res)
       }
     }
   }
@@ -64,7 +65,7 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
       <div className="bg-white px-8 py-4">
         <div className="flex gap-4 justify-between items-center mb-6">
           <h2 className="text-lg">Submit</h2>
-          <div className="flex gap-2 ">
+          <div className="flex gap-2 flex-wrap justify-end">
             {Languages.map(language => {
               return (
                 <div

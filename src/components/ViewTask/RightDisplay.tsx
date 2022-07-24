@@ -9,24 +9,22 @@ import { Task } from '@prisma/client'
 
 export const RightDisplay: FC<{ task: Task }> = ({ task }) => {
   return (
-    <div className="w-full flex flex-col gap-8">
-      <Tab.Panels as={Fragment}>
-        <Tab.Panel>
-          <StatementTab task={task} />
-        </Tab.Panel>
-        <Tab.Panel>
-          <SubmitTab task={task} />
-        </Tab.Panel>
-        <Tab.Panel>
-          <SubmissionsTab task={task} />
-        </Tab.Panel>
-        <Tab.Panel>
-          <MySubmissionsTab task={task} />
-        </Tab.Panel>
-        <Tab.Panel>
-          <SolutionTab task={task} />
-        </Tab.Panel>
-      </Tab.Panels>
-    </div>
+    <Tab.Panels className="w-full md:w-[28rem] xl:w-[55rem] flex flex-col gap-8">
+      <Tab.Panel>
+        <StatementTab task={task} />
+      </Tab.Panel>
+      <Tab.Panel>
+        <SubmitTab task={task} />
+      </Tab.Panel>
+      <Tab.Panel>
+        <SubmissionsTab task={task} />
+      </Tab.Panel>
+      <Tab.Panel>
+        <MySubmissionsTab task={task} />
+      </Tab.Panel>
+      <Tab.Panel as={Fragment}>
+        <SolutionTab task={task} />
+      </Tab.Panel>
+    </Tab.Panels>
   )
 }

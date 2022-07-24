@@ -3,9 +3,8 @@ import { FC, memo } from 'react'
 
 const SolutionTab: FC<{ task: Task }> = ({ task }) => {
   return (
-    <div>
-      <pre className="text-sm overflow-auto w-full my-4 p-4 bg-slate-50 rounded-mg">
-        {`#include <bits/stdc++.h>
+    <pre className="text-sm overflow-auto inline-block my-4 p-4 bg-slate-50 rounded-mg">
+      {`#include <bits/stdc++.h>
 
 using namespace std;
 
@@ -32,8 +31,7 @@ int main () {
         printf("F");
     }
 }`}
-      </pre>
-    </div>
+    </pre>
   )
 }
 

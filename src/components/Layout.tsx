@@ -32,7 +32,7 @@ export const PageLayout = ({ children }) => {
   return (
     <div className={classNames('w-full font-display', backgroundColor)}>
       <Nav />
-      <main className="flex flex-col min-h-screen">{children}</main>
+      <main className="flex flex-col w-screen min-h-screen">{children}</main>
       <Footer />
     </div>
   )
