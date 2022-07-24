@@ -43,7 +43,7 @@ export const SubmitElement: FC = () => {
           <div className="flex gap-2 ">
             {Languages.map(language => {
               return (
-                <button
+                <div
                   key={language.extension}
                   className={classNames(
                     'border rounded-md px-8 py-2',
@@ -53,7 +53,7 @@ export const SubmitElement: FC = () => {
                   )}
                 >
                   {language.title}
-                </button>
+                </div>
               )
             })}
           </div>

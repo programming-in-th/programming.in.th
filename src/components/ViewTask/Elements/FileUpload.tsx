@@ -1,12 +1,49 @@
 import { truncate } from '@/utilities/truncate'
 import { InboxInIcon } from '@heroicons/react/solid'
-import { Dispatch, FC, SetStateAction, useCallback, useRef } from 'react'
+import classNames from 'classnames'
+import {
+  Dispatch,
+  FC,
+  SetStateAction,
+  useCallback,
+  useRef,
+  useState
+} from 'react'
+import { useDropzone } from 'react-dropzone'
 
 export const FileUpload: FC<{
   file: File
   setFile: Dispatch<SetStateAction<File>>
 }> = ({ file, setFile }) => {
-  const inputRef = useRef(null)
+  const {
+    getRootProps,
+    getInputProps,
+    isFocused,
+    isDragAccept,
+    isDragReject,
+    isDragActive
+  } = useDropzone({
+    validator: currentFile => {
+      const extension = currentFile?.name
+        ?.toLowerCase()
+        ?.match(/\.[0-9a-z]+$/i)[0]
+
+      if (['.cpp', '.py', '.java', '.rs'].includes(extension)) {
+        return null
+      } else {
+        return {
+          code: 'wrong-file-extension',
+          message:
+            'Only files with the extension .cpp .py .java .rs are accepted'
+        }
+      }
+    },
+    onDrop(acceptedFiles, fileRejections, event) {
+      if (acceptedFiles.length > 0) {
+        setFile(acceptedFiles[0])
+      }
+    }
+  })
 
   const formatBytes = useCallback(
     (bytes, decimals = 2) => {
@@ -24,40 +61,43 @@ export const FileUpload: FC<{
   )
 
   return (
-    <div className="overflow-hidden w-full">
-      {/* add black bg on file hover */}
-      <input
-        type="file"
-        id="file"
-        ref={inputRef}
-        className="hidden"
-        onChange={e => {
-          if (e.target.files.length > 0) {
-            setFile(e.target.files[0])
-          }
-        }}
-        accept=".cpp,.py,.java,.rs"
-      />
-      <button
-        onClick={() => inputRef?.current?.click()}
-        className="rounded-md w-full border border-dashed border-gray-400 text-gray-400 p-6 gap-2 flex flex-col justify-center items-center"
+    <div className="overflow-hidden relative w-full">
+      <div
+        {...getRootProps({
+          className: classNames(
+            'rounded-md w-full border cursor-pointer hover:bg-slate-50 border-dashed transition-colors border-gray-400 text-gray-400 p-6 gap-2 flex flex-col justify-center items-center',
+            isDragReject && 'border-red-400',
+            (isFocused || isDragAccept) && 'border-prog-primary-500',
+            isDragActive && 'bg-slate-800 bg-opacity-50 backdrop-blur-sm'
+          )
+        })}
       >
-        <InboxInIcon className="w-10 h-10" />
+        <input {...getInputProps()} />
 
-        {file ? (
-          <>
-            <div className="w-full">{truncate(file.name, 32)}</div>
+        <InboxInIcon
+          className={classNames('w-10 h-10', isDragActive && 'text-white')}
+        />
 
-            <p>{formatBytes(file.size)}</p>
-          </>
+        {isDragActive ? (
+          <p className="font-semibold text-white text-xl animate-pulse">
+            Drop your file here
+          </p>
         ) : (
-          <>
-            <div>Upload a file or drag and drop</div>
-
-            <p>.CPP .PY .JAVA .RS up to 10MB</p>
-          </>
+          <div className="text-center">
+            {file ? (
+              <>
+                <p>{truncate(file.name, 32)}</p>
+                <p>{formatBytes(file.size)}</p>
+              </>
+            ) : (
+              <>
+                <p>Upload a file or drag and drop</p>
+                <p>.CPP .PY .JAVA .RS up to 10MB</p>
+              </>
+            )}
+          </div>
         )}
-      </button>
+      </div>
     </div>
   )
 }
