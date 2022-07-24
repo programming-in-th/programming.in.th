@@ -15,6 +15,8 @@ export const FileUpload: FC<{
   file: File
   setFile: Dispatch<SetStateAction<File>>
 }> = ({ file, setFile }) => {
+  const [fileRejected, setFileRejected] = useState(false)
+
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragActive } =
     useDropzone({
       validator: currentFile => {
@@ -32,10 +34,14 @@ export const FileUpload: FC<{
           }
         }
       },
-      onDrop(acceptedFiles, fileRejections, event) {
+      onDropAccepted(acceptedFiles, event) {
         if (acceptedFiles.length > 0) {
+          setFileRejected(false)
           setFile(acceptedFiles[0])
         }
+      },
+      onDropRejected(fileRejections, event) {
+        setFileRejected(true)
       }
     })
 
@@ -61,6 +67,7 @@ export const FileUpload: FC<{
         className={classNames(
           'rounded-md w-full border cursor-pointer h-48 border-dashed transition-colors border-gray-400 text-gray-400 p-6 gap-2 flex flex-col justify-center items-center',
           (isFocused || isDragAccept) && 'border-prog-primary-500',
+          fileRejected && 'border-red-400',
           isDragActive
             ? 'bg-slate-800 bg-opacity-50 backdrop-blur-sm'
             : 'hover:bg-slate-50'
