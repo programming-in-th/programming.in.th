@@ -1,8 +1,8 @@
-import { Task } from '@prisma/client'
+import { IGeneralTask } from '@/types/tasks'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-export const TaskItem = (task: Task) => {
+export const TaskItem = (task: IGeneralTask) => {
   const [bookmark, setBookmark] = useState<boolean>(false)
   const [tagStatus, setTag] = useState<boolean>(false)
 
