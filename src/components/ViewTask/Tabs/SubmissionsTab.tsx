@@ -8,45 +8,57 @@ const SubmissionsTab: FC<{ task: Task }> = ({ task }) => {
       <thead className="text-gray-500">
         <tr>
           <th className="py-2 text-center font-light">
-            <button className="flex justify-center items-center w-full gap-1">
-              <p>Submission time</p>
+            <button className="group flex justify-center items-center w-full gap-1">
+              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
+                Submission time
+              </p>
 
-              <ChevronUpIcon className="text-gray-400 w-3 h-3" />
+              <ChevronUpIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
             </button>
           </th>
           <th className="py-2 text-center font-light">
-            <button className="flex justify-center items-center w-full gap-1">
-              <p>Name</p>
+            <button className="group flex justify-center items-center w-full gap-1">
+              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
+                Name
+              </p>
 
-              <ChevronDownIcon className="text-gray-400 w-3 h-3" />
+              <ChevronDownIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
             </button>
           </th>
           <th className="py-2 text-center font-light">
-            <button className="flex justify-center items-center w-full gap-1">
-              <p>Point</p>
+            <button className="group flex justify-center items-center w-full gap-1">
+              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
+                Point
+              </p>
 
-              <ChevronDownIcon className="text-gray-400 w-3 h-3" />
+              <ChevronDownIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
             </button>
           </th>
           <th className="py-2 text-center font-light">
-            <button className="flex justify-center items-center w-full gap-1">
-              <p>Language</p>
+            <button className="group flex justify-center items-center w-full gap-1">
+              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
+                Language
+              </p>
 
-              <ChevronDownIcon className="text-gray-400 w-3 h-3" />
+              <ChevronDownIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
             </button>
           </th>
           <th className="py-2 text-center font-light">
-            <button className="flex justify-center items-center w-full gap-1">
-              <p>Time</p>
+            <button className="group flex justify-center items-center w-full gap-1">
+              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
+                Time
+              </p>
 
-              <ChevronDownIcon className="text-gray-400 w-3 h-3" />
+              <ChevronDownIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
             </button>
           </th>
           <th className="py-2 text-center font-light">
-            <button className="flex justify-center items-center w-full gap-1">
-              <p>Memory</p>
+            <button className="group flex justify-center items-center w-full gap-1">
+              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
+                Memory
+              </p>
 
-              <ChevronDownIcon className="text-gray-400 w-3 h-3" />
+              <ChevronDownIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
             </button>
           </th>
         </tr>
