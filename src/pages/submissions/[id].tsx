@@ -37,7 +37,8 @@ const Submission = () => {
       data &&
       data.status !== 'Completed' &&
       data.status !== 'Compilation Error' &&
-      data.status !== 'Judge Error'
+      data.status !== 'Judge Error' &&
+      socketStatus === 'CLOSED'
     ) {
       connect()
     }
