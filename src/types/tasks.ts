@@ -7,7 +7,6 @@ export interface IGeneralTask {
   solved: number
   score: number
   fullScore: number
-  showTags: string[] | boolean
 }
 
 export interface Session extends NASession {

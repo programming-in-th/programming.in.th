@@ -1,83 +1,74 @@
-import { useEffect, useState } from 'react'
+import { Fragment, useCallback, useEffect, useState } from 'react'
 import { PageLayout } from '@/components/Layout'
 import { TaskItem } from '@/components/Tasks/TaskItem'
 import { LeftBar } from '@/components/Tasks/LeftBar'
 
 import prisma from '@/lib/prisma'
 import { InferGetStaticPropsType } from 'next'
+import { useRouter } from 'next/router'
+import { Tab } from '@headlessui/react'
+import { RightDisplay } from '@/components/Tasks/RightDisplay'
+import { IGeneralTask } from '@/types/tasks'
 
 export async function getStaticProps() {
   const tasks = await prisma.task.findMany()
+
   return {
     props: {
       tasks: tasks.map((item: any) => {
         let x = Math.floor(Math.random() * item.fullScore)
         if (x > 80) x = item.fullScore
         return {
-          id: item.id,
-          title: item.title,
-          tags: [],
-          solved: item.solved,
-          score: x,
-          fullScore: item.fullScore
-        }
+          id: item.id as string,
+          title: item.title as string,
+          tags: [] as string[],
+          solved: item.solved as number,
+          score: x as number,
+          fullScore: item.fullScore as number
+        } as IGeneralTask
       })
     }
   }
 }
 
+const Tabs = ['all', 'tried', 'solved', 'archives', 'bookmarked']
+
 const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const [tag, setTag] = useState<boolean>(false)
+
+  const { isFallback, query, replace } = useRouter()
+
+  const onTabChange = useCallback((index: number) => {
+    replace({ query: { ...query, type: Tabs[index] } }, null, {
+      shallow: true
+    })
+  }, [])
 
   return (
     <PageLayout>
       <div className="flex w-auto justify-center">
         <div className="flex min-h-screen w-full max-w-7xl flex-col items-center">
-          <div className="flex w-full flex-col items-center py-16">
+          <div className="flex w-full flex-col items-center pt-6 pb-10">
             <p className="text-3xl text-gray-500">Tasks</p>
             <p className="text-md text-gray-500">browse over 700+ tasks</p>
             <input
               className="my-4 w-60 rounded-md border-gray-300 bg-gray-100 px-2 py-1 text-sm shadow-sm"
               placeholder="search..."
-            ></input>
+            />
           </div>
           <div className="flex w-full">
-            <LeftBar />
-            <div className="h-full w-full">
-              <div className="group flex w-full items-center justify-between px-2">
-                <div className="flex w-full px-6 font-display">
-                  <div className="flex w-full flex-col">
-                    <p className="text-sm font-medium text-gray-400">
-                      Problem Title
-                    </p>
-                  </div>
-                  <div className="flex w-full items-center justify-center">
-                    <input
-                      type="checkbox"
-                      onChange={() => setTag(!tag)}
-                      className="h-4 w-4 rounded border-gray-300"
-                    />
-                    <p className="ml-2 text-sm font-medium text-gray-400">
-                      Show tag
-                    </p>
-                  </div>
-                  <div className="flex w-full shrink items-center justify-center">
-                    <p className="text-sm text-gray-400">Solved</p>
-                  </div>
-                  <div className="mx-3 flex h-auto w-28 flex-none items-center justify-center">
-                    <p className="text-sm text-gray-400">Score</p>
-                  </div>
-                </div>
-                <div className="w-14 px-4" />
-              </div>
-              {tasks.map(context => (
-                <TaskItem
-                  {...context}
-                  showTags={tag}
-                  key={`task-${context.id}`}
-                />
-              ))}
-            </div>
+            <Tab.Group
+              defaultIndex={
+                Tabs.includes(query?.type as string)
+                  ? Tabs.findIndex(v => v === query?.type)
+                  : 0
+              }
+              onChange={onTabChange}
+              as={Fragment}
+            >
+              <LeftBar />
+              <RightDisplay tasks={tasks} tag={tag} setTag={setTag} />
+            </Tab.Group>
           </div>
         </div>
       </div>

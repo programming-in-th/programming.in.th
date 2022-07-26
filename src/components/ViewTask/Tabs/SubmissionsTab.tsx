@@ -1,66 +1,60 @@
-import { Task } from '@prisma/client'
+import { Task, Submission } from '@prisma/client'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
 import { FC, memo } from 'react'
+import { ColumnDef, useReactTable } from '@tanstack/react-table'
+
+const Columns = [
+  {
+    title: 'Submission time',
+    field: 'submittedAt'
+  },
+  {
+    title: 'Name',
+    field: 'userId'
+  },
+  {
+    title: 'Score',
+    field: 'score'
+  },
+  {
+    title: 'Language',
+    field: 'language'
+  },
+  {
+    title: 'Time',
+    field: 'time'
+  },
+  {
+    title: 'Memory',
+    field: 'memory'
+  }
+]
+
+const NewColumns: ColumnDef<Submission>[] = [
+  {
+    id: 'submittedAt',
+    cell: props => <span>SubmittedAt</span>
+  }
+]
 
 const SubmissionsTab: FC<{ task: Task }> = ({ task }) => {
+  // const table = useReactTable({ columns: NewColumns })
+
   return (
     <table className="table-auto text-sm border-separate w-full border-spacing-y-3">
       <thead className="text-gray-500">
         <tr>
-          <th className="py-2 text-center font-light">
-            <button className="group flex justify-center items-center w-full gap-1">
-              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
-                Submission time
-              </p>
+          {Columns.map(({ title, field }) => (
+            <th key={field} className="py-2 text-center font-light">
+              <button className="group flex justify-center items-center w-full gap-1">
+                <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
+                  {title}
+                </p>
 
-              <ChevronUpIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
-            </button>
-          </th>
-          <th className="py-2 text-center font-light">
-            <button className="group flex justify-center items-center w-full gap-1">
-              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
-                Name
-              </p>
-
-              <ChevronDownIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
-            </button>
-          </th>
-          <th className="py-2 text-center font-light">
-            <button className="group flex justify-center items-center w-full gap-1">
-              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
-                Point
-              </p>
-
-              <ChevronDownIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
-            </button>
-          </th>
-          <th className="py-2 text-center font-light">
-            <button className="group flex justify-center items-center w-full gap-1">
-              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
-                Language
-              </p>
-
-              <ChevronDownIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
-            </button>
-          </th>
-          <th className="py-2 text-center font-light">
-            <button className="group flex justify-center items-center w-full gap-1">
-              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
-                Time
-              </p>
-
-              <ChevronDownIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
-            </button>
-          </th>
-          <th className="py-2 text-center font-light">
-            <button className="group flex justify-center items-center w-full gap-1">
-              <p className="group-hover:text-gray-600 text-gray-500 transition-colors">
-                Memory
-              </p>
-
-              <ChevronDownIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
-            </button>
-          </th>
+                <ChevronUpIcon className="text-gray-400 group-hover:text-gray-500 transition-colors w-3 h-3" />
+              </button>
+            </th>
+          ))}
         </tr>
       </thead>
       <tbody className="text-gray-500">

@@ -2,7 +2,9 @@ import { IGeneralTask } from '@/types/tasks'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
-export const TaskItem = (task: IGeneralTask) => {
+export const TaskItem = (
+  task: IGeneralTask & { showTags: string[] | boolean }
+) => {
   const [bookmark, setBookmark] = useState<boolean>(false)
   const [tagStatus, setTag] = useState<boolean>(false)
 
