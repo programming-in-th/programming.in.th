@@ -3,6 +3,7 @@ import prisma from '@/lib/prisma'
 import { unstable_getServerSession } from 'next-auth'
 import { authOptions } from '../auth/[...nextauth]'
 import { Session } from '@/types/tasks'
+import compressCode from '@/lib/compressCode'
 
 enum Filter {
   OWN = 'own',
@@ -50,10 +51,11 @@ export default async function handler(
       }
 
       try {
+        const compressedCode = await compressCode(code)
         const submission = await prisma.submission.create({
           data: {
             task: { connect: { id: taskId } },
-            code: code,
+            code: compressedCode,
             language: language,
             user: { connect: { id: session.user.id } },
             groups: []
