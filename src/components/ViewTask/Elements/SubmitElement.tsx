@@ -45,7 +45,7 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
         },
         body: JSON.stringify({
           taskId: task.id,
-          code: fileText,
+          code: [fileText],
           language: getFileExtension(file.name)
         })
       })
