@@ -1,5 +1,5 @@
 import { Task } from '@prisma/client'
-import { getFileExtension } from '@/utilities/getFileExtension'
+import { getFileExtension } from '@/utils/getFileExtension'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { FC, useCallback, useEffect, useState } from 'react'
@@ -61,11 +61,11 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
   }
 
   return (
-    <div className="flex flex-col gap-6 w-full rounded-md shadow-md text-prog-gray-500">
-      <div className="bg-white px-8 py-4">
-        <div className="flex gap-4 justify-between items-center mb-6">
+    <div className="flex flex-col w-full gap-6 rounded-md shadow-md text-prog-gray-500">
+      <div className="px-8 py-4 bg-white">
+        <div className="flex items-center justify-between gap-4 mb-6">
           <h2 className="text-lg">Submit</h2>
-          <div className="flex gap-2 flex-wrap justify-end">
+          <div className="flex flex-wrap justify-end gap-2">
             {Languages.map(language => {
               return (
                 <div
@@ -85,7 +85,7 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
         </div>
 
         {file && (
-          <pre className="text-sm h-96 overflow-auto w-full my-4 p-4 bg-slate-50 rounded-mg">
+          <pre className="w-full p-4 my-4 overflow-auto text-sm h-96 bg-slate-50 rounded-mg">
             {fileText}
           </pre>
         )}
@@ -93,7 +93,7 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
         <FileUpload file={file} setFile={setFile} />
       </div>
 
-      <div className="bg-prog-gray-100 px-8 py-4">
+      <div className="px-8 py-4 bg-prog-gray-100">
         <div className="flex justify-end">
           <button
             onClick={onSubmit}

@@ -1,5 +1,5 @@
-import { getFileExtension } from '@/utilities/getFileExtension'
-import { truncate } from '@/utilities/truncate'
+import { getFileExtension } from '@/utils/getFileExtension'
+import { truncate } from '@/utils/truncate'
 import { InboxInIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import {
@@ -65,7 +65,7 @@ export const FileUpload: FC<{
   )
 
   return (
-    <div className="overflow-hidden relative w-full">
+    <div className="relative w-full overflow-hidden">
       <div
         {...getRootProps()}
         className={classNames(
@@ -87,7 +87,7 @@ export const FileUpload: FC<{
         />
 
         {isDragActive ? (
-          <p className="font-semibold text-white text-xl animate-pulse">
+          <p className="text-xl font-semibold text-white animate-pulse">
             Drop your file here
           </p>
         ) : (
