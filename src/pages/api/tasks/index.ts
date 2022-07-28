@@ -30,10 +30,11 @@ export default async function handler(
     case 'GET':
       if ((filter === Filter.SOLVED || filter === Filter.TRIED) && !session) {
         res.status(401).end('Unauthorized')
+      } else {
+        const task = await getTask(String(filter), session)
+        res.status(200).json(task)
       }
 
-      const task = await getTask(String(filter), session)
-      res.status(200).json(task)
       break
     default:
       res.setHeader('Allow', ['GET'])

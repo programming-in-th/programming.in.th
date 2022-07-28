@@ -1,4 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+import { createRouter } from 'next-connect'
+
 import prisma from '@/lib/prisma'
 import { unstable_getServerSession } from 'next-auth'
 import { authOptions } from '../auth/[...nextauth]'
@@ -11,31 +13,46 @@ enum Filter {
   OWN_TASK = 'own_task'
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const {
-    method,
-    body: { taskId, code, language },
-    query
-  } = req
+const router = createRouter<
+  NextApiRequest & { session: Session },
+  NextApiResponse
+>()
 
-  const session = (await unstable_getServerSession(
-    req,
-    res,
-    authOptions
-  )) as Session
+router
+  .use(async (req, res, next) => {
+    const start = Date.now()
+    await next()
+    const end = Date.now()
+    console.log(`Request took ${end - start}ms`)
+  })
+  .use(async (req, res, next) => {
+    const session = (await unstable_getServerSession(
+      req,
+      res,
+      authOptions
+    )) as Session
+    if (session) {
+      req.session = session
+    }
+    await next()
+  })
+  .get(
+    async (req, res, next) => {
+      const { query } = req
 
-  switch (method) {
-    case 'GET': {
       if (
         (query.filter === Filter.OWN_TASK || query.filter === Filter.OWN) &&
-        !session
+        !req.session
       ) {
-        res.status(401).end('Unauthorized')
-        break
+        throw new Error('Unauthorized')
       }
+
+      return next()
+    },
+    async (req, res) => {
+      const { query } = req
+
+      const session = req.session as Session
 
       const submission = await getPersonalizedSubmission(
         String(query.filter),
@@ -44,13 +61,19 @@ export default async function handler(
       )
 
       res.status(200).json(submission)
-      break
     }
-    case 'PUT': {
-      if (!session) {
-        res.status(401).end('Unauthorized')
-        break
-      }
+  )
+  .put(
+    async (req, res, next) => {
+      if (!req.session) throw new Error('Unauthorized')
+      return next()
+    },
+    async (req, res) => {
+      const {
+        body: { taskId, code, language }
+      } = req
+
+      const session = req.session as Session
 
       const compressedCode = await compressCode(JSON.stringify(code))
 
@@ -69,13 +92,21 @@ export default async function handler(
       } catch (_) {
         res.status(500)
       }
-      break
     }
-    default:
-      res.setHeader('Allow', ['PUT', 'GET'])
-      res.status(405).end(`Method ${method} Not Allowed`)
+  )
+
+export default router.handler({
+  onError: (err, req, res) => {
+    if ((err as Error).message === 'Unauthorized') {
+      res.status(401).end('Unauthorized')
+    } else {
+      res.status(500).end('Internal Server Error')
+    }
+  },
+  onNoMatch: (req, res) => {
+    res.status(404).end('Route Not Found')
   }
-}
+})
 
 const getPersonalizedSubmission = async (
   filter: string,
