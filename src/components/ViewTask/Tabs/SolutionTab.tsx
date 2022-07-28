@@ -3,7 +3,7 @@ import { FC, memo } from 'react'
 
 const SolutionTab: FC<{ task: Task }> = ({ task }) => {
   return (
-    <pre className="text-sm overflow-auto inline-block my-4 p-4 bg-slate-50 rounded-mg">
+    <pre className="text-sm overflow-auto my-4 p-4 bg-slate-50 rounded-mg">
       {`#include <bits/stdc++.h>
 
 using namespace std;
