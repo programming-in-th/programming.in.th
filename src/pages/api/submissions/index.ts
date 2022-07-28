@@ -34,6 +34,7 @@ export default async function handler(
         !session
       ) {
         res.status(401).end('Unauthorized')
+        break
       }
 
       const submission = await getPersonalizedSubmission(
@@ -48,10 +49,12 @@ export default async function handler(
     case 'PUT': {
       if (!session) {
         res.status(401).end('Unauthorized')
+        break
       }
 
+      const compressedCode = await compressCode(JSON.stringify(code))
+
       try {
-        const compressedCode = await compressCode(code)
         const submission = await prisma.submission.create({
           data: {
             task: { connect: { id: taskId } },
@@ -69,7 +72,7 @@ export default async function handler(
       break
     }
     default:
-      res.setHeader('Allow', ['PUT'])
+      res.setHeader('Allow', ['PUT', 'GET'])
       res.status(405).end(`Method ${method} Not Allowed`)
   }
 }
@@ -83,26 +86,68 @@ const getPersonalizedSubmission = async (
     switch (filter) {
       case Filter.OWN:
         return await prisma.submission.findMany({
+          orderBy: [
+            {
+              submittedAt: 'desc'
+            }
+          ],
           where: {
             user: {
               id: { equals: session.user.id }
             }
+          },
+          select: {
+            id: true,
+            score: true,
+            user: true,
+            language: true,
+            time: true,
+            memory: true,
+            submittedAt: true
           }
         })
       case Filter.OWN_TASK:
         return await prisma.submission.findMany({
+          orderBy: [
+            {
+              submittedAt: 'desc'
+            }
+          ],
           where: {
             taskId: String(taskId),
             user: {
               id: { equals: session.user.id }
             }
+          },
+          select: {
+            id: true,
+            score: true,
+            user: true,
+            language: true,
+            time: true,
+            memory: true,
+            submittedAt: true
           }
         })
 
       case Filter.TASK:
         return await prisma.submission.findMany({
+          orderBy: [
+            {
+              submittedAt: 'desc'
+            }
+          ],
           where: {
             taskId: String(taskId)
+          },
+          select: {
+            id: true,
+            score: true,
+            user: true,
+            language: true,
+            time: true,
+            memory: true,
+            submittedAt: true
           }
         })
     }
@@ -110,11 +155,31 @@ const getPersonalizedSubmission = async (
 
   if (filter === Filter.TASK) {
     return await prisma.submission.findMany({
+      orderBy: [
+        {
+          submittedAt: 'desc'
+        }
+      ],
       where: {
         taskId: String(taskId)
+      },
+      select: {
+        id: true,
+        score: true,
+        user: true,
+        language: true,
+        time: true,
+        memory: true,
+        submittedAt: true
       }
     })
   }
 
-  return await prisma.submission.findMany()
+  return await prisma.submission.findMany({
+    orderBy: [
+      {
+        submittedAt: 'desc'
+      }
+    ]
+  })
 }

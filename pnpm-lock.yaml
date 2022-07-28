@@ -20,6 +20,7 @@ specifiers:
   autoprefixer: ^10.4.2
   classnames: ^2.3.1
   concurrently: ^7.2.2
+  dayjs: ^1.11.4
   eslint: 8.20.0
   eslint-config-next: 12.2.2
   framer-motion: ^6.5.1
@@ -60,6 +61,7 @@ dependencies:
   '@visx/text': 2.10.0_react@18.2.0
   classnames: 2.3.1
   concurrently: 7.2.2
+  dayjs: 1.11.4
   framer-motion: 6.5.1_biqbaboplfbrettd7655fr4n2y
   next: 12.2.0_b7sksnfkdyiidz7vzaadim75qm
   next-auth: 4.10.0_biqbaboplfbrettd7655fr4n2y
@@ -2131,7 +2133,7 @@ packages:
     hasBin: true
     dependencies:
       chalk: 4.1.2
-      date-fns: 2.28.0
+      date-fns: 2.29.1
       lodash: 4.17.21
       rxjs: 7.5.5
       shell-quote: 1.7.3
@@ -2329,12 +2331,19 @@ packages:
       }
     dev: true
 
-  /date-fns/2.28.0:
+  /date-fns/2.29.1:
     resolution:
       {
-        integrity: sha512-8d35hViGYx/QH0icHYCeLmsLmMUheMmTyV9Fcm6gvNwdw31yXXH+O85sOBJ+OLnLQMKZowvpKb6FgMIQjcpvQw==
+        integrity: sha512-dlLD5rKaKxpFdnjrs+5azHDFOPEu4ANy/LTh04A1DTzMM7qoajmKCBc8pkKRFT41CNzw+4gQh79X5C+Jq27HAw==
       }
     engines: { node: '>=0.11' }
+    dev: false
+
+  /dayjs/1.11.4:
+    resolution:
+      {
+        integrity: sha512-Zj/lPM5hOvQ1Bf7uAvewDaUcsJoI6JmNqmHhHl3nyumwe0XHwt8sWdOVAPACJzCebL8gQCi+K49w7iKWnGwX9g==
+      }
     dev: false
 
   /debug/2.6.9:
