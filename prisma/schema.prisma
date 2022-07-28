@@ -105,7 +105,7 @@ model Submission {
   submittedAt DateTime @default(now())
   time        Int      @default(0)
   memory      Int      @default(0)
-  code        String[]
+  code        Bytes
   codeLength  Int      @default(0)
   score       Int      @default(0)
   groups      Json     @default(dbgenerated())

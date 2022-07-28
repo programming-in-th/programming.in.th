@@ -91,7 +91,7 @@ Table Submission {
   submittedAt DateTime [default: `now()`, not null]
   time Int [not null, default: 0]
   memory Int [not null, default: 0]
-  code String[] [not null]
+  code Bytes [not null]
   codeLength Int [not null, default: 0]
   score Int [not null, default: 0]
   groups Json [not null]
