@@ -10,7 +10,7 @@ const SubmitTab: FC<{ task: Task }> = ({ task }) => {
     return (
       <div className="flex items-center justify-center h-24">
         <p className="text-prog-gray-500 text-center">
-          You must be logged in to be to submit
+          You must be logged in to submit code
         </p>
       </div>
     )
