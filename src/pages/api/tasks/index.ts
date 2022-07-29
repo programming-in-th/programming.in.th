@@ -4,6 +4,7 @@ import { unstable_getServerSession } from 'next-auth/next'
 import prisma from '@/lib/prisma'
 import { authOptions } from '../auth/[...nextauth]'
 import { Session } from '@/types/tasks'
+import { createRouter } from 'next-connect'
 
 enum Filter {
   ALL = 'all',
@@ -11,35 +12,62 @@ enum Filter {
   SOLVED = 'solved'
 }
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse
-) {
-  const {
-    method,
-    query: { filter }
-  } = req
+const router = createRouter<
+  NextApiRequest & { session: Session },
+  NextApiResponse
+>()
 
-  const session = (await unstable_getServerSession(
-    req,
-    res,
-    authOptions
-  )) as Session
+router
+  .use(async (req, res, next) => {
+    const start = Date.now()
+    await next()
+    const end = Date.now()
+    console.log(`Request took ${end - start}ms`)
+  })
+  .use(async (req, res, next) => {
+    const session = (await unstable_getServerSession(
+      req,
+      res,
+      authOptions
+    )) as Session
 
-  switch (method) {
-    case 'GET':
-      if ((filter === Filter.SOLVED || filter === Filter.TRIED) && !session) {
-        res.status(401).end('Unauthorized')
+    if (session) {
+      req.session = session
+    }
+
+    await next()
+  })
+  .get(
+    async (req, res, next) => {
+      const { query } = req
+
+      if (
+        (query.filter === Filter.SOLVED || query.filter === Filter.TRIED) &&
+        !req.session
+      ) {
+        throw new Error('Unauthorized')
       }
+    },
+    async (req, res) => {
+      const { query } = req
 
-      const task = await getTask(String(filter), session)
+      const task = await getTask(String(query.filter), req.session)
       res.status(200).json(task)
-      break
-    default:
-      res.setHeader('Allow', ['GET'])
-      res.status(405).end(`Method ${method} Not Allowed`)
+    }
+  )
+
+export default router.handler({
+  onError: (err, req, res) => {
+    if ((err as Error).message === 'Unauthorized') {
+      res.status(401).end('Unauthorized')
+    } else {
+      res.status(500).end('Internal Server Error')
+    }
+  },
+  onNoMatch: (req, res) => {
+    res.status(404).end('Route Not Found')
   }
-}
+})
 
 const getTask = async (filter: string = Filter.ALL, session: Session) => {
   if (session) {
