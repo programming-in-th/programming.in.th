@@ -30,9 +30,11 @@ router
       res,
       authOptions
     )) as Session
+
     if (session) {
       req.session = session
     }
+
     await next()
   })
   .get(

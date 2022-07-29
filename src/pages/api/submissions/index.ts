@@ -31,18 +31,20 @@ router
       res,
       authOptions
     )) as Session
+
     if (session) {
       req.session = session
     }
+
     await next()
   })
   .get(
     async (req, res, next) => {
-      const { query } = req
+      const { query, session } = req
 
       if (
         (query.filter === Filter.OWN_TASK || query.filter === Filter.OWN) &&
-        !req.session
+        !session
       ) {
         throw new Error('Unauthorized')
       }
@@ -50,9 +52,7 @@ router
       return next()
     },
     async (req, res) => {
-      const { query } = req
-
-      const session = req.session as Session
+      const { query, session } = req
 
       const submission = await getPersonalizedSubmission(
         String(query.filter),
@@ -69,11 +69,9 @@ router
       return next()
     },
     async (req, res) => {
-      const {
-        body: { taskId, code, language }
-      } = req
+      const { taskId, code, language } = req.body
 
-      const session = req.session as Session
+      const session = req.session
 
       const compressedCode = await compressCode(JSON.stringify(code))
 
