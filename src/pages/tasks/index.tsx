@@ -51,10 +51,10 @@ const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
           <div className="flex w-full flex-col items-center pt-6 pb-10">
             <p className="text-3xl text-gray-500">Tasks</p>
             <p className="text-md text-gray-500">browse over 700+ tasks</p>
-            <input
+            {/* <input
               className="my-4 w-60 rounded-md border-gray-300 bg-gray-100 px-2 py-1 text-sm shadow-sm"
               placeholder="search..."
-            />
+            /> */}
           </div>
           <div className="flex w-full">
             <Tab.Group
