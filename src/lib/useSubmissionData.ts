@@ -28,6 +28,7 @@ const useSubmissionData = (id: number) => {
         data.status === JUDGE_ERROR ||
         data.status === JUDGE_COMPILATION_ERROR
       ) {
+        mutate(`/api/submissions/${id}`)
         eventSource.close()
       }
 
@@ -35,6 +36,9 @@ const useSubmissionData = (id: number) => {
         `/api/submissions/${id}`,
         async (submission: IGeneralSubmission) => {
           return Object.assign({}, submission, data)
+        },
+        {
+          revalidate: false
         }
       )
     }
