@@ -1,4 +1,4 @@
-import { FC, Fragment } from 'react'
+import { FC, Fragment, useCallback, useMemo } from 'react'
 import { Tab } from '@headlessui/react'
 import StatementTab from './Tabs/StatementTab'
 import SubmitTab from './Tabs/SubmitTab'
@@ -13,24 +13,26 @@ export const RightDisplay: FC<{
   task: Task
   submissionID: null | string
   solution: MDXRemoteSerializeResult
-}> = ({ task, submissionID, solution }) => {
+  type: string
+}> = ({ task, submissionID, solution, type }) => {
+  let component = () => {
+    switch (type) {
+      case 'statement':
+        return <StatementTab task={task} />
+      case 'submit':
+        return <SubmitTab task={task} />
+      case 'submissions':
+        return <SubmissionsTab task={task} submissionID={submissionID} />
+      case 'mySubmissions':
+        return <MySubmissionsTab task={task} submissionID={submissionID} />
+      case 'solution':
+        return <SolutionTab solution={solution} />
+    }
+  }
+
   return (
-    <Tab.Panels className="w-full md:w-[28rem] xl:w-[55rem] flex flex-col gap-8">
-      <Tab.Panel>
-        <StatementTab task={task} />
-      </Tab.Panel>
-      <Tab.Panel>
-        <SubmitTab task={task} />
-      </Tab.Panel>
-      <Tab.Panel>
-        <SubmissionsTab task={task} submissionID={submissionID} />
-      </Tab.Panel>
-      <Tab.Panel>
-        <MySubmissionsTab task={task} submissionID={submissionID} />
-      </Tab.Panel>
-      <Tab.Panel>
-        <SolutionTab solution={solution} />
-      </Tab.Panel>
-    </Tab.Panels>
+    <div className="w-full md:w-[28rem] xl:w-[55rem] flex flex-col gap-8">
+      {component()}
+    </div>
   )
 }
