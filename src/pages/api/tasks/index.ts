@@ -3,7 +3,7 @@ import { unstable_getServerSession } from 'next-auth/next'
 
 import prisma from '@/lib/prisma'
 import { authOptions } from '../auth/[...nextauth]'
-import { Session } from '@/types/tasks'
+import { Session } from '@/types/session'
 import { createRouter } from 'next-connect'
 
 enum Filter {

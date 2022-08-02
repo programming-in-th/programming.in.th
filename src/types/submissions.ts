@@ -8,4 +8,7 @@ export interface IGeneralSubmission {
   time: number
   memory: number
   submittedAt: Date
+  groups: JSON
+  status: string
+  code: string[]
 }

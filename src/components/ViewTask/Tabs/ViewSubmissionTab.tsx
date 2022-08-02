@@ -6,6 +6,7 @@ import useSWR from 'swr'
 import dayjs from 'dayjs'
 import { IGeneralSubmission } from '@/types/submissions'
 import { TaskStatus } from '../Elements/TaskStatus'
+import useSubmissionData from '@/lib/useSubmissionData'
 
 const Columns = [
   {
@@ -43,6 +44,8 @@ const ViewSubmissionTab: FC<{ task: Task; submissionID: string }> = ({
   //   fetcher
   // )
 
+  const { submission } = useSubmissionData(12)
+
   const { data, error } = {
     data: {
       id: 103,
@@ -73,7 +76,7 @@ const ViewSubmissionTab: FC<{ task: Task; submissionID: string }> = ({
         // TODO : go back 1 level
       }
       <Link href="/" passHref>
-        <a className="flex gap-2 items-center text-prog-gray-500 hover:text-gray-600 text-sm">
+        <a className="flex items-center gap-2 text-sm text-prog-gray-500 hover:text-gray-600">
           <ArrowNarrowLeftIcon className="w-5 h-5" />
           <p>Back</p>
         </a>
@@ -81,12 +84,12 @@ const ViewSubmissionTab: FC<{ task: Task; submissionID: string }> = ({
       {
         // ! disgusting code alert - will move to component
       }
-      <table className="w-full text-sm bg-white shadow-md rounded-md mt-6 border-separate table-auto border-spacing-y-3">
+      <table className="w-full mt-6 text-sm bg-white border-separate rounded-md shadow-md table-auto border-spacing-y-3">
         <thead className="">
           <tr>
             {Columns.map(({ title, field }) => (
               <th key={field} className="py-2 font-light text-center">
-                <p className="text-gray-400 w-full">{title}</p>
+                <p className="w-full text-gray-400">{title}</p>
               </th>
             ))}
           </tr>
@@ -149,7 +152,7 @@ const ViewSubmissionTab: FC<{ task: Task; submissionID: string }> = ({
         </tbody>
       </table>
 
-      <pre className="text-sm overflow-auto mt-8 p-4 bg-slate-800 text-white rounded-mg">
+      <pre className="p-4 mt-8 overflow-auto text-sm text-white bg-slate-800 rounded-mg">
         {`#include <bits/stdc++.h>
 
 using namespace std;
