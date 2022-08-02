@@ -3,6 +3,7 @@ import { Tab } from '@headlessui/react'
 import StatementTab from './Tabs/StatementTab'
 import SubmitTab from './Tabs/SubmitTab'
 import MySubmissionsTab from './Tabs/MySubmissionsTab'
+import ViewSubmissionTab from './Tabs/ViewSubmissionTab'
 import SubmissionsTab from './Tabs/SubmissionsTab'
 import SolutionTab from './Tabs/SolutionTab'
 import { Task } from '@prisma/client'
@@ -20,7 +21,8 @@ export const RightDisplay: FC<{ task: Task }> = ({ task }) => {
         <SubmissionsTab task={task} />
       </Tab.Panel>
       <Tab.Panel>
-        <MySubmissionsTab task={task} />
+        {/* <MySubmissionsTab task={task} /> */}
+        <ViewSubmissionTab task={task} />
       </Tab.Panel>
       <Tab.Panel>
         <SolutionTab task={task} />

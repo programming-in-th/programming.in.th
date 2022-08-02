@@ -6,10 +6,11 @@ import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
 import useSWR from 'swr'
 import dayjs from 'dayjs'
+import { useRouter } from 'next/router'
 
 const Columns = [
   {
-    title: 'Submission time',
+    title: 'Submission Time',
     field: 'submittedAt'
   },
   {
