@@ -1,5 +1,5 @@
 import { Task } from '@prisma/client'
-import { getFileExtension } from '@/utils/getFileExtension'
+import { getLanguage } from '@/utils/getFileExtension'
 import classNames from 'classnames'
 import { useRouter } from 'next/router'
 import { FC, useCallback, useEffect, useState } from 'react'
@@ -46,7 +46,7 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
         body: JSON.stringify({
           taskId: task.id,
           code: [fileText],
-          language: getFileExtension(file.name)
+          language: getLanguage(file.name)
         })
       })
 

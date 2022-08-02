@@ -1,5 +1,5 @@
 import { formatBytes as formatBytesFunc } from '@/utils/formatSize'
-import { getFileExtension } from '@/utils/getFileExtension'
+import { getLanguage } from '@/utils/getFileExtension'
 import { truncate } from '@/utils/truncate'
 import { InboxInIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
@@ -27,7 +27,7 @@ export const FileUpload: FC<{
         'text/*': ACCEPTED_LANGUAGES
       },
       validator: currentFile => {
-        const extension = getFileExtension(currentFile?.name ?? '')
+        const extension = getLanguage(currentFile?.name ?? '')
 
         if (ACCEPTED_LANGUAGES.includes(extension)) {
           return null

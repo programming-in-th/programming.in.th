@@ -42,7 +42,7 @@ const useSubmissionData = (id: number) => {
     return () => {
       eventSource.close()
     }
-  }, [])
+  }, [id, mutate])
 
   return { submission: data, isLoading: !error && !data, isError: error }
 }

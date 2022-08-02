@@ -1,4 +1,4 @@
-export const getFileExtension = (fileName: string) => {
+export const getLanguage = (fileName: string) => {
   const result = (fileName
     .toLowerCase()
     .replace('.', '')
