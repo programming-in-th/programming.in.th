@@ -7,6 +7,7 @@ import { IGeneralSubmission } from '@/types/submissions'
 import useSWR from 'swr'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/router'
+import ViewSubmissionTab from './ViewSubmissionTab'
 
 const Columns = [
   {
@@ -134,4 +135,13 @@ const MySubmissionsTab: FC<{ task: Task }> = ({ task }) => {
   )
 }
 
-export default memo(MySubmissionsTab)
+const MySubmissionTabRouter: FC<{
+  task: Task
+  submissionID: null | string
+}> = ({ task, submissionID }) => {
+  if (submissionID)
+    return <ViewSubmissionTab task={task} submissionID={submissionID} />
+  else return <MySubmissionsTab task={task} />
+}
+
+export default MySubmissionTabRouter

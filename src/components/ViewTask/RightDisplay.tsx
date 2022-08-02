@@ -11,8 +11,9 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 export const RightDisplay: FC<{
   task: Task
+  submissionID: null | string
   solution: MDXRemoteSerializeResult
-}> = ({ task, solution }) => {
+}> = ({ task, submissionID, solution }) => {
   return (
     <Tab.Panels className="w-full md:w-[28rem] xl:w-[55rem] flex flex-col gap-8">
       <Tab.Panel>
@@ -22,11 +23,10 @@ export const RightDisplay: FC<{
         <SubmitTab task={task} />
       </Tab.Panel>
       <Tab.Panel>
-        <SubmissionsTab task={task} />
+        <SubmissionsTab task={task} submissionID={submissionID} />
       </Tab.Panel>
       <Tab.Panel>
-        {/* <MySubmissionsTab task={task} /> */}
-        <ViewSubmissionTab task={task} />
+        <MySubmissionsTab task={task} submissionID={submissionID} />
       </Tab.Panel>
       <Tab.Panel>
         <SolutionTab solution={solution} />
