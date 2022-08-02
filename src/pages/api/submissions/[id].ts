@@ -1,5 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 import prisma from '@/lib/prisma'
+import { decompressCode } from '@/lib/codeTransformer'
 
 export default async function handler(
   req: NextApiRequest,
@@ -23,10 +24,17 @@ export default async function handler(
           score: true,
           groups: true,
           language: true,
-          user: true
+          user: true,
+          code: true
         }
       })
-      res.status(200).json(submission)
+
+      const payload = {
+        ...submission,
+        code: await decompressCode(submission.code)
+      }
+
+      res.status(200).json(payload)
       break
     default:
       res.setHeader('Allow', ['GET'])

@@ -10,4 +10,5 @@ export interface IGeneralSubmission {
   submittedAt: Date
   groups: JSON
   status: string
+  code: string[]
 }

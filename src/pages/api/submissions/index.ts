@@ -5,7 +5,7 @@ import prisma from '@/lib/prisma'
 import { unstable_getServerSession } from 'next-auth'
 import { authOptions } from '../auth/[...nextauth]'
 import { Session } from '@/types/session'
-import compressCode from '@/lib/compressCode'
+import { compressCode } from '@/lib/codeTransformer'
 
 enum Filter {
   OWN = 'own',
