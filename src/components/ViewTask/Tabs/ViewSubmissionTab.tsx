@@ -35,7 +35,7 @@ const Columns = [
   }
 ]
 
-const ViewSubmissionTab: FC<{ task: Task; submissionID: string }> = ({
+const ViewSubmissionTab: FC<{ task: Task; submissionID: number }> = ({
   task,
   submissionID
 }) => {
@@ -44,7 +44,7 @@ const ViewSubmissionTab: FC<{ task: Task; submissionID: string }> = ({
   //   fetcher
   // )
 
-  const { submission } = useSubmissionData(12)
+  const { submission } = useSubmissionData(submissionID)
 
   const { data, error } = {
     data: {
@@ -153,33 +153,7 @@ const ViewSubmissionTab: FC<{ task: Task; submissionID: string }> = ({
       </table>
 
       <pre className="p-4 mt-8 overflow-auto text-sm text-white bg-slate-800 rounded-mg">
-        {`#include <bits/stdc++.h>
-
-using namespace std;
-
-int a, b, c;
-
-int main () {
-    scanf("%d %d %d", &a, &b, &c);
-    int sum = a + b + c;
-    if (sum <= 100 && sum >= 80) {
-        printf("A");
-    } else if (sum < 80 && sum >= 75) {
-        printf("B+");
-    } else if (sum < 75 && sum >= 70) {
-    printf("B");
-    } else if (sum < 70 && sum >= 65) {
-        printf("C+");
-    } else if (sum < 65 && sum >= 60) {
-        printf("C");
-    } else if (sum < 60 && sum >= 55) {
-        printf("D+");
-    } else if (sum < 55 && sum >= 50) {
-        printf("D");
-    } else if (sum < 50 && sum >= 0) {
-        printf("F");
-    }
-}`}
+        {submission.code}
       </pre>
 
       <TaskStatus />

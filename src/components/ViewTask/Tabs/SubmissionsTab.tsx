@@ -139,7 +139,7 @@ const SubmissionsTab: FC<{ task: Task }> = ({ task }) => {
   )
 }
 
-const SubmissionTabRouter: FC<{ task: Task; submissionID: null | string }> = ({
+const SubmissionTabRouter: FC<{ task: Task; submissionID: null | number }> = ({
   task,
   submissionID
 }) => {

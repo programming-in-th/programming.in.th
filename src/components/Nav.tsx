@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { Popover, Transition } from '@headlessui/react'
 import { useSession, signOut } from 'next-auth/react'
-import { Logo } from '@/vectors/Logo'
+import { Logo } from '@/svg/Logo'
 import Image from 'next/image'
 import classNames from 'classnames'
 
@@ -144,7 +144,7 @@ export const Nav = () => {
       >
         <Popover.Panel
           focus
-          className="absolute z-50 inset-x-0 top-0 p-2 transition origin-top transform md:hidden"
+          className="absolute inset-x-0 top-0 z-50 p-2 transition origin-top transform md:hidden"
         >
           <div className="overflow-hidden bg-white rounded-lg shadow-md ring-1 ring-black ring-opacity-5">
             <div className="flex items-center justify-between px-5 pt-4">

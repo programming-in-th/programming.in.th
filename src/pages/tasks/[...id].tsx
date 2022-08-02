@@ -19,12 +19,12 @@ const Tasks = ({
   solution
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { isFallback, query } = useRouter()
-  let submissionID: null | string = null
+  let submissionID: null | number = null
 
   if (type === 'submissions' || type === 'mysubmissions') {
     // check if params has submission id
     if (query.id.length === 3) {
-      submissionID = query.id[2]
+      submissionID = Number(query.id[2])
     }
   }
 

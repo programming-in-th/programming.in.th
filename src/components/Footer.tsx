@@ -1,4 +1,4 @@
-import { FacebookLogo, GitHubLogo } from '@/vectors/Socials'
+import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
@@ -22,9 +22,9 @@ export const Footer = () => {
   const { data: session } = useSession()
 
   return (
-    <footer className="flex bg-white w-full flex-col items-center font-display">
-      <div className="flex w-full max-w-5xl flex-col items-center">
-        <div className="flex w-full max-w-md justify-between p-8 font-display">
+    <footer className="flex flex-col items-center w-full bg-white font-display">
+      <div className="flex flex-col items-center w-full max-w-5xl">
+        <div className="flex justify-between w-full max-w-md p-8 font-display">
           {navigation.map(item => (
             <Link href={item.href} key={item.name} passHref>
               <a
@@ -41,9 +41,9 @@ export const Footer = () => {
           ))}
         </div>
         <div className="flex w-full justify-center border-y-[0.5px]">
-          <div className="flex max-w-sm flex-col items-center py-12">
+          <div className="flex flex-col items-center max-w-sm py-12">
             <p className="my-2 font-bold text-gray-500">PROGRAMMING.IN.TH</p>
-            <p className="text-center text-sm text-gray-500">
+            <p className="text-sm text-center text-gray-500">
               โปรแกรมมิ่งอินทีเอช ศูนย์รวมของโจทย์และเนื้อหาสำหรับ
               การเขียนโปรแกรมเพื่อการแข่งขัน และวิทยาการคอมพิวเตอร์
             </p>
@@ -76,7 +76,7 @@ export const Footer = () => {
               <GitHubLogo />
             </a>
           </Link>
-          <p className="w-full sm:w-80 text-sm leading-4 text-gray-500">
+          <p className="w-full text-sm leading-4 text-gray-500 sm:w-80">
             © 2019-{currentYear} the PROGRAMMING.IN.TH team{'\n'} The source
             code for this website is available on GitHub
           </p>

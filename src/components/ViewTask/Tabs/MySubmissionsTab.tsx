@@ -137,7 +137,7 @@ const MySubmissionsTab: FC<{ task: Task }> = ({ task }) => {
 
 const MySubmissionTabRouter: FC<{
   task: Task
-  submissionID: null | string
+  submissionID: null | number
 }> = ({ task, submissionID }) => {
   if (submissionID)
     return <ViewSubmissionTab task={task} submissionID={submissionID} />

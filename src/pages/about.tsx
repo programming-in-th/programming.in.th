@@ -5,8 +5,8 @@ import Link from 'next/link'
 const About: NextPage = () => {
   return (
     <PageLayout>
-      <section className="min-h-screen flex flex-col mt-24 items-center text-center">
-        <h1 className="text-2xl sm:text-4xl font-semibold text-prog-primary-500">
+      <section className="flex flex-col items-center min-h-screen mt-24 text-center">
+        <h1 className="text-2xl font-semibold sm:text-4xl text-prog-primary-500">
           Coming Soon...
         </h1>
         <Link href="/" passHref>

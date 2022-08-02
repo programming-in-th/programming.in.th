@@ -1,4 +1,4 @@
-import { QuoteVector } from '@/vectors/Quote'
+import { QuoteVector } from '@/svg/Quote'
 import Image from 'next/image'
 import { FC } from 'react'
 
@@ -11,21 +11,21 @@ export const TestimonyCard: FC<{
   const { title, description, imgURL, role } = props
 
   return (
-    <article className="text-center py-4 relative bg-white text-prog-gray-500 rounded-lg">
+    <article className="relative py-4 text-center bg-white rounded-lg text-prog-gray-500">
       <QuoteVector className="mx-auto mb-4" />
-      <p className="px-12 font-light h-auto sm:h-48 md:h-36">{description}</p>
-      <div className="flex gap-4 items-center justify-center py-6">
+      <p className="h-auto px-12 font-light sm:h-48 md:h-36">{description}</p>
+      <div className="flex items-center justify-center gap-4 py-6">
         <Image
           width={80}
           height={80}
-          className="rounded-full object-cover"
+          className="object-cover rounded-full"
           src={imgURL}
           alt={title}
         />
 
-        <div className="mb-4 pt-2 text-left flex flex-col">
-          <h3 className="font-semibold mb-1">{title}</h3>
-          <span className="text-prog-primary-500 text-sm whitespace-pre-wrap w-48">
+        <div className="flex flex-col pt-2 mb-4 text-left">
+          <h3 className="mb-1 font-semibold">{title}</h3>
+          <span className="w-48 text-sm whitespace-pre-wrap text-prog-primary-500">
             {role}
           </span>
         </div>

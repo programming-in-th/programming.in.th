@@ -11,7 +11,7 @@ import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 export const RightDisplay: FC<{
   task: Task
-  submissionID: null | string
+  submissionID: null | number
   solution: MDXRemoteSerializeResult
   type: string
 }> = ({ task, submissionID, solution, type }) => {
