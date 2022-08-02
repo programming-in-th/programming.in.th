@@ -17,7 +17,7 @@ const SolutionTab: FC<{ solution: MDXRemoteSerializeResult }> = ({
             crossOrigin="anonymous"
           />
         </Head>
-        <div className="w-full mt-4 prose max-w-none">
+        <div className="prose mt-4 w-full max-w-none">
           <MDXRemote
             {...solution}
             components={

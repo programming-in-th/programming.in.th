@@ -42,7 +42,7 @@ const SampleTab: FC<{
 const ComingSoonTab = () => {
   return (
     <div className="w-full">
-      <p className="text-sm font-medium text-prog-gray-500 text-center">
+      <p className="text-center text-sm font-medium text-prog-gray-500">
         Coming Soon...
       </p>
     </div>
@@ -55,7 +55,7 @@ export const RightDisplay: FC<{
   setTag: Dispatch<SetStateAction<boolean>>
 }> = ({ tasks, tag, setTag }) => {
   return (
-    <Tab.Panels className="w-full flex flex-col gap-8">
+    <Tab.Panels className="flex w-full flex-col gap-8">
       <Tab.Panel>
         <SampleTab tasks={tasks} tag={tag} setTag={setTag} />
       </Tab.Panel>

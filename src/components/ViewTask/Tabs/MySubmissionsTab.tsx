@@ -51,17 +51,17 @@ const MySubmissionsTab: FC<{ task: Task }> = ({ task }) => {
   )
 
   return (
-    <table className="w-full text-sm border-separate table-auto border-spacing-y-3">
+    <table className="w-full table-auto border-separate border-spacing-y-3 text-sm">
       <thead className="text-gray-500">
         <tr>
           {Columns.map(({ title, field }) => (
-            <th key={field} className="py-2 font-light text-center">
-              <button className="flex items-center justify-center w-full gap-1 group">
+            <th key={field} className="py-2 text-center font-light">
+              <button className="group flex w-full items-center justify-center gap-1">
                 <p className="text-gray-500 transition-colors group-hover:text-gray-600">
                   {title}
                 </p>
 
-                <ChevronUpIcon className="w-3 h-3 text-gray-400 transition-colors group-hover:text-gray-500" />
+                <ChevronUpIcon className="h-3 w-3 text-gray-400 transition-colors group-hover:text-gray-500" />
               </button>
             </th>
           ))}
@@ -75,7 +75,7 @@ const MySubmissionsTab: FC<{ task: Task }> = ({ task }) => {
             return (
               <tr
                 key={sub.id}
-                className="transition-colors bg-white shadow-md hover:bg-slate-50"
+                className="bg-white shadow-md transition-colors hover:bg-slate-50"
               >
                 <td className="px-6 py-4">
                   <div className="flex flex-col">
@@ -88,12 +88,12 @@ const MySubmissionsTab: FC<{ task: Task }> = ({ task }) => {
                   </div>
                 </td>
                 <td className="py-4">
-                  <p className="font-medium text-center">{sub.user.username}</p>
+                  <p className="text-center font-medium">{sub.user.username}</p>
                 </td>
                 <td className="py-4">
-                  <div className="flex items-center justify-center h-auto mx-auto w-28">
-                    <div className="flex flex-col items-center justify-around w-full h-auto">
-                      <div className="relative w-full h-full">
+                  <div className="mx-auto flex h-auto w-28 items-center justify-center">
+                    <div className="flex h-auto w-full flex-col items-center justify-around">
+                      <div className="relative h-full w-full">
                         <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
                         <div
                           className={`absolute h-1.5 rounded-full ${
@@ -113,16 +113,16 @@ const MySubmissionsTab: FC<{ task: Task }> = ({ task }) => {
                   </div>
                 </td>
                 <td className="py-4">
-                  <p className="font-medium text-center">{sub.language}</p>
+                  <p className="text-center font-medium">{sub.language}</p>
                 </td>
                 <td className="py-4">
-                  <p className="font-medium text-center">
+                  <p className="text-center font-medium">
                     {sub.time}{' '}
                     <span className="font-light text-gray-400">ms</span>
                   </p>
                 </td>
                 <td className="px-6 py-4">
-                  <p className="font-medium text-center">
+                  <p className="text-center font-medium">
                     {sub.memory}{' '}
                     <span className="font-light text-gray-400">kb</span>
                   </p>

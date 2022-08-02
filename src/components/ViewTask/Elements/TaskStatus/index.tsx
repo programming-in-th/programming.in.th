@@ -10,7 +10,7 @@ import useSubmissionData from '@/lib/useSubmissionData'
 const CorrectElement: FC = () => {
   return (
     <span className="flex items-center gap-1 text-green-500">
-      <CheckCircleIcon className="w-5 h-5 text-green-500" />
+      <CheckCircleIcon className="h-5 w-5 text-green-500" />
       Correct
     </span>
   )
@@ -19,7 +19,7 @@ const CorrectElement: FC = () => {
 const IncorrectElement: FC = () => {
   return (
     <span className="flex items-center gap-1 text-red-500">
-      <XCircleIcon className="w-5 h-5 text-red-500" />
+      <XCircleIcon className="h-5 w-5 text-red-500" />
       Incorrect
     </span>
   )
@@ -41,7 +41,7 @@ export const TaskStatus: FC = () => {
   }
 
   return (
-    <section className="px-12 py-20 bg-gray-50">
+    <section className="bg-gray-50 px-12 py-20">
       <p className="mb-6 text-lg font-semibold text-prog-gray-500">Subtasks</p>
 
       <div className="flex flex-col gap-6">
@@ -52,14 +52,14 @@ export const TaskStatus: FC = () => {
           <Disclosure
             as={'div'}
             key={dataArrayKey}
-            className="w-full px-2 bg-white rounded-md shadow-md"
+            className="w-full rounded-md bg-white px-2 shadow-md"
           >
             {({ open }) => (
               <>
                 <Disclosure.Button as={Fragment}>
                   <button
                     className={classNames(
-                      'flex w-full items-center font-medium justify-between border-gray-200 py-6 px-8',
+                      'flex w-full items-center justify-between border-gray-200 py-6 px-8 font-medium',
                       open && 'border-b'
                     )}
                   >
@@ -77,7 +77,7 @@ export const TaskStatus: FC = () => {
                         }
                       }}
                     >
-                      <ChevronUpIcon className="w-5 h-5" />
+                      <ChevronUpIcon className="h-5 w-5" />
                     </motion.span>
                   </button>
                 </Disclosure.Button>

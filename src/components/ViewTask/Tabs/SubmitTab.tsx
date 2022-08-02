@@ -8,8 +8,8 @@ const SubmitTab: FC<{ task: Task }> = ({ task }) => {
 
   if (status !== 'authenticated') {
     return (
-      <div className="flex items-center justify-center h-24">
-        <p className="text-prog-gray-500 text-center">
+      <div className="flex h-24 items-center justify-center">
+        <p className="text-center text-prog-gray-500">
           You must be logged in to submit code
         </p>
       </div>

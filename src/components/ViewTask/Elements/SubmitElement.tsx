@@ -61,9 +61,9 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
   }
 
   return (
-    <div className="flex flex-col w-full gap-6 rounded-md shadow-md text-prog-gray-500">
-      <div className="px-8 py-4 bg-white">
-        <div className="flex items-center justify-between gap-4 mb-6">
+    <div className="flex w-full flex-col gap-6 rounded-md text-prog-gray-500 shadow-md">
+      <div className="bg-white px-8 py-4">
+        <div className="mb-6 flex items-center justify-between gap-4">
           <h2 className="text-lg">Submit</h2>
           <div className="flex flex-wrap justify-end gap-2">
             {Languages.map(language => {
@@ -71,7 +71,7 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
                 <div
                   key={language.extension}
                   className={classNames(
-                    'border text-sm rounded-md px-6 py-2',
+                    'rounded-md border px-6 py-2 text-sm',
                     file?.name?.toLowerCase()?.endsWith(language.extension)
                       ? 'bg-prog-gray-500 text-white'
                       : 'border-gray-300 text-prog-gray-500'
@@ -85,7 +85,7 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
         </div>
 
         {file && (
-          <pre className="w-full p-4 my-4 overflow-auto text-sm h-96 bg-slate-50 rounded-mg">
+          <pre className="rounded-mg my-4 h-96 w-full overflow-auto bg-slate-50 p-4 text-sm">
             {fileText}
           </pre>
         )}
@@ -93,15 +93,15 @@ export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
         <FileUpload file={file} setFile={setFile} />
       </div>
 
-      <div className="px-8 py-4 bg-prog-gray-100">
+      <div className="bg-prog-gray-100 px-8 py-4">
         <div className="flex justify-end">
           <button
             onClick={onSubmit}
             className={classNames(
-              'transition-colors border rounded-md px-8 py-2',
+              'rounded-md border px-8 py-2 transition-colors',
               file && fileText
-                ? 'bg-prog-gray-500 hover:bg-gray-600 text-white'
-                : 'bg-slate-50  text-gray-300 cursor-not-allowed'
+                ? 'bg-prog-gray-500 text-white hover:bg-gray-600'
+                : 'cursor-not-allowed  bg-slate-50 text-gray-300'
             )}
           >
             Submit

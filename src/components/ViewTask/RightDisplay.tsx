@@ -31,7 +31,7 @@ export const RightDisplay: FC<{
   }
 
   return (
-    <div className="w-full md:w-[28rem] xl:w-[55rem] flex flex-col gap-8">
+    <div className="flex w-full flex-col gap-8 md:w-[28rem] xl:w-[55rem]">
       {component()}
     </div>
   )

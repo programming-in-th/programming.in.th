@@ -58,22 +58,22 @@ export const LeftBar: FC<{
         <div className="flex items-center gap-2">
           <button onClick={() => setButtonPressed(v => !v)}>
             {buttonPressed ? (
-              <StarIconSolid className="w-5 h-5 text-gray-400" />
+              <StarIconSolid className="h-5 w-5 text-gray-400" />
             ) : (
-              <StarIconOutline className="w-5 h-5 text-gray-300" />
+              <StarIconOutline className="h-5 w-5 text-gray-300" />
             )}
           </button>
           <h1 className="text-lg font-medium">{task.title}</h1>
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-5 h-5" />
+          <div className="h-5 w-5" />
           <p className="font-light">{task.id}</p>
         </div>
       </div>
 
       <hr className="my-8" />
 
-      <div className="flex flex-col shrink font-display">
+      <div className="flex shrink flex-col font-display">
         {Tabs.map(tabItem => {
           return (
             <Link href={`${task.id}/${tabItem.url}`} key={tabItem.label}>
@@ -106,7 +106,7 @@ export const LeftBar: FC<{
           target="_blank"
           href="https://google.com"
           rel="noreferrer"
-          className="w-full mb-4 font-light text-center"
+          className="mb-4 w-full text-center font-light"
         >
           Report
         </a>

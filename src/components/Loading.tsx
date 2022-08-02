@@ -41,10 +41,10 @@ export const Loading = () => {
   }, [setState])
 
   return (
-    <div className="flex flex-col items-center justify-center w-screen h-screen bg-white">
+    <div className="flex h-screen w-screen flex-col items-center justify-center bg-white">
       <motion.svg
         viewBox="0 0 877 250"
-        className="-my-16 text-black stroke-current w-80"
+        className="-my-16 w-80 stroke-current text-black"
         xmlns="http://www.w3.org/2000/svg"
       >
         <motion.path

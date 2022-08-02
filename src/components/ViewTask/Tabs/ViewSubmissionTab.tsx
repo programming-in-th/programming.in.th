@@ -77,18 +77,18 @@ const ViewSubmissionTab: FC<{ task: Task; submissionID: number }> = ({
       }
       <Link href="/" passHref>
         <a className="flex items-center gap-2 text-sm text-prog-gray-500 hover:text-gray-600">
-          <ArrowNarrowLeftIcon className="w-5 h-5" />
+          <ArrowNarrowLeftIcon className="h-5 w-5" />
           <p>Back</p>
         </a>
       </Link>
       {
         // ! disgusting code alert - will move to component
       }
-      <table className="w-full mt-6 text-sm bg-white border-separate rounded-md shadow-md table-auto border-spacing-y-3">
+      <table className="mt-6 w-full table-auto border-separate border-spacing-y-3 rounded-md bg-white text-sm shadow-md">
         <thead className="">
           <tr>
             {Columns.map(({ title, field }) => (
-              <th key={field} className="py-2 font-light text-center">
+              <th key={field} className="py-2 text-center font-light">
                 <p className="w-full text-gray-400">{title}</p>
               </th>
             ))}
@@ -108,12 +108,12 @@ const ViewSubmissionTab: FC<{ task: Task; submissionID: number }> = ({
                 </div>
               </td>
               <td className="py-2">
-                <p className="font-medium text-center">{data.user.username}</p>
+                <p className="text-center font-medium">{data.user.username}</p>
               </td>
               <td className="py-2">
-                <div className="flex items-center justify-center h-auto mx-auto w-28">
-                  <div className="flex flex-col items-center justify-around w-full h-auto">
-                    <div className="relative w-full h-full">
+                <div className="mx-auto flex h-auto w-28 items-center justify-center">
+                  <div className="flex h-auto w-full flex-col items-center justify-around">
+                    <div className="relative h-full w-full">
                       <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
                       <div
                         className={`absolute h-1.5 rounded-full ${
@@ -133,16 +133,16 @@ const ViewSubmissionTab: FC<{ task: Task; submissionID: number }> = ({
                 </div>
               </td>
               <td className="py-2">
-                <p className="font-medium text-center">{data.language}</p>
+                <p className="text-center font-medium">{data.language}</p>
               </td>
               <td className="py-2">
-                <p className="font-medium text-center">
+                <p className="text-center font-medium">
                   {data.time}{' '}
                   <span className="font-light text-gray-400">ms</span>
                 </p>
               </td>
               <td className="px-6 py-2">
-                <p className="font-medium text-center">
+                <p className="text-center font-medium">
                   {data.memory}{' '}
                   <span className="font-light text-gray-400">kb</span>
                 </p>
@@ -152,7 +152,7 @@ const ViewSubmissionTab: FC<{ task: Task; submissionID: number }> = ({
         </tbody>
       </table>
 
-      <pre className="p-4 mt-8 overflow-auto text-sm text-white bg-slate-800 rounded-mg">
+      <pre className="rounded-mg mt-8 overflow-auto bg-slate-800 p-4 text-sm text-white">
         {submission.code}
       </pre>
 

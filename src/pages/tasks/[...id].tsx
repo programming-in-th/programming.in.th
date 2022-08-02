@@ -30,7 +30,7 @@ const Tasks = ({
 
   return isFallback ? null : (
     <PageLayout>
-      <div className="relative flex min-h-screen gap-12 pt-8 mx-auto text-prog-gray-500 pb-14">
+      <div className="relative mx-auto flex min-h-screen gap-12 pt-8 pb-14 text-prog-gray-500">
         <LeftBar task={task} type={type} />
         <RightDisplay
           task={task}

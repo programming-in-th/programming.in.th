@@ -30,22 +30,22 @@ export const Nav = () => {
     >
       <div className="py-3">
         <nav
-          className="relative flex items-center justify-between px-4 mx-auto max-w-7xl sm:px-14"
+          className="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-14"
           aria-label="Global"
         >
-          <div className="flex items-center justify-between flex-1">
-            <div className="flex items-center justify-between w-full md:w-auto">
+          <div className="flex flex-1 items-center justify-between">
+            <div className="flex w-full items-center justify-between md:w-auto">
               <Link href="/" passHref>
                 <a>
                   <Logo />
                 </a>
               </Link>
-              <div className="flex items-center -mr-2 md:hidden">
-                <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-transparent rounded-md focus-ring-inset hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white">
+              <div className="-mr-2 flex items-center md:hidden">
+                <Popover.Button className="focus-ring-inset inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white">
                   <span className="sr-only">Open main menu</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6"
+                    className="h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -60,7 +60,7 @@ export const Nav = () => {
                 </Popover.Button>
               </div>
             </div>
-            <div className="items-center hidden space-x-8 md:ml-10 md:flex">
+            <div className="hidden items-center space-x-8 md:ml-10 md:flex">
               {navigation.map(item => (
                 <Link href={item.href} key={item.name} passHref>
                   <a
@@ -79,7 +79,7 @@ export const Nav = () => {
               <div className="pl-6">
                 {session ? (
                   <Popover className="relative hidden py-1 md:block">
-                    <Popover.Button className="flex items-center justify-center w-10 h-10 transition-colors bg-transparent rounded-full hover:bg-slate-300 hover:bg-opacity-50 active:ring-1 ring-slate-300">
+                    <Popover.Button className="flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-slate-300 transition-colors hover:bg-slate-300 hover:bg-opacity-50 active:ring-1">
                       <Image
                         src={
                           session.user.image ??
@@ -88,7 +88,7 @@ export const Nav = () => {
                         alt={session.user.name}
                         width={32}
                         height={32}
-                        className="w-8 h-8 rounded-full"
+                        className="h-8 w-8 rounded-full"
                       />
                     </Popover.Button>
 
@@ -101,8 +101,8 @@ export const Nav = () => {
                       leaveFrom="opacity-100 scale-100"
                       leaveTo="opacity-0 scale-95"
                     >
-                      <Popover.Panel className="absolute z-50 mt-2 bg-white rounded-lg shadow-md right-2">
-                        <div className="flex flex-col px-8 py-4 border-b border-gray-100 text-prog-gray-500">
+                      <Popover.Panel className="absolute right-2 z-50 mt-2 rounded-lg bg-white shadow-md">
+                        <div className="flex flex-col border-b border-gray-100 px-8 py-4 text-prog-gray-500">
                           <p className="font-medium">{session.user.name}</p>
                           <p className="font-light">{session.user.email}</p>
                         </div>
@@ -121,7 +121,7 @@ export const Nav = () => {
                 ) : (
                   <Link href="/login" passHref>
                     <a
-                      className={`rounded-md shadow-md px-6 text-white bg-prog-primary-500 transition-colors hover:bg-prog-primary-600 py-2 text-base font-medium`}
+                      className={`rounded-md bg-prog-primary-500 px-6 py-2 text-base font-medium text-white shadow-md transition-colors hover:bg-prog-primary-600`}
                     >
                       Login
                     </a>
@@ -144,19 +144,19 @@ export const Nav = () => {
       >
         <Popover.Panel
           focus
-          className="absolute inset-x-0 top-0 z-50 p-2 transition origin-top transform md:hidden"
+          className="absolute inset-x-0 top-0 z-50 origin-top transform p-2 transition md:hidden"
         >
-          <div className="overflow-hidden bg-white rounded-lg shadow-md ring-1 ring-black ring-opacity-5">
+          <div className="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5">
             <div className="flex items-center justify-between px-5 pt-4">
               <div>
                 <Logo />
               </div>
               <div className="-mr-2">
-                <Popover.Button className="inline-flex items-center justify-center p-2 text-gray-400 bg-transparent rounded-md hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600">
+                <Popover.Button className="inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600">
                   <span className="sr-only">Close menu</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    className="w-6 h-6"
+                    className="h-6 w-6"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -180,7 +180,7 @@ export const Nav = () => {
                       alt={session.user.name}
                       width={40}
                       height={40}
-                      className="w-10 h-10 rounded-full"
+                      className="h-10 w-10 rounded-full"
                     />
                   </div>
 
@@ -190,7 +190,7 @@ export const Nav = () => {
                   </div>
                 </div>
               )}
-              <div className="px-2 space-y-1">
+              <div className="space-y-1 px-2">
                 {navigation.map(item => (
                   <Link href={item.href} key={item.name} passHref>
                     <a
@@ -207,18 +207,18 @@ export const Nav = () => {
                 ))}
               </div>
               {session ? (
-                <div className="px-5 mt-6">
+                <div className="mt-6 px-5">
                   <button
                     onClick={() => signOut()}
-                    className="block w-full px-4 py-3 font-medium text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-700"
+                    className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700"
                   >
                     Logout
                   </button>
                 </div>
               ) : (
-                <div className="px-5 mt-6">
+                <div className="mt-6 px-5">
                   <Link href="/login" passHref>
-                    <a className="block w-full px-4 py-3 font-medium text-center text-white bg-gray-600 rounded-md shadow hover:bg-gray-700">
+                    <a className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700">
                       Login
                     </a>
                   </Link>

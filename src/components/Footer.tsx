@@ -22,9 +22,9 @@ export const Footer = () => {
   const { data: session } = useSession()
 
   return (
-    <footer className="flex flex-col items-center w-full bg-white font-display">
-      <div className="flex flex-col items-center w-full max-w-5xl">
-        <div className="flex justify-between w-full max-w-md p-8 font-display">
+    <footer className="flex w-full flex-col items-center bg-white font-display">
+      <div className="flex w-full max-w-5xl flex-col items-center">
+        <div className="flex w-full max-w-md justify-between p-8 font-display">
           {navigation.map(item => (
             <Link href={item.href} key={item.name} passHref>
               <a
@@ -41,21 +41,21 @@ export const Footer = () => {
           ))}
         </div>
         <div className="flex w-full justify-center border-y-[0.5px]">
-          <div className="flex flex-col items-center max-w-sm py-12">
+          <div className="flex max-w-sm flex-col items-center py-12">
             <p className="my-2 font-bold text-gray-500">PROGRAMMING.IN.TH</p>
-            <p className="text-sm text-center text-gray-500">
+            <p className="text-center text-sm text-gray-500">
               โปรแกรมมิ่งอินทีเอช ศูนย์รวมของโจทย์และเนื้อหาสำหรับ
               การเขียนโปรแกรมเพื่อการแข่งขัน และวิทยาการคอมพิวเตอร์
             </p>
             {session ? (
               <Link passHref href="/tasks">
-                <a className="mt-4 rounded-md bg-prog-primary-500 trasition-colors hover:bg-prog-primary-600 py-2.5 px-9 text-white">
+                <a className="trasition-colors mt-4 rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600">
                   ค้นหาโจทย์
                 </a>
               </Link>
             ) : (
               <Link passHref href="/login">
-                <a className="mt-4 rounded-md bg-prog-primary-500 trasition-colors hover:bg-prog-primary-600 py-2.5 px-9 text-white">
+                <a className="trasition-colors mt-4 rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600">
                   เข้าร่วม
                 </a>
               </Link>

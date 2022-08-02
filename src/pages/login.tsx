@@ -7,32 +7,32 @@ import { AuthGitHubLogo, AuthGoogleLogo } from '@/svg/Socials'
 const Login = () => {
   return (
     <PageLayout>
-      <div className="flex flex-col justify-center min-h-screen pb-44 sm:px-6 lg:px-8">
+      <div className="flex min-h-screen flex-col justify-center pb-44 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h2 className="px-4 mt-6 text-3xl font-extrabold text-center text-prog-gray-500">
+          <h2 className="mt-6 px-4 text-center text-3xl font-extrabold text-prog-gray-500">
             Log in to PROGRAMMING.IN.TH
           </h2>
         </div>
-        <div className="px-4 mt-2 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="px-4 py-2 bg-white sm:rounded-lg sm:px-10">
+        <div className="mt-2 px-4 sm:mx-auto sm:w-full sm:max-w-md">
+          <div className="bg-white px-4 py-2 sm:rounded-lg sm:px-10">
             <div className="mt-6">
-              <div className="flex flex-col gap-6 mt-6">
+              <div className="mt-6 flex flex-col gap-6">
                 <div>
                   <button
-                    className="inline-flex justify-center w-full gap-3 px-4 py-4 text-sm font-medium text-gray-500 bg-white rounded-md shadow-md hover:bg-gray-50"
+                    className="inline-flex w-full justify-center gap-3 rounded-md bg-white px-4 py-4 text-sm font-medium text-gray-500 shadow-md hover:bg-gray-50"
                     onClick={() => signIn('google')}
                   >
-                    <AuthGoogleLogo className="w-5 h-5" />
+                    <AuthGoogleLogo className="h-5 w-5" />
                     <span>Sign in with Google</span>
                   </button>
                 </div>
 
                 <div>
                   <button
-                    className="inline-flex justify-center w-full gap-3 px-4 py-4 text-sm font-medium text-gray-500 bg-white rounded-md shadow-md hover:bg-gray-50"
+                    className="inline-flex w-full justify-center gap-3 rounded-md bg-white px-4 py-4 text-sm font-medium text-gray-500 shadow-md hover:bg-gray-50"
                     onClick={() => signIn('github')}
                   >
-                    <AuthGitHubLogo className="w-5 h-5" />
+                    <AuthGitHubLogo className="h-5 w-5" />
                     <span>Sign in with GitHub</span>
                   </button>
                 </div>

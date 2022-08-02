@@ -57,7 +57,7 @@ export const FileUpload: FC<{
       <div
         {...getRootProps()}
         className={classNames(
-          'rounded-md w-full border cursor-pointer h-48 border-dashed transition-colors border-gray-400 text-gray-400 p-6 gap-2 flex flex-col justify-center items-center',
+          'flex h-48 w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-dashed border-gray-400 p-6 text-gray-400 transition-colors',
           (isFocused || isDragAccept) && 'border-prog-primary-500',
           fileRejected && 'border-red-400',
           isDragActive
@@ -69,13 +69,13 @@ export const FileUpload: FC<{
 
         <InboxInIcon
           className={classNames(
-            'w-10 h-10',
-            isDragActive && 'text-white animate-pulse'
+            'h-10 w-10',
+            isDragActive && 'animate-pulse text-white'
           )}
         />
 
         {isDragActive ? (
-          <p className="text-xl font-semibold text-white animate-pulse">
+          <p className="animate-pulse text-xl font-semibold text-white">
             Drop your file here
           </p>
         ) : (
