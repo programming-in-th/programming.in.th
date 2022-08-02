@@ -1,10 +1,11 @@
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/outline'
 import classNames from 'classnames'
-import { FC, Fragment } from 'react'
+import { FC, Fragment, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import styles from './style.module.scss'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
+import useSubmissionData from '@/lib/useSubmissionData'
 
 const CorrectElement: FC = () => {
   return (
@@ -41,7 +42,7 @@ export const TaskStatus: FC = () => {
 
   return (
     <section className="px-12 py-20 bg-gray-50">
-      <p className="text-prog-gray-500 font-semibold text-lg mb-6">Subtasks</p>
+      <p className="mb-6 text-lg font-semibold text-prog-gray-500">Subtasks</p>
 
       <div className="flex flex-col gap-6">
         {
@@ -51,7 +52,7 @@ export const TaskStatus: FC = () => {
           <Disclosure
             as={'div'}
             key={dataArrayKey}
-            className="w-full bg-white shadow-md px-2 rounded-md"
+            className="w-full px-2 bg-white rounded-md shadow-md"
           >
             {({ open }) => (
               <>
@@ -76,7 +77,7 @@ export const TaskStatus: FC = () => {
                         }
                       }}
                     >
-                      <ChevronUpIcon className="h-5 w-5" />
+                      <ChevronUpIcon className="w-5 h-5" />
                     </motion.span>
                   </button>
                 </Disclosure.Button>

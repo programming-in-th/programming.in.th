@@ -13,7 +13,18 @@ export default async function handler(
   switch (method) {
     case 'GET':
       const submission = await prisma.submission.findUnique({
-        where: { id: Number(id) }
+        where: { id: Number(id) },
+        select: {
+          id: true,
+          status: true,
+          submittedAt: true,
+          time: true,
+          memory: true,
+          score: true,
+          groups: true,
+          language: true,
+          user: true
+        }
       })
       res.status(200).json(submission)
       break
