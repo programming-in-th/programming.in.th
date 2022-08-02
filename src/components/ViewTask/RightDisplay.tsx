@@ -8,7 +8,10 @@ import SubmissionsTab from './Tabs/SubmissionsTab'
 import SolutionTab from './Tabs/SolutionTab'
 import { Task } from '@prisma/client'
 
-export const RightDisplay: FC<{ task: Task }> = ({ task }) => {
+export const RightDisplay: FC<{ task: Task; submissionID: null | string }> = ({
+  task,
+  submissionID
+}) => {
   return (
     <Tab.Panels className="w-full md:w-[28rem] xl:w-[55rem] flex flex-col gap-8">
       <Tab.Panel>
@@ -18,11 +21,10 @@ export const RightDisplay: FC<{ task: Task }> = ({ task }) => {
         <SubmitTab task={task} />
       </Tab.Panel>
       <Tab.Panel>
-        <SubmissionsTab task={task} />
+        <SubmissionsTab task={task} submissionID={submissionID} />
       </Tab.Panel>
       <Tab.Panel>
-        {/* <MySubmissionsTab task={task} /> */}
-        <ViewSubmissionTab task={task} />
+        <MySubmissionsTab task={task} submissionID={submissionID} />
       </Tab.Panel>
       <Tab.Panel>
         <SolutionTab task={task} />

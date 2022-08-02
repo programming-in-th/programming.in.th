@@ -1,12 +1,13 @@
 import { Task, Submission } from '@prisma/client'
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
-import { FC, memo } from 'react'
+import { FC, memo, useMemo } from 'react'
 import { ColumnDef, useReactTable } from '@tanstack/react-table'
 import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
 import useSWR from 'swr'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/router'
+import ViewSubmissionTab from './ViewSubmissionTab'
 
 const Columns = [
   {
@@ -41,6 +42,10 @@ const NewColumns: ColumnDef<Submission>[] = [
     cell: props => <span>SubmittedAt</span>
   }
 ]
+
+const L = () => {
+  return <h1>hi</h1>
+}
 
 const SubmissionsTab: FC<{ task: Task }> = ({ task }) => {
   // const table = useReactTable({ columns: NewColumns })
@@ -134,4 +139,13 @@ const SubmissionsTab: FC<{ task: Task }> = ({ task }) => {
   )
 }
 
-export default memo(SubmissionsTab)
+const SubmissionTabRouter: FC<{ task: Task; submissionID: null | string }> = ({
+  task,
+  submissionID
+}) => {
+  if (submissionID)
+    return <ViewSubmissionTab task={task} submissionID={submissionID} />
+  else return <SubmissionsTab task={task} />
+}
+
+export default SubmissionTabRouter

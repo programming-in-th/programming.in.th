@@ -14,7 +14,8 @@ const Tabs = ['statement', 'submit', 'submissions', 'mysubmissions', 'solution']
 
 const Tasks = ({
   task,
-  type
+  type,
+  submissionID
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { isFallback, query, replace } = useRouter()
 
@@ -39,7 +40,7 @@ const Tasks = ({
           as={Fragment}
         >
           <LeftBar task={task} />
-          <RightDisplay task={task} />
+          <RightDisplay task={task} submissionID={submissionID} />
         </Tab.Group>
       </div>
     </PageLayout>
@@ -72,11 +73,20 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   })
 
   let type = params.id.length === 1 ? 'statement' : params.id[1]
+  let submissionID: null | string = null
+
+  if (type === 'submissions' || type === 'mysubmissions') {
+    // check if params has submission id
+    if (params.id.length === 3) {
+      submissionID = params.id[2]
+    }
+  }
 
   return {
     props: {
       task: task as Task,
-      type: type as string
+      type: type as string,
+      submissionID
     }
   }
 }

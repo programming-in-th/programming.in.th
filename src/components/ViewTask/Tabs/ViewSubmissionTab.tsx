@@ -34,7 +34,10 @@ const Columns = [
   }
 ]
 
-const ViewSubmissionTab: FC<{ task: Task }> = ({ task }) => {
+const ViewSubmissionTab: FC<{ task: Task; submissionID: string }> = ({
+  task,
+  submissionID
+}) => {
   // const { data, error } = useSWR<IGeneralSubmission>(
   //   `/api/submissions?filter=own_task&taskId=${task.id}`,
   //   fetcher
