@@ -9,12 +9,14 @@ import { LeftBar } from '@/components/ViewTask/LeftBar'
 import { RightDisplay } from '@/components/ViewTask/RightDisplay'
 import { Tab } from '@headlessui/react'
 import { Task } from '@prisma/client'
+import { mdxToHtml } from '@/lib/renderMarkdown'
 
 const Tabs = ['statement', 'submit', 'submissions', 'mysubmissions', 'solution']
 
 const Tasks = ({
   task,
-  type
+  type,
+  solution
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { isFallback, query, replace } = useRouter()
 
@@ -30,7 +32,7 @@ const Tasks = ({
 
   return isFallback ? null : (
     <PageLayout>
-      <div className="relative flex min-h-screen pt-8 text-prog-gray-500 gap-12 pb-14 mx-auto">
+      <div className="relative flex min-h-screen gap-12 pt-8 mx-auto text-prog-gray-500 pb-14">
         <Tab.Group
           defaultIndex={
             Tabs.includes(type as string) ? Tabs.findIndex(v => v === type) : 0
@@ -39,7 +41,7 @@ const Tasks = ({
           as={Fragment}
         >
           <LeftBar task={task} />
-          <RightDisplay task={task} />
+          <RightDisplay task={task} solution={solution} />
         </Tab.Group>
       </div>
     </PageLayout>
@@ -67,15 +69,28 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const task = await prisma.task.findUnique({
+  const task: Task = await prisma.task.findUnique({
     where: { id: `${params.id[0]}` }
   })
 
   let type = params.id.length === 1 ? 'statement' : params.id[1]
+  let solution = null
+
+  if (type === 'solution') {
+    const solutionRes = await fetch(
+      `${process.env.AWS_URL}/solutions/md/${params.id[0]}.md`
+    )
+
+    if (solutionRes.status === 200) {
+      const raw = await solutionRes.text()
+      solution = await mdxToHtml(raw)
+    }
+  }
 
   return {
     props: {
-      task: task as Task,
+      solution,
+      task,
       type: type as string
     }
   }

@@ -1,38 +1,37 @@
-import { Task } from '@prisma/client'
-import { FC, memo } from 'react'
+import React, { FC, memo } from 'react'
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
+import components from '@/components/common/MDXComponents'
+import Head from 'next/head'
 
-const SolutionTab: FC<{ task: Task }> = ({ task }) => {
-  return (
-    <pre className="text-sm overflow-auto my-4 p-4 bg-slate-50 rounded-mg">
-      {`#include <bits/stdc++.h>
+const SolutionTab: FC<{ solution: MDXRemoteSerializeResult }> = ({
+  solution
+}) => {
+  if (solution) {
+    return (
+      <React.Fragment>
+        <Head>
+          <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+            integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
+            crossOrigin="anonymous"
+          />
+        </Head>
+        <div className="w-full mt-4 prose max-w-none">
+          <MDXRemote
+            {...solution}
+            components={
+              {
+                ...components
+              } as any
+            }
+          />
+        </div>
+      </React.Fragment>
+    )
+  }
 
-using namespace std;
-
-int a, b, c;
-
-int main () {
-    scanf("%d %d %d", &a, &b, &c);
-    int sum = a + b + c;
-    if (sum <= 100 && sum >= 80) {
-        printf("A");
-    } else if (sum < 80 && sum >= 75) {
-        printf("B+");
-    } else if (sum < 75 && sum >= 70) {
-    printf("B");
-    } else if (sum < 70 && sum >= 65) {
-        printf("C+");
-    } else if (sum < 65 && sum >= 60) {
-        printf("C");
-    } else if (sum < 60 && sum >= 55) {
-        printf("D+");
-    } else if (sum < 55 && sum >= 50) {
-        printf("D");
-    } else if (sum < 50 && sum >= 0) {
-        printf("F");
-    }
-}`}
-    </pre>
-  )
+  return <h1>Solution does not exist!</h1>
 }
 
-export default memo(SolutionTab)
+export default SolutionTab

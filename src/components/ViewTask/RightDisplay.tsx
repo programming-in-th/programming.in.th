@@ -7,8 +7,12 @@ import ViewSubmissionTab from './Tabs/ViewSubmissionTab'
 import SubmissionsTab from './Tabs/SubmissionsTab'
 import SolutionTab from './Tabs/SolutionTab'
 import { Task } from '@prisma/client'
+import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 
-export const RightDisplay: FC<{ task: Task }> = ({ task }) => {
+export const RightDisplay: FC<{
+  task: Task
+  solution: MDXRemoteSerializeResult
+}> = ({ task, solution }) => {
   return (
     <Tab.Panels className="w-full md:w-[28rem] xl:w-[55rem] flex flex-col gap-8">
       <Tab.Panel>
@@ -25,7 +29,7 @@ export const RightDisplay: FC<{ task: Task }> = ({ task }) => {
         <ViewSubmissionTab task={task} />
       </Tab.Panel>
       <Tab.Panel>
-        <SolutionTab task={task} />
+        <SolutionTab solution={solution} />
       </Tab.Panel>
     </Tab.Panels>
   )

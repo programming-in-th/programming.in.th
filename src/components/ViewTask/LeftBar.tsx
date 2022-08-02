@@ -42,7 +42,7 @@ export const LeftBar: FC<{
   )
 
   const maxScore = useMemo(() => {
-    return data ? Math.max(...data.map(sub => sub.score)) : 0
+    return data ? Math.max(...data.map(sub => sub.score), 0) : 0
   }, [data])
 
   return (

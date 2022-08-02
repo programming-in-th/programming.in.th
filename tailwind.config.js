@@ -41,6 +41,9 @@ module.exports = {
               color: theme('colors.gray.900'),
               fontWeight: '600',
               fontFamily: `${theme('fontFamily.display')}`
+            },
+            p: {
+              fontFamily: `${theme('fontFamily.body')}`
             }
           }
         },
@@ -57,6 +60,9 @@ module.exports = {
             },
             h4: {
               fontFamily: `${theme('fontFamily.display')}`
+            },
+            p: {
+              fontFamily: `${theme('fontFamily.body')}`
             }
           }
         },
@@ -73,6 +79,9 @@ module.exports = {
             },
             h4: {
               fontFamily: `${theme('fontFamily.display')}`
+            },
+            p: {
+              fontFamily: `${theme('fontFamily.body')}`
             }
           }
         }
@@ -90,6 +99,18 @@ module.exports = {
         'Noto Sans Thai',
         'SF Pro Display',
         ...defaultTheme.fontFamily.sans
+      ],
+      body: [
+        '-apple-system',
+        'BlinkMacSystemFont',
+        'Segoe UI',
+        'Oxygen',
+        'Ubuntu',
+        'Cantarell',
+        'Fira Sans',
+        'Droid Sans',
+        'Helvetica Neue',
+        'sans-serif'
       ]
     }
   },
