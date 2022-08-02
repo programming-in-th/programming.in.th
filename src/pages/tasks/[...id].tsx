@@ -16,10 +16,17 @@ const Tabs = ['statement', 'submit', 'submissions', 'mysubmissions', 'solution']
 const Tasks = ({
   task,
   type,
-  solution,
-  submissionID
+  solution
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { isFallback, query, replace } = useRouter()
+  let submissionID: null | string = null
+
+  if (type === 'submissions' || type === 'mysubmissions') {
+    // check if params has submission id
+    if (query.id.length === 3) {
+      submissionID = query.id[2]
+    }
+  }
 
   const onTabChange = useCallback(
     (index: number) => {
@@ -92,21 +99,11 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     }
   }
 
-  let submissionID: null | string = null
-
-  if (type === 'submissions' || type === 'mysubmissions') {
-    // check if params has submission id
-    if (params.id.length === 3) {
-      submissionID = params.id[2]
-    }
-  }
-
   return {
     props: {
       solution,
       task,
-      type: type as string,
-      submissionID
+      type: type as string
     }
   }
 }
