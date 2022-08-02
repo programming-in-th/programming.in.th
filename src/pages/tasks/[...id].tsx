@@ -90,7 +90,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   if (type === 'solution') {
     const solutionRes = await fetch(
-      `${process.env.AWS_URL}/solutions/md/${params.id[0]}.md`
+      `${process.env.NEXT_PUBLIC_AWS_URL}/solutions/md/${params.id[0]}.md`
     )
 
     if (solutionRes.status === 200) {
