@@ -1,20 +1,20 @@
 import React from 'react'
-import Link from 'next/link'
-import Image from 'next/image'
+
 import {
   CollectionIcon,
   DocumentSearchIcon,
   FireIcon,
   HeartIcon
 } from '@heroicons/react/solid'
+import Image from 'next/image'
+import Link from 'next/link'
 
-import { PageLayout } from '@/components/Layout'
 import { FeatureCard } from '@/components/Landing/FeatureCard'
-import { TestimonyCard } from '@/components/Landing/TestimonyCard'
 import { IncrementalNumber } from '@/components/Landing/IncrementalNumber'
-
-import { PeopleVector } from '@/svg/Illustrations/People'
+import { TestimonyCard } from '@/components/Landing/TestimonyCard'
+import { PageLayout } from '@/components/Layout'
 import { BGCurve } from '@/svg/BGCurve'
+import { PeopleVector } from '@/svg/Illustrations/People'
 
 const Landing = () => {
   return (

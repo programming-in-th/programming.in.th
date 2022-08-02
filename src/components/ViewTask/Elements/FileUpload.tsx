@@ -1,8 +1,3 @@
-import { formatBytes as formatBytesFunc } from '@/utils/formatSize'
-import { getLanguage } from '@/utils/getFileExtension'
-import { truncate } from '@/utils/truncate'
-import { InboxInIcon } from '@heroicons/react/solid'
-import classNames from 'classnames'
 import {
   Dispatch,
   FC,
@@ -11,7 +6,14 @@ import {
   useRef,
   useState
 } from 'react'
+
+import { InboxInIcon } from '@heroicons/react/solid'
+import classNames from 'classnames'
 import { useDropzone } from 'react-dropzone'
+
+import { formatBytes as formatBytesFunc } from '@/utils/formatSize'
+import { getLanguage } from '@/utils/getFileExtension'
+import { truncate } from '@/utils/truncate'
 
 const ACCEPTED_LANGUAGES = ['.cpp', '.py', '.java', '.rs']
 

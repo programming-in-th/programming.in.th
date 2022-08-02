@@ -1,14 +1,17 @@
-import { Task } from '@prisma/client'
+import { FC, Fragment, useMemo, useState } from 'react'
+
+import { Tab } from '@headlessui/react'
 import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { DownloadIcon, StarIcon as StarIconSolid } from '@heroicons/react/solid'
+import { Task } from '@prisma/client'
 import classNames from 'classnames'
-import { FC, Fragment, useMemo, useState } from 'react'
-import { Tab } from '@headlessui/react'
-import { PieChart } from '../common/PieChart'
+import Link from 'next/link'
+import useSWR from 'swr'
+
 import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
-import useSWR from 'swr'
-import Link from 'next/link'
+
+import { PieChart } from '../common/PieChart'
 
 const Tabs = [
   {

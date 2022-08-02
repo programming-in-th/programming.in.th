@@ -1,6 +1,8 @@
+import { FC } from 'react'
+
 import { Task } from '@prisma/client'
 import { useSession } from 'next-auth/react'
-import { FC } from 'react'
+
 import { SubmitElement } from '../Elements/SubmitElement'
 
 const SubmitTab: FC<{ task: Task }> = ({ task }) => {

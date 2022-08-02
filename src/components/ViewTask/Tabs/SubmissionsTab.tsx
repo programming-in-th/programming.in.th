@@ -1,12 +1,15 @@
-import { Task, Submission } from '@prisma/client'
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
 import { FC, memo, useMemo } from 'react'
+
+import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
+import { Task, Submission } from '@prisma/client'
 import { ColumnDef, useReactTable } from '@tanstack/react-table'
-import fetcher from '@/lib/fetcher'
-import { IGeneralSubmission } from '@/types/submissions'
-import useSWR from 'swr'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/router'
+import useSWR from 'swr'
+
+import fetcher from '@/lib/fetcher'
+import { IGeneralSubmission } from '@/types/submissions'
+
 import ViewSubmissionTab from './ViewSubmissionTab'
 
 const Columns = [

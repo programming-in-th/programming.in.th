@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { signIn } from 'next-auth/react'
 
 import { PageLayout } from '@/components/Layout'

@@ -1,13 +1,14 @@
 import * as React from 'react'
+
 import { Viewer } from '@react-pdf-viewer/core'
+import type { DocumentLoadEvent } from '@react-pdf-viewer/core'
+import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'
 import { SearchIcon } from '@react-pdf-viewer/search'
 import {
   MoreActionsPopover,
   ToolbarProps,
   ToolbarSlot
 } from '@react-pdf-viewer/toolbar'
-import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout'
-import type { DocumentLoadEvent } from '@react-pdf-viewer/core'
 
 import SearchSidebar from './SearchSidebar'
 

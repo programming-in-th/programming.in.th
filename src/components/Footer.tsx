@@ -1,8 +1,10 @@
-import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
+import React, { useMemo } from 'react'
+
 import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import React, { useMemo } from 'react'
+
+import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
 
 const navigation = [
   { name: 'Home', href: '/' },

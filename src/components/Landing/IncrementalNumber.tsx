@@ -1,5 +1,6 @@
-import CountUp from 'react-countup'
 import { RefObject, useEffect, useReducer, useRef } from 'react'
+
+import CountUp from 'react-countup'
 
 interface IncrementalNumberProps {
   start: number

@@ -1,7 +1,10 @@
 import { Dispatch, FC, Fragment, SetStateAction } from 'react'
+
 import { Tab } from '@headlessui/react'
-import { TaskItem } from './TaskItem'
+
 import { IGeneralTask } from '@/types/tasks'
+
+import { TaskItem } from './TaskItem'
 
 const SampleTab: FC<{
   tasks: IGeneralTask[]

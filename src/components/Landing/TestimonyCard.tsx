@@ -1,6 +1,8 @@
-import { QuoteVector } from '@/svg/Quote'
-import Image from 'next/image'
 import { FC } from 'react'
+
+import Image from 'next/image'
+
+import { QuoteVector } from '@/svg/Quote'
 
 export const TestimonyCard: FC<{
   title: string

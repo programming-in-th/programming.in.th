@@ -1,6 +1,7 @@
+import { Fragment } from 'react'
+
 import { Tab } from '@headlessui/react'
 import classNames from 'classnames'
-import { Fragment } from 'react'
 
 const Tabs = [
   {

@@ -1,4 +1,5 @@
-import { Head } from '@/components/Head/Index'
+import React from 'react'
+
 import NextDocument, {
   Html,
   Head as NextHead,
@@ -6,7 +7,8 @@ import NextDocument, {
   NextScript,
   DocumentContext
 } from 'next/document'
-import React from 'react'
+
+import { Head } from '@/components/Head/Index'
 
 export default class Document extends NextDocument {
   static async getInitialProps(ctx: DocumentContext) {

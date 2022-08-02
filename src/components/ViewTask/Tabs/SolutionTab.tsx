@@ -1,7 +1,9 @@
 import React, { FC, memo } from 'react'
+
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
-import components from '@/components/common/MDXComponents'
 import Head from 'next/head'
+
+import components from '@/components/common/MDXComponents'
 
 const SolutionTab: FC<{ solution: MDXRemoteSerializeResult }> = ({
   solution

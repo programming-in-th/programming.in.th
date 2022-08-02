@@ -1,6 +1,9 @@
-import { IGeneralSubmission } from '@/types/submissions'
 import { useEffect } from 'react'
+
 import useSWR, { useSWRConfig } from 'swr'
+
+import { IGeneralSubmission } from '@/types/submissions'
+
 import {
   JUDGE_COMPLETED,
   JUDGE_ERROR,

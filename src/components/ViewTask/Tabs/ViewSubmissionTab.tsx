@@ -1,12 +1,15 @@
+import { FC } from 'react'
+
 import { ArrowNarrowLeftIcon, ChevronUpIcon } from '@heroicons/react/outline'
 import { Task } from '@prisma/client'
-import Link from 'next/link'
-import { FC } from 'react'
-import useSWR from 'swr'
 import dayjs from 'dayjs'
-import { IGeneralSubmission } from '@/types/submissions'
-import { TaskStatus } from '../Elements/TaskStatus'
+import Link from 'next/link'
+import useSWR from 'swr'
+
 import useSubmissionData from '@/lib/useSubmissionData'
+import { IGeneralSubmission } from '@/types/submissions'
+
+import { TaskStatus } from '../Elements/TaskStatus'
 
 const Columns = [
   {

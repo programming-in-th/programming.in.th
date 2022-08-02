@@ -1,5 +1,7 @@
-import { Task } from '@prisma/client'
 import { FC, memo } from 'react'
+
+import { Task } from '@prisma/client'
+
 import PDFViewer from '../Elements/PDFViewer'
 
 const StatementTab: FC<{ task: Task }> = ({ task }) => {

@@ -1,6 +1,8 @@
-import { IGeneralTask } from '@/types/tasks'
-import Link from 'next/link'
 import { useEffect, useState } from 'react'
+
+import Link from 'next/link'
+
+import { IGeneralTask } from '@/types/tasks'
 
 export const TaskItem = (
   task: IGeneralTask & { showTags: string[] | boolean }

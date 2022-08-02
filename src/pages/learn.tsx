@@ -1,6 +1,8 @@
-import { PageLayout } from '@/components/Layout'
 import { NextPage } from 'next'
+
 import Link from 'next/link'
+
+import { PageLayout } from '@/components/Layout'
 
 const Learn: NextPage = () => {
   return (

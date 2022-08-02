@@ -1,7 +1,10 @@
 import React from 'react'
+
 import Script from 'next/script'
-import { Preload } from './Preload'
+
 import { GA_TRACKING_ID } from '@/lib/gtag'
+
+import { Preload } from './Preload'
 
 export const Head = () => (
   <React.Fragment>

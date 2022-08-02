@@ -1,13 +1,15 @@
 import { Fragment, useCallback, useEffect, useState } from 'react'
-import { PageLayout } from '@/components/Layout'
-import { TaskItem } from '@/components/Tasks/TaskItem'
-import { LeftBar } from '@/components/Tasks/LeftBar'
 
-import prisma from '@/lib/prisma'
 import { InferGetStaticPropsType } from 'next'
-import { useRouter } from 'next/router'
+
 import { Tab } from '@headlessui/react'
+import { useRouter } from 'next/router'
+
+import { PageLayout } from '@/components/Layout'
+import { LeftBar } from '@/components/Tasks/LeftBar'
 import { RightDisplay } from '@/components/Tasks/RightDisplay'
+import { TaskItem } from '@/components/Tasks/TaskItem'
+import prisma from '@/lib/prisma'
 import { IGeneralTask } from '@/types/tasks'
 
 export async function getStaticProps() {

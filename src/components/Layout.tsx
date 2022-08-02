@@ -1,12 +1,12 @@
-import { useRouter } from 'next/router'
-import { useSession } from 'next-auth/react'
 import React, { useMemo } from 'react'
 
-import { Footer } from './Footer'
-import { Nav } from './Nav'
-import { Loading } from './Loading'
-
 import classNames from 'classnames'
+import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
+
+import { Footer } from './Footer'
+import { Loading } from './Loading'
+import { Nav } from './Nav'
 
 export const PageLayout = ({ children }) => {
   const router = useRouter()

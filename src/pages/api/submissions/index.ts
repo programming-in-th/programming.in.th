@@ -1,11 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
+
+import { unstable_getServerSession } from 'next-auth'
 import { createRouter } from 'next-connect'
 
-import prisma from '@/lib/prisma'
-import { unstable_getServerSession } from 'next-auth'
-import { authOptions } from '../auth/[...nextauth]'
-import { Session } from '@/types/session'
 import { compressCode } from '@/lib/codeTransformer'
+import prisma from '@/lib/prisma'
+import { Session } from '@/types/session'
+
+import { authOptions } from '../auth/[...nextauth]'
 
 enum Filter {
   OWN = 'own',

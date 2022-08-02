@@ -1,10 +1,9 @@
-import { Fragment } from 'react'
+import { Worker } from '@react-pdf-viewer/core'
 import { SessionProvider } from 'next-auth/react'
 import '@/styles/index.css'
 import '@/styles/fonts.css'
 import '@/styles/style.scss'
 
-import { Worker } from '@react-pdf-viewer/core'
 import '@react-pdf-viewer/core/lib/styles/index.css'
 import '@react-pdf-viewer/default-layout/lib/styles/index.css'
 

@@ -1,14 +1,15 @@
 import { Fragment, useCallback, useMemo } from 'react'
-import Router, { useRouter } from 'next/router'
 
 import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next'
 
-import prisma from '@/lib/prisma'
+import { Tab } from '@headlessui/react'
+import { Task } from '@prisma/client'
+import Router, { useRouter } from 'next/router'
+
 import { PageLayout } from '@/components/Layout'
 import { LeftBar } from '@/components/ViewTask/LeftBar'
 import { RightDisplay } from '@/components/ViewTask/RightDisplay'
-import { Tab } from '@headlessui/react'
-import { Task } from '@prisma/client'
+import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
 
 const Tabs = ['statement', 'submit', 'submissions', 'mysubmissions', 'solution']

@@ -1,11 +1,14 @@
+import { FC, Fragment, useEffect } from 'react'
+
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/outline'
-import classNames from 'classnames'
-import { FC, Fragment, useEffect } from 'react'
-import { motion } from 'framer-motion'
-import styles from './style.module.scss'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
+import classNames from 'classnames'
+import { motion } from 'framer-motion'
+
 import useSubmissionData from '@/lib/useSubmissionData'
+
+import styles from './style.module.scss'
 
 const CorrectElement: FC = () => {
   return (
