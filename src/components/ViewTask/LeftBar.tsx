@@ -8,33 +8,40 @@ import { PieChart } from '../common/PieChart'
 import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
 import useSWR from 'swr'
+import Link from 'next/link'
 
 const Tabs = [
   {
     label: 'Statement',
-    value: 'statement'
+    value: 'statement',
+    url: ''
   },
   {
     label: 'Submit',
-    value: 'submit'
+    value: 'submit',
+    url: 'submit'
   },
   {
     label: 'Submissions',
-    value: 'submissions'
+    value: 'submissions',
+    url: 'submissions'
   },
   {
     label: 'My Submissions',
-    value: 'mySubmissions'
+    value: 'mySubmissions',
+    url: 'mySubmissions'
   },
   {
     label: 'Solution',
-    value: 'solution'
+    value: 'solution',
+    url: 'solution'
   }
 ]
 
 export const LeftBar: FC<{
   task: Task
-}> = ({ task }) => {
+  type: string
+}> = ({ task, type }) => {
   const [buttonPressed, setButtonPressed] = useState(false)
   const { data, error } = useSWR<IGeneralSubmission[]>(
     `/api/submissions?filter=own_task&taskId=${task.id}`,
@@ -67,24 +74,21 @@ export const LeftBar: FC<{
       <hr className="my-8" />
 
       <div className="flex flex-col shrink font-display">
-        <Tab.List>
-          {Tabs.map(tabItem => {
-            return (
-              <Tab key={tabItem.value} as={Fragment}>
-                {({ selected }) => (
-                  <button
-                    className={classNames(
-                      'flex h-9 w-full items-center justify-center rounded-md transition-colors',
-                      selected ? 'bg-gray-100' : 'hover:bg-gray-50'
-                    )}
-                  >
-                    <p className="text-sm text-gray-500">{tabItem.label}</p>
-                  </button>
+        {Tabs.map(tabItem => {
+          return (
+            <Link href={`${task.id}/${tabItem.url}`} key={tabItem.label}>
+              <button
+                key={tabItem.label}
+                className={classNames(
+                  'flex h-9 w-full items-center justify-center rounded-md transition-colors',
+                  type === tabItem.value ? 'bg-gray-100' : 'hover:bg-gray-50'
                 )}
-              </Tab>
-            )
-          })}
-        </Tab.List>
+              >
+                <p className="text-sm text-gray-500">{tabItem.label}</p>
+              </button>
+            </Link>
+          )
+        })}
       </div>
 
       <hr className="my-8" />

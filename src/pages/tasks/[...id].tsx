@@ -1,5 +1,5 @@
-import { Fragment, useCallback } from 'react'
-import { useRouter } from 'next/router'
+import { Fragment, useCallback, useMemo } from 'react'
+import Router, { useRouter } from 'next/router'
 
 import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next'
 
@@ -18,7 +18,7 @@ const Tasks = ({
   type,
   solution
 }: InferGetStaticPropsType<typeof getStaticProps>) => {
-  const { isFallback, query, replace } = useRouter()
+  const { isFallback, query } = useRouter()
   let submissionID: null | string = null
 
   if (type === 'submissions' || type === 'mysubmissions') {
@@ -28,33 +28,16 @@ const Tasks = ({
     }
   }
 
-  const onTabChange = useCallback(
-    (index: number) => {
-      // replace({ query: { ...query, type: Tabs[index] } }, null, {
-      replace({ query: { ...query, id: [task.id, Tabs[index]] } }, null, {
-        shallow: true
-      })
-    },
-    [query]
-  )
-
   return isFallback ? null : (
     <PageLayout>
       <div className="relative flex min-h-screen gap-12 pt-8 mx-auto text-prog-gray-500 pb-14">
-        <Tab.Group
-          defaultIndex={
-            Tabs.includes(type as string) ? Tabs.findIndex(v => v === type) : 0
-          }
-          onChange={onTabChange}
-          as={Fragment}
-        >
-          <LeftBar task={task} />
-          <RightDisplay
-            task={task}
-            submissionID={submissionID}
-            solution={solution}
-          />
-        </Tab.Group>
+        <LeftBar task={task} type={type} />
+        <RightDisplay
+          task={task}
+          submissionID={submissionID}
+          solution={solution}
+          type={type}
+        />
       </div>
     </PageLayout>
   )
