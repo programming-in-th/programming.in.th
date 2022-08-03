@@ -1,3 +1,6 @@
+import { Suspense } from 'react'
+
+import dynamic from 'next/dynamic'
 import Link from 'next/link'
 
 import { ArrowNarrowLeftIcon } from '@heroicons/react/outline'
@@ -9,7 +12,9 @@ import useSubmissionData from '@/lib/useSubmissionData'
 
 import { SubmissionGroup } from './Group'
 
-// import { TaskStatus } from '../Elements/TaskStatus'
+const DynamicCode = dynamic(() => import('../Code'), {
+  suspense: true
+})
 
 const Columns = [
   {
@@ -138,9 +143,10 @@ const Submission = ({
       </table>
 
       <p>{submission.status}</p>
-      <pre className="rounded-mg mt-8 overflow-auto bg-slate-800 p-4 text-sm text-white">
-        {submission.code[0]}
-      </pre>
+      {/* @TODO Add same size skeleton to prevent layout shift */}
+      <Suspense fallback={`Loading...`}>
+        <DynamicCode code={submission.code[0]} language="cpp" />
+      </Suspense>
       <SubmissionGroup groups={submission.groups} />
     </div>
   )
