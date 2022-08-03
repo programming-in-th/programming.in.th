@@ -4,14 +4,10 @@ import { useRouter } from 'next/router'
 
 import { Task } from '@prisma/client'
 
-// import { PageLayout } from '@/components/Layout'
-// import { LeftBar } from '@/components/ViewTask/LeftBar'
+import { RightDisplay } from '@/components/Task/RightDisplay'
 import { Layout } from '@/components/Tasks/Layout'
-import { RightDisplay } from '@/components/ViewTask/RightDisplay'
 import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
-
-const Tabs = ['statement', 'submit', 'submissions', 'mysubmissions', 'solution']
 
 const Tasks = ({
   task,

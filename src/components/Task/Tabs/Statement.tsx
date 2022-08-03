@@ -1,6 +1,6 @@
 import { Task } from '@prisma/client'
 
-import PDFViewer from '../Elements/PDFViewer'
+import PDFViewer from '../PDFViewer'
 
 const StatementTab = ({ task }: { task: Task }) => {
   const pdfURL = `${process.env.NEXT_PUBLIC_AWS_URL}/statements/pdf/${task.id}.pdf`

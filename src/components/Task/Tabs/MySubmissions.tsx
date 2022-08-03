@@ -7,8 +7,6 @@ import useSWR from 'swr'
 import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
 
-import ViewSubmissionTab from './ViewSubmissionTab'
-
 const Columns = [
   {
     title: 'Submission Time',
@@ -135,16 +133,4 @@ const MySubmissionsTab = ({ task }: { task: Task }) => {
   )
 }
 
-const MySubmissionTabRouter = ({
-  task,
-  submissionID
-}: {
-  task: Task
-  submissionID: null | number
-}) => {
-  if (submissionID)
-    return <ViewSubmissionTab task={task} submissionID={submissionID} />
-  else return <MySubmissionsTab task={task} />
-}
-
-export default MySubmissionTabRouter
+export default MySubmissionsTab

@@ -1,7 +1,7 @@
 import { Task } from '@prisma/client'
 import { useSession } from 'next-auth/react'
 
-import { SubmitElement } from '../Elements/SubmitElement'
+import { SubmitElement } from '../SubmitElement'
 
 const SubmitTab = ({ task }: { task: Task }) => {
   const { status } = useSession()

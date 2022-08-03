@@ -1,5 +1,5 @@
 import { PageLayout } from '@/components/Layout'
-import { LeftBar } from '@/components/ViewTask/LeftBar'
+import { LeftBar } from '@/components/Task/LeftBar'
 
 export const Layout = ({ task, type, children }) => (
   <PageLayout>
