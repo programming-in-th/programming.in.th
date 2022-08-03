@@ -1,11 +1,10 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { unstable_getServerSession } from 'next-auth'
+import { Session, unstable_getServerSession } from 'next-auth'
 import { createRouter } from 'next-connect'
 
 import { compressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
-import { Session } from '@/types/session'
 
 import { authOptions } from '../auth/[...nextauth]'
 
@@ -28,11 +27,7 @@ router
     console.log(`Request took ${end - start}ms`)
   })
   .use(async (req, res, next) => {
-    const session = (await unstable_getServerSession(
-      req,
-      res,
-      authOptions
-    )) as Session
+    const session = await unstable_getServerSession(req, res, authOptions)
 
     if (session) {
       req.session = session

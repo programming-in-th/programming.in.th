@@ -106,7 +106,7 @@ export const Nav = () => {
                     >
                       <Popover.Panel className="absolute right-2 z-50 mt-2 rounded-lg bg-white shadow-md">
                         <div className="flex flex-col border-b border-gray-100 px-8 py-4 text-prog-gray-500">
-                          <p className="font-medium">{session.user.name}</p>
+                          <p className="font-medium">{session.user.username}</p>
                           <p className="font-light">{session.user.email}</p>
                         </div>
 
