@@ -7,7 +7,7 @@
   "plugins": ["unused-imports"],
   "rules": {
     "import/order": [
-      "error",
+      "warn",
       {
         "groups": ["builtin", "external", "internal", ["parent", "sibling"]],
         "pathGroups": [

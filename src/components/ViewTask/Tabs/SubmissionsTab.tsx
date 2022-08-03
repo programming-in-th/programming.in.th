@@ -1,3 +1,5 @@
+import Link from 'next/link'
+
 import { ChevronUpIcon } from '@heroicons/react/outline'
 import { Task, Submission } from '@prisma/client'
 import { ColumnDef } from '@tanstack/react-table'
@@ -8,7 +10,6 @@ import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
 
 import ViewSubmissionTab from './ViewSubmissionTab'
-import Link from 'next/link'
 
 const Columns = [
   {

@@ -1,9 +1,8 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 
-import prisma from '@/lib/prisma'
-
 import { Layout } from '@/components/Tasks/Layout'
 import ViewSubmissionTab from '@/components/ViewTask/Tabs/ViewSubmissionTab'
+import prisma from '@/lib/prisma'
 
 const Submissions = ({ id, task }) => {
   return (
