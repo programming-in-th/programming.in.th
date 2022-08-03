@@ -1,10 +1,9 @@
-import { FC, Fragment, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import Link from 'next/link'
 
-import { Tab } from '@headlessui/react'
 import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
-import { DownloadIcon, StarIcon as StarIconSolid } from '@heroicons/react/solid'
+import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import { Task } from '@prisma/client'
 import classNames from 'classnames'
 import useSWR from 'swr'
@@ -42,10 +41,7 @@ const Tabs = [
   }
 ]
 
-export const LeftBar: FC<{
-  task: Task
-  type: string
-}> = ({ task, type }) => {
+export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
   const [buttonPressed, setButtonPressed] = useState(false)
   const { data, error } = useSWR<IGeneralSubmission[]>(
     `/api/submissions?filter=own_task&taskId=${task.id}`,

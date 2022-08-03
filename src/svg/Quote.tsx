@@ -1,6 +1,6 @@
 import { ComponentProps, FC } from 'react'
 
-export const QuoteVector: FC<ComponentProps<'svg'>> = props => {
+export const QuoteVector = (props: ComponentProps<'svg'>) => {
   return (
     <svg
       width="35"

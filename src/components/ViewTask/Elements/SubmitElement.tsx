@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/router'
 
@@ -28,7 +28,7 @@ const Languages = [
   }
 ]
 
-export const SubmitElement: FC<{ task: Task }> = ({ task }) => {
+export const SubmitElement = ({ task }: { task: Task }) => {
   const [file, setFile] = useState<File>()
   const [fileText, setFileText] = useState<string>()
 

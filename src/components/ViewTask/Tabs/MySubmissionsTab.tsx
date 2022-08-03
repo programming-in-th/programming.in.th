@@ -1,10 +1,6 @@
-import { FC, memo } from 'react'
-
-import { useRouter } from 'next/router'
-
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
+import { ChevronUpIcon } from '@heroicons/react/outline'
 import { Task, Submission } from '@prisma/client'
-import { ColumnDef, useReactTable } from '@tanstack/react-table'
+import { ColumnDef } from '@tanstack/react-table'
 import dayjs from 'dayjs'
 import useSWR from 'swr'
 
@@ -47,7 +43,7 @@ const NewColumns: ColumnDef<Submission>[] = [
   }
 ]
 
-const MySubmissionsTab: FC<{ task: Task }> = ({ task }) => {
+const MySubmissionsTab = ({ task }: { task: Task }) => {
   // const table = useReactTable({ columns: NewColumns })
   const { data, error } = useSWR<IGeneralSubmission[]>(
     `/api/submissions?filter=own_task&taskId=${task.id}`,
@@ -139,10 +135,13 @@ const MySubmissionsTab: FC<{ task: Task }> = ({ task }) => {
   )
 }
 
-const MySubmissionTabRouter: FC<{
+const MySubmissionTabRouter = ({
+  task,
+  submissionID
+}: {
   task: Task
   submissionID: null | number
-}> = ({ task, submissionID }) => {
+}) => {
   if (submissionID)
     return <ViewSubmissionTab task={task} submissionID={submissionID} />
   else return <MySubmissionsTab task={task} />

@@ -1,10 +1,8 @@
-import { FC, memo } from 'react'
-
 import { Task } from '@prisma/client'
 
 import PDFViewer from '../Elements/PDFViewer'
 
-const StatementTab: FC<{ task: Task }> = ({ task }) => {
+const StatementTab = ({ task }: { task: Task }) => {
   const pdfURL = `${process.env.NEXT_PUBLIC_AWS_URL}/statements/pdf/${task.id}.pdf`
 
   return (

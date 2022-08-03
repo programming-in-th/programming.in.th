@@ -1,15 +1,13 @@
-import { FC } from 'react'
-
 import Image from 'next/image'
 
 import { QuoteVector } from '@/svg/Quote'
 
-export const TestimonyCard: FC<{
+export const TestimonyCard = (props: {
   title: string
   description: string
   imgURL: string
   role: string
-}> = props => {
+}) => {
   const { title, description, imgURL, role } = props
 
   return (

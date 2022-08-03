@@ -1,4 +1,4 @@
-import { RefObject, useEffect, useReducer, useRef } from 'react'
+import { useEffect, useReducer, useRef } from 'react'
 
 import CountUp from 'react-countup'
 

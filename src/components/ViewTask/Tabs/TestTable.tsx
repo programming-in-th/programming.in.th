@@ -1,11 +1,10 @@
-import { FC, memo, useEffect, useMemo, useState } from 'react'
+import { memo, useEffect, useMemo, useState } from 'react'
 
-import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
 import { Task } from '@prisma/client'
 
 import Table from '@/components/common/Table'
 
-const TestTable: FC<{ task: Task }> = ({ task }) => {
+const TestTable = ({ task }: { task: Task }) => {
   // data state to store the Users API data.
   //Initially it  is an empty array.
   const [data, setData] = useState([])

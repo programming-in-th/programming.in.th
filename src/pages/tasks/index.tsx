@@ -1,4 +1,4 @@
-import { Fragment, useCallback, useEffect, useState } from 'react'
+import { Fragment, useCallback, useState } from 'react'
 
 import { InferGetStaticPropsType } from 'next'
 
@@ -9,7 +9,6 @@ import { Tab } from '@headlessui/react'
 import { PageLayout } from '@/components/Layout'
 import { LeftBar } from '@/components/Tasks/LeftBar'
 import { RightDisplay } from '@/components/Tasks/RightDisplay'
-import { TaskItem } from '@/components/Tasks/TaskItem'
 import prisma from '@/lib/prisma'
 import { IGeneralTask } from '@/types/tasks'
 

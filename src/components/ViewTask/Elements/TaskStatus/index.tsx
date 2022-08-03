@@ -1,4 +1,4 @@
-import { FC, Fragment, useEffect } from 'react'
+import { Fragment } from 'react'
 
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/outline'
@@ -6,11 +6,9 @@ import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
 import { motion } from 'framer-motion'
 
-import useSubmissionData from '@/lib/useSubmissionData'
-
 import styles from './style.module.scss'
 
-const CorrectElement: FC = () => {
+const CorrectElement = () => {
   return (
     <span className="flex items-center gap-1 text-green-500">
       <CheckCircleIcon className="h-5 w-5 text-green-500" />
@@ -19,7 +17,7 @@ const CorrectElement: FC = () => {
   )
 }
 
-const IncorrectElement: FC = () => {
+const IncorrectElement = () => {
   return (
     <span className="flex items-center gap-1 text-red-500">
       <XCircleIcon className="h-5 w-5 text-red-500" />
@@ -28,7 +26,7 @@ const IncorrectElement: FC = () => {
   )
 }
 
-export const TaskStatus: FC = () => {
+export const TaskStatus = () => {
   // ! TODO Reformat data
   const data = {
     'Subtask 1': [

@@ -20,11 +20,11 @@ interface SearchSidebarProps {
   searchPluginInstance: SearchPlugin
 }
 
-const SearchSidebar: React.FC<SearchSidebarProps> = ({
+const SearchSidebar = ({
   isDocumentLoaded,
   keywords,
   searchPluginInstance
-}) => {
+}: SearchSidebarProps) => {
   const [searchStatus, setSearchStatus] = React.useState(
     SearchStatus.NotSearchedYet
   )

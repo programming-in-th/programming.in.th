@@ -1,6 +1,3 @@
-import { FC, Fragment, useCallback, useMemo } from 'react'
-
-import { Tab } from '@headlessui/react'
 import { Task } from '@prisma/client'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 
@@ -9,14 +6,18 @@ import SolutionTab from './Tabs/SolutionTab'
 import StatementTab from './Tabs/StatementTab'
 import SubmissionsTab from './Tabs/SubmissionsTab'
 import SubmitTab from './Tabs/SubmitTab'
-import ViewSubmissionTab from './Tabs/ViewSubmissionTab'
 
-export const RightDisplay: FC<{
+export const RightDisplay = ({
+  task,
+  submissionID,
+  solution,
+  type
+}: {
   task: Task
   submissionID: null | number
   solution: MDXRemoteSerializeResult
   type: string
-}> = ({ task, submissionID, solution, type }) => {
+}) => {
   let component = () => {
     switch (type) {
       case 'statement':

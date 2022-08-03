@@ -1,4 +1,4 @@
-import React, { FC, memo } from 'react'
+import React from 'react'
 
 import Head from 'next/head'
 
@@ -6,9 +6,7 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 import components from '@/components/common/MDXComponents'
 
-const SolutionTab: FC<{ solution: MDXRemoteSerializeResult }> = ({
-  solution
-}) => {
+const SolutionTab = ({ solution }: { solution: MDXRemoteSerializeResult }) => {
   if (solution) {
     return (
       <React.Fragment>

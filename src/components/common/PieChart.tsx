@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { memo } from 'react'
 
 import { Group } from '@visx/group'
 import { Pie } from '@visx/shape'
@@ -10,7 +10,7 @@ export interface IPieData {
   color: string
 }
 
-const PieChart: FC<{ points: number }> = memo(function PieChart({ points }) {
+const PieChart = memo(function PieChart({ points }: { points: number }) {
   const size = 150
   const half = size / 2
 

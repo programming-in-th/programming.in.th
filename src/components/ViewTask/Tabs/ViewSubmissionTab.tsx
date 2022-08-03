@@ -1,14 +1,10 @@
-import { FC } from 'react'
-
 import Link from 'next/link'
 
-import { ArrowNarrowLeftIcon, ChevronUpIcon } from '@heroicons/react/outline'
+import { ArrowNarrowLeftIcon } from '@heroicons/react/outline'
 import { Task } from '@prisma/client'
 import dayjs from 'dayjs'
-import useSWR from 'swr'
 
 import useSubmissionData from '@/lib/useSubmissionData'
-import { IGeneralSubmission } from '@/types/submissions'
 
 import { TaskStatus } from '../Elements/TaskStatus'
 
@@ -39,9 +35,12 @@ const Columns = [
   }
 ]
 
-const ViewSubmissionTab: FC<{ task: Task; submissionID: number }> = ({
+const ViewSubmissionTab = ({
   task,
   submissionID
+}: {
+  task: Task
+  submissionID: number
 }) => {
   // const { data, error } = useSWR<IGeneralSubmission>(
   //   `/api/submissions?filter=own_task&taskId=${task.id}`,

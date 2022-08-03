@@ -1,10 +1,10 @@
-import { ComponentProps, FC } from 'react'
+import { ComponentProps } from 'react'
 
-export const FeatureCard: FC<{
+export const FeatureCard = (props: {
   title: string
   description: string
   Icon: (props: ComponentProps<'svg'>) => JSX.Element
-}> = props => {
+}) => {
   const { title, description, Icon } = props
 
   return (

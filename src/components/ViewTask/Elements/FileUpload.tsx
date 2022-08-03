@@ -1,11 +1,4 @@
-import {
-  Dispatch,
-  FC,
-  SetStateAction,
-  useCallback,
-  useRef,
-  useState
-} from 'react'
+import { Dispatch, SetStateAction, useCallback, useState } from 'react'
 
 import { InboxInIcon } from '@heroicons/react/solid'
 import classNames from 'classnames'
@@ -17,10 +10,13 @@ import { truncate } from '@/utils/truncate'
 
 const ACCEPTED_LANGUAGES = ['.cpp', '.py', '.java', '.rs']
 
-export const FileUpload: FC<{
+export const FileUpload = ({
+  file,
+  setFile
+}: {
   file: File
   setFile: Dispatch<SetStateAction<File>>
-}> = ({ file, setFile }) => {
+}) => {
   const [fileRejected, setFileRejected] = useState(false)
 
   const { getRootProps, getInputProps, isFocused, isDragAccept, isDragActive } =

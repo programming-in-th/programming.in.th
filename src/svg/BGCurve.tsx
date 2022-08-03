@@ -1,6 +1,6 @@
 import { ComponentProps, FC } from 'react'
 
-export const BGCurve: FC<ComponentProps<'svg'>> = props => {
+export const BGCurve = (props: ComponentProps<'svg'>) => {
   return (
     <svg
       width="1441"

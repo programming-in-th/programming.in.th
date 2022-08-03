@@ -1,6 +1,6 @@
 import { ComponentProps, FC } from 'react'
 
-export const FacebookLogo: FC<ComponentProps<'svg'>> = props => {
+export const FacebookLogo = (props: ComponentProps<'svg'>) => {
   return (
     <svg
       width="27"
@@ -20,7 +20,7 @@ export const FacebookLogo: FC<ComponentProps<'svg'>> = props => {
   )
 }
 
-export const GitHubLogo: FC<ComponentProps<'svg'>> = props => {
+export const GitHubLogo = (props: ComponentProps<'svg'>) => {
   return (
     <svg
       className="mx-4"
@@ -41,7 +41,7 @@ export const GitHubLogo: FC<ComponentProps<'svg'>> = props => {
   )
 }
 
-export const AuthGoogleLogo: FC<ComponentProps<'svg'>> = props => {
+export const AuthGoogleLogo = (props: ComponentProps<'svg'>) => {
   return (
     <svg
       viewBox="0 0 24 24"
@@ -72,7 +72,7 @@ export const AuthGoogleLogo: FC<ComponentProps<'svg'>> = props => {
   )
 }
 
-export const AuthGitHubLogo: FC<ComponentProps<'svg'>> = props => {
+export const AuthGitHubLogo = (props: ComponentProps<'svg'>) => {
   return (
     <svg
       aria-hidden="true"

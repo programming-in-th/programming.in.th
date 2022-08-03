@@ -1,8 +1,10 @@
-import { ComponentProps, FC } from 'react'
+import { ComponentProps } from 'react'
 
-export const Ellipsis: FC<ComponentProps<'svg'> & { inverted?: boolean }> = ({
+export const Ellipsis = ({
   inverted = false,
   ...restProps
+}: ComponentProps<'svg'> & {
+  inverted?: boolean
 }) => {
   return inverted ? (
     <svg

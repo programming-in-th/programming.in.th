@@ -25,10 +25,7 @@ interface DocumentKeywordsData {
 const compareArrays = (a: string[], b: string[]) =>
   a.length === b.length && a.every((v, i) => v === b[i])
 
-const PDFViewer: React.FC<SearchSidebarDefaultLayoutProps> = ({
-  fileUrl,
-  keywords
-}) => {
+const PDFViewer = ({ fileUrl, keywords }: SearchSidebarDefaultLayoutProps) => {
   const [docKeywords, setDocKeywords] = React.useState<DocumentKeywordsData>({
     isDocumentLoaded: false,
     keywords

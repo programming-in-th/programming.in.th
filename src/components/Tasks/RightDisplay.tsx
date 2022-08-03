@@ -1,4 +1,4 @@
-import { Dispatch, FC, Fragment, SetStateAction } from 'react'
+import { Dispatch, SetStateAction } from 'react'
 
 import { Tab } from '@headlessui/react'
 
@@ -6,11 +6,15 @@ import { IGeneralTask } from '@/types/tasks'
 
 import { TaskItem } from './TaskItem'
 
-const SampleTab: FC<{
+const SampleTab = ({
+  tasks,
+  tag,
+  setTag
+}: {
   tasks: IGeneralTask[]
   tag: boolean
   setTag: Dispatch<SetStateAction<boolean>>
-}> = ({ tasks, tag, setTag }) => {
+}) => {
   return (
     <div className="h-full w-full">
       <div className="group flex w-full items-center justify-between px-2">
@@ -52,11 +56,15 @@ const ComingSoonTab = () => {
   )
 }
 
-export const RightDisplay: FC<{
+export const RightDisplay = ({
+  tasks,
+  tag,
+  setTag
+}: {
   tasks: IGeneralTask[]
   tag: boolean
   setTag: Dispatch<SetStateAction<boolean>>
-}> = ({ tasks, tag, setTag }) => {
+}) => {
   return (
     <Tab.Panels className="flex w-full flex-col gap-8">
       <Tab.Panel>
