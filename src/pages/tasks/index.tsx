@@ -2,8 +2,9 @@ import { Fragment, useCallback, useEffect, useState } from 'react'
 
 import { InferGetStaticPropsType } from 'next'
 
-import { Tab } from '@headlessui/react'
 import { useRouter } from 'next/router'
+
+import { Tab } from '@headlessui/react'
 
 import { PageLayout } from '@/components/Layout'
 import { LeftBar } from '@/components/Tasks/LeftBar'

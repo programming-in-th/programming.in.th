@@ -1,11 +1,12 @@
 import { FC, Fragment, useMemo, useState } from 'react'
 
+import Link from 'next/link'
+
 import { Tab } from '@headlessui/react'
 import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { DownloadIcon, StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import { Task } from '@prisma/client'
 import classNames from 'classnames'
-import Link from 'next/link'
 import useSWR from 'swr'
 
 import fetcher from '@/lib/fetcher'

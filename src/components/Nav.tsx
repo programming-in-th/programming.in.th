@@ -1,11 +1,12 @@
 import React, { Fragment, useEffect, useMemo, useRef } from 'react'
 
-import { Popover, Transition } from '@headlessui/react'
-import classNames from 'classnames'
-import { useSession, signOut } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
+import { Popover, Transition } from '@headlessui/react'
+import classNames from 'classnames'
+import { useSession, signOut } from 'next-auth/react'
 
 import { Logo } from '@/svg/Logo'
 

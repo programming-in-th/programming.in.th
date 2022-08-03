@@ -1,8 +1,9 @@
 import React, { useMemo } from 'react'
 
-import { useSession } from 'next-auth/react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+
+import { useSession } from 'next-auth/react'
 
 import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
 

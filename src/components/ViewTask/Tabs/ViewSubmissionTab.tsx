@@ -1,9 +1,10 @@
 import { FC } from 'react'
 
+import Link from 'next/link'
+
 import { ArrowNarrowLeftIcon, ChevronUpIcon } from '@heroicons/react/outline'
 import { Task } from '@prisma/client'
 import dayjs from 'dayjs'
-import Link from 'next/link'
 import useSWR from 'swr'
 
 import useSubmissionData from '@/lib/useSubmissionData'

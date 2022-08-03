@@ -1,10 +1,11 @@
 import { FC, memo, useMemo } from 'react'
 
+import { useRouter } from 'next/router'
+
 import { ChevronDownIcon, ChevronUpIcon } from '@heroicons/react/outline'
 import { Task, Submission } from '@prisma/client'
 import { ColumnDef, useReactTable } from '@tanstack/react-table'
 import dayjs from 'dayjs'
-import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
 import fetcher from '@/lib/fetcher'

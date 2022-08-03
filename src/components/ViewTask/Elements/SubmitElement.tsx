@@ -1,8 +1,9 @@
 import { FC, useCallback, useEffect, useState } from 'react'
 
+import { useRouter } from 'next/router'
+
 import { Task } from '@prisma/client'
 import classNames from 'classnames'
-import { useRouter } from 'next/router'
 
 import { getLanguage } from '@/utils/getFileExtension'
 

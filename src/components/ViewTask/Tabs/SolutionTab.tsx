@@ -1,7 +1,8 @@
 import React, { FC, memo } from 'react'
 
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import Head from 'next/head'
+
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 import components from '@/components/common/MDXComponents'
 
