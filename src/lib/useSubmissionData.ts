@@ -31,6 +31,7 @@ const useSubmissionData = (id: number) => {
         data.status === JUDGE_ERROR ||
         data.status === JUDGE_COMPILATION_ERROR
       ) {
+        console.log('DONE mutate')
         mutate(`/api/submissions/${id}`)
         eventSource.close()
       }

@@ -208,13 +208,9 @@ const ViewSubmissionTab = ({
 }) => {
   const { submission, isLoading } = useSubmissionData(submissionID)
 
-  if (isLoading) {
+  if (isLoading || task === undefined) {
     return <Loading />
   }
-
-  console.log(submission)
-
-  // const dt = new Date(submission.submittedAt)
 
   return (
     <div>
@@ -302,6 +298,7 @@ const ViewSubmissionTab = ({
         </tbody>
       </table>
 
+      <p>{submission.status}</p>
       <pre className="rounded-mg mt-8 overflow-auto bg-slate-800 p-4 text-sm text-white">
         {submission.code[0]}
       </pre>

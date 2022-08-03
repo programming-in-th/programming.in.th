@@ -44,13 +44,14 @@ const Tabs = [
 export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
   const [buttonPressed, setButtonPressed] = useState(false)
   const { data, error } = useSWR<IGeneralSubmission[]>(
-    `/api/submissions?filter=own_task&taskId=${task.id}`,
+    task ? `/api/submissions?filter=own_task&taskId=${task.id}` : null,
     fetcher
   )
 
   const maxScore = useMemo(() => {
     return data ? Math.max(...data.map(sub => sub.score), 0) : 0
   }, [data])
+  if (task === undefined) return <div>loading</div>
 
   return (
     <section className="w-[16rem]">
@@ -76,16 +77,18 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
       <div className="flex shrink flex-col font-display">
         {Tabs.map(tabItem => {
           return (
-            <Link href={`${task.id}/${tabItem.url}`} key={tabItem.label}>
-              <button
-                key={tabItem.label}
-                className={clsx(
-                  'flex h-9 w-full items-center justify-center rounded-md transition-colors',
-                  type === tabItem.value ? 'bg-gray-100' : 'hover:bg-gray-50'
-                )}
-              >
-                <p className="text-sm text-gray-500">{tabItem.label}</p>
-              </button>
+            <Link href={`/tasks/${task.id}/${tabItem.url}`} key={tabItem.label}>
+              <a>
+                <button
+                  key={tabItem.label}
+                  className={clsx(
+                    'flex h-9 w-full items-center justify-center rounded-md transition-colors',
+                    type === tabItem.value ? 'bg-gray-100' : 'hover:bg-gray-50'
+                  )}
+                >
+                  <p className="text-sm text-gray-500">{tabItem.label}</p>
+                </button>
+              </a>
             </Link>
           )
         })}

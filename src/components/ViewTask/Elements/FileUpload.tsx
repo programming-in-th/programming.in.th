@@ -27,7 +27,7 @@ export const FileUpload = ({
       validator: currentFile => {
         const extension = getLanguage(currentFile?.name ?? '')
 
-        if (ACCEPTED_LANGUAGES.includes(extension)) {
+        if (ACCEPTED_LANGUAGES.includes('.' + extension)) {
           return null
         } else {
           return {

@@ -4,8 +4,9 @@ import { useRouter } from 'next/router'
 
 import { Task } from '@prisma/client'
 
-import { PageLayout } from '@/components/Layout'
-import { LeftBar } from '@/components/ViewTask/LeftBar'
+// import { PageLayout } from '@/components/Layout'
+// import { LeftBar } from '@/components/ViewTask/LeftBar'
+import { Layout } from '@/components/Tasks/Layout'
 import { RightDisplay } from '@/components/ViewTask/RightDisplay'
 import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
@@ -28,17 +29,14 @@ const Tasks = ({
   }
 
   return isFallback ? null : (
-    <PageLayout>
-      <div className="relative mx-auto flex min-h-screen gap-12 pt-8 pb-14 text-prog-gray-500">
-        <LeftBar task={task} type={type} />
-        <RightDisplay
-          task={task}
-          submissionID={submissionID}
-          solution={solution}
-          type={type}
-        />
-      </div>
-    </PageLayout>
+    <Layout task={task} type={type}>
+      <RightDisplay
+        task={task}
+        submissionID={submissionID}
+        solution={solution}
+        type={type}
+      />
+    </Layout>
   )
 }
 
