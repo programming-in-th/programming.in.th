@@ -65,7 +65,6 @@ const Columns = [
 ]
 
 const Accordion = ({ group, open }) => {
-  console.log('->', group)
   const [expanded, setExpand] = useState(false)
   useEffect(() => {
     setExpand(open)

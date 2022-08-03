@@ -14,7 +14,6 @@ const TestTable = ({ task }: { task: Task }) => {
       const result = await fetch('https://jsonplaceholder.typicode.com/users')
       const data = await result.json()
       setData(data)
-      console.log(data)
     })()
   }, [])
 
