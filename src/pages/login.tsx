@@ -1,4 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+
+import { useRouter } from 'next/router'
 
 import { signIn } from 'next-auth/react'
 
@@ -6,6 +8,14 @@ import { PageLayout } from '@/components/Layout'
 import { AuthGitHubLogo, AuthGoogleLogo } from '@/svg/Socials'
 
 const Login = () => {
+  const { query } = useRouter()
+  const { error } = query
+
+  useEffect(() => {
+    const errorMessage = Array.isArray(error) ? error.pop() : error
+    errorMessage && alert(errorMessage)
+  }, [error])
+
   return (
     <PageLayout>
       <div className="flex min-h-screen flex-col justify-center pb-44 sm:px-6 lg:px-8">
