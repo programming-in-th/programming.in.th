@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useCallback, useState } from 'react'
 
 import { InboxInIcon } from '@heroicons/react/solid'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import { useDropzone } from 'react-dropzone'
 
 import { formatBytes as formatBytesFunc } from '@/utils/formatSize'
@@ -54,7 +54,7 @@ export const FileUpload = ({
     <div className="relative w-full overflow-hidden">
       <div
         {...getRootProps()}
-        className={classNames(
+        className={clsx(
           'flex h-48 w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-dashed border-gray-400 p-6 text-gray-400 transition-colors',
           (isFocused || isDragAccept) && 'border-prog-primary-500',
           fileRejected && 'border-red-400',
@@ -66,7 +66,7 @@ export const FileUpload = ({
         <input {...getInputProps()} />
 
         <InboxInIcon
-          className={classNames(
+          className={clsx(
             'h-10 w-10',
             isDragActive && 'animate-pulse text-white'
           )}

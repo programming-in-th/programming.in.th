@@ -19,7 +19,7 @@ specifiers:
   '@visx/shape': ^2.11.1
   '@visx/text': ^2.10.0
   autoprefixer: ^10.4.2
-  classnames: ^2.3.1
+  clsx: ^1.2.1
   concurrently: ^7.2.2
   dayjs: ^1.11.4
   eslint: 8.20.0
@@ -71,7 +71,7 @@ dependencies:
   '@visx/group': 2.10.0_react@18.2.0
   '@visx/shape': 2.11.1_react@18.2.0
   '@visx/text': 2.10.0_react@18.2.0
-  classnames: 2.3.1
+  clsx: 1.2.1
   concurrently: 7.2.2
   dayjs: 1.11.4
   framer-motion: 6.5.1_biqbaboplfbrettd7655fr4n2y
@@ -2276,6 +2276,14 @@ packages:
       string-width: 4.2.3
       strip-ansi: 6.0.1
       wrap-ansi: 7.0.0
+    dev: false
+
+  /clsx/1.2.1:
+    resolution:
+      {
+        integrity: sha512-EcR6r5a8bj6pu3ycsa/E/cKVGuTgZJZdsyUYHOksG/UHIiKfjxzRxYJpyVBwYaQeOvghal9fcc4PidlgzugAQg==
+      }
+    engines: { node: '>=6' }
     dev: false
 
   /color-convert/1.9.3:

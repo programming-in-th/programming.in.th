@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Popover, Transition } from '@headlessui/react'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import { useSession, signOut } from 'next-auth/react'
 
 import { Logo } from '@/svg/Logo'
@@ -29,7 +29,7 @@ export const Nav = () => {
   return (
     <Popover
       as="header"
-      className={classNames('relative', location !== '' && 'shadow-sm')}
+      className={clsx('relative', location !== '' && 'shadow-sm')}
     >
       <div className="py-3">
         <nav

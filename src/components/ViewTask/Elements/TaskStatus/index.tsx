@@ -3,7 +3,7 @@ import { Fragment } from 'react'
 import { Disclosure, Transition } from '@headlessui/react'
 import { ChevronUpIcon } from '@heroicons/react/outline'
 import { CheckCircleIcon, XCircleIcon } from '@heroicons/react/solid'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import { motion } from 'framer-motion'
 
 import styles from './style.module.scss'
@@ -59,7 +59,7 @@ export const TaskStatus = () => {
               <>
                 <Disclosure.Button as={Fragment}>
                   <button
-                    className={classNames(
+                    className={clsx(
                       'flex w-full items-center justify-between border-gray-200 py-6 px-8 font-medium',
                       open && 'border-b'
                     )}

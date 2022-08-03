@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import { Task } from '@prisma/client'
-import classNames from 'classnames'
+import clsx from 'clsx'
 import useSWR from 'swr'
 
 import fetcher from '@/lib/fetcher'
@@ -79,7 +79,7 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
             <Link href={`${task.id}/${tabItem.url}`} key={tabItem.label}>
               <button
                 key={tabItem.label}
-                className={classNames(
+                className={clsx(
                   'flex h-9 w-full items-center justify-center rounded-md transition-colors',
                   type === tabItem.value ? 'bg-gray-100' : 'hover:bg-gray-50'
                 )}

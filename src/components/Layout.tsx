@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 
 import { useRouter } from 'next/router'
 
-import classNames from 'classnames'
+import clsx from 'clsx'
 import { useSession } from 'next-auth/react'
 
 import { Footer } from './Footer'
@@ -31,7 +31,7 @@ export const PageLayout = ({ children }) => {
   }
 
   return (
-    <div className={classNames('w-full font-display', backgroundColor)}>
+    <div className={clsx('w-full font-display', backgroundColor)}>
       <Nav />
       <main className="flex min-h-screen w-screen flex-col">{children}</main>
       <Footer />

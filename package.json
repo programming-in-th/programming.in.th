@@ -17,7 +17,7 @@
     "@visx/group": "^2.10.0",
     "@visx/shape": "^2.11.1",
     "@visx/text": "^2.10.0",
-    "classnames": "^2.3.1",
+    "clsx": "^1.2.1",
     "concurrently": "^7.2.2",
     "dayjs": "^1.11.4",
     "framer-motion": "^6.5.1",

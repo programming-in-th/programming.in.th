@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 
 import { Task } from '@prisma/client'
-import classNames from 'classnames'
+import clsx from 'clsx'
 
 import { getLanguage } from '@/utils/getFileExtension'
 
@@ -74,7 +74,7 @@ export const SubmitElement = ({ task }: { task: Task }) => {
               return (
                 <div
                   key={language.extension}
-                  className={classNames(
+                  className={clsx(
                     'rounded-md border px-6 py-2 text-sm',
                     file?.name?.toLowerCase()?.endsWith(language.extension)
                       ? 'bg-prog-gray-500 text-white'
@@ -101,7 +101,7 @@ export const SubmitElement = ({ task }: { task: Task }) => {
         <div className="flex justify-end">
           <button
             onClick={onSubmit}
-            className={classNames(
+            className={clsx(
               'rounded-md border px-8 py-2 transition-colors',
               file && fileText
                 ? 'bg-prog-gray-500 text-white hover:bg-gray-600'

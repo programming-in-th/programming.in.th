@@ -1,7 +1,7 @@
 import { Fragment } from 'react'
 
 import { Tab } from '@headlessui/react'
-import classNames from 'classnames'
+import clsx from 'clsx'
 
 const Tabs = [
   {
@@ -36,7 +36,7 @@ export const LeftBar = () => {
               <Tab key={tabItem.value} as={Fragment}>
                 {({ selected }) => (
                   <button
-                    className={classNames(
+                    className={clsx(
                       'flex h-9 w-full items-center justify-center rounded-md transition-colors',
                       selected ? 'bg-gray-100' : 'hover:bg-gray-50'
                     )}
