@@ -29,6 +29,7 @@ const Columns = [
     title: 'Score',
     field: 'score'
   },
+  { title: 'Status', field: 'status' },
   {
     title: 'Language',
     field: 'language'
@@ -61,12 +62,12 @@ const Submission = ({
       {
         // TODO : go back 1 level
       }
-      <Link href="/" passHref>
+      {/* <Link href="/" passHref>
         <a className="flex items-center gap-2 text-sm text-prog-gray-500 hover:text-gray-600">
           <ArrowNarrowLeftIcon className="h-5 w-5" />
           <p>Back</p>
         </a>
-      </Link>
+      </Link> */}
       {
         // ! disgusting code alert - will move to component
       }
@@ -123,6 +124,9 @@ const Submission = ({
                 </div>
               </td>
               <td className="py-2">
+                <p className="text-center font-medium">{submission.status}</p>
+              </td>
+              <td className="py-2">
                 <p className="text-center font-medium">{submission.language}</p>
               </td>
               <td className="py-2">
@@ -142,7 +146,7 @@ const Submission = ({
         </tbody>
       </table>
 
-      <p>{submission.status}</p>
+      {/* <p>{submission.status}</p> */}
       {/* @TODO Add same size skeleton to prevent layout shift */}
       <Suspense fallback={`Loading...`}>
         <DynamicCode code={submission.code[0]} language="cpp" />
