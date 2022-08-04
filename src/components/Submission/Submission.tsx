@@ -1,9 +1,7 @@
 import { Suspense } from 'react'
 
 import dynamic from 'next/dynamic'
-import Link from 'next/link'
 
-import { ArrowNarrowLeftIcon } from '@heroicons/react/outline'
 import { Task } from '@prisma/client'
 import dayjs from 'dayjs'
 
