@@ -1,41 +1,45 @@
-import { Fragment, useCallback, useState } from 'react'
+import { Fragment, useCallback, useMemo, useState } from 'react'
 
 import { InferGetStaticPropsType } from 'next'
 
 import { useRouter } from 'next/router'
 
 import { Tab } from '@headlessui/react'
+import useSWR from 'swr'
 
 import { PageLayout } from '@/components/Layout'
 import { LeftBar } from '@/components/Tasks/LeftBar'
 import { RightDisplay } from '@/components/Tasks/RightDisplay'
+import fetcher from '@/lib/fetcher'
 import prisma from '@/lib/prisma'
-import { IGeneralTask } from '@/types/tasks'
-
-export async function getStaticProps() {
-  const tasks = await prisma.task.findMany()
-
-  return {
-    props: {
-      tasks: tasks.map((item: any) => {
-        let x = Math.floor(Math.random() * item.fullScore)
-        if (x > 80) x = item.fullScore
-        return {
-          id: item.id as string,
-          title: item.title as string,
-          tags: [] as string[],
-          solved: item.solved as number,
-          score: x as number,
-          fullScore: item.fullScore as number
-        } as IGeneralTask
-      })
-    }
-  }
-}
+import { Score, Solved } from '@/types/tasks'
 
 const Tabs = ['all', 'tried', 'solved', 'archives', 'bookmarked']
 
 const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { data: solved, error: solvedErr } = useSWR<Solved[]>(
+    '/api/submissions/solved',
+    fetcher
+  )
+  const { data: score, error: scoreErr } = useSWR<Score[]>(
+    '/api/submissions/score',
+    fetcher
+  )
+
+  const processedTask = useMemo(() => {
+    return tasks.map(task => ({
+      ...task,
+      solved:
+        solved && !solvedErr
+          ? solved.find(item => item.taskId === task.id)?.count || 0
+          : 0,
+      score:
+        score && !scoreErr
+          ? score.find(item => item.taskId === task.id)?.max || 0
+          : 0
+    }))
+  }, [tasks, solved, score])
+
   const [tag, setTag] = useState<boolean>(false)
 
   const { isFallback, query, replace } = useRouter()
@@ -69,7 +73,7 @@ const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
               as={Fragment}
             >
               <LeftBar />
-              <RightDisplay tasks={tasks} tag={tag} setTag={setTag} />
+              <RightDisplay tasks={processedTask} tag={tag} setTag={setTag} />
             </Tab.Group>
           </div>
         </div>
@@ -79,3 +83,22 @@ const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
 }
 
 export default Tasks
+
+export async function getStaticProps() {
+  const tasks = await prisma.task.findMany()
+
+  return {
+    props: {
+      tasks: tasks.map(item => {
+        return {
+          id: item.id,
+          title: item.title,
+          tags: [],
+          solved: 0,
+          score: 0,
+          fullScore: item.fullScore
+        }
+      })
+    }
+  }
+}
