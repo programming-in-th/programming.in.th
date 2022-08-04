@@ -1,6 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
+  darkMode: 'media',
   experimental: {
     optimizeUniversalDefaults: true
   },

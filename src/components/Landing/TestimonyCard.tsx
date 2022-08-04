@@ -11,7 +11,7 @@ export const TestimonyCard = (props: {
   const { title, description, imgURL, role } = props
 
   return (
-    <article className="relative rounded-lg bg-white py-4 text-center text-prog-gray-500">
+    <article className="relative rounded-lg bg-white py-4 text-center text-prog-gray-500 dark:bg-slate-600 dark:text-white">
       <QuoteVector className="mx-auto mb-4" />
       <p className="h-auto px-12 font-light sm:h-48 md:h-36">{description}</p>
       <div className="flex items-center justify-center gap-4 py-6">

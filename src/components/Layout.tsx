@@ -20,7 +20,7 @@ export const PageLayout = ({ children }) => {
   const backgroundColor = useMemo(() => {
     switch (`/${location}`) {
       case '/':
-        return 'bg-prog-gray-100'
+        return 'bg-prog-gray-100 dark:bg-slate-800'
       default:
         return 'bg-white'
     }

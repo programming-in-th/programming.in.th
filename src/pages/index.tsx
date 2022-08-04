@@ -26,10 +26,12 @@ const Landing = () => {
             <span className="mb-3 block text-prog-primary-500">
               ฝึกฝนทักษะการเขียนโปรแกรม
             </span>
-            <span className="text-prog-gray-500">ด้วยโจทย์ที่หลากหลาย</span>
+            <span className="text-prog-gray-500 dark:text-white">
+              ด้วยโจทย์ที่หลากหลาย
+            </span>
           </p>
 
-          <p className="mt-4 text-sm leading-relaxed text-prog-gray-500 sm:text-base">
+          <p className="mt-4 text-sm leading-relaxed text-prog-gray-500 dark:text-slate-200 sm:text-base">
             เว็บไซต์ที่ผู้ใช้มากมายเชื่อมั่น ด้วยโจทย์ฝึกเขียนโปรแกรมถึง 726 ข้อ
             <br />
             และบทเรียนเกี่ยวกับ Data Structure & Algorithms
@@ -59,21 +61,23 @@ const Landing = () => {
           <BGCurve className="absolute bottom-0" />
         </section>
 
-        <section className="w-full bg-white pb-10">
+        <section className="w-full bg-white pb-10 dark:bg-slate-700">
           <h2 className="mb-8 text-center text-xl font-semibold sm:text-2xl">
             <span className="text-prog-primary-500">ทำไมต้อง</span>
             <br />
-            <span className="text-prog-gray-500">Programming.in.th</span>
+            <span className="text-prog-gray-500 dark:text-white">
+              Programming.in.th
+            </span>
           </h2>
 
-          <p className="mx-auto max-w-2xl px-10 text-center font-light text-prog-gray-500">
+          <p className="mx-auto max-w-2xl px-10 text-center font-light text-prog-gray-500 dark:text-slate-200">
             ทำไม programming.in.th จึงเป็นเว็บไซต์ที่ใช้ฝึกฝน
             <br />
             competitive programming อันดับ 1 ของประเทศไทย
           </p>
         </section>
 
-        <section className="w-full bg-white p-6 sm:p-16">
+        <section className="w-full bg-white p-6 dark:bg-slate-700 sm:p-16">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2">
             <FeatureCard
               title="ระบบตรวจ Submission สุดทันสมัย"
@@ -98,7 +102,7 @@ const Landing = () => {
           </div>
         </section>
 
-        <section className="w-full bg-white px-6 py-10 sm:px-10 sm:py-24">
+        <section className="w-full bg-white px-6 py-10 dark:bg-slate-700 sm:px-10 sm:py-24">
           <div
             style={{
               background:
@@ -117,7 +121,7 @@ const Landing = () => {
           </div>
         </section>
 
-        <section className="w-full bg-white p-10">
+        <section className="w-full bg-white p-10 dark:bg-slate-700">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2">
             <TestimonyCard
               title="เขมนันท์ มณีศรี (จอม)"
@@ -149,7 +153,7 @@ const Landing = () => {
 
         <section className="flex w-full flex-col justify-center px-16 py-20 text-center">
           <p className="font-semibold leading-tight">
-            <span className="mb-1 block text-xl text-prog-gray-500 sm:text-2xl">
+            <span className="mb-1 block text-xl text-prog-gray-500 dark:text-white sm:text-2xl">
               วันนี้
             </span>
             <span className="text-2xl text-prog-primary-500 sm:text-4xl">
