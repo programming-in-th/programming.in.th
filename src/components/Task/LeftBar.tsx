@@ -54,7 +54,7 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
   if (task === undefined) return <div>loading</div>
 
   return (
-    <section className="w-[16rem]">
+    <section className="w-[14rem] flex-none">
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
           <button onClick={() => setButtonPressed(v => !v)}>

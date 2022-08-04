@@ -57,7 +57,7 @@ const Submission = ({
   }
 
   return (
-    <div>
+    <div className="w-full">
       {
         // TODO : go back 1 level
       }
