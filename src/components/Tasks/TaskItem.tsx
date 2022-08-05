@@ -88,6 +88,7 @@ export const TaskItem = (
           xmlns="http://www.w3.org/2000/svg"
           onClick={async () => {
             setBookmark(!bookmark)
+
             if (bookmark) {
               await fetch(`/api/bookmarks`, {
                 method: 'DELETE',
@@ -99,12 +100,13 @@ export const TaskItem = (
                 body: task.id
               })
             }
+
             mutate('/api/bookmarks')
           }}
           className={`${
             bookmark
-              ? 'fill-gray-500 stroke-gray-500'
-              : 'hidden stroke-gray-200 group-hover:block'
+              ? 'cursor-pointer fill-gray-500 stroke-gray-500'
+              : 'hidden cursor-pointer stroke-gray-200 group-hover:block'
           }`}
           fill="none"
           viewBox="0 0 24 24"
