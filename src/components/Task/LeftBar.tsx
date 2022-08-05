@@ -42,7 +42,6 @@ const Tabs = [
 ]
 
 export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
-  const [buttonPressed, setButtonPressed] = useState(false)
   const { data, error } = useSWR<IGeneralSubmission[]>(
     task ? `/api/submissions?filter=own_task&taskId=${task.id}` : null,
     fetcher
@@ -52,12 +51,6 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
     task ? `/api/bookmarks/task/${task.id}` : null,
     fetcher
   )
-
-  useEffect(() => {
-    if (!errorBookmark) {
-      setButtonPressed(bookmark)
-    }
-  }, [bookmark])
 
   const maxScore = useMemo(() => {
     return data ? Math.max(...data.map(sub => sub.score), 0) : 0
@@ -70,22 +63,20 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
         <div className="flex items-center gap-2">
           <button
             onClick={async () => {
-              setButtonPressed(v => !v)
-              if (buttonPressed) {
-                await fetch(`/api/bookmarks`, {
-                  method: 'DELETE',
-                  body: task.id
-                })
-              } else {
-                await fetch(`/api/bookmarks`, {
-                  method: 'POST',
-                  body: task.id
-                })
-              }
-              mutate(`/api/bookmarks/tasks/${task.id}`)
+              mutate(
+                `/api/bookmarks/task/${task.id}`,
+                async (state: boolean) => {
+                  await fetch(`/api/bookmarks`, {
+                    method: state ? 'POST' : 'DELETE',
+                    body: task.id
+                  })
+                  return state
+                },
+                { optimisticData: !bookmark }
+              )
             }}
           >
-            {buttonPressed ? (
+            {bookmark ? (
               <StarIconSolid className="h-5 w-5 text-gray-400" />
             ) : (
               <StarIconOutline className="h-5 w-5 text-gray-300" />
