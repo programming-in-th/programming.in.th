@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import Link from 'next/link'
 
@@ -6,7 +6,7 @@ import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 
 import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
@@ -48,6 +48,17 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
     fetcher
   )
 
+  const { data: bookmark, error: errorBookmark } = useSWR<boolean>(
+    `/api/bookmarks/task/${task.id}`,
+    fetcher
+  )
+
+  useEffect(() => {
+    if (!errorBookmark) {
+      setButtonPressed(bookmark)
+    }
+  }, [bookmark])
+
   const maxScore = useMemo(() => {
     return data ? Math.max(...data.map(sub => sub.score), 0) : 0
   }, [data])
@@ -57,7 +68,23 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
     <section className="w-[14rem] flex-none">
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
-          <button onClick={() => setButtonPressed(v => !v)}>
+          <button
+            onClick={async () => {
+              setButtonPressed(v => !v)
+              if (buttonPressed) {
+                await fetch(`/api/bookmarks`, {
+                  method: 'DELETE',
+                  body: task.id
+                })
+              } else {
+                await fetch(`/api/bookmarks`, {
+                  method: 'POST',
+                  body: task.id
+                })
+              }
+              mutate(`/api/bookmarks/tasks/${task.id}`)
+            }}
+          >
             {buttonPressed ? (
               <StarIconSolid className="h-5 w-5 text-gray-400" />
             ) : (

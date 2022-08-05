@@ -2,13 +2,22 @@ import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
+import { useSWRConfig } from 'swr'
+
 import { IGeneralTask } from '@/types/tasks'
 
 export const TaskItem = (
-  task: IGeneralTask & { showTags: string[] | boolean }
+  task: IGeneralTask & { showTags: string[] | boolean } & {
+    bookmarked: boolean
+  }
 ) => {
+  const { mutate } = useSWRConfig()
   const [bookmark, setBookmark] = useState<boolean>(false)
   const [tagStatus, setTag] = useState<boolean>(false)
+
+  useEffect(() => {
+    setBookmark(task.bookmarked)
+  }, [task.bookmarked])
 
   useEffect(() => {
     if (typeof task.showTags === 'boolean') {
@@ -77,7 +86,21 @@ export const TaskItem = (
       <div className="w-14 p-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          onClick={() => setBookmark(!bookmark)}
+          onClick={async () => {
+            setBookmark(!bookmark)
+            if (bookmark) {
+              await fetch(`/api/bookmarks`, {
+                method: 'DELETE',
+                body: task.id
+              })
+            } else {
+              await fetch(`/api/bookmarks`, {
+                method: 'POST',
+                body: task.id
+              })
+            }
+            mutate('/api/bookmarks')
+          }}
           className={`${
             bookmark
               ? 'fill-gray-500 stroke-gray-500'

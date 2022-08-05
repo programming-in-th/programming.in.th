@@ -4,7 +4,7 @@ import { IGeneralTask } from '@/types/tasks'
 
 import { TaskItem } from './TaskItem'
 
-export const AllTasks = ({
+export const Bookmarked = ({
   tasks,
   tag,
   setTag
@@ -37,9 +37,12 @@ export const AllTasks = ({
         </div>
         <div className="w-14 px-4" />
       </div>
-      {tasks.map(context => (
-        <TaskItem {...context} showTags={tag} key={`task-${context.id}`} />
-      ))}
+      {tasks.map(
+        context =>
+          context.bookmarked && (
+            <TaskItem {...context} showTags={tag} key={`task-${context.id}`} />
+          )
+      )}
     </div>
   )
 }

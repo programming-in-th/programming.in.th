@@ -29,7 +29,7 @@ export default async function handler(
         }
       })
 
-      res.status(200).json(bookmark)
+      res.status(200).json(bookmark !== null)
       break
     default:
       res.setHeader('Allow', ['GET'])

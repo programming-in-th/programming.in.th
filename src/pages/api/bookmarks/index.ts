@@ -50,18 +50,17 @@ router
   .post(async (req, res) => {
     const bookmark = await prisma.bookmark.create({
       data: {
-        Task: { connect: { id: String(req.body.id) } },
+        Task: { connect: { id: String(req.body) } },
         user: { connect: { id: req.session.user.id } }
       }
     })
-
     res.status(200).json(bookmark)
   })
   .delete(async (req, res) => {
     const bookmark = await prisma.bookmark.delete({
       where: {
         taskId_userId: {
-          taskId: String(req.body.id),
+          taskId: String(req.body),
           userId: req.session.user.id
         }
       }
