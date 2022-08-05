@@ -49,7 +49,7 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
   )
 
   const { data: bookmark, error: errorBookmark } = useSWR<boolean>(
-    `/api/bookmarks/task/${task.id}`,
+    task ? `/api/bookmarks/task/${task.id}` : null,
     fetcher
   )
 
