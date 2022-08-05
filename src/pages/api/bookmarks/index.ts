@@ -33,7 +33,7 @@ router
     return next()
   })
   .get(async (req, res) => {
-    const bookmark = await prisma.bookmark.findMany({
+    const rawBookmark = await prisma.bookmark.findMany({
       where: {
         user: {
           id: { equals: req.session.user.id }
@@ -41,7 +41,11 @@ router
       }
     })
 
-    res.status(200).json(bookmark)
+    const bookmarks = rawBookmark.map(bookmark => {
+      return bookmark.taskId
+    })
+
+    res.status(200).json(bookmarks)
   })
   .post(async (req, res) => {
     const bookmark = await prisma.bookmark.create({
