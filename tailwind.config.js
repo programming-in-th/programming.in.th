@@ -1,6 +1,8 @@
+const { white } = require('tailwindcss/colors')
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
+  darkMode: ['class', '[data-theme="dark"]'],
   experimental: {
     optimizeUniversalDefaults: true
   },
@@ -16,6 +18,10 @@ module.exports = {
           gray: {
             100: '#F8FAFC',
             500: '#64748B'
+          },
+          white: {
+            100: '#FFFFFF',
+            500: '#F8FAFC'
           }
         }
       },

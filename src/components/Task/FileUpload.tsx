@@ -56,11 +56,11 @@ export const FileUpload = ({
         {...getRootProps()}
         className={clsx(
           'flex h-48 w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-dashed border-gray-400 p-6 text-gray-400 transition-colors',
-          (isFocused || isDragAccept) && 'border-prog-primary-500',
+          (isFocused || isDragAccept) && 'border-blue-300',
           fileRejected && 'border-red-400',
           isDragActive
             ? 'bg-slate-800 bg-opacity-50 backdrop-blur-sm'
-            : 'hover:bg-slate-50'
+            : 'hover:bg-slate-50 dark:hover:bg-slate-600'
         )}
       >
         <input {...getInputProps()} />

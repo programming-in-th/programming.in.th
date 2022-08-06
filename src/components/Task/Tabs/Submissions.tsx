@@ -56,22 +56,22 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
 
   return (
     <table className="w-full table-auto border-separate border-spacing-y-3 text-sm">
-      <thead className="text-gray-500">
+      <thead className="text-gray-500 dark:text-white">
         <tr>
           {Columns.map(({ title, field }) => (
             <th key={field} className="py-2 text-center font-light">
               <button className="group flex w-full items-center justify-center gap-1">
-                <p className="text-gray-500 transition-colors group-hover:text-gray-600">
+                <p className="text-gray-500 transition-colors group-hover:text-gray-600 dark:text-gray-100 dark:group-hover:text-gray-300">
                   {title}
                 </p>
 
-                <ChevronUpIcon className="h-3 w-3 text-gray-400 transition-colors group-hover:text-gray-500" />
+                <ChevronUpIcon className="h-3 w-3 text-gray-400 transition-colors group-hover:text-gray-500 dark:text-gray-50 dark:group-hover:text-gray-300" />
               </button>
             </th>
           ))}
         </tr>
       </thead>
-      <tbody className="text-gray-500">
+      <tbody className="text-gray-500 dark:text-white">
         {!error &&
           data &&
           data.map(sub => {
@@ -79,7 +79,7 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
             return (
               <tr
                 key={sub.id}
-                className=" bg-white shadow-md transition-colors hover:bg-slate-50"
+                className="bg-white shadow-md transition-colors hover:bg-slate-50 dark:bg-slate-700 dark:hover:bg-slate-600"
               >
                 <td className="px-6 py-4">
                   <Link href={`/submissions/${sub.id}`} passHref>
@@ -88,7 +88,7 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
                         <p className="font-medium">
                           {dayjs(dt).format('DD MMM YYYY')}
                         </p>
-                        <p className="text-gray-400">
+                        <p className="text-gray-400 dark:text-gray-300">
                           {dayjs(dt).format('HH:mm:ss')}
                         </p>
                       </div>
@@ -122,7 +122,7 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
                               }}
                             />
                           </div>
-                          <p className="mt-2 text-xs text-gray-500">
+                          <p className="mt-2 text-xs text-gray-500 dark:text-gray-200">
                             {sub.score} points
                           </p>
                         </div>
@@ -142,7 +142,9 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
                     <a>
                       <p className="text-center font-medium">
                         {sub.time}{' '}
-                        <span className="font-light text-gray-400">ms</span>
+                        <span className="font-light text-gray-400 dark:text-gray-300">
+                          ms
+                        </span>
                       </p>
                     </a>
                   </Link>
@@ -152,7 +154,9 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
                     <a>
                       <p className="text-center font-medium">
                         {sub.memory}{' '}
-                        <span className="font-light text-gray-400">kb</span>
+                        <span className="font-light text-gray-400 dark:text-gray-300">
+                          kb
+                        </span>
                       </p>
                     </a>
                   </Link>

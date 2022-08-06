@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import dynamic from 'next/dynamic'
 
 import { Task } from '@prisma/client'
@@ -8,7 +10,6 @@ import useSubmissionData from '@/lib/useSubmissionData'
 
 import { CodeSkeleton } from '../Code'
 import { SubmissionGroup } from './Group'
-import { Suspense } from 'react'
 
 const DynamicCode = dynamic(() => import('../Code'), {
   suspense: true
@@ -62,24 +63,24 @@ const Submission = ({
       }
       {/* <Link href="/" passHref>
         <a className="flex items-center gap-2 text-sm text-prog-gray-500 hover:text-gray-600">
-          <ArrowNarrowLeftIcon className="h-5 w-5" />
+          <ArrowNarrowLeftIcon className="w-5 h-5" />
           <p>Back</p>
         </a>
       </Link> */}
       {
         // ! disgusting code alert - will move to component
       }
-      <table className="mt-6 w-full table-auto border-separate border-spacing-y-3 rounded-md bg-white text-sm shadow-md">
+      <table className="mt-6 w-full table-auto border-separate border-spacing-y-3 rounded-md bg-white text-sm shadow-md dark:bg-slate-600">
         <thead className="">
           <tr>
             {Columns.map(({ title, field }) => (
               <th key={field} className="py-2 text-center font-light">
-                <p className="w-full text-gray-400">{title}</p>
+                <p className="w-full text-gray-400 dark:text-white">{title}</p>
               </th>
             ))}
           </tr>
         </thead>
-        <tbody className="text-gray-500">
+        <tbody className="text-gray-500 dark:text-gray-200">
           {submission && (
             <tr className="">
               <td className="px-6 py-2">
@@ -89,7 +90,7 @@ const Submission = ({
                       'DD MMM YYYY'
                     )}
                   </p>
-                  <p className="text-gray-400">
+                  <p className="text-gray-400 dark:text-gray-300">
                     {dayjs(new Date(submission.submittedAt)).format('HH:mm:ss')}
                   </p>
                 </div>
@@ -115,7 +116,7 @@ const Submission = ({
                         }}
                       />
                     </div>
-                    <p className="mt-2 text-xs text-gray-500">
+                    <p className="mt-2 text-xs text-gray-500 dark:text-gray-200">
                       {submission.score} points
                     </p>
                   </div>
@@ -130,13 +131,17 @@ const Submission = ({
               <td className="py-2">
                 <p className="text-center font-medium">
                   {submission.time}{' '}
-                  <span className="font-light text-gray-400">ms</span>
+                  <span className="font-light text-gray-400 dark:text-gray-300">
+                    ms
+                  </span>
                 </p>
               </td>
               <td className="px-6 py-2">
                 <p className="text-center font-medium">
                   {submission.memory}{' '}
-                  <span className="font-light text-gray-400">kB</span>
+                  <span className="font-light text-gray-400 dark:text-gray-300">
+                    kB
+                  </span>
                 </p>
               </td>
             </tr>
