@@ -25,6 +25,7 @@
     "next-auth": "^4.10.3",
     "next-connect": "1.0.0-next.3",
     "next-mdx-remote": "^4.1.0",
+    "next-themes": "^0.2.0",
     "pdfjs-dist": "^2.14.305",
     "prism-react-renderer": "^1.3.5",
     "prismjs": "^1.28.0",

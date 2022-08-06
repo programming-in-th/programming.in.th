@@ -1,4 +1,5 @@
 import { Worker } from '@react-pdf-viewer/core'
+import { ThemeProvider } from 'next-themes'
 import { SessionProvider } from 'next-auth/react'
 import '@/styles/index.css'
 import '@/styles/fonts.css'
@@ -14,7 +15,9 @@ export default function App({
   return (
     <Worker workerUrl="https://unpkg.com/pdfjs-dist@2.14.305/build/pdf.worker.js">
       <SessionProvider session={session}>
-        <Component {...pageProps} />
+        <ThemeProvider>
+          <Component {...pageProps} />
+        </ThemeProvider>
       </SessionProvider>
     </Worker>
   )

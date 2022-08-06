@@ -1,5 +1,3 @@
-import { FC } from 'react'
-
 export const Logo = () => {
   return (
     <svg

@@ -9,6 +9,7 @@ import clsx from 'clsx'
 import { useSession, signOut } from 'next-auth/react'
 
 import { Logo, LogoDark } from '@/svg/Logo'
+import ThemeSwitch from './DarkMode'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -83,6 +84,8 @@ export const Nav = () => {
                   </a>
                 </Link>
               ))}
+
+              <ThemeSwitch />
 
               <div className="pl-6">
                 {session ? (
