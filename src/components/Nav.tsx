@@ -9,7 +9,6 @@ import clsx from 'clsx'
 import { useSession, signOut } from 'next-auth/react'
 
 import { Logo, LogoDark } from '@/svg/Logo'
-import ThemeSwitch from './DarkMode'
 
 const navigation = [
   { name: 'Home', href: '/' },
