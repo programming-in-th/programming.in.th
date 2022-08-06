@@ -10,8 +10,6 @@ import { useSession, signOut } from 'next-auth/react'
 
 import { Logo, LogoDark } from '@/svg/Logo'
 
-import DarkMode from './DarkMode'
-
 const navigation = [
   { name: 'Home', href: '/' },
   { name: 'Tasks', href: '/tasks' },
