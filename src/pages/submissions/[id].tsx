@@ -1,13 +1,13 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
 
-import ViewSubmissionTab from '@/components/Submission/Submission'
+import Submission from '@/components/Submission/Submission'
 import { Layout } from '@/components/Tasks/Layout'
 import prisma from '@/lib/prisma'
 
 const Submissions = ({ id, task }) => {
   return (
     <Layout task={task} type="submissions">
-      <ViewSubmissionTab task={task} submissionID={id} />
+      <Submission task={task} submissionID={id} />
     </Layout>
   )
 }
