@@ -55,6 +55,7 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
   const maxScore = useMemo(() => {
     return data ? Math.max(...data.map(sub => sub.score), 0) : 0
   }, [data])
+
   if (task === undefined) return <div>loading</div>
 
   return (

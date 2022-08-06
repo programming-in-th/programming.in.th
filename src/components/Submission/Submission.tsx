@@ -9,6 +9,7 @@ import { Loading } from '@/components/Loading'
 import useSubmissionData from '@/lib/useSubmissionData'
 
 import { SubmissionGroup } from './Group'
+import { CodeSkeleton } from '../Code'
 
 const DynamicCode = dynamic(() => import('../Code'), {
   suspense: true
@@ -145,10 +146,10 @@ const Submission = ({
       </table>
 
       {/* <p>{submission.status}</p> */}
-      {/* @TODO Add same size skeleton to prevent layout shift */}
-      <Suspense fallback={`Loading...`}>
+      {/* <Suspense fallback={<CodeSkeleton />}>
         <DynamicCode code={submission.code[0]} language="cpp" />
-      </Suspense>
+      </Suspense> */}
+      <CodeSkeleton />
       <SubmissionGroup groups={submission.groups} />
     </div>
   )
