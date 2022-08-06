@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 
 import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
+import ThemeSwitch from './DarkMode'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -67,24 +68,33 @@ export const Footer = () => {
             )}
           </div>
         </div>
-        <div className="flex justify-between p-12 font-display">
-          <Link href="https://www.facebook.com/programming.in.th/" passHref>
-            <a target="_blank" rel="noreferrer">
-              <FacebookLogo className="text-[#64748B] dark:text-white" />
-            </a>
-          </Link>
-          <Link
-            href="https://github.com/programming-in-th/programming.in.th"
-            passHref
-          >
-            <a target="_blank" rel="noreferrer">
-              <GitHubLogo className="mx-4 text-[#64748B] dark:text-white" />
-            </a>
-          </Link>
+        <div className="flex w-full justify-between py-12 px-8 font-display">
+          <div className="flex space-x-4">
+            <Link href="https://www.facebook.com/programming.in.th/" passHref>
+              <a target="_blank" rel="noreferrer">
+                <FacebookLogo className="text-[#64748B] dark:text-white" />
+              </a>
+            </Link>
+            <Link href="https://github.com/programming-in-th/" passHref>
+              <a target="_blank" rel="noreferrer">
+                <GitHubLogo className="text-[#64748B] dark:text-white" />
+              </a>
+            </Link>
+          </div>
+
           <p className="w-full text-sm leading-4 text-gray-500 dark:text-white sm:w-80">
-            © 2019-{currentYear} the PROGRAMMING.IN.TH team{'\n'} The source
-            code for this website is available on GitHub
+            © 2019-{currentYear} the PROGRAMMING.IN.TH team{'\n'} We are open
+            source on{' '}
+            <Link
+              href="https://github.com/programming-in-th/programming.in.th"
+              passHref
+            >
+              <a target="_blank" rel="noreferrer">
+                GitHub
+              </a>
+            </Link>
           </p>
+          <ThemeSwitch />
         </div>
       </div>
     </footer>

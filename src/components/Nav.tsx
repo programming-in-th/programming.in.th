@@ -85,8 +85,6 @@ export const Nav = () => {
                 </Link>
               ))}
 
-              <ThemeSwitch />
-
               <div className="pl-6">
                 {session ? (
                   <Popover className="relative hidden py-1 md:block">
