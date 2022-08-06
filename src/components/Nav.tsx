@@ -51,7 +51,6 @@ export const Nav = () => {
                 </a>
               </Link>
               <div className="-mr-2 flex items-center md:hidden">
-                <DarkMode />
                 <Popover.Button className="focus-ring-inset inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white dark:text-white">
                   <span className="sr-only">Open main menu</span>
                   <svg
@@ -88,7 +87,6 @@ export const Nav = () => {
               ))}
 
               <div className="flex items-center space-x-4 pl-2">
-                <DarkMode />
                 {session ? (
                   <Popover className="relative hidden py-1 md:block">
                     <Popover.Button className="flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-slate-300 transition-colors hover:bg-slate-300 hover:bg-opacity-50 active:ring-1">

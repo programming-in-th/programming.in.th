@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useSession } from 'next-auth/react'
 
 import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
+import DarkMode from './DarkMode'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -69,7 +70,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className="flex w-full flex-col justify-center py-10 px-8 font-display md:flex-row md:justify-between">
-          <div className="mb-4 flex justify-center space-x-4 md:mb-0 md:justify-start">
+          <div className="flex justify-center space-x-4 md:justify-start">
             <Link href="https://www.facebook.com/programming.in.th/" passHref>
               <a target="_blank" rel="noreferrer">
                 <FacebookLogo className="text-[#64748B] dark:text-white" />
@@ -93,13 +94,14 @@ export const Footer = () => {
               </Link>
             </p>
           </div>
-          <div className="flex w-full justify-center gap-x-4 md:justify-end">
+          <div className="my-4 flex w-full items-center justify-center md:my-0 md:justify-center">
             <svg
               width="166"
               height="35"
               viewBox="0 0 166 35"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
+              className="mr-2"
             >
               <g clipPath="url(#clip0_3127_10521)">
                 <path
@@ -126,9 +128,13 @@ export const Footer = () => {
                 </clipPath>
               </defs>
             </svg>
-            <Image src="/assets/img/IPST_Logo.png" height="30" width="30" />
+            <div className="flex h-full items-center">
+              <Image src="/assets/img/IPST_Logo.png" height="34" width="30" />
+            </div>
           </div>
-
+          <div className="flex w-full justify-center md:w-auto">
+            <DarkMode />
+          </div>
           {/* <ThemeSwitch /> */}
         </div>
       </div>
