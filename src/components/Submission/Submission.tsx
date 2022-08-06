@@ -1,5 +1,3 @@
-import { Suspense } from 'react'
-
 import dynamic from 'next/dynamic'
 
 import { Task } from '@prisma/client'
@@ -8,7 +6,9 @@ import dayjs from 'dayjs'
 import { Loading } from '@/components/Loading'
 import useSubmissionData from '@/lib/useSubmissionData'
 
+import { CodeSkeleton } from '../Code'
 import { SubmissionGroup } from './Group'
+import { Suspense } from 'react'
 
 const DynamicCode = dynamic(() => import('../Code'), {
   suspense: true
@@ -149,8 +149,7 @@ const Submission = ({
       </table>
 
       {/* <p>{submission.status}</p> */}
-      {/* @TODO Add same size skeleton to prevent layout shift */}
-      <Suspense fallback={`Loading...`}>
+      <Suspense fallback={<CodeSkeleton />}>
         <DynamicCode code={submission.code[0]} language="cpp" />
       </Suspense>
       <SubmissionGroup groups={submission.groups} />

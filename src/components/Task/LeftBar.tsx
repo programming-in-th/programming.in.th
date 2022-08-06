@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
 import Link from 'next/link'
 
@@ -6,7 +6,7 @@ import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
-import useSWR from 'swr'
+import useSWR, { mutate } from 'swr'
 
 import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
@@ -42,23 +42,42 @@ const Tabs = [
 ]
 
 export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
-  const [buttonPressed, setButtonPressed] = useState(false)
   const { data, error } = useSWR<IGeneralSubmission[]>(
     task ? `/api/submissions?filter=own_task&taskId=${task.id}` : null,
+    fetcher
+  )
+
+  const { data: bookmark, error: errorBookmark } = useSWR<boolean>(
+    task ? `/api/bookmarks/task/${task.id}` : null,
     fetcher
   )
 
   const maxScore = useMemo(() => {
     return data ? Math.max(...data.map(sub => sub.score), 0) : 0
   }, [data])
+
   if (task === undefined) return <div>loading</div>
 
   return (
     <section className="w-[14rem] flex-none">
       <div className="flex flex-col">
         <div className="flex items-center gap-2">
-          <button onClick={() => setButtonPressed(v => !v)}>
-            {buttonPressed ? (
+          <button
+            onClick={async () => {
+              mutate(
+                `/api/bookmarks/task/${task.id}`,
+                async (state: boolean) => {
+                  await fetch(`/api/bookmarks`, {
+                    method: state ? 'POST' : 'DELETE',
+                    body: task.id
+                  })
+                  return state
+                },
+                { optimisticData: !bookmark }
+              )
+            }}
+          >
+            {bookmark ? (
               <StarIconSolid className="h-5 w-5 text-gray-400 dark:text-amber-400" />
             ) : (
               <StarIconOutline className="h-5 w-5 text-gray-300" />
