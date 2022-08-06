@@ -1,14 +1,12 @@
 import React, { useMemo } from 'react'
 
-import Link from 'next/link'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { useSession } from 'next-auth/react'
 
 import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
-
-import ThemeSwitch from './DarkMode'
 
 const navigation = [
   { name: 'Home', href: '/' },
@@ -103,7 +101,7 @@ export const Footer = () => {
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
-              <g clip-path="url(#clip0_3127_10521)">
+              <g clipPath="url(#clip0_3127_10521)">
                 <path
                   d="M158.965 0H6.23299C2.79006 0 -0.000976562 2.8491 -0.000976562 6.36364V28.6364C-0.000976562 32.1509 2.79006 35 6.23299 35H158.965C162.408 35 165.199 32.1509 165.199 28.6364V6.36364C165.199 2.8491 162.408 0 158.965 0Z"
                   fill="black"
@@ -119,7 +117,7 @@ export const Footer = () => {
                 <path
                   d="M33.8972 0V35"
                   stroke="#5E5E5E"
-                  stroke-width="0.851887"
+                  strokeWidth="0.851887"
                 />
               </g>
               <defs>
