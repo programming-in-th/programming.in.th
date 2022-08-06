@@ -19,9 +19,11 @@ export const TaskItem = (
   return (
     <div className="group flex w-full items-center justify-between p-2">
       <Link href={`/tasks/${task.id}`}>
-        <a className="flex w-full rounded-xl px-6 py-3 font-display shadow-sm transition group-hover:shadow-md">
-          <div className="flex w-full flex-col">
-            <p className="text-sm font-medium text-gray-500">{task.title}</p>
+        <a className="flex w-full rounded-xl px-6 py-3 font-display shadow-sm transition group-hover:shadow-md dark:bg-slate-700">
+          <div className="flex w-full flex-col ">
+            <p className="text-sm font-medium text-gray-500 dark:text-white">
+              {task.title}
+            </p>
             <p className="text-sm text-gray-400">{task.id}</p>
           </div>
           <div className="flex w-full items-center justify-center">
@@ -42,7 +44,7 @@ export const TaskItem = (
             })}
             {tagStatus !== true && (
               <p
-                className="text-sm text-gray-400"
+                className="text-sm text-gray-400 dark:text-gray-100"
                 onClick={event => {
                   event.preventDefault()
                   event.stopPropagation()
@@ -52,7 +54,9 @@ export const TaskItem = (
             )}
           </div>
           <div className="flex w-full items-center justify-center">
-            <p className="text-sm text-gray-500">{task.solved}</p>
+            <p className="text-sm text-gray-500 dark:text-gray-100">
+              {task.solved}
+            </p>
           </div>
           <div className="mx-3 flex h-auto w-28 flex-none items-center justify-center">
             <div className="flex h-auto w-full flex-col items-center justify-around">
@@ -62,14 +66,16 @@ export const TaskItem = (
                   className={`absolute h-1.5 rounded-full ${
                     task.score === task.fullScore
                       ? 'bg-blue-500'
-                      : 'bg-gray-500'
+                      : 'bg-gray-500 dark:bg-slate-500'
                   }`}
                   style={{
                     width: `${(task.score / task.fullScore) * 100}%`
                   }}
                 />
               </div>
-              <p className="mt-2 text-sm text-gray-500">{task.score} points</p>
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-100">
+                {task.score} points
+              </p>
             </div>
           </div>
         </a>
@@ -80,8 +86,8 @@ export const TaskItem = (
           onClick={() => setBookmark(!bookmark)}
           className={`${
             bookmark
-              ? 'fill-gray-500 stroke-gray-500'
-              : 'hidden stroke-gray-200 group-hover:block'
+              ? 'fill-gray-500 stroke-gray-500 dark:fill-amber-400 dark:stroke-amber-400'
+              : 'hidden stroke-gray-200 group-hover:block '
           }`}
           fill="none"
           viewBox="0 0 24 24"

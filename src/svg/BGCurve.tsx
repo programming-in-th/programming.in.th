@@ -12,7 +12,7 @@ export const BGCurve = (props: ComponentProps<'svg'>) => {
     >
       <path
         d="M705.5 0.263573C831.9 5.46357 1248.17 72.4302 1440.5 105.264V204H0V105.264C182.5 68.0969 579.1 -4.93643 705.5 0.263573Z"
-        fill="white"
+        fill="currentColor"
       />
     </svg>
   )

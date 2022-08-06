@@ -33,12 +33,12 @@ export const Accordion = ({ group, open }) => {
     setExpand(open)
   }, [open])
   return (
-    <div className="my-1 w-full rounded-lg bg-white">
+    <div className="my-1 w-full rounded-lg bg-white dark:bg-slate-600">
       <button
-        className="flex w-full items-center justify-between rounded-lg border-b border-gray-300 bg-white py-4 px-8"
+        className="flex w-full items-center justify-between rounded-lg border-b border-gray-300 bg-white px-8 py-4 dark:border-slate-600 dark:bg-slate-500"
         onClick={() => setExpand(e => !e)}
       >
-        <div className="flex items-center">
+        <div className="flex items-center dark:text-gray-100">
           <p className="mr-1">{`Subtask ${group.group_index}`}</p>
           <p className="text-sm">{`(${group.score}/${group.full_score})`}</p>
         </div>
@@ -46,25 +46,27 @@ export const Accordion = ({ group, open }) => {
           animate={expanded ? 'active' : 'hidden'}
           variants={ArrowVariants}
         >
-          <svg
-            width="14"
-            height="8"
-            viewBox="0 0 14 8"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M1 1L7 7L13 1" stroke="#94A3B8" />
-          </svg>
+          <div className="text-[#94A3B8] dark:text-white">
+            <svg
+              width="14"
+              height="8"
+              viewBox="0 0 14 8"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path d="M1 1L7 7L13 1" stroke="currentColor" />
+            </svg>
+          </div>
         </motion.span>
       </button>
       <motion.div
         role="region"
         animate={expanded ? 'active' : 'hidden'}
         variants={DivVariants}
-        className="w-full rounded-b-lg bg-white py-4"
+        className="w-full rounded-b-lg bg-white py-4 dark:bg-slate-600"
         // className="px-8 py-4"
       >
-        <table className="-mt-2 table-auto border-separate border-spacing-x-4 border-spacing-y-3 font-light text-gray-400">
+        <table className="-mt-2 table-auto border-separate border-spacing-x-4 border-spacing-y-3 font-light text-gray-400 dark:text-gray-200">
           <thead>
             <tr>
               <th className="text-sm font-light">#</th>

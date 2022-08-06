@@ -8,7 +8,7 @@ export const FeatureCard = (props: {
   const { title, description, Icon } = props
 
   return (
-    <article className="relative rounded-lg bg-white py-6 text-center text-prog-gray-500 shadow-lg dark:bg-slate-600">
+    <article className="relative rounded-lg bg-white py-6 text-center text-prog-gray-500 shadow-lg dark:bg-slate-700">
       <div className="absolute -top-6 left-1/2 inline-block -translate-x-1/2 rounded-md bg-prog-primary-500 p-4 shadow-lg">
         <Icon className="h-6 w-6 text-white" />
       </div>

@@ -12,7 +12,9 @@ const Learn: NextPage = () => {
           Coming Soon...
         </h1>
         <Link href="/" passHref>
-          <a className="mt-2 text-prog-gray-500">กลับหน้าหลัก</a>
+          <a className="mt-2 text-prog-gray-500 dark:text-white">
+            กลับหน้าหลัก
+          </a>
         </Link>
       </section>
     </PageLayout>

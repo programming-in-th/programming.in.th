@@ -25,7 +25,7 @@ export const Footer = () => {
   const { data: session } = useSession()
 
   return (
-    <footer className="flex w-full flex-col items-center bg-white font-display dark:bg-slate-700">
+    <footer className="flex w-full flex-col items-center bg-white font-display dark:bg-slate-800">
       <div className="flex w-full max-w-5xl flex-col items-center">
         <div className="flex w-full max-w-md justify-between p-8 font-display">
           {navigation.map(item => (
@@ -70,7 +70,7 @@ export const Footer = () => {
         <div className="flex justify-between p-12 font-display">
           <Link href="https://www.facebook.com/programming.in.th/" passHref>
             <a target="_blank" rel="noreferrer">
-              <FacebookLogo />
+              <FacebookLogo className="text-[#64748B] dark:text-white" />
             </a>
           </Link>
           <Link
@@ -78,7 +78,7 @@ export const Footer = () => {
             passHref
           >
             <a target="_blank" rel="noreferrer">
-              <GitHubLogo />
+              <GitHubLogo className="mx-4 text-[#64748B] dark:text-white" />
             </a>
           </Link>
           <p className="w-full text-sm leading-4 text-gray-500 dark:text-white sm:w-80">

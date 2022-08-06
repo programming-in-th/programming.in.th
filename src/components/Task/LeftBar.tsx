@@ -59,16 +59,16 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
         <div className="flex items-center gap-2">
           <button onClick={() => setButtonPressed(v => !v)}>
             {buttonPressed ? (
-              <StarIconSolid className="h-5 w-5 text-gray-400" />
+              <StarIconSolid className="h-5 w-5 text-gray-400 dark:text-amber-400" />
             ) : (
               <StarIconOutline className="h-5 w-5 text-gray-300" />
             )}
           </button>
-          <h1 className="text-lg font-medium">{task.title}</h1>
+          <h1 className="text-lg font-medium dark:text-white">{task.title}</h1>
         </div>
         <div className="flex items-center gap-2">
           <div className="h-5 w-5" />
-          <p className="font-light">{task.id}</p>
+          <p className="font-light dark:text-white">{task.id}</p>
         </div>
       </div>
 
@@ -83,10 +83,14 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
                   key={tabItem.label}
                   className={clsx(
                     'flex h-9 w-full items-center justify-center rounded-md transition-colors',
-                    type === tabItem.value ? 'bg-gray-100' : 'hover:bg-gray-50'
+                    type === tabItem.value
+                      ? 'bg-gray-100 dark:bg-slate-700'
+                      : 'hover:bg-gray-50 dark:hover:bg-slate-600'
                   )}
                 >
-                  <p className="text-sm text-gray-500">{tabItem.label}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-100">
+                    {tabItem.label}
+                  </p>
                 </button>
               </a>
             </Link>
@@ -97,7 +101,7 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
       <hr className="my-8" />
 
       <div className="flex flex-col items-center justify-center">
-        <p className="mb-4 font-light">Your Score</p>
+        <p className="mb-4 font-light dark:text-white">Your Score</p>
         {/* @TODO Login or show login button */}
         <PieChart points={maxScore} />
       </div>
@@ -109,7 +113,7 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
           target="_blank"
           href="https://google.com"
           rel="noreferrer"
-          className="mb-4 w-full text-center font-light"
+          className="mb-4 w-full text-center font-light dark:text-white"
         >
           Report
         </a>

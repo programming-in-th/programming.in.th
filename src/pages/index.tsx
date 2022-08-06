@@ -58,10 +58,10 @@ const Landing = () => {
             />
           </div>
 
-          <BGCurve className="absolute bottom-0" />
+          <BGCurve className="absolute bottom-0 dark:text-slate-800" />
         </section>
 
-        <section className="w-full bg-white pb-10 dark:bg-slate-700">
+        <section className="w-full bg-white pb-10 dark:bg-slate-800">
           <h2 className="mb-8 text-center text-xl font-semibold sm:text-2xl">
             <span className="text-prog-primary-500">ทำไมต้อง</span>
             <br />
@@ -77,7 +77,7 @@ const Landing = () => {
           </p>
         </section>
 
-        <section className="w-full bg-white p-6 dark:bg-slate-700 sm:p-16">
+        <section className="w-full bg-white p-6 dark:bg-slate-800 sm:p-16">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2">
             <FeatureCard
               title="ระบบตรวจ Submission สุดทันสมัย"
@@ -102,26 +102,24 @@ const Landing = () => {
           </div>
         </section>
 
-        <section className="w-full bg-white px-6 py-10 dark:bg-slate-700 sm:px-10 sm:py-24">
-          <div
-            style={{
-              background:
-                'linear-gradient(180deg, #FFF 0%, #FFF 29%, #F8FAFC 30%, #F8FAFC 100%)'
-            }}
-            className="mx-auto grid max-w-6xl grid-cols-1 items-center justify-center sm:grid-cols-2 lg:px-8 xl:px-36"
-          >
+        <section className="w-full bg-white px-6 py-10 dark:bg-slate-800 sm:px-10 sm:py-24">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center justify-center bg-gradient-to-b from-prog-white-100 to-prog-white-500 dark:bg-none sm:grid-cols-2 lg:px-8 xl:px-36">
             <PeopleVector className="mx-auto w-full px-12" />
             <div className="flex flex-col items-center justify-center pb-6 text-center sm:pb-0 sm:pt-20">
-              <p className="font-light text-prog-gray-500">จำนวนผู้ใช้กว่า</p>
+              <p className="font-light text-prog-gray-500 dark:text-gray-100">
+                จำนวนผู้ใช้กว่า
+              </p>
               <div className="text-6xl font-semibold text-prog-primary-500">
                 <IncrementalNumber start={1} end={13071} />
               </div>
-              <p className="text-2xl font-semibold text-prog-gray-500">คน</p>
+              <p className="text-2xl font-semibold text-prog-gray-500 dark:text-gray-100">
+                คน
+              </p>
             </div>
           </div>
         </section>
 
-        <section className="w-full bg-white p-10 dark:bg-slate-700">
+        <section className="w-full bg-white p-10 dark:bg-slate-800">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2">
             <TestimonyCard
               title="เขมนันท์ มณีศรี (จอม)"
