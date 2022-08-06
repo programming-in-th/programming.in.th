@@ -6,3 +6,13 @@ export interface IGeneralTask {
   score: number
   fullScore: number
 }
+
+export interface Score {
+  taskId: string
+  max: number
+}
+
+export interface Solved {
+  taskId: string
+  count: number
+}

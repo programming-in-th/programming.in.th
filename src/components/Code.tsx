@@ -19,12 +19,15 @@ const Code = ({ code, language }: CodeBlockProps) => {
       {({ style, tokens, getLineProps, getTokenProps }) => (
         <pre
           style={{ ...style }}
-          className={`language-${language} overflow-y-auto text-[13.6px]`}
+          className={`language-${language} h-[48rem] overflow-y-auto rounded-lg text-[13.6px]`}
         >
           <code className={`language-${language}`}>
             {tokens.map((line, i) => (
               <tr key={i} {...getLineProps({ line, key: i })}>
-                <td key={i + 'l'} className="w-8	select-none	pr-2 text-gray-500">
+                <td
+                  key={i + 'l'}
+                  className="w-8 select-none pr-2 text-gray-500"
+                >
                   {i + 1}
                 </td>
                 <td>
@@ -42,3 +45,7 @@ const Code = ({ code, language }: CodeBlockProps) => {
 }
 
 export default Code
+
+export const CodeSkeleton = () => (
+  <div className="my-[0.5em] h-[48rem] w-full overflow-y-auto rounded-lg bg-[#011627]"></div>
+)

@@ -2,13 +2,22 @@ import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
+import { useSWRConfig } from 'swr'
+
 import { IGeneralTask } from '@/types/tasks'
 
 export const TaskItem = (
-  task: IGeneralTask & { showTags: string[] | boolean }
+  task: IGeneralTask & { showTags: string[] | boolean } & {
+    bookmarked: boolean
+  }
 ) => {
+  const { mutate } = useSWRConfig()
   const [bookmark, setBookmark] = useState<boolean>(false)
   const [tagStatus, setTag] = useState<boolean>(false)
+
+  useEffect(() => {
+    setBookmark(task.bookmarked)
+  }, [task.bookmarked])
 
   useEffect(() => {
     if (typeof task.showTags === 'boolean') {
@@ -19,11 +28,9 @@ export const TaskItem = (
   return (
     <div className="group flex w-full items-center justify-between p-2">
       <Link href={`/tasks/${task.id}`}>
-        <a className="flex w-full rounded-xl px-6 py-3 font-display shadow-sm transition group-hover:shadow-md dark:bg-slate-700">
-          <div className="flex w-full flex-col ">
-            <p className="text-sm font-medium text-gray-500 dark:text-white">
-              {task.title}
-            </p>
+        <a className="flex w-full rounded-xl px-6 py-3 font-display shadow-md transition group-hover:shadow-lg dark:bg-slate-700">
+          <div className="flex w-full flex-col">
+            <p className="text-sm font-medium text-gray-500 dark:text-white">{task.title}</p>
             <p className="text-sm text-gray-400">{task.id}</p>
           </div>
           <div className="flex w-full items-center justify-center">
@@ -83,11 +90,27 @@ export const TaskItem = (
       <div className="w-14 p-4">
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          onClick={() => setBookmark(!bookmark)}
+          onClick={async () => {
+            setBookmark(!bookmark)
+
+            if (bookmark) {
+              await fetch(`/api/bookmarks`, {
+                method: 'DELETE',
+                body: task.id
+              })
+            } else {
+              await fetch(`/api/bookmarks`, {
+                method: 'POST',
+                body: task.id
+              })
+            }
+
+            mutate('/api/bookmarks')
+          }}
           className={`${
             bookmark
-              ? 'fill-gray-500 stroke-gray-500 dark:fill-amber-400 dark:stroke-amber-400'
-              : 'hidden stroke-gray-200 group-hover:block '
+              ? 'cursor-pointer fill-gray-500 stroke-gray-500 dark:fill-amber-400 dark:stroke-amber-400'
+              : 'hidden cursor-pointer stroke-gray-200 group-hover:block'
           }`}
           fill="none"
           viewBox="0 0 24 24"
