@@ -38,10 +38,14 @@ export const LeftBar = () => {
                   <button
                     className={clsx(
                       'flex h-9 w-full items-center justify-center rounded-md transition-colors',
-                      selected ? 'bg-gray-100' : 'hover:bg-gray-50'
+                      selected
+                        ? 'bg-gray-100 dark:bg-slate-700'
+                        : 'hover:bg-gray-50 dark:hover:bg-slate-600'
                     )}
                   >
-                    <p className="text-sm text-gray-500">{tabItem.label}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-200">
+                      {tabItem.label}
+                    </p>
                   </button>
                 )}
               </Tab>

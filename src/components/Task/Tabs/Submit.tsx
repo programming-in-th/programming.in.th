@@ -9,7 +9,7 @@ const SubmitTab = ({ task }: { task: Task }) => {
   if (status !== 'authenticated') {
     return (
       <div className="flex h-24 items-center justify-center">
-        <p className="text-center text-prog-gray-500">
+        <p className="text-center text-prog-gray-500 dark:text-gray-200">
           You must be logged in to submit code
         </p>
       </div>

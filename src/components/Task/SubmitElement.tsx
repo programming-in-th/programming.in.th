@@ -65,20 +65,20 @@ export const SubmitElement = ({ task }: { task: Task }) => {
   }
 
   return (
-    <div className="flex w-full flex-col gap-6 rounded-md text-prog-gray-500 shadow-md">
-      <div className="bg-white px-8 py-4">
+    <div className="flex w-full flex-col gap-6 rounded-md text-prog-gray-500 shadow-md dark:bg-slate-700 dark:text-gray-100">
+      <div className="bg-white px-8 py-4 dark:bg-slate-700">
         <div className="mb-6 flex items-center justify-between gap-4">
-          <h2 className="text-lg">Submit</h2>
+          <h2 className="text-lg ">Submit</h2>
           <div className="flex flex-wrap justify-end gap-2">
             {Languages.map(language => {
               return (
                 <div
                   key={language.extension}
                   className={clsx(
-                    'rounded-md border px-6 py-2 text-sm',
+                    'rounded-md border px-6 py-2 text-sm dark:border-slate-500',
                     file?.name?.toLowerCase()?.endsWith(language.extension)
-                      ? 'bg-prog-gray-500 text-white'
-                      : 'border-gray-300 text-prog-gray-500'
+                      ? 'bg-prog-gray-500 text-white dark:bg-slate-700'
+                      : 'border-gray-300 text-prog-gray-500 dark:text-slate-400'
                   )}
                 >
                   {language.title}
@@ -89,7 +89,7 @@ export const SubmitElement = ({ task }: { task: Task }) => {
         </div>
 
         {file && (
-          <pre className="rounded-mg my-4 h-96 w-full overflow-auto bg-slate-50 p-4 text-sm">
+          <pre className="rounded-mg my-4 h-96 w-full overflow-auto bg-slate-50 p-4 text-sm dark:bg-slate-600">
             {fileText}
           </pre>
         )}
@@ -97,15 +97,15 @@ export const SubmitElement = ({ task }: { task: Task }) => {
         <FileUpload file={file} setFile={setFile} />
       </div>
 
-      <div className="bg-prog-gray-100 px-8 py-4">
+      <div className="bg-prog-gray-100 px-8 py-4 dark:bg-slate-700">
         <div className="flex justify-end">
           <button
             onClick={onSubmit}
             className={clsx(
-              'rounded-md border px-8 py-2 transition-colors',
+              'rounded-md border px-8 py-2 transition-colors dark:border-slate-600',
               file && fileText
-                ? 'bg-prog-gray-500 text-white hover:bg-gray-600'
-                : 'cursor-not-allowed  bg-slate-50 text-gray-300'
+                ? 'bg-prog-gray-500 text-white dark:hover:bg-slate-600'
+                : 'cursor-not-allowed  bg-slate-50 text-gray-300 dark:bg-slate-500'
             )}
           >
             Submit

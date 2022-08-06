@@ -18,7 +18,7 @@ const SolutionTab = ({ solution }: { solution: MDXRemoteSerializeResult }) => {
             crossOrigin="anonymous"
           />
         </Head>
-        <div className="prose mt-4 w-full max-w-none">
+        <div className="prose mt-4 w-full max-w-none dark:text-gray-100">
           <MDXRemote
             {...solution}
             components={
