@@ -38,7 +38,7 @@ export const Footer = () => {
                 className={`${
                   `/${location}` == item.href
                     ? 'text-prog-primary-500 hover:text-blue-600'
-                    : 'text-prog-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-slate-300'
+                    : 'text-prog-gray-500 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300'
                 }`}
               >
                 {item.name}
@@ -48,10 +48,10 @@ export const Footer = () => {
         </div>
         <div className="flex w-full justify-center border-y-[0.5px]">
           <div className="flex max-w-sm flex-col items-center py-12">
-            <p className="my-2 font-bold text-gray-500 dark:text-white">
+            <p className="my-2 font-bold text-gray-500 dark:text-gray-100">
               PROGRAMMING.IN.TH
             </p>
-            <p className="text-center text-sm text-gray-500 dark:text-white">
+            <p className="text-center text-sm text-gray-500 dark:text-gray-100">
               โปรแกรมมิ่งอินทีเอช ศูนย์รวมของโจทย์และเนื้อหาสำหรับ
               การเขียนโปรแกรมเพื่อการแข่งขัน และวิทยาการคอมพิวเตอร์
             </p>
@@ -70,19 +70,19 @@ export const Footer = () => {
             )}
           </div>
         </div>
-        <div className="flex w-full flex-col justify-center py-10 px-8 font-display md:flex-row md:justify-between">
+        <div className="flex w-full flex-col justify-center px-8 py-10 font-display md:flex-row md:justify-between">
           <div className="flex justify-center space-x-4 md:justify-start">
             <Link href="https://www.facebook.com/programming.in.th/" passHref>
               <a target="_blank" rel="noreferrer">
-                <FacebookLogo className="text-[#64748B] dark:text-white" />
+                <FacebookLogo className="text-[#64748B] dark:text-gray-100" />
               </a>
             </Link>
             <Link href="https://github.com/programming-in-th/" passHref>
               <a target="_blank" rel="noreferrer">
-                <GitHubLogo className="text-[#64748B] dark:text-white" />
+                <GitHubLogo className="text-[#64748B] dark:text-gray-100" />
               </a>
             </Link>
-            <p className="w-full text-sm leading-4 text-gray-500 dark:text-white sm:w-80">
+            <p className="w-full text-sm leading-4 text-gray-500 dark:text-gray-100 sm:w-80">
               © 2019-{currentYear} the PROGRAMMING.IN.TH team{'\n'} We are open
               source on{' '}
               <Link
