@@ -26,7 +26,7 @@ const Landing = () => {
             <span className="mb-3 block text-prog-primary-500">
               ฝึกฝนทักษะการเขียนโปรแกรม
             </span>
-            <span className="text-prog-gray-500 dark:text-white">
+            <span className="text-prog-gray-500 dark:text-gray-100">
               ด้วยโจทย์ที่หลากหลาย
             </span>
           </p>
@@ -58,14 +58,14 @@ const Landing = () => {
             />
           </div>
 
-          <BGCurve className="absolute bottom-0 dark:text-slate-800" />
+          <BGCurve className="absolute bottom-0 text-white dark:text-slate-800" />
         </section>
 
         <section className="w-full bg-white pb-10 dark:bg-slate-800">
           <h2 className="mb-8 text-center text-xl font-semibold sm:text-2xl">
             <span className="text-prog-primary-500">ทำไมต้อง</span>
             <br />
-            <span className="text-prog-gray-500 dark:text-white">
+            <span className="text-prog-gray-500 dark:text-gray-200">
               Programming.in.th
             </span>
           </h2>
@@ -106,13 +106,13 @@ const Landing = () => {
           <div className="mx-auto grid max-w-6xl grid-cols-1 items-center justify-center bg-gradient-to-b from-prog-white-100 to-prog-white-500 dark:bg-none sm:grid-cols-2 lg:px-8 xl:px-36">
             <PeopleVector className="mx-auto w-full px-12" />
             <div className="flex flex-col items-center justify-center pb-6 text-center sm:pb-0 sm:pt-20">
-              <p className="font-light text-prog-gray-500 dark:text-gray-100">
+              <p className="font-light text-prog-gray-500 dark:text-gray-200">
                 จำนวนผู้ใช้กว่า
               </p>
               <div className="text-6xl font-semibold text-prog-primary-500">
                 <IncrementalNumber start={1} end={13071} />
               </div>
-              <p className="text-2xl font-semibold text-prog-gray-500 dark:text-gray-100">
+              <p className="text-2xl font-semibold text-prog-gray-500 dark:text-gray-200">
                 คน
               </p>
             </div>
@@ -151,7 +151,7 @@ const Landing = () => {
 
         <section className="flex w-full flex-col justify-center px-16 py-20 text-center">
           <p className="font-semibold leading-tight">
-            <span className="mb-1 block text-xl text-prog-gray-500 dark:text-white sm:text-2xl">
+            <span className="mb-1 block text-xl text-prog-gray-500 dark:text-gray-200 sm:text-2xl">
               วันนี้
             </span>
             <span className="text-2xl text-prog-primary-500 sm:text-4xl">

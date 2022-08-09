@@ -55,7 +55,9 @@ const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
       <div className="flex w-auto justify-center">
         <div className="flex min-h-screen w-full max-w-7xl flex-col items-center">
           <div className="flex w-full flex-col items-center pt-6 pb-10">
-            <p className="text-3xl text-gray-500 dark:text-white">Tasks</p>
+            <p className="text-3xl font-medium text-gray-500 dark:text-gray-100">
+              Tasks
+            </p>
             <p className="text-md text-gray-500 dark:text-gray-300">
               browse over 700+ tasks
             </p>

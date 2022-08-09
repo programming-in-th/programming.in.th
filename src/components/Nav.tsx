@@ -76,7 +76,7 @@ export const Nav = () => {
                     className={`text-sm font-medium ${
                       `/${location}` == item.href
                         ? 'text-prog-primary-500 hover:text-blue-600'
-                        : 'text-prog-gray-500 hover:text-gray-600 dark:text-white dark:hover:text-gray-300'
+                        : 'text-prog-gray-500 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300'
                     }`}
                   >
                     {item.name}
@@ -110,7 +110,7 @@ export const Nav = () => {
                       leaveTo="opacity-0 scale-95"
                     >
                       <Popover.Panel className="absolute right-2 z-50 mt-2 rounded-lg bg-white shadow-md dark:bg-slate-800">
-                        <div className="flex flex-col border-b border-gray-100 px-8 py-4 text-prog-gray-500 dark:border-slate-900 dark:text-white">
+                        <div className="flex flex-col border-b border-gray-100 px-8 py-4 text-prog-gray-500 dark:border-slate-900 dark:text-gray-100">
                           <p className="font-medium">{session.user.username}</p>
                           <p className="font-light">{session.user.email}</p>
                         </div>
@@ -118,7 +118,7 @@ export const Nav = () => {
                         <div className="px-8 py-4">
                           <button
                             onClick={() => signOut()}
-                            className="text-prog-gray-500 hover:text-gray-700 dark:text-white dark:hover:text-gray-400"
+                            className="text-prog-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-400"
                           >
                             Logout
                           </button>
@@ -163,7 +163,7 @@ export const Nav = () => {
                 <LogoDark />
               </div>
               <div className="-mr-2">
-                <Popover.Button className="inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600 dark:text-white">
+                <Popover.Button className="inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600 dark:text-gray-100">
                   <span className="sr-only">Close menu</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -195,7 +195,7 @@ export const Nav = () => {
                     />
                   </div>
 
-                  <div className="flex flex-col text-prog-gray-500 dark:text-white">
+                  <div className="flex flex-col text-prog-gray-500 dark:text-gray-100">
                     <p className="font-medium">{session.user.name}</p>
                     <p className="font-light">{session.user.email}</p>
                   </div>
@@ -208,7 +208,7 @@ export const Nav = () => {
                       key={item.name}
                       className={`font-sm block rounded-md px-3 py-2 text-base ${
                         `/${location}` == item.href
-                          ? 'bg-gray-200 text-gray-700 dark:bg-slate-500 dark:text-white'
+                          ? 'bg-gray-200 text-gray-700 dark:bg-slate-500 dark:text-prog-gray-100'
                           : 'text-gray-400 dark:text-gray-300'
                       }`}
                     >

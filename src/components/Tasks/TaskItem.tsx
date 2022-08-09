@@ -30,7 +30,9 @@ export const TaskItem = (
       <Link href={`/tasks/${task.id}`}>
         <a className="flex w-full rounded-xl px-6 py-3 font-display shadow-md transition group-hover:shadow-lg dark:bg-slate-700">
           <div className="flex w-full flex-col">
-            <p className="text-sm font-medium text-gray-500 dark:text-white">{task.title}</p>
+            <p className="text-sm font-medium text-gray-500 dark:text-gray-100">
+              {task.title}
+            </p>
             <p className="text-sm text-gray-400">{task.id}</p>
           </div>
           <div className="flex w-full items-center justify-center">
@@ -51,7 +53,7 @@ export const TaskItem = (
             })}
             {tagStatus !== true && (
               <p
-                className="text-sm text-gray-400 dark:text-gray-100"
+                className="text-sm text-gray-400 dark:text-gray-200"
                 onClick={event => {
                   event.preventDefault()
                   event.stopPropagation()
@@ -61,14 +63,14 @@ export const TaskItem = (
             )}
           </div>
           <div className="flex w-full items-center justify-center">
-            <p className="text-sm text-gray-500 dark:text-gray-100">
+            <p className="text-sm text-gray-500 dark:text-gray-200">
               {task.solved}
             </p>
           </div>
           <div className="mx-3 flex h-auto w-28 flex-none items-center justify-center">
             <div className="flex h-auto w-full flex-col items-center justify-around">
               <div className="relative h-full w-full">
-                <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
+                <div className="absolute h-1.5 w-full rounded-full bg-gray-200" />
                 <div
                   className={`absolute h-1.5 rounded-full ${
                     task.score === task.fullScore
@@ -80,7 +82,7 @@ export const TaskItem = (
                   }}
                 />
               </div>
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-100">
+              <p className="mt-2 text-sm text-gray-500 dark:text-gray-200">
                 {task.score} points
               </p>
             </div>
