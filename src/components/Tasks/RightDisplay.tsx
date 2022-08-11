@@ -34,7 +34,7 @@ export const RightDisplay = ({
       ...task,
       bookmarked: bookmarks && !error ? bookmarks.includes(task.id) : false
     }))
-  }, [bookmarks, error])
+  }, [tasks, bookmarks, error])
   return (
     <Tab.Panels className="flex w-full flex-col gap-8">
       <Tab.Panel>
