@@ -39,21 +39,20 @@ const Tasks = ({
 export default Tasks
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  const tasks = await prisma.task.findMany()
+
   return {
-    paths: [],
+    paths: tasks.reduce((acc, task) => {
+      return [
+        ...acc,
+        { params: { id: [task.id] } },
+        { params: { id: [task.id, 'submissions'] } },
+        { params: { id: [task.id, 'submit'] } },
+        { params: { id: [task.id, 'solution'] } }
+      ]
+    }, []),
     fallback: true
   }
-
-  // const tasks = await prisma.task.findMany()
-
-  // const paths = tasks.map(task => ({
-  //   params: { id: task.id }
-  // }))
-
-  // return {
-  //   paths,
-  //   fallback: true
-  // }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
