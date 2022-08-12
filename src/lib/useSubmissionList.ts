@@ -6,11 +6,6 @@ import fetcher from './fetcher'
 
 const PAGE_SIZE = 10
 
-type Response = {
-  data: IGeneralSubmission
-  nextCursor: number
-}
-
 const getKey = (pageIndex, previousPageData, taskId) => {
   // reached the end
   if (previousPageData && !previousPageData.data) return null
