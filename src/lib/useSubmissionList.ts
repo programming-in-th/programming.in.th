@@ -1,6 +1,7 @@
-import { IGeneralSubmission } from '@/types/submissions'
-import React from 'react'
 import useSWRInfinite from 'swr/infinite'
+
+import { IGeneralSubmission } from '@/types/submissions'
+
 import fetcher from './fetcher'
 
 const PAGE_SIZE = 10

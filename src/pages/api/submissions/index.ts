@@ -3,11 +3,11 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Session, unstable_getServerSession } from 'next-auth'
 import { createRouter } from 'next-connect'
 
+import { getInfiniteSubmission } from '@/lib/api/queries/getInfiniteSubmissions'
 import { compressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
 
 import { authOptions } from '../auth/[...nextauth]'
-import { getInfiniteSubmission } from '@/lib/api/queries/getInfiniteSubmissions'
 
 enum Filter {
   OWN = 'own',
