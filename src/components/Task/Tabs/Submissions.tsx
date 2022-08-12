@@ -1,13 +1,9 @@
 import Link from 'next/link'
 
-import { ChevronUpIcon } from '@heroicons/react/outline'
-import { Task, Submission } from '@prisma/client'
-import { ColumnDef } from '@tanstack/react-table'
+import { Task } from '@prisma/client'
 import dayjs from 'dayjs'
-import useSWR from 'swr'
 
-import fetcher from '@/lib/fetcher'
-import { IGeneralSubmission } from '@/types/submissions'
+import useSubmissionList from '@/lib/useSubmissionList'
 
 const Columns = [
   {
@@ -36,45 +32,30 @@ const Columns = [
   }
 ]
 
-const NewColumns: ColumnDef<Submission>[] = [
-  {
-    id: 'submittedAt',
-    cell: props => <span>SubmittedAt</span>
-  }
-]
-
-const L = () => {
-  return <h1>hi</h1>
-}
-
 const SubmissionsTab = ({ task }: { task: Task }) => {
-  // const table = useReactTable({ columns: NewColumns })
-  const { data, error } = useSWR<IGeneralSubmission[]>(
-    `/api/submissions?filter=task&taskId=${task.id}`,
-    fetcher
-  )
+  const { submissions, isLoadingMore, isReachingEnd, size, setSize } =
+    useSubmissionList(task.id)
 
   return (
-    <table className="w-full table-auto border-separate border-spacing-y-3 text-sm">
-      <thead className="text-gray-500 dark:text-white">
-        <tr>
-          {Columns.map(({ title, field }) => (
-            <th key={field} className="py-2 text-center font-light">
-              <button className="group flex w-full items-center justify-center gap-1">
-                <p className="text-gray-500 transition-colors group-hover:text-gray-600 dark:text-gray-100 dark:group-hover:text-gray-300">
-                  {title}
-                </p>
+    <div>
+      <table className="w-full table-auto border-separate border-spacing-y-3 text-sm">
+        <thead className="text-gray-500 dark:text-white">
+          <tr>
+            {Columns.map(({ title, field }) => (
+              <th key={field} className="py-2 text-center font-light">
+                <button className="group flex w-full items-center justify-center gap-1">
+                  <p className="text-gray-500 transition-colors group-hover:text-gray-600 dark:text-gray-100 dark:group-hover:text-gray-300">
+                    {title}
+                  </p>
 
-                <ChevronUpIcon className="h-3 w-3 text-gray-400 transition-colors group-hover:text-gray-500 dark:text-gray-50 dark:group-hover:text-gray-300" />
-              </button>
-            </th>
-          ))}
-        </tr>
-      </thead>
-      <tbody className="text-gray-500 dark:text-white">
-        {!error &&
-          data &&
-          data.map(sub => {
+                  {/* <ChevronUpIcon className="h-3 w-3 text-gray-400 transition-colors group-hover:text-gray-500 dark:text-gray-50 dark:group-hover:text-gray-300" /> */}
+                </button>
+              </th>
+            ))}
+          </tr>
+        </thead>
+        <tbody className="text-gray-500 dark:text-white">
+          {submissions.map(sub => {
             const dt = new Date(sub.submittedAt)
             return (
               <tr
@@ -99,7 +80,7 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
                   <Link href={`/submissions/${sub.id}`} passHref>
                     <a>
                       <p className="text-center font-medium">
-                        {sub.user.username}
+                        {sub.user?.username}
                       </p>
                     </a>
                   </Link>
@@ -164,8 +145,19 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
               </tr>
             )
           })}
-      </tbody>
-    </table>
+        </tbody>
+      </table>
+      <button
+        disabled={isLoadingMore || isReachingEnd}
+        onClick={() => setSize(size + 1)}
+      >
+        {isLoadingMore
+          ? 'Loading...'
+          : isReachingEnd
+          ? 'No more submissions'
+          : 'Load more'}
+      </button>
+    </div>
   )
 }
 

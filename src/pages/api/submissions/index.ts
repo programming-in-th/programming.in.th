@@ -7,6 +7,7 @@ import { compressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
 
 import { authOptions } from '../auth/[...nextauth]'
+import { getInfiniteSubmission } from '@/lib/api/queries/getInfiniteSubmissions'
 
 enum Filter {
   OWN = 'own',
@@ -51,13 +52,23 @@ router
     async (req, res) => {
       const { query, session } = req
 
-      const submission = await getPersonalizedSubmission(
-        String(query.filter),
-        session,
-        String(query.taskId)
-      )
+      if (query.filter === Filter.TASK) {
+        const infiniteSubmission = await getInfiniteSubmission(
+          String(query.taskId),
+          Number(query.cursor),
+          Number(query.limit)
+        )
 
-      res.status(200).json(submission)
+        res.status(200).json(infiniteSubmission)
+      } else {
+        const submission = await getPersonalizedSubmission(
+          String(query.filter),
+          session,
+          String(query.taskId)
+        )
+
+        res.status(200).json(submission)
+      }
     }
   )
   .put(
@@ -155,50 +166,7 @@ const getPersonalizedSubmission = async (
             submittedAt: true
           }
         })
-
-      case Filter.TASK:
-        return await prisma.submission.findMany({
-          orderBy: [
-            {
-              submittedAt: 'desc'
-            }
-          ],
-          where: {
-            taskId: String(taskId)
-          },
-          select: {
-            id: true,
-            score: true,
-            user: true,
-            language: true,
-            time: true,
-            memory: true,
-            submittedAt: true
-          }
-        })
     }
-  }
-
-  if (filter === Filter.TASK) {
-    return await prisma.submission.findMany({
-      orderBy: [
-        {
-          submittedAt: 'desc'
-        }
-      ],
-      where: {
-        taskId: String(taskId)
-      },
-      select: {
-        id: true,
-        score: true,
-        user: true,
-        language: true,
-        time: true,
-        memory: true,
-        submittedAt: true
-      }
-    })
   }
 
   return await prisma.submission.findMany({
