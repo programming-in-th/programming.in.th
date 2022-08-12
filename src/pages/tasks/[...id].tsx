@@ -41,10 +41,6 @@ export default Tasks
 export const getStaticPaths: GetStaticPaths = async () => {
   const tasks = await prisma.task.findMany()
 
-  const paths = tasks.map(task => ({
-    params: { id: [task.id] }
-  }))
-
   return {
     paths: tasks.reduce((acc, task) => {
       return [
