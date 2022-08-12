@@ -44,7 +44,7 @@ const NewColumns: ColumnDef<Submission>[] = [
 const MySubmissionsTab = ({ task }: { task: Task }) => {
   // const table = useReactTable({ columns: NewColumns })
   const { data, error } = useSWR<IGeneralSubmission[]>(
-    `/api/submissions?filter=own_task&taskId=${task.id}`,
+    `/api/submissions?filter=own&filter=task&taskId=${task.id}`,
     fetcher
   )
 

@@ -11,8 +11,7 @@ import { authOptions } from '../auth/[...nextauth]'
 
 enum Filter {
   OWN = 'own',
-  TASK = 'task',
-  OWN_TASK = 'own_task'
+  TASK = 'task'
 }
 
 const router = createRouter<
@@ -40,10 +39,7 @@ router
     async (req, res, next) => {
       const { query, session } = req
 
-      if (
-        (query.filter === Filter.OWN_TASK || query.filter === Filter.OWN) &&
-        !session
-      ) {
+      if (query.filter === Filter.OWN && !session) {
         throw new Error('Unauthorized')
       }
 
@@ -62,7 +58,7 @@ router
         res.status(200).json(infiniteSubmission)
       } else {
         const submission = await getPersonalizedSubmission(
-          String(query.filter),
+          Array.isArray(query.filter) ? query.filter : [query.filter],
           session,
           String(query.taskId)
         )
@@ -115,58 +111,33 @@ export default router.handler({
 })
 
 const getPersonalizedSubmission = async (
-  filter: string,
+  filter: string[],
   session: Session,
   taskId: string
 ) => {
   if (session) {
-    switch (filter) {
-      case Filter.OWN:
-        return await prisma.submission.findMany({
-          orderBy: [
-            {
-              submittedAt: 'desc'
-            }
-          ],
-          where: {
-            user: {
-              id: { equals: session.user.id }
-            }
-          },
-          select: {
-            id: true,
-            score: true,
-            user: true,
-            language: true,
-            time: true,
-            memory: true,
-            submittedAt: true
-          }
-        })
-      case Filter.OWN_TASK:
-        return await prisma.submission.findMany({
-          orderBy: [
-            {
-              submittedAt: 'desc'
-            }
-          ],
-          where: {
-            taskId: String(taskId),
-            user: {
-              id: { equals: session.user.id }
-            }
-          },
-          select: {
-            id: true,
-            score: true,
-            user: true,
-            language: true,
-            time: true,
-            memory: true,
-            submittedAt: true
-          }
-        })
-    }
+    return await prisma.submission.findMany({
+      where: {
+        ...(filter.includes(Filter.OWN) && {
+          user: { id: { equals: session.user.id } }
+        }),
+        ...(filter.includes(Filter.TASK) && { taskId })
+      },
+      orderBy: [
+        {
+          submittedAt: 'desc'
+        }
+      ],
+      select: {
+        id: true,
+        score: true,
+        user: true,
+        language: true,
+        time: true,
+        memory: true,
+        submittedAt: true
+      }
+    })
   }
 
   return await prisma.submission.findMany({
