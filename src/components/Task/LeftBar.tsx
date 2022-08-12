@@ -43,7 +43,7 @@ const Tabs = [
 
 export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
   const { data, error } = useSWR<IGeneralSubmission[]>(
-    task ? `/api/submissions?filter=own_task&taskId=${task.id}` : null,
+    task ? `/api/submissions?filter=own&filter=task&taskId=${task.id}` : null,
     fetcher
   )
 
