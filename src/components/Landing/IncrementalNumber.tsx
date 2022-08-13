@@ -1,4 +1,5 @@
-import { useEffect, useReducer, useRef } from 'react'
+import useInViewport from '@/lib/useInViewport'
+import { useRef } from 'react'
 
 import CountUp from 'react-countup'
 
@@ -8,35 +9,12 @@ interface IncrementalNumberProps {
 }
 
 export const IncrementalNumber = ({ start, end }: IncrementalNumberProps) => {
-  const interactive = useRef<HTMLDivElement>(null)
-  const [isShowingInterative, showInteractive] = useReducer(() => true, false)
-
-  useEffect(() => {
-    const detectInteractive = () => {
-      if (
-        typeof interactive.current === 'undefined' ||
-        interactive.current === null
-      )
-        return
-      let interactivePosition = interactive.current.getBoundingClientRect().top
-      if (interactivePosition === 0) return
-      if (interactivePosition > window.innerHeight / 2) return
-      showInteractive()
-      window.removeEventListener('scroll', detectInteractive)
-    }
-
-    window.addEventListener('scroll', detectInteractive, {
-      passive: true
-    })
-
-    detectInteractive()
-
-    return () => window.removeEventListener('scroll', detectInteractive)
-  }, [])
+  const childRefContainer = useRef<HTMLDivElement>(null)
+  const isRendered = useInViewport(childRefContainer)
 
   return (
-    <p ref={interactive}>
-      {isShowingInterative ? (
+    <p ref={childRefContainer}>
+      {isRendered ? (
         <CountUp
           start={start}
           end={end}
