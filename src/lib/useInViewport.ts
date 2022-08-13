@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, MutableRefObject } from 'react'
 
-const useInViewport = (ref: any) => {
+const useInViewport = (ref: MutableRefObject<HTMLDivElement>) => {
   const [isInViewport, setIsInViewport] = useState(false)
   const [isLoaded, setIsLoaded] = useState(false)
 

@@ -1,7 +1,8 @@
-import useInViewport from '@/lib/useInViewport'
 import { useRef } from 'react'
 
 import CountUp from 'react-countup'
+
+import useInViewport from '@/lib/useInViewport'
 
 interface IncrementalNumberProps {
   start: number
