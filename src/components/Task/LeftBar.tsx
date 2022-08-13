@@ -30,11 +30,6 @@ const Tabs = [
     url: 'submissions'
   },
   {
-    label: 'My Submissions',
-    value: 'mySubmissions',
-    url: 'mySubmissions'
-  },
-  {
     label: 'Solution',
     value: 'solution',
     url: 'solution'

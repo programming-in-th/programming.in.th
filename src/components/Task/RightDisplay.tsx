@@ -1,7 +1,6 @@
 import { Task } from '@prisma/client'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 
-import MySubmissionsTab from './Tabs/MySubmissions'
 import SolutionTab from './Tabs/Solution'
 import StatementTab from './Tabs/Statement'
 import SubmissionsTab from './Tabs/Submissions'
@@ -19,8 +18,6 @@ const component = (
       return <SubmitTab task={task} />
     case 'submissions':
       return <SubmissionsTab task={task} />
-    case 'mySubmissions':
-      return <MySubmissionsTab task={task} />
     case 'solution':
       return <SolutionTab solution={solution} />
   }
