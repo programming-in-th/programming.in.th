@@ -7,11 +7,13 @@ import { TaskItem } from './TaskItem'
 export const AllTasks = ({
   tasks,
   tag,
-  setTag
+  setTag,
+  condition
 }: {
-  tasks: (IGeneralTask & { bookmarked: boolean })[]
+  tasks: IGeneralTask[]
   tag: boolean
   setTag: Dispatch<SetStateAction<boolean>>
+  condition: (task: IGeneralTask) => boolean
 }) => {
   return (
     <div className="h-full w-full">
@@ -37,9 +39,12 @@ export const AllTasks = ({
         </div>
         <div className="w-14 px-4" />
       </div>
-      {tasks.map(context => (
-        <TaskItem {...context} showTags={tag} key={`task-${context.id}`} />
-      ))}
+      {tasks.map(
+        context =>
+          condition(context) && (
+            <TaskItem {...context} showTags={tag} key={`task-${context.id}`} />
+          )
+      )}
     </div>
   )
 }

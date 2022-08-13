@@ -4,7 +4,6 @@ import { InferGetStaticPropsType } from 'next'
 
 import { useRouter } from 'next/router'
 
-import { Tab } from '@headlessui/react'
 import useSWR from 'swr'
 
 import { PageLayout } from '@/components/Layout'
@@ -25,6 +24,10 @@ const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
     '/api/submissions/score',
     fetcher
   )
+  const { data: bookmarks, error: bookmarkErr } = useSWR<string[]>(
+    '/api/bookmarks',
+    fetcher
+  )
 
   const processedTask = useMemo(() => {
     return tasks.map(task => ({
@@ -36,19 +39,17 @@ const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
       score:
         score && !scoreErr
           ? score.find(item => item.taskId === task.id)?.max || 0
-          : 0
+          : 0,
+      bookmarked:
+        bookmarks && !bookmarkErr ? bookmarks.includes(task.id) : false,
+      tried:
+        score && !scoreErr
+          ? score.find(item => item.taskId === task.id) !== undefined
+          : false
     }))
-  }, [tasks, solved, score])
+  }, [tasks, solved, score, bookmarks])
 
   const [tag, setTag] = useState<boolean>(false)
-
-  const { isFallback, query, replace } = useRouter()
-
-  const onTabChange = useCallback((index: number) => {
-    replace({ query: { ...query, type: Tabs[index] } }, null, {
-      shallow: true
-    })
-  }, [])
 
   return (
     <PageLayout>
@@ -66,19 +67,9 @@ const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
               placeholder="search..."
             /> */}
           </div>
-          <div className="flex w-full">
-            <Tab.Group
-              defaultIndex={
-                Tabs.includes(query?.type as string)
-                  ? Tabs.findIndex(v => v === query?.type)
-                  : 0
-              }
-              onChange={onTabChange}
-              as={Fragment}
-            >
-              <LeftBar />
-              <RightDisplay tasks={processedTask} tag={tag} setTag={setTag} />
-            </Tab.Group>
+          <div className="flex w-full flex-col md:flex-row">
+            <LeftBar />
+            <RightDisplay tasks={processedTask} tag={tag} setTag={setTag} />
           </div>
         </div>
       </div>
@@ -100,7 +91,9 @@ export async function getStaticProps() {
           tags: [],
           solved: 0,
           score: 0,
-          fullScore: item.fullScore
+          fullScore: item.fullScore,
+          tried: false,
+          bookmarked: false
         }
       })
     }

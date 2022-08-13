@@ -5,6 +5,8 @@ export interface IGeneralTask {
   solved: number
   score: number
   fullScore: number
+  tried: boolean
+  bookmarked: boolean
 }
 
 export interface Score {
