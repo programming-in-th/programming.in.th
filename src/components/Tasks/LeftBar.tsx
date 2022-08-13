@@ -16,10 +16,10 @@ const Tabs = [
     label: 'Solved',
     value: 'solved'
   },
-  {
-    label: 'Archives',
-    value: 'archives'
-  },
+  // {
+  //   label: 'Archives',
+  //   value: 'archives'
+  // },
   {
     label: 'Bookmarked',
     value: 'bookmarked'
