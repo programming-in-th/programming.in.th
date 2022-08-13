@@ -44,8 +44,10 @@ export const LeftBar = () => {
                       ? null
                       : { type: tabItem.value }
                 }}
+                passHref
               >
-                <button
+                <a
+                  type="button"
                   className={clsx(
                     'flex h-9 w-full items-center justify-center rounded-md transition-colors',
                     tabItem.value === String(query?.type)
@@ -56,7 +58,7 @@ export const LeftBar = () => {
                   <p className="text-sm text-gray-500 dark:text-gray-200">
                     {tabItem.label}
                   </p>
-                </button>
+                </a>
               </Link>
             )
           })}
