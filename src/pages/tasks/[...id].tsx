@@ -39,6 +39,10 @@ const Tasks = ({
 export default Tasks
 
 export const getStaticPaths: GetStaticPaths = async () => {
+  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
+    return { paths: [], fallback: 'blocking' }
+  }
+
   const tasks = await prisma.task.findMany()
 
   return {
