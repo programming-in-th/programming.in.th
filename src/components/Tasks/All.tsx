@@ -18,7 +18,7 @@ export const AllTasks = ({
   return (
     <div className="h-full w-full">
       <div className="group flex w-full items-center justify-between px-2">
-        <div className="flex w-full px-6 font-display">
+        <div className="hidden w-full px-6 font-display md:flex">
           <div className="flex w-full flex-col">
             <p className="text-sm font-medium text-gray-400">Problem Title</p>
           </div>

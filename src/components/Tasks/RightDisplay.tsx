@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction, useMemo } from 'react'
 
+import { useRouter } from 'next/router'
+
 import { IGeneralTask } from '@/types/tasks'
 
 import { AllTasks } from './All'
-import { useRouter } from 'next/router'
 
 const ComingSoonTab = () => {
   return (

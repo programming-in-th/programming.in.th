@@ -1,8 +1,6 @@
-import { Fragment, useCallback, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { InferGetStaticPropsType } from 'next'
-
-import { useRouter } from 'next/router'
 
 import useSWR from 'swr'
 

@@ -1,9 +1,7 @@
-import { Fragment } from 'react'
-
-import { Tab } from '@headlessui/react'
-import clsx from 'clsx'
-import { Router, useRouter } from 'next/router'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+import clsx from 'clsx'
 
 const Tabs = [
   {
@@ -37,6 +35,7 @@ export const LeftBar = () => {
           {Tabs.map(tabItem => {
             return (
               <Link
+                key={tabItem.value}
                 href={{
                   pathname: '/tasks',
                   query:
@@ -64,9 +63,9 @@ export const LeftBar = () => {
           })}
         </div>
       </div>
-      <div className="w-full md:hidden">
+      <div className="w-full px-4 md:hidden">
         <select
-          className="my-2 mx-4 block w-full rounded-md border-gray-800 py-2 pl-3 text-base sm:text-sm"
+          className="my-2 block w-full rounded-md border-gray-800 py-2 pl-3 text-base sm:text-sm"
           onChange={({ target: { value } }) => {
             push({
               pathname: '/tasks',
@@ -77,6 +76,7 @@ export const LeftBar = () => {
           {Tabs.map(tabItem => {
             return (
               <option
+                key={tabItem.value}
                 selected={tabItem.value === String(query?.type)}
                 value={tabItem.value}
               >
