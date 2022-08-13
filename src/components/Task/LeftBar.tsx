@@ -37,12 +37,12 @@ const Tabs = [
 ]
 
 export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
-  const { data, error } = useSWR<IGeneralSubmission[]>(
+  const { data } = useSWR<IGeneralSubmission[]>(
     task ? `/api/submissions?filter=own&filter=task&taskId=${task.id}` : null,
     fetcher
   )
 
-  const { data: bookmark, error: errorBookmark } = useSWR<boolean>(
+  const { data: bookmark } = useSWR<boolean>(
     task ? `/api/bookmarks/task/${task.id}` : null,
     fetcher
   )
