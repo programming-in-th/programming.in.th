@@ -27,9 +27,9 @@ export const TaskItem = (
 
   return (
     <>
-      <div className="px-4 py-2">
+      <div className="px-4 py-2 md:hidden">
         <Link href={`/tasks/${task.id}`}>
-          <a className="flex w-full flex-col divide-y divide-gray-200 rounded-xl px-6 py-1 shadow-md transition dark:bg-slate-700 md:hidden">
+          <a className="flex w-full flex-col divide-y divide-gray-200 rounded-xl px-6 py-1 shadow-md transition dark:bg-slate-700">
             <div className="flex flex-col p-2">
               <p className="text-gray-500 dark:text-gray-200">{task.title}</p>
               <p className="text-sm font-light text-gray-400 ">{task.id}</p>
