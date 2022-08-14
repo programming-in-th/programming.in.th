@@ -1,3 +1,5 @@
+import prisma from '@/lib/prisma'
+
 export const getInfiniteSubmission = async (
   taskId: string,
   cursor: number,

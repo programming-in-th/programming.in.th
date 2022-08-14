@@ -20,7 +20,7 @@ export const Pagination = ({
             passHref
             scroll={false}
           >
-            <a className="flex items-center text-gray-400">
+            <a className="flex w-full items-center text-gray-400">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 className="h-4 w-4"
@@ -98,10 +98,14 @@ export const Pagination = ({
         <select
           className="px-4 py-2 md:hidden"
           onChange={({ target: { value } }) =>
-            push({
-              pathname: '/tasks',
-              query: { ...query, page: value }
-            })
+            push(
+              {
+                pathname: '/tasks',
+                query: { ...query, page: value }
+              },
+              null,
+              { scroll: false }
+            )
           }
         >
           {Array.from(Array(pageLimit + 1).keys())
@@ -120,7 +124,7 @@ export const Pagination = ({
             passHref
             scroll={false}
           >
-            <a className="flex items-center justify-end text-gray-400">
+            <a className="flex w-full items-center justify-end text-gray-400">
               <p className="mr-2 text-sm">Next</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
