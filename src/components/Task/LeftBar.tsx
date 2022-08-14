@@ -87,7 +87,7 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
         </div>
       </div>
       <select
-        className="mt-2 w-full px-4 py-2"
+        className="mt-2 w-full px-4 py-2 md:hidden"
         onChange={({ target: { value } }) =>
           push({ pathname: `/tasks/${task.id}/${value}` })
         }
