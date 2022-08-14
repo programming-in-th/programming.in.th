@@ -1,18 +1,25 @@
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 
+import dynamic from 'next/dynamic'
 import { useRouter } from 'next/router'
 
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
 
-import { getLanguage } from '@/utils/getFileExtension'
+import { getFileExtension } from '@/utils/getFileExtension'
+import { getPrismNameFromExtension } from '@/utils/language'
 
+import { CodeSkeleton } from '../Code'
 import { FileUpload } from './FileUpload'
 
 const Languages = [
   {
     title: 'C++',
     extension: '.cpp'
+  },
+  {
+    title: 'C',
+    extension: '.c'
   },
   {
     title: 'Python',
@@ -27,6 +34,10 @@ const Languages = [
     extension: '.rs'
   }
 ]
+
+const DynamicCode = dynamic(() => import('../Code'), {
+  suspense: true
+})
 
 export const SubmitElement = ({ task }: { task: Task }) => {
   const [file, setFile] = useState<File>()
@@ -50,7 +61,7 @@ export const SubmitElement = ({ task }: { task: Task }) => {
         body: JSON.stringify({
           taskId: task.id,
           code: [fileText],
-          language: getLanguage(file.name)
+          language: getFileExtension(file.name)
         })
       })
 
@@ -58,7 +69,6 @@ export const SubmitElement = ({ task }: { task: Task }) => {
         const resJson = await res.json()
         router.push(`/submissions/${resJson.id}`)
       } else {
-        // log error
         console.error(res)
       }
     }
@@ -88,11 +98,14 @@ export const SubmitElement = ({ task }: { task: Task }) => {
           </div>
         </div>
 
-        {file && (
-          <pre className="rounded-mg my-4 h-96 w-full overflow-auto bg-slate-50 p-4 text-sm dark:bg-slate-600">
-            {fileText}
-          </pre>
-        )}
+        <Suspense fallback={<CodeSkeleton />}>
+          {file && fileText && (
+            <DynamicCode
+              code={fileText}
+              language={getPrismNameFromExtension(getFileExtension(file.name))}
+            />
+          )}
+        </Suspense>
 
         <FileUpload file={file} setFile={setFile} />
       </div>
@@ -105,8 +118,9 @@ export const SubmitElement = ({ task }: { task: Task }) => {
               'rounded-md border px-8 py-2 transition-colors dark:border-slate-600',
               file && fileText
                 ? 'bg-prog-gray-500 text-white dark:hover:bg-slate-600'
-                : 'cursor-not-allowed  bg-slate-50 text-gray-300 dark:bg-slate-500'
+                : 'cursor-not-allowed bg-slate-50 text-gray-300 dark:bg-slate-500'
             )}
+            disabled={!file && !fileText}
           >
             Submit
           </button>
