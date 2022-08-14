@@ -11,7 +11,7 @@ const data = [
     path: 'prog/00',
     title: 'A+B Problem',
     type: 'normal',
-    id: 'a_plus_b'
+    id: '0000'
   },
   {
     type: 'normal',
@@ -114,14 +114,25 @@ const data = [
   },
   {
     title: 'Trik',
-    private: false,
     memoryLimit: 32,
+    private: false,
     path: 'prog/00',
     fullScore: 100,
     solved: 0,
     type: 'normal',
     timeLimit: 1.0,
     id: '0010'
+  },
+  {
+    path: 'ipst/62/may',
+    type: 'normal',
+    fullScore: 100,
+    solved: 0,
+    title: 'กุ๊ยจัดแถว',
+    private: false,
+    memoryLimit: 256,
+    timeLimit: 5.0,
+    id: 'o62_may09_judtaew'
   }
 ]
 
