@@ -5,7 +5,7 @@ const ThemeSwitch = () => {
   return (
     <select
       value={theme}
-      className="mt-1 block w-48 rounded-md border border-gray-800 py-2 pl-3 pr-10 text-base focus:outline-none sm:text-sm"
+      className="block w-28 rounded-md border border-gray-800 py-1 pl-3 text-base focus:outline-none sm:text-sm md:w-32"
       onChange={e => setTheme(e.target.value)}
     >
       <option value="system">System</option>
