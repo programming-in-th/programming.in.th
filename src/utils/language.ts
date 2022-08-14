@@ -12,7 +12,7 @@ export const getDisplayNameFromGrader = (name: string) => {
   return lang ? lang[1] : name
 }
 
-export const getPrismNameFromExtension = (ext: string) => {
+export const getLanguageFromExtension = (ext: string) => {
   const lang = languageData.find(l => l[0] === ext)
   return lang ? lang[2] : ext
 }

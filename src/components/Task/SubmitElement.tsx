@@ -7,7 +7,7 @@ import { Task } from '@prisma/client'
 import clsx from 'clsx'
 
 import { getFileExtension } from '@/utils/getFileExtension'
-import { getPrismNameFromExtension } from '@/utils/language'
+import { getLanguageFromExtension } from '@/utils/language'
 
 import { CodeSkeleton } from '../Code'
 import { FileUpload } from './FileUpload'
@@ -61,7 +61,7 @@ export const SubmitElement = ({ task }: { task: Task }) => {
         body: JSON.stringify({
           taskId: task.id,
           code: [fileText],
-          language: getFileExtension(file.name)
+          language: getLanguageFromExtension(getFileExtension(file.name))
         })
       })
 
@@ -102,7 +102,7 @@ export const SubmitElement = ({ task }: { task: Task }) => {
           {file && fileText && (
             <DynamicCode
               code={fileText}
-              language={getPrismNameFromExtension(getFileExtension(file.name))}
+              language={getLanguageFromExtension(getFileExtension(file.name))}
             />
           )}
         </Suspense>
