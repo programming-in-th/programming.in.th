@@ -81,10 +81,10 @@ CREATE TABLE "Submission" (
     "submittedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "time" INTEGER NOT NULL DEFAULT 0,
     "memory" INTEGER NOT NULL DEFAULT 0,
-    "code" TEXT[],
+    "code" BYTEA NOT NULL,
     "codeLength" INTEGER NOT NULL DEFAULT 0,
     "score" INTEGER NOT NULL DEFAULT 0,
-    "groups" JSONB,
+    "groups" JSONB NOT NULL,
     "language" TEXT NOT NULL,
     "userId" TEXT,
 
