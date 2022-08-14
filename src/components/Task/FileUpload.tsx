@@ -5,10 +5,10 @@ import clsx from 'clsx'
 import { useDropzone } from 'react-dropzone'
 
 import { formatBytes as formatBytesFunc } from '@/utils/formatSize'
-import { getLanguage } from '@/utils/getFileExtension'
+import { getFileExtension } from '@/utils/getFileExtension'
 import { truncate } from '@/utils/truncate'
 
-const ACCEPTED_LANGUAGES = ['.cpp', '.py', '.java', '.rs']
+const ACCEPTED_LANGUAGES = ['.cpp', '.py', '.java', '.rs', '.c']
 
 export const FileUpload = ({
   file,
@@ -25,7 +25,7 @@ export const FileUpload = ({
         'text/*': ACCEPTED_LANGUAGES
       },
       validator: currentFile => {
-        const extension = getLanguage(currentFile?.name ?? '')
+        const extension = getFileExtension(currentFile?.name ?? '')
 
         if (ACCEPTED_LANGUAGES.includes('.' + extension)) {
           return null
@@ -33,7 +33,7 @@ export const FileUpload = ({
           return {
             code: 'wrong-file-extension',
             message:
-              'Only files with the extension .cpp .py .java .rs are accepted'
+              'Only files with the extension .c .cpp .py .java .rs are accepted'
           }
         }
       },
@@ -86,7 +86,7 @@ export const FileUpload = ({
             ) : (
               <>
                 <p>Upload a file or drag and drop</p>
-                <p>.CPP .PY .JAVA .RS up to 10MB</p>
+                <p>.c .cpp .py .java .rs up to 4MB</p>
               </>
             )}
           </div>
