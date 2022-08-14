@@ -12,6 +12,7 @@ import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
 
 import { PieChart } from '../common/PieChart'
+import { useRouter } from 'next/router'
 
 const Tabs = [
   {
@@ -47,6 +48,8 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
     fetcher
   )
 
+  const { push } = useRouter()
+
   const maxScore = useMemo(() => {
     return data ? Math.max(...data.map(sub => sub.score), 0) : 0
   }, [data])
@@ -54,41 +57,51 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
   if (task === undefined) return <div>loading</div>
 
   return (
-    <section className="w-[14rem] flex-none">
-      <div className="flex flex-col">
-        <div className="flex items-center gap-2">
-          <button
-            onClick={async () => {
-              mutate(
-                `/api/bookmarks/task/${task.id}`,
-                async (state: boolean) => {
-                  await fetch(`/api/bookmarks`, {
-                    method: state ? 'POST' : 'DELETE',
-                    body: task.id
-                  })
-                  return state
-                },
-                { optimisticData: !bookmark }
-              )
-            }}
-          >
-            {bookmark ? (
-              <StarIconSolid className="h-5 w-5 text-gray-400 dark:text-amber-400" />
-            ) : (
-              <StarIconOutline className="h-5 w-5 text-gray-300" />
-            )}
-          </button>
+    <section className="w-full flex-none md:w-[14rem]">
+      <div className="flex flex-row-reverse justify-between space-x-2 px-2 md:flex-row md:justify-start md:px-0">
+        <button
+          className="mt-1 flex"
+          onClick={async () => {
+            mutate(
+              `/api/bookmarks/task/${task.id}`,
+              async (state: boolean) => {
+                await fetch(`/api/bookmarks`, {
+                  method: state ? 'POST' : 'DELETE',
+                  body: task.id
+                })
+                return state
+              },
+              { optimisticData: !bookmark }
+            )
+          }}
+        >
+          {bookmark ? (
+            <StarIconSolid className="h-5 w-5 text-gray-400 dark:text-amber-400" />
+          ) : (
+            <StarIconOutline className="h-5 w-5 text-gray-300" />
+          )}
+        </button>
+        <div className="flex flex-col">
           <h1 className="text-lg font-medium dark:text-white">{task.title}</h1>
-        </div>
-        <div className="flex items-center gap-2">
-          <div className="h-5 w-5" />
           <p className="font-light dark:text-white">{task.id}</p>
         </div>
       </div>
+      <select
+        className="mt-2 w-full px-4 py-2"
+        onChange={({ target: { value } }) =>
+          push({ pathname: `/tasks/${task.id}/${value}` })
+        }
+      >
+        {Tabs.map(tabItem => (
+          <option key={tabItem.value} value={tabItem.url}>
+            {tabItem.label}
+          </option>
+        ))}
+      </select>
 
-      <hr className="my-8" />
+      <hr className="my-8 hidden md:block" />
 
-      <div className="flex shrink flex-col font-display">
+      <div className="hidden shrink flex-col font-display md:flex">
         {Tabs.map(tabItem => {
           return (
             <Link href={`/tasks/${task.id}/${tabItem.url}`} key={tabItem.label}>
@@ -112,17 +125,17 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
         })}
       </div>
 
-      <hr className="my-8" />
+      <hr className="my-8 hidden md:block" />
 
-      <div className="flex flex-col items-center justify-center">
+      <div className="hidden flex-col items-center justify-center md:flex">
         <p className="mb-4 font-light dark:text-white">Your Score</p>
         {/* @TODO Login or show login button */}
         <PieChart points={maxScore} />
       </div>
 
-      <hr className="my-8" />
+      <hr className="my-8 hidden md:block" />
 
-      <div className="flex flex-col items-center justify-center">
+      <div className="hidden flex-col items-center justify-center md:flex">
         <a
           target="_blank"
           href="https://google.com"
