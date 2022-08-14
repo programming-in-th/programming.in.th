@@ -98,7 +98,7 @@ export const Footer = () => {
             </p>
           </div>
           <div className="flex items-center space-x-2 md:space-x-4">
-            <div className="flex h-full w-full items-center justify-center md:w-auto">
+            <div className="flex h-full w-full items-center md:w-auto">
               <DarkMode />
             </div>
             <div className="my-4 flex items-center justify-center md:my-0">
