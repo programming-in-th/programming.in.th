@@ -1,150 +1,73 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { Session, unstable_getServerSession } from 'next-auth'
-import { createRouter } from 'next-connect'
+import { unstable_getServerSession } from 'next-auth'
 
 import { getInfiniteSubmission } from '@/lib/api/queries/getInfiniteSubmissions'
+import {
+  Filter,
+  getPersonalizedSubmission
+} from '@/lib/api/queries/getPersonalizedSubmissions'
 import { compressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
+import { unauthorized, methodNotAllowed, ok } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
 
-enum Filter {
-  OWN = 'own',
-  TASK = 'task'
-}
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method === 'GET') {
+    const { query } = req
 
-const router = createRouter<
-  NextApiRequest & { session: Session },
-  NextApiResponse
->()
-
-router
-  .use(async (req, res, next) => {
-    const start = Date.now()
-    await next()
-    const end = Date.now()
-    console.log(`Request took ${end - start}ms`)
-  })
-  .use(async (req, res, next) => {
     const session = await unstable_getServerSession(req, res, authOptions)
 
-    if (session) {
-      req.session = session
+    if (query.filter === Filter.OWN && !session) {
+      return unauthorized(res)
     }
 
-    await next()
-  })
-  .get(
-    async (req, res, next) => {
-      const { query, session } = req
+    if (query.filter === Filter.TASK) {
+      const infiniteSubmission = await getInfiniteSubmission(
+        String(query.taskId),
+        Number(query.cursor),
+        Number(query.limit)
+      )
 
-      if (query.filter === Filter.OWN && !session) {
-        throw new Error('Unauthorized')
-      }
-
-      return next()
-    },
-    async (req, res) => {
-      const { query, session } = req
-
-      if (query.filter === Filter.TASK) {
-        const infiniteSubmission = await getInfiniteSubmission(
-          String(query.taskId),
-          Number(query.cursor),
-          Number(query.limit)
-        )
-
-        res.status(200).json(infiniteSubmission)
-      } else {
-        const submission = await getPersonalizedSubmission(
-          Array.isArray(query.filter) ? query.filter : [query.filter],
-          session,
-          String(query.taskId)
-        )
-
-        res.status(200).json(submission)
-      }
-    }
-  )
-  .put(
-    async (req, res, next) => {
-      if (!req.session) throw new Error('Unauthorized')
-      return next()
-    },
-    async (req, res) => {
-      const { taskId, code, language } = req.body
-
-      const session = req.session
-
-      const compressedCode = await compressCode(JSON.stringify(code))
-
-      try {
-        const submission = await prisma.submission.create({
-          data: {
-            task: { connect: { id: taskId } },
-            code: compressedCode,
-            language: language,
-            user: { connect: { id: session.user.id } },
-            groups: []
-          }
-        })
-
-        res.status(201).json(submission)
-      } catch (_) {
-        res.status(500)
-      }
-    }
-  )
-
-export default router.handler({
-  onError: (err, req, res) => {
-    if ((err as Error).message === 'Unauthorized') {
-      res.status(401).end('Unauthorized')
+      return ok(res, infiniteSubmission)
     } else {
-      res.status(500).end('Internal Server Error')
-    }
-  },
-  onNoMatch: (req, res) => {
-    res.status(404).end('Route Not Found')
-  }
-})
+      const submission = await getPersonalizedSubmission(
+        Array.isArray(query.filter) ? query.filter : [query.filter],
+        session,
+        String(query.taskId)
+      )
 
-const getPersonalizedSubmission = async (
-  filter: string[],
-  session: Session,
-  taskId: string
-) => {
-  if (session) {
-    return await prisma.submission.findMany({
-      where: {
-        ...(filter.includes(Filter.OWN) && {
-          user: { id: { equals: session.user.id } }
-        }),
-        ...(filter.includes(Filter.TASK) && { taskId })
-      },
-      orderBy: [
-        {
-          submittedAt: 'desc'
-        }
-      ],
-      select: {
-        id: true,
-        score: true,
-        user: true,
-        language: true,
-        time: true,
-        memory: true,
-        submittedAt: true
+      return ok(res, submission)
+    }
+  } else if (req.method === 'POST') {
+    const session = await unstable_getServerSession(req, res, authOptions)
+
+    if (!session) {
+      return unauthorized(res)
+    }
+
+    const {
+      body: { taskId, code, language }
+    } = req
+
+    const compressedCode = await compressCode(JSON.stringify(code))
+
+    const submission = await prisma.submission.create({
+      data: {
+        task: { connect: { id: taskId } },
+        code: compressedCode,
+        language: language,
+        user: { connect: { id: session.user.id } },
+        groups: []
       }
     })
+
+    return ok(res, submission)
   }
 
-  return await prisma.submission.findMany({
-    orderBy: [
-      {
-        submittedAt: 'desc'
-      }
-    ]
-  })
+  return methodNotAllowed(res, ['GET', 'POST'])
 }

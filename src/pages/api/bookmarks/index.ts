@@ -1,42 +1,27 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { Session, unstable_getServerSession } from 'next-auth'
-import { createRouter } from 'next-connect'
+import { unstable_getServerSession } from 'next-auth'
 
 import prisma from '@/lib/prisma'
+import { methodNotAllowed, ok, unauthorized } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
 
-const router = createRouter<
-  NextApiRequest & { session: Session },
-  NextApiResponse
->()
-
-router
-  .use(async (req, res, next) => {
-    const start = Date.now()
-    await next()
-    const end = Date.now()
-    console.log(`Request took ${end - start}ms`)
-  })
-  .use(async (req, res, next) => {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
+) {
+  if (req.method === 'GET') {
     const session = await unstable_getServerSession(req, res, authOptions)
 
-    if (session) {
-      req.session = session
+    if (!session) {
+      return unauthorized(res)
     }
 
-    await next()
-  })
-  .use(async (req, res, next) => {
-    if (!req.session) throw new Error('Unauthorized')
-    return next()
-  })
-  .get(async (req, res) => {
     const rawBookmark = await prisma.bookmark.findMany({
       where: {
         user: {
-          id: { equals: req.session.user.id }
+          id: { equals: session.user.id }
         }
       }
     })
@@ -45,39 +30,40 @@ router
       return bookmark.taskId
     })
 
-    res.status(200).json(bookmarks)
-  })
-  .post(async (req, res) => {
+    return ok(res, bookmarks)
+  } else if (req.method === 'POST') {
+    const session = await unstable_getServerSession(req, res, authOptions)
+
+    if (!session) {
+      return unauthorized(res)
+    }
+
     const bookmark = await prisma.bookmark.create({
       data: {
         Task: { connect: { id: String(req.body) } },
-        user: { connect: { id: req.session.user.id } }
+        user: { connect: { id: session.user.id } }
       }
     })
-    res.status(200).json(bookmark)
-  })
-  .delete(async (req, res) => {
+
+    return ok(res, bookmark)
+  } else if (req.method === 'DELETE') {
+    const session = await unstable_getServerSession(req, res, authOptions)
+
+    if (!session) {
+      return unauthorized(res)
+    }
+
     const bookmark = await prisma.bookmark.delete({
       where: {
         taskId_userId: {
           taskId: String(req.body),
-          userId: req.session.user.id
+          userId: session.user.id
         }
       }
     })
 
-    res.status(200).json(bookmark)
-  })
-
-export default router.handler({
-  onError: (err, req, res) => {
-    if ((err as Error).message === 'Unauthorized') {
-      res.status(401).end('Unauthorized')
-    } else {
-      res.status(500).end('Internal Server Error')
-    }
-  },
-  onNoMatch: (req, res) => {
-    res.status(404).end('Route Not Found')
+    return ok(res, bookmark)
   }
-})
+
+  return methodNotAllowed(res, ['GET', 'POST', 'DELETE'])
+}

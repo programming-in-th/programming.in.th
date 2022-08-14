@@ -4,31 +4,27 @@ import { Prisma } from '@prisma/client'
 import { unstable_getServerSession } from 'next-auth'
 
 import prisma from '@/lib/prisma'
+import { methodNotAllowed, ok, unauthorized } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
 
-// @TODO Redesign REST API
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { method } = req
+  if (req.method === 'GET') {
+    const session = await unstable_getServerSession(req, res, authOptions)
 
-  switch (method) {
-    case 'GET':
-      const session = await unstable_getServerSession(req, res, authOptions)
-      if (!session) {
-        res.status(401).end('Unauthorized')
-      }
+    if (!session) {
+      return unauthorized(res)
+    }
 
-      const maxScore = await prisma.$queryRaw(
-        Prisma.sql`SELECT "taskId", max(score) FROM "Submission" WHERE "userId" = ${session.user.id} GROUP BY "taskId";`
-      )
+    const maxScore = await prisma.$queryRaw(
+      Prisma.sql`SELECT "taskId", max(score) FROM "Submission" WHERE "userId" = ${session.user.id} GROUP BY "taskId";`
+    )
 
-      res.status(200).json(maxScore)
-      break
-    default:
-      res.setHeader('Allow', ['GET'])
-      res.status(405).end(`Method ${method} Not Allowed`)
+    return ok(res, maxScore)
   }
+
+  return methodNotAllowed(res, ['GET'])
 }

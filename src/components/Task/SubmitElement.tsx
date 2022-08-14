@@ -54,7 +54,7 @@ export const SubmitElement = ({ task }: { task: Task }) => {
   const onSubmit = async () => {
     if (file && fileText) {
       const res = await fetch('/api/submissions', {
-        method: 'PUT',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
