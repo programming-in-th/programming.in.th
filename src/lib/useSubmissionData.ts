@@ -24,25 +24,27 @@ const useSubmissionData = (id: number) => {
     )
 
     eventSource.onmessage = event => {
-      const data = JSON.parse(`${event.data}`)
+      const realtimeData = JSON.parse(`${event.data}`)
 
       if (
-        data.status === JUDGE_COMPLETED ||
-        data.status === JUDGE_ERROR ||
-        data.status === JUDGE_COMPILATION_ERROR
+        realtimeData.status === JUDGE_COMPLETED ||
+        realtimeData.status === JUDGE_ERROR ||
+        realtimeData.status === JUDGE_COMPILATION_ERROR
       ) {
         mutate(`/api/submissions/${id}`)
         eventSource.close()
       } else {
-        mutate(
-          `/api/submissions/${id}`,
-          async (submission: IGeneralSubmission) => {
-            return Object.assign({}, submission, data)
-          },
-          {
-            revalidate: false
-          }
-        )
+        if (data) {
+          mutate(
+            `/api/submissions/${id}`,
+            async (submission: IGeneralSubmission) => {
+              return Object.assign({}, submission, realtimeData)
+            },
+            {
+              revalidate: false
+            }
+          )
+        }
       }
     }
 
