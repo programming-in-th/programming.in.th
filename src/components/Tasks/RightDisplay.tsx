@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useMemo } from 'react'
 
-import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { IGeneralTask } from '@/types/tasks'
