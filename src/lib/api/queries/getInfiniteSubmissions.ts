@@ -31,7 +31,8 @@ export const getInfiniteSubmission = async (
       }
     })
 
-    const nextCursor = submissions[submissions.length - 1].id
+    const nextCursor =
+      submissions.length > 0 ? submissions[submissions.length - 1].id : null
 
     return { data: submissions, nextCursor }
   } else {
@@ -56,7 +57,8 @@ export const getInfiniteSubmission = async (
       }
     })
 
-    const nextCursor = submissions[submissions.length - 1].id
+    const nextCursor =
+      submissions.length > 0 ? submissions[submissions.length - 1].id : null
 
     return { data: submissions, nextCursor }
   }
