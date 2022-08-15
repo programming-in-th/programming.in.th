@@ -19,7 +19,6 @@ export default class Document extends NextDocument {
   render() {
     return (
       <Html lang="th">
-        <title>PROGRAMMING.IN.TH | β</title>
         <NextHead>
           <Head />
           <meta charSet="utf-8" />
