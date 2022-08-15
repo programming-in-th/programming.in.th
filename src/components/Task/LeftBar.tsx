@@ -1,6 +1,7 @@
 import { useMemo } from 'react'
 
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
@@ -12,7 +13,6 @@ import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
 
 import { PieChart } from '../common/PieChart'
-import { useRouter } from 'next/router'
 
 const Tabs = [
   {

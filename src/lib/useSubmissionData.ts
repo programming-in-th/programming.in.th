@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import useSWR, { useSWRConfig } from 'swr'
+import useSWR from 'swr'
 
 import { IGeneralSubmission } from '@/types/submissions'
 
