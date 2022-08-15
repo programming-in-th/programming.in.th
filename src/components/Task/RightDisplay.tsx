@@ -34,7 +34,7 @@ export const RightDisplay = ({
   type: string
 }) => {
   return (
-    <div className="flex min-w-0 shrink flex-col gap-8">
+    <div className="flex w-full min-w-0 shrink flex-col gap-8">
       {component(type, task, solution)}
     </div>
   )
