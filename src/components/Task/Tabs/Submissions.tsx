@@ -27,7 +27,7 @@ const Columns = [
   {
     title: 'Name',
     field: 'userId',
-    width: 'w-[16rem]',
+    width: 'w-[14rem]',
     child: (sub: IGeneralSubmission) => (
       <p className="truncate text-center font-medium">{sub.user?.username}</p>
     )
@@ -99,7 +99,10 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
         {Columns.map(column => (
           <p
             key={column.field}
-            className={clsx('flex justify-center text-sm', column.width)}
+            className={clsx(
+              'flex min-w-0 items-center justify-center px-2 text-sm',
+              column.width
+            )}
           >
             {column.title}
           </p>
@@ -113,7 +116,7 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
                 <div
                   key={column.title}
                   className={clsx(
-                    'flex min-w-0 items-center justify-center text-sm',
+                    'flex min-w-0 items-center justify-center px-2 text-sm',
                     column.width
                   )}
                 >
