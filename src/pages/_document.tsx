@@ -22,6 +22,7 @@ export default class Document extends NextDocument {
         <NextHead>
           <Head />
           <meta charSet="utf-8" />
+          <title>PROGRAMMING.IN.TH | β</title>
         </NextHead>
         <body>
           <Main />
