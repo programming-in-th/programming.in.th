@@ -45,7 +45,6 @@ pre[class*='language-'] {
   margin: 0.5em 0;
   padding: 1.3125rem;
   font-size: 14px;
-  display: grid; /* this code is really weird */
 }
 
 pre[class*='language-']::-moz-selection {
