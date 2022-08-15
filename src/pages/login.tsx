@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import { useRouter } from 'next/router'
 
+import { SignInErrorTypes } from 'next-auth/core/pages/signin'
 import { signIn } from 'next-auth/react'
 
 import { PageLayout } from '@/components/Layout'
 import { AuthGitHubLogo, AuthGoogleLogo } from '@/svg/Socials'
-import { SignInErrorTypes } from 'next-auth/core/pages/signin'
 
 // Direct copy from https://github.com/nextauthjs/next-auth/blob/main/packages/next-auth/src/core/pages/signin.tsx
 const errors: Record<SignInErrorTypes, string> = {

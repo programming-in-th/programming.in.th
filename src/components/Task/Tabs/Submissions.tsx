@@ -1,10 +1,10 @@
 import Link from 'next/link'
 
 import { Task } from '@prisma/client'
+import clsx from 'clsx'
 import dayjs from 'dayjs'
 
 import useSubmissionList from '@/lib/useSubmissionList'
-import clsx from 'clsx'
 import { IGeneralSubmission } from '@/types/submissions'
 
 const Columns = [
@@ -111,6 +111,7 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
             <a className="flex w-full rounded-xl py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700">
               {Columns.map(column => (
                 <div
+                  key={column.title}
                   className={clsx(
                     'flex min-w-0 items-center justify-center text-sm',
                     column.width
