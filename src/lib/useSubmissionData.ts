@@ -12,8 +12,7 @@ import {
 import fetcher from './fetcher'
 
 const useSubmissionData = (id: number) => {
-  const { mutate } = useSWRConfig()
-  const { data, error } = useSWR<IGeneralSubmission>(
+  const { data, error, mutate } = useSWR<IGeneralSubmission>(
     `/api/submissions/${id}`,
     fetcher
   )
@@ -31,13 +30,12 @@ const useSubmissionData = (id: number) => {
         realtimeData.status === JUDGE_ERROR ||
         realtimeData.status === JUDGE_COMPILATION_ERROR
       ) {
-        mutate(`/api/submissions/${id}`)
+        mutate()
         eventSource.close()
       } else {
         if (data) {
           mutate(
-            `/api/submissions/${id}`,
-            async (submission: IGeneralSubmission) => {
+            async submission => {
               return Object.assign({}, submission, realtimeData)
             },
             {
