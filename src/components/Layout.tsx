@@ -8,6 +8,7 @@ import { useSession } from 'next-auth/react'
 import { Footer } from './Footer'
 import { Loading } from './Loading'
 import { Nav } from './Nav'
+import Head from 'next/head'
 
 export const PageLayout = ({ children }) => {
   const router = useRouter()
@@ -32,6 +33,9 @@ export const PageLayout = ({ children }) => {
 
   return (
     <div className={clsx('w-full font-display', backgroundColor)}>
+      <Head>
+        <title>PROGRAMMING.IN.TH | β</title>
+      </Head>
       <Nav />
       <main className="flex min-h-screen w-screen flex-col">{children}</main>
       <Footer />

@@ -12,9 +12,6 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <ThemeProvider>
-        <Head>
-          <title>PROGRAMMING.IN.TH | β</title>
-        </Head>
         <Component {...pageProps} />
       </ThemeProvider>
     </SessionProvider>
