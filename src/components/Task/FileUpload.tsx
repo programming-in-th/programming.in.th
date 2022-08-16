@@ -37,13 +37,13 @@ export const FileUpload = ({
           }
         }
       },
-      onDropAccepted(acceptedFiles, event) {
+      onDropAccepted(acceptedFiles, _event) {
         if (acceptedFiles.length > 0) {
           setFileRejected(false)
           setFile(acceptedFiles[0])
         }
       },
-      onDropRejected(fileRejections, event) {
+      onDropRejected(_rejectedFiles, _event) {
         setFileRejected(true)
       }
     })

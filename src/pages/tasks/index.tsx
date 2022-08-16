@@ -11,8 +11,6 @@ import fetcher from '@/lib/fetcher'
 import prisma from '@/lib/prisma'
 import { Score, Solved } from '@/types/tasks'
 
-const Tabs = ['all', 'tried', 'solved', 'archives', 'bookmarked']
-
 const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { data: solved, error: solvedErr } = useSWR<Solved[]>(
     '/api/submissions/solved',
@@ -45,7 +43,7 @@ const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
           ? score.find(item => item.taskId === task.id) !== undefined
           : false
     }))
-  }, [tasks, solved, score, bookmarks])
+  }, [tasks, solved, score, bookmarks, bookmarkErr, scoreErr, solvedErr])
 
   const [tag, setTag] = useState<boolean>(false)
 

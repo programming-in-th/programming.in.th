@@ -7,16 +7,6 @@ import { IGeneralTask } from '@/types/tasks'
 import { AllTasks } from './All'
 import { Pagination } from './Pagination'
 
-const ComingSoonTab = () => {
-  return (
-    <div className="w-full">
-      <p className="text-center text-sm font-medium text-prog-gray-500">
-        Coming Soon...
-      </p>
-    </div>
-  )
-}
-
 const Tabs = [
   {
     condition: () => true,

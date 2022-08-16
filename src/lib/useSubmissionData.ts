@@ -33,16 +33,16 @@ const useSubmissionData = (id: number) => {
         mutate()
         eventSource.close()
       } else {
-        if (data) {
-          mutate(
-            async submission => {
-              return Object.assign({}, submission, realtimeData)
-            },
-            {
-              revalidate: false
-            }
-          )
-        }
+        mutate(
+          async submission => {
+            return submission
+              ? Object.assign({}, submission, realtimeData)
+              : submission
+          },
+          {
+            revalidate: false
+          }
+        )
       }
     }
 

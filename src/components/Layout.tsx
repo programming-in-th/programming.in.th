@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react'
 
+import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import clsx from 'clsx'
@@ -8,7 +9,6 @@ import { useSession } from 'next-auth/react'
 import { Footer } from './Footer'
 import { Loading } from './Loading'
 import { Nav } from './Nav'
-import Head from 'next/head'
 
 export const PageLayout = ({ children }) => {
   const router = useRouter()

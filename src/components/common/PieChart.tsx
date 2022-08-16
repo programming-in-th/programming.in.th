@@ -27,7 +27,7 @@ const PieChart = memo(function PieChart({ points }: { points: number }) {
             data={pieData}
             pieValue={data => data.value}
             outerRadius={half}
-            innerRadius={({ data }) => half - 12}
+            innerRadius={() => half - 12}
             cornerRadius={10}
             padAngle={0.005}
           >

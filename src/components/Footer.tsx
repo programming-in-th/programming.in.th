@@ -136,7 +136,12 @@ export const Footer = () => {
                 </defs>
               </svg>
               <div className="flex h-full items-center">
-                <Image src="/assets/img/IPST_Logo.png" height="34" width="30" />
+                <Image
+                  src="/assets/img/IPST_Logo.png"
+                  height="34"
+                  width="30"
+                  alt="IPST's Logo"
+                />
               </div>
             </div>
           </div>
