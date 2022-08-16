@@ -93,7 +93,11 @@ export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
         }
       >
         {Tabs.map(tabItem => (
-          <option key={tabItem.value} value={tabItem.url}>
+          <option
+            key={tabItem.value}
+            value={tabItem.url}
+            selected={type === tabItem.value}
+          >
             {tabItem.label}
           </option>
         ))}

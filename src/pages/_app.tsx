@@ -3,6 +3,7 @@ import { ThemeProvider } from 'next-themes'
 import '@/styles/index.css'
 import '@/styles/fonts.css'
 import '@/styles/style.scss'
+import Head from 'next/head'
 
 export default function App({
   Component,
