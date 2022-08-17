@@ -12,20 +12,16 @@ import { Nav } from './Nav'
 
 export const PageLayout = ({ children }) => {
   const router = useRouter()
-  const location = useMemo(() => {
-    return router.pathname.split('/')[1]
-  }, [router])
 
   const { status } = useSession()
 
   const backgroundColor = useMemo(() => {
-    switch (`/${location}`) {
-      case '/':
-        return 'bg-prog-gray-100 dark:bg-slate-900'
-      default:
-        return 'bg-white dark:bg-slate-800'
-    }
-  }, [location])
+    const location = router.pathname.split('/')[1]
+
+    return `/${location}` === `/`
+      ? 'bg-prog-gray-100 dark:bg-slate-900'
+      : 'bg-white dark:bg-slate-800'
+  }, [location, router])
 
   if (status === 'loading') {
     return <Loading />
