@@ -21,7 +21,7 @@ export const PageLayout = ({ children }) => {
     return `/${location}` === `/`
       ? 'bg-prog-gray-100 dark:bg-slate-900'
       : 'bg-white dark:bg-slate-800'
-  }, [location, router])
+  }, [router])
 
   if (status === 'loading') {
     return <Loading />
