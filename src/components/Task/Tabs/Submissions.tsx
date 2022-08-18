@@ -6,6 +6,7 @@ import dayjs from 'dayjs'
 
 import useSubmissionList from '@/lib/useSubmissionList'
 import { IGeneralSubmission } from '@/types/submissions'
+import { getDisplayNameFromGrader } from '@/utils/language'
 
 const Columns = [
   {
@@ -62,7 +63,9 @@ const Columns = [
     field: 'language',
     width: 'w-[6rem]',
     child: (sub: IGeneralSubmission) => (
-      <p className="text-center font-medium">{sub.language}</p>
+      <p className="text-center font-medium">
+        {getDisplayNameFromGrader(sub.language)}
+      </p>
     )
   },
   {
