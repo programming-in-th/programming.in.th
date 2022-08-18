@@ -4,7 +4,7 @@ import { IGeneralTask } from '@/types/tasks'
 
 import { TaskItem } from './TaskItem'
 
-export const AllTasks = ({
+export const Listing = ({
   tasks,
   tag,
   setTag

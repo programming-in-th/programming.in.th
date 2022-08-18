@@ -1,32 +1,36 @@
 import { useMemo, useState } from 'react'
 
-import { InferGetStaticPropsType } from 'next'
-
+import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 
 import { PageLayout } from '@/components/Layout'
-import { LeftBar } from '@/components/Tasks/LeftBar'
-import { RightDisplay } from '@/components/Tasks/RightDisplay'
+import { TasksList } from '@/components/Tasks/List'
+import { SideBar } from '@/components/Tasks/SideBar'
 import fetcher from '@/lib/fetcher'
 import prisma from '@/lib/prisma'
-import { Score, Solved } from '@/types/tasks'
+import { IGeneralTask, Score, Solved } from '@/types/tasks'
 
-const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
+const Tasks = ({ tasks }: { tasks: IGeneralTask[] }) => {
+  const [filteredTasks, setFilteredTasks] = useState<IGeneralTask[]>(tasks)
+  const { status } = useSession()
+
   const { data: solved, error: solvedErr } = useSWR<Solved[]>(
     '/api/submissions/solved',
     fetcher
   )
+
   const { data: score, error: scoreErr } = useSWR<Score[]>(
-    '/api/submissions/score',
+    status === 'authenticated' ? '/api/submissions/score' : null,
     fetcher
   )
+
   const { data: bookmarks, error: bookmarkErr } = useSWR<string[]>(
-    '/api/bookmarks',
+    status === 'authenticated' ? '/api/bookmarks' : null,
     fetcher
   )
 
   const processedTask = useMemo(() => {
-    return tasks.map(task => ({
+    return filteredTasks.map(task => ({
       ...task,
       solved:
         solved && !solvedErr
@@ -43,7 +47,15 @@ const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
           ? score.find(item => item.taskId === task.id) !== undefined
           : false
     }))
-  }, [tasks, solved, score, bookmarks, bookmarkErr, scoreErr, solvedErr])
+  }, [
+    filteredTasks,
+    solved,
+    score,
+    bookmarks,
+    bookmarkErr,
+    scoreErr,
+    solvedErr
+  ])
 
   const [tag, setTag] = useState<boolean>(false)
 
@@ -58,14 +70,29 @@ const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
             <p className="text-md text-gray-500 dark:text-gray-300">
               browse over 700+ tasks
             </p>
-            {/* <input
-              className="px-2 py-1 my-4 text-sm bg-gray-100 border-gray-300 rounded-md shadow-sm w-60"
-              placeholder="search..."
-            /> */}
+            <input
+              className="my-4 w-60 rounded-md border-gray-300 bg-gray-100 px-2 py-1 text-sm shadow-sm dark:border-slate-900 dark:bg-slate-700 dark:text-gray-100"
+              placeholder="Search..."
+              onChange={async e => {
+                const { value } = e.currentTarget
+
+                if (value) {
+                  const Fuse = (await import('fuse.js')).default
+                  const fuse = new Fuse(tasks, {
+                    keys: ['id', 'title'],
+                    threshold: 0.25
+                  })
+
+                  setFilteredTasks(fuse.search(value).map(val => val.item))
+                } else {
+                  setFilteredTasks(tasks)
+                }
+              }}
+            />
           </div>
           <div className="flex w-full flex-col md:flex-row">
-            <LeftBar />
-            <RightDisplay tasks={processedTask} tag={tag} setTag={setTag} />
+            <SideBar />
+            <TasksList tasks={processedTask} tag={tag} setTag={setTag} />
           </div>
         </div>
       </div>

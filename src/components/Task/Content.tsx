@@ -23,7 +23,7 @@ const component = (
   }
 }
 
-export const RightDisplay = ({
+export const TaskContent = ({
   task,
   solution,
   type

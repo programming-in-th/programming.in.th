@@ -4,8 +4,8 @@ import { useRouter } from 'next/router'
 
 import { Task } from '@prisma/client'
 
-import { RightDisplay } from '@/components/Task/RightDisplay'
-import { Layout } from '@/components/Tasks/Layout'
+import { TaskContent } from '@/components/Task/Content'
+import { TaskLayout } from '@/components/Task/Layout'
 import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
 
@@ -25,14 +25,14 @@ const Tasks = ({
   }
 
   return isFallback ? null : (
-    <Layout task={task} type={type}>
-      <RightDisplay
+    <TaskLayout task={task} type={type}>
+      <TaskContent
         task={task}
         submissionID={submissionID}
         solution={solution}
         type={type}
       />
-    </Layout>
+    </TaskLayout>
   )
 }
 

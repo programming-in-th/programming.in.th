@@ -4,16 +4,16 @@ import Head from 'next/head'
 import { useRouter } from 'next/router'
 
 import clsx from 'clsx'
-import { useSession } from 'next-auth/react'
+// import { useSession } from 'next-auth/react'
 
 import { Footer } from './Footer'
-import { Loading } from './Loading'
+// import { Loading } from './Loading'
 import { Nav } from './Nav'
 
 export const PageLayout = ({ children }) => {
   const router = useRouter()
 
-  const { status } = useSession()
+  // const { status } = useSession()
 
   const backgroundColor = useMemo(() => {
     const location = router.pathname.split('/')[1]
@@ -23,9 +23,9 @@ export const PageLayout = ({ children }) => {
       : 'bg-white dark:bg-slate-800'
   }, [router])
 
-  if (status === 'loading') {
-    return <Loading />
-  }
+  // if (status === 'loading') {
+  //   return <Loading />
+  // }
 
   return (
     <div className={clsx('w-full font-display', backgroundColor)}>

@@ -36,7 +36,8 @@ const Languages = [
 ]
 
 const DynamicCode = dynamic(() => import('../Code'), {
-  suspense: true
+  suspense: true,
+  ssr: false
 })
 
 export const SubmitElement = ({ task }: { task: Task }) => {

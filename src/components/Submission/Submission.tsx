@@ -12,7 +12,8 @@ import { CodeSkeleton } from '../Code'
 import { SubmissionGroup } from './Group'
 
 const DynamicCode = dynamic(() => import('../Code'), {
-  suspense: true
+  suspense: true,
+  ssr: false
 })
 
 const Submission = ({
@@ -33,7 +34,7 @@ const Submission = ({
       <Header />
       {submission && <Card sub={submission} task={task} isViewing={true} />}
       <Suspense fallback={<CodeSkeleton />}>
-        <DynamicCode code={submission.code[0]} language="cpp" />
+        <DynamicCode code={submission.code[0]} language={submission.language} />
       </Suspense>
       <SubmissionGroup groups={submission.groups} />
     </div>

@@ -7,6 +7,7 @@ import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
+import { useSession } from 'next-auth/react'
 import useSWR, { mutate } from 'swr'
 
 import fetcher from '@/lib/fetcher'
@@ -37,14 +38,20 @@ const Tabs = [
   }
 ]
 
-export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
+export const SideBar = ({ task, type }: { task: Task; type: string }) => {
+  const { status } = useSession()
+
   const { data } = useSWR<IGeneralSubmission[]>(
-    task ? `/api/submissions?filter=own&filter=task&taskId=${task.id}` : null,
+    task && status === 'authenticated'
+      ? `/api/submissions?filter=own&filter=task&taskId=${task.id}`
+      : null,
     fetcher
   )
 
   const { data: bookmark } = useSWR<boolean>(
-    task ? `/api/bookmarks/task/${task.id}` : null,
+    task && status === 'authenticated'
+      ? `/api/bookmarks/task/${task.id}`
+      : null,
     fetcher
   )
 

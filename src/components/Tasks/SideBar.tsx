@@ -6,7 +6,7 @@ import clsx from 'clsx'
 const Tabs = [
   {
     label: 'All',
-    value: 'undefined'
+    value: null
   },
   {
     label: 'Tried',
@@ -26,7 +26,7 @@ const Tabs = [
   }
 ]
 
-export const LeftBar = () => {
+export const SideBar = () => {
   const { query, push } = useRouter()
   return (
     <>
@@ -38,10 +38,7 @@ export const LeftBar = () => {
                 key={tabItem.value}
                 href={{
                   pathname: '/tasks',
-                  query:
-                    tabItem.value === 'undefined'
-                      ? null
-                      : { type: tabItem.value }
+                  query: tabItem.value && { type: tabItem.value }
                 }}
                 passHref
               >
@@ -69,7 +66,7 @@ export const LeftBar = () => {
           onChange={({ target: { value } }) => {
             push({
               pathname: '/tasks',
-              query: value === 'undefined' ? null : { type: value }
+              query: value && { type: value }
             })
           }}
         >
