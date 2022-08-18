@@ -7,13 +7,13 @@ import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
+import { useSession } from 'next-auth/react'
 import useSWR, { mutate } from 'swr'
 
 import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
 
 import { PieChart } from '../common/PieChart'
-import { useSession } from 'next-auth/react'
 
 const Tabs = [
   {
@@ -38,7 +38,7 @@ const Tabs = [
   }
 ]
 
-export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
+export const SideBar = ({ task, type }: { task: Task; type: string }) => {
   const { status } = useSession()
 
   const { data } = useSWR<IGeneralSubmission[]>(

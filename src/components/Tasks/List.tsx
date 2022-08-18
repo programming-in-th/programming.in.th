@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 
 import { IGeneralTask } from '@/types/tasks'
 
-import { AllTasks } from './All'
+import { Listing } from './All'
 import { Pagination } from './Pagination'
 
 const Tabs = [
@@ -33,7 +33,7 @@ const Tabs = [
 
 const LIMIT = 5
 
-export const RightDisplay = ({
+export const TasksList = ({
   tasks,
   tag,
   setTag
@@ -68,7 +68,7 @@ export const RightDisplay = ({
 
   return (
     <div className="flex w-full flex-col">
-      <AllTasks tasks={slicedTask} tag={tag} setTag={setTag} />
+      <Listing tasks={slicedTask} tag={tag} setTag={setTag} />
       <Pagination page={page} pageLimit={pageLimit} />
     </div>
   )

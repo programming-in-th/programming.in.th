@@ -2,15 +2,15 @@ import { useMemo, useState } from 'react'
 
 import { InferGetStaticPropsType } from 'next'
 
+import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 
 import { PageLayout } from '@/components/Layout'
-import { LeftBar } from '@/components/Tasks/LeftBar'
-import { RightDisplay } from '@/components/Tasks/RightDisplay'
+import { TasksList } from '@/components/Tasks/List'
+import { SideBar } from '@/components/Tasks/SideBar'
 import fetcher from '@/lib/fetcher'
 import prisma from '@/lib/prisma'
 import { Score, Solved } from '@/types/tasks'
-import { useSession } from 'next-auth/react'
 
 const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
   const { status } = useSession()
@@ -69,8 +69,8 @@ const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
             /> */}
           </div>
           <div className="flex w-full flex-col md:flex-row">
-            <LeftBar />
-            <RightDisplay tasks={processedTask} tag={tag} setTag={setTag} />
+            <SideBar />
+            <TasksList tasks={processedTask} tag={tag} setTag={setTag} />
           </div>
         </div>
       </div>

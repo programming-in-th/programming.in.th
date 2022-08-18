@@ -26,7 +26,7 @@ const Tabs = [
   }
 ]
 
-export const LeftBar = () => {
+export const SideBar = () => {
   const { query, push } = useRouter()
   return (
     <>
