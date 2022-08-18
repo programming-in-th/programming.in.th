@@ -10,7 +10,7 @@ import { Pagination } from './Pagination'
 const Tabs = [
   {
     condition: () => true,
-    value: 'undefined'
+    value: null
   },
   {
     condition: (task: IGeneralTask) =>
