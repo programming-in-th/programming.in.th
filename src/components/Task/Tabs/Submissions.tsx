@@ -16,7 +16,9 @@ const Columns = [
       const dt = new Date(sub.submittedAt)
       return (
         <div className="flex flex-col">
-          <p className="font-medium">{dayjs(dt).format('DD MMM YYYY')}</p>
+          <p className="font-medium text-gray-500 dark:text-white">
+            {dayjs(dt).format('DD MMM YYYY')}
+          </p>
           <p className="text-gray-400 dark:text-gray-300">
             {dayjs(dt).format('HH:mm:ss')}
           </p>
@@ -27,9 +29,11 @@ const Columns = [
   {
     title: 'Name',
     field: 'userId',
-    width: 'w-[14rem]',
+    width: 'w-[18em]',
     child: (sub: IGeneralSubmission) => (
-      <p className="truncate text-center font-medium">{sub.user?.username}</p>
+      <p className="truncate text-center font-medium text-gray-500 dark:text-white">
+        {sub.user?.username}
+      </p>
     )
   },
   {
@@ -60,17 +64,19 @@ const Columns = [
   {
     title: 'Language',
     field: 'language',
-    width: 'w-[6rem]',
+    width: 'w-[7rem]',
     child: (sub: IGeneralSubmission) => (
-      <p className="text-center font-medium">{sub.language}</p>
+      <p className="text-center font-medium text-gray-500 dark:text-white">
+        {sub.language}
+      </p>
     )
   },
   {
     title: 'Time',
     field: 'time',
-    width: 'w-[6rem]',
+    width: 'w-[7rem]',
     child: (sub: IGeneralSubmission) => (
-      <p className="text-center font-medium">
+      <p className="text-center font-medium text-gray-500 dark:text-white">
         {sub.time}{' '}
         <span className="font-light text-gray-400 dark:text-gray-300">ms</span>
       </p>
@@ -79,9 +85,9 @@ const Columns = [
   {
     title: 'Memory',
     field: 'memory',
-    width: 'w-[6rem]',
+    width: 'w-[7rem]',
     child: (sub: IGeneralSubmission) => (
-      <p className="text-center font-medium">
+      <p className="text-center font-medium text-gray-500 dark:text-white">
         {sub.memory}{' '}
         <span className="font-light text-gray-400 dark:text-gray-300">kB</span>
       </p>
@@ -100,7 +106,7 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
           <p
             key={column.field}
             className={clsx(
-              'flex min-w-0 items-center justify-center px-2 text-sm',
+              'flex min-w-0 items-center justify-center px-2 text-sm text-gray-400',
               column.width
             )}
           >
