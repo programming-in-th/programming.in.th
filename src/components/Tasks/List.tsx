@@ -10,7 +10,7 @@ import { Pagination } from './Pagination'
 const Tabs = [
   {
     condition: () => true,
-    value: 'undefined'
+    value: null
   },
   {
     condition: (task: IGeneralTask) =>
@@ -45,7 +45,12 @@ export const TasksList = ({
   const { query } = useRouter()
 
   const condition = useMemo(
-    () => Tabs.find(tab => tab.value === String(query?.type)).condition,
+    () =>
+      Tabs.find(
+        tab =>
+          (query?.type === undefined && tab.value === null) ||
+          tab.value === String(query?.type)
+      ).condition,
     [query]
   )
 

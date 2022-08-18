@@ -29,7 +29,7 @@ const Tabs = [
 export const SideBar = () => {
   const { query, push } = useRouter()
   return (
-    <>
+    <div>
       <div className="mx-4 hidden w-52 shrink flex-col font-display md:flex">
         <div className="flex shrink flex-col font-display">
           {Tabs.map(tabItem => {
@@ -46,7 +46,8 @@ export const SideBar = () => {
                   type="button"
                   className={clsx(
                     'flex h-9 w-full items-center justify-center rounded-md transition-colors',
-                    tabItem.value === String(query?.type)
+                    (query?.type === undefined && tabItem.value === null) ||
+                      tabItem.value === String(query?.type)
                       ? 'bg-gray-100 dark:bg-slate-700'
                       : 'hover:bg-gray-50 dark:hover:bg-slate-600'
                   )}
@@ -83,6 +84,6 @@ export const SideBar = () => {
           })}
         </select>
       </div>
-    </>
+    </div>
   )
 }

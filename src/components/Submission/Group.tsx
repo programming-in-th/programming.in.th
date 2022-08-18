@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { Accordion } from './Accordian'
 
-export const SubmissionGroup = ({ groups }) => {
+const SubmissionGroup = ({ groups }) => {
   const [open, setOpen] = useState(false)
   return (
     <div className="flex w-full flex-col bg-gray-50 p-5 dark:bg-slate-700 xl:p-20 ">
@@ -52,3 +52,5 @@ export const SubmissionGroup = ({ groups }) => {
     </div>
   )
 }
+
+export default SubmissionGroup
