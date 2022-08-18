@@ -6,7 +6,7 @@ import clsx from 'clsx'
 const Tabs = [
   {
     label: 'All',
-    value: 'undefined'
+    value: null
   },
   {
     label: 'Tried',
@@ -38,10 +38,7 @@ export const SideBar = () => {
                 key={tabItem.value}
                 href={{
                   pathname: '/tasks',
-                  query:
-                    tabItem.value === 'undefined'
-                      ? null
-                      : { type: tabItem.value }
+                  query: tabItem.value === null ? null : { type: tabItem.value }
                 }}
                 passHref
               >
