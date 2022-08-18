@@ -13,6 +13,7 @@ import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission } from '@/types/submissions'
 
 import { PieChart } from '../common/PieChart'
+import { useSession } from 'next-auth/react'
 
 const Tabs = [
   {
@@ -38,13 +39,19 @@ const Tabs = [
 ]
 
 export const LeftBar = ({ task, type }: { task: Task; type: string }) => {
+  const { status } = useSession()
+
   const { data } = useSWR<IGeneralSubmission[]>(
-    task ? `/api/submissions?filter=own&filter=task&taskId=${task.id}` : null,
+    task && status === 'authenticated'
+      ? `/api/submissions?filter=own&filter=task&taskId=${task.id}`
+      : null,
     fetcher
   )
 
   const { data: bookmark } = useSWR<boolean>(
-    task ? `/api/bookmarks/task/${task.id}` : null,
+    task && status === 'authenticated'
+      ? `/api/bookmarks/task/${task.id}`
+      : null,
     fetcher
   )
 

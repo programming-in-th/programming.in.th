@@ -10,18 +10,23 @@ import { RightDisplay } from '@/components/Tasks/RightDisplay'
 import fetcher from '@/lib/fetcher'
 import prisma from '@/lib/prisma'
 import { Score, Solved } from '@/types/tasks'
+import { useSession } from 'next-auth/react'
 
 const Tasks = ({ tasks }: InferGetStaticPropsType<typeof getStaticProps>) => {
+  const { status } = useSession()
+
   const { data: solved, error: solvedErr } = useSWR<Solved[]>(
     '/api/submissions/solved',
     fetcher
   )
+
   const { data: score, error: scoreErr } = useSWR<Score[]>(
-    '/api/submissions/score',
+    status === 'authenticated' ? '/api/submissions/score' : null,
     fetcher
   )
+
   const { data: bookmarks, error: bookmarkErr } = useSWR<string[]>(
-    '/api/bookmarks',
+    status === 'authenticated' ? '/api/bookmarks' : null,
     fetcher
   )
 
