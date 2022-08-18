@@ -23,6 +23,7 @@ specifiers:
   eslint-plugin-import: ^2.26.0
   eslint-plugin-unused-imports: ^2.0.0
   framer-motion: ^6.5.1
+  fuse.js: ^6.6.2
   husky: ^8.0.1
   next: ^12.2.0
   next-auth: ^4.10.3
@@ -68,6 +69,7 @@ dependencies:
   concurrently: 7.2.2
   dayjs: 1.11.4
   framer-motion: 6.5.1_biqbaboplfbrettd7655fr4n2y
+  fuse.js: 6.6.2
   next: 12.2.0_b7sksnfkdyiidz7vzaadim75qm
   next-auth: 4.10.3_biqbaboplfbrettd7655fr4n2y
   next-mdx-remote: 4.1.0_biqbaboplfbrettd7655fr4n2y
@@ -3385,6 +3387,14 @@ packages:
         integrity: sha512-xckBUXyTIqT97tq2x2AMb+g163b5JFysYk0x4qxNFwbfQkmNZoiRHb6sPzI9/QV33WeuvVYBUIiD4NzNIyqaRQ==
       }
     dev: true
+
+  /fuse.js/6.6.2:
+    resolution:
+      {
+        integrity: sha512-cJaJkxCCxC8qIIcPBF9yGxY0W/tVZS3uEISDxhYIdtk8OL93pe+6Zj7LjCqVV4dzbqcriOZ+kQ/NE4RXZHsIGA==
+      }
+    engines: { node: '>=10' }
+    dev: false
 
   /get-caller-file/2.0.5:
     resolution:

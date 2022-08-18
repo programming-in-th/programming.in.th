@@ -17,6 +17,7 @@
     "concurrently": "^7.2.2",
     "dayjs": "^1.11.4",
     "framer-motion": "^6.5.1",
+    "fuse.js": "^6.6.2",
     "next": "^12.2.0",
     "next-auth": "^4.10.3",
     "next-mdx-remote": "^4.1.0",
