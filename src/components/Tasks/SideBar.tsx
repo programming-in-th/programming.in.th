@@ -38,7 +38,7 @@ export const SideBar = () => {
                 key={tabItem.value}
                 href={{
                   pathname: '/tasks',
-                  query: tabItem.value === null ? null : { type: tabItem.value }
+                  query: tabItem.value && { type: tabItem.value }
                 }}
                 passHref
               >
@@ -66,7 +66,7 @@ export const SideBar = () => {
           onChange={({ target: { value } }) => {
             push({
               pathname: '/tasks',
-              query: value === 'undefined' ? null : { type: value }
+              query: value && { type: value }
             })
           }}
         >
