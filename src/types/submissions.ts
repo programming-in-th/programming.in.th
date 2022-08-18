@@ -4,7 +4,7 @@ export interface IGeneralSubmission {
   id: number
   user: User
   score: number
-  language: String
+  language: string
   time: number
   memory: number
   submittedAt: Date
