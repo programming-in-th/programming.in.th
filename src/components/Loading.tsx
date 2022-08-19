@@ -542,3 +542,518 @@ export const Loading = () => {
     </div>
   )
 }
+
+export const DarkLoading = () => {
+  const initState = true
+  const refreshTime = 1
+  const [state, setState] = useState(initState)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setState(s => !s)
+    }, 1300)
+
+    return () => clearInterval(id)
+  }, [setState])
+
+  return (
+    <div className="flex h-screen w-screen flex-col items-center justify-center bg-slate-700">
+      <motion.svg
+        viewBox="0 0 877 250"
+        className="-my-16 w-80 stroke-current text-white"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M108.174 214.006C91.2684 214.006 77.6069 200.259 77.6069 183.439C77.6069 166.533 91.3537 152.871 108.174 152.871C124.995 152.871 138.742 166.618 138.742 183.439C138.742 200.259 125.08 214.006 108.174 214.006ZM108.174 166.959C99.1237 166.959 91.6953 174.388 91.6953 183.439C91.6953 192.489 99.1237 199.918 108.174 199.918C117.225 199.918 124.654 192.489 124.654 183.439C124.654 174.302 117.31 166.959 108.174 166.959Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M163.584 118.06L119.148 162.502L129.111 172.464L173.547 128.022L163.584 118.06Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M52.727 118.331L42.7651 128.293L86.7182 172.246L96.68 162.284L52.727 118.331Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M239.021 42.615L195.973 85.6685L205.936 95.6303L248.984 52.5769L239.021 42.615Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M451.333 224.935C447.405 224.935 444.246 221.776 444.246 217.849V169.863C444.246 165.935 447.405 162.776 451.333 162.776C455.261 162.776 458.42 165.935 458.42 169.863V217.849C458.42 221.776 455.261 224.935 451.333 224.935Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M475.582 248.758C458.591 248.758 444.758 234.925 444.758 217.934C444.758 214.006 447.918 210.847 451.845 210.847C455.773 210.847 458.932 214.006 458.932 217.934C458.932 227.156 466.446 234.584 475.582 234.584C484.803 234.584 492.232 227.07 492.232 217.934C492.232 214.006 495.391 210.847 499.319 210.847C503.246 210.847 506.406 214.006 506.406 217.934C506.32 234.925 492.573 248.758 475.582 248.758Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M481.473 200.43H454.15C450.223 200.43 447.063 197.271 447.063 193.343C447.063 189.416 450.223 186.257 454.15 186.257H481.473C485.401 186.257 488.56 189.416 488.56 193.343C488.56 197.271 485.401 200.43 481.473 200.43Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M8.019 182.841C4.09133 182.841 0.932129 179.682 0.932129 175.754V107.02C0.932129 103.092 4.09133 99.9331 8.019 99.9331C11.9467 99.9331 15.1059 103.092 15.1059 107.02V175.754C15.1059 179.682 11.9467 182.841 8.019 182.841Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M8.019 213.921C4.09133 213.921 0.932129 210.762 0.932129 206.834V138.1C0.932129 134.172 4.09133 131.013 8.019 131.013C11.9467 131.013 15.1059 134.172 15.1059 138.1V206.834C15.1059 210.762 11.9467 213.921 8.019 213.921Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M413.678 137.673C396.772 137.673 383.111 123.926 383.111 107.106C383.111 90.2849 396.858 76.5381 413.678 76.5381C430.499 76.5381 444.246 90.2849 444.246 107.106C444.246 123.926 430.584 137.673 413.678 137.673ZM413.678 90.6264C404.628 90.6264 397.199 98.0548 397.199 107.106C397.199 116.156 404.628 123.585 413.678 123.585C422.729 123.585 430.157 116.156 430.157 107.106C430.157 98.0548 422.814 90.6264 413.678 90.6264Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M438.184 138.612C434.256 138.612 431.097 135.453 431.097 131.525V83.5395C431.097 79.6118 434.256 76.4526 438.184 76.4526C442.111 76.4526 445.27 79.6118 445.27 83.5395V131.525C445.27 135.453 442.111 138.612 438.184 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M260.67 138.612C243.679 138.612 229.847 124.78 229.847 107.789C229.847 103.861 233.006 100.702 236.934 100.702C240.861 100.702 244.02 103.861 244.02 107.789C244.02 117.01 251.534 124.438 260.67 124.438C269.806 124.438 277.32 117.01 277.32 107.789C277.32 103.861 280.479 100.702 284.407 100.702C288.335 100.702 291.494 103.861 291.494 107.789C291.494 124.78 277.662 138.612 260.67 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M284.322 114.363C280.394 114.363 277.235 111.204 277.235 107.276V61.1689C277.235 57.2413 280.394 54.082 284.322 54.082C288.249 54.082 291.409 57.2413 291.409 61.1689V107.276C291.409 111.204 288.249 114.363 284.322 114.363Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M284.322 84.308C280.394 84.308 277.235 81.1488 277.235 77.2211V31.1137C277.235 27.1861 280.394 24.0269 284.322 24.0269C288.249 24.0269 291.409 27.1861 291.409 31.1137V77.2211C291.409 81.1488 288.249 84.308 284.322 84.308Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M846.063 136.99C829.157 136.99 815.496 123.243 815.496 106.422C815.496 89.5165 829.242 75.855 846.063 75.855C862.884 75.855 876.631 89.6018 876.631 106.422C876.631 123.243 862.884 136.99 846.063 136.99ZM846.063 89.9433C837.012 89.9433 829.584 97.3718 829.584 106.422C829.584 115.473 837.012 122.902 846.063 122.902C855.114 122.902 862.542 115.473 862.542 106.422C862.542 97.3718 855.114 89.9433 846.063 89.9433Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M845.892 182.841C828.901 182.841 815.069 169.009 815.069 152.018C815.069 148.09 818.228 144.931 822.156 144.931C826.083 144.931 829.243 148.09 829.243 152.018C829.243 161.239 836.756 168.667 845.892 168.667C855.114 168.667 862.542 161.154 862.542 152.018C862.542 148.09 865.701 144.931 869.629 144.931C873.557 144.931 876.716 148.09 876.716 152.018C876.716 169.009 862.884 182.841 845.892 182.841Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M869.544 158.592C865.616 158.592 862.457 155.433 862.457 151.505V105.398C862.457 101.47 865.616 98.311 869.544 98.311C873.472 98.311 876.631 101.47 876.631 105.398V151.505C876.631 155.433 873.472 158.592 869.544 158.592Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M131.911 112.399C127.983 112.399 124.824 109.24 124.824 105.312C124.824 96.0909 117.31 88.6625 108.174 88.6625C98.9527 88.6625 91.5243 96.1763 91.5243 105.312C91.5243 109.24 88.3651 112.399 84.4375 112.399C80.5098 112.399 77.3506 109.24 77.3506 105.312C77.3506 88.321 91.1828 74.4888 108.174 74.4888C125.166 74.4888 138.998 88.321 138.998 105.312C138.998 109.24 135.839 112.399 131.911 112.399Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M84.267 138.612C80.3394 138.612 77.1802 135.453 77.1802 131.525V106.081C77.1802 102.153 80.3394 98.9941 84.267 98.9941C88.1947 98.9941 91.3539 102.153 91.3539 106.081V131.525C91.3539 135.453 88.1947 138.612 84.267 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M744.968 138.612C741.041 138.612 737.881 135.453 737.881 131.525V83.5395C737.881 79.6118 741.041 76.4526 744.968 76.4526C748.896 76.4526 752.055 79.6118 752.055 83.5395V131.525C752.055 135.453 748.896 138.612 744.968 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M792.869 113.766C788.941 113.766 785.782 110.606 785.782 106.679C785.782 97.4572 778.268 90.0288 769.132 90.0288C759.996 90.0288 752.482 97.5426 752.482 106.679C752.482 110.606 749.323 113.766 745.395 113.766C741.468 113.766 738.309 110.606 738.309 106.679C738.309 89.6872 752.141 75.855 769.132 75.855C786.124 75.855 799.956 89.6872 799.956 106.679C799.87 110.606 796.711 113.766 792.869 113.766Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M792.954 137.673C789.026 137.673 785.867 134.514 785.867 130.586V105.227C785.867 101.299 789.026 98.1401 792.954 98.1401C796.882 98.1401 800.041 101.299 800.041 105.227V130.671C800.041 134.514 796.882 137.673 792.954 137.673Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M345.969 248.416C342.042 248.416 338.882 245.257 338.882 241.329V193.343C338.882 189.416 342.042 186.257 345.969 186.257C349.897 186.257 353.056 189.416 353.056 193.343V241.329C352.971 245.257 349.811 248.416 345.969 248.416Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M393.784 224.253C389.856 224.253 386.697 221.093 386.697 217.166C386.697 207.944 379.183 200.516 370.047 200.516C360.826 200.516 353.397 208.03 353.397 217.166C353.397 221.093 350.238 224.253 346.31 224.253C342.383 224.253 339.224 221.093 339.224 217.166C339.224 200.174 353.056 186.342 370.047 186.342C387.039 186.342 400.871 200.174 400.871 217.166C400.871 221.093 397.712 224.253 393.784 224.253Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M393.955 248.416C390.027 248.416 386.868 245.257 386.868 241.329V215.885C386.868 211.957 390.027 208.798 393.955 208.798C397.882 208.798 401.041 211.957 401.041 215.885V241.329C400.956 245.257 397.797 248.416 393.955 248.416Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M466.873 138.612C462.945 138.612 459.786 135.453 459.786 131.525V83.5395C459.786 79.6118 462.945 76.4526 466.873 76.4526C470.801 76.4526 473.96 79.6118 473.96 83.5395V131.525C473.874 135.453 470.715 138.612 466.873 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M514.346 113.936C510.419 113.936 507.26 110.777 507.26 106.85C507.26 97.6281 499.746 90.1997 490.61 90.1997C481.388 90.1997 473.96 97.7134 473.96 106.85C473.96 110.777 470.801 113.936 466.873 113.936C462.945 113.936 459.786 110.777 459.786 106.85C459.786 89.8581 473.618 76.0259 490.61 76.0259C507.601 76.0259 521.433 89.8581 521.433 106.85C521.433 110.777 518.274 113.936 514.346 113.936Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M561.82 113.936C557.893 113.936 554.733 110.777 554.733 106.85C554.733 97.6281 547.22 90.1997 538.083 90.1997C528.862 90.1997 521.434 97.7134 521.434 106.85C521.434 110.777 518.274 113.936 514.347 113.936C510.419 113.936 507.26 110.777 507.26 106.85C507.26 89.8581 521.092 76.0259 538.083 76.0259C555.075 76.0259 568.907 89.8581 568.907 106.85C568.907 110.777 565.748 113.936 561.82 113.936Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M514.347 138.612C510.419 138.612 507.26 135.453 507.26 131.525V106.081C507.26 102.153 510.419 98.9941 514.347 98.9941C518.274 98.9941 521.434 102.153 521.434 106.081V131.525C521.434 135.453 518.274 138.612 514.347 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M561.82 138.612C557.893 138.612 554.733 135.453 554.733 131.525V106.081C554.733 102.153 557.893 98.9941 561.82 98.9941C565.748 98.9941 568.907 102.153 568.907 106.081V131.525C568.907 135.453 565.748 138.612 561.82 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M591.619 138.612C587.691 138.612 584.532 135.453 584.532 131.525V83.5395C584.532 79.6118 587.691 76.4526 591.619 76.4526C595.547 76.4526 598.706 79.6118 598.706 83.5395V131.525C598.706 135.453 595.547 138.612 591.619 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M639.093 113.936C635.165 113.936 632.006 110.777 632.006 106.85C632.006 97.6281 624.492 90.1997 615.356 90.1997C606.134 90.1997 598.706 97.7134 598.706 106.85C598.706 110.777 595.547 113.936 591.619 113.936C587.691 113.936 584.532 110.777 584.532 106.85C584.532 89.8581 598.364 76.0259 615.356 76.0259C632.347 76.0259 646.179 89.8581 646.179 106.85C646.179 110.777 643.02 113.936 639.093 113.936Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M686.566 113.936C682.638 113.936 679.479 110.777 679.479 106.85C679.479 97.6281 671.965 90.1997 662.829 90.1997C653.693 90.1997 646.179 97.7134 646.179 106.85C646.179 110.777 643.02 113.936 639.092 113.936C635.165 113.936 632.005 110.777 632.005 106.85C632.005 89.8581 645.838 76.0259 662.829 76.0259C679.82 76.0259 693.653 89.8581 693.653 106.85C693.653 110.777 690.493 113.936 686.566 113.936Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M639.092 138.612C635.165 138.612 632.005 135.453 632.005 131.525V106.081C632.005 102.153 635.165 98.9941 639.092 98.9941C643.02 98.9941 646.179 102.153 646.179 106.081V131.525C646.179 135.453 643.02 138.612 639.092 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M686.566 138.612C682.638 138.612 679.479 135.453 679.479 131.525V106.081C679.479 102.153 682.638 98.9941 686.566 98.9941C690.494 98.9941 693.653 102.153 693.653 106.081V131.525C693.653 135.453 690.494 138.612 686.566 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M361.338 112.656C357.411 112.656 354.251 109.496 354.251 105.569C354.251 96.3473 346.738 88.9189 337.601 88.9189C328.465 88.9189 320.952 96.4327 320.952 105.569C320.952 109.496 317.792 112.656 313.865 112.656C309.937 112.656 306.778 109.496 306.778 105.569C306.778 88.5774 320.61 74.7451 337.601 74.7451C354.593 74.7451 368.425 88.5774 368.425 105.569C368.425 109.496 365.266 112.656 361.338 112.656Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M313.95 138.612C310.022 138.612 306.863 135.453 306.863 131.525V106.081C306.863 102.153 310.022 98.9941 313.95 98.9941C317.878 98.9941 321.037 102.153 321.037 106.081V131.525C321.037 135.453 317.878 138.612 313.95 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M715.852 138.612C711.925 138.612 708.766 135.453 708.766 131.525V83.5395C708.766 79.6118 711.925 76.4526 715.852 76.4526C719.78 76.4526 722.939 79.6118 722.939 83.5395V131.525C722.854 135.453 719.695 138.612 715.852 138.612Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M715.34 71.7566C719.49 71.7566 722.854 68.3925 722.854 64.2428C722.854 60.093 719.49 56.729 715.34 56.729C711.19 56.729 707.826 60.093 707.826 64.2428C707.826 68.3925 711.19 71.7566 715.34 71.7566Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M576.335 224.253C572.407 224.253 569.248 221.093 569.248 217.166C569.248 207.944 561.734 200.516 552.598 200.516C543.462 200.516 535.948 208.03 535.948 217.166C535.948 221.093 532.789 224.253 528.861 224.253C524.934 224.253 521.774 221.093 521.774 217.166C521.774 200.174 535.607 186.342 552.598 186.342C569.589 186.342 583.422 200.174 583.422 217.166C583.422 221.093 580.262 224.253 576.335 224.253Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M576.506 248.416C572.578 248.416 569.419 245.257 569.419 241.329V217.763C569.419 213.836 572.578 210.677 576.506 210.677C580.434 210.677 583.593 213.836 583.593 217.763V241.329C583.593 245.257 580.434 248.416 576.506 248.416Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M528.52 248.416C524.592 248.416 521.433 245.257 521.433 241.329V166.96C521.433 163.032 524.592 159.873 528.52 159.873C532.448 159.873 535.607 163.032 535.607 166.96V241.329C535.607 245.257 532.448 248.416 528.52 248.416Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M313.95 248.416C310.022 248.416 306.863 245.257 306.863 241.329V193.343C306.863 189.416 310.022 186.256 313.95 186.256C317.878 186.256 321.037 189.416 321.037 193.343V241.329C321.037 245.257 317.878 248.416 313.95 248.416Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M313.438 182.499C317.587 182.499 320.951 179.135 320.951 174.986C320.951 170.836 317.587 167.472 313.438 167.472C309.288 167.472 305.924 170.836 305.924 174.986C305.924 179.135 309.288 182.499 313.438 182.499Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M284.321 249.355C288.471 249.355 291.835 245.991 291.835 241.841C291.835 237.692 288.471 234.328 284.321 234.328C280.172 234.328 276.808 237.692 276.808 241.841C276.808 245.991 280.172 249.355 284.321 249.355Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M422.644 249.355C426.793 249.355 430.157 245.991 430.157 241.841C430.157 237.692 426.793 234.328 422.644 234.328C418.494 234.328 415.13 237.692 415.13 241.841C415.13 245.991 418.494 249.355 422.644 249.355Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M31.5851 137.673C14.679 137.673 1.01758 123.926 1.01758 107.106C1.01758 90.2849 14.7644 76.5381 31.5851 76.5381C48.4057 76.5381 62.1525 90.2849 62.1525 107.106C62.1525 123.926 48.4911 137.673 31.5851 137.673ZM31.5851 90.6264C22.5343 90.6264 15.1059 98.0548 15.1059 107.106C15.1059 116.156 22.5343 123.585 31.5851 123.585C40.6358 123.585 48.0642 116.156 48.0642 107.106C48.0642 98.0548 40.6358 90.6264 31.5851 90.6264Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M260.755 61.5104C243.849 61.5104 230.188 47.7636 230.188 30.943C230.188 14.1223 243.935 0.375488 260.755 0.375488C277.662 0.375488 291.323 14.1223 291.323 30.943C291.323 47.7636 277.662 61.5104 260.755 61.5104ZM260.755 14.4639C251.705 14.4639 244.276 21.8923 244.276 30.943C244.276 39.9937 251.705 47.4221 260.755 47.4221C269.806 47.4221 277.235 39.9937 277.235 30.943C277.235 21.8923 269.892 14.4639 260.755 14.4639Z"
+        />
+        <motion.path
+          variants={black}
+          initial={initState ? 'visible' : 'hidden'}
+          animate={state ? 'visible' : 'hidden'}
+          transition={{
+            default: { duration: refreshTime, ease: 'easeInOut' },
+            fill: { duration: refreshTime, ease: [1, 0, 0.8, 1] }
+          }}
+          d="M184.508 137.673C167.602 137.673 153.94 123.926 153.94 107.106C153.94 90.2849 167.687 76.5381 184.508 76.5381C201.329 76.5381 215.075 90.2849 215.075 107.106C215.075 123.926 201.414 137.673 184.508 137.673ZM184.508 90.6264C175.457 90.6264 168.029 98.0548 168.029 107.106C168.029 116.156 175.457 123.585 184.508 123.585C193.559 123.585 200.987 116.156 200.987 107.106C200.987 98.0548 193.559 90.6264 184.508 90.6264Z"
+        />
+      </motion.svg>
+    </div>
+  )
+}
