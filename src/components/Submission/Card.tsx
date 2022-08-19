@@ -7,7 +7,7 @@ import dayjs from 'dayjs'
 import { IGeneralSubmission } from '@/types/submissions'
 import { getDisplayNameFromGrader } from '@/utils/language'
 
-const Columns = [
+const getColumn = (isViewing: boolean) => [
   {
     title: 'Time',
     field: 'submittedAt',
@@ -62,6 +62,16 @@ const Columns = [
     )
   },
   {
+    title: 'Status',
+    field: 'status',
+    width: isViewing ? 'w-[14rem]' : 'hidden',
+    child: (sub: IGeneralSubmission) => (
+      <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
+        {sub.status}
+      </p>
+    )
+  },
+  {
     title: 'Language',
     field: 'language',
     width: 'w-[7rem]',
@@ -95,7 +105,8 @@ const Columns = [
   }
 ]
 
-export const Header = () => {
+export const Header = ({ isViewing = false }: { isViewing?: boolean }) => {
+  const Columns = getColumn(isViewing)
   return (
     <div className="hidden w-full md:flex">
       {Columns.map(column => (
@@ -133,7 +144,9 @@ export const Card = ({
   task: Task
   isViewing?: boolean
 }) => {
-  const [stime, name, score, lang, time, mem] = Columns.map(item =>
+  console.log(isViewing)
+  const Columns = getColumn(isViewing)
+  const [stime, name, score, _status, lang, time, mem] = Columns.map(item =>
     item.child(sub, task)
   )
   return (

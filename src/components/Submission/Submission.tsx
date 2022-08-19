@@ -31,8 +31,8 @@ const Submission = ({
 
   return (
     <div className="w-full min-w-0">
-      <Header />
-      {submission && <Card sub={submission} task={task} isViewing={true} />}
+      <Header isViewing />
+      {submission && <Card sub={submission} task={task} isViewing />}
       <Suspense fallback={<CodeSkeleton />}>
         <DynamicCode code={submission.code[0]} language={submission.language} />
       </Suspense>
