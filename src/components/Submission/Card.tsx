@@ -144,7 +144,6 @@ export const Card = ({
   task: Task
   isViewing?: boolean
 }) => {
-  console.log(isViewing)
   const Columns = getColumn(isViewing)
   const [stime, name, score, _status, lang, time, mem] = Columns.map(item =>
     item.child(sub, task)
