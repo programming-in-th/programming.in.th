@@ -1,5 +1,5 @@
 // Map ['Extension', 'Display Name', 'Grader and Prism Format']
-const languageData = [
+export const languageData = [
   ['cpp', 'C++', 'cpp'],
   ['c', 'C', 'c'],
   ['py', 'Python 3', 'python'],

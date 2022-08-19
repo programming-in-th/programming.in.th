@@ -7,33 +7,10 @@ import { Task } from '@prisma/client'
 import clsx from 'clsx'
 
 import { getFileExtension } from '@/utils/getFileExtension'
-import { getLanguageFromExtension } from '@/utils/language'
+import { getLanguageFromExtension, languageData } from '@/utils/language'
 
 import { CodeSkeleton } from '../Code'
 import { FileUpload } from './FileUpload'
-
-const Languages = [
-  {
-    title: 'C++',
-    extension: '.cpp'
-  },
-  {
-    title: 'C',
-    extension: '.c'
-  },
-  {
-    title: 'Python',
-    extension: '.py'
-  },
-  {
-    title: 'Java',
-    extension: '.java'
-  },
-  {
-    title: 'Rust',
-    extension: '.rs'
-  }
-]
 
 const DynamicCode = dynamic(() => import('../Code'), {
   suspense: true,
@@ -81,18 +58,18 @@ export const SubmitElement = ({ task }: { task: Task }) => {
         <div className="mb-6 flex items-center justify-between gap-4">
           <h2 className="text-lg ">Submit</h2>
           <div className="flex flex-wrap justify-end gap-2">
-            {Languages.map(language => {
+            {languageData.map(language => {
               return (
                 <div
-                  key={language.extension}
+                  key={language[0]}
                   className={clsx(
                     'rounded-md border px-6 py-2 text-sm dark:border-slate-500',
-                    file?.name?.toLowerCase()?.endsWith(language.extension)
+                    file?.name?.toLowerCase()?.endsWith(language[0])
                       ? 'bg-prog-gray-500 text-white dark:bg-slate-700'
                       : 'border-gray-300 text-prog-gray-500 dark:text-slate-400'
                   )}
                 >
-                  {language.title}
+                  {language[1]}
                 </div>
               )
             })}
