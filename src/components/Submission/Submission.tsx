@@ -23,6 +23,7 @@ const Submission = ({
   task: Task
   submissionID: number
 }) => {
+  console.log(task, submissionID)
   const { submission, isLoading } = useSubmissionData(submissionID)
 
   if (isLoading || task === undefined) {
