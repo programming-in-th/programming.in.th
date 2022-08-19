@@ -13,7 +13,7 @@ import fetcher from './fetcher'
 
 const useSubmissionData = (id: number) => {
   const { data, error, mutate } = useSWR<IGeneralSubmission>(
-    `/api/submissions/${id}`,
+    id && `/api/submissions/${id}`,
     fetcher
   )
 

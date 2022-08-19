@@ -61,7 +61,7 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
     return data ? Math.max(...data.map(sub => sub.score), 0) : 0
   }, [data])
 
-  if (task === undefined) return <div>loading</div>
+  // if (task === undefined) return <div>loading</div>
 
   return (
     <section className="w-full flex-none md:w-[14rem]">
@@ -88,34 +88,57 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
             <StarIconOutline className="h-5 w-5 text-gray-300" />
           )}
         </button>
-        <div className="flex flex-col">
-          <h1 className="text-lg font-medium dark:text-white">{task.title}</h1>
-          <p className="font-light dark:text-white">{task.id}</p>
+        <div
+          className={clsx(
+            'flex w-full flex-col',
+            task === undefined && 'animate-pulse'
+          )}
+        >
+          <h1
+            className={clsx(
+              'h-6 w-full text-lg font-medium dark:text-white',
+              task === undefined && 'rounded bg-slate-700'
+            )}
+          >
+            {task?.title}
+          </h1>
+          <p
+            className={clsx(
+              'mt-1 h-5 w-full font-light dark:text-white',
+              task === undefined && 'rounded bg-slate-700'
+            )}
+          >
+            {task?.id}
+          </p>
         </div>
       </div>
       <select
         className="mt-2 w-full px-4 py-2 md:hidden"
         onChange={({ target: { value } }) =>
-          push({ pathname: `/tasks/${task.id}/${value}` })
+          push({ pathname: `/tasks/${task?.id}/${value}` })
         }
       >
-        {Tabs.map(tabItem => (
-          <option
-            key={tabItem.value}
-            value={tabItem.url}
-            selected={type === tabItem.value}
-          >
-            {tabItem.label}
-          </option>
-        ))}
+        {type &&
+          Tabs.map(tabItem => (
+            <option
+              key={tabItem.value}
+              value={tabItem.url}
+              selected={type === tabItem.value}
+            >
+              {tabItem.label}
+            </option>
+          ))}
       </select>
 
-      <hr className="my-8 hidden md:block" />
+      <hr className="my-4 hidden md:block" />
 
       <div className="hidden shrink flex-col font-display md:flex">
         {Tabs.map(tabItem => {
           return (
-            <Link href={`/tasks/${task.id}/${tabItem.url}`} key={tabItem.label}>
+            <Link
+              href={`/tasks/${task?.id}/${tabItem.url}`}
+              key={tabItem.label}
+            >
               <a>
                 <button
                   key={tabItem.label}
