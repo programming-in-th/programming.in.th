@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 
 import { useSession } from 'next-auth/react'
+import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
 import { PageLayout } from '@/components/Layout'
@@ -12,6 +13,7 @@ import { IGeneralTask, Score, Solved } from '@/types/tasks'
 
 const Tasks = ({ tasks }: { tasks: IGeneralTask[] }) => {
   const [filteredTasks, setFilteredTasks] = useState<IGeneralTask[]>(tasks)
+  const { push, query } = useRouter()
   const { status } = useSession()
 
   const { data: solved, error: solvedErr } = useSWR<Solved[]>(
@@ -74,8 +76,11 @@ const Tasks = ({ tasks }: { tasks: IGeneralTask[] }) => {
               className="my-4 w-60 rounded-md border-gray-300 bg-gray-100 px-2 py-1 text-sm shadow-sm dark:border-slate-900 dark:bg-slate-700 dark:text-gray-100"
               placeholder="Search..."
               onChange={async e => {
+                push({
+                  pathname: '/tasks',
+                  query: { ...query, page: 1 }
+                })
                 const { value } = e.currentTarget
-
                 if (value) {
                   const Fuse = (await import('fuse.js')).default
                   const fuse = new Fuse(tasks, {
