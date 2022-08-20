@@ -40,7 +40,7 @@ export default async function handler(
 
     const bookmark = await prisma.bookmark.create({
       data: {
-        Task: { connect: { id: String(req.body) } },
+        task: { connect: { id: String(req.body) } },
         user: { connect: { id: session.user.id } }
       }
     })
