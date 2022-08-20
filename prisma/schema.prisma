@@ -49,21 +49,21 @@ model Session {
 }
 
 model User {
-  id            String              @id @default(cuid())
-  username      String?             @unique
-  name          String?
-  email         String?             @unique
-  emailVerified DateTime?
-  image         String?
-  createdAt     DateTime            @default(now())
-  updatedAt     DateTime            @updatedAt
-  admin         Boolean             @default(false)
-  accounts      Account[]
-  sessions      Session[]
-  submissions   Submission[]
-  bookmarks     Bookmark[]
-  Assessment    UserOnAssessment[]
-  OwnAssessment OwnerOnAssessment[]
+  id              String              @id @default(cuid())
+  username        String?             @unique
+  name            String?
+  email           String?             @unique
+  emailVerified   DateTime?
+  image           String?
+  createdAt       DateTime            @default(now())
+  updatedAt       DateTime            @updatedAt
+  admin           Boolean             @default(false)
+  accounts        Account[]
+  sessions        Session[]
+  submissions     Submission[]
+  bookmarks       Bookmark[]
+  assessments     UserOnAssessment[]
+  ownedAssessment OwnerOnAssessment[]
 }
 
 model VerificationToken {
@@ -78,7 +78,7 @@ model Bookmark {
   createdAt DateTime @default(now())
   user      User     @relation(fields: [userId], references: [id])
   userId    String
-  Task      Task     @relation(fields: [taskId], references: [id])
+  task      Task     @relation(fields: [taskId], references: [id])
   taskId    String
 
   @@id([taskId, userId])
@@ -96,8 +96,8 @@ model Task {
   type             String             @db.Text
   tags             Tag[]
   bookmarks        Bookmark[]
-  Submissions      Submission[]
-  TaskOnAssessment TaskOnAssessment[]
+  submissions      Submission[]
+  taskOnAssessment TaskOnAssessment[]
 
   @@index([id])
 }
@@ -125,11 +125,12 @@ model Submission {
 
 model Assessment {
   id         String              @id
+  name       String
   private    Boolean
   submission Submission[]
-  Task       TaskOnAssessment[]
-  User       UserOnAssessment[]
-  Owner      OwnerOnAssessment[]
+  tasks      TaskOnAssessment[]
+  users      UserOnAssessment[]
+  owners     OwnerOnAssessment[]
   open       DateTime
   close      DateTime
 }
