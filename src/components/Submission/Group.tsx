@@ -5,14 +5,10 @@ import SeparateTable from './SeparateTable'
 const SubmissionGroup = ({ groups }) => {
   console.log(groups)
   const isGroup = useMemo<boolean>(() => {
-    return groups.reduce(
-      (previous: boolean, current) =>
-        previous || current.run_result.length !== 1,
-      false
-    )
+    return groups.every(current => current.run_result.length !== 1)
   }, [groups])
   return (
-    <div className="flex w-full flex-col bg-gray-50 p-5 dark:bg-slate-700 xl:p-20 ">
+    <div className="flex w-full flex-col bg-gray-50 p-5 dark:bg-slate-700 xl:px-20 xl:py-10 ">
       {isGroup ? (
         <GroupTable groups={groups} />
       ) : (
