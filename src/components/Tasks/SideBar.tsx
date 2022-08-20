@@ -67,7 +67,7 @@ export const SideBar = () => {
           onChange={({ target: { value } }) => {
             push({
               pathname: '/tasks',
-              query: value && { type: value }
+              query: value && value !== 'All' && { type: value }
             })
           }}
         >

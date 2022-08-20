@@ -46,7 +46,7 @@ const PieChart = memo(function PieChart({ points }: { points: number }) {
           </Pie>
 
           <text textAnchor="middle" dy={5} fontSize={'1.25rem'}>
-            <tspan fill="#64748B" fontWeight={500}>
+            <tspan fill="currentColor" fontWeight={500}>
               {points}
             </tspan>
             <tspan fill="#94A3B8" fontWeight={300}>
@@ -62,7 +62,7 @@ const PieChart = memo(function PieChart({ points }: { points: number }) {
             dy={25}
             fontSize={'0.75rem'}
             fontWeight={300}
-            fill="#64748B"
+            fill="currentColor"
           >
             points
           </Text>

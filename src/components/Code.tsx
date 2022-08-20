@@ -19,7 +19,7 @@ const Code = ({ code, language }: CodeBlockProps) => {
       {({ style, tokens, getLineProps, getTokenProps }) => (
         <pre
           style={{ ...style }}
-          className={`language-${language} h-[48rem] overflow-y-auto rounded-lg text-[13.6px]`}
+          className={`language-${language} overflow-y-auto rounded-lg text-[13.6px]`}
         >
           <code className={`language-${language}`}>
             {tokens.map((line, i) => (

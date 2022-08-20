@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 
+import { Header, Card, ITestCase } from './Table'
+
 import { motion, Variants } from 'framer-motion'
 
 const ArrowVariants: Variants = {
@@ -15,7 +17,9 @@ const ArrowVariants: Variants = {
 
 const DivVariants: Variants = {
   active: {
-    overflow: 'auto',
+    // height: 'auto',
+    paddingTop: '16px',
+    paddingBottom: '16px',
     transition: { duration: 0.25, type: 'tween' }
   },
   hidden: {
@@ -35,7 +39,7 @@ export const Accordion = ({ group, open }) => {
   return (
     <div className="my-1 w-full rounded-lg bg-white dark:bg-slate-600">
       <button
-        className="flex w-full items-center justify-between rounded-lg border-b border-gray-300 bg-white px-8 py-4 dark:border-slate-600 dark:bg-slate-500"
+        className="flex w-full items-center justify-between rounded-lg border-b border-gray-300 bg-white px-8 py-2 dark:border-slate-600 dark:bg-slate-500"
         onClick={() => setExpand(e => !e)}
       >
         <div className="flex items-center dark:text-gray-100">
@@ -63,50 +67,14 @@ export const Accordion = ({ group, open }) => {
         role="region"
         animate={expanded ? 'active' : 'hidden'}
         variants={DivVariants}
-        className="w-full rounded-b-lg bg-white py-4 dark:bg-slate-600"
-        // className="px-8 py-4"
+        className="h-auto w-full rounded-b-lg bg-white py-4 dark:bg-slate-600"
       >
-        <table className="-mt-2 table-auto border-separate border-spacing-x-4 border-spacing-y-3 font-light text-gray-400 dark:text-gray-200">
-          <thead>
-            <tr>
-              <th className="text-sm font-light">#</th>
-              <th className="text-sm font-light">Time</th>
-              <th className="text-sm font-light">Memory</th>
-              <th className="text-sm font-light">Message</th>
-            </tr>
-          </thead>
-          <tbody>
-            {group.run_result.map(result => (
-              <tr key={result.test_index}>
-                <td
-                  className="text-sm font-light"
-                  key={`idx-${result.text_index}`}
-                >
-                  {result.test_index}
-                </td>
-                <td
-                  className="text-sm font-light"
-                  key={`time-${result.text_index}`}
-                >
-                  {`${result.time_usage * 1000} ms`}
-                </td>
-                <td
-                  className="text-sm font-light"
-                  key={`mem-${result.text_index}`}
-                >
-                  {`${result.memory_usage} kB`}
-                </td>
-
-                <td
-                  className="text-sm font-light"
-                  key={`status-${result.text_index}`}
-                >
-                  {result.status}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <div className="space-y-1 px-2 font-light text-gray-400 dark:text-gray-200 md:px-10">
+          <Header />
+          {group.run_result.map((result: ITestCase) => (
+            <Card {...result} key={result.test_index} />
+          ))}
+        </div>
       </motion.div>
     </div>
   )

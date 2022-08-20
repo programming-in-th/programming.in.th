@@ -97,7 +97,7 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
           <h1
             className={clsx(
               'h-6 w-full text-lg font-medium dark:text-white',
-              task === undefined && 'rounded bg-slate-700'
+              task === undefined && 'rounded bg-gray-200 dark:bg-slate-700'
             )}
           >
             {task?.title}
@@ -105,7 +105,7 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
           <p
             className={clsx(
               'mt-1 h-5 w-full font-light dark:text-white',
-              task === undefined && 'rounded bg-slate-700'
+              task === undefined && 'rounded bg-gray-200 dark:bg-slate-700'
             )}
           >
             {task?.id}
@@ -161,8 +161,8 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
 
       <hr className="my-8 hidden md:block" />
 
-      <div className="hidden flex-col items-center justify-center md:flex">
-        <p className="mb-4 font-light dark:text-white">Your Score</p>
+      <div className="hidden flex-col items-center justify-center text-slate-500 dark:text-gray-300 md:flex">
+        <p className="mb-4 font-light dark:text-gray-200">Your Score</p>
         {/* @TODO Login or show login button */}
         <PieChart points={maxScore} />
       </div>
@@ -179,29 +179,6 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
           Report
         </a>
       </div>
-
-      {/* <h2 className="mb-3">Attatchments</h2> */}
-
-      {/* <table className="w-full border border-collapse border-gray-300 rounded-md table-auto">
-        <tbody>
-          <tr>
-            <td className="w-full px-5 py-4 transition-colors border border-gray-200 hover:bg-slate-50">
-              <button className="flex items-center justify-between w-full">
-                <p className="">attachmentsfilename...</p>
-                <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <td className="w-full px-5 py-4 transition-colors border border-gray-200 hover:bg-slate-50">
-              <button className="flex items-center justify-between w-full">
-                <p className="">attachmentsfilename...</p>
-                <DownloadIcon className="w-5 h-5 text-prog-primary-500" />
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table> */}
     </section>
   )
 }
