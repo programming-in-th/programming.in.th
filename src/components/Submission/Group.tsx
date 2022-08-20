@@ -8,8 +8,13 @@ const SubmissionGroup = ({ groups }) => {
     <div className="flex w-full flex-col bg-gray-50 p-5 dark:bg-slate-700 xl:p-20 ">
       <div className="flex w-full justify-between">
         <p className="font-semibold dark:text-white">subtasks</p>
-        <div className="flex justify-between">
-          <button className="mr-8 flex " onClick={() => setOpen(false)}>
+        <div className="flex justify-between space-x-2 md:space-x-4">
+          <button
+            className="flex"
+            onClick={() => {
+              setOpen(false)
+            }}
+          >
             <p className="dark:text-white">collapse all</p>
             <div className="flex h-full items-center justify-center text-[#64748B] dark:text-white">
               <svg
@@ -24,7 +29,12 @@ const SubmissionGroup = ({ groups }) => {
               </svg>
             </div>
           </button>
-          <button className="flex" onClick={() => setOpen(true)}>
+          <button
+            className="flex"
+            onClick={() => {
+              setOpen(true)
+            }}
+          >
             <p className="dark:text-white">expand all</p>
             <div className="flex h-full items-center justify-center text-[#64748B] dark:text-white">
               <svg
