@@ -100,6 +100,7 @@ Table Submission {
   score Int [not null, default: 0]
   groups Json [not null]
   language String [not null]
+  private Boolean [not null, default: false]
   userId String
   assessmentId String
   user User
@@ -109,7 +110,7 @@ Table Submission {
 
 Table Assessment {
   id String [pk]
-  name String [not null]
+  name String [unique, not null]
   private Boolean [not null]
   submission Submission [not null]
   tasks TaskOnAssessment [not null]

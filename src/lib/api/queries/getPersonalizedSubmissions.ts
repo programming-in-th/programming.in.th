@@ -13,7 +13,8 @@ export const getPersonalizedSubmission = async (
         ...(filter.includes(Filter.OWN) && {
           user: { id: { equals: session.user.id } }
         }),
-        ...(filter.includes(Filter.TASK) && { taskId })
+        ...(filter.includes(Filter.TASK) && { taskId }),
+        task: { private: false }
       },
       orderBy: [
         {

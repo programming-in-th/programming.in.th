@@ -114,6 +114,7 @@ model Submission {
   score        Int         @default(0)
   groups       Json        @default(dbgenerated())
   language     String
+  private      Boolean     @default(false)
   userId       String?
   assessmentId String?
   user         User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
@@ -125,7 +126,7 @@ model Submission {
 
 model Assessment {
   id         String              @id
-  name       String
+  name       String              @unique
   private    Boolean
   submission Submission[]
   tasks      TaskOnAssessment[]
