@@ -41,10 +41,13 @@ Table User {
   image String
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
+  admin Boolean [not null, default: false]
   accounts Account [not null]
   sessions Session [not null]
   submissions Submission [not null]
   bookmarks Bookmark [not null]
+  Assessment UserOnAssessment [not null]
+  OwnAssessment OwnerOnAssessment [not null]
 }
 
 Table VerificationToken {
@@ -82,6 +85,7 @@ Table Task {
   tags Tag [not null]
   bookmarks Bookmark [not null]
   Submissions Submission [not null]
+  TaskOnAssessment TaskOnAssessment [not null]
 }
 
 Table Submission {
@@ -97,8 +101,54 @@ Table Submission {
   groups Json [not null]
   language String [not null]
   userId String
+  assessmentId String
   user User
+  assessment Assessment
   task Task [not null]
+}
+
+Table Assessment {
+  id String [pk]
+  private Boolean [not null]
+  submission Submission [not null]
+  Task TaskOnAssessment [not null]
+  User UserOnAssessment [not null]
+  Owner OwnerOnAssessment [not null]
+  open DateTime [not null]
+  close DateTime [not null]
+}
+
+Table TaskOnAssessment {
+  task Task [not null]
+  taskId String [not null]
+  assessment Assessment [not null]
+  assessmentId String [not null]
+
+  indexes {
+    (taskId, assessmentId) [pk]
+  }
+}
+
+Table UserOnAssessment {
+  user User [not null]
+  userId String [not null]
+  assessment Assessment [not null]
+  assessmentId String [not null]
+
+  indexes {
+    (userId, assessmentId) [pk]
+  }
+}
+
+Table OwnerOnAssessment {
+  user User [not null]
+  userId String [not null]
+  assessment Assessment [not null]
+  assessmentId String [not null]
+
+  indexes {
+    (userId, assessmentId) [pk]
+  }
 }
 
 Table Tag {
@@ -122,4 +172,18 @@ Ref: Bookmark.taskId > Task.id
 
 Ref: Submission.userId > User.id [delete: Set Null]
 
+Ref: Submission.assessmentId > Assessment.id [delete: Set Null]
+
 Ref: Submission.taskId > Task.id [delete: Cascade]
+
+Ref: TaskOnAssessment.taskId > Task.id
+
+Ref: TaskOnAssessment.assessmentId > Assessment.id
+
+Ref: UserOnAssessment.userId > User.id
+
+Ref: UserOnAssessment.assessmentId > Assessment.id
+
+Ref: OwnerOnAssessment.userId > User.id
+
+Ref: OwnerOnAssessment.assessmentId > Assessment.id

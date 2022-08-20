@@ -49,18 +49,21 @@ model Session {
 }
 
 model User {
-  id            String       @id @default(cuid())
-  username      String?      @unique
+  id            String              @id @default(cuid())
+  username      String?             @unique
   name          String?
-  email         String?      @unique
+  email         String?             @unique
   emailVerified DateTime?
   image         String?
-  createdAt     DateTime     @default(now())
-  updatedAt     DateTime     @updatedAt
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+  admin         Boolean             @default(false)
   accounts      Account[]
   sessions      Session[]
   submissions   Submission[]
   bookmarks     Bookmark[]
+  Assessment    UserOnAssessment[]
+  OwnAssessment OwnerOnAssessment[]
 }
 
 model VerificationToken {
@@ -82,39 +85,80 @@ model Bookmark {
 }
 
 model Task {
-  id          String       @id
-  title       String       @db.Text
-  fullScore   Int
-  memoryLimit Int
-  timeLimit   Float
-  path        String       @db.Text
-  solved      Int
-  private     Boolean
-  type        String       @db.Text
-  tags        Tag[]
-  bookmarks   Bookmark[]
-  Submissions Submission[]
+  id               String             @id
+  title            String             @db.Text
+  fullScore        Int
+  memoryLimit      Int
+  timeLimit        Float
+  path             String             @db.Text
+  solved           Int
+  private          Boolean
+  type             String             @db.Text
+  tags             Tag[]
+  bookmarks        Bookmark[]
+  Submissions      Submission[]
+  TaskOnAssessment TaskOnAssessment[]
 
   @@index([id])
 }
 
 model Submission {
-  id          Int      @id @default(autoincrement())
-  taskId      String
-  status      String   @default("In Queue")
-  submittedAt DateTime @default(now())
-  time        Int      @default(0)
-  memory      Int      @default(0)
-  code        Bytes
-  codeLength  Int      @default(0)
-  score       Int      @default(0)
-  groups      Json     @default(dbgenerated())
-  language    String
-  userId      String?
-  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
-  task        Task     @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  id           Int         @id @default(autoincrement())
+  taskId       String
+  status       String      @default("In Queue")
+  submittedAt  DateTime    @default(now())
+  time         Int         @default(0)
+  memory       Int         @default(0)
+  code         Bytes
+  codeLength   Int         @default(0)
+  score        Int         @default(0)
+  groups       Json        @default(dbgenerated())
+  language     String
+  userId       String?
+  assessmentId String?
+  user         User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  assessment   Assessment? @relation(fields: [assessmentId], references: [id], onDelete: SetNull)
+  task         Task        @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
   @@index([id])
+}
+
+model Assessment {
+  id         String              @id
+  private    Boolean
+  submission Submission[]
+  Task       TaskOnAssessment[]
+  User       UserOnAssessment[]
+  Owner      OwnerOnAssessment[]
+  open       DateTime
+  close      DateTime
+}
+
+model TaskOnAssessment {
+  task         Task       @relation(fields: [taskId], references: [id])
+  taskId       String
+  assessment   Assessment @relation(fields: [assessmentId], references: [id])
+  assessmentId String
+
+  @@id([taskId, assessmentId])
+}
+
+model UserOnAssessment {
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String
+  assessment   Assessment @relation(fields: [assessmentId], references: [id])
+  assessmentId String
+
+  @@id([userId, assessmentId])
+}
+
+model OwnerOnAssessment {
+  user         User       @relation(fields: [userId], references: [id])
+  userId       String
+  assessment   Assessment @relation(fields: [assessmentId], references: [id])
+  assessmentId String
+
+  @@id([userId, assessmentId])
 }
 
 model Tag {
