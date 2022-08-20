@@ -46,8 +46,8 @@ Table User {
   sessions Session [not null]
   submissions Submission [not null]
   bookmarks Bookmark [not null]
-  Assessment UserOnAssessment [not null]
-  OwnAssessment OwnerOnAssessment [not null]
+  assessments UserOnAssessment [not null]
+  ownedAssessment OwnerOnAssessment [not null]
 }
 
 Table VerificationToken {
@@ -64,7 +64,7 @@ Table Bookmark {
   createdAt DateTime [default: `now()`, not null]
   user User [not null]
   userId String [not null]
-  Task Task [not null]
+  task Task [not null]
   taskId String [not null]
 
   indexes {
@@ -84,8 +84,8 @@ Table Task {
   type String [not null]
   tags Tag [not null]
   bookmarks Bookmark [not null]
-  Submissions Submission [not null]
-  TaskOnAssessment TaskOnAssessment [not null]
+  submissions Submission [not null]
+  taskOnAssessment TaskOnAssessment [not null]
 }
 
 Table Submission {
@@ -100,6 +100,7 @@ Table Submission {
   score Int [not null, default: 0]
   groups Json [not null]
   language String [not null]
+  private Boolean [not null, default: false]
   userId String
   assessmentId String
   user User
@@ -109,11 +110,12 @@ Table Submission {
 
 Table Assessment {
   id String [pk]
+  name String [unique, not null]
   private Boolean [not null]
   submission Submission [not null]
-  Task TaskOnAssessment [not null]
-  User UserOnAssessment [not null]
-  Owner OwnerOnAssessment [not null]
+  tasks TaskOnAssessment [not null]
+  users UserOnAssessment [not null]
+  owners OwnerOnAssessment [not null]
   open DateTime [not null]
   close DateTime [not null]
 }
