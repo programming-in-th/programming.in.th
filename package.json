@@ -64,13 +64,12 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write ./src/**/*.{ts,tsx,css}",
     "prebuild": "prisma generate",
     "predev": "prisma generate",
-    "prepare": "husky install",
-    "vercel-build": "prisma generate && prisma migrate deploy && next build"
+    "prepare": "husky install"
   }
 }
