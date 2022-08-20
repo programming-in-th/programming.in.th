@@ -7,7 +7,10 @@ const SeparateTable = ({ groups }) => (
       <Header />
     </div>
     {groups.map(({ run_result: [testcase] }) => (
-      <div className="my-1 w-full rounded-lg bg-white px-4 py-2 shadow-sm dark:bg-slate-600">
+      <div
+        className="my-1 w-full rounded-lg bg-white px-4 py-2 shadow-sm dark:bg-slate-600"
+        key={testcase.test_index}
+      >
         <Card {...testcase} />
       </div>
     ))}
