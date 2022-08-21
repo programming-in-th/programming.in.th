@@ -4,8 +4,8 @@ export const getInfiniteSubmission = async (
   taskId: string,
   cursor: number,
   limit: number,
-  assessmentId: string,
-  userId: string
+  assessmentId: string | null,
+  userId: string | null
 ) => {
   const submissions = await prisma.submission.findMany({
     take: limit,

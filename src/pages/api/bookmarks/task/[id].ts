@@ -22,7 +22,7 @@ export default async function handler(
       where: {
         taskId_userId: {
           taskId: String(req.query.id),
-          userId: session.user.id
+          userId: session.user.id!
         }
       }
     })
