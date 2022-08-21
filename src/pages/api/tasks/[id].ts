@@ -4,9 +4,16 @@ import { unstable_getServerSession } from 'next-auth'
 
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import prisma from '@/lib/prisma'
-import { unauthorized, methodNotAllowed, ok, forbidden } from '@/utils/response'
+import {
+  unauthorized,
+  methodNotAllowed,
+  ok,
+  forbidden,
+  badRequest
+} from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
+import { TaskSchema } from '@/lib/api/schema/task'
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,14 +26,14 @@ export default async function handler(
       where: { id: String(query.id) }
     })
 
-    if (task.private) {
+    if (task && task.private) {
       const session = await unstable_getServerSession(req, res, authOptions)
 
       if (!session) {
         return unauthorized(res)
       }
 
-      if (checkUserPermissionOnTask(session.user.id, task.id)) {
+      if (await checkUserPermissionOnTask(session.user.id, task.id)) {
         return forbidden(res)
       }
 
@@ -45,9 +52,15 @@ export default async function handler(
       return forbidden(res)
     }
 
-    const task = await prisma.task.create({
-      data: { id: String(req.body.id), ...req.body }
-    })
+    try {
+      const task = TaskSchema.parse(req.body)
+
+      const createdTask = await prisma.task.create({
+        data: { ...task }
+      })
+    } catch {
+      return badRequest(res)
+    }
 
     ok(res, task)
   }
