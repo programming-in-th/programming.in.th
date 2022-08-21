@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { IndividualSubmissionSchema } from '@/lib/api/schema/submission'
+import { IndividualSubmissionSchema } from '@/lib/api/schema/submissions'
 import { decompressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
 import { badRequest, methodNotAllowed, notFound, ok } from '@/utils/response'

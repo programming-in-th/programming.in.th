@@ -8,7 +8,7 @@ import {
   SubmissionSchema,
   SubmissionFilterEnum as Filter,
   SubmitSchema
-} from '@/lib/api/schema/submission'
+} from '@/lib/api/schema/submissions'
 import { compressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
 import {
@@ -64,6 +64,8 @@ export default async function handler(
     if (!session) {
       return unauthorized(res)
     }
+
+    console.log(req.body)
 
     const { body } = req
 

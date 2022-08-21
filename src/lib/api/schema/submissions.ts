@@ -18,7 +18,7 @@ export type SubmissionSchema = z.infer<typeof SubmissionSchema>
 export const SubmitSchema = z.object({
   taskId: z.string(),
   language: z.string(),
-  code: z.string()
+  code: z.string().array()
 })
 
 export type SubmitSchema = z.infer<typeof SubmitSchema>

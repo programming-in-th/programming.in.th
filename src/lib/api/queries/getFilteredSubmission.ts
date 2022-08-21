@@ -2,7 +2,7 @@ import { Session } from 'next-auth'
 
 import prisma from '@/lib/prisma'
 
-import { SubmissionFilterEnum as Filter } from '../schema/submission'
+import { SubmissionFilterEnum as Filter } from '../schema/submissions'
 
 export const getFilteredSubmission = async (
   filter: string[],
