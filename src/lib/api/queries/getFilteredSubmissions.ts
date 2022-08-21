@@ -4,7 +4,7 @@ import prisma from '@/lib/prisma'
 
 import { SubmissionFilterEnum as Filter } from '../schema/submissions'
 
-export const getFilteredSubmission = async (
+export const getFilteredSubmissions = async (
   filter: string[],
   taskId?: string,
   session?: Session

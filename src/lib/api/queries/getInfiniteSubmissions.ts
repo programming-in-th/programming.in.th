@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
 
-export const getInfiniteSubmission = async (
+export const getInfiniteSubmissions = async (
   limit?: number,
   cursor?: number,
   taskId?: string,
