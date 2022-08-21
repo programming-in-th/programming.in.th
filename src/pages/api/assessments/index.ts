@@ -18,9 +18,8 @@ export default async function handler(
       return unauthorized(res)
     }
 
-    const assessment = await prisma.assessment.groupBy({
-      by: ['name'],
-      where: { users: { every: { userId: session.user.id! } } }
+    const assessment = await prisma.assessment.findMany({
+      where: { users: { some: { userId: session.user.id! } } }
     })
 
     return ok(res, assessment)
