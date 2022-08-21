@@ -7,7 +7,13 @@ import { getInfiniteSubmission } from '@/lib/api/queries/getInfiniteSubmissions'
 import { Filter } from '@/lib/api/queries/getPersonalizedSubmissions'
 import { compressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
-import { unauthorized, methodNotAllowed, ok, forbidden } from '@/utils/response'
+import {
+  unauthorized,
+  methodNotAllowed,
+  ok,
+  forbidden,
+  badRequest
+} from '@/utils/response'
 
 import { authOptions } from '../../auth/[...nextauth]'
 
@@ -30,7 +36,7 @@ export default async function handler(
         Number(query.cursor),
         Number(query.limit),
         String(query.id),
-        session.user.id
+        session.user.id!
       )
 
       return ok(res, infiniteSubmission)
@@ -51,25 +57,29 @@ export default async function handler(
       where: { id: taskId }
     })
 
-    if (checkUserPermissionOnTask(session.user.id, task.id)) {
-      return forbidden(res)
+    if (task) {
+      if (await checkUserPermissionOnTask(session.user.id!, task.id)) {
+        return forbidden(res)
+      }
+
+      const compressedCode = await compressCode(JSON.stringify(code))
+
+      const submission = await prisma.submission.create({
+        data: {
+          task: { connect: task },
+          code: compressedCode,
+          language,
+          user: { connect: { id: session.user.id! } },
+          groups: [],
+          private: true,
+          assessment: { connect: { id: String(query.id) } }
+        }
+      })
+
+      return ok(res, submission)
     }
 
-    const compressedCode = await compressCode(JSON.stringify(code))
-
-    const submission = await prisma.submission.create({
-      data: {
-        task: { connect: task },
-        code: compressedCode,
-        language,
-        user: { connect: { id: session.user.id } },
-        groups: [],
-        private: true,
-        assessment: { connect: { id: String(query.id) } }
-      }
-    })
-
-    return ok(res, submission)
+    return badRequest(res)
   }
 
   return methodNotAllowed(res, ['GET', 'POST'])

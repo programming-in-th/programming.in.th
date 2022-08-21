@@ -26,14 +26,14 @@ export default async function handler(
       where: { id: String(query.id) }
     })
 
-    if (task && task.private) {
+    if (task?.private) {
       const session = await unstable_getServerSession(req, res, authOptions)
 
       if (!session) {
         return unauthorized(res)
       }
 
-      if (await checkUserPermissionOnTask(session.user.id, task.id)) {
+      if (await checkUserPermissionOnTask(session.user.id!, task.id)) {
         return forbidden(res)
       }
 
@@ -44,11 +44,15 @@ export default async function handler(
   } else if (req.method === 'POST') {
     const session = await unstable_getServerSession(req, res, authOptions)
 
+    if (!session) {
+      return unauthorized(res)
+    }
+
     const user = await prisma.user.findUnique({
-      where: { id: session.user.id }
+      where: { id: session.user.id! }
     })
 
-    if (!user.admin) {
+    if (!user?.admin) {
       return forbidden(res)
     }
 
@@ -58,11 +62,11 @@ export default async function handler(
       const createdTask = await prisma.task.create({
         data: { ...task }
       })
+
+      ok(res, createdTask)
     } catch {
       return badRequest(res)
     }
-
-    ok(res, task)
   }
 
   return methodNotAllowed(res, ['GET'])

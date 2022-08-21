@@ -20,7 +20,7 @@ export default async function handler(
 
     const assessment = await prisma.assessment.groupBy({
       by: ['name'],
-      where: { users: { every: { userId: session.user.id } } }
+      where: { users: { every: { userId: session.user.id! } } }
     })
 
     return ok(res, assessment)
