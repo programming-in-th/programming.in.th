@@ -14,8 +14,8 @@ export const FileUpload = ({
   file,
   setFile
 }: {
-  file: File
-  setFile: Dispatch<SetStateAction<File>>
+  file: File | undefined
+  setFile: Dispatch<SetStateAction<File | undefined>>
 }) => {
   const [fileRejected, setFileRejected] = useState(false)
 

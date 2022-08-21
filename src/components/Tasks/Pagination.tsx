@@ -43,7 +43,7 @@ export const Pagination = ({
       <div className="flex w-full justify-center text-gray-400 md:space-x-6">
         {Array.from(Array(pageLimit + 1).keys())
           .slice(1)
-          .reduce((pre, index) => {
+          .reduce((pre: JSX.Element[], index: number) => {
             const component = (
               <Link
                 key={index}
@@ -103,7 +103,7 @@ export const Pagination = ({
                 pathname: '/tasks',
                 query: { ...query, page: value }
               },
-              null,
+              undefined,
               { scroll: false }
             )
           }

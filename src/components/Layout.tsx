@@ -10,7 +10,7 @@ import { Footer } from './Footer'
 // import { Loading } from './Loading'
 import { Nav } from './Nav'
 
-export const PageLayout = ({ children }) => {
+export const PageLayout = ({ children }: { children: JSX.Element }) => {
   const router = useRouter()
 
   // const { status } = useSession()

@@ -6,7 +6,7 @@ import clsx from 'clsx'
 const Tabs = [
   {
     label: 'All',
-    value: null
+    value: 'All'
   },
   {
     label: 'Tried',
@@ -67,7 +67,7 @@ export const SideBar = () => {
           onChange={({ target: { value } }) => {
             push({
               pathname: '/tasks',
-              query: value && value !== 'All' && { type: value }
+              query: value !== 'All' ? { type: value } : null
             })
           }}
         >
