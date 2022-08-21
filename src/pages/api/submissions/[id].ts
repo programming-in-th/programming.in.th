@@ -1,20 +1,27 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { IndividualSubmissionSchema } from '@/lib/api/schema/submission'
 import { decompressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
-import { methodNotAllowed, notFound, ok } from '@/utils/response'
+import { badRequest, methodNotAllowed, notFound, ok } from '@/utils/response'
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const {
-    query: { id }
-  } = req
+  const { query } = req
+
+  const parsedQuery = IndividualSubmissionSchema.safeParse(query)
+
+  if (!parsedQuery.success) {
+    return badRequest(res)
+  }
+
+  const { id } = parsedQuery.data
 
   if (req.method === 'GET') {
     const submission = await prisma.submission.findUnique({
-      where: { id: Number(id) },
+      where: { id },
       select: {
         id: true,
         status: true,
@@ -24,7 +31,11 @@ export default async function handler(
         score: true,
         groups: true,
         language: true,
-        user: true,
+        user: {
+          select: {
+            username: true
+          }
+        },
         code: true
       }
     })

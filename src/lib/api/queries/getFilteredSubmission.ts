@@ -2,18 +2,20 @@ import { Session } from 'next-auth'
 
 import prisma from '@/lib/prisma'
 
-export const getPersonalizedSubmission = async (
+import { SubmissionFilterEnum as Filter } from '../schema/submission'
+
+export const getFilteredSubmission = async (
   filter: string[],
-  session: Session,
-  taskId: string
+  taskId?: string,
+  session?: Session
 ) => {
   if (session) {
     return await prisma.submission.findMany({
       where: {
-        ...(filter.includes(Filter.OWN) && {
-          user: { id: { equals: session.user.id } }
+        ...(filter.includes(Filter.enum.own) && {
+          user: { id: { equals: session.user.id! } }
         }),
-        ...(filter.includes(Filter.TASK) && { taskId }),
+        ...(filter.includes(Filter.enum.task) && { taskId }),
         task: { private: false }
       },
       orderBy: [
@@ -24,7 +26,6 @@ export const getPersonalizedSubmission = async (
       select: {
         id: true,
         score: true,
-        user: true,
         language: true,
         time: true,
         memory: true,
@@ -40,9 +41,4 @@ export const getPersonalizedSubmission = async (
       }
     ]
   })
-}
-
-export enum Filter {
-  OWN = 'own',
-  TASK = 'task'
 }

@@ -1,11 +1,11 @@
 import prisma from '@/lib/prisma'
 
 export const getInfiniteSubmission = async (
-  taskId: string,
-  cursor: number,
-  limit: number,
-  assessmentId: string | null,
-  userId: string | null
+  limit?: number,
+  cursor?: number,
+  taskId?: string,
+  assessmentId?: string,
+  userId?: string
 ) => {
   const submissions = await prisma.submission.findMany({
     take: limit,
@@ -26,7 +26,11 @@ export const getInfiniteSubmission = async (
     select: {
       id: true,
       score: true,
-      user: true,
+      user: {
+        select: {
+          username: true
+        }
+      },
       language: true,
       time: true,
       memory: true,
