@@ -124,7 +124,17 @@ export const Header = ({ isViewing = false }: { isViewing?: boolean }) => {
   )
 }
 
-const LinkComponent = ({ children, className, id, isViewing }) => {
+const LinkComponent = ({
+  children,
+  className,
+  id,
+  isViewing
+}: {
+  children: JSX.Element
+  className: string
+  id: string
+  isViewing: boolean
+}) => {
   if (isViewing) {
     return <div className={className}>{children}</div>
   }
@@ -150,33 +160,35 @@ export const Card = ({
   )
   return (
     <LinkComponent
-      id={sub.id}
+      id={String(sub.id)}
       isViewing={isViewing}
       className="flex w-full flex-col rounded-xl py-3 px-6 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex-row md:px-0"
     >
-      {Columns.map(column => (
-        <div
-          key={column.title}
-          className={clsx(
-            'hidden min-w-0 items-center justify-center px-2 text-sm md:flex',
-            column.width
-          )}
-        >
-          {column.child(sub, task)}
+      <>
+        {Columns.map(column => (
+          <div
+            key={column.title}
+            className={clsx(
+              'hidden min-w-0 items-center justify-center px-2 text-sm md:flex',
+              column.width
+            )}
+          >
+            {column.child(sub, task)}
+          </div>
+        ))}
+        <div className="flex w-full justify-between border-b pb-2 md:hidden">
+          <div className="w-1/2">{stime}</div>
+          <div className="flex w-1/2 justify-end">{name}</div>
         </div>
-      ))}
-      <div className="flex w-full justify-between border-b pb-2 md:hidden">
-        <div className="w-1/2">{stime}</div>
-        <div className="flex w-1/2 justify-end">{name}</div>
-      </div>
-      <div className="flex justify-between pt-2 md:hidden">
-        <div className="w-1/3">{score}</div>
-        <div className="flex w-2/3 pl-4">
-          <div className="w-1/3">{lang}</div>
-          <div className="w-1/3">{time}</div>
-          <div className="w-1/3">{mem}</div>
+        <div className="flex justify-between pt-2 md:hidden">
+          <div className="w-1/3">{score}</div>
+          <div className="flex w-2/3 pl-4">
+            <div className="w-1/3">{lang}</div>
+            <div className="w-1/3">{time}</div>
+            <div className="w-1/3">{mem}</div>
+          </div>
         </div>
-      </div>
+      </>
     </LinkComponent>
   )
 }

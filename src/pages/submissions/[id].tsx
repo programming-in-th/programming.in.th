@@ -3,11 +3,12 @@ import { GetStaticPaths, GetStaticProps } from 'next'
 import Submission from '@/components/Submission/Submission'
 import { TaskLayout } from '@/components/Task/Layout'
 import prisma from '@/lib/prisma'
+import { Task } from '@prisma/client'
 
-const Submissions = ({ id, task }) => {
+const Submissions = ({ id, task }: { id: string; task: Task }) => {
   return (
     <TaskLayout task={task} type="submissions">
-      <Submission task={task} submissionID={id} />
+      <Submission task={task} submissionID={Number(id)} />
     </TaskLayout>
   )
 }
@@ -20,14 +21,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const { id } = params
+  const { id } = params!
 
-  const { task } = await prisma.submission.findUnique({
+  if (typeof id !== 'string') {
+    return {
+      notFound: true
+    }
+  }
+
+  const { task } = (await prisma.submission.findUnique({
     where: { id: Number(id) },
     select: {
       task: true
     }
-  })
+  }))!
 
   return {
     props: {

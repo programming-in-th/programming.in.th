@@ -7,7 +7,12 @@ import { IGeneralTask } from '@/types/tasks'
 import { Listing } from './All'
 import { Pagination } from './Pagination'
 
-const Tabs = [
+interface ITab {
+  condition: (task: IGeneralTask) => boolean
+  value: string | null
+}
+
+const Tabs: ITab[] = [
   {
     condition: () => true,
     value: null
@@ -44,13 +49,13 @@ export const TasksList = ({
 }) => {
   const { query } = useRouter()
 
-  const condition = useMemo(
+  const condition = useMemo<(task: IGeneralTask) => boolean>(
     () =>
       Tabs.find(
         tab =>
           (query?.type === undefined && tab.value === null) ||
           tab.value === String(query?.type)
-      ).condition,
+      )!.condition,
     [query]
   )
 
