@@ -1,4 +1,5 @@
 import { useState } from 'react'
+
 import { Accordion } from './Accordian'
 
 const GroupTable = ({ groups }) => {

@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 
-import { Header, Card, ITestCase } from './Table'
-
 import { motion, Variants } from 'framer-motion'
+
+import { Header, Card, ITestCase } from './Table'
 
 const ArrowVariants: Variants = {
   active: {
