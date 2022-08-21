@@ -112,6 +112,8 @@ Table Assessment {
   id String [pk]
   name String [unique, not null]
   private Boolean [not null]
+  description String
+  instruction String
   submission Submission [not null]
   tasks TaskOnAssessment [not null]
   users UserOnAssessment [not null]

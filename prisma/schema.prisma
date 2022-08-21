@@ -125,15 +125,17 @@ model Submission {
 }
 
 model Assessment {
-  id         String              @id
-  name       String              @unique
-  private    Boolean
-  submission Submission[]
-  tasks      TaskOnAssessment[]
-  users      UserOnAssessment[]
-  owners     OwnerOnAssessment[]
-  open       DateTime
-  close      DateTime
+  id          String              @id
+  name        String              @unique
+  private     Boolean
+  description String?
+  instruction String?
+  submission  Submission[]
+  tasks       TaskOnAssessment[]
+  users       UserOnAssessment[]
+  owners      OwnerOnAssessment[]
+  open        DateTime
+  close       DateTime
 }
 
 model TaskOnAssessment {
