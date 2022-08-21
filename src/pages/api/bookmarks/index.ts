@@ -21,7 +21,7 @@ export default async function handler(
     const rawBookmark = await prisma.bookmark.findMany({
       where: {
         user: {
-          id: { equals: session.user.id }
+          id: { equals: session.user.id! }
         }
       }
     })
@@ -41,7 +41,7 @@ export default async function handler(
     const bookmark = await prisma.bookmark.create({
       data: {
         task: { connect: { id: String(req.body) } },
-        user: { connect: { id: session.user.id } }
+        user: { connect: { id: session.user.id! } }
       }
     })
 
@@ -57,7 +57,7 @@ export default async function handler(
       where: {
         taskId_userId: {
           taskId: String(req.body),
-          userId: session.user.id
+          userId: session.user.id!
         }
       }
     })

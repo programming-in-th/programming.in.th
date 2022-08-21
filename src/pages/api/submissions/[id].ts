@@ -2,7 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { decompressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
-import { methodNotAllowed, ok } from '@/utils/response'
+import { methodNotAllowed, notFound, ok } from '@/utils/response'
 
 export default async function handler(
   req: NextApiRequest,
@@ -28,6 +28,10 @@ export default async function handler(
         code: true
       }
     })
+
+    if (!submission) {
+      return notFound(res)
+    }
 
     const payload = {
       ...submission,

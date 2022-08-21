@@ -9,7 +9,7 @@ import {
 } from '@/lib/api/queries/getPersonalizedSubmissions'
 import { compressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
-import { unauthorized, methodNotAllowed, ok } from '@/utils/response'
+import { unauthorized, methodNotAllowed, ok, forbidden } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
 
@@ -21,6 +21,8 @@ export default async function handler(
     const { query } = req
 
     const session = await unstable_getServerSession(req, res, authOptions)
+
+    if (!query.filter) return forbidden(res)
 
     if (query.filter === Filter.OWN && !session) {
       return unauthorized(res)
@@ -39,7 +41,7 @@ export default async function handler(
     } else {
       const submission = await getPersonalizedSubmission(
         Array.isArray(query.filter) ? query.filter : [query.filter],
-        session,
+        session!,
         String(query.taskId)
       )
 
@@ -63,7 +65,7 @@ export default async function handler(
         task: { connect: { id: taskId } },
         code: compressedCode,
         language: language,
-        user: { connect: { id: session.user.id } },
+        user: { connect: { id: session.user.id! } },
         groups: []
       }
     })
