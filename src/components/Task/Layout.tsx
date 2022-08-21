@@ -1,6 +1,7 @@
+import { Task } from '@prisma/client'
+
 import { PageLayout } from '@/components/Layout'
 import { SideBar } from '@/components/Task/SideBar'
-import { Task } from '@prisma/client'
 
 export const TaskLayout = ({
   task,
