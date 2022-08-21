@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 
-import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/router'
+
+import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 
 import { PageLayout } from '@/components/Layout'

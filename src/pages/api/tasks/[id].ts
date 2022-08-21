@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { unstable_getServerSession } from 'next-auth'
 
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
+import { TaskSchema } from '@/lib/api/schema/task'
 import prisma from '@/lib/prisma'
 import {
   unauthorized,
@@ -13,7 +14,6 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
-import { TaskSchema } from '@/lib/api/schema/task'
 
 export default async function handler(
   req: NextApiRequest,
