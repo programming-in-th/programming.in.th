@@ -4,6 +4,11 @@ import { unstable_getServerSession } from 'next-auth'
 
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import { getInfiniteSubmissions } from '@/lib/api/queries/getInfiniteSubmissions'
+import {
+  AssessmentSubmissionSchema,
+  SubmissionFilterEnum as Filter,
+  SubmitSchema
+} from '@/lib/api/schema/submissions'
 import { compressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
 import {
@@ -15,11 +20,6 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../../auth/[...nextauth]'
-import {
-  AssessmentSubmissionSchema,
-  SubmissionFilterEnum as Filter,
-  SubmitSchema
-} from '@/lib/api/schema/submissions'
 
 export default async function handler(
   req: NextApiRequest,

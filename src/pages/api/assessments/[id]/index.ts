@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
+import { IndividualAssessmentSchema } from '@/lib/api/schema/assessment'
 import prisma from '@/lib/prisma'
 import {
   methodNotAllowed,
@@ -11,7 +12,6 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../../auth/[...nextauth]'
-import { IndividualAssessmentSchema } from '@/lib/api/schema/assessment'
 
 export default async function handler(
   req: NextApiRequest,
