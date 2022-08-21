@@ -3,8 +3,12 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { unstable_getServerSession } from 'next-auth'
 
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
-import { getInfiniteSubmission } from '@/lib/api/queries/getInfiniteSubmissions'
-import { Filter } from '@/lib/api/queries/getPersonalizedSubmissions'
+import { getInfiniteSubmissions } from '@/lib/api/queries/getInfiniteSubmissions'
+import {
+  AssessmentSubmissionSchema,
+  SubmissionFilterEnum as Filter,
+  SubmitSchema
+} from '@/lib/api/schema/submissions'
 import { compressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
 import {
@@ -22,25 +26,35 @@ export default async function handler(
   res: NextApiResponse
 ) {
   if (req.method === 'GET') {
+    const session = await unstable_getServerSession(req, res, authOptions)
+
     const { query } = req
 
-    const session = await unstable_getServerSession(req, res, authOptions)
+    const parsedQuery = AssessmentSubmissionSchema.safeParse(query)
+
+    if (!parsedQuery.success) {
+      return badRequest(res)
+    }
+
+    const { taskId, cursor, limit, filter, id: assignmentId } = parsedQuery.data
 
     if (!session) {
       return unauthorized(res)
     }
 
-    if (query.filter === Filter.TASK) {
-      const infiniteSubmission = await getInfiniteSubmission(
-        String(query.taskId),
-        Number(query.cursor),
-        Number(query.limit),
-        String(query.id),
+    if (filter === Filter.enum.task) {
+      const infiniteSubmission = await getInfiniteSubmissions(
+        cursor,
+        limit,
+        taskId,
+        assignmentId,
         session.user.id!
       )
 
       return ok(res, infiniteSubmission)
     }
+
+    return badRequest(res)
   } else if (req.method === 'POST') {
     const session = await unstable_getServerSession(req, res, authOptions)
 
@@ -48,10 +62,21 @@ export default async function handler(
       return unauthorized(res)
     }
 
-    const {
-      body: { taskId, code, language },
-      query
-    } = req
+    const { body, query } = req
+
+    const parsedBody = SubmitSchema.safeParse(body)
+    const parsedQuery = AssessmentSubmissionSchema.safeParse(query)
+
+    if (!parsedBody.success) {
+      return badRequest(res)
+    }
+
+    if (!parsedQuery.success) {
+      return badRequest(res)
+    }
+
+    const { taskId, language, code } = parsedBody.data
+    const { id: assignmentId } = parsedQuery.data
 
     const task = await prisma.task.findUnique({
       where: { id: taskId }
@@ -72,7 +97,7 @@ export default async function handler(
           user: { connect: { id: session.user.id! } },
           groups: [],
           private: true,
-          assessment: { connect: { id: String(query.id) } }
+          assessment: { connect: { id: assignmentId } }
         }
       })
 

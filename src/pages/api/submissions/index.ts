@@ -2,8 +2,8 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
-import { getFilteredSubmission } from '@/lib/api/queries/getFilteredSubmission'
-import { getInfiniteSubmission } from '@/lib/api/queries/getInfiniteSubmissions'
+import { getFilteredSubmissions } from '@/lib/api/queries/getFilteredSubmissions'
+import { getInfiniteSubmissions } from '@/lib/api/queries/getInfiniteSubmissions'
 import {
   SubmissionSchema,
   SubmissionFilterEnum as Filter,
@@ -42,7 +42,7 @@ export default async function handler(
     }
 
     if (filter === Filter.enum.task) {
-      const infiniteSubmission = await getInfiniteSubmission(
+      const infiniteSubmission = await getInfiniteSubmissions(
         limit,
         cursor,
         taskId
@@ -50,7 +50,7 @@ export default async function handler(
 
       return ok(res, infiniteSubmission)
     } else {
-      const submission = await getFilteredSubmission(
+      const submission = await getFilteredSubmissions(
         filter ? (Array.isArray(filter) ? filter : [filter]) : [],
         taskId,
         session ? session : undefined
@@ -64,8 +64,6 @@ export default async function handler(
     if (!session) {
       return unauthorized(res)
     }
-
-    console.log(req.body)
 
     const { body } = req
 
