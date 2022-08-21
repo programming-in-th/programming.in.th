@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
+import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import { getInfiniteSubmission } from '@/lib/api/queries/getInfiniteSubmissions'
 import { Filter } from '@/lib/api/queries/getPersonalizedSubmissions'
 import { compressCode } from '@/lib/codeTransformer'
@@ -42,26 +43,15 @@ export default async function handler(
     }
 
     const {
-      body: { taskId, code, language }
+      body: { taskId, code, language },
+      query
     } = req
 
-    const userOnAssessment = await prisma.userOnAssessment.findMany({
-      where: {
-        userId: session.user.id
-      }
+    const task = await prisma.task.findUnique({
+      where: { id: taskId }
     })
 
-    const taskOnAssessment = await prisma.taskOnAssessment.findMany({
-      where: {
-        taskId: taskId
-      }
-    })
-
-    if (
-      !userOnAssessment.some(user =>
-        taskOnAssessment.some(task => task.assessmentId === user.assessmentId)
-      )
-    ) {
+    if (checkUserPermissionOnTask(session.user.id, task.id)) {
       return forbidden(res)
     }
 
@@ -69,13 +59,13 @@ export default async function handler(
 
     const submission = await prisma.submission.create({
       data: {
-        task: { connect: { id: taskId } },
+        task: { connect: task },
         code: compressedCode,
         language,
         user: { connect: { id: session.user.id } },
         groups: [],
         private: true,
-        assessment: { connect: { id: String(req.query.id) } }
+        assessment: { connect: { id: String(query.id) } }
       }
     })
 

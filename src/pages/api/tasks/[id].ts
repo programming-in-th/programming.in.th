@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
+import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import prisma from '@/lib/prisma'
 import { unauthorized, methodNotAllowed, ok, forbidden } from '@/utils/response'
 
@@ -25,23 +26,7 @@ export default async function handler(
         return unauthorized(res)
       }
 
-      const userOnAssessment = await prisma.userOnAssessment.findMany({
-        where: {
-          userId: session.user.id
-        }
-      })
-
-      const taskOnAssessment = await prisma.taskOnAssessment.findMany({
-        where: {
-          taskId: task.id
-        }
-      })
-
-      if (
-        !userOnAssessment.some(user =>
-          taskOnAssessment.some(task => task.assessmentId === user.assessmentId)
-        )
-      ) {
+      if (checkUserPermissionOnTask(session.user.id, task.id)) {
         return forbidden(res)
       }
 
@@ -49,6 +34,22 @@ export default async function handler(
     }
 
     return ok(res, task)
+  } else if (req.method === 'POST') {
+    const session = await unstable_getServerSession(req, res, authOptions)
+
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id }
+    })
+
+    if (!user.admin) {
+      return forbidden(res)
+    }
+
+    const task = await prisma.task.create({
+      data: { id: String(req.body.id), ...req.body }
+    })
+
+    ok(res, task)
   }
 
   return methodNotAllowed(res, ['GET'])
