@@ -63,7 +63,7 @@ export default async function handler(
         data: { ...task }
       })
 
-      ok(res, createdTask)
+      return ok(res, createdTask)
     } catch {
       return badRequest(res)
     }
