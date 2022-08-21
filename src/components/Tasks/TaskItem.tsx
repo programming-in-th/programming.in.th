@@ -70,12 +70,22 @@ export const TaskItem = (
                     if (bookmark) {
                       await fetch(`/api/bookmarks`, {
                         method: 'DELETE',
-                        body: task.id
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                          taskId: task.id
+                        })
                       })
                     } else {
                       await fetch(`/api/bookmarks`, {
                         method: 'POST',
-                        body: task.id
+                        headers: {
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                          taskId: task.id
+                        })
                       })
                     }
 
@@ -174,12 +184,22 @@ export const TaskItem = (
               if (bookmark) {
                 await fetch(`/api/bookmarks`, {
                   method: 'DELETE',
-                  body: task.id
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    taskId: task.id
+                  })
                 })
               } else {
                 await fetch(`/api/bookmarks`, {
                   method: 'POST',
-                  body: task.id
+                  headers: {
+                    'Content-Type': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    taskId: task.id
+                  })
                 })
               }
 

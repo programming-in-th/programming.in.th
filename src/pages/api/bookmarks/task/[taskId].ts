@@ -2,8 +2,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
+import { BookmarkCDSchema } from '@/lib/api/schema/bookmark'
 import prisma from '@/lib/prisma'
-import { methodNotAllowed, unauthorized, ok } from '@/utils/response'
+import {
+  methodNotAllowed,
+  unauthorized,
+  ok,
+  badRequest
+} from '@/utils/response'
 
 import { authOptions } from '../../auth/[...nextauth]'
 
@@ -18,10 +24,20 @@ export default async function handler(
       return unauthorized(res)
     }
 
+    const { query } = req
+
+    const parsedQuery = BookmarkCDSchema.safeParse(query)
+
+    if (!parsedQuery.success) {
+      return badRequest(res)
+    }
+
+    const { taskId } = parsedQuery.data
+
     const bookmark = await prisma.bookmark.findUnique({
       where: {
         taskId_userId: {
-          taskId: String(req.query.id),
+          taskId: taskId,
           userId: session.user.id!
         }
       }

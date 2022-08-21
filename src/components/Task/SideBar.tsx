@@ -74,7 +74,8 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
               async (state: boolean) => {
                 await fetch(`/api/bookmarks`, {
                   method: state ? 'POST' : 'DELETE',
-                  body: task.id
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ taskId: task.id })
                 })
                 return state
               },

@@ -2,8 +2,14 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
+import { BookmarkCDSchema } from '@/lib/api/schema/bookmark'
 import prisma from '@/lib/prisma'
-import { methodNotAllowed, ok, unauthorized } from '@/utils/response'
+import {
+  badRequest,
+  methodNotAllowed,
+  ok,
+  unauthorized
+} from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
 
@@ -38,9 +44,19 @@ export default async function handler(
       return unauthorized(res)
     }
 
+    const { body } = req
+
+    const parsedBody = BookmarkCDSchema.safeParse(body)
+
+    if (!parsedBody.success) {
+      return badRequest(res)
+    }
+
+    const { taskId } = parsedBody.data
+
     const bookmark = await prisma.bookmark.create({
       data: {
-        task: { connect: { id: String(req.body) } },
+        task: { connect: { id: taskId } },
         user: { connect: { id: session.user.id! } }
       }
     })
@@ -53,10 +69,20 @@ export default async function handler(
       return unauthorized(res)
     }
 
+    const { body } = req
+
+    const parsedBody = BookmarkCDSchema.safeParse(body)
+
+    if (!parsedBody.success) {
+      return badRequest(res)
+    }
+
+    const { taskId } = parsedBody.data
+
     const bookmark = await prisma.bookmark.delete({
       where: {
         taskId_userId: {
-          taskId: String(req.body),
+          taskId,
           userId: session.user.id!
         }
       }
