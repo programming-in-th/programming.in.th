@@ -15,6 +15,14 @@ export const SubmissionSchema = z
 
 export type SubmissionSchema = z.infer<typeof SubmissionSchema>
 
+export const AssessmentSubmissionSchema = SubmissionSchema.extend({
+  id: z.string()
+}).partial()
+
+export type AssessmentSubmissionSchema = z.infer<
+  typeof AssessmentSubmissionSchema
+>
+
 export const SubmitSchema = z.object({
   taskId: z.string(),
   language: z.string(),
