@@ -2,7 +2,10 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
+import isAdmin from '@/lib/api/queries/isAdmin'
+import { CreateAssessmentSchema } from '@/lib/api/schema/assessment'
 import prisma from '@/lib/prisma'
+import removeArrDup from '@/utils/removeArrDup'
 import {
   unauthorized,
   methodNotAllowed,
@@ -11,9 +14,6 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
-import { CreateAssessmentSchema } from '@/lib/api/schema/assessment'
-import removeArrDup from '@/utils/removeArrDup'
-import isAdmin from '@/lib/api/queries/isAdmin'
 
 export default async function handler(
   req: NextApiRequest,

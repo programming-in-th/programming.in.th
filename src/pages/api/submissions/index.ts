@@ -4,6 +4,7 @@ import { unstable_getServerSession } from 'next-auth'
 
 import { getFilteredSubmissions } from '@/lib/api/queries/getFilteredSubmissions'
 import { getInfiniteSubmissions } from '@/lib/api/queries/getInfiniteSubmissions'
+import isAdmin from '@/lib/api/queries/isAdmin'
 import {
   SubmissionSchema,
   SubmissionFilterEnum as Filter,
@@ -19,7 +20,6 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
-import isAdmin from '@/lib/api/queries/isAdmin'
 
 export default async function handler(
   req: NextApiRequest,
