@@ -1,5 +1,6 @@
-import { IGeneralSubmission } from '@/types/submissions'
 import useSWRInfinite from 'swr/infinite'
+
+import { IGeneralSubmission } from '@/types/submissions'
 
 import fetcher from './fetcher'
 
