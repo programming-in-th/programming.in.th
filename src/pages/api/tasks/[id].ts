@@ -66,5 +66,5 @@ export default async function handler(
     }
   }
 
-  return methodNotAllowed(res, ['GET'])
+  return methodNotAllowed(res, ['GET', 'POST'])
 }
