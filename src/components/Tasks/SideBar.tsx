@@ -38,7 +38,10 @@ export const SideBar = () => {
                 key={tabItem.value}
                 href={{
                   pathname: '/tasks',
-                  query: tabItem.value && { type: tabItem.value }
+                  query:
+                    tabItem.value === 'All'
+                      ? null
+                      : tabItem.value && { type: tabItem.value }
                 }}
                 passHref
               >
@@ -47,7 +50,8 @@ export const SideBar = () => {
                   className={clsx(
                     'flex h-9 w-full items-center justify-center rounded-md transition-colors',
                     (query?.type === undefined && tabItem.value === null) ||
-                      tabItem.value === String(query?.type)
+                      tabItem.value === String(query?.type) ||
+                      (tabItem.value === 'All' && query?.type === undefined)
                       ? 'bg-gray-100 dark:bg-slate-700'
                       : 'hover:bg-gray-50 dark:hover:bg-slate-600'
                   )}
