@@ -1,10 +1,13 @@
+import React from 'react'
+
+import Link from 'next/link'
+
+import dayjs from 'dayjs'
+import useSWR from 'swr'
+
 import { PageLayout } from '@/components/Layout'
 import fetcher from '@/lib/fetcher'
 import { IAssessment } from '@/types/assessments'
-import dayjs from 'dayjs'
-import Link from 'next/link'
-import React from 'react'
-import useSWR from 'swr'
 
 const Card = (assessment: IAssessment & { index: number }) => (
   <Link href={`/assessments/${assessment.id}`}>
