@@ -39,6 +39,12 @@ export default async function handler(
     })
 
     return ok(res, assessment)
+  } else if (req.method === 'POST') {
+    const session = await unstable_getServerSession(req, res, authOptions)
+
+    if (!session) {
+      return unauthorized(res)
+    }
   }
 
   return methodNotAllowed(res, ['GET', 'POST'])

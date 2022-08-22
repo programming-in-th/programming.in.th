@@ -5,27 +5,27 @@ const checkUserPermissionOnTask = async (userId: string, taskId: string) => {
     where: {
       userId: userId,
       assessment: {
-        is: {
-          open: {
-            lte: new Date()
+        OR: [
+          {
+            AND: [{ open: { lte: new Date() } }, { close: { gte: new Date() } }]
           },
-          close: {
-            gte: new Date()
-          },
-          OR: {
-            private: false
-          }
+          { private: false }
+        ],
+        tasks: {
+          some: { taskId: { equals: taskId } }
         }
       }
     },
     select: {
       assessment: {
-        select: { tasks: { where: { taskId: taskId } } }
+        select: {
+          tasks: { select: { taskId: true } }
+        }
       }
     }
   })
 
-  return taskOnAssessment.some(task => task.assessment.tasks.length > 0)
+  return taskOnAssessment.length > 0
 }
 
 export default checkUserPermissionOnTask
