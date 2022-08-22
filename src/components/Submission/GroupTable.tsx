@@ -7,7 +7,7 @@ const GroupTable = ({ groups }) => {
   return (
     <>
       <div className="flex w-full justify-between">
-        <p className="font-semibold dark:text-white">subtasks</p>
+        <p className="font-semibold dark:text-white">Subtasks</p>
         <div className="flex justify-between space-x-2 md:space-x-4">
           <button
             className="flex"
