@@ -1,6 +1,8 @@
+import { IGroup } from '@/types/submissions'
+
 import { Header, Card } from './Table'
 
-const SeparateTable = ({ groups }) => (
+const SeparateTable = ({ groups }: { groups: IGroup[] }) => (
   <div className="flex w-full flex-col justify-between px-0 text-gray-400 md:px-4">
     <p className="ml-4 mb-2 font-semibold dark:text-white">Subtasks</p>
     <div className="px-4">

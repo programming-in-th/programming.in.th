@@ -1,3 +1,5 @@
+import { ITestCase } from '@/types/submissions'
+
 const Status = ({ msg }: { msg: string }) => {
   if (msg === 'Correct') {
     return (
@@ -70,16 +72,6 @@ export const Header = () => (
     <p className="text-sm font-light">Message</p>
   </div>
 )
-
-export interface ITestCase {
-  memory_usage: number
-  message: string
-  score: number
-  status: string
-  submission_id: string
-  test_index: number
-  time_usage: number
-}
 
 export const Card = ({
   memory_usage,

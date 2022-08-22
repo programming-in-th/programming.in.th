@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-const CustomLink = props => {
+const CustomLink = (props: any) => {
   const href = props.href
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'))
 
@@ -16,7 +16,7 @@ const CustomLink = props => {
   return <a target="_blank" rel="noopener noreferrer" {...props} />
 }
 
-const CustomImage = props => {
+const CustomImage = (props: any) => {
   return <Image alt={props.alt} {...props} />
 }
 

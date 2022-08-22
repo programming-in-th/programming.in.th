@@ -1,9 +1,11 @@
 import { useMemo } from 'react'
 
+import { IGroup } from '@/types/submissions'
+
 import GroupTable from './GroupTable'
 import SeparateTable from './SeparateTable'
 
-const SubmissionGroup = ({ groups }) => {
+const SubmissionGroup = ({ groups }: { groups: IGroup[] }) => {
   console.log(groups)
   const isGroup = useMemo<boolean>(() => {
     return groups.every(current => current.run_result.length !== 1)

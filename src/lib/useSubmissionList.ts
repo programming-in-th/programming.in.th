@@ -1,10 +1,15 @@
+import { IGeneralSubmission } from '@/types/submissions'
 import useSWRInfinite from 'swr/infinite'
 
 import fetcher from './fetcher'
 
 const PAGE_SIZE = 10
 
-const getKey = (pageIndex, previousPageData, taskId) => {
+const getKey = (
+  pageIndex: number,
+  previousPageData: { data: IGeneralSubmission[]; nextCursor: number | null },
+  taskId: string
+) => {
   // reached the end
   if (previousPageData && !previousPageData.data) return null
 
@@ -31,7 +36,7 @@ const useSubmissionList = (taskId: string) => {
   )
 
   const data = rawData ? rawData.map(data => data.data) : []
-  const submissions = data ? [].concat(...data) : []
+  const submissions: IGeneralSubmission[] = data ? [].concat(...data) : []
   const isLoadingInitialData = !data && !error
   const isLoadingMore =
     isLoadingInitialData ||

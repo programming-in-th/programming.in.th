@@ -34,10 +34,12 @@ const Submission = ({
       <Header isViewing />
       {submission && <Card sub={submission} task={task} isViewing />}
       <Suspense fallback={<CodeSkeleton />}>
-        <DynamicCode code={submission.code[0]} language={submission.language} />
+        <DynamicCode
+          code={submission!.code[0]}
+          language={submission!.language}
+        />
       </Suspense>
-
-      <SubmissionGroup groups={submission.groups} />
+      {submission && <SubmissionGroup groups={submission.groups} />}
     </div>
   )
 }

@@ -1,3 +1,5 @@
+import { ParsedUrlQuery } from 'querystring'
+
 import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next'
 
 import { useRouter } from 'next/router'
@@ -17,10 +19,17 @@ const Tasks = ({
   const { isFallback, query } = useRouter()
   let submissionID: null | number = null
 
-  if (type === 'submissions' || type === 'mysubmissions') {
+  if (
+    query !== undefined &&
+    (type === 'submissions' || type === 'mysubmissions')
+  ) {
     // check if params has submission id
-    if (query.id.length === 3) {
-      submissionID = Number(query.id[2])
+    const { id } = query
+    if (!id || typeof id === 'string') {
+      return null
+    }
+    if (id.length === 3) {
+      submissionID = Number(id[2])
     }
   }
 
@@ -45,31 +54,39 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const tasks = await prisma.task.findMany()
 
+  const paths = tasks.reduce((acc: { params: ParsedUrlQuery }[], task) => {
+    return [
+      ...acc,
+      { params: { id: [task.id] } },
+      { params: { id: [task.id, 'submissions'] } },
+      { params: { id: [task.id, 'submit'] } },
+      { params: { id: [task.id, 'solution'] } }
+    ]
+  }, [])
+
   return {
-    paths: tasks.reduce((acc, task) => {
-      return [
-        ...acc,
-        { params: { id: [task.id] } },
-        { params: { id: [task.id, 'submissions'] } },
-        { params: { id: [task.id, 'submit'] } },
-        { params: { id: [task.id, 'solution'] } }
-      ]
-    }, []),
+    paths: paths,
     fallback: true
   }
 }
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const task: Task = await prisma.task.findUnique({
-    where: { id: `${params.id[0]}` }
+  const { id } = params!
+  if (typeof id === 'string' || !id) {
+    return {
+      notFound: true
+    }
+  }
+  const task: Task | null = await prisma.task.findUnique({
+    where: { id: `${id[0]}` }
   })
 
-  let type = params.id.length === 1 ? 'statement' : params.id[1]
+  let type = id.length === 1 ? 'statement' : id[1]
   let solution = null
 
   if (type === 'solution') {
     const solutionRes = await fetch(
-      `${process.env.NEXT_PUBLIC_AWS_URL}/solutions/md/${params.id[0]}.md`
+      `${process.env.NEXT_PUBLIC_AWS_URL}/solutions/md/${id[0]}.md`
     )
 
     if (solutionRes.status === 200) {
@@ -82,7 +99,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
     props: {
       solution,
       task,
-      type: type as string
+      type: type
     }
   }
 }

@@ -2,7 +2,9 @@ import { useEffect, useState } from 'react'
 
 import { motion, Variants } from 'framer-motion'
 
-import { Header, Card, ITestCase } from './Table'
+import { ITestCase, IGroup } from '@/types/submissions'
+
+import { Header, Card } from './Table'
 
 const ArrowVariants: Variants = {
   active: {
@@ -31,7 +33,13 @@ const DivVariants: Variants = {
   }
 }
 
-export const Accordion = ({ group, open }) => {
+export const Accordion = ({
+  group,
+  open
+}: {
+  group: IGroup
+  open: boolean
+}) => {
   const [expanded, setExpand] = useState(false)
   useEffect(() => {
     setExpand(open)

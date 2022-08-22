@@ -1,8 +1,10 @@
 import { useState } from 'react'
 
+import { IGroup } from '@/types/submissions'
+
 import { Accordion } from './Accordian'
 
-const GroupTable = ({ groups }) => {
+const GroupTable = ({ groups }: { groups: IGroup[] }) => {
   const [open, setOpen] = useState(false)
   return (
     <>
