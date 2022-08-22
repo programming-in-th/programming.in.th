@@ -18,8 +18,24 @@ export default async function handler(
       return unauthorized(res)
     }
 
+    const user = await prisma.user.findUnique({
+      where: { id: session.user.id! },
+      select: { admin: true }
+    })
+
+    if (user?.admin) {
+      const assessment = await prisma.assessment.findMany()
+
+      return ok(res, assessment)
+    }
+
     const assessment = await prisma.assessment.findMany({
-      where: { users: { some: { userId: session.user.id! } } }
+      where: {
+        OR: [
+          { users: { some: { userId: session.user.id! } } },
+          { owners: { some: { userId: session.user.id! } } }
+        ]
+      }
     })
 
     return ok(res, assessment)
