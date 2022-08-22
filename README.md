@@ -60,6 +60,7 @@ You too can help us improve our project by suggesting features, bug report, etc.
 - [@win11905](https://github.com/win11905)
 - [@iammarkps](https://github.com/iammarkps)
 - [@betich](https://github.com/betich)
+- [@NakZaa](https://github.com/nakzaa)
 - [@nuyer](https://github.com/nuyer)
 
 ### Retired
