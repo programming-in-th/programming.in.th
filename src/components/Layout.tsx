@@ -28,7 +28,9 @@ export const PageLayout = ({ children }: { children: JSX.Element }) => {
   // }
 
   return (
-    <div className={clsx('w-full font-display', backgroundColor)}>
+    <div
+      className={clsx('w-full overflow-hidden font-display', backgroundColor)}
+    >
       <Head>
         <title>PROGRAMMING.IN.TH | β</title>
       </Head>
