@@ -16,7 +16,8 @@ import {
   methodNotAllowed,
   ok,
   forbidden,
-  badRequest
+  badRequest,
+  notFound
 } from '@/utils/response'
 
 import { authOptions } from '../../auth/[...nextauth]'
@@ -40,6 +41,19 @@ export default async function handler(
 
     if (!session) {
       return unauthorized(res)
+    }
+
+    const task = await prisma.task.findUnique({
+      where: { id: taskId },
+      select: { id: true, private: true }
+    })
+
+    if (!task) {
+      return notFound(res)
+    }
+
+    if (await checkUserPermissionOnTask(session.user.id!, task.id)) {
+      return forbidden(res)
     }
 
     if (filter === Filter.enum.task) {
@@ -79,7 +93,8 @@ export default async function handler(
     const { id: assignmentId } = parsedQuery.data
 
     const task = await prisma.task.findUnique({
-      where: { id: taskId }
+      where: { id: taskId },
+      select: { id: true }
     })
 
     if (task) {

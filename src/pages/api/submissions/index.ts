@@ -41,6 +41,25 @@ export default async function handler(
       return unauthorized(res)
     }
 
+    const task = await prisma.task.findUnique({
+      where: { id: taskId },
+      select: { private: true }
+    })
+
+    if (task?.private) {
+      if (!session) {
+        return unauthorized(res)
+      }
+
+      const user = await prisma.user.findUnique({
+        where: { id: session.user.id! }
+      })
+
+      if (!user?.admin) {
+        return unauthorized(res)
+      }
+    }
+
     if (filter === Filter.enum.task) {
       const infiniteSubmission = await getInfiniteSubmissions(
         limit,
