@@ -13,6 +13,7 @@ import {
 import { authOptions } from '../auth/[...nextauth]'
 import { CreateAssessmentSchema } from '@/lib/api/schema/assessment'
 import removeArrDup from '@/utils/removeArrDup'
+import isAdmin from '@/lib/api/queries/isAdmin'
 
 export default async function handler(
   req: NextApiRequest,
@@ -25,12 +26,7 @@ export default async function handler(
       return unauthorized(res)
     }
 
-    const user = await prisma.user.findUnique({
-      where: { id: session.user.id! },
-      select: { admin: true }
-    })
-
-    if (user?.admin) {
+    if (await isAdmin(session.user.id!)) {
       const assessment = await prisma.assessment.findMany()
 
       return ok(res, assessment)

@@ -19,6 +19,7 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
+import isAdmin from '@/lib/api/queries/isAdmin'
 
 export default async function handler(
   req: NextApiRequest,
@@ -51,11 +52,7 @@ export default async function handler(
         return unauthorized(res)
       }
 
-      const user = await prisma.user.findUnique({
-        where: { id: session.user.id! }
-      })
-
-      if (!user?.admin) {
+      if (!(await isAdmin(session.user.id!))) {
         return unauthorized(res)
       }
     }
