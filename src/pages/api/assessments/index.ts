@@ -2,7 +2,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
-import isAdmin from '@/lib/api/queries/isAdmin'
 import { CreateAssessmentSchema } from '@/lib/api/schema/assessment'
 import prisma from '@/lib/prisma'
 import removeArrDup from '@/utils/removeArrDup'
@@ -26,7 +25,7 @@ export default async function handler(
       return unauthorized(res)
     }
 
-    if (await isAdmin(session.user.id!)) {
+    if (session.user.admin) {
       const assessment = await prisma.assessment.findMany()
 
       return ok(res, assessment)

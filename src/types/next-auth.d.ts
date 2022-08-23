@@ -8,6 +8,7 @@ declare module 'next-auth' {
       image?: string | null
       id?: string | null
       username?: string | null
+      admin?: boolean | null
     }
   }
 
@@ -17,5 +18,6 @@ declare module 'next-auth' {
     image?: string | null
     name?: string | null
     username?: string | null
+    admin?: boolean | null
   }
 }

@@ -3,7 +3,6 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { unstable_getServerSession } from 'next-auth'
 
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
-import isAdmin from '@/lib/api/queries/isAdmin'
 import { TaskSchema } from '@/lib/api/schema/tasks'
 import prisma from '@/lib/prisma'
 import {
@@ -49,7 +48,7 @@ export default async function handler(
       return unauthorized(res)
     }
 
-    if (!(await isAdmin(session.user.id!))) {
+    if (!session.user.admin) {
       return forbidden(res)
     }
 

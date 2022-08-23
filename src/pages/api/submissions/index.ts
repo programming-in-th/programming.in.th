@@ -4,7 +4,6 @@ import { unstable_getServerSession } from 'next-auth'
 
 import { getFilteredSubmissions } from '@/lib/api/queries/getFilteredSubmissions'
 import { getInfiniteSubmissions } from '@/lib/api/queries/getInfiniteSubmissions'
-import isAdmin from '@/lib/api/queries/isAdmin'
 import {
   SubmissionSchema,
   SubmissionFilterEnum as Filter,
@@ -16,7 +15,8 @@ import {
   unauthorized,
   methodNotAllowed,
   ok,
-  badRequest
+  badRequest,
+  forbidden
 } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
@@ -52,8 +52,8 @@ export default async function handler(
         return unauthorized(res)
       }
 
-      if (!(await isAdmin(session.user.id!))) {
-        return unauthorized(res)
+      if (!session.user.admin) {
+        return forbidden(res)
       }
     }
 
