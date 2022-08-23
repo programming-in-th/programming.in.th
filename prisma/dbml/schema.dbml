@@ -111,14 +111,14 @@ Table Submission {
 Table Assessment {
   id String [pk]
   name String [unique, not null]
-  private Boolean [not null]
+  archived Boolean [not null, default: false]
   description String
   instruction String
   submission Submission [not null]
   tasks TaskOnAssessment [not null]
   users UserOnAssessment [not null]
   owners OwnerOnAssessment [not null]
-  open DateTime [not null]
+  open DateTime [default: `now()`, not null]
   close DateTime [not null]
 }
 

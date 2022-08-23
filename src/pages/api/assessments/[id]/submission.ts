@@ -92,32 +92,25 @@ export default async function handler(
     const { taskId, language, code } = parsedBody.data
     const { id: assignmentId } = parsedQuery.data
 
-    const task = await prisma.task.findUnique({
-      where: { id: taskId },
-      select: { id: true }
+    if (await checkUserPermissionOnTask(session.user.id!, taskId, 'WRITE')) {
+      return forbidden(res)
+    }
+
+    const compressedCode = await compressCode(JSON.stringify(code))
+
+    const submission = await prisma.submission.create({
+      data: {
+        task: { connect: { id: taskId } },
+        code: compressedCode,
+        language,
+        user: { connect: { id: session.user.id! } },
+        groups: [],
+        private: true,
+        assessment: { connect: { id: assignmentId } }
+      }
     })
 
-    if (task) {
-      if (await checkUserPermissionOnTask(session.user.id!, task.id)) {
-        return forbidden(res)
-      }
-
-      const compressedCode = await compressCode(JSON.stringify(code))
-
-      const submission = await prisma.submission.create({
-        data: {
-          task: { connect: task },
-          code: compressedCode,
-          language,
-          user: { connect: { id: session.user.id! } },
-          groups: [],
-          private: true,
-          assessment: { connect: { id: assignmentId } }
-        }
-      })
-
-      return ok(res, submission)
-    }
+    return ok(res, submission)
 
     return badRequest(res)
   }

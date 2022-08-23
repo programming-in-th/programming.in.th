@@ -127,14 +127,14 @@ model Submission {
 model Assessment {
   id          String              @id
   name        String              @unique
-  private     Boolean
+  archived    Boolean             @default(false)
   description String?
   instruction String?
   submission  Submission[]
   tasks       TaskOnAssessment[]
   users       UserOnAssessment[]
   owners      OwnerOnAssessment[]
-  open        DateTime
+  open        DateTime            @default(now())
   close       DateTime
 }
 
