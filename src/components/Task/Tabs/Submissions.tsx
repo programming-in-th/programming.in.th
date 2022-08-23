@@ -9,10 +9,10 @@ const SubmissionsTab = ({ task }: { task: Task }) => {
 
   return (
     <div className="flex flex-shrink flex-col">
-      <Header />
+      <Header isViewing />
       <div className="flex flex-col space-y-2 md:mt-2">
         {submissions.map(sub => (
-          <Card key={sub.id} sub={sub} task={task} />
+          <Card key={sub.id} sub={sub} task={task} isViewing />
         ))}
       </div>
       <button

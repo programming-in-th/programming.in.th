@@ -2,11 +2,13 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
+import checkOwnerPermissionOnAssessment from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
 import {
   CreateAssessmentSchema,
   IndividualAssessmentSchema
 } from '@/lib/api/schema/assessment'
 import prisma from '@/lib/prisma'
+import removeArrDup from '@/utils/removeArrDup'
 import {
   methodNotAllowed,
   unauthorized,
@@ -16,8 +18,6 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../../auth/[...nextauth]'
-import checkOwnerPermissionOnAssessment from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
-import removeArrDup from '@/utils/removeArrDup'
 
 export default async function handler(
   req: NextApiRequest,

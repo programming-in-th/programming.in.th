@@ -1,9 +1,8 @@
-import Link from 'next/link'
-
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
 
+import IsLink from '@/components/common/IsLink'
 import { IGeneralSubmission } from '@/types/submissions'
 import { getDisplayNameFromGrader } from '@/utils/language'
 
@@ -64,7 +63,7 @@ const getColumn = (isViewing: boolean) => [
   {
     title: 'Status',
     field: 'status',
-    width: isViewing ? 'w-[14rem]' : 'hidden',
+    width: isViewing ? 'hidden' : 'w-[14rem]',
     child: (sub: IGeneralSubmission) => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {sub.status}
@@ -124,27 +123,6 @@ export const Header = ({ isViewing = false }: { isViewing?: boolean }) => {
   )
 }
 
-const LinkComponent = ({
-  children,
-  className,
-  id,
-  isViewing
-}: {
-  children: JSX.Element
-  className: string
-  id: string
-  isViewing: boolean
-}) => {
-  if (isViewing) {
-    return <div className={className}>{children}</div>
-  }
-  return (
-    <Link href={`/submissions/${id}`}>
-      <a className={className}>{children}</a>
-    </Link>
-  )
-}
-
 export const Card = ({
   sub,
   task,
@@ -159,9 +137,9 @@ export const Card = ({
     item.child(sub, task)
   )
   return (
-    <LinkComponent
-      id={String(sub.id)}
-      isViewing={isViewing}
+    <IsLink
+      href={`/submissions/${sub.id}`}
+      isLink={isViewing}
       className="flex w-full flex-col rounded-xl py-3 px-6 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex-row md:px-0"
     >
       <>
@@ -189,6 +167,6 @@ export const Card = ({
           </div>
         </div>
       </>
-    </LinkComponent>
+    </IsLink>
   )
 }
