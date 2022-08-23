@@ -46,6 +46,9 @@ export default async function handler(
             userId: session.user.id!
           }
         }
+      },
+      include: {
+        tasks: { include: { task: true } }
       }
     })
 
