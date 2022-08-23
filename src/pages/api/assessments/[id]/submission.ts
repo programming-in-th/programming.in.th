@@ -52,7 +52,7 @@ export default async function handler(
       return notFound(res)
     }
 
-    if (await checkUserPermissionOnTask(session.user.id!, task.id)) {
+    if (!(await checkUserPermissionOnTask(session, task.id))) {
       return forbidden(res)
     }
 
@@ -92,7 +92,7 @@ export default async function handler(
     const { taskId, language, code } = parsedBody.data
     const { id: assignmentId } = parsedQuery.data
 
-    if (await checkUserPermissionOnTask(session.user.id!, taskId, 'WRITE')) {
+    if (await checkUserPermissionOnTask(session, taskId, 'WRITE')) {
       return forbidden(res)
     }
 

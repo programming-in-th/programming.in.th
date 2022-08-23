@@ -1,14 +1,18 @@
+import { Session } from 'next-auth'
+
 import prisma from '@/lib/prisma'
 
 const checkUserPermissionOnTask = async (
-  userId: string,
+  session: Session,
   taskId: string,
   interaction: 'READ' | 'WRITE' = 'READ'
 ) => {
+  if (session.user.admin) return true
+
   if (interaction === 'WRITE') {
     const taskOnAssessment = await prisma.userOnAssessment.findMany({
       where: {
-        userId: userId,
+        userId: session.user.id!,
         assessment: {
           OR: [
             {
@@ -38,7 +42,7 @@ const checkUserPermissionOnTask = async (
 
   const taskOnAssessment = await prisma.userOnAssessment.findMany({
     where: {
-      userId: userId,
+      userId: session.user.id!,
       assessment: {
         OR: [{ archived: false }],
         tasks: {

@@ -33,7 +33,7 @@ export default async function handler(
         return unauthorized(res)
       }
 
-      if (!(await checkUserPermissionOnTask(session.user.id!, task.id))) {
+      if (!(await checkUserPermissionOnTask(session, task.id))) {
         return forbidden(res)
       }
 
