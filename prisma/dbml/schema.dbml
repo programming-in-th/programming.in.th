@@ -114,7 +114,7 @@ Table Assessment {
   archived Boolean [not null, default: false]
   description String
   instruction String
-  submission Submission [not null]
+  submissions Submission [not null]
   tasks TaskOnAssessment [not null]
   users UserOnAssessment [not null]
   owners OwnerOnAssessment [not null]

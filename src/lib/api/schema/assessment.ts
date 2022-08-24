@@ -13,7 +13,7 @@ export type IndividualAssessmentSchema = z.infer<
 export const CreateAssessmentSchema = z.object({
   id: z.string(),
   name: z.string(),
-  private: z.boolean(),
+  archived: z.boolean(),
   description: z.string().optional(),
   instruction: z.string().optional(),
   tasks: z.string().array().optional(),

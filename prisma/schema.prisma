@@ -130,7 +130,7 @@ model Assessment {
   archived    Boolean             @default(false)
   description String?
   instruction String?
-  submission  Submission[]
+  submissions Submission[]
   tasks       TaskOnAssessment[]
   users       UserOnAssessment[]
   owners      OwnerOnAssessment[]

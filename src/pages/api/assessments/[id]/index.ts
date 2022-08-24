@@ -100,7 +100,7 @@ export default async function handler(
     const {
       id,
       name,
-      private: isPrivate,
+      archived,
       description,
       instruction,
       tasks,
@@ -116,7 +116,7 @@ export default async function handler(
         data: {
           id,
           name,
-          private: isPrivate,
+          archived,
           description,
           instruction,
           ...(tasks && {
