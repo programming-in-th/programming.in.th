@@ -86,7 +86,7 @@ export const Nav = () => {
 
               <div className="flex items-center space-x-4 pl-2">
                 {session ? (
-                  <Popover className="relative hidden py-1 md:block">
+                  <Popover className="relative hidden md:block">
                     <Popover.Button className="flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-slate-300 transition-colors hover:bg-slate-300 hover:bg-opacity-50 active:ring-1">
                       <Image
                         src={
