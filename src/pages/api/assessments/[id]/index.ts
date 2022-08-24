@@ -48,7 +48,11 @@ export default async function handler(
         }
       },
       include: {
-        tasks: { include: { task: true } }
+        tasks: {
+          select: {
+            task: { select: { id: true, title: true, fullScore: true } }
+          }
+        }
       }
     })
 
