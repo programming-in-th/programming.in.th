@@ -7,6 +7,8 @@ import prisma from '@/lib/prisma'
 import { methodNotAllowed, ok, unauthorized } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
+import { getAllTaskForUser } from '@/lib/api/queries/getAllTaskForUser'
+import isAdmin from '@/lib/api/queries/isAdmin'
 
 export default async function handler(
   req: NextApiRequest,
@@ -19,11 +21,20 @@ export default async function handler(
       return unauthorized(res)
     }
 
-    const maxScore = await prisma.$queryRaw(
+    const maxScore = (await prisma.$queryRaw(
       Prisma.sql`SELECT "taskId", max(score) FROM "Submission" WHERE "userId" = ${session.user.id} GROUP BY "taskId";`
+    )) as Array<{ taskId: string; max: number }>
+
+    if (await isAdmin(session.user.id!)) {
+      return ok(res, maxScore)
+    }
+
+    const usersTasks = await getAllTaskForUser(session.user.id!)
+    const filteredMaxScore = maxScore.filter(ms =>
+      usersTasks.includes(ms.taskId)
     )
 
-    return ok(res, maxScore)
+    return ok(res, filteredMaxScore)
   }
 
   return methodNotAllowed(res, ['GET'])

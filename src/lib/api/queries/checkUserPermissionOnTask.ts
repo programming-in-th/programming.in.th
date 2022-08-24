@@ -14,7 +14,7 @@ const checkUserPermissionOnTask = async (
       where: {
         userId: session.user.id!,
         assessment: {
-          OR: [
+          AND: [
             {
               AND: [
                 { open: { lte: new Date() } },
@@ -44,7 +44,7 @@ const checkUserPermissionOnTask = async (
     where: {
       userId: session.user.id!,
       assessment: {
-        OR: [{ archived: false }],
+        archived: false,
         tasks: {
           some: { taskId: { equals: taskId } }
         }
