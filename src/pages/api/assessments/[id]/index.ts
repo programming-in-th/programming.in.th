@@ -56,7 +56,10 @@ export default async function handler(
       }
     })
 
-    return ok(res, assessment)
+    return ok(res, {
+      ...assessment,
+      tasks: assessment?.tasks.map(task => task.task)
+    })
   } else if (req.method === 'DELETE') {
     const { query } = req
     const parsedQuery = IndividualAssessmentSchema.safeParse(query)
