@@ -4,7 +4,6 @@ const prisma = new PrismaClient()
 const data = [
   {
     memoryLimit: 64,
-    solved: 0,
     fullScore: 100,
     private: false,
     timeLimit: 1.0,
@@ -15,7 +14,6 @@ const data = [
   },
   {
     type: 'normal',
-    solved: 0,
     title: 'Grading',
     timeLimit: 1.0,
     memoryLimit: 64,
@@ -29,7 +27,6 @@ const data = [
     timeLimit: 1.0,
     type: 'normal',
     private: false,
-    solved: 0,
     title: 'Min Max',
     fullScore: 100,
     memoryLimit: 64,
@@ -41,13 +38,11 @@ const data = [
     title: 'Matrix Addition',
     type: 'normal',
     private: false,
-    solved: 0,
     memoryLimit: 64,
     path: 'prog/00',
     id: '0003'
   },
   {
-    solved: 0,
     memoryLimit: 64,
     title: 'Character Checker',
     path: 'prog/00',
@@ -58,7 +53,6 @@ const data = [
     id: '0004'
   },
   {
-    solved: 0,
     fullScore: 100,
     memoryLimit: 64,
     path: 'prog/00',
@@ -71,7 +65,6 @@ const data = [
   {
     title: 'Soundex',
     private: false,
-    solved: 0,
     timeLimit: 1.0,
     memoryLimit: 64,
     fullScore: 100,
@@ -85,7 +78,6 @@ const data = [
     fullScore: 100,
     type: 'normal',
     title: 'Herman',
-    solved: 0,
     memoryLimit: 32,
     private: false,
     id: '0007'
@@ -105,7 +97,6 @@ const data = [
     timeLimit: 1.0,
     private: false,
     type: 'normal',
-    solved: 0,
     title: 'ABC',
     fullScore: 100,
     path: 'prog/00',
@@ -118,7 +109,6 @@ const data = [
     private: false,
     path: 'prog/00',
     fullScore: 100,
-    solved: 0,
     type: 'normal',
     timeLimit: 1.0,
     id: '0010'
@@ -127,7 +117,6 @@ const data = [
     path: 'ipst/62/may',
     type: 'normal',
     fullScore: 100,
-    solved: 0,
     title: 'กุ๊ยจัดแถว',
     private: false,
     memoryLimit: 256,
