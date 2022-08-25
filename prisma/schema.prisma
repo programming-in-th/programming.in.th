@@ -91,8 +91,7 @@ model Task {
   memoryLimit      Int
   timeLimit        Float
   path             String             @db.Text
-  solved           Int
-  private          Boolean
+  private          Boolean            @default(false)
   type             String             @db.Text
   tags             Tag[]
   bookmarks        Bookmark[]

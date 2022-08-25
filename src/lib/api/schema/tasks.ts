@@ -9,7 +9,6 @@ export const TaskSchema = z.object({
   memoryLimit: z.number(),
   timeLimit: z.number(),
   path: z.string(),
-  solved: z.number(),
   private: z.boolean(),
   type: TaskTypeEnum
 })
