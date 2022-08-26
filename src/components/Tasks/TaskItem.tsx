@@ -112,7 +112,7 @@ export const TaskItem = (
           </a>
         </Link>
       </div>
-      <div className="group hidden w-full items-center justify-between p-2 md:flex">
+      <div className="group hidden w-full items-center justify-between py-1.5 md:flex">
         <Link href={`/tasks/${task.id}`}>
           <a className="flex w-full rounded-xl px-6 py-3 font-display shadow-md transition group-hover:shadow-lg dark:bg-slate-700">
             <div className="flex w-full flex-col">

@@ -18,10 +18,10 @@ const Card = ({
     <>
       <div className="flex w-full px-10 py-6">
         <div className="flex w-1/3 flex-col">
-          <p className="text-xl text-gray-500 dark:text-gray-200">
+          <p className="text-xl font-semibold leading-6 text-gray-500 dark:text-gray-200">
             {assessment.name}
           </p>
-          <p className="text-base text-gray-500 dark:text-gray-200">{`#${assessment.id}`}</p>
+          <p className="pt-1 text-base text-gray-500 dark:text-gray-200">{`#${assessment.id}`}</p>
         </div>
         <p className="w-2/3">{assessment.description}</p>
       </div>
@@ -39,7 +39,7 @@ const Card = ({
             <p className="text-sm text-gray-400 dark:text-gray-300">Solved</p>
             <p className="text-base text-gray-500 dark:text-white">9/11</p>
           </div>
-          <div className="flex flex-col items-center px-4">
+          <div className="flex flex-col items-center pl-4">
             <p className="text-sm text-gray-400 dark:text-gray-300">Score</p>
             <p className="text-base text-gray-500 dark:text-white">9/100</p>
           </div>

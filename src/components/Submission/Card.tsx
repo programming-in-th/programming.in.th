@@ -63,7 +63,7 @@ const getColumn = (isViewing: boolean) => [
   {
     title: 'Status',
     field: 'status',
-    width: isViewing ? 'hidden' : 'w-[14rem]',
+    width: isViewing ? 'hidden -mx-2' : 'w-[14rem]',
     child: (sub: IGeneralSubmission) => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {sub.status}

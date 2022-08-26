@@ -36,7 +36,7 @@ const Tabs: ITab[] = [
   }
 ]
 
-const LIMIT = 5
+const LIMIT = 7
 
 export const TasksList = ({
   tasks,

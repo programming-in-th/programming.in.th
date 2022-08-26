@@ -66,7 +66,7 @@ const Tasks = ({ tasks }: { tasks: IGeneralTask[] }) => {
     <PageLayout>
       <div className="flex w-auto justify-center">
         <div className="flex min-h-screen w-full max-w-7xl flex-col items-center">
-          <div className="flex w-full flex-col items-center pt-6 pb-10">
+          <div className="flex w-full flex-col items-center pt-6 pb-6">
             <p className="text-3xl font-medium text-gray-500 dark:text-gray-100">
               Tasks
             </p>

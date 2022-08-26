@@ -58,7 +58,8 @@ export const Pagination = ({
                   <p
                     className={clsx(
                       'flex h-7 w-7 items-center justify-center rounded-full transition hover:bg-gray-100',
-                      index === page && 'bg-blue-100 text-blue-600'
+                      index === page &&
+                        'bg-blue-100 text-blue-600 dark:bg-gray-700 dark:text-gray-300'
                     )}
                   >
                     {index}
