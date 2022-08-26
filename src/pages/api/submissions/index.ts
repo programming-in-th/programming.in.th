@@ -20,6 +20,7 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
+import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 
 export default async function handler(
   req: NextApiRequest,
@@ -44,7 +45,7 @@ export default async function handler(
 
     const task = await prisma.task.findUnique({
       where: { id: taskId },
-      select: { private: true }
+      select: { private: true, id: true }
     })
 
     if (task?.private) {
@@ -52,7 +53,7 @@ export default async function handler(
         return unauthorized(res)
       }
 
-      if (!session.user.admin) {
+      if (!(await checkUserPermissionOnTask(session, task.id))) {
         return forbidden(res)
       }
     }
