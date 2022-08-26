@@ -3,12 +3,12 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { Prisma } from '@prisma/client'
 import { unstable_getServerSession } from 'next-auth'
 
+import { getAllTaskForUser } from '@/lib/api/queries/getAllTaskForUser'
+import isAdmin from '@/lib/api/queries/isAdmin'
 import prisma from '@/lib/prisma'
 import { methodNotAllowed, ok, unauthorized } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
-import { getAllTaskForUser } from '@/lib/api/queries/getAllTaskForUser'
-import isAdmin from '@/lib/api/queries/isAdmin'
 
 export default async function handler(
   req: NextApiRequest,

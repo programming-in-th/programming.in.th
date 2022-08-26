@@ -1,7 +1,6 @@
 import { useState } from 'react'
 
 import { CollapseAll, ExpandAll } from '@/svg/ExpandCollapse'
-
 import { IGroup } from '@/types/submissions'
 
 import { Accordion } from './Accordian'
