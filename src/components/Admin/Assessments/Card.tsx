@@ -1,10 +1,11 @@
+import { useState } from 'react'
+
 import dayjs from 'dayjs'
 
-import VerifyDelete from './VerifyDelete'
-import EditAssessment from './EditAssessment'
-
 import { IAssessment } from '@/types/assessments'
-import { useState } from 'react'
+
+import EditAssessment from './EditAssessment'
+import VerifyDelete from './VerifyDelete'
 
 const Card = ({ assessment }: { assessment: IAssessment }) => {
   const [openEdit, setOpenEdit] = useState<boolean>(false)

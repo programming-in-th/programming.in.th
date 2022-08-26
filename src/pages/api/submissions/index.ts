@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
+import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import { getFilteredSubmissions } from '@/lib/api/queries/getFilteredSubmissions'
 import { getInfiniteSubmissions } from '@/lib/api/queries/getInfiniteSubmissions'
 import {
@@ -20,7 +21,6 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
-import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 
 export default async function handler(
   req: NextApiRequest,
