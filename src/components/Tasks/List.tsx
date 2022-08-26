@@ -8,7 +8,7 @@ import { Listing } from './All'
 import { Pagination } from './Pagination'
 
 interface ITab {
-  condition: (task: IGeneralTask) => boolean
+  condition: (_task: IGeneralTask) => boolean
   value: string | null
 }
 
@@ -49,7 +49,7 @@ export const TasksList = ({
 }) => {
   const { query } = useRouter()
 
-  const condition = useMemo<(task: IGeneralTask) => boolean>(
+  const condition = useMemo<(_task: IGeneralTask) => boolean>(
     () =>
       Tabs.find(
         tab =>

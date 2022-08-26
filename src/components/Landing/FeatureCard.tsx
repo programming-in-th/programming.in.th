@@ -7,7 +7,7 @@ export const FeatureCard = ({
 }: {
   title: string
   description: string
-  Icon: (props: ComponentProps<'svg'>) => JSX.Element
+  Icon: (_props: ComponentProps<'svg'>) => JSX.Element
 }) => {
   return (
     <article className="relative rounded-lg bg-white py-6 text-center text-prog-gray-500 shadow-lg dark:bg-slate-700">
