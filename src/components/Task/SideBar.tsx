@@ -15,7 +15,7 @@ import { IGeneralSubmission } from '@/types/submissions'
 
 import { PieChart } from '../common/PieChart'
 
-const Tabs = [
+const NormalTabs = [
   {
     label: 'Statement',
     value: 'statement',
@@ -38,7 +38,33 @@ const Tabs = [
   }
 ]
 
-export const SideBar = ({ task, type }: { task: Task; type: string }) => {
+const AssessmentTabs = [
+  {
+    label: 'Statement',
+    value: 'statement',
+    url: ''
+  },
+  {
+    label: 'Submit',
+    value: 'submit',
+    url: 'submit'
+  },
+  {
+    label: 'My Submissions',
+    value: 'submissions',
+    url: 'submissions'
+  }
+]
+
+export const SideBar = ({
+  task,
+  type,
+  isAssessment
+}: {
+  task: Task
+  type: string
+  isAssessment: boolean
+}) => {
   const { status } = useSession()
 
   const { data } = useSWR<IGeneralSubmission[]>(
@@ -55,6 +81,11 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
     fetcher
   )
 
+  const Tabs = useMemo(
+    () => (isAssessment ? AssessmentTabs : NormalTabs),
+    [isAssessment]
+  )
+
   const { push } = useRouter()
 
   const maxScore = useMemo(() => {
@@ -66,29 +97,31 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
   return (
     <section className="w-full flex-none md:w-[14rem]">
       <div className="flex flex-row-reverse justify-between space-x-2 px-2 md:flex-row md:justify-start md:px-0">
-        <button
-          className="mt-1 flex"
-          onClick={async () => {
-            mutate(
-              `/api/bookmarks/task/${task.id}`,
-              async (state: boolean) => {
-                await fetch(`/api/bookmarks`, {
-                  method: state ? 'POST' : 'DELETE',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ taskId: task.id })
-                })
-                return state
-              },
-              { optimisticData: !bookmark }
-            )
-          }}
-        >
-          {bookmark ? (
-            <StarIconSolid className="h-5 w-5 text-gray-400 dark:text-amber-400" />
-          ) : (
-            <StarIconOutline className="h-5 w-5 text-gray-300" />
-          )}
-        </button>
+        {!isAssessment && (
+          <button
+            className="mt-1 flex"
+            onClick={async () => {
+              mutate(
+                `/api/bookmarks/task/${task.id}`,
+                async (state: boolean) => {
+                  await fetch(`/api/bookmarks`, {
+                    method: state ? 'POST' : 'DELETE',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ taskId: task.id })
+                  })
+                  return state
+                },
+                { optimisticData: !bookmark }
+              )
+            }}
+          >
+            {bookmark ? (
+              <StarIconSolid className="h-5 w-5 text-gray-400 dark:text-amber-400" />
+            ) : (
+              <StarIconOutline className="h-5 w-5 text-gray-300" />
+            )}
+          </button>
+        )}
         <div
           className={clsx(
             'flex w-full flex-col',
@@ -116,7 +149,7 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
       <select
         className="mt-2 w-full px-4 py-2 md:hidden"
         onChange={({ target: { value } }) =>
-          push({ pathname: `/tasks/${task?.id}/${value}` })
+          push({ pathname: `./${task?.id}/${value}` })
         }
       >
         {type &&
@@ -136,10 +169,7 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
       <div className="hidden shrink flex-col font-display md:flex">
         {Tabs.map(tabItem => {
           return (
-            <Link
-              href={`/tasks/${task?.id}/${tabItem.url}`}
-              key={tabItem.label}
-            >
+            <Link href={`${task?.id}/${tabItem.url}`} key={tabItem.label}>
               <a>
                 <button
                   key={tabItem.label}
@@ -160,7 +190,7 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
         })}
       </div>
 
-      <hr className="my-8 hidden md:block" />
+      <hr className="my-4 hidden md:block" />
 
       <div className="hidden flex-col items-center justify-center text-slate-500 dark:text-gray-300 md:flex">
         <p className="mb-4 font-light dark:text-gray-200">Your Score</p>
@@ -168,7 +198,7 @@ export const SideBar = ({ task, type }: { task: Task; type: string }) => {
         <PieChart points={maxScore} />
       </div>
 
-      <hr className="my-8 hidden md:block" />
+      <hr className="my-4 hidden md:block" />
 
       <div className="hidden flex-col items-center justify-center md:flex">
         <a
