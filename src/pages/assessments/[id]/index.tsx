@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { NextRouter, withRouter } from 'next/router'
 
 import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
@@ -55,13 +55,12 @@ const TaskCard = ({
   )
 }
 
-const Assessments = () => {
-  const router = useRouter()
+const Assessments = ({ router }: { router: NextRouter }) => {
   const id = router.query.id as string
 
-  const { status } = useSession()
+  console.log('====> ', id)
 
-  console.log('-> ', status)
+  const { status } = useSession()
 
   const { data: scores } = useSWR<Score[]>(
     status === 'authenticated' ? '/api/submissions/score' : null,
@@ -109,4 +108,4 @@ const Assessments = () => {
   )
 }
 
-export default Assessments
+export default withRouter(Assessments)

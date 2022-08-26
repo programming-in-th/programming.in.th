@@ -23,7 +23,7 @@ const component = (type: string, task: Task) => {
 
 const Task = () => {
   const router = useRouter()
-  // const assessmentId = router.query.id as string
+  const assessmentId = router.query.id as string
   const taskPath = router.query.task as string[]
 
   const taskId = taskPath && taskPath[0]
@@ -35,7 +35,7 @@ const Task = () => {
   return (
     <>
       {task ? (
-        <TaskLayout task={task} type={type} isAssessment>
+        <TaskLayout task={task} type={type} assessmentId={assessmentId}>
           <div className="flex w-full min-w-0 shrink flex-col gap-8">
             {component(type, task)}
           </div>

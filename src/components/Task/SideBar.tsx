@@ -59,12 +59,13 @@ const AssessmentTabs = [
 export const SideBar = ({
   task,
   type,
-  isAssessment
+  assessmentId
 }: {
   task: Task
   type: string
-  isAssessment: boolean
+  assessmentId?: string
 }) => {
+  console.log('aid: ', assessmentId)
   const { status } = useSession()
 
   const { data } = useSWR<IGeneralSubmission[]>(
@@ -82,8 +83,8 @@ export const SideBar = ({
   )
 
   const Tabs = useMemo(
-    () => (isAssessment ? AssessmentTabs : NormalTabs),
-    [isAssessment]
+    () => (assessmentId ? AssessmentTabs : NormalTabs),
+    [assessmentId]
   )
 
   const { push } = useRouter()
@@ -97,7 +98,7 @@ export const SideBar = ({
   return (
     <section className="w-full flex-none md:w-[14rem]">
       <div className="flex flex-row-reverse justify-between space-x-2 px-2 md:flex-row md:justify-start md:px-0">
-        {!isAssessment && (
+        {!assessmentId && (
           <button
             className="mt-1 flex"
             onClick={async () => {
@@ -149,7 +150,11 @@ export const SideBar = ({
       <select
         className="mt-2 w-full px-4 py-2 md:hidden"
         onChange={({ target: { value } }) =>
-          push({ pathname: `./${task?.id}/${value}` })
+          push({
+            pathname: assessmentId
+              ? `/assessments/${assessmentId}/${task?.id}/${value}`
+              : `/tasks/${task?.id}/${value}`
+          })
         }
       >
         {type &&
@@ -169,7 +174,14 @@ export const SideBar = ({
       <div className="hidden shrink flex-col font-display md:flex">
         {Tabs.map(tabItem => {
           return (
-            <Link href={`${task?.id}/${tabItem.url}`} key={tabItem.label}>
+            <Link
+              href={
+                assessmentId
+                  ? `/assessments/${assessmentId}/${task?.id}/${tabItem.url}`
+                  : `/tasks/${task?.id}/${tabItem.url}`
+              }
+              key={tabItem.label}
+            >
               <a>
                 <button
                   key={tabItem.label}
