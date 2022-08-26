@@ -8,6 +8,12 @@ export interface IAssessment {
   close: Date
 }
 
-// export interface IAssessmentTask extends IAssessment {
+export interface IAssessmentTask {
+  id: string
+  title: string
+  fullScore: number
+}
 
-// }
+export interface IAssessmentwithTask extends IAssessment {
+  tasks: IAssessmentTask[]
+}
