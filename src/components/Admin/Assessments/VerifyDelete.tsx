@@ -72,8 +72,10 @@ const VerifyDelete = ({
                           Are you sure you want to delete your assessment? All
                           of your data will be permanently removed. This action
                           cannot be undone. Please type{' '}
-                          <span className="font-bold text-white">{id}</span> to
-                          confirm.
+                          <span className="font-bold text-black dark:text-white">
+                            {id}
+                          </span>{' '}
+                          to confirm.
                         </p>
                       </div>
                     </div>
