@@ -1,15 +1,18 @@
+import { Task } from '@prisma/client'
 import useSWR from 'swr'
 
 import Card from '@/components/Admin/Assessments/Card'
 import { Layout } from '@/components/Admin/Layout'
 import fetcher from '@/lib/fetcher'
-import { IAssessment } from '@/types/assessments'
+import { IAssessmentwithTask } from '@/types/assessments'
 
 const Assessments = () => {
-  const { data: assessments } = useSWR<IAssessment[]>(
+  const { data: assessments } = useSWR<IAssessmentwithTask[]>(
     '/api/assessments',
     fetcher
   )
+  console.log(assessments)
+  const { data: tasks } = useSWR<Task[]>('/api/tasks', fetcher)
   return (
     <Layout current="assessments">
       <div className="flex flex-col space-y-4 py-4 ">
@@ -32,7 +35,7 @@ const Assessments = () => {
         </div>
         {assessments &&
           assessments.map(assessment => (
-            <Card assessment={assessment} key={assessment.id} />
+            <Card assessment={assessment} key={assessment.id} tasks={tasks} />
           ))}
       </div>
     </Layout>

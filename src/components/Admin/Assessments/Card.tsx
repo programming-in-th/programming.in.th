@@ -1,13 +1,20 @@
 import { useState } from 'react'
 
+import { Task } from '@prisma/client'
 import dayjs from 'dayjs'
 
-import { IAssessment } from '@/types/assessments'
+import { IAssessmentwithTask } from '@/types/assessments'
 
 import EditAssessment from './EditAssessment'
 import VerifyDelete from './VerifyDelete'
 
-const Card = ({ assessment }: { assessment: IAssessment }) => {
+const Card = ({
+  assessment,
+  tasks = []
+}: {
+  assessment: IAssessmentwithTask
+  tasks?: Task[]
+}) => {
   const [openEdit, setOpenEdit] = useState<boolean>(false)
   const [openDelete, setOpenDelete] = useState<boolean>(false)
   return (
@@ -43,7 +50,7 @@ const Card = ({ assessment }: { assessment: IAssessment }) => {
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <div className="rounded-md p-2 transition hover:bg-gray-700">
+          <div className="rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700">
             <svg
               width="20"
               height="20"
@@ -65,7 +72,7 @@ const Card = ({ assessment }: { assessment: IAssessment }) => {
             </svg>
           </div>
           <div
-            className="rounded-md p-2 transition hover:bg-gray-700"
+            className="rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700"
             onClick={() => setOpenDelete(true)}
           >
             <svg
@@ -91,7 +98,12 @@ const Card = ({ assessment }: { assessment: IAssessment }) => {
         id={assessment.id}
         onDelete={() => console.log('DELETE')}
       />
-      <EditAssessment open={openEdit} setOpen={setOpenEdit} />
+      <EditAssessment
+        open={openEdit}
+        setOpen={setOpenEdit}
+        tasks={tasks}
+        assessment={assessment}
+      />
     </div>
   )
 }
