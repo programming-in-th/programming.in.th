@@ -109,7 +109,7 @@ const Tasks = ({ tasks }: { tasks: IGeneralTask[] }) => {
 export default Tasks
 
 export async function getStaticProps() {
-  const tasks = await prisma.task.findMany()
+  const tasks = await prisma.task.findMany({ where: { private: false } })
 
   return {
     props: {
