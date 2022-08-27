@@ -26,12 +26,26 @@ export default async function handler(
     }
 
     if (session.user.admin) {
-      const assessment = await prisma.assessment.findMany()
+      const assessments = await prisma.assessment.findMany({
+        include: {
+          tasks: {
+            select: {
+              task: { select: { id: true, title: true, fullScore: true } }
+            }
+          }
+        }
+      })
 
-      return ok(res, assessment)
+      return ok(
+        res,
+        assessments.map(assessment => ({
+          ...assessment,
+          tasks: assessment?.tasks.map(task => task.task)
+        }))
+      )
     }
 
-    const assessment = await prisma.assessment.findMany({
+    const assessments = await prisma.assessment.findMany({
       where: {
         OR: [
           { users: { some: { userId: session.user.id! } } },
@@ -40,7 +54,7 @@ export default async function handler(
       }
     })
 
-    return ok(res, assessment)
+    return ok(res, assessments)
   } else if (req.method === 'POST') {
     const session = await unstable_getServerSession(req, res, authOptions)
 
