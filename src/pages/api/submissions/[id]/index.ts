@@ -1,5 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { unstable_getServerSession } from 'next-auth'
+
+import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import { IndividualSubmissionSchema } from '@/lib/api/schema/submissions'
 import { decompressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
@@ -11,8 +14,7 @@ import {
   ok,
   unauthorized
 } from '@/utils/response'
-import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
-import { unstable_getServerSession } from 'next-auth'
+
 import { authOptions } from '../../auth/[...nextauth]'
 
 export default async function handler(
