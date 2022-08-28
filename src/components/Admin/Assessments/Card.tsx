@@ -2,6 +2,7 @@ import { useState } from 'react'
 
 import { Task } from '@prisma/client'
 import dayjs from 'dayjs'
+import { mutate } from 'swr'
 
 import { IAssessmentwithTask } from '@/types/assessments'
 
@@ -96,7 +97,10 @@ const Card = ({
         open={openDelete}
         setOpen={setOpenDelete}
         id={assessment.id}
-        onDelete={() => console.log('DELETE')}
+        onDelete={async () => {
+          await fetch(`/api/assessments/${assessment.id}`, { method: 'DELETE' })
+          await mutate('/api/assessments')
+        }}
       />
       <EditAssessment
         open={openEdit}

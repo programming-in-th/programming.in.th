@@ -1,35 +1,64 @@
-import { Fragment, useMemo } from 'react'
+import { Fragment, useEffect, useMemo, useState } from 'react'
 
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { Task } from '@prisma/client'
+import { FieldValues, useForm, UseFormRegister } from 'react-hook-form'
 
-import { IAssessmentwithTask } from '@/types/assessments'
+import { IAssessmentTask, IAssessmentwithTask } from '@/types/assessments'
 
-const LeftBar = () => {
+const LeftBar = ({
+  register,
+  assessment
+}: {
+  register: UseFormRegister<FieldValues>
+  assessment?: IAssessmentwithTask
+}) => {
+  console.log(assessment)
   return (
     <div className="flex h-full w-full flex-col space-y-3 overflow-y-auto border-r-[1px] border-gray-300 px-6 py-4">
       <div className="flex flex-col">
         <p>Assessment Name</p>
-        <input type="text" className="rounded-md border px-4 py-1" />
+        <input
+          type="text"
+          className="rounded-md border px-4 py-1"
+          {...register('name', { required: true, maxLength: 2 })}
+          // defaultValue={assessment?.name || ''}
+        />
       </div>
       <div className="flex flex-col">
         <p>ID</p>
-        <input type="text" className="rounded-md border px-4 py-1" />
+        <input
+          type="text"
+          className="rounded-md border px-4 py-1"
+          defaultValue={assessment?.id || ''}
+          {...register('id')}
+          disabled={assessment !== undefined}
+        />
       </div>
       <div className="flex flex-col">
         <p>Description</p>
-        <textarea className="h-28 rounded-md border px-4 py-1" />
+        <textarea
+          className="h-28 rounded-md border px-4 py-1"
+          {...register('description')}
+          defaultValue={assessment?.description || ''}
+        />
       </div>
       <div className="flex flex-col">
         <p>Instruction</p>
-        <textarea className="h-28 rounded-md border px-4 py-1" />
+        <textarea
+          className="h-28 rounded-md border px-4 py-1"
+          {...register('instruction')}
+          defaultValue={assessment?.instruction || ''}
+        />
       </div>
       <div className="flex flex-col">
         <p>Open At</p>
         <input
           type="datetime-local"
           className="rounded-md border px-4 py-1"
+          {...register('open')}
+          defaultValue={assessment?.open.slice(0, -1) || ''}
         ></input>
       </div>
       <div className="flex flex-col">
@@ -37,6 +66,8 @@ const LeftBar = () => {
         <input
           type="datetime-local"
           className="rounded-md border px-4 py-1"
+          {...register('close')}
+          defaultValue={assessment?.close.slice(0, -1) || ''}
         ></input>
       </div>
       <div className="flex flex-col">
@@ -50,7 +81,7 @@ const LeftBar = () => {
         </div>
       </div>
       <div className="flex flex-col">
-        <p>Assign to</p>
+        <p>Assign owener to</p>
         <div className="flex h-52 flex-col overflow-y-auto rounded-md border border-gray-200 p-0.5">
           <input
             type="text"
@@ -105,12 +136,12 @@ const MiddleBar = ({ tasks }: { tasks: Task[] }) => {
   )
 }
 
-const RightBar = ({ assessment }: { assessment: IAssessmentwithTask }) => {
+const RightBar = ({ tasks }: { tasks: IAssessmentTask[] }) => {
   return (
     <div className="flex h-full w-full flex-col pt-4">
       <p className="mb-2 px-6 text-gray-400">Selected task for assessment</p>
       <div className="flex h-full w-full flex-col space-y-1 overflow-y-auto rounded-md bg-gray-50 p-6">
-        {assessment.tasks.map(task => (
+        {tasks.map(task => (
           <TaskCard
             id={task.id}
             title={task.title}
@@ -131,8 +162,17 @@ export default function EditAssessment({
   open: boolean
   setOpen: (_: boolean) => void
   tasks: Task[]
-  assessment: IAssessmentwithTask
+  assessment?: IAssessmentwithTask
 }) {
+  const [selectedTasks, setSelectedTasks] = useState<IAssessmentTask[]>([])
+
+  const { register, handleSubmit } = useForm()
+  const onSubmit = (data: any) => console.log(data)
+
+  useEffect(() => {
+    setSelectedTasks(assessment?.tasks || [])
+  }, [assessment])
+
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -181,11 +221,14 @@ export default function EditAssessment({
                       </button>
                     </div>
                   </Transition.Child>
-                  <div className="flex h-full w-full flex-col bg-white">
+                  <form
+                    className="flex h-full w-full flex-col bg-white"
+                    onSubmit={handleSubmit(onSubmit)}
+                  >
                     <div className="flex h-full overflow-y-scroll px-3 text-sm text-gray-500">
-                      <LeftBar />
+                      <LeftBar register={register} assessment={assessment} />
                       <MiddleBar tasks={tasks} />
-                      <RightBar assessment={assessment} />
+                      <RightBar tasks={selectedTasks} />
                     </div>
                     <div className="flex justify-end space-x-2 border-t-[1px] px-4 py-2">
                       <button
@@ -194,14 +237,19 @@ export default function EditAssessment({
                       >
                         ยกเลิก
                       </button>
-                      <button
+                      <input
+                        type="submit"
+                        value="สร้าง"
                         className="rounded-md border bg-blue-500 py-2 px-9 text-white transition hover:bg-blue-600"
-                        onClick={() => setOpen(false)}
+                      />
+
+                      {/* </input>
+                      <button
+                        type="submit"
                       >
-                        สร้าง
-                      </button>
+                      </button> */}
                     </div>
-                  </div>
+                  </form>
                 </Dialog.Panel>
               </Transition.Child>
             </div>
