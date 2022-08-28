@@ -11,7 +11,7 @@ import {
 } from './constant'
 import fetcher from './fetcher'
 
-const useSubmissionData = (id: number) => {
+export const useSSESubmissionData = (id: number) => {
   const { data, error, mutate } = useSWR<IGeneralSubmission>(
     `/api/submissions/${id}`,
     fetcher
@@ -54,4 +54,31 @@ const useSubmissionData = (id: number) => {
   return { submission: data, isLoading: !error && !data, isError: error }
 }
 
-export default useSubmissionData
+export const useShortPollingSubmissionData = (id: number) => {
+  const { data, error } = useSWR<IGeneralSubmission>(
+    `/api/submissions/${id}`,
+    fetcher
+  )
+
+  const { data: updates, error: updatesError } = useSWR<
+    Pick<IGeneralSubmission, 'groups' | 'id' | 'score' | 'status'>
+  >(`/api/submissions/${id}/realtime`, fetcher, {
+    refreshInterval: data => {
+      if (
+        data?.status === JUDGE_COMPLETED ||
+        data?.status === JUDGE_ERROR ||
+        data?.status === JUDGE_COMPILATION_ERROR
+      ) {
+        return 0
+      }
+
+      return 1500
+    }
+  })
+
+  return {
+    submission: { ...data, ...updates } as IGeneralSubmission,
+    isLoading: !error && !data,
+    isError: error
+  }
+}

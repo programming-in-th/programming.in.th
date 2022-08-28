@@ -15,8 +15,7 @@ export const getFilteredSubmissions = async (
         ...(filter.includes(Filter.enum.own) && {
           user: { id: { equals: session.user.id! } }
         }),
-        ...(filter.includes(Filter.enum.task) && { taskId }),
-        task: { private: false }
+        ...(filter.includes(Filter.enum.task) && { taskId })
       },
       orderBy: [
         {

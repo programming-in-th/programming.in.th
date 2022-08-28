@@ -68,6 +68,8 @@ export const SideBar = ({
   console.log('aid: ', assessmentId)
   const { status } = useSession()
 
+  console.log(task)
+
   const { data } = useSWR<IGeneralSubmission[]>(
     task && status === 'authenticated'
       ? `/api/submissions?filter=own&filter=task&taskId=${task.id}`
@@ -92,6 +94,8 @@ export const SideBar = ({
   const maxScore = useMemo(() => {
     return data ? Math.max(...data.map(sub => sub.score), 0) : 0
   }, [data])
+
+  console.log(data)
 
   // if (task === undefined) return <div>loading</div>
 

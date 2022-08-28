@@ -6,7 +6,7 @@ import { Task } from '@prisma/client'
 
 import { Loading } from '@/components/Loading'
 import { Card, Header } from '@/components/Submission/Card'
-import useSubmissionData from '@/lib/useSubmissionData'
+import { useSSESubmissionData } from '@/lib/useSubmissionData'
 
 import { CodeSkeleton } from '../Code'
 import SubmissionGroup from './Group'
@@ -23,7 +23,7 @@ const Submission = ({
   task: Task
   submissionID: number
 }) => {
-  const { submission, isLoading } = useSubmissionData(submissionID)
+  const { submission, isLoading } = useSSESubmissionData(submissionID)
 
   if (isLoading || task === undefined) {
     return <Loading />
