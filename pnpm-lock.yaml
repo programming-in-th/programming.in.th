@@ -42,6 +42,7 @@ specifiers:
   react-countup: ^6.3.0
   react-dom: ^18.2.0
   react-dropzone: ^14.2.2
+  react-hook-form: ^7.34.2
   react-infinite-scroll-component: ^6.1.0
   react-table: ^7.8.0
   rehype-autolink-headings: ^6.1.1
@@ -83,6 +84,7 @@ dependencies:
   react-countup: 6.3.0_react@18.2.0
   react-dom: 18.2.0_react@18.2.0
   react-dropzone: 14.2.2_react@18.2.0
+  react-hook-form: 7.34.2_react@18.2.0
   react-infinite-scroll-component: 6.1.0_react@18.2.0
   react-table: 7.8.0_react@18.2.0
   rehype-autolink-headings: 6.1.1
@@ -6321,6 +6323,18 @@ packages:
       attr-accept: 2.2.2
       file-selector: 0.6.0
       prop-types: 15.8.1
+      react: 18.2.0
+    dev: false
+
+  /react-hook-form/7.34.2_react@18.2.0:
+    resolution:
+      {
+        integrity: sha512-1lYWbEqr0GW7HHUjMScXMidGvV0BE2RJV3ap2BL7G0EJirkqpccTaawbsvBO8GZaB3JjCeFBEbnEWI1P8ZoLRQ==
+      }
+    engines: { node: '>=12.22.0' }
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
       react: 18.2.0
     dev: false
 

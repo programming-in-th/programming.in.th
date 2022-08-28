@@ -29,6 +29,7 @@
     "react-countup": "^6.3.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.2",
+    "react-hook-form": "^7.34.2",
     "react-infinite-scroll-component": "^6.1.0",
     "react-table": "^7.8.0",
     "rehype-autolink-headings": "^6.1.1",
