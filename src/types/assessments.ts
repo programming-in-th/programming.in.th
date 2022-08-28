@@ -4,8 +4,8 @@ export interface IAssessment {
   archived: boolean
   description: string | null
   instruction: string | null
-  open: Date
-  close: Date
+  open: string
+  close: string
 }
 
 export interface IAssessmentTask {
