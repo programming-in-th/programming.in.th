@@ -6,6 +6,7 @@ import { ThemeProvider } from 'next-themes'
 import '@/styles/index.css'
 import '@/styles/fonts.css'
 import '@/styles/style.scss'
+import { Toaster } from 'react-hot-toast'
 
 export default function App({
   Component,
@@ -14,6 +15,7 @@ export default function App({
   return (
     <SessionProvider session={session}>
       <ThemeProvider>
+        <Toaster />
         <Component {...pageProps} />
       </ThemeProvider>
     </SessionProvider>

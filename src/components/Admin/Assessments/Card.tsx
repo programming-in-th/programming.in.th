@@ -2,18 +2,19 @@ import { useState } from 'react'
 
 import { Task } from '@prisma/client'
 import dayjs from 'dayjs'
+import toast from 'react-hot-toast'
 import { mutate } from 'swr'
 
-import { IAssessmentwithTask } from '@/types/assessments'
+import { IAssessment } from '@/types/assessments'
 
-import EditAssessment from './EditAssessment'
+import EditAssessment from './EditAssessment/EditAssessment'
 import VerifyDelete from './VerifyDelete'
 
 const Card = ({
   assessment,
   tasks = []
 }: {
-  assessment: IAssessmentwithTask
+  assessment: IAssessment
   tasks?: Task[]
 }) => {
   const [openEdit, setOpenEdit] = useState<boolean>(false)
@@ -51,14 +52,17 @@ const Card = ({
           </div>
         </div>
         <div className="flex items-center space-x-4">
-          <div className="rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700">
+          <button
+            className="rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700"
+            type="button"
+            onClick={() => setOpenEdit(true)}
+          >
             <svg
               width="20"
               height="20"
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
-              onClick={() => setOpenEdit(true)}
             >
               <path
                 d="M17.4142 2.58579C16.6332 1.80474 15.3668 1.80474 14.5858 2.58579L7 10.1716V13H9.82842L17.4142 5.41421C18.1953 4.63316 18.1953 3.36683 17.4142 2.58579Z"
@@ -71,8 +75,9 @@ const Card = ({
                 fill="#94A3B8"
               />
             </svg>
-          </div>
-          <div
+          </button>
+          <button
+            type="button"
             className="rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700"
             onClick={() => setOpenDelete(true)}
           >
@@ -90,7 +95,7 @@ const Card = ({
                 fill="#94A3B8"
               />
             </svg>
-          </div>
+          </button>
         </div>
       </div>
       <VerifyDelete
@@ -98,7 +103,14 @@ const Card = ({
         setOpen={setOpenDelete}
         id={assessment.id}
         onDelete={async () => {
-          await fetch(`/api/assessments/${assessment.id}`, { method: 'DELETE' })
+          await toast.promise(
+            fetch(`/api/assessments/${assessment.id}`, { method: 'DELETE' }),
+            {
+              loading: 'Loading',
+              success: 'Successfully Deleted',
+              error: 'Delete Assessment Error'
+            }
+          )
           await mutate('/api/assessments')
         }}
       />
@@ -106,7 +118,7 @@ const Card = ({
         open={openEdit}
         setOpen={setOpenEdit}
         tasks={tasks}
-        assessment={assessment}
+        assessmentId={assessment.id}
       />
     </div>
   )
