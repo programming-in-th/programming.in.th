@@ -26,23 +26,9 @@ export default async function handler(
     }
 
     if (session.user.admin) {
-      const assessments = await prisma.assessment.findMany({
-        include: {
-          tasks: {
-            select: {
-              task: { select: { id: true, title: true, fullScore: true } }
-            }
-          }
-        }
-      })
+      const assessments = await prisma.assessment.findMany()
 
-      return ok(
-        res,
-        assessments.map(assessment => ({
-          ...assessment,
-          tasks: assessment?.tasks.map(task => task.task)
-        }))
-      )
+      return ok(res, assessments)
     }
 
     const assessments = await prisma.assessment.findMany({
