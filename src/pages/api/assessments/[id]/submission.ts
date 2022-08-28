@@ -111,8 +111,6 @@ export default async function handler(
     })
 
     return ok(res, submission)
-
-    return badRequest(res)
   }
 
   return methodNotAllowed(res, ['GET', 'POST'])

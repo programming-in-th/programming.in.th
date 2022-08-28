@@ -4,7 +4,6 @@ import { Prisma } from '@prisma/client'
 import { unstable_getServerSession } from 'next-auth'
 
 import { getAllTaskForUser } from '@/lib/api/queries/getAllTaskForUser'
-import isAdmin from '@/lib/api/queries/isAdmin'
 import prisma from '@/lib/prisma'
 import { methodNotAllowed, ok, unauthorized } from '@/utils/response'
 
@@ -25,7 +24,7 @@ export default async function handler(
       Prisma.sql`SELECT "taskId", max(score) FROM "Submission" WHERE "userId" = ${session.user.id} GROUP BY "taskId";`
     )) as Array<{ taskId: string; max: number }>
 
-    if (await isAdmin(session.user.id!)) {
+    if (session.user.admin) {
       return ok(res, maxScore)
     }
 
