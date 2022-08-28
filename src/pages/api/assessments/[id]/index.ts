@@ -52,6 +52,16 @@ export default async function handler(
           select: {
             task: { select: { id: true, title: true, fullScore: true } }
           }
+        },
+        users: {
+          select: {
+            userId: true
+          }
+        },
+        owners: {
+          select: {
+            userId: true
+          }
         }
       }
     })
