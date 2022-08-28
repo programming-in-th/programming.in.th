@@ -181,12 +181,12 @@ Ref: Submission.taskId > Task.id [delete: Cascade]
 
 Ref: TaskOnAssessment.taskId > Task.id
 
-Ref: TaskOnAssessment.assessmentId > Assessment.id
+Ref: TaskOnAssessment.assessmentId > Assessment.id [delete: Cascade]
 
 Ref: UserOnAssessment.userId > User.id
 
-Ref: UserOnAssessment.assessmentId > Assessment.id
+Ref: UserOnAssessment.assessmentId > Assessment.id [delete: Cascade]
 
 Ref: OwnerOnAssessment.userId > User.id
 
-Ref: OwnerOnAssessment.assessmentId > Assessment.id
+Ref: OwnerOnAssessment.assessmentId > Assessment.id [delete: Cascade]
