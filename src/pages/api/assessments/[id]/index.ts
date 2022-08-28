@@ -75,7 +75,7 @@ export default async function handler(
       return unauthorized(res)
     }
 
-    if (await checkOwnerPermissionOnAssessment(session.user.id!, id)) {
+    if (await checkOwnerPermissionOnAssessment(session, id)) {
       const assessment = await prisma.assessment.delete({
         where: { id }
       })
@@ -117,7 +117,7 @@ export default async function handler(
       close
     } = parsedBody.data
 
-    if (await checkOwnerPermissionOnAssessment(session.user.id!, id)) {
+    if (await checkOwnerPermissionOnAssessment(session, id)) {
       const assessment = await prisma.assessment.update({
         where: { id },
         data: {
