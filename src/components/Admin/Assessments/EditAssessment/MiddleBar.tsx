@@ -18,8 +18,10 @@ const TaskCard = ({
 }) => (
   <div
     className={clsx(
-      'flex w-full rounded-xl border border-gray-100 px-6 py-3 font-display shadow-md transition dark:border-slate-700',
-      selected ? 'bg-gray-100 dark:bg-slate-800' : 'bg-white dark:bg-slate-600'
+      'flex w-full cursor-pointer rounded-xl  border bg-white px-6 py-3 font-display shadow-md transition dark:border-slate-700',
+      selected
+        ? 'border-gray-400 dark:bg-slate-800'
+        : 'border-gray-100 dark:bg-slate-600'
     )}
     onClick={() => toggleTask(id, title)}
   >
@@ -76,7 +78,7 @@ export const MiddleBar = ({
       </div>
       <div className="flex h-full w-full flex-col overflow-y-auto px-6 py-2">
         <p className="py-2 text-gray-400 dark:text-gray-200">Private Task</p>
-        <div className="flex w-full flex-col space-y-1">
+        <div className="flex w-full flex-col space-y-2">
           {privateTask.map(task => (
             <TaskCard
               id={task.id}
@@ -90,7 +92,7 @@ export const MiddleBar = ({
         <p className="mt-4 py-2 text-gray-400 dark:text-gray-200">
           Public Task
         </p>
-        <div className="flex w-full flex-col space-y-1">
+        <div className="flex w-full flex-col space-y-2">
           {publicTask.map(task => (
             <TaskCard
               id={task.id}
