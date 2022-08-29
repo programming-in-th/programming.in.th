@@ -1,11 +1,12 @@
-import { Layout } from '@/components/Admin/Layout'
-import fetcher from '@/lib/fetcher'
-import { Task } from '@prisma/client'
 import { useMemo, useState } from 'react'
+
+import { Task } from '@prisma/client'
 import useSWR from 'swr'
 
-import VerifyDelete from '@/components/Admin/Assessments/VerifyDelete'
 import EditTask from '@/components/Admin/Assessments/EditTask'
+import VerifyDelete from '@/components/Admin/Assessments/VerifyDelete'
+import { Layout } from '@/components/Admin/Layout'
+import fetcher from '@/lib/fetcher'
 
 const TaskCard = ({ task }: { task: Task }) => {
   const [openEdit, setOpenEdit] = useState<boolean>(false)
