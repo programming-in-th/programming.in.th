@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
+import { checkOwnerPermissionOnTask } from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import { getFilteredSubmissions } from '@/lib/api/queries/getFilteredSubmissions'
 import { getInfiniteSubmissions } from '@/lib/api/queries/getInfiniteSubmissions'
@@ -62,11 +63,15 @@ export default async function handler(
           return forbidden(res)
         }
 
+        const isAdminOrOwner =
+          session.user.admin ||
+          (await checkOwnerPermissionOnTask(session.user.id!, taskId))
+
         const infiniteSubmission = await getInfiniteSubmissions(
           limit,
           cursor,
           taskId,
-          session.user.id!
+          isAdminOrOwner ? undefined : session.user.id!
         )
 
         return ok(res, infiniteSubmission)
