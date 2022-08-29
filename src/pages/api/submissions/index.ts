@@ -21,6 +21,7 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
+import { checkOwnerPermissionOnTask } from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
 
 export default async function handler(
   req: NextApiRequest,
@@ -62,11 +63,15 @@ export default async function handler(
           return forbidden(res)
         }
 
+        const isAdminOrOwner =
+          session.user.admin ||
+          (await checkOwnerPermissionOnTask(session.user.id!, taskId))
+
         const infiniteSubmission = await getInfiniteSubmissions(
           limit,
           cursor,
           taskId,
-          session.user.id!
+          isAdminOrOwner ? undefined : session.user.id!
         )
 
         return ok(res, infiniteSubmission)

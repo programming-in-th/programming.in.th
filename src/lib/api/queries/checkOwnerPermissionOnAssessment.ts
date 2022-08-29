@@ -31,3 +31,26 @@ export const checkOwnerPermission = async (userId: string) => {
 
   return ownerOnAssessment !== null
 }
+
+export const checkOwnerPermissionOnTask = async (
+  userId: string,
+  taskId: string
+) => {
+  try {
+    await prisma.ownerOnAssessment.findFirstOrThrow({
+      where: {
+        userId,
+        assessment: {
+          tasks: {
+            some: { taskId: { equals: taskId } }
+          }
+        }
+      },
+      select: { userId: true }
+    })
+
+    return true
+  } catch {
+    return false
+  }
+}

@@ -8,8 +8,11 @@ import EditAssessment from '@/components/Admin/Assessments/EditAssessment/EditAs
 import { Layout } from '@/components/Admin/Layout'
 import fetcher from '@/lib/fetcher'
 import { IAssessment } from '@/types/assessments'
+import useRequireAdmin from '@/lib/useRequireAdmin'
 
 const Assessments = () => {
+  useRequireAdmin()
+
   const { data: assessments } = useSWR<IAssessment[]>(
     '/api/assessments',
     fetcher
