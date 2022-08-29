@@ -45,9 +45,9 @@ const TaskCard = ({
           <rect x="5" y="10" width="2" height="2" fill="#CBD5E1" />
         </svg>
       </div>
-      <div className="flex w-full items-center justify-between rounded-xl border border-gray-100 bg-white px-6 py-3 font-display shadow-md transition dark:bg-slate-700">
+      <div className="flex w-full items-center justify-between rounded-xl border border-gray-100 bg-white px-6 py-3 font-display shadow-md transition dark:border-slate-700 dark:bg-slate-700">
         <div className="flex w-full flex-col items-start">
-          <p className="text-sm font-medium text-gray-500 dark:text-gray-100">
+          <p className="text-sm font-medium text-gray-500 dark:text-gray-200">
             {title}
           </p>
           <p className="text-sm text-gray-400">{id}</p>
@@ -101,8 +101,10 @@ export const RightBar = ({
 
   return (
     <div className="flex h-full w-full flex-col pt-4">
-      <p className="mb-2 px-6 text-gray-400">Selected task for assessment</p>
-      <div className="flex h-full w-full flex-col space-y-1 overflow-y-auto rounded-md bg-gray-50 p-6 pl-4">
+      <p className="mb-2 px-6 text-gray-400 dark:text-gray-200">
+        Selected task for assessment
+      </p>
+      <div className="flex h-full w-full flex-col space-y-1 overflow-y-auto rounded-md bg-gray-50 p-6 pl-4 dark:bg-slate-600">
         <DndContext
           modifiers={[restrictToVerticalAxis]}
           onDragEnd={handleDragEnd}

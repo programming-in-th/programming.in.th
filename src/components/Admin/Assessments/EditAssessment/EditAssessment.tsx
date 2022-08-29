@@ -49,8 +49,9 @@ const SubmitForm = ({
       owners: [],
       tasks: selectedTasks.map(task => task.id)
     }
+
     await toast.promise(
-      fetch('/api/assessments', {
+      fetch(assessment ? `/api/assessments/${data.id}` : '/api/assessments', {
         method: assessment ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -63,7 +64,10 @@ const SubmitForm = ({
         error: 'Error'
       }
     )
+
     mutate('/api/assessments')
+    mutate(`/api/assessments/${assessment?.id}`)
+
     setOpen(false)
   }
 
@@ -92,10 +96,10 @@ const SubmitForm = ({
 
   return (
     <form
-      className="flex h-full w-full flex-col bg-white"
+      className="flex h-full w-full flex-col bg-white dark:bg-slate-700"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <div className="flex h-full overflow-y-scroll px-3 text-sm text-gray-500">
+      <div className="flex h-full overflow-y-scroll px-3 text-sm text-gray-500 dark:text-gray-200">
         <LeftBar register={register} assessment={assessment} />
         <MiddleBar
           tasks={tasks}
@@ -108,10 +112,10 @@ const SubmitForm = ({
           setTasks={setSelectedTasks}
         />
       </div>
-      <div className="flex justify-end space-x-2 border-t-[1px] px-4 py-2">
+      <div className="flex justify-end space-x-2 border-t-[1px] px-4 py-2 dark:border-t-slate-800">
         <button
           type="button"
-          className="rounded-md border border-gray-100 py-2 px-9 text-gray-400 transition hover:bg-gray-100"
+          className="rounded-md border border-gray-100 py-2 px-9 text-gray-400 transition hover:bg-gray-100 dark:border-slate-600 dark:text-gray-200 dark:hover:bg-slate-600"
           onClick={() => setOpen(false)}
         >
           Cancel
@@ -119,7 +123,7 @@ const SubmitForm = ({
         <input
           type="submit"
           value={assessment ? 'Update' : 'Create'}
-          className="rounded-md border bg-blue-500 py-2 px-9 text-white transition hover:bg-blue-600"
+          className="rounded-md border bg-blue-500 py-2 px-9 text-white transition hover:bg-blue-600 dark:border-slate-700"
         />
       </div>
     </form>
@@ -154,7 +158,7 @@ export default function EditAssessment({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity dark:bg-slate-600 dark:bg-opacity-75" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
@@ -182,7 +186,7 @@ export default function EditAssessment({
                     <div className="absolute top-0 left-0 -ml-8 flex pt-4 pr-2 sm:-ml-8 sm:pr-2">
                       <button
                         type="button"
-                        className="rounded-md text-gray-300 hover:text-white"
+                        className="rounded-md text-gray-300 hover:text-white dark:text-white dark:hover:text-gray-200"
                         onClick={() => setOpen(false)}
                       >
                         <span className="sr-only">Close panel</span>
