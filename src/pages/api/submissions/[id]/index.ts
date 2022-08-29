@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
+import checkOwnerPermissionOnAssessment from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import { IndividualSubmissionSchema } from '@/lib/api/schema/submissions'
 import { decompressCode } from '@/lib/codeTransformer'
@@ -46,7 +47,8 @@ export default async function handler(
         language: true,
         user: {
           select: {
-            username: true
+            username: true,
+            id: true
           }
         },
         task: {
@@ -55,7 +57,8 @@ export default async function handler(
             private: true
           }
         },
-        code: true
+        code: true,
+        assessmentId: true
       }
     })
 
@@ -68,7 +71,17 @@ export default async function handler(
         return unauthorized(res)
       }
 
-      if (!(await checkUserPermissionOnTask(session, submission.task.id))) {
+      if (
+        !(
+          ((await checkUserPermissionOnTask(session, submission.task.id)) &&
+            submission?.user?.id === session.user.id!) ||
+          session.user.admin ||
+          (await checkOwnerPermissionOnAssessment(
+            session,
+            submission.assessmentId
+          ))
+        )
+      ) {
         return forbidden(res)
       }
     }
