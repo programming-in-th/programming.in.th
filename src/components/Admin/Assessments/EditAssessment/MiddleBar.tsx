@@ -18,13 +18,13 @@ const TaskCard = ({
 }) => (
   <div
     className={clsx(
-      'flex w-full rounded-xl border border-gray-100 px-6 py-3 font-display shadow-md transition dark:bg-slate-700',
-      selected ? 'bg-gray-100' : 'bg-white'
+      'flex w-full rounded-xl border border-gray-100 px-6 py-3 font-display shadow-md transition dark:border-slate-700',
+      selected ? 'bg-gray-100 dark:bg-slate-800' : 'bg-white dark:bg-slate-600'
     )}
     onClick={() => toggleTask(id, title)}
   >
     <div className="flex w-full flex-col items-start">
-      <p className="text-sm font-medium text-gray-500 dark:text-gray-100">
+      <p className="text-sm font-medium text-gray-500 dark:text-gray-200">
         {title}
       </p>
       <p className="text-sm text-gray-400">{id}</p>
@@ -56,7 +56,7 @@ export const MiddleBar = ({
         <p>Choose Tasks</p>
         <input
           type="text"
-          className="my-3 rounded-md bg-gray-100 px-4 py-1"
+          className="my-3 rounded-md bg-gray-100 px-4 py-1 dark:bg-slate-800"
           placeholder="Search..."
           onChange={async e => {
             const { value } = e.currentTarget
@@ -75,7 +75,7 @@ export const MiddleBar = ({
         />
       </div>
       <div className="flex h-full w-full flex-col overflow-y-auto px-6 py-2">
-        <p className="py-2 text-gray-400">Private Task</p>
+        <p className="py-2 text-gray-400 dark:text-gray-200">Private Task</p>
         <div className="flex w-full flex-col space-y-1">
           {privateTask.map(task => (
             <TaskCard
@@ -87,7 +87,9 @@ export const MiddleBar = ({
             />
           ))}
         </div>
-        <p className="mt-4 py-2 text-gray-400">Public Task</p>
+        <p className="mt-4 py-2 text-gray-400 dark:text-gray-200">
+          Public Task
+        </p>
         <div className="flex w-full flex-col space-y-1">
           {publicTask.map(task => (
             <TaskCard

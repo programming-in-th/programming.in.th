@@ -209,7 +209,7 @@ export const Loading = () => {
 
 export const DarkLoading = () => {
   return (
-    <div className="flex h-screen w-screen flex-col items-center justify-center bg-slate-700">
+    <div className="flex h-screen w-screen flex-col items-center justify-center bg-slate-800">
       <svg
         viewBox="0 0 877 250"
         className="-my-16 w-80 stroke-current text-white"
