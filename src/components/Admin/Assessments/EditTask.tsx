@@ -3,8 +3,8 @@ import { Fragment } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { Task } from '@prisma/client'
-import { useForm } from 'react-hook-form'
 import clsx from 'clsx'
+import { useForm } from 'react-hook-form'
 
 export interface IAssessmentForm {
   id: string
