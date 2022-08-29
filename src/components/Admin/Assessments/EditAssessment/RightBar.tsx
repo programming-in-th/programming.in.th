@@ -104,7 +104,7 @@ export const RightBar = ({
       <p className="mb-2 px-6 text-gray-400 dark:text-gray-200">
         Selected task for assessment
       </p>
-      <div className="flex h-full w-full flex-col space-y-2 overflow-y-auto rounded-md bg-gray-50 p-6 pl-4 dark:bg-slate-600">
+      <div className="flex h-full w-full flex-col space-y-2 overflow-y-auto rounded-md bg-gray-50 p-6 pl-4 dark:bg-slate-800">
         <DndContext
           modifiers={[restrictToVerticalAxis]}
           onDragEnd={handleDragEnd}

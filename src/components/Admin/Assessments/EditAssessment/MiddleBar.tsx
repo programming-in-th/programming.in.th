@@ -20,7 +20,7 @@ const TaskCard = ({
     className={clsx(
       'flex w-full cursor-pointer rounded-xl  border bg-white px-6 py-3 font-display shadow-md transition dark:border-slate-700',
       selected
-        ? 'border-gray-400 dark:bg-slate-800'
+        ? 'border-gray-400 dark:bg-slate-700'
         : 'border-gray-100 dark:bg-slate-600'
     )}
     onClick={() => toggleTask(id, title)}
@@ -58,7 +58,7 @@ export const MiddleBar = ({
         <p>Choose Tasks</p>
         <input
           type="text"
-          className="my-3 rounded-md bg-gray-100 px-4 py-1 dark:bg-slate-800"
+          className="my-3 rounded-md bg-gray-100 px-4 py-1 dark:bg-slate-700 dark:focus:outline"
           placeholder="Search..."
           onChange={async e => {
             const { value } = e.currentTarget

@@ -26,12 +26,12 @@ const LeftBar = ({ task }: { task: Task | undefined }) => {
   })
 
   return (
-    <div className="flex w-72 flex-none flex-col space-y-4 text-sm">
+    <div className="flex w-72 flex-none flex-col space-y-4 text-sm dark:text-gray-200">
       <div className="flex flex-col">
         <p>Task Name</p>
         <input
           type="text"
-          className="h-10 rounded-md border px-4 py-1"
+          className="h-10 rounded-md border px-4 py-1 dark:border-slate-700 dark:bg-slate-700 dark:focus:outline"
           {...register('title')}
         />
       </div>
@@ -39,7 +39,7 @@ const LeftBar = ({ task }: { task: Task | undefined }) => {
         <p>ID</p>
         <input
           type="text"
-          className="h-10  rounded-md border px-4 py-1"
+          className="h-10 rounded-md border px-4 py-1 dark:border-slate-600"
           {...register('id')}
           disabled={task !== undefined}
         />
@@ -49,7 +49,7 @@ const LeftBar = ({ task }: { task: Task | undefined }) => {
           <p>Full Score</p>
           <input
             type="number"
-            className="h-10 w-full rounded-md border px-4 py-1"
+            className="h-10 w-full rounded-md border px-4 py-1 dark:border-slate-700 dark:bg-slate-700 dark:focus:outline"
             {...register('fullScore')}
           />
         </div>
@@ -57,7 +57,7 @@ const LeftBar = ({ task }: { task: Task | undefined }) => {
           <p>Privacy</p>
           <select
             {...register('private')}
-            className="h-10 w-full rounded-md border px-4 py-1"
+            className="h-10 w-full rounded-md border px-4 py-1 dark:border-slate-700 dark:bg-slate-700 dark:focus:outline"
           >
             <option value="true">private</option>
             <option value="false">public</option>
@@ -68,7 +68,7 @@ const LeftBar = ({ task }: { task: Task | undefined }) => {
         <p>Type</p>
         <select
           {...register('type')}
-          className="h-10 w-full rounded-md border px-4 py-1"
+          className="h-10 w-full rounded-md border px-4 py-1 dark:border-slate-700 dark:bg-slate-700 dark:focus:outline"
         >
           <option value="normal">Normal</option>
           <option value="communication">Communication</option>
@@ -87,9 +87,9 @@ const SubmitForm = ({
   setOpen: (_: boolean) => void
 }) => {
   return (
-    <form className="flex h-full w-full space-x-9 bg-white p-8 text-gray-500">
+    <form className="flex h-full w-full space-x-9 bg-white p-8 text-gray-500 dark:bg-slate-600">
       <LeftBar task={task} />
-      <div className="flex w-full flex-col">
+      <div className="flex w-full flex-col dark:text-gray-200">
         <p>File</p>
         <div className="flex h-96 flex-col items-center justify-center rounded-md border border-dashed border-gray-400">
           <svg
@@ -114,7 +114,7 @@ const SubmitForm = ({
         <div className="flex justify-end space-x-2 py-2">
           <button
             type="button"
-            className="rounded-md border border-gray-100 py-2 px-9 text-gray-400 transition hover:bg-gray-100"
+            className="rounded-md border border-gray-100 py-2 px-9 text-gray-400 transition hover:bg-gray-100 dark:border-slate-700 dark:text-gray-200 dark:hover:bg-slate-700"
             onClick={() => setOpen(false)}
           >
             Cancel
@@ -122,7 +122,7 @@ const SubmitForm = ({
           <input
             type="submit"
             value={task ? 'Update' : 'Create'}
-            className="rounded-md border bg-blue-500 py-2 px-9 text-white transition hover:bg-blue-600"
+            className="rounded-md border bg-blue-500 py-2 px-9 text-white transition hover:bg-blue-600 dark:border-slate-600"
           />
         </div>
       </div>
@@ -151,7 +151,7 @@ export default function EditTask({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity dark:bg-slate-700 dark:opacity-75" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
@@ -179,7 +179,7 @@ export default function EditTask({
                     <div className="absolute top-0 left-0 -ml-8 flex pt-4 pr-2 sm:-ml-8 sm:pr-2">
                       <button
                         type="button"
-                        className="rounded-md text-gray-300 hover:text-white"
+                        className="rounded-md text-gray-300 hover:text-white dark:text-white dark:hover:text-gray-300"
                         onClick={() => setOpen(false)}
                       >
                         <span className="sr-only">Close panel</span>

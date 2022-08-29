@@ -13,17 +13,17 @@ const TaskCard = ({ task }: { task: Task }) => {
   const [openDelete, setOpenDelete] = useState<boolean>(false)
   return (
     <>
-      <div className="flex w-full rounded-xl border border-gray-100 px-6 py-3 font-display shadow-md transition group-hover:shadow-lg dark:bg-slate-700">
+      <div className="flex w-full rounded-xl border border-gray-100 px-6 py-3 font-display shadow-md transition group-hover:shadow-lg dark:border-slate-600 dark:bg-slate-700">
         <div className="flex w-full flex-col">
           <p className="text-sm font-medium text-gray-500 dark:text-gray-100">
             {task.title}
           </p>
           <p className="text-sm text-gray-400">{task.id}</p>
         </div>
-        {/* <div className="flex w-full items-center justify-center">
+        {/* <div className="flex items-center justify-center w-full">
             {task.tags.map((tag: string) => (
               <div
-                className="mx-1 rounded-lg bg-gray-100 px-2 text-sm text-gray-500"
+                className="px-2 mx-1 text-sm text-gray-500 bg-gray-100 rounded-lg"
                 key={`tag-${task.id}-${tag}`}
               >
                 {tag}
@@ -32,7 +32,7 @@ const TaskCard = ({ task }: { task: Task }) => {
           </div> */}
         <div className="flex items-center space-x-1">
           <button
-            className="rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-slate-600"
             type="button"
             onClick={() => setOpenEdit(true)}
           >
@@ -57,7 +57,7 @@ const TaskCard = ({ task }: { task: Task }) => {
           </button>
           <button
             type="button"
-            className="rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700"
+            className="rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-slate-600"
             onClick={() => setOpenDelete(true)}
           >
             <svg
@@ -108,7 +108,7 @@ const Tasks = () => {
       <>
         <div className="flex w-full max-w-6xl flex-col">
           <div
-            className="my-6 flex w-full items-center justify-center space-x-2 rounded-md border border-gray-100 py-10 shadow-md transition hover:bg-gray-50"
+            className="my-6 flex w-full items-center justify-center space-x-2 rounded-md border border-gray-100 py-10 shadow-md transition hover:bg-gray-50 dark:border-none dark:bg-slate-700 dark:hover:bg-slate-600"
             onClick={() => setOpenNewTask(true)}
           >
             <svg
@@ -129,11 +129,11 @@ const Tasks = () => {
           </div>
           <div className="w-ful flex space-x-4">
             <div className="w-64 flex-none">
-              <p className="font-semibold">Tags</p>
+              <p className="font-semibold dark:text-gray-200">Tags</p>
             </div>
             <div className="flex w-full flex-col space-y-6">
               <div className="flex w-full flex-col space-y-2">
-                <p className="w-full border-b border-gray-200 pb-2">
+                <p className="w-full border-b border-gray-200 pb-2 dark:border-slate-500 dark:text-gray-200">
                   Private Tasks
                 </p>
                 {privateTask.map(task => (
@@ -141,7 +141,7 @@ const Tasks = () => {
                 ))}
               </div>
               <div className="flex w-full flex-col space-y-2">
-                <p className="w-full border-b border-gray-200 pb-2">
+                <p className="w-full border-b border-gray-200 pb-2 dark:border-slate-500 dark:text-gray-200">
                   Public Tasks
                 </p>
                 {publicTask.map(task => (

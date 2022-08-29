@@ -96,7 +96,7 @@ const SubmitForm = ({
 
   return (
     <form
-      className="flex h-full w-full flex-col bg-white dark:bg-slate-700"
+      className="flex h-full w-full flex-col bg-white dark:bg-slate-600"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex h-full overflow-y-scroll px-3 text-sm text-gray-500 dark:text-gray-200">
@@ -112,10 +112,10 @@ const SubmitForm = ({
           setTasks={setSelectedTasks}
         />
       </div>
-      <div className="flex justify-end space-x-2 border-t-[1px] px-4 py-2 dark:border-t-slate-800">
+      <div className="flex justify-end space-x-2 border-t-[1px] px-4 py-2 dark:border-t-slate-700">
         <button
           type="button"
-          className="rounded-md border border-gray-100 py-2 px-9 text-gray-400 transition hover:bg-gray-100 dark:border-slate-600 dark:text-gray-200 dark:hover:bg-slate-600"
+          className="rounded-md border border-gray-100 py-2 px-9 text-gray-400 transition hover:bg-gray-100 dark:border-slate-700 dark:text-gray-200 dark:hover:bg-slate-700"
           onClick={() => setOpen(false)}
         >
           Cancel
@@ -158,7 +158,7 @@ export default function EditAssessment({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity dark:bg-slate-600 dark:bg-opacity-75" />
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity dark:bg-slate-700 dark:bg-opacity-75" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
