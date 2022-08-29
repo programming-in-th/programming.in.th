@@ -37,6 +37,34 @@ export default async function handler(
     if (!session) {
       return unauthorized(res)
     }
+    if (session.user.admin) {
+      const assessment = await prisma.assessment.findFirst({
+        where: {
+          id
+        },
+        include: {
+          tasks: {
+            select: {
+              task: { select: { id: true, title: true, fullScore: true } }
+            }
+          },
+          users: {
+            select: {
+              userId: true
+            }
+          },
+          owners: {
+            select: {
+              userId: true
+            }
+          }
+        }
+      })
+      return ok(res, {
+        ...assessment,
+        tasks: assessment?.tasks.map(task => task.task)
+      })
+    }
 
     const assessment = await prisma.assessment.findFirst({
       where: {
@@ -51,16 +79,6 @@ export default async function handler(
         tasks: {
           select: {
             task: { select: { id: true, title: true, fullScore: true } }
-          }
-        },
-        users: {
-          select: {
-            userId: true
-          }
-        },
-        owners: {
-          select: {
-            userId: true
           }
         }
       }
