@@ -96,7 +96,7 @@ const SubmitForm = ({
 
   return (
     <form
-      className="flex h-full w-full flex-col bg-white dark:bg-slate-600"
+      className="flex h-full w-full flex-col bg-white dark:bg-gray-800"
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex h-full overflow-y-scroll px-3 text-sm text-gray-500 dark:text-gray-200">
@@ -123,7 +123,7 @@ const SubmitForm = ({
         <input
           type="submit"
           value={assessment ? 'Update' : 'Create'}
-          className="rounded-md border bg-blue-500 py-2 px-9 text-white transition hover:bg-blue-600 dark:border-slate-700"
+          className="cursor-pointer rounded-md border bg-blue-500 py-2 px-9 text-white transition hover:bg-blue-600 dark:border-slate-700"
         />
       </div>
     </form>

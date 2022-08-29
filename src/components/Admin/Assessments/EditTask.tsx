@@ -4,6 +4,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
 import { Task } from '@prisma/client'
 import { useForm } from 'react-hook-form'
+import clsx from 'clsx'
 
 export interface IAssessmentForm {
   id: string
@@ -31,7 +32,7 @@ const LeftBar = ({ task }: { task: Task | undefined }) => {
         <p>Task Name</p>
         <input
           type="text"
-          className="h-10 rounded-md border px-4 py-1 dark:border-slate-700 dark:bg-slate-700 dark:focus:outline"
+          className="h-10 rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
           {...register('title')}
         />
       </div>
@@ -39,7 +40,10 @@ const LeftBar = ({ task }: { task: Task | undefined }) => {
         <p>ID</p>
         <input
           type="text"
-          className="h-10 rounded-md border px-4 py-1 dark:border-slate-600"
+          className={clsx(
+            'h-10 rounded-md border px-4 py-1 backdrop-blur-sm dark:border-gray-900 dark:bg-gray-900 dark:focus:outline',
+            task && 'cursor-not-allowed text-gray-500'
+          )}
           {...register('id')}
           disabled={task !== undefined}
         />
@@ -49,7 +53,7 @@ const LeftBar = ({ task }: { task: Task | undefined }) => {
           <p>Full Score</p>
           <input
             type="number"
-            className="h-10 w-full rounded-md border px-4 py-1 dark:border-slate-700 dark:bg-slate-700 dark:focus:outline"
+            className="h-10 w-full rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
             {...register('fullScore')}
           />
         </div>
@@ -57,7 +61,7 @@ const LeftBar = ({ task }: { task: Task | undefined }) => {
           <p>Privacy</p>
           <select
             {...register('private')}
-            className="h-10 w-full rounded-md border px-4 py-1 dark:border-slate-700 dark:bg-slate-700 dark:focus:outline"
+            className="h-10 w-full rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
           >
             <option value="true">private</option>
             <option value="false">public</option>
@@ -68,7 +72,7 @@ const LeftBar = ({ task }: { task: Task | undefined }) => {
         <p>Type</p>
         <select
           {...register('type')}
-          className="h-10 w-full rounded-md border px-4 py-1 dark:border-slate-700 dark:bg-slate-700 dark:focus:outline"
+          className="h-10 w-full rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
         >
           <option value="normal">Normal</option>
           <option value="communication">Communication</option>
@@ -87,11 +91,11 @@ const SubmitForm = ({
   setOpen: (_: boolean) => void
 }) => {
   return (
-    <form className="flex h-full w-full space-x-9 bg-white p-8 text-gray-500 dark:bg-slate-600">
+    <form className="flex h-full w-full space-x-9 bg-white p-8 text-gray-500 dark:bg-gray-800">
       <LeftBar task={task} />
       <div className="flex w-full flex-col dark:text-gray-200">
         <p>File</p>
-        <div className="flex h-96 flex-col items-center justify-center rounded-md border border-dashed border-gray-400">
+        <div className="flex h-full flex-col items-center justify-center rounded-md border border-dashed border-gray-400">
           <svg
             width="49"
             height="49"
@@ -122,7 +126,7 @@ const SubmitForm = ({
           <input
             type="submit"
             value={task ? 'Update' : 'Create'}
-            className="rounded-md border bg-blue-500 py-2 px-9 text-white transition hover:bg-blue-600 dark:border-slate-600"
+            className="cursor-pointer rounded-md border bg-blue-500 py-2 px-9 text-white transition hover:bg-blue-600 dark:border-slate-600"
           />
         </div>
       </div>
@@ -151,7 +155,7 @@ export default function EditTask({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity dark:bg-slate-700 dark:opacity-75" />
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity dark:bg-slate-700 dark:bg-opacity-75" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
@@ -166,7 +170,7 @@ export default function EditTask({
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className="pointer-events-auto relative w-screen max-w-7xl">
+                <Dialog.Panel className="pointer-events-auto relative w-screen max-w-4xl">
                   <Transition.Child
                     as={Fragment}
                     enter="ease-in-out duration-500"
