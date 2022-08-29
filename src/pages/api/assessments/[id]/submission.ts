@@ -61,7 +61,6 @@ export default async function handler(
         cursor,
         limit,
         taskId,
-        assignmentId,
         session.user.id!
       )
 

@@ -49,8 +49,9 @@ const SubmitForm = ({
       owners: [],
       tasks: selectedTasks.map(task => task.id)
     }
+
     await toast.promise(
-      fetch('/api/assessments', {
+      fetch(assessment ? `/api/assessments/${data.id}` : '/api/assessments', {
         method: assessment ? 'PUT' : 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -63,7 +64,10 @@ const SubmitForm = ({
         error: 'Error'
       }
     )
+
     mutate('/api/assessments')
+    mutate(`/api/assessments/${assessment?.id}`)
+
     setOpen(false)
   }
 

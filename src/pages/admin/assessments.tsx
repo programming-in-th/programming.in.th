@@ -7,8 +7,8 @@ import Card from '@/components/Admin/Assessments/Card'
 import EditAssessment from '@/components/Admin/Assessments/EditAssessment/EditAssessment'
 import { Layout } from '@/components/Admin/Layout'
 import fetcher from '@/lib/fetcher'
-import { IAssessment } from '@/types/assessments'
 import useRequireAdmin from '@/lib/useRequireAdmin'
+import { IAssessment } from '@/types/assessments'
 
 const Assessments = () => {
   useRequireAdmin()
