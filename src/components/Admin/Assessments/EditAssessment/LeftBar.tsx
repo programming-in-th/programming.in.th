@@ -1,3 +1,4 @@
+import clsx from 'clsx'
 import { UseFormRegister } from 'react-hook-form'
 
 import { IAssessment, IAssessmentForm } from './EditAssessment'
@@ -23,7 +24,10 @@ export const LeftBar = ({
         <p>ID</p>
         <input
           type="text"
-          className="rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+          className={clsx(
+            'rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline',
+            assessment && 'cursor-not-allowed text-gray-500'
+          )}
           {...register('id')}
           disabled={assessment !== undefined}
         />

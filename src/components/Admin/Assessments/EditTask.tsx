@@ -91,7 +91,7 @@ const SubmitForm = ({
   setOpen: (_: boolean) => void
 }) => {
   return (
-    <form className="flex h-full w-full space-x-9 bg-white p-8 text-gray-500 dark:bg-gray-800">
+    <form className="flex h-full w-full space-x-9 bg-white px-8 py-4 text-gray-500 dark:bg-gray-800">
       <LeftBar task={task} />
       <div className="flex w-full flex-col dark:text-gray-200">
         <p>File</p>
