@@ -18,7 +18,7 @@ const Assessments = () => {
   const { data: tasks } = useSWR<Task[]>('/api/tasks', fetcher)
   return (
     <Layout current="assessments">
-      <div className="flex flex-col space-y-4 py-4 ">
+      <div className="flex max-w-3xl flex-col space-y-4 py-4">
         <button
           className="flex h-40 items-center justify-center space-x-2 rounded-lg shadow-md transition dark:bg-slate-700 dark:hover:bg-slate-600"
           onClick={() => setOpenCreate(true)}
