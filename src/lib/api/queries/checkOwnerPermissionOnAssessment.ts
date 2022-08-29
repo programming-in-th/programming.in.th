@@ -4,9 +4,10 @@ import prisma from '@/lib/prisma'
 
 const checkOwnerPermissionOnAssessment = async (
   session: Session,
-  assessmentId: string
+  assessmentId: string | null
 ) => {
   if (session.user.admin) return true
+  if (!assessmentId) return false
 
   const ownerOnAssessment = await prisma.ownerOnAssessment.findUnique({
     where: {
