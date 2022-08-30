@@ -3,10 +3,12 @@ import { promisify } from 'util'
 
 import type { NextApiRequest, NextApiResponse } from 'next'
 
+import { GetObjectCommand } from '@aws-sdk/client-s3'
 import { unstable_getServerSession } from 'next-auth'
 
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import prisma from '@/lib/prisma'
+import { s3Client } from '@/lib/s3Client'
 import {
   unauthorized,
   methodNotAllowed,
@@ -42,21 +44,28 @@ export default async function handler(
         return forbidden(res)
       }
     }
+    try {
+      const response = await s3Client.send(
+        new GetObjectCommand({
+          Bucket: process.env.BUCKET_NAME,
+          Key: `statements/pdf/${query.id}.pdf`
+        })
+      )
 
-    const pipeline = promisify(stream.pipeline)
-    const url = `${process.env.NEXT_PUBLIC_AWS_URL}/statements/pdf/${query.id}.pdf`
-    const response = await fetch(url)
-    if (!response.ok) return notFound(res)
+      const pipeline = promisify(stream.pipeline)
+      const body = response.Body
 
-    const body = response.body
+      res.setHeader('Content-Type', 'application/pdf')
+      res.setHeader(
+        'Content-Disposition',
+        `inline; attachment; filename=${query.id}.pdf`
+      )
 
-    res.setHeader('Content-Type', 'application/pdf')
-    res.setHeader(
-      'Content-Disposition',
-      `inline; attachment; filename=${query.id}.pdf`
-    )
-
-    await pipeline(body as any, res)
+      await pipeline(body as any, res)
+      return
+    } catch {
+      return notFound(res)
+    }
   }
 
   return methodNotAllowed(res, ['GET'])
