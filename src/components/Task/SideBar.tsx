@@ -95,8 +95,6 @@ export const SideBar = ({
     return data ? Math.max(...data.map(sub => sub.score), 0) : 0
   }, [data])
 
-  console.log(data)
-
   // if (task === undefined) return <div>loading</div>
 
   return (

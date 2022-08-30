@@ -2,6 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 
 import { unstable_getServerSession } from 'next-auth'
 
+import { checkOwnerPermissionOnTask } from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import { getFilteredSubmissions } from '@/lib/api/queries/getFilteredSubmissions'
 import { getInfiniteSubmissions } from '@/lib/api/queries/getInfiniteSubmissions'
@@ -43,22 +44,39 @@ export default async function handler(
       return unauthorized(res)
     }
 
-    const task = await prisma.task.findUnique({
-      where: { id: taskId },
-      select: { private: true, id: true }
-    })
+    const filterArr = filter ? (Array.isArray(filter) ? filter : [filter]) : []
 
-    if (task?.private) {
-      if (!session) {
-        return unauthorized(res)
+    if (
+      filterArr.includes(Filter.enum.task) &&
+      !filterArr.includes(Filter.enum.own) &&
+      taskId
+    ) {
+      const task = await prisma.task.findUnique({
+        where: { id: taskId },
+        select: { private: true, id: true }
+      })
+
+      if (task?.private) {
+        if (!session) return unauthorized(res)
+
+        if (!(await checkUserPermissionOnTask(session, taskId))) {
+          return forbidden(res)
+        }
+
+        const isAdminOrOwner =
+          session.user.admin ||
+          (await checkOwnerPermissionOnTask(session.user.id!, taskId))
+
+        const infiniteSubmission = await getInfiniteSubmissions(
+          limit,
+          cursor,
+          taskId,
+          isAdminOrOwner ? undefined : session.user.id!
+        )
+
+        return ok(res, infiniteSubmission)
       }
 
-      if (!(await checkUserPermissionOnTask(session, task.id))) {
-        return forbidden(res)
-      }
-    }
-
-    if (filter === Filter.enum.task) {
       const infiniteSubmission = await getInfiniteSubmissions(
         limit,
         cursor,
@@ -68,7 +86,7 @@ export default async function handler(
       return ok(res, infiniteSubmission)
     } else {
       const submission = await getFilteredSubmissions(
-        filter ? (Array.isArray(filter) ? filter : [filter]) : [],
+        filterArr,
         taskId,
         session ? session : undefined
       )

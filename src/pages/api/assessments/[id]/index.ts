@@ -38,6 +38,35 @@ export default async function handler(
       return unauthorized(res)
     }
 
+    if (session.user.admin) {
+      const assessment = await prisma.assessment.findFirst({
+        where: {
+          id
+        },
+        include: {
+          tasks: {
+            select: {
+              task: { select: { id: true, title: true, fullScore: true } }
+            }
+          },
+          users: {
+            select: {
+              userId: true
+            }
+          },
+          owners: {
+            select: {
+              userId: true
+            }
+          }
+        }
+      })
+      return ok(res, {
+        ...assessment,
+        tasks: assessment?.tasks.map(task => task.task)
+      })
+    }
+
     const assessment = await prisma.assessment.findFirst({
       where: {
         id,
@@ -51,16 +80,6 @@ export default async function handler(
         tasks: {
           select: {
             task: { select: { id: true, title: true, fullScore: true } }
-          }
-        },
-        users: {
-          select: {
-            userId: true
-          }
-        },
-        owners: {
-          select: {
-            userId: true
           }
         }
       }
@@ -128,45 +147,98 @@ export default async function handler(
     } = parsedBody.data
 
     if (await checkOwnerPermissionOnAssessment(session, id)) {
-      const assessment = await prisma.assessment.update({
+      const oldAssessment = await prisma.assessment.findUnique({
         where: { id },
-        data: {
-          id,
-          name,
-          archived,
-          description,
-          instruction,
-          ...(tasks && {
-            tasks: {
-              create: [
-                ...removeArrDup(tasks).map(id => ({
-                  task: { connect: { id } }
-                }))
-              ]
-            }
-          }),
-          ...(users && {
-            users: {
-              create: [
-                ...removeArrDup(users).map(id => ({
-                  user: { connect: { id } }
-                }))
-              ]
-            }
-          }),
-          ...(owners && {
-            owners: {
-              create: [
-                ...removeArrDup([...owners, session.user.id!]).map(id => ({
-                  user: { connect: { id } }
-                }))
-              ]
-            }
-          }),
-          open,
-          close
+        select: {
+          tasks: { select: { taskId: true } },
+          users: { select: { userId: true } },
+          owners: { select: { userId: true } }
         }
       })
+
+      if (!oldAssessment) {
+        return badRequest(res)
+      }
+
+      const oldTasksId = oldAssessment.tasks.map(task => task.taskId)
+      const oldUsersId = oldAssessment.users.map(user => user.userId)
+      const oldOwnersId = oldAssessment.owners.map(owner => owner.userId)
+
+      const addTasksId = tasks?.filter(taskId => !oldTasksId?.includes(taskId))
+      const removeTaskId = oldTasksId.filter(taskId => !tasks?.includes(taskId))
+
+      const addUsersId = users?.filter(userId => !oldUsersId?.includes(userId))
+      const removeUsersId = oldUsersId.filter(
+        userId => !users?.includes(userId)
+      )
+
+      const addOwnersId = owners?.filter(
+        ownerId => !oldOwnersId?.includes(ownerId)
+      )
+      const removeOwnersId = oldOwnersId.filter(
+        ownerId => !owners?.includes(ownerId)
+      )
+
+      const [_taskCount, _userCount, _ownerCount, assessment] =
+        await prisma.$transaction([
+          prisma.taskOnAssessment.deleteMany({
+            where: { taskId: { in: removeTaskId }, assessmentId: id }
+          }),
+          prisma.userOnAssessment.deleteMany({
+            where: { userId: { in: removeUsersId }, assessmentId: id }
+          }),
+          prisma.ownerOnAssessment.deleteMany({
+            where: { userId: { in: removeOwnersId }, assessmentId: id }
+          }),
+          prisma.assessment.update({
+            where: { id },
+            data: {
+              id,
+              name,
+              archived,
+              description,
+              instruction,
+              ...(addTasksId && {
+                tasks: {
+                  connectOrCreate: [
+                    ...removeArrDup(addTasksId).map(taskId => ({
+                      where: {
+                        taskId_assessmentId: { taskId, assessmentId: id }
+                      },
+                      create: { task: { connect: { id: taskId } } }
+                    }))
+                  ]
+                }
+              }),
+              ...(addUsersId && {
+                users: {
+                  connectOrCreate: [
+                    ...removeArrDup(addUsersId).map(userId => ({
+                      where: {
+                        userId_assessmentId: { userId, assessmentId: id }
+                      },
+                      create: { user: { connect: { id: userId } } }
+                    }))
+                  ]
+                }
+              }),
+              ...(addOwnersId && {
+                owners: {
+                  connectOrCreate: [
+                    ...removeArrDup(addOwnersId).map(userId => ({
+                      where: {
+                        userId_assessmentId: { userId, assessmentId: id }
+                      },
+                      create: { user: { connect: { id: userId } } }
+                    }))
+                  ]
+                }
+              }),
+              open,
+              close
+            }
+          })
+        ])
 
       return ok(res, assessment)
     }

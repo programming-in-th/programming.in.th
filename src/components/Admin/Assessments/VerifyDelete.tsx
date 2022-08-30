@@ -8,12 +8,14 @@ const VerifyDelete = ({
   open,
   setOpen,
   id,
-  onDelete
+  onDelete,
+  isTask = false
 }: {
   open: boolean
   setOpen: (_open: boolean) => void
   id: string
   onDelete: () => void
+  isTask?: boolean
 }) => {
   const [text, setText] = useState<string>('')
 
@@ -65,13 +67,14 @@ const VerifyDelete = ({
                         as="h3"
                         className="text-lg font-medium leading-6 text-gray-900 dark:text-white"
                       >
-                        Delete Assessments
+                        Delete {isTask ? 'Task' : 'Assessment'}
                       </Dialog.Title>
                       <div className="mt-2">
                         <p className="text-sm text-gray-500 dark:text-gray-200">
-                          Are you sure you want to delete your assessment? All
-                          of your data will be permanently removed. This action
-                          cannot be undone. Please type{' '}
+                          Are you sure you want to delete your{' '}
+                          {isTask ? 'task' : 'assessment'}? All of your data
+                          will be permanently removed. This action cannot be
+                          undone. Please type{' '}
                           <span className="font-bold text-black dark:text-white">
                             {id}
                           </span>{' '}

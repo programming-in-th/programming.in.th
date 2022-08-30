@@ -1,22 +1,32 @@
+import { useState } from 'react'
+
 import { Task } from '@prisma/client'
 import useSWR from 'swr'
 
 import Card from '@/components/Admin/Assessments/Card'
+import EditAssessment from '@/components/Admin/Assessments/EditAssessment/EditAssessment'
 import { Layout } from '@/components/Admin/Layout'
 import fetcher from '@/lib/fetcher'
-import { IAssessmentwithTask } from '@/types/assessments'
+import useRequireAdmin from '@/lib/useRequireAdmin'
+import { IAssessment } from '@/types/assessments'
 
 const Assessments = () => {
-  const { data: assessments } = useSWR<IAssessmentwithTask[]>(
+  useRequireAdmin()
+
+  const { data: assessments } = useSWR<IAssessment[]>(
     '/api/assessments',
     fetcher
   )
-  console.log(assessments)
+
+  const [openCreate, setOpenCreate] = useState<boolean>(false)
   const { data: tasks } = useSWR<Task[]>('/api/tasks', fetcher)
   return (
     <Layout current="assessments">
-      <div className="flex flex-col space-y-4 py-4 ">
-        <div className="flex h-40 items-center justify-center space-x-2 rounded-lg shadow-md transition dark:bg-slate-700 dark:hover:bg-slate-600">
+      <div className="flex w-full max-w-3xl flex-col space-y-4 py-4">
+        <button
+          className="flex h-40 items-center justify-center space-x-2 rounded-lg shadow-md transition hover:bg-gray-100 dark:bg-slate-700 dark:hover:bg-slate-600"
+          onClick={() => setOpenCreate(true)}
+        >
           <svg
             width="20"
             height="20"
@@ -32,11 +42,15 @@ const Assessments = () => {
             />
           </svg>
           <p>สร้าง Assessments</p>
-        </div>
-        {assessments &&
-          assessments.map(assessment => (
-            <Card assessment={assessment} key={assessment.id} tasks={tasks} />
-          ))}
+        </button>
+        <EditAssessment
+          open={openCreate}
+          setOpen={setOpenCreate}
+          tasks={tasks || []}
+        />
+        {(assessments || []).map(assessment => (
+          <Card assessment={assessment} key={assessment.id} tasks={tasks} />
+        ))}
       </div>
     </Layout>
   )

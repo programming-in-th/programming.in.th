@@ -4,8 +4,6 @@ import { GetStaticProps, GetStaticPaths, InferGetStaticPropsType } from 'next'
 
 import { useRouter } from 'next/router'
 
-import { Task } from '@prisma/client'
-
 import { TaskContent } from '@/components/Task/Content'
 import { TaskLayout } from '@/components/Task/Layout'
 import prisma from '@/lib/prisma'
@@ -52,7 +50,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     return { paths: [], fallback: 'blocking' }
   }
 
-  const tasks = await prisma.task.findMany()
+  const tasks = await prisma.task.findMany({ where: { private: false } })
 
   const paths = tasks.reduce((acc: { params: ParsedUrlQuery }[], task) => {
     return [
@@ -77,9 +75,15 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       notFound: true
     }
   }
-  const task: Task | null = await prisma.task.findUnique({
-    where: { id: `${id[0]}` }
+  const task = await prisma.task.findFirst({
+    where: { id: `${id[0]}`, private: false }
   })
+
+  if (task === null) {
+    return {
+      notFound: true
+    }
+  }
 
   let type = id.length === 1 ? 'statement' : id[1]
   let solution = null
