@@ -84,15 +84,25 @@ model Bookmark {
   @@id([taskId, userId])
 }
 
+enum StatementType {
+  PDF
+  MARKDOWN
+}
+
+enum TaskType {
+  NORMAL
+  COMMUNICATION
+  OUTPUT_ONLY
+}
+
 model Task {
   id               String             @id
   title            String             @db.Text
   fullScore        Int
-  memoryLimit      Int
-  timeLimit        Float
   path             String             @db.Text
   private          Boolean            @default(false)
-  type             String             @db.Text
+  type             TaskType           @default(NORMAL)
+  statement        StatementType      @default(PDF)
   tags             Tag[]
   bookmarks        Bookmark[]
   submissions      Submission[]
@@ -109,7 +119,6 @@ model Submission {
   time         Int         @default(0)
   memory       Int         @default(0)
   code         Bytes
-  codeLength   Int         @default(0)
   score        Int         @default(0)
   groups       Json        @default(dbgenerated())
   language     String

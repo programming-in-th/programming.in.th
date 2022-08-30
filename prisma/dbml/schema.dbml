@@ -76,11 +76,10 @@ Table Task {
   id String [pk]
   title String [not null]
   fullScore Int [not null]
-  memoryLimit Int [not null]
-  timeLimit Float [not null]
   path String [not null]
   private Boolean [not null, default: false]
-  type String [not null]
+  type TaskType [not null, default: 'NORMAL']
+  statement StatementType [not null, default: 'PDF']
   tags Tag [not null]
   bookmarks Bookmark [not null]
   submissions Submission [not null]
@@ -95,7 +94,6 @@ Table Submission {
   time Int [not null, default: 0]
   memory Int [not null, default: 0]
   code Bytes [not null]
-  codeLength Int [not null, default: 0]
   score Int [not null, default: 0]
   groups Json [not null]
   language String [not null]
@@ -163,6 +161,17 @@ Table Tag {
 Table TagToTask {
   tagsId Int [ref: > Tag.id]
   tasksId String [ref: > Task.id]
+}
+
+Enum StatementType {
+  PDF
+  MARKDOWN
+}
+
+Enum TaskType {
+  NORMAL
+  COMMUNICATION
+  OUTPUT_ONLY
 }
 
 Ref: Account.userId > User.id [delete: Cascade]
