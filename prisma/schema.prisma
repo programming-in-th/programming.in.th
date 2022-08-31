@@ -49,21 +49,21 @@ model Session {
 }
 
 model User {
-  id              String              @id @default(cuid())
-  username        String?             @unique
-  name            String?
-  email           String?             @unique
-  emailVerified   DateTime?
-  image           String?
-  createdAt       DateTime            @default(now())
-  updatedAt       DateTime            @updatedAt
-  admin           Boolean             @default(false)
-  accounts        Account[]
-  sessions        Session[]
-  submissions     Submission[]
-  bookmarks       Bookmark[]
-  assessments     UserOnAssessment[]
-  ownedAssessment OwnerOnAssessment[]
+  id               String              @id @default(cuid())
+  username         String?             @unique
+  name             String?
+  email            String?             @unique
+  emailVerified    DateTime?
+  image            String?
+  createdAt        DateTime            @default(now())
+  updatedAt        DateTime            @updatedAt
+  admin            Boolean             @default(false)
+  accounts         Account[]
+  sessions         Session[]
+  submissions      Submission[]
+  bookmarks        Bookmark[]
+  assessments      UserOnAssessment[]
+  ownedAssessments OwnerOnAssessment[]
 }
 
 model VerificationToken {
@@ -120,7 +120,7 @@ model Submission {
   memory       Int         @default(0)
   code         Bytes
   score        Int         @default(0)
-  groups       Json        @default(dbgenerated())
+  groups       Json        @default("[]")
   language     String
   private      Boolean     @default(false)
   userId       String?

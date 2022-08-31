@@ -47,7 +47,7 @@ Table User {
   submissions Submission [not null]
   bookmarks Bookmark [not null]
   assessments UserOnAssessment [not null]
-  ownedAssessment OwnerOnAssessment [not null]
+  ownedAssessments OwnerOnAssessment [not null]
 }
 
 Table VerificationToken {
@@ -95,7 +95,7 @@ Table Submission {
   memory Int [not null, default: 0]
   code Bytes [not null]
   score Int [not null, default: 0]
-  groups Json [not null]
+  groups Json [not null, default: '[]']
   language String [not null]
   private Boolean [not null, default: false]
   userId String
