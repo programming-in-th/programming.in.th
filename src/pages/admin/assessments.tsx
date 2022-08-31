@@ -9,6 +9,7 @@ import { Layout } from '@/components/Admin/Layout'
 import fetcher from '@/lib/fetcher'
 import useRequireAdmin from '@/lib/useRequireAdmin'
 import { IAssessment } from '@/types/assessments'
+import { IUser } from '@/types/users'
 
 const Assessments = () => {
   useRequireAdmin()
@@ -20,6 +21,8 @@ const Assessments = () => {
 
   const [openCreate, setOpenCreate] = useState<boolean>(false)
   const { data: tasks } = useSWR<Task[]>('/api/tasks', fetcher)
+  const { data: users } = useSWR<IUser[]>('/api/users', fetcher)
+
   return (
     <Layout current="assessments">
       <div className="flex w-full max-w-3xl flex-col space-y-4 py-4">
@@ -47,9 +50,15 @@ const Assessments = () => {
           open={openCreate}
           setOpen={setOpenCreate}
           tasks={tasks || []}
+          users={users || []}
         />
         {(assessments || []).map(assessment => (
-          <Card assessment={assessment} key={assessment.id} tasks={tasks} />
+          <Card
+            assessment={assessment}
+            key={assessment.id}
+            tasks={tasks || []}
+            users={users || []}
+          />
         ))}
       </div>
     </Layout>
