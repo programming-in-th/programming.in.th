@@ -107,8 +107,11 @@ export default async function handler(
     if (!parsedBody.success) {
       return badRequest(res)
     }
+    const { assessmentId, taskId, language, code } = parsedBody.data
 
-    const { taskId, language, code } = parsedBody.data
+    if (!(await checkUserPermissionOnTask(session, taskId, 'WRITE'))) {
+      return forbidden(res)
+    }
 
     const compressedCode = await compressCode(JSON.stringify(code))
 
@@ -116,9 +119,12 @@ export default async function handler(
       data: {
         task: { connect: { id: taskId } },
         code: compressedCode,
-        language: language,
+        language,
         user: { connect: { id: session.user.id! } },
-        groups: []
+        ...(assessmentId && {
+          assessment: { connect: { id: assessmentId } },
+          private: true
+        })
       }
     })
 
