@@ -9,6 +9,13 @@ const checkUserPermissionOnTask = async (
 ) => {
   if (session.user.admin) return true
 
+  const task = await prisma.task.findUnique({
+    where: { id: taskId },
+    select: { private: true, id: true }
+  })
+
+  if (!task?.private) return true
+
   if (interaction === 'WRITE') {
     const taskOnAssessment = await prisma.userOnAssessment.findMany({
       where: {
