@@ -36,7 +36,7 @@ export const LeftBar = ({
             'rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline',
             assessment && 'cursor-not-allowed text-gray-500'
           )}
-          {...register('id')}
+          {...register('id', { required: true })}
           disabled={assessment !== undefined}
         />
       </div>
@@ -59,7 +59,7 @@ export const LeftBar = ({
         <input
           type="datetime-local"
           className="rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
-          {...register('open')}
+          {...register('open', { required: true })}
         ></input>
       </div>
       <div className="flex flex-col">
@@ -67,7 +67,7 @@ export const LeftBar = ({
         <input
           type="datetime-local"
           className="rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
-          {...register('close')}
+          {...register('close', { required: true })}
         ></input>
       </div>
       <div className="flex flex-col">

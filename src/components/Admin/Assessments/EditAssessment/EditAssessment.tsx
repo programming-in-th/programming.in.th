@@ -89,7 +89,7 @@ const SubmitForm = ({
         }),
         {
           loading: 'Loading',
-          success: 'Successfully Created a Task',
+          success: `Successfully ${assessment ? 'Updated' : 'Created'} a Task`,
           error: (err: Error) => `${err}`
         }
       )
