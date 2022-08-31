@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Task } from '@prisma/client'
 import dayjs from 'dayjs'
 import toast from 'react-hot-toast'
-import { mutate } from 'swr'
+import useSWR, { mutate } from 'swr'
 
 import IsLink from '@/components/common/IsLink'
 import { IAssessment } from '@/types/assessments'
@@ -11,23 +11,25 @@ import { IUser } from '@/types/users'
 
 import EditAssessment from './EditAssessment/EditAssessment'
 import VerifyDelete from './VerifyDelete'
+import fetcher from '@/lib/fetcher'
 
 const Card = ({
   assessment,
-  tasks,
-  users
+  isLink = false
 }: {
   assessment: IAssessment
-  tasks: Task[]
-  users: IUser[]
+  isLink?: boolean
 }) => {
+  const { data: tasks } = useSWR<Task[]>('/api/tasks', fetcher)
+  const { data: users } = useSWR<IUser[]>('/api/users', fetcher)
+
   const [openEdit, setOpenEdit] = useState<boolean>(false)
   const [openDelete, setOpenDelete] = useState<boolean>(false)
   return (
     <IsLink
-      className="flex flex-col justify-between space-y-2 rounded-lg shadow-md dark:bg-slate-700"
+      className="flex flex-col justify-between space-y-2 rounded-lg border border-gray-100 shadow-md dark:border-none dark:bg-slate-700"
       href={`/admin/assessments/${assessment.id}`}
-      isLink
+      isLink={isLink}
     >
       <>
         <div className="flex w-full px-10 py-6">
@@ -37,7 +39,9 @@ const Card = ({
             </p>
             <p className="pt-1 text-base text-gray-500 dark:text-gray-200">{`#${assessment.id}`}</p>
           </div>
-          <p className="w-2/3">{assessment.description}</p>
+          <p className="w-2/3 text-gray-500 dark:text-gray-200">
+            {assessment.description}
+          </p>
         </div>
         <div className="flex w-full justify-between rounded-b-lg bg-gray-50 px-10 py-4 dark:bg-slate-600">
           <div className="flex space-x-6">
@@ -50,7 +54,7 @@ const Card = ({
               ).format('DD MMM YYYY HH:mm:ss')}`}</p>
             </div>
           </div>
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-1">
             <button
               className="rounded-md p-2 transition hover:bg-gray-200 dark:hover:bg-gray-700"
               type="button"
@@ -124,9 +128,9 @@ const Card = ({
         <EditAssessment
           open={openEdit}
           setOpen={setOpenEdit}
-          tasks={tasks}
+          tasks={tasks || []}
           assessmentId={assessment.id}
-          users={users}
+          users={users || []}
         />
       </>
     </IsLink>
