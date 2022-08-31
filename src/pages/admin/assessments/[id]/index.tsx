@@ -1,12 +1,15 @@
+import { useEffect, useMemo, useState } from 'react'
+
+import Link from 'next/link'
+import { useRouter } from 'next/router'
+
+import useSWR from 'swr'
+
 import Card from '@/components/Admin/Assessments/Card'
 import { IAssessment } from '@/components/Admin/Assessments/EditAssessment/EditAssessment'
 import { PageLayout } from '@/components/Layout'
 import fetcher from '@/lib/fetcher'
 import { IUser } from '@/types/users'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { useEffect, useMemo, useState } from 'react'
-import useSWR from 'swr'
 
 const ViewAssessment = () => {
   const { query } = useRouter()

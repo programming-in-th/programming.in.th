@@ -6,12 +6,12 @@ import toast from 'react-hot-toast'
 import useSWR, { mutate } from 'swr'
 
 import IsLink from '@/components/common/IsLink'
+import fetcher from '@/lib/fetcher'
 import { IAssessment } from '@/types/assessments'
 import { IUser } from '@/types/users'
 
 import EditAssessment from './EditAssessment/EditAssessment'
 import VerifyDelete from './VerifyDelete'
-import fetcher from '@/lib/fetcher'
 
 const Card = ({
   assessment,
