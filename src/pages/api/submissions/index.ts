@@ -22,6 +22,7 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
+import { getSubmissionsForAdmin } from '@/lib/api/queries/getSubmissionsForAdmin'
 
 export default async function handler(
   req: NextApiRequest,
@@ -36,63 +37,78 @@ export default async function handler(
       return badRequest(res)
     }
 
-    const { taskId, cursor, limit, filter } = parsedQuery.data
+    const { taskId, assessmentId, userId, cursor, limit, filter } =
+      parsedQuery.data
 
     const session = await unstable_getServerSession(req, res, authOptions)
 
-    if (filter === Filter.enum.own && !session) {
+    const filterArr = filter ? (Array.isArray(filter) ? filter : [filter]) : []
+
+    if (filterArr.includes(Filter.enum.own) && !session) {
       return unauthorized(res)
     }
 
-    const filterArr = filter ? (Array.isArray(filter) ? filter : [filter]) : []
+    if (session?.user.admin) {
+      const submissions = await getSubmissionsForAdmin(
+        filterArr,
+        limit,
+        taskId,
+        userId,
+        assessmentId
+      )
 
-    if (
-      filterArr.includes(Filter.enum.task) &&
-      !filterArr.includes(Filter.enum.own) &&
-      taskId
-    ) {
+      return ok(res, submissions)
+    }
+
+    if (filterArr.includes(Filter.enum.task) && taskId) {
       const task = await prisma.task.findUnique({
         where: { id: taskId },
         select: { private: true, id: true }
       })
 
-      if (task?.private) {
-        if (!session) return unauthorized(res)
+      if (!task) return badRequest(res)
 
-        if (!(await checkUserPermissionOnTask(session, taskId))) {
-          return forbidden(res)
+      if (!filterArr.includes(Filter.enum.own)) {
+        if (task.private) {
+          if (!session) return unauthorized(res)
+
+          if (!(await checkUserPermissionOnTask(session, task.id))) {
+            return forbidden(res)
+          }
+
+          const isAdminOrOwner =
+            session.user.admin ||
+            (await checkOwnerPermissionOnTask(session.user.id!, taskId))
+
+          const infiniteSubmission = await getInfiniteSubmissions(
+            limit,
+            cursor,
+            taskId,
+            isAdminOrOwner ? undefined : session.user.id!
+          )
+
+          return ok(res, infiniteSubmission)
         }
 
-        const isAdminOrOwner =
-          session.user.admin ||
-          (await checkOwnerPermissionOnTask(session.user.id!, taskId))
-
-        const infiniteSubmission = await getInfiniteSubmissions(
+        const infiniteSubmissions = await getInfiniteSubmissions(
           limit,
           cursor,
-          taskId,
-          isAdminOrOwner ? undefined : session.user.id!
+          taskId
         )
 
-        return ok(res, infiniteSubmission)
+        return ok(res, infiniteSubmissions)
+      } else {
+        const submissions = await getFilteredSubmissions(
+          filterArr,
+          taskId,
+          session ? session : undefined
+        )
+
+        return ok(res, submissions)
       }
-
-      const infiniteSubmission = await getInfiniteSubmissions(
-        limit,
-        cursor,
-        taskId
-      )
-
-      return ok(res, infiniteSubmission)
-    } else {
-      const submission = await getFilteredSubmissions(
-        filterArr,
-        taskId,
-        session ? session : undefined
-      )
-
-      return ok(res, submission)
     }
+
+    return badRequest(res)
   } else if (req.method === 'POST') {
     const session = await unstable_getServerSession(req, res, authOptions)
 
