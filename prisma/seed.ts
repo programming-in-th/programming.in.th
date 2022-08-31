@@ -1,132 +1,119 @@
-import { PrismaClient } from '@prisma/client'
+import { PrismaClient, Task } from '@prisma/client'
 const prisma = new PrismaClient()
 
-const data = [
+const data: Task[] = [
   {
-    memoryLimit: 64,
     fullScore: 100,
     private: false,
-    timeLimit: 1.0,
     path: 'prog/00',
     title: 'A+B Problem',
-    type: 'normal',
-    id: '0000'
+    type: 'NORMAL',
+    id: '0000',
+    statement: 'PDF'
   },
   {
-    type: 'normal',
+    type: 'NORMAL',
     title: 'Grading',
-    timeLimit: 1.0,
-    memoryLimit: 64,
     private: false,
     path: 'prog/00',
     fullScore: 100,
-    id: '0001'
+    id: '0001',
+    statement: 'PDF'
   },
   {
     path: 'prog/00',
-    timeLimit: 1.0,
-    type: 'normal',
+    type: 'NORMAL',
     private: false,
     title: 'Min Max',
     fullScore: 100,
-    memoryLimit: 64,
-    id: '0002'
+    id: '0002',
+    statement: 'PDF'
   },
   {
-    timeLimit: 1.0,
     fullScore: 100,
     title: 'Matrix Addition',
-    type: 'normal',
+    type: 'NORMAL',
     private: false,
-    memoryLimit: 64,
     path: 'prog/00',
-    id: '0003'
+    id: '0003',
+    statement: 'PDF'
   },
   {
-    memoryLimit: 64,
     title: 'Character Checker',
     path: 'prog/00',
     private: false,
-    type: 'normal',
-    timeLimit: 1.0,
+    type: 'NORMAL',
     fullScore: 100,
-    id: '0004'
+    id: '0004',
+    statement: 'PDF'
   },
   {
     fullScore: 100,
-    memoryLimit: 64,
     path: 'prog/00',
     private: false,
-    timeLimit: 1.0,
     title: 'Pythagorus',
-    type: 'normal',
-    id: '0005'
+    type: 'NORMAL',
+    id: '0005',
+    statement: 'PDF'
   },
   {
     title: 'Soundex',
     private: false,
-    timeLimit: 1.0,
-    memoryLimit: 64,
     fullScore: 100,
     path: 'prog/00',
-    type: 'normal',
-    id: '0006'
+    type: 'NORMAL',
+    id: '0006',
+    statement: 'PDF'
   },
   {
-    timeLimit: 1.0,
     path: 'prog/00',
     fullScore: 100,
-    type: 'normal',
+    type: 'NORMAL',
     title: 'Herman',
-    memoryLimit: 32,
     private: false,
-    id: '0007'
+    id: '0007',
+    statement: 'PDF'
   },
   {
-    type: 'normal',
+    type: 'NORMAL',
     private: false,
-    timeLimit: 1.0,
     title: 'X2',
     path: 'prog/00',
-    memoryLimit: 32,
-    solved: 0,
     fullScore: 100,
-    id: '0008'
+    id: '0008',
+    statement: 'PDF'
   },
   {
-    timeLimit: 1.0,
     private: false,
-    type: 'normal',
+    type: 'NORMAL',
     title: 'ABC',
     fullScore: 100,
     path: 'prog/00',
-    memoryLimit: 32,
-    id: '0009'
+    id: '0009',
+    statement: 'PDF'
   },
   {
     title: 'Trik',
-    memoryLimit: 32,
     private: false,
     path: 'prog/00',
     fullScore: 100,
-    type: 'normal',
-    timeLimit: 1.0,
-    id: '0010'
+    type: 'NORMAL',
+    id: '0010',
+    statement: 'PDF'
   },
   {
     path: 'ipst/62/may',
-    type: 'normal',
+    type: 'NORMAL',
     fullScore: 100,
     title: 'กุ๊ยจัดแถว',
     private: false,
-    memoryLimit: 256,
-    timeLimit: 5.0,
-    id: 'o62_may09_judtaew'
+    id: 'o62_may09_judtaew',
+    statement: 'PDF'
   }
 ]
 
 async function main() {
-  const tasks = await prisma.task.createMany({
+  await prisma.task.createMany({
     data
   })
 }
