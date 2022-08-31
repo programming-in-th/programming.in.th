@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import clsx from 'clsx'
 import { UseFormRegister } from 'react-hook-form'
 
@@ -14,6 +16,8 @@ export const LeftBar = ({
   assessment?: IAssessment
   users: IUser[]
 }) => {
+  const [assignUser, setAssignUser] = useState<IUser[]>(users)
+  const [assignOwnUser, setAssignOwnUser] = useState<IUser[]>(users)
   return (
     <div className="flex h-full w-full flex-col space-y-3 overflow-y-auto border-r-[1px] border-gray-300 px-6 py-4 dark:border-slate-700">
       <div className="flex flex-col">
@@ -73,9 +77,22 @@ export const LeftBar = ({
             type="text"
             className="rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
             placeholder="Search..."
+            onChange={async e => {
+              const { value } = e.currentTarget
+              if (value) {
+                const Fuse = (await import('fuse.js')).default
+                const fuse = new Fuse(users, {
+                  keys: ['username'],
+                  threshold: 0.25
+                })
+                setAssignUser(fuse.search(value).map(val => val.item))
+              } else {
+                setAssignUser(users)
+              }
+            }}
           />
           <div className="flex h-full w-full flex-col overflow-y-auto py-1">
-            {users.map(user => (
+            {assignUser.map(user => (
               <div
                 key={`assign-${user.id}`}
                 className="flex items-center space-x-2 px-2"
@@ -98,9 +115,22 @@ export const LeftBar = ({
             type="text"
             className="rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
             placeholder="Search..."
+            onChange={async e => {
+              const { value } = e.currentTarget
+              if (value) {
+                const Fuse = (await import('fuse.js')).default
+                const fuse = new Fuse(users, {
+                  keys: ['username'],
+                  threshold: 0.25
+                })
+                setAssignOwnUser(fuse.search(value).map(val => val.item))
+              } else {
+                setAssignOwnUser(users)
+              }
+            }}
           />
           <div className="flex h-full w-full flex-col overflow-y-auto py-1">
-            {users.map(user => (
+            {assignOwnUser.map(user => (
               <div
                 key={`assignOwn-${user.id}`}
                 className="flex items-center space-x-2 px-2"
