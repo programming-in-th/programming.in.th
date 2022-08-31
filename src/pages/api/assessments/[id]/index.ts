@@ -8,7 +8,7 @@ import {
   IndividualAssessmentSchema
 } from '@/lib/api/schema/assessment'
 import prisma from '@/lib/prisma'
-import removeArrDup from '@/utils/removeArrDup'
+import dedupeAndMap from '@/utils/dedupeAndMap'
 import {
   methodNotAllowed,
   unauthorized,
@@ -201,7 +201,7 @@ export default async function handler(
               ...(addTasksId && {
                 tasks: {
                   connectOrCreate: [
-                    ...removeArrDup(addTasksId).map(taskId => ({
+                    ...dedupeAndMap(addTasksId, taskId => ({
                       where: {
                         taskId_assessmentId: { taskId, assessmentId: id }
                       },
@@ -213,7 +213,7 @@ export default async function handler(
               ...(addUsersId && {
                 users: {
                   connectOrCreate: [
-                    ...removeArrDup(addUsersId).map(userId => ({
+                    ...dedupeAndMap(addUsersId, userId => ({
                       where: {
                         userId_assessmentId: { userId, assessmentId: id }
                       },
@@ -225,7 +225,7 @@ export default async function handler(
               ...(addOwnersId && {
                 owners: {
                   connectOrCreate: [
-                    ...removeArrDup(addOwnersId).map(userId => ({
+                    ...dedupeAndMap(addOwnersId, userId => ({
                       where: {
                         userId_assessmentId: { userId, assessmentId: id }
                       },
