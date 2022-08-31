@@ -12,7 +12,6 @@ const Assessments = () => {
     '/api/assessments',
     fetcher
   )
-  console.log(assessments)
   return (
     <PageLayout>
       <div className="flex w-full flex-col items-center">

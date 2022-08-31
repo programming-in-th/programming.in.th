@@ -58,8 +58,6 @@ const TaskCard = ({
 const Assessments = ({ router }: { router: NextRouter }) => {
   const id = router.query.id as string
 
-  console.log('====> ', id)
-
   const { status } = useSession()
 
   const { data: scores } = useSWR<Score[]>(
@@ -72,7 +70,6 @@ const Assessments = ({ router }: { router: NextRouter }) => {
     fetcher
   )
 
-  console.log(assessment, scores)
   return (
     <PageLayout>
       <div className="flex w-full flex-col items-center">

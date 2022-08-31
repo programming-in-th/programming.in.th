@@ -29,9 +29,8 @@ const Task = () => {
   const taskId = taskPath && taskPath[0]
   const type = taskPath && (taskPath.length === 1 ? 'statement' : taskPath[1])
 
-  console.log(taskId)
   const { data: task } = useSWR<Task>(`/api/tasks/${taskId}`, fetcher)
-  console.log(task)
+
   return (
     <>
       {task ? (
