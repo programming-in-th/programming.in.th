@@ -111,7 +111,7 @@ const SubmitForm = ({
     setSelectedTasks(assessment?.tasks || [])
   }, [assessment])
 
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<IAssessmentForm>({
     defaultValues: {
       id: assessment?.id || '',
       name: assessment?.name || '',

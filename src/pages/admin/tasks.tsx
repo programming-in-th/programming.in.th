@@ -106,7 +106,7 @@ const Tasks = () => {
   return (
     <Layout current="tasks">
       <>
-        <div className="flex w-full max-w-6xl flex-col">
+        <div className="flex w-full max-w-3xl flex-col">
           <div
             className="my-6 flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md border border-gray-100 py-10 shadow-md transition hover:bg-gray-50 dark:border-none dark:bg-slate-700 dark:hover:bg-slate-600"
             onClick={() => setOpenNewTask(true)}
@@ -128,9 +128,9 @@ const Tasks = () => {
             <p>Create Task</p>
           </div>
           <div className="w-ful flex space-x-4">
-            <div className="w-64 flex-none">
+            {/* <div className="w-64 flex-none">
               <p className="font-semibold dark:text-gray-200">Tags</p>
-            </div>
+            </div> */}
             <div className="flex w-full flex-col space-y-6">
               <div className="flex w-full flex-col space-y-2">
                 <p className="w-full border-b border-gray-200 pb-2 dark:border-slate-500 dark:text-gray-200">
