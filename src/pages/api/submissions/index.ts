@@ -6,6 +6,7 @@ import { checkOwnerPermissionOnTask } from '@/lib/api/queries/checkOwnerPermissi
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import { getFilteredSubmissions } from '@/lib/api/queries/getFilteredSubmissions'
 import { getInfiniteSubmissions } from '@/lib/api/queries/getInfiniteSubmissions'
+import { getSubmissionsForAdmin } from '@/lib/api/queries/getSubmissionsForAdmin'
 import {
   SubmissionSchema,
   SubmissionFilterEnum as Filter,
@@ -22,7 +23,6 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../auth/[...nextauth]'
-import { getSubmissionsForAdmin } from '@/lib/api/queries/getSubmissionsForAdmin'
 
 export default async function handler(
   req: NextApiRequest,
