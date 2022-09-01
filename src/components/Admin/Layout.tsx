@@ -9,10 +9,10 @@ const Tabs = [
     title: 'All Assessments',
     url: 'assessments'
   },
-  {
-    title: 'Users',
-    url: 'users'
-  },
+  // {
+  //   title: 'Users',
+  //   url: 'users'
+  // },
   {
     title: 'Tasks',
     url: 'tasks'

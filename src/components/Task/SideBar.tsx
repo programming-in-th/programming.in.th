@@ -65,10 +65,7 @@ export const SideBar = ({
   type: string
   assessmentId?: string
 }) => {
-  console.log('aid: ', assessmentId)
   const { status } = useSession()
-
-  console.log(task)
 
   const { data } = useSWR<IGeneralSubmission[]>(
     task && status === 'authenticated'

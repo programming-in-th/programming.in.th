@@ -9,6 +9,7 @@ import { Layout } from '@/components/Admin/Layout'
 import fetcher from '@/lib/fetcher'
 import useRequireAdmin from '@/lib/useRequireAdmin'
 import { IAssessment } from '@/types/assessments'
+import { IUser } from '@/types/users'
 
 const Assessments = () => {
   useRequireAdmin()
@@ -20,11 +21,13 @@ const Assessments = () => {
 
   const [openCreate, setOpenCreate] = useState<boolean>(false)
   const { data: tasks } = useSWR<Task[]>('/api/tasks', fetcher)
+  const { data: users } = useSWR<IUser[]>('/api/users', fetcher)
+
   return (
     <Layout current="assessments">
       <div className="flex w-full max-w-3xl flex-col space-y-4 py-4">
         <button
-          className="flex h-40 items-center justify-center space-x-2 rounded-lg shadow-md transition hover:bg-gray-100 dark:bg-slate-700 dark:hover:bg-slate-600"
+          className="flex h-40 items-center justify-center space-x-2 rounded-lg border border-gray-100 shadow-md transition hover:bg-gray-100 dark:border-none dark:bg-slate-700 dark:hover:bg-slate-600"
           onClick={() => setOpenCreate(true)}
         >
           <svg
@@ -47,9 +50,10 @@ const Assessments = () => {
           open={openCreate}
           setOpen={setOpenCreate}
           tasks={tasks || []}
+          users={users || []}
         />
         {(assessments || []).map(assessment => (
-          <Card assessment={assessment} key={assessment.id} tasks={tasks} />
+          <Card assessment={assessment} key={assessment.id} isLink />
         ))}
       </div>
     </Layout>

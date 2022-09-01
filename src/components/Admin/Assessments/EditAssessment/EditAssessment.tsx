@@ -9,6 +9,7 @@ import useSWR, { mutate } from 'swr'
 
 import fetcher from '@/lib/fetcher'
 import { IAssessmentTask, IAssessmentwithTask } from '@/types/assessments'
+import { IUser } from '@/types/users'
 
 import { LeftBar } from './LeftBar'
 import { MiddleBar } from './MiddleBar'
@@ -26,16 +27,20 @@ export interface IAssessmentForm {
   instruction: string
   open: string
   close: string
+  [assign: `assign-${string}`]: boolean
+  [assign: `assignOwn-${string}`]: boolean
 }
 
 const SubmitForm = ({
   assessment,
   tasks,
-  setOpen
+  setOpen,
+  users
 }: {
   assessment: IAssessment | undefined
   tasks: Task[]
   setOpen: (_: boolean) => void
+  users: IUser[]
 }) => {
   const [selectedTasks, setSelectedTasks] = useState<
     Omit<IAssessmentTask, 'fullScore'>[]
@@ -43,32 +48,57 @@ const SubmitForm = ({
 
   const onSubmit = async (data: IAssessmentForm) => {
     const submit_data = {
-      ...data,
+      ...Object.entries(data).reduce((pre, [key, value]) => {
+        if (key.startsWith('assign-') || key.startsWith('assignOwn-'))
+          return pre
+        return { ...pre, [key]: value }
+      }, {}),
       archived: false,
-      users: [],
-      owners: [],
+      users: Object.entries(data).reduce(
+        (pre: string[], [key, value]: [string, boolean]) => {
+          if (key.startsWith('assign-'))
+            if (value) return [...pre, key.slice('assign-'.length)]
+          return pre
+        },
+        []
+      ),
+      owners: Object.entries(data).reduce(
+        (pre: string[], [key, value]: [string, boolean]) => {
+          if (key.startsWith('assignOwn-'))
+            if (value) return [...pre, key.slice('assignOwn-'.length)]
+          return pre
+        },
+        []
+      ),
       tasks: selectedTasks.map(task => task.id)
     }
 
-    await toast.promise(
-      fetch(assessment ? `/api/assessments/${data.id}` : '/api/assessments', {
-        method: assessment ? 'PUT' : 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(submit_data)
-      }),
-      {
-        loading: 'Loading',
-        success: 'Successfully Created a Task',
-        error: 'Error'
-      }
-    )
+    try {
+      await toast.promise(
+        fetch(assessment ? `/api/assessments/${data.id}` : '/api/assessments', {
+          method: assessment ? 'PUT' : 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(submit_data)
+        }).then(response => {
+          if (response.ok) {
+            return response.json()
+          }
+          throw new Error(`${response.status} ${response.statusText}`)
+        }),
+        {
+          loading: 'Loading',
+          success: `Successfully ${assessment ? 'Updated' : 'Created'} a Task`,
+          error: (err: Error) => `${err}`
+        }
+      )
 
-    mutate('/api/assessments')
-    mutate(`/api/assessments/${assessment?.id}`)
+      mutate('/api/assessments')
+      mutate(`/api/assessments/${assessment?.id}`)
 
-    setOpen(false)
+      setOpen(false)
+    } catch {}
   }
 
   const toggleTask = (id: string, title: string) => {
@@ -81,16 +111,32 @@ const SubmitForm = ({
     setSelectedTasks(assessment?.tasks || [])
   }, [assessment])
 
-  console.log('->', assessment)
-
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<IAssessmentForm>({
     defaultValues: {
       id: assessment?.id || '',
       name: assessment?.name || '',
       description: assessment?.description || '',
       instruction: assessment?.instruction || '',
       open: assessment?.open.slice(0, -1) || '',
-      close: assessment?.close.slice(0, -1) || ''
+      close: assessment?.close.slice(0, -1) || '',
+      ...users.reduce(
+        (pre, user) => ({
+          ...pre,
+          [`assign-${user.id}`]:
+            assessment?.users.map(user => user.userId).includes(user.id) ||
+            false
+        }),
+        {}
+      ),
+      ...users.reduce(
+        (pre, user) => ({
+          ...pre,
+          [`assignOwn-${user.id}`]:
+            assessment?.owners.map(user => user.userId).includes(user.id) ||
+            false
+        }),
+        {}
+      )
     }
   })
 
@@ -100,7 +146,7 @@ const SubmitForm = ({
       onSubmit={handleSubmit(onSubmit)}
     >
       <div className="flex h-full overflow-y-scroll px-3 text-sm text-gray-500 dark:text-gray-200">
-        <LeftBar register={register} assessment={assessment} />
+        <LeftBar register={register} assessment={assessment} users={users} />
         <MiddleBar
           tasks={tasks}
           selectedTasks={selectedTasks}
@@ -134,12 +180,14 @@ export default function EditAssessment({
   open,
   setOpen,
   tasks,
-  assessmentId
+  assessmentId,
+  users
 }: {
   open: boolean
   setOpen: (_: boolean) => void
   tasks: Task[]
   assessmentId?: string
+  users: IUser[]
 }) {
   const { data: assessment } = useSWR<IAssessment>(
     assessmentId && `/api/assessments/${assessmentId}`,
@@ -198,6 +246,7 @@ export default function EditAssessment({
                     assessment={assessment}
                     tasks={tasks}
                     setOpen={setOpen}
+                    users={users}
                   />
                 </Dialog.Panel>
               </Transition.Child>
