@@ -132,7 +132,7 @@ export default async function handler(
         cursor,
         {
           taskId,
-          assessmentId: isAdminOrOwner ? assessmentId : undefined,
+          assessmentId,
           userId: filterArr.includes(Filter.enum.own)
             ? session?.user.id!
             : isAdminOrOwner
