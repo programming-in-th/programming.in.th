@@ -33,6 +33,7 @@ export const getInfiniteSubmissions = async (
       })
     },
     select: {
+      taskId: true,
       id: true,
       score: true,
       user: {
