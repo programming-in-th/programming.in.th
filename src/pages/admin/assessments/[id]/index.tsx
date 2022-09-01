@@ -95,7 +95,7 @@ const ViewAssessment = () => {
               {searchUsers.map(user => (
                 <Link
                   key={user.id}
-                  href={`/admin/${assessment?.id}/${user.id}`}
+                  href={`/admin/assessments/${assessment?.id}/${user.id}`}
                   passHref
                 >
                   <a className="flex cursor-pointer items-center space-x-2 px-4 py-2 transition hover:bg-gray-100 dark:hover:bg-gray-700">
