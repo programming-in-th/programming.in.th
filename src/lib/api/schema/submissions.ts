@@ -2,11 +2,18 @@ import { z } from 'zod'
 
 import { stringToNumber } from './helper'
 
-export const SubmissionFilterEnum = z.enum(['own', 'task', 'user'])
+export const SubmissionFilterEnum = z.enum([
+  'own',
+  'task',
+  'assessment',
+  'user'
+])
 
 export const SubmissionSchema = z
   .object({
     taskId: z.string(),
+    assessmentId: z.string(),
+    userId: z.string(),
     cursor: stringToNumber,
     limit: stringToNumber,
     filter: z.union([SubmissionFilterEnum, z.array(SubmissionFilterEnum)])

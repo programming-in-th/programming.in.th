@@ -2,12 +2,17 @@ import prisma from '@/lib/prisma'
 
 import { SubmissionFilterEnum as Filter } from '../schema/submissions'
 
+export type filterOptions = {
+  taskId?: string
+  assessmentId?: string
+  userId?: string
+}
+
 export const getInfiniteSubmissions = async (
   filter?: string[],
   limit?: number,
   cursor?: number,
-  taskId?: string,
-  userId?: string
+  options?: filterOptions
 ) => {
   const submissions = await prisma.submission.findMany({
     take: limit,
@@ -18,11 +23,14 @@ export const getInfiniteSubmissions = async (
       }
     ],
     where: {
-      ...(filter?.includes(Filter.enum.task) && { taskId }),
-      ...(filter?.includes(Filter.enum.user) &&
-        userId && {
-          user: { id: { equals: userId } }
-        })
+      ...(filter?.includes(Filter.enum.task) && { taskId: options?.taskId }),
+      ...((filter?.includes(Filter.enum.user) ||
+        filter?.includes(Filter.enum.own)) && {
+        user: { id: { equals: options?.userId } }
+      }),
+      ...(filter?.includes(Filter.enum.assessment) && {
+        assessmentId: options?.assessmentId
+      })
     },
     select: {
       id: true,
