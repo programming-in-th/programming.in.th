@@ -3,9 +3,15 @@ import { Task } from '@prisma/client'
 import { Card, Header } from '@/components/Submission/Card'
 import useSubmissionList from '@/lib/useSubmissionList'
 
-const SubmissionsTab = ({ task }: { task: Task }) => {
+const SubmissionsTab = ({
+  task,
+  assessmentId
+}: {
+  task: Task
+  assessmentId?: string
+}) => {
   const { submissions, isLoadingMore, isReachingEnd, size, setSize } =
-    useSubmissionList(task.id)
+    useSubmissionList(task.id, assessmentId)
 
   return (
     <div className="flex flex-shrink flex-col">

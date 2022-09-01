@@ -10,20 +10,20 @@ import SubmissionsTab from '@/components/Task/Tabs/Submissions'
 import SubmitTab from '@/components/Task/Tabs/Submit'
 import fetcher from '@/lib/fetcher'
 
-const component = (type: string, task: Task) => {
+const component = (type: string, task: Task, assessmentId: string) => {
   switch (type) {
     case 'statement':
       return <StatementTab task={task} />
     case 'submit':
-      return <SubmitTab task={task} />
+      return <SubmitTab task={task} assessmentId={assessmentId} />
     case 'submissions':
-      return <SubmissionsTab task={task} />
+      return <SubmissionsTab task={task} assessmentId={assessmentId} />
   }
 }
 
 const Task = () => {
   const router = useRouter()
-  const assessmentId = router.query.id as string
+  const assessmentId = router.query.assessmentId as string
   const taskPath = router.query.task as string[]
 
   const taskId = taskPath && taskPath[0]
@@ -36,7 +36,7 @@ const Task = () => {
       {task ? (
         <TaskLayout task={task} type={type} assessmentId={assessmentId}>
           <div className="flex w-full min-w-0 shrink flex-col gap-8">
-            {component(type, task)}
+            {component(type, task, assessmentId)}
           </div>
         </TaskLayout>
       ) : (

@@ -56,7 +56,7 @@ const TaskCard = ({
 }
 
 const Assessments = ({ router }: { router: NextRouter }) => {
-  const id = router.query.id as string
+  const id = router.query.assessmentId as string
 
   const { status } = useSession()
 

@@ -67,9 +67,14 @@ export const SideBar = ({
 }) => {
   const { status } = useSession()
 
-  const { data } = useSWR<IGeneralSubmission[]>(
+  const { data } = useSWR<{
+    data: IGeneralSubmission[]
+    nextCursor: number | null
+  }>(
     task && status === 'authenticated'
-      ? `/api/submissions?filter=own&filter=task&taskId=${task.id}`
+      ? `/api/submissions?filter=own&filter=task&taskId=${task.id}${
+          assessmentId && `&filter=assessment&assessmentId=${assessmentId}`
+        }`
       : null,
     fetcher
   )
@@ -88,8 +93,10 @@ export const SideBar = ({
 
   const { push } = useRouter()
 
+  console.log(data)
+
   const maxScore = useMemo(() => {
-    return data ? Math.max(...data.map(sub => sub.score), 0) : 0
+    return data ? Math.max(...data.data.map(sub => sub.score), 0) : 0
   }, [data])
 
   // if (task === undefined) return <div>loading</div>

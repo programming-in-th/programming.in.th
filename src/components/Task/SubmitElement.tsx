@@ -17,7 +17,13 @@ const DynamicCode = dynamic(() => import('../Code'), {
   ssr: false
 })
 
-export const SubmitElement = ({ task }: { task: Task }) => {
+export const SubmitElement = ({
+  task,
+  assessmentId
+}: {
+  task: Task
+  assessmentId?: string
+}) => {
   const [file, setFile] = useState<File>()
   const [fileText, setFileText] = useState<string>()
 
@@ -39,7 +45,8 @@ export const SubmitElement = ({ task }: { task: Task }) => {
         body: JSON.stringify({
           taskId: task.id,
           code: [fileText],
-          language: getLanguageFromExtension(getFileExtension(file.name))
+          language: getLanguageFromExtension(getFileExtension(file.name)),
+          ...(assessmentId && { assessmentId })
         })
       })
 

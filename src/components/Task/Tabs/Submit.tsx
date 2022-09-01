@@ -3,7 +3,13 @@ import { useSession } from 'next-auth/react'
 
 import { SubmitElement } from '../SubmitElement'
 
-const SubmitTab = ({ task }: { task: Task }) => {
+const SubmitTab = ({
+  task,
+  assessmentId
+}: {
+  task: Task
+  assessmentId?: string
+}) => {
   const { status } = useSession()
 
   if (status !== 'authenticated') {
@@ -17,7 +23,7 @@ const SubmitTab = ({ task }: { task: Task }) => {
   } else
     return (
       <div>
-        <SubmitElement task={task} />
+        <SubmitElement task={task} assessmentId={assessmentId} />
       </div>
     )
 }

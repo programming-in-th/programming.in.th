@@ -9,21 +9,29 @@ const PAGE_SIZE = 10
 const getKey = (
   pageIndex: number,
   previousPageData: { data: IGeneralSubmission[]; nextCursor: number | null },
-  taskId: string
+  taskId: string,
+  assessmentId?: string
 ) => {
   // reached the end
   if (previousPageData && !previousPageData.data) return null
 
   // first page, we don't have `previousPageData`
   if (pageIndex === 0)
-    return `/api/submissions?limit=10&filter=task&taskId=${taskId}`
+    return `/api/submissions?limit=10&filter=task&taskId=${taskId}${
+      assessmentId &&
+      `&filter=own&filter=assessment&assessmentId=${assessmentId}`
+    }`
 
   // add the cursor to the API endpoint
-  return `/api/submissions?cursor=${previousPageData.nextCursor}&limit=10&filter=task&taskId=${taskId}`
+  return `/api/submissions?cursor=${
+    previousPageData.nextCursor
+  }&limit=10&filter=task&taskId=${taskId}${
+    assessmentId && `&filter=own&filter=assessment&assessmentId=${assessmentId}`
+  }`
 }
 
 // get submission list from server with infinite loading
-const useSubmissionList = (taskId: string) => {
+const useSubmissionList = (taskId: string, assessmentId?: string) => {
   const {
     data: rawData,
     error,
@@ -32,7 +40,8 @@ const useSubmissionList = (taskId: string) => {
     setSize,
     isValidating
   } = useSWRInfinite(
-    (index, previousPageData) => getKey(index, previousPageData, taskId),
+    (index, previousPageData) =>
+      getKey(index, previousPageData, taskId, assessmentId),
     fetcher
   )
 
