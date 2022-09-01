@@ -1,9 +1,11 @@
+import { MDXRemoteSerializeResult } from 'next-mdx-remote'
+
 export interface IAssessment {
   id: string
   name: string
   archived: boolean
   description: string | null
-  instruction: string | null
+  instruction: MDXRemoteSerializeResult | null
   open: string
   close: string
 }

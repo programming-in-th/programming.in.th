@@ -18,6 +18,7 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../../auth/[...nextauth]'
+import { mdxToHtml } from '@/lib/renderMarkdown'
 
 export default async function handler(
   req: NextApiRequest,
@@ -61,8 +62,12 @@ export default async function handler(
           }
         }
       })
+
       return ok(res, {
         ...assessment,
+        ...(assessment?.instruction && {
+          instruction: await mdxToHtml(assessment?.instruction)
+        }),
         tasks: assessment?.tasks.map(task => task.task)
       })
     }
@@ -87,6 +92,9 @@ export default async function handler(
 
     return ok(res, {
       ...assessment,
+      ...(assessment?.instruction && {
+        instruction: await mdxToHtml(assessment?.instruction)
+      }),
       tasks: assessment?.tasks.map(task => task.task)
     })
   } else if (req.method === 'DELETE') {

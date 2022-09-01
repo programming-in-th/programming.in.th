@@ -11,6 +11,8 @@ import { PageLayout } from '@/components/Layout'
 import fetcher from '@/lib/fetcher'
 import { IAssessmentTask, IAssessmentwithTask } from '@/types/assessments'
 import { Score } from '@/types/tasks'
+import { MDXRemote } from 'next-mdx-remote'
+import components from '@/components/common/MDXComponents'
 
 const TaskCard = ({
   task,
@@ -70,6 +72,8 @@ const Assessments = ({ router }: { router: NextRouter }) => {
     fetcher
   )
 
+  console.log(assessment)
+
   return (
     <PageLayout>
       <div className="flex w-full flex-col items-center">
@@ -82,6 +86,20 @@ const Assessments = ({ router }: { router: NextRouter }) => {
           ) : (
             <div className="h-48 w-full animate-pulse rounded-lg bg-gray-100 dark:bg-gray-500" />
           )}
+
+          {assessment?.instruction && (
+            <div className="prose mt-4 w-full max-w-none dark:text-gray-100">
+              <MDXRemote
+                {...assessment?.instruction}
+                components={
+                  {
+                    ...components
+                  } as any
+                }
+              />
+            </div>
+          )}
+
           <div className="mt-10 mb-2 flex justify-between px-6">
             <p className="text-sm font-medium text-gray-500 dark:text-gray-100">
               Problem Title
