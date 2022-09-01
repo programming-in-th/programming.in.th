@@ -4,7 +4,7 @@ import prisma from '@/lib/prisma'
 
 const checkOwnerPermissionOnAssessment = async (
   session: Session,
-  assessmentId: string | null
+  assessmentId?: string | null
 ) => {
   if (session.user.admin) return true
   if (!assessmentId) return false
