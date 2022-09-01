@@ -1,6 +1,9 @@
 import prisma from '@/lib/prisma'
 
+import { SubmissionFilterEnum as Filter } from '../schema/submissions'
+
 export const getInfiniteSubmissions = async (
+  filter?: string[],
   limit?: number,
   cursor?: number,
   taskId?: string,
@@ -15,10 +18,11 @@ export const getInfiniteSubmissions = async (
       }
     ],
     where: {
-      ...(taskId && { taskId }),
-      ...(userId && {
-        user: { id: { equals: userId } }
-      })
+      ...(filter?.includes(Filter.enum.task) && { taskId }),
+      ...(filter?.includes(Filter.enum.user) &&
+        userId && {
+          user: { id: { equals: userId } }
+        })
     },
     select: {
       id: true,

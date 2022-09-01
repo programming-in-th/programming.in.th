@@ -2,7 +2,7 @@ import { z } from 'zod'
 
 import { stringToNumber } from './helper'
 
-export const SubmissionFilterEnum = z.enum(['own', 'task'])
+export const SubmissionFilterEnum = z.enum(['own', 'task', 'user'])
 
 export const SubmissionSchema = z
   .object({
