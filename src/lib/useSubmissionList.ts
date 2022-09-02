@@ -1,6 +1,6 @@
 import useSWRInfinite from 'swr/infinite'
 
-import { IGeneralSubmission } from '@/types/submissions'
+import { IListSubmission } from '@/types/submissions'
 
 import fetcher from './fetcher'
 
@@ -8,7 +8,7 @@ const PAGE_SIZE = 10
 
 const getKey = (
   pageIndex: number,
-  previousPageData: { data: IGeneralSubmission[]; nextCursor: number | null },
+  previousPageData: { data: IListSubmission[]; nextCursor: number | null },
   taskId: string,
   assessmentId?: string
 ) => {
@@ -46,7 +46,7 @@ const useSubmissionList = (taskId: string, assessmentId?: string) => {
   )
 
   const data = rawData ? rawData.map(data => data.data) : []
-  const submissions: IGeneralSubmission[] = data ? [].concat(...data) : []
+  const submissions: IListSubmission[] = data ? [].concat(...data) : []
   const isLoadingInitialData = !data && !error
   const isLoadingMore =
     isLoadingInitialData ||

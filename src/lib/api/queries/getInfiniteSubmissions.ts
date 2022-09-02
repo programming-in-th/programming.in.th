@@ -1,4 +1,7 @@
+import { Prisma } from '@prisma/client'
+
 import prisma from '@/lib/prisma'
+import { IListSubmission } from '@/types/submissions'
 
 import { SubmissionFilterEnum as Filter } from '../schema/submissions'
 
@@ -12,8 +15,9 @@ export const getInfiniteSubmissions = async (
   filter?: string[],
   limit?: number,
   cursor?: number,
-  options?: filterOptions
-) => {
+  options?: filterOptions,
+  where?: Prisma.SubmissionWhereInput
+): Promise<{ data: IListSubmission[]; nextCursor: number | null }> => {
   const submissions = await prisma.submission.findMany({
     take: limit,
     ...(cursor && { skip: 1, cursor: { id: cursor } }),
@@ -30,7 +34,8 @@ export const getInfiniteSubmissions = async (
       }),
       ...(filter?.includes(Filter.enum.assessment) && {
         assessmentId: options?.assessmentId
-      })
+      }),
+      ...where
     },
     select: {
       taskId: true,
