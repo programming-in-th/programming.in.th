@@ -116,7 +116,10 @@ const SubmitForm = ({
       id: assessment?.id || '',
       name: assessment?.name || '',
       description: assessment?.description || '',
-      instruction: assessment?.instruction || '',
+      instruction:
+        typeof assessment?.instruction === 'string'
+          ? assessment.instruction
+          : '' || '',
       open: assessment?.open.slice(0, -1) || '',
       close: assessment?.close.slice(0, -1) || '',
       ...users.reduce(
@@ -190,7 +193,7 @@ export default function EditAssessment({
   users: IUser[]
 }) {
   const { data: assessment } = useSWR<IAssessment>(
-    assessmentId && `/api/assessments/${assessmentId}`,
+    assessmentId && `/api/assessments/${assessmentId}?mdType=RAW`,
     fetcher
   )
 

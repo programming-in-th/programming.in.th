@@ -5,7 +5,7 @@ export interface IAssessment {
   name: string
   archived: boolean
   description: string | null
-  instruction: MDXRemoteSerializeResult | null
+  instruction: MDXRemoteSerializeResult | string | null
   open: string
   close: string
 }

@@ -32,7 +32,7 @@ export default async function handler(
       return badRequest(res)
     }
 
-    const { id } = parsedQuery.data
+    const { id, mdType } = parsedQuery.data
     const session = await unstable_getServerSession(req, res, authOptions)
 
     if (!session) {
@@ -66,7 +66,10 @@ export default async function handler(
       return ok(res, {
         ...assessment,
         ...(assessment?.instruction && {
-          instruction: await mdxToHtml(assessment?.instruction)
+          instruction:
+            mdType === 'RAW'
+              ? assessment?.instruction
+              : await mdxToHtml(assessment?.instruction)
         }),
         tasks: assessment?.tasks.map(task => task.task)
       })
@@ -93,7 +96,10 @@ export default async function handler(
     return ok(res, {
       ...assessment,
       ...(assessment?.instruction && {
-        instruction: await mdxToHtml(assessment?.instruction)
+        instruction:
+          mdType === 'RAW'
+            ? assessment?.instruction
+            : await mdxToHtml(assessment?.instruction)
       }),
       tasks: assessment?.tasks.map(task => task.task)
     })

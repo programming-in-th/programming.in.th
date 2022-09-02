@@ -89,14 +89,16 @@ const Assessments = ({ router }: { router: NextRouter }) => {
 
           {assessment?.instruction && (
             <div className="prose mt-4 w-full max-w-none dark:text-gray-100">
-              <MDXRemote
-                {...assessment?.instruction}
-                components={
-                  {
-                    ...components
-                  } as any
-                }
-              />
+              {typeof assessment?.instruction !== 'string' && (
+                <MDXRemote
+                  {...assessment?.instruction}
+                  components={
+                    {
+                      ...components
+                    } as any
+                  }
+                />
+              )}
             </div>
           )}
 
