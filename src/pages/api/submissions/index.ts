@@ -93,7 +93,7 @@ export default async function handler(
               ? session.user.id!
               : isAdminOrOwner
               ? userId
-              : undefined
+              : ''
           }
         )
 
@@ -110,7 +110,7 @@ export default async function handler(
             ? session?.user.id!
             : session?.user.admin
             ? userId
-            : undefined
+            : ''
         }
       )
 
