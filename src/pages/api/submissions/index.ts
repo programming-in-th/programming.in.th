@@ -135,9 +135,7 @@ export default async function handler(
           assessmentId,
           userId: filterArr.includes(Filter.enum.own)
             ? session?.user.id!
-            : isAdminOrOwner
-            ? userId
-            : undefined
+            : userId
         }
       )
 
