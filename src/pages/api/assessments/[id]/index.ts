@@ -28,6 +28,8 @@ export default async function handler(
     const { query } = req
     const parsedQuery = IndividualAssessmentSchema.safeParse(query)
 
+    console.log(parsedQuery)
+
     if (!parsedQuery.success) {
       return badRequest(res)
     }
