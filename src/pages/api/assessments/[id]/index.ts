@@ -39,7 +39,7 @@ export default async function handler(
       return unauthorized(res)
     }
 
-    if (session.user.admin) {
+    if (await checkOwnerPermissionOnAssessment(session, id)) {
       const assessment = await prisma.assessment.findFirst({
         where: {
           id

@@ -154,6 +154,9 @@ export default async function handler(
           : session?.user.admin
           ? userId
           : undefined
+      },
+      {
+        ...(!session?.user.admin && { private: false })
       }
     )
 
