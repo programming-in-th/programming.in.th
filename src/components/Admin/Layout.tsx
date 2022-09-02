@@ -33,7 +33,7 @@ export const Layout = ({
           <div className="flex w-full justify-center">
             <p className="py-8 text-xl font-semibold">Admin</p>
           </div>
-          <div className="flex w-full max-w-3xl justify-center">
+          <div className="flex w-full max-w-3xl justify-center space-x-2">
             {Tabs.map(tab => (
               <Link href={`/admin/${tab.url}`} key={tab.title}>
                 <a

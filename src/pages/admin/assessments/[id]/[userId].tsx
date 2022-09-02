@@ -39,7 +39,7 @@ const SubmissionCard = ({
 }) => {
   const dt = new Date(submission.submittedAt)
   return (
-    <div className="flex w-full items-center rounded-md border border-gray-100 px-6 py-3 shadow-md dark:bg-slate-700">
+    <div className="flex w-full items-center rounded-lg border border-gray-100 px-6 py-3 shadow-md dark:bg-slate-700">
       <div className="flex w-1/6 flex-col text-sm">
         <p className="font-medium text-gray-500 dark:text-white">
           {dayjs(dt).format('DD MMM YYYY')}
