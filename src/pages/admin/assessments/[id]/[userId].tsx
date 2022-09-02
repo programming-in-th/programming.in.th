@@ -3,13 +3,13 @@ import { useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import dayjs from 'dayjs'
 import useSWR from 'swr'
 
 import { IAssessment } from '@/components/Admin/Assessments/EditAssessment/EditAssessment'
 import { PageLayout } from '@/components/Layout'
 import fetcher from '@/lib/fetcher'
 import { IUser } from '@/types/users'
-import dayjs from 'dayjs'
 import { getDisplayNameFromGrader } from '@/utils/language'
 
 interface ISubmission {

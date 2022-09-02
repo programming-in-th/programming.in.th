@@ -4,15 +4,15 @@ import Link from 'next/link'
 import { NextRouter, withRouter } from 'next/router'
 
 import { useSession } from 'next-auth/react'
+import { MDXRemote } from 'next-mdx-remote'
 import useSWR from 'swr'
 
 import AssessmentCard from '@/components/Assessment/AssessmentCard'
+import components from '@/components/common/MDXComponents'
 import { PageLayout } from '@/components/Layout'
 import fetcher from '@/lib/fetcher'
 import { IAssessmentTask, IAssessmentwithTask } from '@/types/assessments'
 import { Score } from '@/types/tasks'
-import { MDXRemote } from 'next-mdx-remote'
-import components from '@/components/common/MDXComponents'
 
 const TaskCard = ({
   task,
@@ -89,14 +89,16 @@ const Assessments = ({ router }: { router: NextRouter }) => {
 
           {assessment?.instruction && (
             <div className="prose mt-4 w-full max-w-none dark:text-gray-100">
-              <MDXRemote
-                {...assessment?.instruction}
-                components={
-                  {
-                    ...components
-                  } as any
-                }
-              />
+              {typeof assessment?.instruction !== 'string' && (
+                <MDXRemote
+                  {...assessment?.instruction}
+                  components={
+                    {
+                      ...components
+                    } as any
+                  }
+                />
+              )}
             </div>
           )}
 

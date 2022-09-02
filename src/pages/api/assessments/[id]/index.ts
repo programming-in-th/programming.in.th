@@ -8,6 +8,7 @@ import {
   IndividualAssessmentSchema
 } from '@/lib/api/schema/assessment'
 import prisma from '@/lib/prisma'
+import { mdxToHtml } from '@/lib/renderMarkdown'
 import dedupeAndMap from '@/utils/dedupeAndMap'
 import {
   methodNotAllowed,
@@ -18,7 +19,6 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../../auth/[...nextauth]'
-import { mdxToHtml } from '@/lib/renderMarkdown'
 
 export default async function handler(
   req: NextApiRequest,
@@ -32,14 +32,14 @@ export default async function handler(
       return badRequest(res)
     }
 
-    const { id } = parsedQuery.data
+    const { id, mdType } = parsedQuery.data
     const session = await unstable_getServerSession(req, res, authOptions)
 
     if (!session) {
       return unauthorized(res)
     }
 
-    if (session.user.admin) {
+    if (await checkOwnerPermissionOnAssessment(session, id)) {
       const assessment = await prisma.assessment.findFirst({
         where: {
           id
@@ -66,7 +66,10 @@ export default async function handler(
       return ok(res, {
         ...assessment,
         ...(assessment?.instruction && {
-          instruction: await mdxToHtml(assessment?.instruction)
+          instruction:
+            mdType === 'RAW'
+              ? assessment?.instruction
+              : await mdxToHtml(assessment?.instruction)
         }),
         tasks: assessment?.tasks.map(task => task.task)
       })
@@ -93,7 +96,10 @@ export default async function handler(
     return ok(res, {
       ...assessment,
       ...(assessment?.instruction && {
-        instruction: await mdxToHtml(assessment?.instruction)
+        instruction:
+          mdType === 'RAW'
+            ? assessment?.instruction
+            : await mdxToHtml(assessment?.instruction)
       }),
       tasks: assessment?.tasks.map(task => task.task)
     })

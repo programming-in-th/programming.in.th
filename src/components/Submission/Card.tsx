@@ -3,15 +3,22 @@ import clsx from 'clsx'
 import dayjs from 'dayjs'
 
 import IsLink from '@/components/common/IsLink'
-import { IGeneralSubmission } from '@/types/submissions'
+import { IGeneralSubmission, IListSubmission } from '@/types/submissions'
 import { getDisplayNameFromGrader } from '@/utils/language'
 
-const getColumn = (isViewing: boolean) => [
+const getColumn = (
+  isViewing: boolean
+): {
+  title: string
+  field: string
+  width: string
+  child: (sub: IGeneralSubmission | IListSubmission, task: Task) => JSX.Element
+}[] => [
   {
     title: 'Time',
     field: 'submittedAt',
     width: 'w-[10rem]',
-    child: (sub: IGeneralSubmission) => {
+    child: sub => {
       const dt = new Date(sub.submittedAt)
       return (
         <div className="flex flex-col text-sm">
@@ -29,7 +36,7 @@ const getColumn = (isViewing: boolean) => [
     title: 'Name',
     field: 'userId',
     width: 'w-[18em]',
-    child: (sub: IGeneralSubmission) => (
+    child: sub => (
       <p className="truncate text-center text-sm font-medium text-gray-500 dark:text-white">
         {sub.user?.username}
       </p>
@@ -39,7 +46,7 @@ const getColumn = (isViewing: boolean) => [
     title: 'Score',
     field: 'score',
     width: 'w-[10rem]',
-    child: (sub: IGeneralSubmission, task: Task) => (
+    child: (sub, task) => (
       <div className="flex h-auto w-full items-center justify-center text-sm">
         <div className="flex h-auto w-full flex-col items-center justify-around">
           <div className="relative h-full w-full">
@@ -64,9 +71,9 @@ const getColumn = (isViewing: boolean) => [
     title: 'Status',
     field: 'status',
     width: isViewing ? 'hidden -mx-2' : 'w-[14rem]',
-    child: (sub: IGeneralSubmission) => (
+    child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
-        {sub.status}
+        {'status' in sub && sub.status}
       </p>
     )
   },
@@ -74,7 +81,7 @@ const getColumn = (isViewing: boolean) => [
     title: 'Language',
     field: 'language',
     width: 'w-[7rem]',
-    child: (sub: IGeneralSubmission) => (
+    child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {getDisplayNameFromGrader(sub.language)}
       </p>
@@ -84,7 +91,7 @@ const getColumn = (isViewing: boolean) => [
     title: 'Time',
     field: 'time',
     width: 'w-[7rem]',
-    child: (sub: IGeneralSubmission) => (
+    child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {sub.time}{' '}
         <span className="font-light text-gray-400 dark:text-gray-300">ms</span>
@@ -95,7 +102,7 @@ const getColumn = (isViewing: boolean) => [
     title: 'Memory',
     field: 'memory',
     width: 'w-[7rem]',
-    child: (sub: IGeneralSubmission) => (
+    child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {sub.memory}{' '}
         <span className="font-light text-gray-400 dark:text-gray-300">kB</span>
@@ -128,14 +135,16 @@ export const Card = ({
   task,
   isViewing = false
 }: {
-  sub: IGeneralSubmission
+  sub: IListSubmission
   task: Task
   isViewing?: boolean
 }) => {
-  const Columns = getColumn(isViewing)
-  const [stime, name, score, _status, lang, time, mem] = Columns.map(item =>
+  const columns = getColumn(isViewing)
+
+  const [stime, name, score, _status, lang, time, mem] = columns.map(item =>
     item.child(sub, task)
   )
+
   return (
     <IsLink
       href={`/submissions/${sub.id}`}
@@ -143,7 +152,7 @@ export const Card = ({
       className="flex w-full flex-col rounded-xl py-3 px-6 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex-row md:px-0"
     >
       <>
-        {Columns.map(column => (
+        {columns.map(column => (
           <div
             key={column.title}
             className={clsx(
