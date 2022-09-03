@@ -12,7 +12,7 @@ import components from '@/components/common/MDXComponents'
 import { PageLayout } from '@/components/Layout'
 import fetcher from '@/lib/fetcher'
 import { IAssessmentTask, IAssessmentwithTask } from '@/types/assessments'
-import { Score } from '@/types/tasks'
+import { IScore } from '@/types/tasks'
 
 const TaskCard = ({
   task,
@@ -21,7 +21,7 @@ const TaskCard = ({
 }: {
   task: IAssessmentTask
   id: string
-  scores: Score[]
+  scores: IScore[]
 }) => {
   const score = useMemo(
     () => (scores ? scores.find(item => item.taskId === task.id)?.max || 0 : 0),
@@ -62,7 +62,7 @@ const Assessments = ({ router }: { router: NextRouter }) => {
 
   const { status } = useSession()
 
-  const { data: scores } = useSWR<Score[]>(
+  const { data: scores } = useSWR<IScore[]>(
     status === 'authenticated' ? '/api/submissions/score' : null,
     fetcher
   )
@@ -89,14 +89,16 @@ const Assessments = ({ router }: { router: NextRouter }) => {
 
           {assessment?.instruction && (
             <div className="prose mt-4 w-full max-w-none dark:text-gray-100">
-              <MDXRemote
-                {...assessment?.instruction}
-                components={
-                  {
-                    ...components
-                  } as any
-                }
-              />
+              {typeof assessment?.instruction !== 'string' && (
+                <MDXRemote
+                  {...assessment?.instruction}
+                  components={
+                    {
+                      ...components
+                    } as any
+                  }
+                />
+              )}
             </div>
           )}
 

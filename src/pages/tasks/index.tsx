@@ -10,19 +10,19 @@ import { TasksList } from '@/components/Tasks/List'
 import { SideBar } from '@/components/Tasks/SideBar'
 import fetcher from '@/lib/fetcher'
 import prisma from '@/lib/prisma'
-import { IGeneralTask, Score, Solved } from '@/types/tasks'
+import { IGeneralTask, IScore, ISolved } from '@/types/tasks'
 
 const Tasks = ({ tasks }: { tasks: IGeneralTask[] }) => {
   const [filteredTasks, setFilteredTasks] = useState<IGeneralTask[]>(tasks)
   const { push, query } = useRouter()
   const { status } = useSession()
 
-  const { data: solved, error: solvedErr } = useSWR<Solved[]>(
+  const { data: solved, error: solvedErr } = useSWR<ISolved[]>(
     '/api/submissions/solved',
     fetcher
   )
 
-  const { data: score, error: scoreErr } = useSWR<Score[]>(
+  const { data: score, error: scoreErr } = useSWR<IScore[]>(
     status === 'authenticated' ? '/api/submissions/score' : null,
     fetcher
   )

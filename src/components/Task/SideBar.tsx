@@ -11,7 +11,7 @@ import { useSession } from 'next-auth/react'
 import useSWR, { mutate } from 'swr'
 
 import fetcher from '@/lib/fetcher'
-import { IGeneralSubmission } from '@/types/submissions'
+import { IListSubmission } from '@/types/submissions'
 
 import { PieChart } from '../common/PieChart'
 
@@ -67,7 +67,7 @@ export const SideBar = ({
 }) => {
   const { status } = useSession()
 
-  const { data } = useSWR<CursorPagination<IGeneralSubmission[], number>>(
+  const { data } = useSWR<CursorPagination<IListSubmission[], number>>(
     task && status === 'authenticated'
       ? `/api/submissions?filter=own&filter=task&taskId=${task.id}${
           assessmentId ? `&filter=assessment&assessmentId=${assessmentId}` : ''

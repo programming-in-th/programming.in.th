@@ -9,12 +9,12 @@ export interface IGeneralTask {
   bookmarked: boolean
 }
 
-export interface Score {
+export interface IScore {
   taskId: string
   max: number
 }
 
-export interface Solved {
+export interface ISolved {
   taskId: string
   count: number
 }

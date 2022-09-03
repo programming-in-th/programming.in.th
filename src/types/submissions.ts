@@ -18,14 +18,22 @@ export interface IGroup {
   submission_id: string
 }
 
-export interface IGeneralSubmission {
+export interface IListSubmission {
+  user: {
+    id: string
+    username: string | null
+  } | null
   id: number
-  user: User
+  taskId: string
   score: number
   language: string
   time: number
   memory: number
   submittedAt: Date
+}
+
+export interface IGeneralSubmission extends IListSubmission {
+  user: User
   groups: IGroup[]
   status: string
   code: string[]

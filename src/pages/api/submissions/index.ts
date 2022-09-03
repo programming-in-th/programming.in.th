@@ -93,7 +93,7 @@ export default async function handler(
               ? session.user.id!
               : isAdminOrOwner
               ? userId
-              : undefined
+              : ''
           }
         )
 
@@ -110,7 +110,7 @@ export default async function handler(
             ? session?.user.id!
             : session?.user.admin
             ? userId
-            : undefined
+            : ''
         }
       )
 
@@ -135,9 +135,7 @@ export default async function handler(
           assessmentId,
           userId: filterArr.includes(Filter.enum.own)
             ? session?.user.id!
-            : isAdminOrOwner
-            ? userId
-            : undefined
+            : userId
         }
       )
 
@@ -154,6 +152,9 @@ export default async function handler(
           : session?.user.admin
           ? userId
           : undefined
+      },
+      {
+        ...(!session?.user.admin && { private: false })
       }
     )
 
