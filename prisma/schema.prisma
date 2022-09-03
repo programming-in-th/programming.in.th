@@ -99,7 +99,6 @@ model Task {
   id               String             @id
   title            String             @db.Text
   fullScore        Int
-  path             String             @db.Text
   private          Boolean            @default(false)
   type             TaskType           @default(NORMAL)
   statement        StatementType      @default(PDF)
@@ -107,8 +106,20 @@ model Task {
   bookmarks        Bookmark[]
   submissions      Submission[]
   taskOnAssessment TaskOnAssessment[]
+  category         Category?          @relation(fields: [categoryId], references: [id])
+  categoryId       String?
 
   @@index([id])
+}
+
+model Category {
+  id               String    @id
+  name             String
+  childCategory    Category? @relation("CategoryRelations", fields: [childCategoryId], references: [id])
+  parentCategory   Category? @relation("CategoryRelations")
+  tasks            Task[]
+  childCategoryId  String    @unique
+  parentCategoryId String    @unique
 }
 
 model Submission {

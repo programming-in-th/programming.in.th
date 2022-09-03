@@ -76,7 +76,6 @@ Table Task {
   id String [pk]
   title String [not null]
   fullScore Int [not null]
-  path String [not null]
   private Boolean [not null, default: false]
   type TaskType [not null, default: 'NORMAL']
   statement StatementType [not null, default: 'PDF']
@@ -84,6 +83,18 @@ Table Task {
   bookmarks Bookmark [not null]
   submissions Submission [not null]
   taskOnAssessment TaskOnAssessment [not null]
+  category Category
+  categoryId String
+}
+
+Table Category {
+  id String [pk]
+  name String [not null]
+  childCategory Category
+  parentCategory Category
+  tasks Task [not null]
+  childCategoryId String [unique, not null]
+  parentCategoryId String [unique, not null]
 }
 
 Table Submission {
@@ -181,6 +192,10 @@ Ref: Session.userId > User.id [delete: Cascade]
 Ref: Bookmark.userId > User.id
 
 Ref: Bookmark.taskId > Task.id
+
+Ref: Task.categoryId > Category.id
+
+Ref: Category.childCategoryId - Category.id
 
 Ref: Submission.userId > User.id [delete: Set Null]
 
