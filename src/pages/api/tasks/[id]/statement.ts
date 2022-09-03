@@ -17,9 +17,9 @@ import {
   notFound,
   ok
 } from '@/utils/response'
+import streamToString from '@/utils/streamToString'
 
 import { authOptions } from '../../auth/[...nextauth]'
-import streamToString from '@/utils/streamToString'
 
 export default async function handler(
   req: NextApiRequest,
