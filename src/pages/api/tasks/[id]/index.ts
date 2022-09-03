@@ -6,7 +6,7 @@ import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTa
 import prisma from '@/lib/prisma'
 import { unauthorized, methodNotAllowed, ok, forbidden } from '@/utils/response'
 
-import { authOptions } from '../auth/[...nextauth]'
+import { authOptions } from '../../auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,
