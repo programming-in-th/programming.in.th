@@ -8,6 +8,7 @@ import {
   IndividualAssessmentSchema
 } from '@/lib/api/schema/assessment'
 import prisma from '@/lib/prisma'
+import { mdxToHtml } from '@/lib/renderMarkdown'
 import dedupeAndMap from '@/utils/dedupeAndMap'
 import {
   methodNotAllowed,
@@ -18,7 +19,6 @@ import {
 } from '@/utils/response'
 
 import { authOptions } from '../../auth/[...nextauth]'
-import { mdxToHtml } from '@/lib/renderMarkdown'
 
 export default async function handler(
   req: NextApiRequest,
