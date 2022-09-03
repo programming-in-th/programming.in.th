@@ -37,8 +37,6 @@ export default async function handler(
       }
     })
 
-    console.log(task)
-
     if (!task) return notFound(res)
 
     if (task.private) {
