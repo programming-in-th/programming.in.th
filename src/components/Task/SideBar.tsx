@@ -70,7 +70,7 @@ export const SideBar = ({
   const { data } = useSWR<CursorPagination<IGeneralSubmission[], number>>(
     task && status === 'authenticated'
       ? `/api/submissions?filter=own&filter=task&taskId=${task.id}${
-          assessmentId && `&filter=assessment&assessmentId=${assessmentId}`
+          assessmentId ? `&filter=assessment&assessmentId=${assessmentId}` : ''
         }`
       : null,
     fetcher
