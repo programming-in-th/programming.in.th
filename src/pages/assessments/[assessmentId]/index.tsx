@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
 import Link from 'next/link'
-import { NextRouter, useRouter, withRouter } from 'next/router'
+import { useRouter } from 'next/router'
 
 import { useSession } from 'next-auth/react'
 import { MDXRemote } from 'next-mdx-remote'
