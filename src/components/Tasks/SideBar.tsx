@@ -74,14 +74,11 @@ export const SideBar = () => {
               query: value !== 'All' ? { type: value } : null
             })
           }}
+          value={String(query?.type)}
         >
           {Tabs.map(tabItem => {
             return (
-              <option
-                key={tabItem.value}
-                selected={tabItem.value === String(query?.type)}
-                value={tabItem.value}
-              >
+              <option key={tabItem.value} value={tabItem.value}>
                 {tabItem.label}
               </option>
             )

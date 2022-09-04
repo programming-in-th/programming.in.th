@@ -108,11 +108,12 @@ export const Pagination = ({
               { scroll: false }
             )
           }
+          value={page}
         >
           {Array.from(Array(pageLimit + 1).keys())
             .slice(1)
             .map(index => (
-              <option value={index} key={index} selected={index === page}>
+              <option value={index} key={index}>
                 {index}
               </option>
             ))}

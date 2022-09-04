@@ -155,14 +155,11 @@ export const SideBar = ({
               : `/tasks/${task?.id}/${value}`
           })
         }
+        value={Tabs.find(tab => type === tab.value)?.url}
       >
         {type &&
           Tabs.map(tabItem => (
-            <option
-              key={tabItem.value}
-              value={tabItem.url}
-              selected={type === tabItem.value}
-            >
+            <option key={tabItem.value} value={tabItem.url}>
               {tabItem.label}
             </option>
           ))}
