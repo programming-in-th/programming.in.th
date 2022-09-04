@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 
 import Link from 'next/link'
-import { NextRouter, withRouter } from 'next/router'
+import { NextRouter, useRouter, withRouter } from 'next/router'
 
 import { useSession } from 'next-auth/react'
 import { MDXRemote } from 'next-mdx-remote'
@@ -57,7 +57,8 @@ const TaskCard = ({
   )
 }
 
-const Assessments = ({ router }: { router: NextRouter }) => {
+const Assessments = () => {
+  const router = useRouter()
   const id = router.query.assessmentId as string
 
   const { status } = useSession()
@@ -71,8 +72,6 @@ const Assessments = ({ router }: { router: NextRouter }) => {
     `/api/assessments/${id}`,
     fetcher
   )
-
-  console.log(assessment)
 
   return (
     <PageLayout>
@@ -125,4 +124,4 @@ const Assessments = ({ router }: { router: NextRouter }) => {
   )
 }
 
-export default withRouter(Assessments)
+export default Assessments
