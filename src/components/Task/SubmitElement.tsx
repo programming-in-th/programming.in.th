@@ -12,7 +12,7 @@ import { getLanguageFromExtension, languageData } from '@/utils/language'
 import { CodeSkeleton } from '../Code'
 import { FileUpload } from './FileUpload'
 
-const DynamicCode = dynamic(() => import('../Code'), {
+const DynamicCodeEditor = dynamic(() => import('../CodeEditor'), {
   suspense: true,
   ssr: false
 })
@@ -25,12 +25,14 @@ export const SubmitElement = ({
   assessmentId?: string
 }) => {
   const [file, setFile] = useState<File>()
+  const [currentLanguage, setCurrentLanguage] = useState<string>('')
   const [fileText, setFileText] = useState<string>()
 
   const router = useRouter()
 
   useEffect(() => {
     if (file) {
+      setCurrentLanguage(getLanguageFromExtension(getFileExtension(file.name)))
       file.text().then(value => setFileText(value))
     }
   }, [file])
@@ -45,7 +47,7 @@ export const SubmitElement = ({
         body: JSON.stringify({
           taskId: task.id,
           code: [fileText],
-          language: getLanguageFromExtension(getFileExtension(file.name)),
+          language: currentLanguage,
           ...(assessmentId && { assessmentId })
         })
       })
@@ -70,11 +72,12 @@ export const SubmitElement = ({
                 <div
                   key={language[0]}
                   className={clsx(
-                    'rounded-md border px-6 py-2 text-sm dark:border-slate-500',
-                    file?.name?.toLowerCase()?.endsWith(language[0])
+                    'cursor-pointer rounded-md border px-6 py-2 text-sm dark:border-slate-500',
+                    currentLanguage === language[0]
                       ? 'bg-prog-gray-500 text-white dark:bg-slate-700'
                       : 'border-gray-300 text-prog-gray-500 dark:text-slate-400'
                   )}
+                  onClick={() => setCurrentLanguage(language[0])}
                 >
                   {language[1]}
                 </div>
@@ -84,15 +87,15 @@ export const SubmitElement = ({
         </div>
 
         <Suspense fallback={<CodeSkeleton />}>
-          {file && fileText && (
-            <DynamicCode
-              code={fileText}
-              language={getLanguageFromExtension(getFileExtension(file.name))}
-            />
-          )}
+          <DynamicCodeEditor
+            setValue={setFileText}
+            value={fileText}
+            height="42rem"
+          />
         </Suspense>
-
-        <FileUpload file={file} setFile={setFile} />
+        <div className="mt-8">
+          <FileUpload file={file} setFile={setFile} />
+        </div>
       </div>
 
       <div className="bg-prog-gray-100 px-8 py-4 dark:bg-slate-700">
@@ -101,11 +104,11 @@ export const SubmitElement = ({
             onClick={onSubmit}
             className={clsx(
               'rounded-md border px-8 py-2 transition-colors dark:border-slate-600',
-              file && fileText
+              fileText
                 ? 'bg-prog-gray-500 text-white dark:hover:bg-slate-600'
                 : 'cursor-not-allowed bg-slate-50 text-gray-300 dark:bg-slate-500'
             )}
-            disabled={!file && !fileText}
+            disabled={!fileText}
           >
             Submit
           </button>
