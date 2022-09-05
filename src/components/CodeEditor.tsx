@@ -36,7 +36,7 @@ const CodeEditor = (
     if (editor.current) {
       setContainer(editor.current)
     }
-  }, [editor.current, setContainer])
+  }, [editor, setContainer])
 
   return <div ref={editor} />
 }

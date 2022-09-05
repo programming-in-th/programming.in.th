@@ -60,7 +60,7 @@ export const useShortPollingSubmissionData = (id: number) => {
     fetcher
   )
 
-  const { data: updates, error: updatesError } = useSWR<
+  const { data: updates } = useSWR<
     Pick<IGeneralSubmission, 'groups' | 'id' | 'score' | 'status'>
   >(`/api/submissions/${id}/realtime`, fetcher, {
     refreshInterval: data => {
