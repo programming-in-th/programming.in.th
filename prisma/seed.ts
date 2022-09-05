@@ -1,11 +1,10 @@
-import { PrismaClient, Task } from '@prisma/client'
+import { Prisma, PrismaClient } from '@prisma/client'
 const prisma = new PrismaClient()
 
-const data: Task[] = [
+const data: Prisma.TaskCreateManyInput[] = [
   {
     fullScore: 100,
     private: false,
-    path: 'prog/00',
     title: 'A+B Problem',
     type: 'NORMAL',
     id: '0000',
@@ -15,13 +14,11 @@ const data: Task[] = [
     type: 'NORMAL',
     title: 'Grading',
     private: false,
-    path: 'prog/00',
     fullScore: 100,
     id: '0001',
     statement: 'PDF'
   },
   {
-    path: 'prog/00',
     type: 'NORMAL',
     private: false,
     title: 'Min Max',
@@ -34,13 +31,11 @@ const data: Task[] = [
     title: 'Matrix Addition',
     type: 'NORMAL',
     private: false,
-    path: 'prog/00',
     id: '0003',
     statement: 'PDF'
   },
   {
     title: 'Character Checker',
-    path: 'prog/00',
     private: false,
     type: 'NORMAL',
     fullScore: 100,
@@ -49,7 +44,6 @@ const data: Task[] = [
   },
   {
     fullScore: 100,
-    path: 'prog/00',
     private: false,
     title: 'Pythagorus',
     type: 'NORMAL',
@@ -60,13 +54,11 @@ const data: Task[] = [
     title: 'Soundex',
     private: false,
     fullScore: 100,
-    path: 'prog/00',
     type: 'NORMAL',
     id: '0006',
     statement: 'PDF'
   },
   {
-    path: 'prog/00',
     fullScore: 100,
     type: 'NORMAL',
     title: 'Herman',
@@ -78,7 +70,6 @@ const data: Task[] = [
     type: 'NORMAL',
     private: false,
     title: 'X2',
-    path: 'prog/00',
     fullScore: 100,
     id: '0008',
     statement: 'PDF'
@@ -88,21 +79,18 @@ const data: Task[] = [
     type: 'NORMAL',
     title: 'ABC',
     fullScore: 100,
-    path: 'prog/00',
     id: '0009',
     statement: 'PDF'
   },
   {
     title: 'Trik',
     private: false,
-    path: 'prog/00',
     fullScore: 100,
     type: 'NORMAL',
     id: '0010',
     statement: 'PDF'
   },
   {
-    path: 'ipst/62/may',
     type: 'NORMAL',
     fullScore: 100,
     title: 'กุ๊ยจัดแถว',
