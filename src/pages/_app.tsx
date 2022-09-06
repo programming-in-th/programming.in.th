@@ -2,11 +2,11 @@ import { AppProps } from 'next/app'
 
 import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from 'next-themes'
+import { Toaster } from 'react-hot-toast'
 
 import '@/styles/index.css'
 import '@/styles/fonts.css'
 import '@/styles/style.scss'
-import { Toaster } from 'react-hot-toast'
 
 export default function App({
   Component,
