@@ -90,10 +90,9 @@ Table Task {
 Table Category {
   id String [pk]
   name String [not null]
-  childCategory Category
+  childCategory Category [not null]
   parentCategory Category
   tasks Task [not null]
-  childCategoryId String [unique, not null]
   parentCategoryId String [unique, not null]
 }
 
@@ -195,7 +194,7 @@ Ref: Bookmark.taskId > Task.id
 
 Ref: Task.categoryId > Category.id
 
-Ref: Category.childCategoryId - Category.id
+Ref: Category.parentCategoryId > Category.id
 
 Ref: Submission.userId > User.id [delete: Set Null]
 

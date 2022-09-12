@@ -113,13 +113,12 @@ model Task {
 }
 
 model Category {
-  id               String    @id
+  id               String     @id
   name             String
-  childCategory    Category? @relation("CategoryRelations", fields: [childCategoryId], references: [id])
-  parentCategory   Category? @relation("CategoryRelations")
+  childCategory    Category[] @relation("CategoryRelations")
+  parentCategory   Category?  @relation("CategoryRelations", references: [id], fields: [parentCategoryId])
   tasks            Task[]
-  childCategoryId  String    @unique
-  parentCategoryId String    @unique
+  parentCategoryId String     @unique
 }
 
 model Submission {
