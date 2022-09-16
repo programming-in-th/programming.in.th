@@ -93,7 +93,7 @@ Table Category {
   childCategory Category [not null]
   parentCategory Category
   tasks Task [not null]
-  parentCategoryId String [unique, not null]
+  parentCategoryId String
 }
 
 Table Submission {

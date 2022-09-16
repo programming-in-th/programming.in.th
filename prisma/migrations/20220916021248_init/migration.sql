@@ -82,8 +82,7 @@ CREATE TABLE "Task" (
 CREATE TABLE "Category" (
     "id" TEXT NOT NULL,
     "name" TEXT NOT NULL,
-    "childCategoryId" TEXT NOT NULL,
-    "parentCategoryId" TEXT NOT NULL,
+    "parentCategoryId" TEXT,
 
     CONSTRAINT "Category_pkey" PRIMARY KEY ("id")
 );
@@ -186,12 +185,6 @@ CREATE UNIQUE INDEX "VerificationToken_identifier_token_key" ON "VerificationTok
 CREATE INDEX "Task_id_idx" ON "Task"("id");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "Category_childCategoryId_key" ON "Category"("childCategoryId");
-
--- CreateIndex
-CREATE UNIQUE INDEX "Category_parentCategoryId_key" ON "Category"("parentCategoryId");
-
--- CreateIndex
 CREATE INDEX "Submission_id_idx" ON "Submission"("id");
 
 -- CreateIndex
@@ -225,7 +218,7 @@ ALTER TABLE "Bookmark" ADD CONSTRAINT "Bookmark_taskId_fkey" FOREIGN KEY ("taskI
 ALTER TABLE "Task" ADD CONSTRAINT "Task_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Category" ADD CONSTRAINT "Category_childCategoryId_fkey" FOREIGN KEY ("childCategoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Category" ADD CONSTRAINT "Category_parentCategoryId_fkey" FOREIGN KEY ("parentCategoryId") REFERENCES "Category"("id") ON DELETE SET NULL ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Submission" ADD CONSTRAINT "Submission_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE SET NULL ON UPDATE CASCADE;
@@ -260,17 +253,16 @@ ALTER TABLE "_TagToTask" ADD CONSTRAINT "_TagToTask_A_fkey" FOREIGN KEY ("A") RE
 -- AddForeignKey
 ALTER TABLE "_TagToTask" ADD CONSTRAINT "_TagToTask_B_fkey" FOREIGN KEY ("B") REFERENCES "Task"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
+create schema if not exists extensions;
+create extension if not exists "uuid-ossp" with schema extensions;
 
-CREATE SCHEMA IF NOT EXISTS  extensions;
-CREATE extension IF NOT EXISTS "uuid-ossp" WITH SCHEMA extensions;
-CREATE SCHEMA IF NOT EXISTS reatlime;
-
+create schema if not exists realtime;
 begin;
-  DROP publication IF EXISTS supabase_realtime;
-  CREATE publication supabase_realtime;
+  drop publication if exists supabase_realtime;
+  create publication supabase_realtime;
 commit;
 
-ALTER publication supabase_realtime ADD TABLE "Submission";
-ALTER TABLE "Submission" REPLICA IDENTITY full;
+alter publication supabase_realtime add table "Submission";
+alter table "Submission" replica identity full;
 
 
