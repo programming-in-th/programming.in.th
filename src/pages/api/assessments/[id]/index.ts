@@ -15,7 +15,8 @@ import {
   unauthorized,
   ok,
   badRequest,
-  forbidden
+  forbidden,
+  notFound
 } from '@/utils/response'
 
 import { authOptions } from '../../auth/[...nextauth]'
@@ -63,6 +64,8 @@ export default async function handler(
         }
       })
 
+      if (assessment === null) return notFound(res)
+
       return ok(res, {
         ...assessment,
         ...(assessment?.instruction && {
@@ -92,6 +95,8 @@ export default async function handler(
         }
       }
     })
+
+    if (assessment === null) return notFound(res)
 
     return ok(res, {
       ...assessment,
