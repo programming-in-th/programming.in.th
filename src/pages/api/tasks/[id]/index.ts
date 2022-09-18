@@ -3,8 +3,15 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { unstable_getServerSession } from 'next-auth'
 
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
+import { IndividualTaskSchema, TaskSchema } from '@/lib/api/schema/tasks'
 import prisma from '@/lib/prisma'
-import { unauthorized, methodNotAllowed, ok, forbidden } from '@/utils/response'
+import {
+  unauthorized,
+  methodNotAllowed,
+  ok,
+  forbidden,
+  badRequest
+} from '@/utils/response'
 
 import { authOptions } from '../../auth/[...nextauth]'
 
@@ -14,9 +21,16 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     const { query } = req
+    const parsedQuery = IndividualTaskSchema.safeParse(query)
+
+    if (!parsedQuery.success) {
+      return badRequest(res)
+    }
+
+    const { id } = parsedQuery.data
 
     const task = await prisma.task.findUnique({
-      where: { id: String(query.id) }
+      where: { id }
     })
 
     if (task?.private) {
@@ -34,7 +48,64 @@ export default async function handler(
     }
 
     return ok(res, task)
+  } else if (req.method === 'PUT') {
+    const { query, body } = req
+    const parsedQuery = IndividualTaskSchema.safeParse(query)
+
+    if (!parsedQuery.success) {
+      return badRequest(res)
+    }
+
+    const parsedTask = TaskSchema.safeParse(body)
+
+    if (!parsedTask.success) {
+      return badRequest(res)
+    }
+
+    const task = parsedTask.data
+
+    const session = await unstable_getServerSession(req, res, authOptions)
+
+    if (!session) {
+      return unauthorized(res)
+    }
+
+    if (!session.user.admin) {
+      return forbidden(res)
+    }
+
+    const updatedTask = await prisma.task.update({
+      where: { id: parsedQuery.data.id },
+      data: { ...task, id: parsedQuery.data.id }
+    })
+
+    return ok(res, updatedTask)
+  } else if (req.method === 'DELETE') {
+    const { query } = req
+    const parsedQuery = IndividualTaskSchema.safeParse(query)
+
+    if (!parsedQuery.success) {
+      return badRequest(res)
+    }
+
+    const { id } = parsedQuery.data
+
+    const session = await unstable_getServerSession(req, res, authOptions)
+
+    if (!session) {
+      return unauthorized(res)
+    }
+
+    if (!session.user.admin) {
+      return forbidden(res)
+    }
+
+    const deletedTask = await prisma.task.delete({
+      where: { id }
+    })
+
+    return ok(res, deletedTask)
   }
 
-  return methodNotAllowed(res, ['GET'])
+  return methodNotAllowed(res, ['GET', 'PUT', 'DELETE'])
 }
