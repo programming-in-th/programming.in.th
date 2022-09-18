@@ -19,29 +19,35 @@ const generateCategoryTree = async () => {
     node: typeof categories[number],
     path: string[]
   ): ICategory => {
+    if (node.childCategory?.length) {
+      const children = node.childCategory.map(child => {
+        const childNode = categories.find(category => category.id === child.id)
+        if (!childNode) throw new Error('Category not found')
+        return getTree(childNode, [...path, childNode.name])
+      })
+      return {
+        path,
+        title: node.name,
+        children,
+        taskIds: children.map(child => child.taskIds).flat()
+      }
+    }
     return {
       path,
       title: node.name,
-      children: node.childCategory?.length
-        ? node.childCategory.map(child => {
-            const childNode = categories.find(
-              category => category.id === child.id
-            )
-            if (!childNode) throw new Error('Category not found')
-            return getTree(childNode, [...path, childNode.name])
-          })
-        : node.tasks.map(item => {
-            return {
-              id: item.id,
-              title: item.title,
-              tags: [],
-              solved: 0,
-              score: 0,
-              fullScore: item.fullScore,
-              tried: false,
-              bookmarked: false
-            }
-          })
+      children: node.tasks.map<IGeneralTask>(item => {
+        return {
+          id: item.id,
+          title: item.title,
+          tags: [],
+          solved: 0,
+          score: 0,
+          fullScore: item.fullScore,
+          tried: false,
+          bookmarked: false
+        }
+      }),
+      taskIds: node.tasks.map(item => item.id)
     }
   }
   categoryTree = getTree(
