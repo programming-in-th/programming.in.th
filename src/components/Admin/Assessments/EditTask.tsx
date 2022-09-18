@@ -5,6 +5,8 @@ import { XIcon } from '@heroicons/react/outline'
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import { useForm, UseFormRegister } from 'react-hook-form'
+import toast from 'react-hot-toast'
+import { mutate } from 'swr'
 
 export interface IAssessmentForm {
   id: string
@@ -12,6 +14,9 @@ export interface IAssessmentForm {
   fullScore: number
   private: boolean
   type: 'NORMAL' | 'COMMUNICATION' | 'OUTPUT_ONLY'
+  statement: string
+  categoryId: string
+  tags: string[]
 }
 
 const LeftBar = ({
@@ -41,6 +46,14 @@ const LeftBar = ({
           )}
           {...register('id', { required: true })}
           disabled={task !== undefined}
+        />
+      </div>
+      <div className="flex flex-col">
+        <p>Category Path</p>
+        <input
+          type="text"
+          className="h-10 rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+          {...register('categoryId')}
         />
       </div>
       <div className="flex w-full space-x-4">
@@ -85,18 +98,44 @@ const SubmitForm = ({
   task: Task | undefined
   setOpen: (_: boolean) => void
 }) => {
-  const { register, handleSubmit } = useForm({
+  const { register, handleSubmit } = useForm<IAssessmentForm>({
     defaultValues: {
       id: task?.id || '',
       title: task?.title || '',
       fullScore: task?.fullScore || 100,
       private: task?.private || false,
-      type: task?.type || 'NORMAL'
+      type: task?.type || 'NORMAL',
+      statement: task?.statement || 'PDF',
+      categoryId: task?.categoryId || '',
+      tags: []
     }
   })
 
-  const onSubmit = (data: IAssessmentForm) => {
-    console.log(data)
+  const onSubmit = async (data: IAssessmentForm) => {
+    try {
+      await toast.promise(
+        fetch(task ? `/api/tasks/${task.id}` : '/api/tasks', {
+          method: task ? 'PUT' : 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        }).then(res => {
+          if (!res.ok) throw new Error('Failed to submit')
+          return res.json()
+        }),
+        {
+          loading: 'Submitting...',
+          success: `Successfully ${task ? 'updated' : 'created'} a task`,
+          error: (err: Error) => `${err}`
+        }
+      )
+
+      mutate('/api/tasks')
+      mutate(`/api/tasks/${task?.id}`)
+
+      setOpen(false)
+    } catch {}
   }
 
   return (

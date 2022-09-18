@@ -40,8 +40,29 @@ export default async function handler(
     try {
       const task = TaskSchema.parse(req.body)
 
+      // const path = task.categoryId.split('/')
+      // for (let i = 0; i < path.length; i++) {
+      //   await prisma.category.upsert({
+      //     where: { id: path.slice(0, i + 1).join('/') },
+      //     update: {},
+      //     create: {
+      //       id: path.slice(0, i + 1).join('/'),
+      //       name: path[i],
+      //       parentCategoryId: path.slice(0, i).join('/') || null
+      //     }
+      //   })
+      // }
+
       const createdTask = await prisma.task.create({
-        data: { ...task }
+        data: {
+          ...task,
+          tags: {
+            connectOrCreate: task.tags.map(tag => ({
+              where: { name: tag },
+              create: { name: tag }
+            }))
+          }
+        }
       })
 
       return ok(res, createdTask)

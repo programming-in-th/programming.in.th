@@ -74,9 +74,33 @@ export default async function handler(
       return forbidden(res)
     }
 
+    // const path = task.categoryId.split('/')
+    // for (let i = 0; i < path.length; i++) {
+    //   await prisma.category.upsert({
+    //     where: { id: path.slice(0, i + 1).join('/') },
+    //     update: {},
+    //     create: {
+    //       id: path.slice(0, i + 1).join('/'),
+    //       name: path[i],
+    //       parentCategoryId: path.slice(0, i).join('/') || null
+    //     }
+    //   })
+    // }
+
+    // TODO: Remove unused categories
+
     const updatedTask = await prisma.task.update({
       where: { id: parsedQuery.data.id },
-      data: { ...task, id: parsedQuery.data.id }
+      data: {
+        ...task,
+        id: parsedQuery.data.id,
+        tags: {
+          connectOrCreate: task.tags.map(tag => ({
+            where: { name: tag },
+            create: { name: tag }
+          }))
+        }
+      }
     })
 
     return ok(res, updatedTask)
@@ -103,6 +127,8 @@ export default async function handler(
     const deletedTask = await prisma.task.delete({
       where: { id }
     })
+
+    // TODO: Remove unused categories
 
     return ok(res, deletedTask)
   }

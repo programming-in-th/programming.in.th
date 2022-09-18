@@ -11,8 +11,9 @@ export const TaskSchema = z.object({
   id: z.string().min(1),
   title: z.string().min(1),
   fullScore: z.number(),
-  path: z.string(),
+  categoryId: z.string(),
   private: z.boolean(),
+  tags: z.array(z.string()),
   type: TaskTypeEnum,
   statement: StatementTypeEnum
 })

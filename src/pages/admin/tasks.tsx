@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react'
 
 import { Task } from '@prisma/client'
-import useSWR from 'swr'
+import toast from 'react-hot-toast'
+import useSWR, { mutate } from 'swr'
 
 import EditTask from '@/components/Admin/Assessments/EditTask'
 import VerifyDelete from '@/components/Admin/Assessments/VerifyDelete'
@@ -81,7 +82,17 @@ const TaskCard = ({ task }: { task: Task }) => {
         open={openDelete}
         setOpen={setOpenDelete}
         id={task.id}
-        onDelete={() => console.log('DELETE TASK')}
+        onDelete={async () => {
+          await toast.promise(
+            fetch(`/api/tasks/${task.id}`, { method: 'DELETE' }),
+            {
+              loading: 'Loading',
+              success: 'Successfully Deleted',
+              error: 'Delete Task Error'
+            }
+          )
+          await mutate('/api/tasks')
+        }}
         isTask
       />
       <EditTask task={task} open={openEdit} setOpen={setOpenEdit} />
