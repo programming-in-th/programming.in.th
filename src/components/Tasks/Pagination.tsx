@@ -19,24 +19,23 @@ export const Pagination = ({
             href={{ pathname: '/tasks', query: { ...query, page: page - 1 } }}
             passHref
             scroll={false}
+            className="flex w-full items-center text-gray-400"
           >
-            <a className="flex w-full items-center text-gray-400">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
-              </svg>
-              <p className="ml-2 text-sm">Previous</p>
-            </a>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M10 19l-7-7m0 0l7-7m-7 7h18"
+              />
+            </svg>
+            <p className="ml-2 text-sm">Previous</p>
           </Link>
         )}
       </div>
@@ -53,18 +52,17 @@ export const Pagination = ({
                 }}
                 passHref
                 scroll={false}
+                className="hidden md:block"
               >
-                <a className="hidden md:block">
-                  <p
-                    className={clsx(
-                      'flex h-7 w-7 items-center justify-center rounded-full transition hover:bg-gray-100',
-                      index === page &&
-                        'bg-blue-100 text-blue-600 dark:bg-gray-700 dark:text-gray-300'
-                    )}
-                  >
-                    {index}
-                  </p>
-                </a>
+                <p
+                  className={clsx(
+                    'flex h-7 w-7 items-center justify-center rounded-full transition hover:bg-gray-100',
+                    index === page &&
+                      'bg-blue-100 text-blue-600 dark:bg-gray-700 dark:text-gray-300'
+                  )}
+                >
+                  {index}
+                </p>
               </Link>
             )
             const blankComponent = (
@@ -125,24 +123,23 @@ export const Pagination = ({
             href={{ pathname: '/tasks', query: { ...query, page: page + 1 } }}
             passHref
             scroll={false}
+            className="flex w-full items-center justify-end text-gray-400"
           >
-            <a className="flex w-full items-center justify-end text-gray-400">
-              <p className="mr-2 text-sm">Next</p>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                strokeWidth={2}
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M14 5l7 7m0 0l-7 7m7-7H3"
-                />
-              </svg>
-            </a>
+            <p className="mr-2 text-sm">Next</p>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              strokeWidth={2}
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M14 5l7 7m0 0l-7 7m7-7H3"
+              />
+            </svg>
           </Link>
         )}
       </div>

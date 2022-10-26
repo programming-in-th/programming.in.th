@@ -1,10 +1,10 @@
 import React, { useMemo } from 'react'
 
-import Image from 'next/legacy/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { useSession } from 'next-auth/react'
+import Image from 'next/legacy/image'
 
 import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
 
@@ -32,17 +32,17 @@ export const Footer = () => {
       <div className="flex w-full max-w-5xl flex-col items-center">
         <div className="flex w-full max-w-md flex-col items-center justify-between space-y-6 p-8 font-display md:flex-row md:space-y-0">
           {navigation.map(item => (
-            <Link href={item.href} key={item.name} passHref>
-              <a
-                key={item.name}
-                className={`${
-                  `/${location}` == item.href
-                    ? 'text-prog-primary-500 hover:text-blue-600'
-                    : 'text-prog-gray-500 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300'
-                }`}
-              >
-                {item.name}
-              </a>
+            <Link
+              href={item.href}
+              key={item.name}
+              passHref
+              className={`${
+                `/${location}` == item.href
+                  ? 'text-prog-primary-500 hover:text-blue-600'
+                  : 'text-prog-gray-500 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300'
+              }`}
+            >
+              {item.name}
             </Link>
           ))}
         </div>
@@ -56,16 +56,20 @@ export const Footer = () => {
               การเขียนโปรแกรมเพื่อการแข่งขัน และวิทยาการคอมพิวเตอร์
             </p>
             {session ? (
-              <Link passHref href="/tasks">
-                <a className="trasition-colors mt-4 rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600">
-                  ค้นหาโจทย์
-                </a>
+              <Link
+                passHref
+                href="/tasks"
+                className="trasition-colors mt-4 rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600"
+              >
+                ค้นหาโจทย์
               </Link>
             ) : (
-              <Link passHref href="/login">
-                <a className="trasition-colors mt-4 rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600">
-                  เข้าร่วม
-                </a>
+              <Link
+                passHref
+                href="/login"
+                className="trasition-colors mt-4 rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600"
+              >
+                เข้าร่วม
               </Link>
             )}
           </div>
@@ -73,15 +77,21 @@ export const Footer = () => {
         <div className="flex w-full flex-col justify-between font-display md:flex-row md:justify-between md:py-10">
           <div className="flex flex-col items-center justify-center space-x-4 space-y-4 border-b-[0.5px] py-6 md:flex-row md:justify-start md:space-y-0 md:border-none md:py-0">
             <div className="flex space-x-2">
-              <Link href="https://www.facebook.com/programming.in.th/" passHref>
-                <a target="_blank" rel="noreferrer">
-                  <FacebookLogo className="text-[#64748B] dark:text-gray-100" />
-                </a>
+              <Link
+                href="https://www.facebook.com/programming.in.th/"
+                passHref
+                target="_blank"
+                rel="noreferrer"
+              >
+                <FacebookLogo className="text-[#64748B] dark:text-gray-100" />
               </Link>
-              <Link href="https://github.com/programming-in-th/" passHref>
-                <a target="_blank" rel="noreferrer">
-                  <GitHubLogo className="text-[#64748B] dark:text-gray-100" />
-                </a>
+              <Link
+                href="https://github.com/programming-in-th/"
+                passHref
+                target="_blank"
+                rel="noreferrer"
+              >
+                <GitHubLogo className="text-[#64748B] dark:text-gray-100" />
               </Link>
             </div>
             <p className="w-full text-center text-sm leading-4 text-gray-500 dark:text-gray-100 sm:w-80 md:text-left">
@@ -90,10 +100,10 @@ export const Footer = () => {
               <Link
                 href="https://github.com/programming-in-th/programming.in.th"
                 passHref
+                target="_blank"
+                rel="noreferrer"
               >
-                <a target="_blank" rel="noreferrer">
-                  GitHub
-                </a>
+                GitHub
               </Link>
             </p>
           </div>

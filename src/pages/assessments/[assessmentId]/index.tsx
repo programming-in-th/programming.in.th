@@ -28,31 +28,33 @@ const TaskCard = ({
     [scores, task.id]
   )
   return (
-    <Link href={`${id}/${task.id}`} passHref>
-      <a className="flex w-full rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700">
-        <div className="flex w-full flex-col">
-          <p className="text-sm font-medium text-gray-500 dark:text-gray-100">
-            {task.title}
-          </p>
-          <p className="text-sm text-gray-400">{task.id}</p>
-        </div>
-        <div className="mx-3 flex h-auto w-28 flex-none items-center justify-center">
-          <div className="flex h-auto w-full flex-col items-center justify-around">
-            <div className="relative h-full w-full">
-              <div className="absolute h-1.5 w-full rounded-full bg-gray-200"></div>
-              <div
-                className="absolute h-1.5 rounded-full bg-blue-500"
-                style={{
-                  width: `${(score / task.fullScore) * 100}%`
-                }}
-              />
-            </div>
-            <p className="mt-2 text-sm text-gray-500 dark:text-gray-200">
-              {score} points
-            </p>
+    <Link
+      href={`${id}/${task.id}`}
+      passHref
+      className="flex w-full rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700"
+    >
+      <div className="flex w-full flex-col">
+        <p className="text-sm font-medium text-gray-500 dark:text-gray-100">
+          {task.title}
+        </p>
+        <p className="text-sm text-gray-400">{task.id}</p>
+      </div>
+      <div className="mx-3 flex h-auto w-28 flex-none items-center justify-center">
+        <div className="flex h-auto w-full flex-col items-center justify-around">
+          <div className="relative h-full w-full">
+            <div className="absolute h-1.5 w-full rounded-full bg-gray-200"></div>
+            <div
+              className="absolute h-1.5 rounded-full bg-blue-500"
+              style={{
+                width: `${(score / task.fullScore) * 100}%`
+              }}
+            />
           </div>
+          <p className="mt-2 text-sm text-gray-500 dark:text-gray-200">
+            {score} points
+          </p>
         </div>
-      </a>
+      </div>
     </Link>
   )
 }

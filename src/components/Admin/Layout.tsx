@@ -35,17 +35,17 @@ export const Layout = ({
           </div>
           <div className="flex w-full max-w-3xl justify-center space-x-2">
             {Tabs.map(tab => (
-              <Link href={`/admin/${tab.url}`} key={tab.title}>
-                <a
-                  className={clsx(
-                    'flex w-full justify-center rounded-lg py-2 transition',
-                    current == tab.url
-                      ? 'bg-gray-200 dark:bg-gray-700'
-                      : 'hover:bg-gray-200 hover:dark:bg-gray-700'
-                  )}
-                >
-                  <p className="text-sm">{tab.title}</p>
-                </a>
+              <Link
+                href={`/admin/${tab.url}`}
+                key={tab.title}
+                className={clsx(
+                  'flex w-full justify-center rounded-lg py-2 transition',
+                  current == tab.url
+                    ? 'bg-gray-200 dark:bg-gray-700'
+                    : 'hover:bg-gray-200 hover:dark:bg-gray-700'
+                )}
+              >
+                <p className="text-sm">{tab.title}</p>
               </Link>
             ))}
           </div>

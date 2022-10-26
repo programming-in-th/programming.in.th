@@ -1,6 +1,5 @@
 import React from 'react'
 
-import Image from 'next/legacy/image'
 import Link from 'next/link'
 
 import {
@@ -9,6 +8,7 @@ import {
   FireIcon,
   HeartIcon
 } from '@heroicons/react/solid'
+import Image from 'next/legacy/image'
 
 import { FeatureCard } from '@/components/Landing/FeatureCard'
 import { IncrementalNumber } from '@/components/Landing/IncrementalNumber'
@@ -39,11 +39,11 @@ const Landing = () => {
         </section>
 
         <section className="flex items-center justify-center gap-4">
-          <Link href="/login" passHref>
-            <a className="landing-btn --primary">เข้าร่วม</a>
+          <Link href="/login" passHref className="landing-btn --primary">
+            เข้าร่วม
           </Link>
-          <Link href="/tasks" passHref>
-            <a className="landing-btn --normal">ค้นหาโจทย์</a>
+          <Link href="/tasks" passHref className="landing-btn --normal">
+            ค้นหาโจทย์
           </Link>
         </section>
 
@@ -160,10 +160,12 @@ const Landing = () => {
           </p>
 
           <div className="mt-12">
-            <Link href="/tasks" passHref>
-              <a className="trasition-colors mt-4 inline rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600">
-                เริ่มเลย
-              </a>
+            <Link
+              href="/tasks"
+              passHref
+              className="trasition-colors mt-4 inline rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600"
+            >
+              เริ่มเลย
             </Link>
           </div>
         </section>

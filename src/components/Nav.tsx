@@ -1,12 +1,12 @@
 import React, { Fragment, useMemo } from 'react'
 
-import Image from 'next/legacy/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { useSession, signOut } from 'next-auth/react'
+import Image from 'next/legacy/image'
 
 import { Logo, LogoDark } from '@/svg/Logo'
 
@@ -38,15 +38,11 @@ export const Nav = () => {
         >
           <div className="flex flex-1 items-center justify-between">
             <div className="flex w-full items-center justify-between md:w-auto">
-              <Link href="/" passHref>
-                <a className="dark:hidden">
-                  <Logo />
-                </a>
+              <Link href="/" passHref className="dark:hidden">
+                <Logo />
               </Link>
-              <Link href="/" passHref>
-                <a className="hidden dark:block">
-                  <LogoDark />
-                </a>
+              <Link href="/" passHref className="hidden dark:block">
+                <LogoDark />
               </Link>
               <div className="-mr-2 flex items-center md:hidden">
                 <Popover.Button className="focus-ring-inset inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white dark:text-white">
@@ -70,17 +66,17 @@ export const Nav = () => {
             </div>
             <div className="hidden items-center space-x-8 md:ml-10 md:flex">
               {navigation.map(item => (
-                <Link href={item.href} key={item.name} passHref>
-                  <a
-                    key={item.name}
-                    className={`text-sm font-medium ${
-                      `/${location}` == item.href
-                        ? 'text-prog-primary-500 hover:text-blue-600'
-                        : 'text-prog-gray-500 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300'
-                    }`}
-                  >
-                    {item.name}
-                  </a>
+                <Link
+                  href={item.href}
+                  key={item.name}
+                  passHref
+                  className={`text-sm font-medium ${
+                    `/${location}` == item.href
+                      ? 'text-prog-primary-500 hover:text-blue-600'
+                      : 'text-prog-gray-500 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300'
+                  }`}
+                >
+                  {item.name}
                 </Link>
               ))}
 
@@ -127,12 +123,12 @@ export const Nav = () => {
                     </Transition>
                   </Popover>
                 ) : (
-                  <Link href="/login" passHref>
-                    <a
-                      className={`rounded-md bg-prog-primary-500 px-6 py-2 text-base font-medium text-white shadow-md transition-colors hover:bg-prog-primary-600`}
-                    >
-                      Login
-                    </a>
+                  <Link
+                    href="/login"
+                    passHref
+                    className={`rounded-md bg-prog-primary-500 px-6 py-2 text-base font-medium text-white shadow-md transition-colors hover:bg-prog-primary-600`}
+                  >
+                    Login
                   </Link>
                 )}
               </div>
@@ -203,17 +199,17 @@ export const Nav = () => {
               )}
               <div className="space-y-1 px-2">
                 {navigation.map(item => (
-                  <Link href={item.href} key={item.name} passHref>
-                    <a
-                      key={item.name}
-                      className={`font-sm block rounded-md px-3 py-2 text-base ${
-                        `/${location}` == item.href
-                          ? 'bg-gray-200 text-gray-700 dark:bg-slate-500 dark:text-prog-gray-100'
-                          : 'text-gray-400 dark:text-gray-300'
-                      }`}
-                    >
-                      {item.name}
-                    </a>
+                  <Link
+                    href={item.href}
+                    key={item.name}
+                    passHref
+                    className={`font-sm block rounded-md px-3 py-2 text-base ${
+                      `/${location}` == item.href
+                        ? 'bg-gray-200 text-gray-700 dark:bg-slate-500 dark:text-prog-gray-100'
+                        : 'text-gray-400 dark:text-gray-300'
+                    }`}
+                  >
+                    {item.name}
                   </Link>
                 ))}
               </div>
@@ -228,10 +224,12 @@ export const Nav = () => {
                 </div>
               ) : (
                 <div className="mt-6 px-5">
-                  <Link href="/login" passHref>
-                    <a className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700">
-                      Login
-                    </a>
+                  <Link
+                    href="/login"
+                    passHref
+                    className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700"
+                  >
+                    Login
                   </Link>
                 </div>
               )}

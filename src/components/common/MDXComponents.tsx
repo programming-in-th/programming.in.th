@@ -1,5 +1,6 @@
-import Image from 'next/legacy/image'
 import Link from 'next/link'
+
+import Image from 'next/legacy/image'
 
 const CustomLink = (props: any) => {
   const href = props.href
@@ -7,8 +8,8 @@ const CustomLink = (props: any) => {
 
   if (isInternalLink) {
     return (
-      <Link href={href}>
-        <a {...props}>{props.children}</a>
+      <Link href={href} {...props}>
+        {props.children}
       </Link>
     )
   }

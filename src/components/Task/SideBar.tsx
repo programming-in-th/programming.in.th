@@ -178,21 +178,19 @@ export const SideBar = ({
               }
               key={tabItem.label}
             >
-              <a>
-                <button
-                  key={tabItem.label}
-                  className={clsx(
-                    'flex h-9 w-full items-center justify-center rounded-md transition-colors',
-                    type === tabItem.value
-                      ? 'bg-gray-100 dark:bg-slate-700'
-                      : 'hover:bg-gray-50 dark:hover:bg-slate-600'
-                  )}
-                >
-                  <p className="text-sm text-gray-500 dark:text-gray-100">
-                    {tabItem.label}
-                  </p>
-                </button>
-              </a>
+              <button
+                key={tabItem.label}
+                className={clsx(
+                  'flex h-9 w-full items-center justify-center rounded-md transition-colors',
+                  type === tabItem.value
+                    ? 'bg-gray-100 dark:bg-slate-700'
+                    : 'hover:bg-gray-50 dark:hover:bg-slate-600'
+                )}
+              >
+                <p className="text-sm text-gray-500 dark:text-gray-100">
+                  {tabItem.label}
+                </p>
+              </button>
             </Link>
           )
         })}
