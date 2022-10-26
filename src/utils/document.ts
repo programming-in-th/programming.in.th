@@ -1,6 +1,6 @@
-import { MutableRefObject, RefObject, useEffect, useState } from 'react'
+import { RefObject, useEffect, useState } from 'react'
 
-export const detectOuside = (
+export const useDetectOuside = (
   ref: RefObject<HTMLElement>,
   dep: boolean,
   callback: () => void

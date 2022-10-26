@@ -1,4 +1,4 @@
-import { ComponentProps, FC } from 'react'
+import { ComponentProps } from 'react'
 
 export const PeopleVector = (props: ComponentProps<'svg'>) => {
   return (
