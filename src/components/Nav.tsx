@@ -1,12 +1,12 @@
 import React, { Fragment, useMemo } from 'react'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { useSession, signOut } from 'next-auth/react'
-import Image from 'next/image'
 
 import { Logo, LogoDark } from '@/svg/Logo'
 

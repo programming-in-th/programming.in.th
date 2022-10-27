@@ -1,5 +1,6 @@
 import React from 'react'
 
+import Image from 'next/image'
 import Link from 'next/link'
 
 import {
@@ -8,7 +9,6 @@ import {
   FireIcon,
   HeartIcon
 } from '@heroicons/react/solid'
-import Image from 'next/image'
 
 import { FeatureCard } from '@/components/Landing/FeatureCard'
 import { IncrementalNumber } from '@/components/Landing/IncrementalNumber'
