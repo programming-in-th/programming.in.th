@@ -81,7 +81,7 @@ export const Nav = () => {
               ))}
 
               <div className="flex items-center space-x-4 pl-2">
-                {session ? (
+                {session?.user ? (
                   <Popover className="relative hidden md:block">
                     <Popover.Button className="flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-slate-300 transition-colors hover:bg-slate-300 hover:bg-opacity-50 active:ring-1">
                       <Image
@@ -179,7 +179,7 @@ export const Nav = () => {
               </div>
             </div>
             <div className="pt-5 pb-6">
-              {session && (
+              {session?.user && (
                 <div className="flex items-center gap-4 p-4">
                   <div>
                     <Image
