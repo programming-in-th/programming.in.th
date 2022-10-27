@@ -1,4 +1,4 @@
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 
 import { QuoteVector } from '@/svg/Quote'
 
@@ -21,6 +21,10 @@ export const TestimonyCard = (props: {
           className="rounded-full object-cover"
           src={imgURL}
           alt={title}
+          style={{
+            maxWidth: '100%',
+            height: 'auto'
+          }}
         />
 
         <div className="mb-4 flex flex-col pt-2 text-left">

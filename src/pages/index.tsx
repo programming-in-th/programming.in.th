@@ -8,7 +8,7 @@ import {
   FireIcon,
   HeartIcon
 } from '@heroicons/react/solid'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 
 import { FeatureCard } from '@/components/Landing/FeatureCard'
 import { IncrementalNumber } from '@/components/Landing/IncrementalNumber'
@@ -55,6 +55,10 @@ const Landing = () => {
               width={400}
               height={400}
               className="h-full w-full rounded-3xl object-cover"
+              style={{
+                maxWidth: '100%',
+                height: 'auto'
+              }}
             />
           </div>
 

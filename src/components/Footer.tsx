@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 
 import { useSession } from 'next-auth/react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 
 import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
 
@@ -151,6 +151,10 @@ export const Footer = () => {
                   height="34"
                   width="30"
                   alt="IPST's Logo"
+                  style={{
+                    maxWidth: '100%',
+                    height: 'auto'
+                  }}
                 />
               </div>
             </div>

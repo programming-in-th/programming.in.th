@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 
 const CustomLink = (props: any) => {
   const href = props.href
@@ -18,7 +18,16 @@ const CustomLink = (props: any) => {
 }
 
 const CustomImage = (props: any) => {
-  return <Image alt={props.alt} {...props} />
+  return (
+    <Image
+      alt={props.alt}
+      {...props}
+      style={{
+        maxWidth: '100%',
+        height: 'auto'
+      }}
+    />
+  )
 }
 
 const MDXComponent = {

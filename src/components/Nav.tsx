@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import { useSession, signOut } from 'next-auth/react'
-import Image from 'next/legacy/image'
+import Image from 'next/image'
 
 import { Logo, LogoDark } from '@/svg/Logo'
 
@@ -93,6 +93,10 @@ export const Nav = () => {
                         width={32}
                         height={32}
                         className="h-8 w-8 rounded-full"
+                        style={{
+                          maxWidth: '100%',
+                          height: 'auto'
+                        }}
                       />
                     </Popover.Button>
 
@@ -188,6 +192,10 @@ export const Nav = () => {
                       width={40}
                       height={40}
                       className="h-10 w-10 rounded-full"
+                      style={{
+                        maxWidth: '100%',
+                        height: 'auto'
+                      }}
                     />
                   </div>
 
