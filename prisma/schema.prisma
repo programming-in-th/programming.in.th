@@ -3,7 +3,7 @@
 
 datasource db {
   provider          = "postgresql"
-  url               = env("MIGRATION_DATABASE_URL")
+  url               = env("DATABASE_URL")
   shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
 }
 
@@ -18,10 +18,10 @@ generator dbml {
 
 model Account {
   id                 String  @id @default(cuid())
-  userId             String
+  userId             String  @map("user_id")
   type               String
   provider           String
-  providerAccountId  String
+  providerAccountId  String  @map("provider_account_id")
   refresh_token      String? @db.Text
   access_token       String? @db.Text
   expires_at         Int?
@@ -36,16 +36,18 @@ model Account {
 
   @@unique([provider, providerAccountId])
   @@index([userId])
+  @@map("account")
 }
 
 model Session {
   id           String   @id @default(cuid())
-  sessionToken String   @unique
-  userId       String
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([userId])
+  @@map("session")
 }
 
 model User {
@@ -53,10 +55,10 @@ model User {
   username         String?             @unique
   name             String?
   email            String?             @unique
-  emailVerified    DateTime?
+  emailVerified    DateTime?           @map("email_verified")
   image            String?
-  createdAt        DateTime            @default(now())
-  updatedAt        DateTime            @updatedAt
+  createdAt        DateTime            @default(now()) @map("created_at")
+  updatedAt        DateTime            @updatedAt @map("updated_at")
   admin            Boolean             @default(false)
   accounts         Account[]
   sessions         Session[]
@@ -64,6 +66,8 @@ model User {
   bookmarks        Bookmark[]
   assessments      UserOnAssessment[]
   ownedAssessments OwnerOnAssessment[]
+
+  @@map("user")
 }
 
 model VerificationToken {
@@ -72,16 +76,18 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+  @@map("verification_token")
 }
 
 model Bookmark {
-  createdAt DateTime @default(now())
+  createdAt DateTime @default(now()) @map("created_at")
   user      User     @relation(fields: [userId], references: [id])
-  userId    String
+  userId    String   @map("user_id")
   task      Task     @relation(fields: [taskId], references: [id])
-  taskId    String
+  taskId    String   @map("task_id")
 
   @@id([taskId, userId])
+  @@map("bookmark")
 }
 
 enum StatementType {
@@ -98,7 +104,7 @@ enum TaskType {
 model Task {
   id               String             @id
   title            String             @db.Text
-  fullScore        Int
+  fullScore        Int                @map("full_score")
   private          Boolean            @default(false)
   type             TaskType           @default(NORMAL)
   statement        StatementType      @default(PDF)
@@ -107,9 +113,10 @@ model Task {
   submissions      Submission[]
   taskOnAssessment TaskOnAssessment[]
   category         Category?          @relation(fields: [categoryId], references: [id])
-  categoryId       String?
+  categoryId       String?            @map("category_id")
 
   @@index([id])
+  @@map("task")
 }
 
 model Category {
@@ -118,14 +125,16 @@ model Category {
   childCategory    Category[] @relation("CategoryRelations")
   parentCategory   Category?  @relation("CategoryRelations", references: [id], fields: [parentCategoryId])
   tasks            Task[]
-  parentCategoryId String?
+  parentCategoryId String?    @map("parent_category_id")
+
+  @@map("category")
 }
 
 model Submission {
   id           Int         @id @default(autoincrement())
-  taskId       String
+  taskId       String      @map("task_id")
   status       String      @default("In Queue")
-  submittedAt  DateTime    @default(now())
+  submittedAt  DateTime    @default(now()) @map("submitted_at")
   time         Int         @default(0)
   memory       Int         @default(0)
   code         Bytes
@@ -133,13 +142,14 @@ model Submission {
   groups       Json        @default("[]")
   language     String
   private      Boolean     @default(false)
-  userId       String?
-  assessmentId String?
+  userId       String?     @map("user_id")
+  assessmentId String?     @map("assessment_id")
   user         User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
   assessment   Assessment? @relation(fields: [assessmentId], references: [id], onDelete: SetNull)
   task         Task        @relation(fields: [taskId], references: [id], onDelete: Cascade)
 
   @@index([id])
+  @@map("submission")
 }
 
 model Assessment {
@@ -154,33 +164,38 @@ model Assessment {
   owners      OwnerOnAssessment[]
   open        DateTime            @default(now())
   close       DateTime
+
+  @@map("assessment")
 }
 
 model TaskOnAssessment {
   task         Task       @relation(fields: [taskId], references: [id])
-  taskId       String
+  taskId       String     @map("task_id")
   assessment   Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
-  assessmentId String
+  assessmentId String     @map("assessment_id")
 
   @@id([taskId, assessmentId])
+  @@map("task_on_assessment")
 }
 
 model UserOnAssessment {
   user         User       @relation(fields: [userId], references: [id])
-  userId       String
+  userId       String     @map("user_id")
   assessment   Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
-  assessmentId String
+  assessmentId String     @map("assessment_id")
 
   @@id([userId, assessmentId])
+  @@map("user_on_assessment")
 }
 
 model OwnerOnAssessment {
   user         User       @relation(fields: [userId], references: [id])
-  userId       String
+  userId       String     @map("user_id")
   assessment   Assessment @relation(fields: [assessmentId], references: [id], onDelete: Cascade)
-  assessmentId String
+  assessmentId String     @map("assessment_id")
 
   @@id([userId, assessmentId])
+  @@map("owner_on_assessment")
 }
 
 model Tag {
@@ -189,4 +204,5 @@ model Tag {
   tasks Task[]
 
   @@index([id])
+  @@map("tag")
 }

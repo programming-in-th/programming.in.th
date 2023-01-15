@@ -41,7 +41,7 @@ specifiers:
   framer-motion: ^6.5.1
   fuse.js: ^6.6.2
   husky: ^8.0.1
-  legacy-modes: link:@codemirror/legacy-modes
+  legacy-modes: npm:@codemirror/legacy-modes
   next: ^13.0.0
   next-auth: ^4.10.3
   next-mdx-remote: ^4.1.0
@@ -106,7 +106,7 @@ dependencies:
   dayjs: 1.11.4
   framer-motion: 6.5.1_biqbaboplfbrettd7655fr4n2y
   fuse.js: 6.6.2
-  legacy-modes: link:@codemirror/legacy-modes
+  legacy-modes: /@codemirror/legacy-modes/6.3.1
   next: 13.0.0_b7sksnfkdyiidz7vzaadim75qm
   next-auth: 4.10.3_biqbaboplfbrettd7655fr4n2y
   next-mdx-remote: 4.1.0_biqbaboplfbrettd7655fr4n2y
@@ -1426,6 +1426,15 @@ packages:
     resolution:
       {
         integrity: sha512-V/PgGpndkZeTn3Hdlg/gd8MLFdyvTCIX+iwJzjUw5iNziWiNsAY8X0jvf7m3gSfxnKkNzmid6l0g4rYSpiDaCw==
+      }
+    dependencies:
+      '@codemirror/language': 6.2.1
+    dev: false
+
+  /@codemirror/legacy-modes/6.3.1:
+    resolution:
+      {
+        integrity: sha512-icXmCs4Mhst2F8mE0TNpmG6l7YTj1uxam3AbZaFaabINH5oWAdg2CfR/PVi+d/rqxJ+TuTnvkKK5GILHrNThtw==
       }
     dependencies:
       '@codemirror/language': 6.2.1
