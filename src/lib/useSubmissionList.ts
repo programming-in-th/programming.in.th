@@ -18,15 +18,18 @@ const getKey = (
   // first page, we don't have `previousPageData`
   if (pageIndex === 0)
     return `/api/submissions?limit=10&filter=task&taskId=${taskId}${
-      assessmentId &&
-      `&filter=own&filter=assessment&assessmentId=${assessmentId}`
+      assessmentId
+        ? `&filter=own&filter=assessment&assessmentId=${assessmentId}`
+        : ''
     }`
 
   // add the cursor to the API endpoint
   return `/api/submissions?cursor=${
     previousPageData.nextCursor
   }&limit=10&filter=task&taskId=${taskId}${
-    assessmentId && `&filter=own&filter=assessment&assessmentId=${assessmentId}`
+    assessmentId
+      ? `&filter=own&filter=assessment&assessmentId=${assessmentId}`
+      : ''
   }`
 }
 
