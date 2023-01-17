@@ -2,7 +2,7 @@
 //// THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 //// ------------------------------------------------------
 
-Table Account {
+Table account {
   id String [pk]
   userId String [not null]
   type String [not null]
@@ -17,22 +17,22 @@ Table Account {
   session_state String
   oauth_token_secret String
   oauth_token String
-  user User [not null]
+  user user [not null]
 
   indexes {
     (provider, providerAccountId) [unique]
   }
 }
 
-Table Session {
+Table session {
   id String [pk]
   sessionToken String [unique, not null]
   userId String [not null]
   expires DateTime [not null]
-  user User [not null]
+  user user [not null]
 }
 
-Table User {
+Table user {
   id String [pk]
   username String [unique]
   name String
@@ -42,15 +42,15 @@ Table User {
   createdAt DateTime [default: `now()`, not null]
   updatedAt DateTime [not null]
   admin Boolean [not null, default: false]
-  accounts Account [not null]
-  sessions Session [not null]
-  submissions Submission [not null]
-  bookmarks Bookmark [not null]
-  assessments UserOnAssessment [not null]
-  ownedAssessments OwnerOnAssessment [not null]
+  accounts account [not null]
+  sessions session [not null]
+  submissions submission [not null]
+  bookmarks bookmark [not null]
+  assessments user_on_assessment [not null]
+  ownedAssessments owner_on_assessment [not null]
 }
 
-Table VerificationToken {
+Table verification_token {
   identifier String [not null]
   token String [unique, not null]
   expires DateTime [not null]
@@ -60,11 +60,11 @@ Table VerificationToken {
   }
 }
 
-Table Bookmark {
+Table bookmark {
   createdAt DateTime [default: `now()`, not null]
-  user User [not null]
+  user user [not null]
   userId String [not null]
-  task Task [not null]
+  task task [not null]
   taskId String [not null]
 
   indexes {
@@ -72,31 +72,31 @@ Table Bookmark {
   }
 }
 
-Table Task {
+Table task {
   id String [pk]
   title String [not null]
   fullScore Int [not null]
   private Boolean [not null, default: false]
   type TaskType [not null, default: 'NORMAL']
   statement StatementType [not null, default: 'PDF']
-  tags Tag [not null]
-  bookmarks Bookmark [not null]
-  submissions Submission [not null]
-  taskOnAssessment TaskOnAssessment [not null]
-  category Category
+  tags tag [not null]
+  bookmarks bookmark [not null]
+  submissions submission [not null]
+  taskOnAssessment task_on_assessment [not null]
+  category category
   categoryId String
 }
 
-Table Category {
+Table category {
   id String [pk]
   name String [not null]
-  childCategory Category [not null]
-  parentCategory Category
-  tasks Task [not null]
+  childCategory category [not null]
+  parentCategory category
+  tasks task [not null]
   parentCategoryId String
 }
 
-Table Submission {
+Table submission {
   id Int [pk, increment]
   taskId String [not null]
   status String [not null, default: 'In Queue']
@@ -110,29 +110,29 @@ Table Submission {
   private Boolean [not null, default: false]
   userId String
   assessmentId String
-  user User
-  assessment Assessment
-  task Task [not null]
+  user user
+  assessment assessment
+  task task [not null]
 }
 
-Table Assessment {
+Table assessment {
   id String [pk]
   name String [unique, not null]
   archived Boolean [not null, default: false]
   description String
   instruction String
-  submissions Submission [not null]
-  tasks TaskOnAssessment [not null]
-  users UserOnAssessment [not null]
-  owners OwnerOnAssessment [not null]
+  submissions submission [not null]
+  tasks task_on_assessment [not null]
+  users user_on_assessment [not null]
+  owners owner_on_assessment [not null]
   open DateTime [default: `now()`, not null]
   close DateTime [not null]
 }
 
-Table TaskOnAssessment {
-  task Task [not null]
+Table task_on_assessment {
+  task task [not null]
   taskId String [not null]
-  assessment Assessment [not null]
+  assessment assessment [not null]
   assessmentId String [not null]
 
   indexes {
@@ -140,10 +140,10 @@ Table TaskOnAssessment {
   }
 }
 
-Table UserOnAssessment {
-  user User [not null]
+Table user_on_assessment {
+  user user [not null]
   userId String [not null]
-  assessment Assessment [not null]
+  assessment assessment [not null]
   assessmentId String [not null]
 
   indexes {
@@ -151,10 +151,10 @@ Table UserOnAssessment {
   }
 }
 
-Table OwnerOnAssessment {
-  user User [not null]
+Table owner_on_assessment {
+  user user [not null]
   userId String [not null]
-  assessment Assessment [not null]
+  assessment assessment [not null]
   assessmentId String [not null]
 
   indexes {
@@ -162,15 +162,15 @@ Table OwnerOnAssessment {
   }
 }
 
-Table Tag {
+Table tag {
   id Int [pk, increment]
   name String [unique, not null]
-  tasks Task [not null]
+  tasks task [not null]
 }
 
 Table TagToTask {
-  tagsId Int [ref: > Tag.id]
-  tasksId String [ref: > Task.id]
+  tagsId Int [ref: > tag.id]
+  tasksId String [ref: > task.id]
 }
 
 Enum StatementType {
@@ -184,32 +184,32 @@ Enum TaskType {
   OUTPUT_ONLY
 }
 
-Ref: Account.userId > User.id [delete: Cascade]
+Ref: account.userId > user.id [delete: Cascade]
 
-Ref: Session.userId > User.id [delete: Cascade]
+Ref: session.userId > user.id [delete: Cascade]
 
-Ref: Bookmark.userId > User.id
+Ref: bookmark.userId > user.id
 
-Ref: Bookmark.taskId > Task.id
+Ref: bookmark.taskId > task.id
 
-Ref: Task.categoryId > Category.id
+Ref: task.categoryId > category.id
 
-Ref: Category.parentCategoryId > Category.id
+Ref: category.parentCategoryId > category.id
 
-Ref: Submission.userId > User.id [delete: Set Null]
+Ref: submission.userId > user.id [delete: Set Null]
 
-Ref: Submission.assessmentId > Assessment.id [delete: Set Null]
+Ref: submission.assessmentId > assessment.id [delete: Set Null]
 
-Ref: Submission.taskId > Task.id [delete: Cascade]
+Ref: submission.taskId > task.id [delete: Cascade]
 
-Ref: TaskOnAssessment.taskId > Task.id
+Ref: task_on_assessment.taskId > task.id
 
-Ref: TaskOnAssessment.assessmentId > Assessment.id [delete: Cascade]
+Ref: task_on_assessment.assessmentId > assessment.id [delete: Cascade]
 
-Ref: UserOnAssessment.userId > User.id
+Ref: user_on_assessment.userId > user.id
 
-Ref: UserOnAssessment.assessmentId > Assessment.id [delete: Cascade]
+Ref: user_on_assessment.assessmentId > assessment.id [delete: Cascade]
 
-Ref: OwnerOnAssessment.userId > User.id
+Ref: owner_on_assessment.userId > user.id
 
-Ref: OwnerOnAssessment.assessmentId > Assessment.id [delete: Cascade]
+Ref: owner_on_assessment.assessmentId > assessment.id [delete: Cascade]

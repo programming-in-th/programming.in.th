@@ -21,7 +21,7 @@ export default async function handler(
     }
 
     const maxScore = (await prisma.$queryRaw(
-      Prisma.sql`SELECT "taskId", max(score) FROM "Submission" WHERE "userId" = ${session.user.id} GROUP BY "taskId";`
+      Prisma.sql`SELECT task_id, max(score) FROM submission WHERE user_id = ${session.user.id} GROUP BY task_id;`
     )) as Array<{ taskId: string; max: number }>
 
     if (session.user.admin) {

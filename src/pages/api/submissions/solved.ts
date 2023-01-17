@@ -11,7 +11,7 @@ export default async function handler(
 ) {
   if (req.method === 'GET') {
     const solved = await prisma.$queryRaw(
-      Prisma.sql`SELECT COUNT(DISTINCT "userId"), "taskId" FROM "Submission" WHERE "score" = 100 GROUP BY "taskId"`
+      Prisma.sql`SELECT COUNT(DISTINCT user_id), task_id FROM submission WHERE score = 100 GROUP BY task_id`
     )
 
     return send(
