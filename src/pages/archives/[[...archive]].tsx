@@ -36,12 +36,18 @@ export const getStaticProps: GetStaticProps = async ctx => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths: string[][] = []
+  // console.log('YES')
+  return {
+    paths: [],
+    fallback: false
+  }
   const generatePaths = (category: ICategory) => {
     paths.push(category.path)
     for (const child of category.children)
       if ('children' in child) generatePaths(child)
     return paths
   }
+  console.log(generatePaths)
   generatePaths(await getCategoryTree())
   return {
     paths: paths.map(path => ({ params: { archive: path } })),
