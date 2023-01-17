@@ -43,7 +43,9 @@ const Login = () => {
             Log in to PROGRAMMING.IN.TH
           </h2>
         </div>
-        {errorMessage && <p>{errorMessage}</p>}
+        <div className="sm:mx-auto sm:w-full sm:max-w-md">
+          {errorMessage && <p>{errorMessage}</p>}
+        </div>
         <div className="mt-2 px-4 sm:mx-auto sm:w-full sm:max-w-md">
           <div className="bg-white px-4 py-2 dark:bg-slate-800 sm:rounded-lg sm:px-10">
             <div className="mt-6">
