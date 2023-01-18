@@ -66,7 +66,9 @@ export const Pagination = ({
               </Link>
             )
             const blankComponent = (
-              <p className="flex h-7 w-7 items-center justify-center">...</p>
+              <p className="hidden h-7 w-7 items-center justify-center md:flex">
+                ...
+              </p>
             )
             if (pageLimit <= 8) {
               return [...pre, component]
