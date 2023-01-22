@@ -9,11 +9,9 @@ import fetcher from '@/lib/fetcher'
 
 export const Title = ({
   task,
-  type,
   assessmentId
 }: {
   task: Task
-  type: string
   assessmentId?: string
 }) => {
   const { status } = useSession()
