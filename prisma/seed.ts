@@ -112,7 +112,7 @@ const data: Prisma.TaskCreateManyInput[] = [
     title:
       'แผนที่ตัวกวนป่วนนครจักรวาลนฤมิต (The Marauder’s Map of Metaverse City)',
     private: false,
-    id: 'toi17_metaverse_1',
+    id: 'toi17_metaverse_2',
     statement: 'PDF'
   }
 ]
