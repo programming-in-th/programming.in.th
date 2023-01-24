@@ -97,6 +97,23 @@ const data: Prisma.TaskCreateManyInput[] = [
     private: false,
     id: 'o62_may09_judtaew',
     statement: 'PDF'
+  },
+  {
+    type: 'NORMAL',
+    fullScore: 100,
+    title: 'น้องออโต้กับตัวหารร่วมมาก',
+    private: false,
+    id: 'tumso17_gcdarray',
+    statement: 'PDF'
+  },
+  {
+    type: 'NORMAL',
+    fullScore: 100,
+    title:
+      'แผนที่ตัวกวนป่วนนครจักรวาลนฤมิต (The Marauder’s Map of Metaverse City)',
+    private: false,
+    id: 'toi17_metaverse_2',
+    statement: 'PDF'
   }
 ]
 

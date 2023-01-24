@@ -3,12 +3,10 @@ import { useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
-import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import { useSession } from 'next-auth/react'
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 
 import fetcher from '@/lib/fetcher'
 import { IListSubmission } from '@/types/submissions'
@@ -76,13 +74,6 @@ export const SideBar = ({
     fetcher
   )
 
-  const { data: bookmark } = useSWR<boolean>(
-    task && status === 'authenticated'
-      ? `/api/bookmarks/task/${task.id}`
-      : null,
-    fetcher
-  )
-
   const Tabs = useMemo(
     () => (assessmentId ? AssessmentTabs : NormalTabs),
     [assessmentId]
@@ -96,56 +87,6 @@ export const SideBar = ({
 
   return (
     <section className="w-full flex-none md:w-[14rem]">
-      <div className="flex flex-row-reverse justify-between space-x-2 px-2 md:flex-row md:justify-start md:px-0">
-        {!assessmentId && (
-          <button
-            className="mt-1 flex"
-            onClick={async () => {
-              mutate(
-                `/api/bookmarks/task/${task.id}`,
-                async (state: boolean) => {
-                  await fetch(`/api/bookmarks`, {
-                    method: state ? 'POST' : 'DELETE',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ taskId: task.id })
-                  })
-                  return state
-                },
-                { optimisticData: !bookmark }
-              )
-            }}
-          >
-            {bookmark ? (
-              <StarIconSolid className="h-5 w-5 text-gray-400 dark:text-amber-400" />
-            ) : (
-              <StarIconOutline className="h-5 w-5 text-gray-300" />
-            )}
-          </button>
-        )}
-        <div
-          className={clsx(
-            'flex w-full flex-col',
-            task === undefined && 'animate-pulse'
-          )}
-        >
-          <h1
-            className={clsx(
-              'h-6 w-full text-lg font-medium dark:text-white',
-              task === undefined && 'rounded bg-gray-200 dark:bg-slate-700'
-            )}
-          >
-            {task?.title}
-          </h1>
-          <p
-            className={clsx(
-              'mt-1 h-5 w-full font-light dark:text-white',
-              task === undefined && 'rounded bg-gray-200 dark:bg-slate-700'
-            )}
-          >
-            {task?.id}
-          </p>
-        </div>
-      </div>
       <select
         className="mt-2 w-full px-4 py-2 md:hidden"
         onChange={({ target: { value } }) =>
@@ -165,7 +106,7 @@ export const SideBar = ({
           ))}
       </select>
 
-      <hr className="my-4 hidden md:block" />
+      <hr className="mb-4 hidden md:block" />
 
       <div className="hidden shrink flex-col font-display md:flex">
         {Tabs.map(tabItem => {
