@@ -56,17 +56,17 @@ export const Title = ({
           task === undefined && 'animate-pulse'
         )}
       >
-        <h1
+        <p
           className={clsx(
-            'word-break-normal h-6 w-full text-lg font-medium dark:text-white',
+            'w-full break-normal text-lg font-medium dark:text-white',
             task === undefined && 'rounded bg-gray-200 dark:bg-slate-700'
           )}
         >
           {task?.title}
-        </h1>
+        </p>
         <p
           className={clsx(
-            'z-50 mt-1 h-5 w-full font-light dark:text-white',
+            'mt-1 h-5 w-full font-light dark:text-white',
             task === undefined && 'rounded bg-gray-200 dark:bg-slate-700'
           )}
         >
