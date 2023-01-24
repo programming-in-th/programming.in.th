@@ -88,7 +88,7 @@ export const SideBar = ({
   return (
     <section className="w-full flex-none md:w-[14rem]">
       <select
-        className="absolute mt-2 w-full px-4 py-2 md:hidden"
+        className="mt-2 w-full px-4 py-2 md:hidden"
         onChange={({ target: { value } }) =>
           push({
             pathname: assessmentId
@@ -106,7 +106,7 @@ export const SideBar = ({
           ))}
       </select>
 
-      <hr className="my-4 hidden md:block" />
+      <hr className="mb-4 hidden md:block" />
 
       <div className="hidden shrink flex-col font-display md:flex">
         {Tabs.map(tabItem => {
