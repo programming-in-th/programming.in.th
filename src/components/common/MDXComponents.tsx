@@ -25,12 +25,16 @@ const CustomImage = (props: any) => {
         maxWidth: '100%',
         height: 'auto'
       }}
+      width="0"
+      height="0"
+      sizes="100vw"
+      className="h-auto w-full"
     />
   )
 }
 
 const MDXComponent = {
-  Image: CustomImage,
+  img: CustomImage,
   a: CustomLink
 }
 

@@ -8,6 +8,10 @@ export default withBundleAnalyzer({
   swcMinify: true,
   reactStrictMode: true,
   images: {
-    domains: ['lh3.googleusercontent.com', 'avatars.githubusercontent.com']
+    domains: [
+      'lh3.googleusercontent.com',
+      'avatars.githubusercontent.com',
+      'proginth.sgp1.cdn.digitaloceanspaces.com'
+    ]
   }
 })
