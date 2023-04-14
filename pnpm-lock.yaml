@@ -64,6 +64,9 @@ dependencies:
   '@uiw/react-codemirror':
     specifier: ^4.11.6
     version: 4.11.6(@babel/runtime@7.18.9)(@codemirror/autocomplete@6.1.0)(@codemirror/commands@6.1.0)(@codemirror/language@6.2.1)(@codemirror/lint@6.0.0)(@codemirror/search@6.2.0)(@codemirror/state@6.2.0)(@codemirror/theme-one-dark@6.0.0)(@codemirror/view@6.2.2)(codemirror@6.0.1)(react-dom@18.2.0)(react@18.2.0)
+  '@vercel/analytics':
+    specifier: ^0.1.11
+    version: 0.1.11(react@18.2.0)
   '@visx/group':
     specifier: ^2.10.0
     version: 2.10.0(react@18.2.0)
@@ -2915,6 +2918,17 @@ packages:
       - '@codemirror/lint'
       - '@codemirror/search'
       - '@codemirror/state'
+    dev: false
+
+  /@vercel/analytics@0.1.11(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-mj5CPR02y0BRs1tN3oZcBNAX9a8NxsIUl9vElDPcqxnMfP0RbRc9fI9Ud7+QDg/1Izvt5uMumsr+6YsmVHcyuw==
+      }
+    peerDependencies:
+      react: ^16.8||^17||^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /@visx/curve@2.1.0:

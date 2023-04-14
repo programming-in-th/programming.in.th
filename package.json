@@ -25,6 +25,7 @@
     "@tanstack/react-table": "^8.3.3",
     "@uiw/codemirror-theme-dracula": "^4.11.6",
     "@uiw/react-codemirror": "^4.11.6",
+    "@vercel/analytics": "^0.1.11",
     "@visx/group": "^2.10.0",
     "@visx/shape": "^2.11.1",
     "@visx/text": "^2.10.0",
