@@ -1,11 +1,5 @@
 export const Head = () => (
   <>
-    <script
-      async
-      defer
-      data-website-id="6a4f860a-47c3-4772-85d3-ec8b12b6f1c2"
-      src="https://analytics.proginth.app/umami.js"
-    />
     <meta charSet="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />

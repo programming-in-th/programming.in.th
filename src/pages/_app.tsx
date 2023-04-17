@@ -1,9 +1,9 @@
 import { AppProps } from 'next/app'
 
+import { Analytics } from '@vercel/analytics/react'
 import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from 'next-themes'
 import { Toaster } from 'react-hot-toast'
-import { Analytics } from '@vercel/analytics/react'
 
 import '@/styles/index.css'
 import '@/styles/fonts.css'

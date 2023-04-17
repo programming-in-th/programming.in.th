@@ -13,13 +13,12 @@ import {
 import { FeatureCard } from '@/components/Landing/FeatureCard'
 import { IncrementalNumber } from '@/components/Landing/IncrementalNumber'
 import { TestimonyCard } from '@/components/Landing/TestimonyCard'
-import { PageLayout } from '@/components/Layout'
 import { BGCurve } from '@/svg/BGCurve'
 import { PeopleVector } from '@/svg/Illustrations/People'
 
 const Landing = () => {
   return (
-    <PageLayout>
+    <div>
       <div className="flex min-h-screen flex-col items-center justify-start pt-12">
         <section className="mb-8 px-10 text-center">
           <p className="text-2xl font-semibold leading-[1] sm:text-4xl">
@@ -174,7 +173,7 @@ const Landing = () => {
           </div>
         </section>
       </div>
-    </PageLayout>
+    </div>
   )
 }
 

@@ -1,12 +1,14 @@
+'use client'
 import React, { Fragment, useMemo } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
-import { useSession, signOut } from 'next-auth/react'
+import { User } from 'next-auth'
+import { signOut } from 'next-auth/react'
 
 import { Logo, LogoDark } from '@/svg/Logo'
 
@@ -17,14 +19,12 @@ const navigation = [
   { name: 'About', href: '/about' }
 ]
 
-export const Nav = () => {
-  const router = useRouter()
+export const Nav = ({ user }: { user: User }) => {
+  const pathname = usePathname()
 
   const location = useMemo(() => {
-    return router.pathname.split('/')[1]
-  }, [router])
-
-  const { data: session } = useSession()
+    return pathname?.split('/')[1]
+  }, [pathname])
 
   return (
     <Popover
@@ -81,15 +81,12 @@ export const Nav = () => {
               ))}
 
               <div className="flex items-center space-x-4 pl-2">
-                {session?.user ? (
+                {user ? (
                   <Popover className="relative hidden md:block">
                     <Popover.Button className="flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-slate-300 transition-colors hover:bg-slate-300 hover:bg-opacity-50 active:ring-1">
                       <Image
-                        src={
-                          session.user.image ??
-                          '/assets/img/profile/default.svg'
-                        }
-                        alt={session.user.name!}
+                        src={user.image ?? '/assets/img/profile/default.svg'}
+                        alt={user.name!}
                         width={32}
                         height={32}
                         className="h-8 w-8 rounded-full"
@@ -111,8 +108,8 @@ export const Nav = () => {
                     >
                       <Popover.Panel className="absolute right-2 z-50 mt-2 rounded-lg bg-white shadow-md dark:bg-slate-800">
                         <div className="flex flex-col border-b border-gray-100 px-8 py-4 text-prog-gray-500 dark:border-slate-900 dark:text-gray-100">
-                          <p className="font-medium">{session.user.username}</p>
-                          <p className="font-light">{session.user.email}</p>
+                          <p className="font-medium">{user.username}</p>
+                          <p className="font-light">{user.email}</p>
                         </div>
 
                         <div className="px-8 py-4">
@@ -183,12 +180,12 @@ export const Nav = () => {
               </div>
             </div>
             <div className="pt-5 pb-6">
-              {session?.user && (
+              {user && (
                 <div className="flex items-center gap-4 p-4">
                   <div>
                     <Image
-                      src={session.user.image!}
-                      alt={session.user.name!}
+                      src={user.image!}
+                      alt={user.name!}
                       width={40}
                       height={40}
                       className="h-10 w-10 rounded-full"
@@ -200,8 +197,8 @@ export const Nav = () => {
                   </div>
 
                   <div className="flex flex-col text-prog-gray-500 dark:text-gray-100">
-                    <p className="font-medium">{session.user.name}</p>
-                    <p className="font-light">{session.user.email}</p>
+                    <p className="font-medium">{user.name}</p>
+                    <p className="font-light">{user.email}</p>
                   </div>
                 </div>
               )}
@@ -221,7 +218,7 @@ export const Nav = () => {
                   </Link>
                 ))}
               </div>
-              {session ? (
+              {user ? (
                 <div className="mt-6 px-5">
                   <button
                     onClick={() => signOut()}

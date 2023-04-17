@@ -5,6 +5,9 @@ const withBundleAnalyzer = bundleAnalyzer({
 })
 
 export default withBundleAnalyzer({
+  experimental: {
+    appDir: true
+  },
   swcMinify: true,
   reactStrictMode: true,
   images: {

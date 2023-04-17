@@ -1,4 +1,4 @@
-const { white } = require('tailwindcss/colors')
+/** @type {import('tailwindcss').Config} */
 const defaultTheme = require('tailwindcss/defaultTheme')
 
 module.exports = {
@@ -101,6 +101,7 @@ module.exports = {
     },
     fontFamily: {
       display: [
+        'var(--font-inter)',
         'Inter var',
         'Noto Sans Thai',
         'SF Pro Display',

@@ -45,7 +45,7 @@ dependencies:
     version: 1.0.6(react@18.2.0)
   '@next-auth/prisma-adapter':
     specifier: ^1.0.3
-    version: 1.0.3(@prisma/client@4.3.0)(next-auth@4.10.3)
+    version: 1.0.3(@prisma/client@4.3.0)(next-auth@4.22.0)
   '@next/bundle-analyzer':
     specifier: ^12.2.5
     version: 12.2.5
@@ -63,7 +63,7 @@ dependencies:
     version: 4.11.6(@codemirror/language@6.2.1)(@codemirror/state@6.2.0)(@codemirror/view@6.2.2)
   '@uiw/react-codemirror':
     specifier: ^4.11.6
-    version: 4.11.6(@babel/runtime@7.18.9)(@codemirror/autocomplete@6.1.0)(@codemirror/commands@6.1.0)(@codemirror/language@6.2.1)(@codemirror/lint@6.0.0)(@codemirror/search@6.2.0)(@codemirror/state@6.2.0)(@codemirror/theme-one-dark@6.0.0)(@codemirror/view@6.2.2)(codemirror@6.0.1)(react-dom@18.2.0)(react@18.2.0)
+    version: 4.11.6(@babel/runtime@7.21.0)(@codemirror/autocomplete@6.1.0)(@codemirror/commands@6.1.0)(@codemirror/language@6.2.1)(@codemirror/lint@6.0.0)(@codemirror/search@6.2.0)(@codemirror/state@6.2.0)(@codemirror/theme-one-dark@6.0.0)(@codemirror/view@6.2.2)(codemirror@6.0.1)(react-dom@18.2.0)(react@18.2.0)
   '@vercel/analytics':
     specifier: ^0.1.11
     version: 0.1.11(react@18.2.0)
@@ -101,8 +101,8 @@ dependencies:
     specifier: ^13.3.0
     version: 13.3.0(react-dom@18.2.0)(react@18.2.0)(sass@1.53.0)
   next-auth:
-    specifier: ^4.10.3
-    version: 4.10.3(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^4.22.0
+    version: 4.22.0(next@13.3.0)(react-dom@18.2.0)(react@18.2.0)
   next-mdx-remote:
     specifier: ^4.1.0
     version: 4.1.0(react-dom@18.2.0)(react@18.2.0)
@@ -1396,16 +1396,6 @@ packages:
       regenerator-runtime: 0.13.9
     dev: true
 
-  /@babel/runtime@7.18.3:
-    resolution:
-      {
-        integrity: sha512-38Y8f7YUhce/K7RMwTp7m0uCumpv9hZkitCbBClqQIow1qSbCvGkcegKOXpEWCQLfWmevgRiWokZ1GkpfhbZug==
-      }
-    engines: { node: '>=6.9.0' }
-    dependencies:
-      regenerator-runtime: 0.13.9
-    dev: false
-
   /@babel/runtime@7.18.9:
     resolution:
       {
@@ -1414,6 +1404,17 @@ packages:
     engines: { node: '>=6.9.0' }
     dependencies:
       regenerator-runtime: 0.13.9
+    dev: true
+
+  /@babel/runtime@7.21.0:
+    resolution:
+      {
+        integrity: sha512-xwII0//EObnq89Ji5AKYQaRYiW/nZ3llSv29d49IuxPhKbtJoLP+9QUUZ4nVragQVtaVGeZrpB+ZtG/Pdy/POw==
+      }
+    engines: { node: '>=6.9.0' }
+    dependencies:
+      regenerator-runtime: 0.13.11
+    dev: false
 
   /@codemirror/autocomplete@6.1.0(@codemirror/language@6.2.1)(@codemirror/state@6.2.0)(@codemirror/view@6.2.2)(@lezer/common@1.0.2):
     resolution:
@@ -2002,7 +2003,7 @@ packages:
       tslib: 2.4.0
     dev: false
 
-  /@next-auth/prisma-adapter@1.0.3(@prisma/client@4.3.0)(next-auth@4.10.3):
+  /@next-auth/prisma-adapter@1.0.3(@prisma/client@4.3.0)(next-auth@4.22.0):
     resolution:
       {
         integrity: sha512-3Lq1cD3ytKM3EGKJZ4UZvlqshLtlPvYxLeCrUV9ifYwYlq51kmDaHjsIawlp8EbH5pE1UhlsvtlXMery7RghtA==
@@ -2012,7 +2013,7 @@ packages:
       next-auth: ^4.0.1
     dependencies:
       '@prisma/client': 4.3.0(prisma@4.3.0)
-      next-auth: 4.10.3(react-dom@18.2.0)(react@18.2.0)
+      next-auth: 4.22.0(next@13.3.0)(react-dom@18.2.0)(react@18.2.0)
     dev: false
 
   /@next/bundle-analyzer@12.2.5:
@@ -2891,7 +2892,7 @@ packages:
       '@codemirror/view': 6.2.2
     dev: false
 
-  /@uiw/react-codemirror@4.11.6(@babel/runtime@7.18.9)(@codemirror/autocomplete@6.1.0)(@codemirror/commands@6.1.0)(@codemirror/language@6.2.1)(@codemirror/lint@6.0.0)(@codemirror/search@6.2.0)(@codemirror/state@6.2.0)(@codemirror/theme-one-dark@6.0.0)(@codemirror/view@6.2.2)(codemirror@6.0.1)(react-dom@18.2.0)(react@18.2.0):
+  /@uiw/react-codemirror@4.11.6(@babel/runtime@7.21.0)(@codemirror/autocomplete@6.1.0)(@codemirror/commands@6.1.0)(@codemirror/language@6.2.1)(@codemirror/lint@6.0.0)(@codemirror/search@6.2.0)(@codemirror/state@6.2.0)(@codemirror/theme-one-dark@6.0.0)(@codemirror/view@6.2.2)(codemirror@6.0.1)(react-dom@18.2.0)(react@18.2.0):
     resolution:
       {
         integrity: sha512-xPBOHtWE1MqHp8H/hTnOTxnz1ZQiQ2CHi1neiTpnjUxQUNv5mm5vTSgw2POxPh1AJqAVFuS6L1p3EZZPiVyehQ==
@@ -2904,7 +2905,7 @@ packages:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'
     dependencies:
-      '@babel/runtime': 7.18.9
+      '@babel/runtime': 7.21.0
       '@codemirror/theme-one-dark': 6.0.0
       '@codemirror/view': 6.2.2
       '@uiw/codemirror-extensions-basic-setup': 4.11.6(@codemirror/autocomplete@6.1.0)(@codemirror/commands@6.1.0)(@codemirror/language@6.2.1)(@codemirror/lint@6.0.0)(@codemirror/search@6.2.0)(@codemirror/state@6.2.0)(@codemirror/view@6.2.2)
@@ -3817,10 +3818,10 @@ packages:
       yargs: 17.5.1
     dev: false
 
-  /cookie@0.4.2:
+  /cookie@0.5.0:
     resolution:
       {
-        integrity: sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==
+        integrity: sha512-YZ3GUyn/o8gfKJlnlX7g7xq4gyO6OSuhGPKaaGssGB2qgDUS0gPgtTvoyZLTt9Ab6dC4hfc9dV5arkvc/OCmrw==
       }
     engines: { node: '>= 0.6' }
     dev: false
@@ -6019,10 +6020,10 @@ packages:
       }
     dev: true
 
-  /jose@4.8.1:
+  /jose@4.14.0:
     resolution:
       {
-        integrity: sha512-+/hpTbRcCw9YC0TOfN1W47pej4a9lRmltdOVdRLz5FP5UvUq3CenhXjQK7u/8NdMIIShMXYAh9VLPhc7TjhvFw==
+        integrity: sha512-LSA/XenLPwqk6e2L+PSUNuuY9G4NGsvjRWz6sJcUBmzTLEPJqQh46FHSUxnAQ64AWOkRO6bSXpy3yXuEKZkbIA==
       }
     dev: false
 
@@ -7172,13 +7173,13 @@ packages:
     engines: { node: '>=10' }
     dev: true
 
-  /next-auth@4.10.3(react-dom@18.2.0)(react@18.2.0):
+  /next-auth@4.22.0(next@13.3.0)(react-dom@18.2.0)(react@18.2.0):
     resolution:
       {
-        integrity: sha512-7zc4aXYc/EEln7Pkcsn21V1IevaTZsMLJwapfbnKA4+JY0+jFzWbt5p/ljugesGIrN4VOZhpZIw50EaFZyghJQ==
+        integrity: sha512-08+kjnDoE7aQ52O996x6cwA3ffc2CbHIkrCgLYhbE+aDIJBKI0oA9UbIEIe19/+ODYJgpAHHOtJx4izmsgaVag==
       }
-    engines: { node: ^12.19.0 || ^14.15.0 || ^16.13.0 }
     peerDependencies:
+      next: ^12.2.5 || ^13
       nodemailer: ^6.6.5
       react: ^17.0.2 || ^18
       react-dom: ^17.0.2 || ^18
@@ -7186,12 +7187,13 @@ packages:
       nodemailer:
         optional: true
     dependencies:
-      '@babel/runtime': 7.18.3
+      '@babel/runtime': 7.21.0
       '@panva/hkdf': 1.0.2
-      cookie: 0.4.2
-      jose: 4.8.1
+      cookie: 0.5.0
+      jose: 4.14.0
+      next: 13.3.0(react-dom@18.2.0)(react@18.2.0)(sass@1.53.0)
       oauth: 0.9.15
-      openid-client: 5.1.6
+      openid-client: 5.4.0
       preact: 10.8.0
       preact-render-to-string: 5.2.0(preact@10.8.0)
       react: 18.2.0
@@ -7507,14 +7509,13 @@ packages:
     hasBin: true
     dev: false
 
-  /openid-client@5.1.6:
+  /openid-client@5.4.0:
     resolution:
       {
-        integrity: sha512-HTFaXWdUHvLFw4GaEMgC0jXYBgpjgzQQNHW1pZsSqJorSgrXzxJ+4u/LWCGaClDEse5HLjXRV+zU5Bn3OefiZw==
+        integrity: sha512-hgJa2aQKcM2hn3eyVtN12tEA45ECjTJPXCgUh5YzTzy9qwapCvmDTVPWOcWVL0d34zeQoQ/hbG9lJhl3AYxJlQ==
       }
-    engines: { node: ^12.19.0 || ^14.15.0 || ^16.13.0 }
     dependencies:
-      jose: 4.8.1
+      jose: 4.14.0
       lru-cache: 6.0.0
       object-hash: 2.2.0
       oidc-token-hash: 5.0.1
@@ -8303,11 +8304,19 @@ packages:
       parse-entities: 4.0.0
     dev: false
 
+  /regenerator-runtime@0.13.11:
+    resolution:
+      {
+        integrity: sha512-kY1AZVr2Ra+t+piVaJ4gxaFaReZVH40AKNo7UCX6W+dEwBo/2oZJzqfuN1qLq1oL45o56cPaTXELwrTh8Fpggg==
+      }
+    dev: false
+
   /regenerator-runtime@0.13.9:
     resolution:
       {
         integrity: sha512-p3VT+cOEgxFsRRA9X4lkI1E+k2/CtnKtU4gcxyaCUreilL/vqI6CdZ3wxVUx3UOUg+gnUOQQcRI7BmSI656MYA==
       }
+    dev: true
 
   /regexp.prototype.flags@1.4.3:
     resolution:

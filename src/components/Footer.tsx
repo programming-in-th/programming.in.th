@@ -1,10 +1,11 @@
+'use client'
 import React, { useMemo } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
-import { useSession } from 'next-auth/react'
+import { User } from 'next-auth'
 
 import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
 
@@ -17,15 +18,13 @@ const navigation = [
   { name: 'About', href: '/about' }
 ]
 
-export const Footer = () => {
+export const Footer = ({ user }: { user: User }) => {
   const currentYear = useMemo(() => +new Date().getFullYear(), [])
 
-  const router = useRouter()
+  const pathname = usePathname()
   const location = useMemo(() => {
-    return router.pathname.split('/')[1]
-  }, [router])
-
-  const { data: session } = useSession()
+    return pathname?.split('/')[1]
+  }, [pathname])
 
   return (
     <footer className="flex w-full flex-col items-center bg-white px-10 font-display dark:bg-slate-800">
@@ -55,7 +54,7 @@ export const Footer = () => {
               โปรแกรมมิ่งอินทีเอช ศูนย์รวมของโจทย์และเนื้อหาสำหรับ
               การเขียนโปรแกรมเพื่อการแข่งขัน และวิทยาการคอมพิวเตอร์
             </p>
-            {session ? (
+            {user ? (
               <Link
                 passHref
                 href="/tasks"
