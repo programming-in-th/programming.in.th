@@ -1,6 +1,6 @@
 export const config = {
   baseURL: 'https://asia-east2-proginth.cloudfunctions.net',
-  awsURL: 'hhttps://proginth.sgp1.cdn.digitaloceanspaces.com',
+  awsURL: 'https://proginth.sgp1.cdn.digitaloceanspaces.com',
   languageData: [
     ['cpp14', 'C++', 'cpp'],
     ['c11', 'C', 'c'],
