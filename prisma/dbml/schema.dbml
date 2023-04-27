@@ -168,11 +168,6 @@ Table tag {
   tasks task [not null]
 }
 
-Table TagToTask {
-  tagsId Int [ref: > tag.id]
-  tasksId String [ref: > task.id]
-}
-
 Enum StatementType {
   PDF
   MARKDOWN
