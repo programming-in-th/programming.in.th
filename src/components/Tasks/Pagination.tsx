@@ -11,6 +11,7 @@ export const Pagination = ({
   pageLimit: number
 }) => {
   const { query, push } = useRouter()
+
   return (
     <div className="justfiy-between mt-4 flex w-full items-center pr-4 pl-4 md:pr-20">
       <div className="w-28">

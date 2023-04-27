@@ -52,7 +52,7 @@ export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
         tab =>
           (type === undefined && tab.value === null) ||
           tab.value === String(type)
-      )!.condition,
+      )?.condition || (() => true),
     [type]
   )
 

@@ -15,7 +15,7 @@ const getTasks = async (user: User) => {
             some: {
               assessment: {
                 is: {
-                  users: { some: { userId: user.id } },
+                  users: { some: { userId: user?.id } },
                   archived: false
                 }
               }
@@ -59,13 +59,13 @@ const Tasks = async () => {
   ) as ISolved[]
 
   const score = (await prisma.$queryRaw(
-    Prisma.sql`SELECT task_id, max(score) FROM submission WHERE user_id = ${user.id} GROUP BY task_id;`
+    Prisma.sql`SELECT task_id, max(score) FROM submission WHERE user_id = ${user?.id} GROUP BY task_id;`
   )) as Array<{ taskId: string; max: number }>
 
   const rawBookmark = await prisma.bookmark.findMany({
     where: {
       user: {
-        id: { equals: user.id }
+        id: { equals: user?.id }
       }
     }
   })
