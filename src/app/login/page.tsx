@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+
 import { type NextPage } from 'next'
 
 import { useSearchParams } from 'next/navigation'
