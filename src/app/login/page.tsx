@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { type NextPage } from 'next'
 
 import { useSearchParams } from 'next/navigation'
 
@@ -26,7 +27,7 @@ const errors: Record<SignInErrorTypes, string> = {
   default: 'Unable to sign in.'
 }
 
-const Login = () => {
+const Login: NextPage = () => {
   const searchParams = useSearchParams()
   const errType = searchParams!.get('error')
 

@@ -1,5 +1,6 @@
 import { Prisma } from '@prisma/client'
 import { User } from 'next-auth'
+import { type NextPage } from 'next'
 
 import { TasksList } from '@/components/Tasks/List'
 import prisma from '@/lib/prisma'
