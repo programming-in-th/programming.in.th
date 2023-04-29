@@ -4,14 +4,14 @@ import { Metadata } from 'next'
 
 import { Analytics } from '@vercel/analytics/react'
 import { Inter } from 'next/font/google'
+import { User } from 'next-auth'
 
 import '@/styles/index.css'
 import '@/styles/style.scss'
+
 import { Footer } from '@/components/Footer'
 import { Nav } from '@/components/Nav'
 import { getCurrentUser } from '@/lib/session'
-
-import { User } from 'next-auth'
 
 import { Providers } from './providers'
 
