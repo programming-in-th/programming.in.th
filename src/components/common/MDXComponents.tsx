@@ -29,9 +29,21 @@ const CustomImage = (props: any) => {
   )
 }
 
+const CustomCode = (props: any) => {
+  if (
+    typeof props.className === 'string' &&
+    props.className.includes('code-highlight')
+  ) {
+    return <>{props.children}</>
+  } else {
+    return <code className="text-black dark:text-white">{props.children}</code>
+  }
+}
+
 const MDXComponent = {
   Image: CustomImage,
-  a: CustomLink
+  a: CustomLink,
+  code: CustomCode
 }
 
 export default MDXComponent

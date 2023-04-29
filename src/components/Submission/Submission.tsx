@@ -8,8 +8,8 @@ import { Loading } from '@/components/Loading'
 import { Card, Header } from '@/components/Submission/Card'
 import { useSSESubmissionData } from '@/lib/useSubmissionData'
 
-import { CodeSkeleton } from '../Code'
 import SubmissionGroup from './Group'
+import { CodeSkeleton } from '../Code'
 
 const DynamicCode = dynamic(() => import('../Code'), {
   suspense: true,
@@ -23,7 +23,7 @@ const Submission = ({
   task: Task
   submissionID: number
 }) => {
-  const { submission, isLoading } = useSSESubmissionData(submissionID)
+  const { submission, isLoading, mutate } = useSSESubmissionData(submissionID)
 
   if (isLoading || task === undefined) {
     return <Loading />
@@ -32,6 +32,12 @@ const Submission = ({
   return (
     <div className="w-full min-w-0">
       <Header />
+      <button
+        onClick={() => mutate()}
+        className="bg-prog-gray-500 text-white dark:hover:bg-slate-600"
+      >
+        Refresh
+      </button>
       {submission && <Card sub={submission} task={task} />}
       <Suspense fallback={<CodeSkeleton />}>
         <DynamicCode
