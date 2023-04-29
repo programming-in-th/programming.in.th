@@ -9,8 +9,8 @@ import clsx from 'clsx'
 import { getFileExtension } from '@/utils/getFileExtension'
 import { getLanguageFromExtension, languageData } from '@/utils/language'
 
-import { CodeSkeleton } from '../Code'
 import { FileUpload } from './FileUpload'
+import { CodeSkeleton } from '../Code'
 
 const DynamicCodeEditor = dynamic(() => import('../CodeEditor'), {
   suspense: true,

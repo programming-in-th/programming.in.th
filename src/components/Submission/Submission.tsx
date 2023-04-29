@@ -8,8 +8,8 @@ import { Loading } from '@/components/Loading'
 import { Card, Header } from '@/components/Submission/Card'
 import { useSSESubmissionData } from '@/lib/useSubmissionData'
 
-import { CodeSkeleton } from '../Code'
 import SubmissionGroup from './Group'
+import { CodeSkeleton } from '../Code'
 
 const DynamicCode = dynamic(() => import('../Code'), {
   suspense: true,
