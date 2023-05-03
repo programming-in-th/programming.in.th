@@ -11,6 +11,7 @@ import { GlobalStyle } from 'design'
 import { customTheme } from 'design/theme'
 
 import 'assets/css/prism.css'
+import { Toaster, toast } from 'react-hot-toast'
 
 let timeout: any
 
@@ -29,6 +30,37 @@ Router.events.on('routeChangeError', done)
 
 const App: NextPage<AppProps> = ({ Component, pageProps }) => {
   useEffect(() => {
+    toast(
+      (t) => (
+        <span>
+          ทดลองใช้งานเว็บใหม่ได้ที่{' '}
+          <b>
+            <a
+              href="https://staging.programming.in.th"
+              target="_blank"
+              // style="color: #0089c7;text-decoration: underline; text-decoration-color: #a2dffb;"
+            >
+              staging.programming.in.th
+            </a>
+          </b>
+          <button
+            onClick={() => toast.dismiss(t.id)}
+            style={{
+              marginLeft: '20px',
+              border: '2px solid black',
+              borderRadius: '5px',
+              padding: '5px',
+              borderColor: '#e7e7e7',
+            }}
+          >
+            Dismiss
+          </button>
+        </span>
+      ),
+      {
+        duration: 15000,
+      }
+    )
     const handleRouteChange = (url) => {
       gtag.pageview(url)
     }
@@ -43,6 +75,7 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
       <UserProvider>
         <CSSReset />
         <GlobalStyle />
+        <Toaster />
         <Component {...pageProps} />
       </UserProvider>
     </ThemeProvider>
