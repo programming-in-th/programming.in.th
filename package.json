@@ -36,7 +36,7 @@
     "fuse.js": "^6.6.2",
     "legacy-modes": "npm:@codemirror/legacy-modes@^6.3.1",
     "next": "^13.3.1",
-    "next-auth": "4.10.3",
+    "next-auth": "^4.22.1",
     "next-mdx-remote": "^4.4.1",
     "next-themes": "^0.2.1",
     "prism-react-renderer": "^1.3.5",
