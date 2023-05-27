@@ -74,22 +74,32 @@ const Tasks = async () => {
     return bookmark.taskId
   })
 
-  const processedTask = tasks.map(task => ({
-    ...task,
-    solved: solved
-      ? solved.find(item => item.taskId === task.id)?.count || 0
-      : 0,
-    score: score ? score.find(item => item.taskId === task.id)?.max || 0 : 0,
-    bookmarked: bookmarks ? bookmarks.includes(task.id) : false,
-    tried: score
-      ? score.find(item => item.taskId === task.id) !== undefined
-      : false
-  }))
+  const processedTask = tasks
+    .map(task => ({
+      ...task,
+      solved: solved
+        ? solved.find(item => item.taskId === task.id)?.count || 0
+        : 0,
+      score: score ? score.find(item => item.taskId === task.id)?.max || 0 : 0,
+      bookmarked: bookmarks ? bookmarks.includes(task.id) : false,
+      tried: score
+        ? score.find(item => item.taskId === task.id) !== undefined
+        : false
+    }))
+    .sort((a, b) => {
+      if (a.id < b.id) {
+        return -1
+      } else if (a.id > b.id) {
+        return 1
+      } else {
+        return 0
+      }
+    })
 
   return (
     <div className="flex w-auto justify-center">
       <div className="flex min-h-screen w-full max-w-7xl flex-col items-center">
-        <div className="flex w-full flex-col items-center pt-6 pb-6">
+        <div className="flex w-full flex-col items-center pb-6 pt-6">
           <p className="text-3xl font-medium text-gray-500 dark:text-gray-100">
             Tasks
           </p>
