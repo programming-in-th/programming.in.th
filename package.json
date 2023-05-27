@@ -40,7 +40,7 @@
     "next-auth": "^4.22.1",
     "next-mdx-remote": "^4.4.1",
     "next-themes": "^0.2.1",
-    "prism-react-renderer": "^2.0.4",
+    "prism-react-renderer": "^1.3.5",
     "prismjs": "^1.29.0",
     "react": "^18.2.0",
     "react-countup": "^6.4.2",
@@ -56,7 +56,7 @@
     "rehype-slug": "^5.1.0",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
-    "swr": "^2.1.5",
+    "swr": "^1.3.0",
     "zod": "^3.21.4"
   },
   "devDependencies": {

@@ -27,8 +27,10 @@ export const PageLayout = ({ children }: { children: JSX.Element }) => {
       <Head>
         <title>PROGRAMMING.IN.TH | β</title>
       </Head>
+      {/* @ts-expect-error 🐐 */}
       <Nav />
       <main className="flex min-h-screen w-screen flex-col">{children}</main>
+      {/* @ts-expect-error 🐐 */}
       <Footer />
     </div>
   )
