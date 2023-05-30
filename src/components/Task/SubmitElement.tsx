@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 import { Task } from '@prisma/client'
 import clsx from 'clsx'

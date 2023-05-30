@@ -1,3 +1,6 @@
+'use client'
+// TODO Get session on server?
+
 import { Task } from '@prisma/client'
 import { useSession } from 'next-auth/react'
 

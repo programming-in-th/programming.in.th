@@ -29,7 +29,6 @@ export const TaskContent = ({
   type
 }: {
   task: Task
-  submissionID: null | number
   solution: MDXRemoteSerializeResult
   type: string
 }) => {
