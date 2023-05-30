@@ -4,7 +4,7 @@ import { TaskContent } from '@/components/Task/Content'
 import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
 
-export const getTask = async (id: string, type = 'statement') => {
+const getTask = async (id: string, type = 'statement') => {
   if (!id) {
     return null
   }
