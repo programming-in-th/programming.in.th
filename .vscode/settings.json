@@ -1,4 +1,5 @@
 {
-  "typescript.tsdk": "node_modules/.pnpm/typescript@4.7.3/node_modules/typescript/lib",
+  "scss.lint.unknownAtRules": "ignore",
+  "typescript.tsdk": "node_modules/.pnpm/typescript@5.0.4/node_modules/typescript/lib",
   "typescript.enablePromptUseWorkspaceTsdk": true
 }

@@ -102,6 +102,7 @@ module.exports = {
     fontFamily: {
       display: [
         'var(--font-inter)',
+        'var(--font-noto-sans-thai)',
         'Inter var',
         'Noto Sans Thai',
         'SF Pro Display',

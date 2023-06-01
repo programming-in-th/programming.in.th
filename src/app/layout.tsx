@@ -1,9 +1,9 @@
-import React from 'react'
+import { ReactNode } from 'react'
 
 import { Metadata } from 'next'
 
 import { Analytics } from '@vercel/analytics/react'
-import { Inter } from 'next/font/google'
+import { Inter, Noto_Sans_Thai } from 'next/font/google'
 import { User } from 'next-auth'
 
 import '@/styles/index.css'
@@ -13,7 +13,8 @@ import { Footer } from '@/components/Footer'
 import { Nav } from '@/components/Nav'
 import { getCurrentUser } from '@/lib/session'
 
-import { Providers } from './providers'
+import { LayoutWithTheme } from './LayoutWithTheme'
+import { Providers } from './Providers'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -21,23 +22,33 @@ const inter = Inter({
   display: 'swap'
 })
 
+const notoSans = Noto_Sans_Thai({
+  variable: '--font-noto-sans-thai',
+  subsets: ['thai'],
+  display: 'swap'
+})
+
 export default async function RootLayout({
   children
 }: {
-  children: React.ReactNode
+  children: ReactNode
 }) {
   const user = (await getCurrentUser()) as User
 
   return (
-    <html lang="th" className={`${inter.variable}`} suppressHydrationWarning>
+    <html
+      lang="th"
+      className={`${inter.variable} ${notoSans.variable}`}
+      suppressHydrationWarning
+    >
       <body>
         <body>
           <Providers>
-            <div className="w-full overflow-hidden font-display">
+            <LayoutWithTheme>
               <Nav user={user} />
               {children}
               <Footer user={user} />
-            </div>
+            </LayoutWithTheme>
           </Providers>
         </body>
         <Analytics />
