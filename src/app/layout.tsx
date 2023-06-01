@@ -36,11 +36,7 @@ export default async function RootLayout({
   const user = (await getCurrentUser()) as User
 
   return (
-    <html
-      lang="th"
-      className={`${inter.variable} ${notoSans.variable}`}
-      suppressHydrationWarning
-    >
+    <html lang="th" className={`${inter.variable} ${notoSans.variable}`}>
       <body>
         <body>
           <Providers>
