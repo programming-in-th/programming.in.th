@@ -4,7 +4,7 @@
 
 @layer components {
   .landing-btn {
-    @apply mt-4 rounded-md font-semibold py-3 px-9 transition-colors shadow-md;
+    @apply mt-4 rounded-md px-9 py-3 font-semibold shadow-md transition-colors;
 
     &.--primary {
       @apply bg-prog-primary-500 text-white hover:bg-prog-primary-600;

@@ -149,7 +149,7 @@ export const Card = ({
     <IsLink
       href={`/submissions/${sub.id}`}
       isLink={isViewing}
-      className="flex w-full flex-col rounded-xl py-3 px-6 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex-row md:px-0"
+      className="flex w-full flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex-row md:px-0"
     >
       <>
         {columns.map(column => (

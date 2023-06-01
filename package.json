@@ -1,7 +1,23 @@
 {
+  "name": "programming.in.th",
   "private": true,
+  "packageManager": "pnpm@8.6.0",
+  "engines": {
+    "node": "^18.12"
+  },
   "prisma": {
     "seed": "ts-node --compiler-options {\"module\":\"CommonJS\"} prisma/seed.ts"
+  },
+  "scripts": {
+    "preinstall": "npx only-allow pnpm",
+    "dev": "next dev",
+    "build": "prisma generate && next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format": "prettier --write \"./src/**/*.{css,scss}\" && eslint src --fix",
+    "prebuild": "prisma generate",
+    "predev": "prisma generate",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.341.0",
@@ -64,10 +80,14 @@
     "@types/node": "^20.2.5",
     "@types/react": "^18.2.7",
     "@types/react-table": "^7.7.14",
+    "@typescript-eslint/eslint-plugin": "^5.59.8",
+    "@typescript-eslint/parser": "^5.59.8",
     "autoprefixer": "^10.4.14",
     "eslint": "8.41.0",
     "eslint-config-next": "13.4.4",
+    "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-unused-imports": "^2.0.0",
     "husky": "^8.0.3",
     "postcss": "^8.4.23",
@@ -80,16 +100,5 @@
     "tailwindcss": "^3.3.2",
     "ts-node": "^10.9.1",
     "typescript": "^5.0.4"
-  },
-  "scripts": {
-    "preinstall": "npx only-allow pnpm",
-    "dev": "next dev",
-    "build": "prisma generate && next build",
-    "start": "next start",
-    "lint": "next lint",
-    "format": "prettier --write ./src/**/*.{ts,tsx,css}",
-    "prebuild": "prisma generate",
-    "predev": "prisma generate",
-    "prepare": "husky install"
   }
 }
