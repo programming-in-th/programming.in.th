@@ -1,6 +1,8 @@
 import Submission from '@/components/Submission/Submission'
 import prisma from '@/lib/prisma'
 
+import { TaskLayout } from '../../TaskLayout'
+
 export default async function Submissions({
   params
 }: {
@@ -21,7 +23,9 @@ export default async function Submissions({
     return <div>Not found j3k</div>
   }
 
-  console.log({ task, id })
-
-  return <Submission task={task} submissionID={id} />
+  return (
+    <TaskLayout task={task} type="submission">
+      <Submission task={task} submissionID={id} />
+    </TaskLayout>
+  )
 }

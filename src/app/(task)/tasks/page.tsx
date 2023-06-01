@@ -6,7 +6,9 @@ import prisma from '@/lib/prisma'
 import { getCurrentUser } from '@/lib/session'
 import { ISolved } from '@/types/tasks'
 
-const getTasks = async (user: User) => {
+import { TasksSidebar } from './TasksSidebar'
+
+async function getTasks(user: User) {
   const rawTasks = await prisma.task.findMany({
     where: {
       OR: [
@@ -104,7 +106,7 @@ const Tasks = async () => {
             Tasks
           </p>
           <p className="text-md text-gray-500 dark:text-gray-300">
-            browse over 700+ tasks
+            Browse over 700+ tasks
           </p>
           {/* <input
             className="my-4 w-60 rounded-md border-gray-300 bg-gray-100 px-2 py-1 text-sm shadow-sm dark:border-slate-900 dark:bg-slate-700 dark:text-gray-100"
@@ -130,7 +132,7 @@ const Tasks = async () => {
           /> */}
         </div>
         <div className="flex w-full flex-col md:flex-row">
-          {/* <SideBar /> */}
+          <TasksSidebar />
           <TasksList tasks={processedTask} />
         </div>
       </div>

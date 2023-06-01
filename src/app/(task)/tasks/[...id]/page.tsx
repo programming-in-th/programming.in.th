@@ -4,7 +4,9 @@ import { TaskContent } from '@/components/Task/Content'
 import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
 
-const getTask = async (id: string, type = 'statement') => {
+import { TaskLayout } from '../../TaskLayout'
+
+async function getTask(id: string, type = 'statement') {
   if (!id) {
     return null
   }
@@ -47,7 +49,11 @@ const Tasks = async ({ params }: { params: { id: string[] } }) => {
 
   const { solution, task, type } = tasks
 
-  return <TaskContent task={task} solution={solution!} type={type} />
+  return (
+    <TaskLayout task={task} type={type}>
+      <TaskContent task={task} solution={solution!} type={type} />
+    </TaskLayout>
+  )
 }
 
 export default Tasks
