@@ -48,7 +48,15 @@ const config = {
     '@typescript-eslint/no-unused-vars': 'off',
     'unused-imports/no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'error'
-  }
+  },
+  overrides: [
+    {
+      files: ['*.js'],
+      rules: {
+        '@typescript-eslint/no-var-requires': 'off'
+      }
+    }
+  ]
 }
 
 module.exports = config

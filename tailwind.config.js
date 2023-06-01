@@ -1,7 +1,9 @@
-/** @type {import('tailwindcss').Config} */
+// @ts-check
+
 const defaultTheme = require('tailwindcss/defaultTheme')
 
-module.exports = {
+/** @satisfies {import('tailwindcss').Config} */
+const config = {
   darkMode: ['class', '[data-theme="dark"]'],
   experimental: {
     optimizeUniversalDefaults: true
@@ -124,3 +126,5 @@ module.exports = {
   },
   plugins: [require('@tailwindcss/typography')]
 }
+
+module.exports = config
