@@ -20,7 +20,7 @@ export default async function Submissions({
   )?.task
 
   if (!task) {
-    return <div>Not found j3k</div>
+    return <div>Not found</div>
   }
 
   return (
