@@ -30,7 +30,6 @@ const TaskCard = ({
   return (
     <Link
       href={`${id}/${task.id}`}
-      passHref
       className="flex w-full rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700"
     >
       <div className="flex w-full flex-col">
@@ -103,7 +102,7 @@ const Assessments = () => {
             </div>
           )}
 
-          <div className="mt-10 mb-2 flex justify-between px-6">
+          <div className="mb-2 mt-10 flex justify-between px-6">
             <p className="text-sm font-medium text-gray-500 dark:text-gray-100">
               Problem Title
             </p>

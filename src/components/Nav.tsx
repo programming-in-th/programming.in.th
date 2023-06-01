@@ -38,10 +38,10 @@ export const Nav = ({ user }: { user: User }) => {
         >
           <div className="flex flex-1 items-center justify-between">
             <div className="flex w-full items-center justify-between md:w-auto">
-              <Link href="/" passHref className="dark:hidden">
+              <Link href="/" className="dark:hidden">
                 <Logo />
               </Link>
-              <Link href="/" passHref className="hidden dark:block">
+              <Link href="/" className="hidden dark:block">
                 <LogoDark />
               </Link>
               <div className="-mr-2 flex items-center md:hidden">
@@ -69,7 +69,6 @@ export const Nav = ({ user }: { user: User }) => {
                 <Link
                   href={item.href}
                   key={item.name}
-                  passHref
                   className={`text-sm font-medium ${
                     `/${location}` == item.href
                       ? 'text-prog-primary-500 hover:text-blue-600'
@@ -126,7 +125,6 @@ export const Nav = ({ user }: { user: User }) => {
                 ) : (
                   <Link
                     href="/login"
-                    passHref
                     className={`rounded-md bg-prog-primary-500 px-6 py-2 text-base font-medium text-white shadow-md transition-colors hover:bg-prog-primary-600`}
                   >
                     Login
@@ -179,7 +177,7 @@ export const Nav = ({ user }: { user: User }) => {
                 </Popover.Button>
               </div>
             </div>
-            <div className="pt-5 pb-6">
+            <div className="pb-6 pt-5">
               {user && (
                 <div className="flex items-center gap-4 p-4">
                   <div>
@@ -207,7 +205,6 @@ export const Nav = ({ user }: { user: User }) => {
                   <Link
                     href={item.href}
                     key={item.name}
-                    passHref
                     className={`font-sm block rounded-md px-3 py-2 text-base ${
                       `/${location}` == item.href
                         ? 'bg-gray-200 text-gray-700 dark:bg-slate-500 dark:text-prog-gray-100'
@@ -231,7 +228,6 @@ export const Nav = ({ user }: { user: User }) => {
                 <div className="mt-6 px-5">
                   <Link
                     href="/login"
-                    passHref
                     className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700"
                   >
                     Login

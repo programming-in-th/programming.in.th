@@ -43,11 +43,7 @@ const ViewAssessment = () => {
   return (
     <PageLayout>
       <div className="mt-6 flex justify-center space-x-4">
-        <Link
-          href="/admin/assessments"
-          passHref
-          className="mt-4 h-6 cursor-pointer"
-        >
+        <Link href="/admin/assessments" className="mt-4 h-6 cursor-pointer">
           <svg
             width="20"
             height="20"
@@ -70,7 +66,7 @@ const ViewAssessment = () => {
             ) : (
               <div className="h-48 w-full animate-pulse rounded-lg bg-gray-100 dark:bg-gray-500" />
             )}
-            <div className="mt-6 mb-2 flex items-center justify-start space-x-4">
+            <div className="mb-2 mt-6 flex items-center justify-start space-x-4">
               <p className="text-sm font-semibold text-gray-500 dark:text-white">
                 Assigned Students
               </p>
@@ -98,7 +94,6 @@ const ViewAssessment = () => {
                 <Link
                   key={user.id}
                   href={`/admin/assessments/${assessment?.id}/${user.id}`}
-                  passHref
                   className="flex cursor-pointer items-center space-x-2 px-4 py-2 transition hover:bg-gray-100 dark:hover:bg-gray-700"
                 >
                   <svg

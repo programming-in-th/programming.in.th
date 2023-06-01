@@ -38,10 +38,10 @@ const Landing = () => {
         </section>
 
         <section className="flex items-center justify-center gap-4">
-          <Link href="/login" passHref className="landing-btn --primary">
+          <Link href="/login" className="landing-btn --primary">
             เข้าร่วม
           </Link>
-          <Link href="/tasks" passHref className="landing-btn --normal">
+          <Link href="/tasks" className="landing-btn --normal">
             ค้นหาโจทย์
           </Link>
         </section>
@@ -165,8 +165,7 @@ const Landing = () => {
           <div className="mt-12">
             <Link
               href="/tasks"
-              passHref
-              className="trasition-colors mt-4 inline rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600"
+              className="trasition-colors mt-4 inline rounded-md bg-prog-primary-500 px-9 py-2.5 text-white hover:bg-prog-primary-600"
             >
               เริ่มเลย
             </Link>

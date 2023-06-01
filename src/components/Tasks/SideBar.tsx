@@ -43,7 +43,6 @@ export const SideBar = () => {
                       ? null
                       : tabItem.value && { type: tabItem.value }
                 }}
-                passHref
                 type="button"
                 className={clsx(
                   'flex h-9 w-full items-center justify-center rounded-md transition-colors',

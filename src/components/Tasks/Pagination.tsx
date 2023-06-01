@@ -19,7 +19,6 @@ export const Pagination = ({
         {page > 1 && (
           <Link
             href={{ pathname: '/tasks', query: { page: page - 1 } }}
-            passHref
             scroll={false}
             className="flex w-full items-center text-gray-400"
           >
@@ -52,7 +51,6 @@ export const Pagination = ({
                   pathname: '/tasks',
                   query: { page: index }
                 }}
-                passHref
                 scroll={false}
                 className="hidden md:block"
               >
@@ -118,7 +116,6 @@ export const Pagination = ({
         {page < pageLimit && (
           <Link
             href={{ pathname: '/tasks', query: { page: page + 1 } }}
-            passHref
             scroll={false}
             className="flex w-full items-center justify-end text-gray-400"
           >

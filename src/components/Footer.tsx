@@ -34,7 +34,6 @@ export const Footer = ({ user }: { user: User }) => {
             <Link
               href={item.href}
               key={item.name}
-              passHref
               className={`${
                 `/${location}` == item.href
                   ? 'text-prog-primary-500 hover:text-blue-600'
@@ -56,17 +55,15 @@ export const Footer = ({ user }: { user: User }) => {
             </p>
             {user ? (
               <Link
-                passHref
                 href="/tasks"
-                className="trasition-colors mt-4 rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600"
+                className="trasition-colors mt-4 rounded-md bg-prog-primary-500 px-9 py-2.5 text-white hover:bg-prog-primary-600"
               >
                 ค้นหาโจทย์
               </Link>
             ) : (
               <Link
-                passHref
                 href="/login"
-                className="trasition-colors mt-4 rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600"
+                className="trasition-colors mt-4 rounded-md bg-prog-primary-500 px-9 py-2.5 text-white hover:bg-prog-primary-600"
               >
                 เข้าร่วม
               </Link>
@@ -78,7 +75,6 @@ export const Footer = ({ user }: { user: User }) => {
             <div className="flex space-x-2">
               <Link
                 href="https://www.facebook.com/programming.in.th/"
-                passHref
                 target="_blank"
                 rel="noreferrer"
               >
@@ -86,7 +82,6 @@ export const Footer = ({ user }: { user: User }) => {
               </Link>
               <Link
                 href="https://github.com/programming-in-th/"
-                passHref
                 target="_blank"
                 rel="noreferrer"
               >
@@ -98,7 +93,6 @@ export const Footer = ({ user }: { user: User }) => {
               source on{' '}
               <Link
                 href="https://github.com/programming-in-th/programming.in.th"
-                passHref
                 target="_blank"
                 rel="noreferrer"
               >

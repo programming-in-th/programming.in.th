@@ -16,7 +16,7 @@ const generateCategoryTree = async () => {
   })
   if (categories.length === 0) throw new Error('No categories found')
   const getTree = (
-    node: typeof categories[number],
+    node: (typeof categories)[number],
     path: string[]
   ): ICategory => {
     if (node.childCategory?.length) {
