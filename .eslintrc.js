@@ -6,6 +6,7 @@ const config = {
   plugins: ['@typescript-eslint/eslint-plugin', 'unused-imports'],
   extends: [
     'next/core-web-vitals',
+    'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:import/recommended',
     'plugin:import/typescript',

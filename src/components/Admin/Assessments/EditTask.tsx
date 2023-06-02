@@ -135,7 +135,9 @@ const SubmitForm = ({
       mutate(`/api/tasks/${task?.id}`)
 
       setOpen(false)
-    } catch {}
+    } catch {
+      // do nothing
+    }
   }
 
   return (

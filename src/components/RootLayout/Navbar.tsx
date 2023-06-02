@@ -96,7 +96,7 @@ export const Navbar = ({ user }: { user: User }) => {
                 ) : (
                   <Link
                     href="/login"
-                    className={`rounded-md bg-prog-primary-500 px-6 py-2 text-base font-medium text-white shadow-md transition-colors hover:bg-prog-primary-600`}
+                    className="rounded-md bg-prog-primary-500 px-6 py-2 text-base font-medium text-white shadow-md transition-colors hover:bg-prog-primary-600"
                   >
                     Login
                   </Link>

@@ -98,7 +98,9 @@ const SubmitForm = ({
       mutate(`/api/assessments/${assessment?.id}`)
 
       setOpen(false)
-    } catch {}
+    } catch {
+      // do nothing
+    }
   }
 
   const toggleTask = (id: string, title: string) => {
