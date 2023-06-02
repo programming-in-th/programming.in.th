@@ -9,14 +9,39 @@ import {
   FireIcon,
   HeartIcon
 } from '@heroicons/react/solid'
+import clsx from 'clsx'
 
 import { FeatureCard } from '@/components/Landing/FeatureCard'
 import { IncrementalNumber } from '@/components/Landing/IncrementalNumber'
 import { TestimonyCard } from '@/components/Landing/TestimonyCard'
+import { getServerUser } from '@/lib/session'
 import { BGCurve } from '@/svg/BGCurve'
 import { PeopleVector } from '@/svg/Illustrations/People'
 
-const Landing = () => {
+async function JoinButton() {
+  const user = await getServerUser()
+
+  const isLoggedIn = user ? true : false
+
+  return (
+    <>
+      {isLoggedIn || (
+        <Link href="/login" className="landing-btn --primary">
+          เข้าร่วม
+        </Link>
+      )}
+
+      <Link
+        href="/tasks"
+        className={clsx('landing-btn', isLoggedIn ? '--primary' : '--normal')}
+      >
+        ค้นหาโจทย์
+      </Link>
+    </>
+  )
+}
+
+export default function Landing() {
   return (
     <div>
       <div className="flex min-h-screen flex-col items-center justify-start pt-12">
@@ -38,12 +63,8 @@ const Landing = () => {
         </section>
 
         <section className="flex items-center justify-center gap-4">
-          <Link href="/login" className="landing-btn --primary">
-            เข้าร่วม
-          </Link>
-          <Link href="/tasks" className="landing-btn --normal">
-            ค้นหาโจทย์
-          </Link>
+          {/* @ts-expect-error Async Server Component */}
+          <JoinButton />
         </section>
 
         <section className="relative flex w-full justify-center overflow-hidden py-6">
@@ -175,5 +196,3 @@ const Landing = () => {
     </div>
   )
 }
-
-export default Landing
