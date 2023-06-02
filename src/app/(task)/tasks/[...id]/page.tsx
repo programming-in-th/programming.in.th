@@ -1,5 +1,3 @@
-import { ParsedUrlQuery } from 'node:querystring'
-
 import { TaskContent } from '@/components/Task/Content'
 import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
@@ -54,24 +52,4 @@ export default async function Tasks({ params }: { params: { id: string[] } }) {
       <TaskContent task={task} solution={solution} type={type} />
     </TaskLayout>
   )
-}
-
-export const generateStaticParams = async () => {
-  if (process.env.SKIP_BUILD_STATIC_GENERATION) {
-    return []
-  }
-
-  const tasks = await prisma.task.findMany({ where: { private: false } })
-
-  const paths = tasks.reduce((acc: { params: ParsedUrlQuery }[], task) => {
-    return [
-      ...acc,
-      { params: { id: [task.id] } },
-      { params: { id: [task.id, 'submissions'] } },
-      { params: { id: [task.id, 'submit'] } },
-      { params: { id: [task.id, 'solution'] } }
-    ]
-  }, [])
-
-  return paths
 }
