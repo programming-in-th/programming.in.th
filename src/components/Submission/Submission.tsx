@@ -25,7 +25,7 @@ const Submission = ({
   task: Task
   submissionID: number
 }) => {
-  const { submission, isLoading, mutate } = useSSESubmissionData(submissionID)
+  const { submission, isLoading } = useSSESubmissionData(submissionID)
 
   if (isLoading || task === undefined) {
     return <Loading />
@@ -34,12 +34,6 @@ const Submission = ({
   return (
     <div className="w-full min-w-0">
       <Header />
-      <button
-        onClick={() => mutate()}
-        className="bg-prog-gray-500 text-white dark:hover:bg-slate-600"
-      >
-        Refresh
-      </button>
       {submission && <Card sub={submission} task={task} />}
       <Suspense fallback={<CodeSkeleton />}>
         <DynamicCode
