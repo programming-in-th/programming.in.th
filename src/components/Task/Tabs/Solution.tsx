@@ -6,7 +6,8 @@ import components from '@/components/common/MDXComponents'
 
 import 'katex/dist/katex.min.css'
 
-const articleClsx = 'prose mt-4 w-full max-w-none dark:text-gray-100'
+const articleClsx =
+  'prose dark:prose-headings:text-white dark:prose-invert mt-4 w-full max-w-none'
 
 const SolutionTab = ({
   solution
@@ -16,7 +17,7 @@ const SolutionTab = ({
   if (!solution) {
     return (
       <article className={articleClsx}>
-        <h1 className="text-2xl font-bold">Solution does not exist</h1>
+        <h1>Solution does not exist</h1>
 
         <p>
           You can write and submit one at{' '}

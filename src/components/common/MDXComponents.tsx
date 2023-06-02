@@ -7,7 +7,7 @@ const CustomLink = (props: any) => {
 
   if (isInternalLink) {
     return (
-      <Link href={href} {...props}>
+      <Link href={href} className="dark:text-white" {...props}>
         {props.children}
       </Link>
     )
