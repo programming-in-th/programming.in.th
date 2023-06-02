@@ -23,7 +23,7 @@ async function getTask(id: string, type = 'statement') {
 
   if (type === 'solution') {
     const solutionRes = await fetch(
-      `${process.env.NEXT_PUBLIC_AWS_URL}/solutions/md/${id[0]}.md`
+      `${process.env.NEXT_PUBLIC_AWS_URL}/solutions/md/${id}.md`
     )
 
     if (solutionRes.status === 200) {
@@ -51,7 +51,7 @@ export default async function Tasks({ params }: { params: { id: string[] } }) {
 
   return (
     <TaskLayout task={task} type={type}>
-      <TaskContent task={task} solution={solution!} type={type} />
+      <TaskContent task={task} solution={solution} type={type} />
     </TaskLayout>
   )
 }
