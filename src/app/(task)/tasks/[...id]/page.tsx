@@ -39,7 +39,7 @@ async function getTask(id: string, type = 'statement') {
   }
 }
 
-const Tasks = async ({ params }: { params: { id: string[] } }) => {
+export default async function Tasks({ params }: { params: { id: string[] } }) {
   const id = params.id
   const tasks = await getTask(id[0], id[1])
 
@@ -55,8 +55,6 @@ const Tasks = async ({ params }: { params: { id: string[] } }) => {
     </TaskLayout>
   )
 }
-
-export default Tasks
 
 export const generateStaticParams = async () => {
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
