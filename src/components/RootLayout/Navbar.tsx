@@ -1,5 +1,6 @@
 'use client'
-import React, { Fragment, useMemo } from 'react'
+
+import { Fragment, useMemo } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
@@ -19,10 +20,7 @@ const navigation = [
   { name: 'About', href: '/about' }
 ]
 
-/**
- * @deprecated For legacy page dir
- */
-export const Nav = ({ user }: { user: User }) => {
+export const Navbar = ({ user }: { user: User }) => {
   const pathname = usePathname()
 
   const location = useMemo(() => {
@@ -88,7 +86,7 @@ export const Nav = ({ user }: { user: User }) => {
                     <Popover.Button className="flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-slate-300 transition-colors hover:bg-slate-300 hover:bg-opacity-50 active:ring-1">
                       <Image
                         src={user.image ?? '/assets/img/profile/default.svg'}
-                        alt={user.name!}
+                        alt={user.name ?? 'Default profile image'}
                         width={32}
                         height={32}
                         className="h-8 w-8 rounded-full"

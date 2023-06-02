@@ -18,6 +18,9 @@ const navigation = [
   { name: 'About', href: '/about' }
 ]
 
+/**
+ * @deprecated For legacy page dir
+ */
 export const Footer = ({ user }: { user: User }) => {
   const currentYear = useMemo(() => +new Date().getFullYear(), [])
 

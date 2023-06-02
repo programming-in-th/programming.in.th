@@ -9,6 +9,9 @@ import clsx from 'clsx'
 import { Footer } from './Footer'
 import { Nav } from './Nav'
 
+/**
+ * @deprecated For legacy page dir
+ */
 export const PageLayout = ({ children }: { children: JSX.Element }) => {
   const pathname = usePathname()
 

@@ -9,12 +9,13 @@ import { User } from 'next-auth'
 import '@/styles/index.css'
 import '@/styles/style.scss'
 
-import { Footer } from '@/components/Footer'
-import { Nav } from '@/components/Nav'
+import {
+  LayoutWithTheme,
+  Footer,
+  Navbar,
+  Providers
+} from '@/components/RootLayout'
 import { getCurrentUser } from '@/lib/session'
-
-import { LayoutWithTheme } from './LayoutWithTheme'
-import { Providers } from './Providers'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -41,7 +42,7 @@ export default async function RootLayout({
         <body>
           <Providers>
             <LayoutWithTheme>
-              <Nav user={user} />
+              <Navbar user={user} />
               {children}
               <Footer user={user} />
             </LayoutWithTheme>

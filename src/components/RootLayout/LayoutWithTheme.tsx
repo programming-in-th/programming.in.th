@@ -6,6 +6,9 @@ import { usePathname } from 'next/navigation'
 
 import clsx from 'clsx'
 
+/**
+ * Client component for app's background color
+ */
 export const LayoutWithTheme: FC<PropsWithChildren> = ({ children }) => {
   const pathname = usePathname()
 

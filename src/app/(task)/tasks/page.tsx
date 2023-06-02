@@ -43,7 +43,7 @@ async function getTasks(user: User) {
   })
 }
 
-const Tasks = async () => {
+export default async function Tasks() {
   const user = (await getCurrentUser()) as User
   const tasks = await getTasks(user)
 
@@ -139,5 +139,3 @@ const Tasks = async () => {
     </div>
   )
 }
-
-export default Tasks
