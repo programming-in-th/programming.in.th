@@ -1,31 +1,27 @@
+'use client'
 import React, { useMemo } from 'react'
 
 import Head from 'next/head'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 import clsx from 'clsx'
-// import { useSession } from 'next-auth/react'
 
 import { Footer } from './Footer'
-// import { Loading } from './Loading'
 import { Nav } from './Nav'
 
+/**
+ * @deprecated For legacy page dir
+ */
 export const PageLayout = ({ children }: { children: JSX.Element }) => {
-  const router = useRouter()
-
-  // const { status } = useSession()
+  const pathname = usePathname()
 
   const backgroundColor = useMemo(() => {
-    const location = router.pathname.split('/')[1]
+    const location = pathname?.split('/')[1]
 
     return `/${location}` === `/`
       ? 'bg-prog-gray-100 dark:bg-slate-900'
       : 'bg-white dark:bg-slate-800'
-  }, [router])
-
-  // if (status === 'loading') {
-  //   return <Loading />
-  // }
+  }, [pathname])
 
   return (
     <div
@@ -34,8 +30,10 @@ export const PageLayout = ({ children }: { children: JSX.Element }) => {
       <Head>
         <title>PROGRAMMING.IN.TH | β</title>
       </Head>
+      {/* @ts-expect-error 🐐🐐🐐 */}
       <Nav />
       <main className="flex min-h-screen w-screen flex-col">{children}</main>
+      {/* @ts-expect-error 🐐🐐🐐 */}
       <Footer />
     </div>
   )

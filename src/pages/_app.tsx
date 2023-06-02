@@ -1,5 +1,6 @@
 import { AppProps } from 'next/app'
 
+import { Analytics } from '@vercel/analytics/react'
 import { SessionProvider } from 'next-auth/react'
 import { ThemeProvider } from 'next-themes'
 import { Toaster } from 'react-hot-toast'
@@ -19,6 +20,7 @@ export default function App({
           toastOptions={{ className: 'dark:bg-slate-600 dark:text-gray-100' }}
         />
         <Component {...pageProps} />
+        <Analytics />
       </ThemeProvider>
     </SessionProvider>
   )

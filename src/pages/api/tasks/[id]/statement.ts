@@ -7,6 +7,7 @@ import { GetObjectCommand } from '@aws-sdk/client-s3'
 import { unstable_getServerSession } from 'next-auth'
 
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
+import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
 import { s3Client } from '@/lib/s3Client'
@@ -18,8 +19,6 @@ import {
   ok
 } from '@/utils/response'
 import streamToString from '@/utils/streamToString'
-
-import { authOptions } from '../../auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,

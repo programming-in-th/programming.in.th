@@ -1,7 +1,7 @@
 import { Suspense, useEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
@@ -38,7 +38,7 @@ export const SubmitElement = ({
   }, [file])
 
   const onSubmit = async () => {
-    if (file && fileText) {
+    if (fileText) {
       const res = await fetch('/api/submissions', {
         method: 'POST',
         headers: {
@@ -70,14 +70,14 @@ export const SubmitElement = ({
             {languageData.map(language => {
               return (
                 <div
-                  key={language[0]}
+                  key={language[2]}
                   className={clsx(
                     'cursor-pointer rounded-md border px-6 py-2 text-sm dark:border-slate-500',
-                    currentLanguage === language[0]
+                    currentLanguage === language[2]
                       ? 'bg-prog-gray-500 text-white dark:bg-slate-700'
                       : 'border-gray-300 text-prog-gray-500 dark:text-slate-400'
                   )}
-                  onClick={() => setCurrentLanguage(language[0])}
+                  onClick={() => setCurrentLanguage(language[2])}
                 >
                   {language[1]}
                 </div>
@@ -104,11 +104,11 @@ export const SubmitElement = ({
             onClick={onSubmit}
             className={clsx(
               'rounded-md border px-8 py-2 transition-colors dark:border-slate-600',
-              fileText
+              fileText && currentLanguage !== ''
                 ? 'bg-prog-gray-500 text-white dark:hover:bg-slate-600'
                 : 'cursor-not-allowed bg-slate-50 text-gray-300 dark:bg-slate-500'
             )}
-            disabled={!fileText}
+            disabled={!fileText || currentLanguage === ''}
           >
             Submit
           </button>

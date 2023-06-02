@@ -100,7 +100,7 @@ export const RightBar = ({
   }
 
   return (
-    <div className="flex h-full w-full flex-col pt-4 pb-2">
+    <div className="flex h-full w-full flex-col pb-2 pt-4">
       <p className="mb-2 px-6 text-gray-400 dark:text-gray-200">
         Selected task for assessment
       </p>

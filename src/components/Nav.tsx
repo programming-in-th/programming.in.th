@@ -1,12 +1,14 @@
+'use client'
 import React, { Fragment, useMemo } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
-import { useSession, signOut } from 'next-auth/react'
+import { User } from 'next-auth'
+import { signOut } from 'next-auth/react'
 
 import { Logo, LogoDark } from '@/svg/Logo'
 
@@ -17,14 +19,15 @@ const navigation = [
   { name: 'About', href: '/about' }
 ]
 
-export const Nav = () => {
-  const router = useRouter()
+/**
+ * @deprecated For legacy page dir
+ */
+export const Nav = ({ user }: { user: User }) => {
+  const pathname = usePathname()
 
   const location = useMemo(() => {
-    return router.pathname.split('/')[1]
-  }, [router])
-
-  const { data: session } = useSession()
+    return pathname?.split('/')[1]
+  }, [pathname])
 
   return (
     <Popover
@@ -38,10 +41,10 @@ export const Nav = () => {
         >
           <div className="flex flex-1 items-center justify-between">
             <div className="flex w-full items-center justify-between md:w-auto">
-              <Link href="/" passHref className="dark:hidden">
+              <Link href="/" className="dark:hidden">
                 <Logo />
               </Link>
-              <Link href="/" passHref className="hidden dark:block">
+              <Link href="/" className="hidden dark:block">
                 <LogoDark />
               </Link>
               <div className="-mr-2 flex items-center md:hidden">
@@ -69,7 +72,6 @@ export const Nav = () => {
                 <Link
                   href={item.href}
                   key={item.name}
-                  passHref
                   className={`text-sm font-medium ${
                     `/${location}` == item.href
                       ? 'text-prog-primary-500 hover:text-blue-600'
@@ -81,15 +83,12 @@ export const Nav = () => {
               ))}
 
               <div className="flex items-center space-x-4 pl-2">
-                {session?.user ? (
+                {user ? (
                   <Popover className="relative hidden md:block">
                     <Popover.Button className="flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-slate-300 transition-colors hover:bg-slate-300 hover:bg-opacity-50 active:ring-1">
                       <Image
-                        src={
-                          session.user.image ??
-                          '/assets/img/profile/default.svg'
-                        }
-                        alt={session.user.name!}
+                        src={user.image ?? '/assets/img/profile/default.svg'}
+                        alt={user.name!}
                         width={32}
                         height={32}
                         className="h-8 w-8 rounded-full"
@@ -111,8 +110,8 @@ export const Nav = () => {
                     >
                       <Popover.Panel className="absolute right-2 z-50 mt-2 rounded-lg bg-white shadow-md dark:bg-slate-800">
                         <div className="flex flex-col border-b border-gray-100 px-8 py-4 text-prog-gray-500 dark:border-slate-900 dark:text-gray-100">
-                          <p className="font-medium">{session.user.username}</p>
-                          <p className="font-light">{session.user.email}</p>
+                          <p className="font-medium">{user.username}</p>
+                          <p className="font-light">{user.email}</p>
                         </div>
 
                         <div className="px-8 py-4">
@@ -129,7 +128,6 @@ export const Nav = () => {
                 ) : (
                   <Link
                     href="/login"
-                    passHref
                     className={`rounded-md bg-prog-primary-500 px-6 py-2 text-base font-medium text-white shadow-md transition-colors hover:bg-prog-primary-600`}
                   >
                     Login
@@ -182,13 +180,13 @@ export const Nav = () => {
                 </Popover.Button>
               </div>
             </div>
-            <div className="pt-5 pb-6">
-              {session?.user && (
+            <div className="pb-6 pt-5">
+              {user && (
                 <div className="flex items-center gap-4 p-4">
                   <div>
                     <Image
-                      src={session.user.image!}
-                      alt={session.user.name!}
+                      src={user.image!}
+                      alt={user.name!}
                       width={40}
                       height={40}
                       className="h-10 w-10 rounded-full"
@@ -200,8 +198,8 @@ export const Nav = () => {
                   </div>
 
                   <div className="flex flex-col text-prog-gray-500 dark:text-gray-100">
-                    <p className="font-medium">{session.user.name}</p>
-                    <p className="font-light">{session.user.email}</p>
+                    <p className="font-medium">{user.name}</p>
+                    <p className="font-light">{user.email}</p>
                   </div>
                 </div>
               )}
@@ -210,7 +208,6 @@ export const Nav = () => {
                   <Link
                     href={item.href}
                     key={item.name}
-                    passHref
                     className={`font-sm block rounded-md px-3 py-2 text-base ${
                       `/${location}` == item.href
                         ? 'bg-gray-200 text-gray-700 dark:bg-slate-500 dark:text-prog-gray-100'
@@ -221,7 +218,7 @@ export const Nav = () => {
                   </Link>
                 ))}
               </div>
-              {session ? (
+              {user ? (
                 <div className="mt-6 px-5">
                   <button
                     onClick={() => signOut()}
@@ -234,7 +231,6 @@ export const Nav = () => {
                 <div className="mt-6 px-5">
                   <Link
                     href="/login"
-                    passHref
                     className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700"
                   >
                     Login

@@ -1,5 +1,7 @@
+'use client'
+
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import clsx from 'clsx'
 
@@ -26,8 +28,12 @@ const Tabs = [
   }
 ]
 
-export const SideBar = () => {
-  const { query, push } = useRouter()
+export const TasksSidebar = () => {
+  const router = useRouter()
+  const searchParams = useSearchParams()
+
+  const type = searchParams?.get('type')
+
   return (
     <div>
       <div className="mx-4 hidden w-52 shrink flex-col font-display md:flex">
@@ -43,13 +49,12 @@ export const SideBar = () => {
                       ? null
                       : tabItem.value && { type: tabItem.value }
                 }}
-                passHref
                 type="button"
                 className={clsx(
                   'flex h-9 w-full items-center justify-center rounded-md transition-colors',
-                  (query?.type === undefined && tabItem.value === null) ||
-                    tabItem.value === String(query?.type) ||
-                    (tabItem.value === 'All' && query?.type === undefined)
+                  (!type && tabItem.value === null) ||
+                    tabItem.value === String(type) ||
+                    (tabItem.value === 'All' && !type)
                     ? 'bg-gray-100 dark:bg-slate-700'
                     : 'hover:bg-gray-50 dark:hover:bg-slate-600'
                 )}
@@ -66,12 +71,9 @@ export const SideBar = () => {
         <select
           className="my-2 block w-full rounded-md border-gray-800 py-2 pl-3 text-base sm:text-sm"
           onChange={({ target: { value } }) => {
-            push({
-              pathname: '/tasks',
-              query: value !== 'All' ? { type: value } : null
-            })
+            router.push(`/tasks${value === 'All' ? '' : `&type=${value}`}`)
           }}
-          value={String(query?.type)}
+          value={type ?? 'All'}
         >
           {Tabs.map(tabItem => {
             return (

@@ -1,3 +1,5 @@
+'use client'
+
 import { Task } from '@prisma/client'
 
 import { Card, Header } from '@/components/Submission/Card'

@@ -139,8 +139,7 @@ const IndividualSubmission = () => {
         <div className="relative mt-8 w-full max-w-6xl">
           <Link
             href={`/admin/assessments/${id}`}
-            passHref
-            className="absolute top-0 -left-8"
+            className="absolute -left-8 top-0"
           >
             <svg
               width="20"

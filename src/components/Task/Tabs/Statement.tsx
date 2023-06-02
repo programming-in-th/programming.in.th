@@ -1,3 +1,6 @@
+'use client'
+// TODO Convert to Server Component
+
 import { Task } from '@prisma/client'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import useSWR from 'swr'

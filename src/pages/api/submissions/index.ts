@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { unstable_getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth'
 
 import checkOwnerPermissionOnAssessment, {
   checkOwnerPermissionOnTask
@@ -12,6 +12,7 @@ import {
   SubmissionFilterEnum as Filter,
   SubmitSchema
 } from '@/lib/api/schema/submissions'
+import { authOptions } from '@/lib/auth'
 import { compressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
 import {
@@ -21,8 +22,6 @@ import {
   badRequest,
   forbidden
 } from '@/utils/response'
-
-import { authOptions } from '../auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,
@@ -40,7 +39,7 @@ export default async function handler(
     const { taskId, assessmentId, userId, cursor, limit, filter } =
       parsedQuery.data
 
-    const session = await unstable_getServerSession(req, res, authOptions)
+    const session = await getServerSession(req, res, authOptions)
 
     const filterArr = filter ? (Array.isArray(filter) ? filter : [filter]) : []
 
@@ -160,7 +159,7 @@ export default async function handler(
 
     return ok(res, infiniteSubmissions)
   } else if (req.method === 'POST') {
-    const session = await unstable_getServerSession(req, res, authOptions)
+    const session = await getServerSession(req, res, authOptions)
 
     if (!session) {
       return unauthorized(res)

@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction, useMemo } from 'react'
+'use client'
+import { useMemo, useState } from 'react'
 
-import { useRouter } from 'next/router'
+import { useSearchParams } from 'next/navigation'
 
 import { IGeneralTask } from '@/types/tasks'
 
@@ -38,25 +39,21 @@ const Tabs: ITab[] = [
 
 const LIMIT = 7
 
-export const TasksList = ({
-  tasks,
-  tag,
-  setTag
-}: {
-  tasks: IGeneralTask[]
-  tag: boolean
-  setTag: Dispatch<SetStateAction<boolean>>
-}) => {
-  const { query } = useRouter()
+export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
+  const searchParams = useSearchParams()
+  const type = searchParams?.get('type')
+  const qPage = searchParams?.get('page')
+
+  const [tag, setTag] = useState<boolean>(false)
 
   const condition = useMemo<(_task: IGeneralTask) => boolean>(
     () =>
       Tabs.find(
         tab =>
-          (query?.type === undefined && tab.value === null) ||
-          tab.value === String(query?.type)
-      )!.condition,
-    [query]
+          (type === undefined && tab.value === null) ||
+          tab.value === String(type)
+      )?.condition || (() => true),
+    [type]
   )
 
   const filteredTask = useMemo(
@@ -64,7 +61,7 @@ export const TasksList = ({
     [tasks, condition]
   )
 
-  const page = useMemo(() => parseInt(query?.page as string) || 1, [query])
+  const page = useMemo(() => parseInt(qPage as string) || 1, [qPage])
 
   const pageLimit = useMemo(
     () => Math.ceil(filteredTask.length / LIMIT),

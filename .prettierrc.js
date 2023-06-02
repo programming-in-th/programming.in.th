@@ -1,4 +1,7 @@
-module.exports = {
+// @ts-check
+
+/** @satisfies {import('prettier').Config} */
+const config = {
   plugins: [require('prettier-plugin-tailwindcss')],
   semi: false,
   singleQuote: true,
@@ -7,3 +10,5 @@ module.exports = {
   tabWidth: 2,
   arrowParens: 'avoid'
 }
+
+module.exports = config

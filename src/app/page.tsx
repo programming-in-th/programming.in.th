@@ -9,17 +9,41 @@ import {
   FireIcon,
   HeartIcon
 } from '@heroicons/react/solid'
+import clsx from 'clsx'
 
 import { FeatureCard } from '@/components/Landing/FeatureCard'
 import { IncrementalNumber } from '@/components/Landing/IncrementalNumber'
 import { TestimonyCard } from '@/components/Landing/TestimonyCard'
-import { PageLayout } from '@/components/Layout'
+import { getServerUser } from '@/lib/session'
 import { BGCurve } from '@/svg/BGCurve'
 import { PeopleVector } from '@/svg/Illustrations/People'
 
-const Landing = () => {
+async function JoinButton() {
+  const user = await getServerUser()
+
+  const isLoggedIn = user ? true : false
+
   return (
-    <PageLayout>
+    <>
+      {isLoggedIn || (
+        <Link href="/login" className="landing-btn --primary">
+          เข้าร่วม
+        </Link>
+      )}
+
+      <Link
+        href="/tasks"
+        className={clsx('landing-btn', isLoggedIn ? '--primary' : '--normal')}
+      >
+        ค้นหาโจทย์
+      </Link>
+    </>
+  )
+}
+
+export default function Landing() {
+  return (
+    <div>
       <div className="flex min-h-screen flex-col items-center justify-start pt-12">
         <section className="mb-8 px-10 text-center">
           <p className="text-2xl font-semibold leading-[1] sm:text-4xl">
@@ -39,12 +63,8 @@ const Landing = () => {
         </section>
 
         <section className="flex items-center justify-center gap-4">
-          <Link href="/login" passHref className="landing-btn --primary">
-            เข้าร่วม
-          </Link>
-          <Link href="/tasks" passHref className="landing-btn --normal">
-            ค้นหาโจทย์
-          </Link>
+          {/* @ts-expect-error Async Server Component */}
+          <JoinButton />
         </section>
 
         <section className="relative flex w-full justify-center overflow-hidden py-6">
@@ -166,16 +186,13 @@ const Landing = () => {
           <div className="mt-12">
             <Link
               href="/tasks"
-              passHref
-              className="trasition-colors mt-4 inline rounded-md bg-prog-primary-500 py-2.5 px-9 text-white hover:bg-prog-primary-600"
+              className="trasition-colors mt-4 inline rounded-md bg-prog-primary-500 px-9 py-2.5 text-white hover:bg-prog-primary-600"
             >
               เริ่มเลย
             </Link>
           </div>
         </section>
       </div>
-    </PageLayout>
+    </div>
   )
 }
-
-export default Landing

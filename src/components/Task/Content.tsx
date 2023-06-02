@@ -9,7 +9,7 @@ import SubmitTab from './Tabs/Submit'
 const component = (
   type: string,
   task: Task,
-  solution: MDXRemoteSerializeResult
+  solution: MDXRemoteSerializeResult | null
 ) => {
   switch (type) {
     case 'statement':
@@ -25,13 +25,12 @@ const component = (
 
 export const TaskContent = ({
   task,
-  solution,
-  type
+  type,
+  solution
 }: {
   task: Task
-  submissionID: null | number
-  solution: MDXRemoteSerializeResult
   type: string
+  solution: MDXRemoteSerializeResult | null
 }) => {
   return (
     <div className="flex w-full min-w-0 shrink flex-col gap-8">

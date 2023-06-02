@@ -1,3 +1,5 @@
+// @ts-check
+
 import bundleAnalyzer from '@next/bundle-analyzer'
 
 const withBundleAnalyzer = bundleAnalyzer({
@@ -5,7 +7,6 @@ const withBundleAnalyzer = bundleAnalyzer({
 })
 
 export default withBundleAnalyzer({
-  swcMinify: true,
   reactStrictMode: true,
   images: {
     domains: ['lh3.googleusercontent.com', 'avatars.githubusercontent.com']

@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 import clsx from 'clsx'
 
@@ -10,14 +10,15 @@ export const Pagination = ({
   page: number
   pageLimit: number
 }) => {
-  const { query, push } = useRouter()
+  const router = useRouter()
+  // const searchParams = useSearchParams()
+
   return (
-    <div className="justfiy-between mt-4 flex w-full items-center pr-4 pl-4 md:pr-20">
+    <div className="justfiy-between mt-4 flex w-full items-center pl-4 pr-4 md:pr-20">
       <div className="w-28">
         {page > 1 && (
           <Link
-            href={{ pathname: '/tasks', query: { ...query, page: page - 1 } }}
-            passHref
+            href={{ pathname: '/tasks', query: { page: page - 1 } }}
             scroll={false}
             className="flex w-full items-center text-gray-400"
           >
@@ -48,9 +49,8 @@ export const Pagination = ({
                 key={index}
                 href={{
                   pathname: '/tasks',
-                  query: { ...query, page: index }
+                  query: { page: index }
                 }}
-                passHref
                 scroll={false}
                 className="hidden md:block"
               >
@@ -99,14 +99,7 @@ export const Pagination = ({
         <select
           className="px-4 py-2 md:hidden"
           onChange={({ target: { value } }) =>
-            push(
-              {
-                pathname: '/tasks',
-                query: { ...query, page: value }
-              },
-              undefined,
-              { scroll: false }
-            )
+            router.push(`/tasks?page=${value}`)
           }
           value={page}
         >
@@ -122,8 +115,7 @@ export const Pagination = ({
       <div className="w-28">
         {page < pageLimit && (
           <Link
-            href={{ pathname: '/tasks', query: { ...query, page: page + 1 } }}
-            passHref
+            href={{ pathname: '/tasks', query: { page: page + 1 } }}
             scroll={false}
             className="flex w-full items-center justify-end text-gray-400"
           >

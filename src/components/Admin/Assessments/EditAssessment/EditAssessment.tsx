@@ -98,7 +98,9 @@ const SubmitForm = ({
       mutate(`/api/assessments/${assessment?.id}`)
 
       setOpen(false)
-    } catch {}
+    } catch {
+      // do nothing
+    }
   }
 
   const toggleTask = (id: string, title: string) => {
@@ -164,7 +166,7 @@ const SubmitForm = ({
       <div className="flex justify-end space-x-2 border-t-[1px] px-4 py-2 dark:border-t-slate-700">
         <button
           type="button"
-          className="rounded-md border border-gray-100 py-2 px-9 text-gray-400 transition hover:bg-gray-100 dark:border-slate-700 dark:text-gray-200 dark:hover:bg-slate-700"
+          className="rounded-md border border-gray-100 px-9 py-2 text-gray-400 transition hover:bg-gray-100 dark:border-slate-700 dark:text-gray-200 dark:hover:bg-slate-700"
           onClick={() => setOpen(false)}
         >
           Cancel
@@ -172,7 +174,7 @@ const SubmitForm = ({
         <input
           type="submit"
           value={assessment ? 'Update' : 'Create'}
-          className="cursor-pointer rounded-md border bg-blue-500 py-2 px-9 text-white transition hover:bg-blue-600 dark:border-slate-700"
+          className="cursor-pointer rounded-md border bg-blue-500 px-9 py-2 text-white transition hover:bg-blue-600 dark:border-slate-700"
         />
       </div>
     </form>
@@ -234,7 +236,7 @@ export default function EditAssessment({
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
-                    <div className="absolute top-0 left-0 -ml-8 flex pt-4 pr-2 sm:-ml-8 sm:pr-2">
+                    <div className="absolute left-0 top-0 -ml-8 flex pr-2 pt-4 sm:-ml-8 sm:pr-2">
                       <button
                         type="button"
                         className="rounded-md text-gray-300 hover:text-white dark:text-white dark:hover:text-gray-200"

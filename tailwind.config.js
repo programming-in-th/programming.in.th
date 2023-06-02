@@ -1,7 +1,9 @@
-const { white } = require('tailwindcss/colors')
+// @ts-check
+
 const defaultTheme = require('tailwindcss/defaultTheme')
 
-module.exports = {
+/** @satisfies {import('tailwindcss').Config} */
+const config = {
   darkMode: ['class', '[data-theme="dark"]'],
   experimental: {
     optimizeUniversalDefaults: true
@@ -101,6 +103,8 @@ module.exports = {
     },
     fontFamily: {
       display: [
+        'var(--font-inter)',
+        'var(--font-noto-sans-thai)',
         'Inter var',
         'Noto Sans Thai',
         'SF Pro Display',
@@ -122,3 +126,5 @@ module.exports = {
   },
   plugins: [require('@tailwindcss/typography')]
 }
+
+module.exports = config

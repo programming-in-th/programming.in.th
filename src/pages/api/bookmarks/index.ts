@@ -1,8 +1,9 @@
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-import { unstable_getServerSession } from 'next-auth'
+import { getServerSession } from 'next-auth'
 
 import { BookmarkCDSchema } from '@/lib/api/schema/bookmark'
+import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import {
   badRequest,
@@ -11,34 +12,12 @@ import {
   unauthorized
 } from '@/utils/response'
 
-import { authOptions } from '../auth/[...nextauth]'
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === 'GET') {
-    const session = await unstable_getServerSession(req, res, authOptions)
-
-    if (!session) {
-      return unauthorized(res)
-    }
-
-    const rawBookmark = await prisma.bookmark.findMany({
-      where: {
-        user: {
-          id: { equals: session.user.id! }
-        }
-      }
-    })
-
-    const bookmarks = rawBookmark.map(bookmark => {
-      return bookmark.taskId
-    })
-
-    return ok(res, bookmarks)
-  } else if (req.method === 'POST') {
-    const session = await unstable_getServerSession(req, res, authOptions)
+  if (req.method === 'POST') {
+    const session = await getServerSession(req, res, authOptions)
 
     if (!session) {
       return unauthorized(res)
@@ -63,7 +42,7 @@ export default async function handler(
 
     return ok(res, bookmark)
   } else if (req.method === 'DELETE') {
-    const session = await unstable_getServerSession(req, res, authOptions)
+    const session = await getServerSession(req, res, authOptions)
 
     if (!session) {
       return unauthorized(res)

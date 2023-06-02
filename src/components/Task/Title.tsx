@@ -1,3 +1,5 @@
+'use client'
+
 import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
 import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import { Task } from '@prisma/client'
