@@ -6,13 +6,29 @@ import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 import components from '@/components/common/MDXComponents'
 
+const articleClsx = 'prose mt-4 w-full max-w-none dark:text-gray-100'
+
 const SolutionTab = ({
   solution
 }: {
   solution: MDXRemoteSerializeResult | null
 }) => {
   if (!solution) {
-    return <h1>Solution does not exist!</h1>
+    return (
+      <article className={articleClsx}>
+        <h1 className="text-2xl font-bold">Solution does not exist</h1>
+
+        <p>
+          You can write and submit one at{' '}
+          <a
+            href="https://github.com/programming-in-th/solutions"
+            target="_blank"
+          >
+            https://github.com/programming-in-th/solutions
+          </a>
+        </p>
+      </article>
+    )
   }
 
   return (
@@ -25,7 +41,7 @@ const SolutionTab = ({
           crossOrigin="anonymous"
         />
       </Head>
-      <div className="prose mt-4 w-full max-w-none dark:text-gray-100">
+      <article className={articleClsx}>
         <MDXRemote
           {...solution}
           components={
@@ -34,7 +50,7 @@ const SolutionTab = ({
             } as any
           }
         />
-      </div>
+      </article>
     </>
   )
 }
