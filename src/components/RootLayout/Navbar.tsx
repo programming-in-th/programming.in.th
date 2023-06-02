@@ -1,37 +1,25 @@
-'use client'
-
-import { Fragment, useMemo } from 'react'
+import { Fragment } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
 
-import { Popover, Transition } from '@headlessui/react'
-import clsx from 'clsx'
 import { User } from 'next-auth'
-import { signOut } from 'next-auth/react'
 
 import { Logo, LogoDark } from '@/svg/Logo'
 
-const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'Tasks', href: '/tasks' },
-  { name: 'Learn', href: '/learn' },
-  { name: 'About', href: '/about' }
-]
+import { DesktopLinks, MobileLinks } from './Links/NavbarLinks'
+import { NavbarBox } from './NavbarBox'
+import { SignoutButton } from './SignoutButton'
+import {
+  Popover,
+  Transition,
+  PopoverButton,
+  PopoverPanel
+} from './useClientMirror'
 
 export const Navbar = ({ user }: { user: User }) => {
-  const pathname = usePathname()
-
-  const location = useMemo(() => {
-    return pathname?.split('/')[1]
-  }, [pathname])
-
   return (
-    <Popover
-      as="header"
-      className={clsx('relative', location !== '' && 'shadow-sm')}
-    >
+    <NavbarBox>
       <div className="py-3">
         <nav
           className="relative mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-14"
@@ -46,7 +34,7 @@ export const Navbar = ({ user }: { user: User }) => {
                 <LogoDark />
               </Link>
               <div className="-mr-2 flex items-center md:hidden">
-                <Popover.Button className="focus-ring-inset inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white dark:text-white">
+                <PopoverButton className="focus-ring-inset inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white dark:text-white">
                   <span className="sr-only">Open main menu</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -62,28 +50,15 @@ export const Navbar = ({ user }: { user: User }) => {
                       d="M4 6h16M4 12h16M4 18h16"
                     />
                   </svg>
-                </Popover.Button>
+                </PopoverButton>
               </div>
             </div>
             <div className="hidden items-center space-x-8 md:ml-10 md:flex">
-              {navigation.map(item => (
-                <Link
-                  href={item.href}
-                  key={item.name}
-                  className={`text-sm font-medium ${
-                    `/${location}` == item.href
-                      ? 'text-prog-primary-500 hover:text-blue-600'
-                      : 'text-prog-gray-500 hover:text-gray-600 dark:text-gray-100 dark:hover:text-gray-300'
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              ))}
-
+              <DesktopLinks />
               <div className="flex items-center space-x-4 pl-2">
                 {user ? (
                   <Popover className="relative hidden md:block">
-                    <Popover.Button className="flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-slate-300 transition-colors hover:bg-slate-300 hover:bg-opacity-50 active:ring-1">
+                    <PopoverButton className="flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-slate-300 transition-colors hover:bg-slate-300 hover:bg-opacity-50 active:ring-1">
                       <Image
                         src={user.image ?? '/assets/img/profile/default.svg'}
                         alt={user.name ?? 'Default profile image'}
@@ -95,7 +70,7 @@ export const Navbar = ({ user }: { user: User }) => {
                           height: 'auto'
                         }}
                       />
-                    </Popover.Button>
+                    </PopoverButton>
 
                     <Transition
                       as={Fragment}
@@ -106,21 +81,16 @@ export const Navbar = ({ user }: { user: User }) => {
                       leaveFrom="opacity-100 scale-100"
                       leaveTo="opacity-0 scale-95"
                     >
-                      <Popover.Panel className="absolute right-2 z-50 mt-2 rounded-lg bg-white shadow-md dark:bg-slate-800">
+                      <PopoverPanel className="absolute right-2 z-50 mt-2 rounded-lg bg-white shadow-md dark:bg-slate-800">
                         <div className="flex flex-col border-b border-gray-100 px-8 py-4 text-prog-gray-500 dark:border-slate-900 dark:text-gray-100">
                           <p className="font-medium">{user.username}</p>
                           <p className="font-light">{user.email}</p>
                         </div>
 
                         <div className="px-8 py-4">
-                          <button
-                            onClick={() => signOut()}
-                            className="text-prog-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-400"
-                          >
-                            Logout
-                          </button>
+                          <SignoutButton className="text-prog-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-400" />
                         </div>
-                      </Popover.Panel>
+                      </PopoverPanel>
                     </Transition>
                   </Popover>
                 ) : (
@@ -146,7 +116,7 @@ export const Navbar = ({ user }: { user: User }) => {
         leaveFrom="opacity-100 scale-100"
         leaveTo="opacity-0 scale-95"
       >
-        <Popover.Panel
+        <PopoverPanel
           focus
           className="absolute inset-x-0 top-0 z-50 origin-top transform p-2 transition md:hidden"
         >
@@ -159,7 +129,7 @@ export const Navbar = ({ user }: { user: User }) => {
                 <LogoDark />
               </div>
               <div className="-mr-2">
-                <Popover.Button className="inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600 dark:text-gray-100">
+                <PopoverButton className="inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600 dark:text-gray-100">
                   <span className="sr-only">Close menu</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -175,7 +145,7 @@ export const Navbar = ({ user }: { user: User }) => {
                       d="M6 18L18 6M6 6l12 12"
                     />
                   </svg>
-                </Popover.Button>
+                </PopoverButton>
               </div>
             </div>
             <div className="pb-6 pt-5">
@@ -202,28 +172,11 @@ export const Navbar = ({ user }: { user: User }) => {
                 </div>
               )}
               <div className="space-y-1 px-2">
-                {navigation.map(item => (
-                  <Link
-                    href={item.href}
-                    key={item.name}
-                    className={`font-sm block rounded-md px-3 py-2 text-base ${
-                      `/${location}` == item.href
-                        ? 'bg-gray-200 text-gray-700 dark:bg-slate-500 dark:text-prog-gray-100'
-                        : 'text-gray-400 dark:text-gray-300'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
+                <MobileLinks />
               </div>
               {user ? (
                 <div className="mt-6 px-5">
-                  <button
-                    onClick={() => signOut()}
-                    className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700"
-                  >
-                    Logout
-                  </button>
+                  <SignoutButton className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700" />
                 </div>
               ) : (
                 <div className="mt-6 px-5">
@@ -237,8 +190,8 @@ export const Navbar = ({ user }: { user: User }) => {
               )}
             </div>
           </div>
-        </Popover.Panel>
+        </PopoverPanel>
       </Transition>
-    </Popover>
+    </NavbarBox>
   )
 }

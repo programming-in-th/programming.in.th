@@ -7,7 +7,7 @@ import { User } from 'next-auth'
 
 import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
 
-import { FooterNavigation } from './FooterNavigation'
+import { FooterLinks } from './Links/FooterLinks'
 import { PoweredByVercel } from './PoweredByVercel'
 import DarkMode from '../DarkMode'
 
@@ -18,7 +18,7 @@ export const Footer = ({ user }: { user: User }) => {
     <footer className="flex w-full flex-col items-center bg-white px-10 font-display dark:bg-slate-800">
       <div className="flex w-full max-w-5xl flex-col items-center">
         <div className="flex w-full max-w-md flex-col items-center justify-between space-y-6 p-8 font-display md:flex-row md:space-y-0">
-          <FooterNavigation />
+          <FooterLinks />
         </div>
         <div className="flex w-full justify-center border-y-[0.5px]">
           <div className="flex max-w-sm flex-col items-center py-12">

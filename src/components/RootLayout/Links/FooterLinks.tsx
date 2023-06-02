@@ -5,14 +5,9 @@ import { useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-const navigation = [
-  { name: 'Home', href: '/' },
-  { name: 'Tasks', href: '/tasks' },
-  { name: 'Learn', href: '/learn' },
-  { name: 'About', href: '/about' }
-]
+import { navigation } from './links'
 
-export const FooterNavigation = () => {
+export const FooterLinks = () => {
   const pathname = usePathname()
   const location = useMemo(() => {
     return pathname?.split('/')[1]

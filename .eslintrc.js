@@ -14,6 +14,7 @@ const config = {
   rules: {
     // TODO หยุดเกียน
     '@typescript-eslint/no-non-null-asserted-optional-chain': 'warn',
+    'prettier/prettier': 'warn',
     'import/order': [
       'warn',
       {
