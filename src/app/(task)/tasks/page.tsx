@@ -1,12 +1,11 @@
 import { Prisma } from '@prisma/client'
 import { User } from 'next-auth'
 
-import { TasksList } from '@/components/Tasks/List'
 import prisma from '@/lib/prisma'
-import { getCurrentUser } from '@/lib/session'
+import { getServerUser } from '@/lib/session'
 import { ISolved } from '@/types/tasks'
 
-import { TasksSidebar } from './TasksSidebar'
+import { TaskSearch } from './TaskSearch'
 
 async function getTasks(user: User) {
   const rawTasks = await prisma.task.findMany({
@@ -33,7 +32,7 @@ async function getTasks(user: User) {
     return {
       id: item.id,
       title: item.title,
-      tags: [],
+      tags: [] as string[],
       solved: 0,
       score: 0,
       fullScore: item.fullScore,
@@ -44,11 +43,8 @@ async function getTasks(user: User) {
 }
 
 export default async function Tasks() {
-  const user = (await getCurrentUser()) as User
+  const user = (await getServerUser()) as User
   const tasks = await getTasks(user)
-
-  //   const [filteredTasks, setFilteredTasks] = useState<IGeneralTask[]>(tasks)
-  //   const { push, query } = useRouter()
 
   const rawSolved = await prisma.$queryRaw(
     Prisma.sql`SELECT COUNT(DISTINCT user_id), task_id FROM submission WHERE score = 100 GROUP BY task_id`
@@ -76,65 +72,25 @@ export default async function Tasks() {
     return bookmark.taskId
   })
 
-  const processedTask = tasks
-    .map(task => ({
-      ...task,
-      solved: solved
-        ? solved.find(item => item.taskId === task.id)?.count || 0
-        : 0,
-      score: score ? score.find(item => item.taskId === task.id)?.max || 0 : 0,
-      bookmarked: bookmarks ? bookmarks.includes(task.id) : false,
-      tried: score
-        ? score.find(item => item.taskId === task.id) !== undefined
-        : false
-    }))
-    .sort((a, b) => {
-      if (a.id < b.id) {
-        return -1
-      } else if (a.id > b.id) {
-        return 1
-      } else {
-        return 0
-      }
-    })
-
   return (
     <div className="flex w-auto justify-center">
       <div className="flex min-h-screen w-full max-w-7xl flex-col items-center">
-        <div className="flex w-full flex-col items-center pb-6 pt-6">
-          <p className="text-3xl font-medium text-gray-500 dark:text-gray-100">
-            Tasks
-          </p>
-          <p className="text-md text-gray-500 dark:text-gray-300">
-            Browse over 700+ tasks
-          </p>
-          {/* <input
-            className="my-4 w-60 rounded-md border-gray-300 bg-gray-100 px-2 py-1 text-sm shadow-sm dark:border-slate-900 dark:bg-slate-700 dark:text-gray-100"
-            placeholder="Search..."
-            onChange={async e => {
-              push({
-                pathname: '/tasks',
-                query: { ...query, page: 1 }
-              })
-              const { value } = e.currentTarget
-              if (value) {
-                const Fuse = (await import('fuse.js')).default
-                const fuse = new Fuse(tasks, {
-                  keys: ['id', 'title'],
-                  threshold: 0.25
-                })
-
-                setFilteredTasks(fuse.search(value).map(val => val.item))
-              } else {
-                setFilteredTasks(tasks)
-              }
-            }}
-          /> */}
-        </div>
-        <div className="flex w-full flex-col md:flex-row">
-          <TasksSidebar />
-          <TasksList tasks={processedTask} />
-        </div>
+        <TaskSearch
+          header={
+            <>
+              <p className="text-3xl font-medium text-gray-500 dark:text-gray-100">
+                Tasks
+              </p>
+              <p className="text-md text-gray-500 dark:text-gray-300">
+                Browse over 700+ tasks
+              </p>
+            </>
+          }
+          tasks={tasks}
+          solved={solved}
+          score={score}
+          bookmarks={bookmarks}
+        />
       </div>
     </div>
   )
