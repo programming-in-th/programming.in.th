@@ -1,5 +1,7 @@
 'use client'
 
+import { useEffect } from 'react'
+
 import useSWR from 'swr'
 
 import { IGeneralSubmission } from '@/types/submissions'
@@ -10,7 +12,6 @@ import {
   JUDGE_COMPILATION_ERROR
 } from './constant'
 import fetcher from './fetcher'
-import { useEffect } from 'react'
 
 export const useSSESubmissionData = (id: number) => {
   const { data, error, mutate } = useSWR<IGeneralSubmission>(
