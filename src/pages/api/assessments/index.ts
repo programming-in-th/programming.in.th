@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { unstable_getServerSession } from 'next-auth'
 
 import { CreateAssessmentSchema } from '@/lib/api/schema/assessment'
+import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import removeArrDup from '@/utils/removeArrDup'
 import {
@@ -11,8 +12,6 @@ import {
   ok,
   badRequest
 } from '@/utils/response'
-
-import { authOptions } from '../auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,

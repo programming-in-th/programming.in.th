@@ -12,6 +12,7 @@ import {
   SubmissionFilterEnum as Filter,
   SubmitSchema
 } from '@/lib/api/schema/submissions'
+import { authOptions } from '@/lib/auth'
 import { compressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
 import {
@@ -21,8 +22,6 @@ import {
   badRequest,
   forbidden
 } from '@/utils/response'
-
-import { authOptions } from '../auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,

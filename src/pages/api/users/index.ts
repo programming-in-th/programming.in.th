@@ -3,10 +3,9 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { unstable_getServerSession } from 'next-auth'
 
 import { checkOwnerPermission } from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
+import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { unauthorized, methodNotAllowed, ok, forbidden } from '@/utils/response'
-
-import { authOptions } from '../auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,

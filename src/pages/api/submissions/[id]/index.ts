@@ -5,6 +5,7 @@ import { unstable_getServerSession } from 'next-auth'
 import checkOwnerPermissionOnAssessment from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import { IndividualSubmissionSchema } from '@/lib/api/schema/submissions'
+import { authOptions } from '@/lib/auth'
 import { decompressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
 import {
@@ -15,8 +16,6 @@ import {
   ok,
   unauthorized
 } from '@/utils/response'
-
-import { authOptions } from '../../auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,

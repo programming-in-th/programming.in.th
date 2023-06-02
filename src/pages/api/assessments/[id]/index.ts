@@ -7,6 +7,7 @@ import {
   CreateAssessmentSchema,
   IndividualAssessmentSchema
 } from '@/lib/api/schema/assessment'
+import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
 import dedupeAndMap from '@/utils/dedupeAndMap'
@@ -18,8 +19,6 @@ import {
   forbidden,
   notFound
 } from '@/utils/response'
-
-import { authOptions } from '../../auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,

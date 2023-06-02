@@ -3,6 +3,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import { unstable_getServerSession } from 'next-auth'
 
 import { TaskSchema } from '@/lib/api/schema/tasks'
+import { authOptions } from '@/lib/auth'
 import prisma from '@/lib/prisma'
 import {
   unauthorized,
@@ -11,8 +12,6 @@ import {
   forbidden,
   badRequest
 } from '@/utils/response'
-
-import { authOptions } from '../auth/[...nextauth]'
 
 export default async function handler(
   req: NextApiRequest,
