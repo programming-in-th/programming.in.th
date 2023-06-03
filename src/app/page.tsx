@@ -134,7 +134,7 @@ export default function Landing() {
                 จำนวนผู้ใช้กว่า
               </p>
               <div className="text-6xl font-semibold text-prog-primary-500">
-                <IncrementalNumber start={1} end={13071} />
+                <IncrementalNumber start={1} end={18222} />
               </div>
               <p className="text-2xl font-semibold text-prog-gray-500 dark:text-gray-200">
                 คน
