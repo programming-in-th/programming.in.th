@@ -19,7 +19,7 @@ const component = (
     case 'submissions':
       return <SubmissionsTab task={task} />
     case 'solution':
-      return <SolutionTab solution={solution} />
+      return <SolutionTab taskId={task.id} solution={solution} />
   }
 }
 
