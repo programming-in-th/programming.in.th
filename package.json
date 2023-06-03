@@ -64,6 +64,7 @@
     "react-dropzone": "14.2.3",
     "react-hook-form": "7.44.2",
     "react-hot-toast": "2.4.1",
+    "react-icons": "4.9.0",
     "react-infinite-scroll-component": "6.1.0",
     "react-table": "7.8.0",
     "rehype-autolink-headings": "6.1.1",
