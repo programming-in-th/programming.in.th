@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  undici: '>=5.19.1'
+
 dependencies:
   '@aws-sdk/client-s3':
     specifier: 3.342.0
@@ -2576,7 +2579,7 @@ packages:
       new-github-issue-url: 0.2.1
       p-retry: 4.6.2
       strip-ansi: 6.0.1
-      undici: 5.11.0
+      undici: 5.22.1
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -10528,12 +10531,12 @@ packages:
       which-boxed-primitive: 1.0.2
     dev: true
 
-  /undici@5.11.0:
+  /undici@5.22.1:
     resolution:
       {
-        integrity: sha512-oWjWJHzFet0Ow4YZBkyiJwiK5vWqEYoH7BINzJAJOLedZ++JpAlCbUktW2GQ2DS2FpKmxD/JMtWUUWl1BtghGw==
+        integrity: sha512-Ji2IJhFXZY0x/0tVBXeQwgPlLWw13GVzpsWPQ3rV50IFMMof2I55PZZxtm4P6iNq+L5znYN9nSTAq0ZyE6lSJw==
       }
-    engines: { node: '>=12.18' }
+    engines: { node: '>=14.0' }
     dependencies:
       busboy: 1.6.0
     dev: true
