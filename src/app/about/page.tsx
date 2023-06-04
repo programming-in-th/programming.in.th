@@ -4,7 +4,8 @@ import { type NextPage } from 'next'
 
 import Image from 'next/image'
 
-import { OurTeam } from '@/components/About/OurTeam'
+import { Contributor } from '@/components/About/Contributors'
+import { CoreTeam } from '@/components/About/CoreTeam'
 import { PoweredByVercel } from '@/components/RootLayout/PoweredByVercel'
 
 const About: NextPage = () => {
@@ -53,7 +54,16 @@ const About: NextPage = () => {
           />
         </div>
       </section>
-      <OurTeam />
+      <section className="min-h-screen w-full bg-gray-50 dark:bg-slate-700">
+        <h1 className="mt-20 text-2xl font-bold text-gray-600 dark:text-white">
+          Our team
+        </h1>
+        <p className="text-gray-500 dark:text-gray-200">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit
+        </p>
+        <CoreTeam />
+        <Contributor />
+      </section>
     </main>
   )
 }
