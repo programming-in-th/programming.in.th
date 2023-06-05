@@ -1,38 +1,32 @@
 [
   {
-    "name": "Alice",
+    "name": "win11905",
     "position": "Developer",
-    "github": "Leomotors",
-    "avatar_url": "https://avatars.githubusercontent.com/u/59821765?v=4"
+    "github": "pongsaphol",
+    "avatar_url": "https://avatars.githubusercontent.com/u/30414878?v=4"
   },
   {
-    "name": "Bob",
+    "name": "iammarkps",
     "position": "Developer",
-    "github": "Leomotors",
-    "avatar_url": "https://avatars.githubusercontent.com/u/59821765?v=4"
+    "github": "iammarkps",
+    "avatar_url": "https://avatars.githubusercontent.com/u/12445326?v=4"
   },
   {
-    "name": "Christopher",
+    "name": "betich",
     "position": "Developer",
-    "github": "Leomotors",
-    "avatar_url": "https://avatars.githubusercontent.com/u/59821765?v=4"
+    "github": "betich",
+    "avatar_url": "https://avatars.githubusercontent.com/u/28398789?v=4"
   },
   {
-    "name": "Dave",
+    "name": "NakZaa",
     "position": "Developer",
-    "github": "Leomotors",
-    "avatar_url": "https://avatars.githubusercontent.com/u/59821765?v=4"
+    "github": "NakZaa",
+    "avatar_url": "https://avatars.githubusercontent.com/u/48176198?v=4"
   },
   {
-    "name": "Eric",
+    "name": "nuyer",
     "position": "Developer",
-    "github": "Leomotors",
-    "avatar_url": "https://avatars.githubusercontent.com/u/59821765?v=4"
-  },
-  {
-    "name": "Frank",
-    "position": "Developer",
-    "github": "Leomotors",
-    "avatar_url": "https://avatars.githubusercontent.com/u/59821765?v=4"
+    "github": "nuyer",
+    "avatar_url": "https://avatars.githubusercontent.com/u/98694104?v=4"
   }
 ]
