@@ -55,10 +55,10 @@ const About: NextPage = () => {
         </div>
       </section>
       <section className="min-h-screen w-full bg-gray-50 dark:bg-slate-700">
-        <h1 className="mt-20 text-2xl font-bold text-gray-600 dark:text-white">
+        <h1 className="mt-20 text-2xl font-semibold text-gray-600 dark:text-white sm:text-4xl">
           Our team
         </h1>
-        <p className="text-gray-500 dark:text-gray-200">
+        <p className="text-xl text-gray-500 dark:text-gray-200">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
         </p>
         <CoreTeam />

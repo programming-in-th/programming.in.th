@@ -46,8 +46,8 @@ export const Collaborator = () => {
   if (collaborators.length === 0) {
     return (
       <div className="mb-4">
-        <h1 className="text-2xl font-bold">Collaborators</h1>
-        <p className="text-gray-500 dark:text-gray-200">
+        <h1 className="text-2xl font-semibold sm:text-3xl">Collaborators</h1>
+        <p className="text-xl text-gray-500 dark:text-gray-200">
           สามารถร่วมพัฒนาได้ที่{' '}
           <span>
             <Link href="https://github.com/programming-in-th/programming.in.th">
