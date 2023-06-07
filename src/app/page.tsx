@@ -15,7 +15,6 @@ import { FeatureCard } from '@/components/Landing/FeatureCard'
 import { IncrementalNumber } from '@/components/Landing/IncrementalNumber'
 import { TestimonyCard } from '@/components/Landing/TestimonyCard'
 import { getServerUser } from '@/lib/session'
-import { BGCurve } from '@/svg/BGCurve'
 import { PeopleVector } from '@/svg/Illustrations/People'
 
 async function JoinButton() {
@@ -76,13 +75,14 @@ export default function Landing() {
               height={50}
               className="flex h-full w-full items-center justify-center rounded-3xl object-cover"
               style={{
-                maxWidth: '45em',
+                maxWidth: '77vh',
                 height: 'auto'
               }}
             />
           </div>
 
-          <BGCurve className="absolute bottom-0 text-white dark:text-slate-800" />
+          {/* <BGCurve className="absolute bottom-0 text-white dark:text-slate-800"/> */}
+          <div className="absolute bottom-0 h-2/5 w-full rounded-t-[5vh] bg-white dark:bg-slate-800 md:rounded-t-full" />
         </section>
 
         <section className="w-full bg-white pb-10 dark:bg-slate-800">
