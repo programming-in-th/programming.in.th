@@ -1,14 +1,28 @@
-'use client'
-
-import { type NextPage } from 'next'
-
 import Image from 'next/image'
 
 import { Collaborator } from '@/components/About/Collaborator'
 import { CoreTeam } from '@/components/About/CoreTeam'
 import { PoweredByVercel } from '@/components/RootLayout/PoweredByVercel'
+import { GithubMemberProps } from '@/types/GithubMemberProps'
 
-const About: NextPage = () => {
+export async function fetchData(url: string): Promise<GithubMemberProps[]> {
+  const res = await fetch(url)
+
+  return res.json()
+}
+
+async function About() {
+  const coreTeam = await fetchData(
+    'https://api.github.com/orgs/programming-in-th/public_members'
+  )
+  const contributors = await fetchData(
+    'https://api.github.com/repos/programming-in-th/programming.in.th/contributors'
+  )
+
+  const collaborators = contributors.filter(
+    contributor => !coreTeam.find(member => member.login === contributor.login)
+  )
+
   return (
     <main className="mt-24 flex min-h-screen flex-col items-center text-center">
       <h1 className="text-2xl font-semibold text-gray-600 dark:text-white sm:text-4xl">
@@ -61,8 +75,8 @@ const About: NextPage = () => {
         <p className="text-xl text-gray-500 dark:text-gray-200">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
         </p>
-        <CoreTeam />
-        <Collaborator />
+        <CoreTeam coreTeam={coreTeam} />
+        <Collaborator collaborators={collaborators} />
       </section>
     </main>
   )
