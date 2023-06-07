@@ -70,14 +70,14 @@ export default function Landing() {
         <section className="relative flex w-full justify-center overflow-hidden py-6">
           <div className="relative z-10">
             <Image
-              src="/assets/img/landing/coding.png"
+              src="/assets/img/landing/coding.svg"
               alt="PROGRAMMING.IN.TH"
-              width={400}
-              height={400}
-              className="h-full w-full rounded-3xl object-cover"
+              width={50}
+              height={50}
+              className="flex h-full w-full items-center justify-center rounded-3xl object-cover"
               style={{
-                maxWidth: '100%',
-                height: 'auto'
+                maxHeight: '33em',
+                width: 'auto'
               }}
             />
           </div>
