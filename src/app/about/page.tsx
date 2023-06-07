@@ -4,7 +4,7 @@ import { type NextPage } from 'next'
 
 import Image from 'next/image'
 
-import { Contributor } from '@/components/About/Contributors'
+import { Collaborator } from '@/components/About/Collaborator'
 import { CoreTeam } from '@/components/About/CoreTeam'
 import { PoweredByVercel } from '@/components/RootLayout/PoweredByVercel'
 
@@ -62,7 +62,7 @@ const About: NextPage = () => {
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
         </p>
         <CoreTeam />
-        <Contributor />
+        <Collaborator />
       </section>
     </main>
   )

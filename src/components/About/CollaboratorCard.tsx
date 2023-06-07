@@ -1,14 +1,14 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-interface IContributor {
+interface ICollaborator {
   username: string
   image: string
   url: string
   key: number
 }
 
-export const ContributorCard = ({ username, image, url }: IContributor) => {
+export const CollaboratorCard = ({ username, image, url }: ICollaborator) => {
   return (
     <div className="m-2 inline-block rounded-lg bg-white p-2 shadow-md hover:bg-gray-100 dark:bg-slate-800 dark:hover:bg-slate-700">
       <Link
@@ -27,7 +27,7 @@ export const ContributorCard = ({ username, image, url }: IContributor) => {
               src={image}
             />
           </div>
-          <p>{username}</p>
+          <p className="text-xl">{username}</p>
         </div>
       </Link>
     </div>

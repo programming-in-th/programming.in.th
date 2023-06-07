@@ -2,14 +2,14 @@ import { useState, useEffect } from 'react'
 
 import axios from 'axios'
 
-import { ContributorCard } from '@/components/About/ContributorCard'
+import { CollaboratorCard } from '@/components/About/CollaboratorCard'
 import { GithubMemberProps } from '@/types/GithubMemberProps'
 
-export const Contributor = () => {
+export const Collaborator = () => {
   const [coreTeam, setCoreTeam] = useState<GithubMemberProps[]>([])
   const [initializedCoreTeam, setInitializedCoreTeam] = useState<boolean>(false)
-  const [contributors, setContributors] = useState<GithubMemberProps[]>([])
-  const [initializedContributors, setInitializedContributors] =
+  const [collaborators, setCollaborators] = useState<GithubMemberProps[]>([])
+  const [initializedCollaborators, setInitializedCollaborators] =
     useState<boolean>(false)
 
   useEffect(() => {
@@ -25,30 +25,30 @@ export const Contributor = () => {
         }
       }
       setInitializedCoreTeam(true)
-      if (!initializedContributors) {
+      if (!initializedCollaborators) {
         try {
           const { data }: { data: GithubMemberProps[] } = await axios.get(
             'https://api.github.com/repos/programming-in-th/programming.in.th/contributors'
           )
 
-          setContributors(
+          setCollaborators(
             data.filter(value => !coreTeam.some(v => v.login === value.login))
           )
         } catch (err) {
           console.log(err)
         }
       }
-      setInitializedContributors(true)
+      setInitializedCollaborators(true)
     })()
-  }, [coreTeam, initializedContributors, initializedCoreTeam])
+  }, [coreTeam, initializedCollaborators, initializedCoreTeam])
 
   return (
     <div className="mb-4">
-      <h1 className="text-2xl font-bold">Collaborator</h1>
+      <h1 className="text-2xl font-bold">Collaborators</h1>
       <div className="flex w-full justify-center">
         <div className="inline-block text-center">
-          {contributors.map((contributor, index) => (
-            <ContributorCard
+          {collaborators.map((contributor, index) => (
+            <CollaboratorCard
               username={contributor.login}
               image={contributor.avatar_url}
               url={contributor.html_url}
