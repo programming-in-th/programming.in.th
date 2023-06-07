@@ -7,7 +7,7 @@ import { CoreTeam } from '@/components/About/CoreTeam'
 import { PoweredByVercel } from '@/components/RootLayout/PoweredByVercel'
 import { GithubMemberProps } from '@/types/GithubMemberProps'
 
-export async function fetchData(url: string): Promise<GithubMemberProps[]> {
+export async function fetchData(url: string) {
   const res = await fetch(url, { cache: 'force-cache' })
 
   if (res.ok === false) {
