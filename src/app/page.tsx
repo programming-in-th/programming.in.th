@@ -76,8 +76,8 @@ export default function Landing() {
               height={50}
               className="flex h-full w-full items-center justify-center rounded-3xl object-cover"
               style={{
-                maxHeight: '33em',
-                width: 'auto'
+                maxWidth: '45em',
+                height: 'auto'
               }}
             />
           </div>
