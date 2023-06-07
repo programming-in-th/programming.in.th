@@ -1,3 +1,5 @@
+'use client'
+
 import Image from 'next/image'
 
 import { Collaborator } from '@/components/About/Collaborator'
@@ -6,12 +8,15 @@ import { PoweredByVercel } from '@/components/RootLayout/PoweredByVercel'
 import { GithubMemberProps } from '@/types/GithubMemberProps'
 
 export async function fetchData(url: string): Promise<GithubMemberProps[]> {
-  const res = await fetch(url)
+  const res = await fetch(url, { cache: 'force-cache' })
 
+  if (res.ok === false) {
+    return []
+  }
   return res.json()
 }
 
-async function About() {
+export default async function About() {
   const coreTeam = await fetchData(
     'https://api.github.com/orgs/programming-in-th/public_members'
   )
@@ -20,7 +25,10 @@ async function About() {
   )
 
   const collaborators = contributors.filter(
-    contributor => !coreTeam.find(member => member.login === contributor.login)
+    (contributor: GithubMemberProps) =>
+      !coreTeam.find(
+        (member: GithubMemberProps) => member.login === contributor.login
+      )
   )
 
   return (
@@ -82,4 +90,4 @@ async function About() {
   )
 }
 
-export default About
+// export default About

@@ -140,9 +140,6 @@ dependencies:
   react-hot-toast:
     specifier: 2.4.1
     version: 2.4.1(csstype@3.1.2)(react-dom@18.2.0)(react@18.2.0)
-  react-icons:
-    specifier: 4.9.0
-    version: 4.9.0(react@18.2.0)
   react-infinite-scroll-component:
     specifier: 6.1.0
     version: 6.1.0(react@18.2.0)
@@ -9176,17 +9173,6 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     transitivePeerDependencies:
       - csstype
-    dev: false
-
-  /react-icons@4.9.0(react@18.2.0):
-    resolution:
-      {
-        integrity: sha512-ijUnFr//ycebOqujtqtV9PFS7JjhWg0QU6ykURVHuL4cbofvRCf3f6GMn9+fBktEFQOIVZnuAYLZdiyadRQRFg==
-      }
-    peerDependencies:
-      react: '*'
-    dependencies:
-      react: 18.2.0
     dev: false
 
   /react-infinite-scroll-component@6.1.0(react@18.2.0):
