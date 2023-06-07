@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
+
 import axios from 'axios'
 
-import { GithubMemberProps } from '@/types/GithubMemberProps'
-
 import { CoreTeamCard } from '@/components/About/CoreTeamCard'
+import { GithubMemberProps } from '@/types/GithubMemberProps'
 
 export const CoreTeam = () => {
   const [coreTeam, setCoreTeam] = useState<GithubMemberProps[]>([])

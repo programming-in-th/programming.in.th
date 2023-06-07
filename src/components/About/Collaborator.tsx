@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import axios from 'axios'
+import Link from 'next/link'
 
 import { CollaboratorCard } from '@/components/About/CollaboratorCard'
 import { GithubMemberProps } from '@/types/GithubMemberProps'
@@ -41,6 +42,22 @@ export const Collaborator = () => {
       setInitializedCollaborators(true)
     })()
   }, [coreTeam, initializedCollaborators, initializedCoreTeam])
+
+  if (collaborators.length === 0) {
+    return (
+      <div className="mb-4">
+        <h1 className="text-2xl font-bold">Collaborators</h1>
+        <p className="text-gray-500 dark:text-gray-200">
+          สามารถร่วมพัฒนาได้ที่{' '}
+          <span>
+            <Link href="https://github.com/programming-in-th/programming.in.th">
+              github.com/programming-in-th/programming.in.th
+            </Link>
+          </span>
+        </p>
+      </div>
+    )
+  }
 
   return (
     <div className="mb-4">
