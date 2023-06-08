@@ -73,15 +73,16 @@ export default function Landing() {
               alt="PROGRAMMING.IN.TH"
               width={50}
               height={50}
-              className="flex h-full w-full items-center justify-center rounded-3xl object-cover"
+              className="flex h-full w-full items-center justify-center rounded-3xl object-cover px-5"
               style={{
-                maxWidth: '77vh',
+                maxWidth: '50vh',
                 height: 'auto'
               }}
             />
           </div>
 
-          <div className="absolute bottom-0 h-2/5 w-full rounded-t-[5vh] bg-white dark:bg-slate-800 md:rounded-t-full" />
+          <div className="absolute bottom-0 h-2/5 w-[120%] overflow-hidden rounded-[50%] bg-white dark:bg-slate-800 md:w-[110%]" />
+          <div className="absolute bottom-0 h-1/5 w-full bg-white dark:bg-slate-800" />
         </section>
 
         <section className="w-full bg-white pb-10 dark:bg-slate-800">
