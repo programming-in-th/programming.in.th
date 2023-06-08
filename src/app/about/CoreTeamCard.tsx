@@ -3,14 +3,9 @@ import Link from 'next/link'
 
 import { GitHubLogo } from '@/svg/Socials'
 
-interface CoreTeamCardProps {
-  avatar_url: string
-  html_url: string
-  login: string
-  key: number
-}
+import { GitHubUser } from './types'
 
-export const CoreTeamCard = (member: CoreTeamCardProps) => {
+export const CoreTeamCard = (member: GitHubUser) => {
   return (
     <div className="my-4 flex w-1/4 flex-col">
       <div className="relative h-[300px]">

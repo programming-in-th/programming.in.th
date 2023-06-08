@@ -172,6 +172,9 @@ dependencies:
     version: 3.21.4
 
 devDependencies:
+  '@octokit/types':
+    specifier: 9.2.3
+    version: 9.2.3
   '@tailwindcss/typography':
     specifier: 0.5.9
     version: 0.5.9(tailwindcss@3.3.2)
@@ -2449,6 +2452,22 @@ packages:
     dependencies:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.15.0
+    dev: true
+
+  /@octokit/openapi-types@17.2.0:
+    resolution:
+      {
+        integrity: sha512-MazrFNx4plbLsGl+LFesMo96eIXkFgEtaKbnNpdh4aQ0VM10aoylFsTYP1AEjkeoRNZiiPe3T6Gl2Hr8dJWdlQ==
+      }
+    dev: true
+
+  /@octokit/types@9.2.3:
+    resolution:
+      {
+        integrity: sha512-MMeLdHyFIALioycq+LFcA71v0S2xpQUX2cw6pPbHQjaibcHYwLnmK/kMZaWuGfGfjBJZ3wRUq+dOaWsvrPJVvA==
+      }
+    dependencies:
+      '@octokit/openapi-types': 17.2.0
     dev: true
 
   /@opentelemetry/api@1.4.1:

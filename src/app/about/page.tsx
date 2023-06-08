@@ -1,34 +1,36 @@
 import Image from 'next/image'
 
-import { Collaborator } from '@/components/About/Collaborator'
-import { CoreTeam } from '@/components/About/CoreTeam'
 import { PoweredByVercel } from '@/components/RootLayout/PoweredByVercel'
-import { GithubMemberProps } from '@/types/GithubMemberProps'
 
-const fetchData = async (url: string) => {
-  const res = await fetch(url, { cache: 'force-cache' })
+import { ContributorSection } from './ContributorSection'
+import { CoreTeamSection } from './CoreTeamSection'
+import { Contributor, OrgMember } from './types'
+
+async function fetchData<T>(url: string, defaultValue: T) {
+  const res = await fetch(url, { next: { revalidate: 3600 } })
 
   if (!res || res.ok === false) {
-    throw new Error('Failed to Fetch')
+    return defaultValue
   }
+
   const response = await res.json()
-  return response
+  return response as T
 }
 
-async function About() {
-  const coreteam = fetchData(
-    'https://api.github.com/orgs/programming-in-th/public_members'
-  )
-  const contributors = fetchData(
-    'https://api.github.com/repos/programming-in-th/programming.in.th/contributors'
+export default async function About() {
+  const coreteamPromise = fetchData<OrgMember[]>(
+    'https://api.github.com/orgs/programming-in-th/public_members',
+    []
   )
 
-  const coreTeam: GithubMemberProps[] = await coreteam
-  const collaborators = (await contributors).filter(
-    (contributor: GithubMemberProps) =>
-      !coreTeam.find(
-        (member: GithubMemberProps) => member.login === contributor.login
-      )
+  const contributorsPromise = fetchData<Contributor[]>(
+    'https://api.github.com/repos/programming-in-th/programming.in.th/contributors',
+    []
+  )
+
+  const coreTeam = await coreteamPromise
+  const contributors = (await contributorsPromise).filter(
+    contributor => !coreTeam.find(member => member.login === contributor.login)
   )
 
   return (
@@ -83,11 +85,9 @@ async function About() {
         <p className="text-xl text-gray-500 dark:text-gray-200">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
         </p>
-        <CoreTeam coreTeam={coreTeam} />
-        <Collaborator collaborators={collaborators} />
+        <CoreTeamSection coreTeam={coreTeam} />
+        <ContributorSection contributors={contributors} />
       </section>
     </main>
   )
 }
-
-export default About
