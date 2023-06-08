@@ -32,12 +32,12 @@ export const TaskSearch: FC<TaskSearchProps> = ({
     .map(task => ({
       ...task,
       solved: solved
-        ? solved.find(item => item.taskId === task.id)?.count || 0
+        ? solved.find(item => item.task_id === task.id)?.count || 0
         : 0,
-      score: score ? score.find(item => item.taskId === task.id)?.max || 0 : 0,
+      score: score ? score.find(item => item.task_id === task.id)?.max || 0 : 0,
       bookmarked: bookmarks ? bookmarks.includes(task.id) : false,
       tried: score
-        ? score.find(item => item.taskId === task.id) !== undefined
+        ? score.find(item => item.task_id === task.id) !== undefined
         : false
     }))
     .sort((a, b) => {

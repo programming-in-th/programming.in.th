@@ -10,11 +10,11 @@ export interface IGeneralTask {
 }
 
 export interface IScore {
-  taskId: string
+  task_id: string
   max: number
 }
 
 export interface ISolved {
-  taskId: string
+  task_id: string
   count: number
 }
