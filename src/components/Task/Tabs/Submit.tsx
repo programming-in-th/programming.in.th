@@ -1,21 +1,19 @@
-'use client'
-// TODO Get session on server?
-
 import { Task } from '@prisma/client'
-import { useSession } from 'next-auth/react'
+
+import { getServerUser } from '@/lib/session'
 
 import { SubmitElement } from '../SubmitElement'
 
-const SubmitTab = ({
+const SubmitTab = async ({
   task,
   assessmentId
 }: {
   task: Task
   assessmentId?: string
 }) => {
-  const { status } = useSession()
+  const user = await getServerUser()
 
-  if (status !== 'authenticated') {
+  if (!user) {
     return (
       <div className="flex h-24 items-center justify-center">
         <p className="text-center text-prog-gray-500 dark:text-gray-200">

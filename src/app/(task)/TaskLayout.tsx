@@ -16,18 +16,14 @@ export function TaskLayout({
   children: ReactNode
 }) {
   return (
-    <>
-      <div className="align-center flex h-full w-screen justify-center px-4 pt-4">
-        <div className="flex h-full w-full max-w-6xl flex-col gap-2 md:flex-row md:gap-8">
+    <div className="align-center flex h-full w-screen justify-center px-4 py-4">
+      <div className="flex h-full w-full max-w-6xl flex-col gap-2 md:flex-row md:gap-8">
+        <div className="flex flex-col gap-4">
           <Title task={task} />
-        </div>
-      </div>
-      <div className="align-center flex h-full w-screen justify-center px-4 py-4">
-        <div className="flex h-full w-full max-w-6xl flex-col gap-2 md:flex-row md:gap-8">
           <SideBar task={task} type={type} />
-          {children}
         </div>
+        {children}
       </div>
-    </>
+    </div>
   )
 }

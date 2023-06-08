@@ -51,11 +51,11 @@ export const FileUpload = ({
   const formatBytes = useCallback(formatBytesFunc, [file])
 
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative overflow-hidden">
       <div
         {...getRootProps()}
         className={clsx(
-          'flex h-48 w-full cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-dashed border-gray-400 p-6 text-gray-400 transition-colors',
+          'flex cursor-pointer items-center justify-center gap-2 rounded-md border border-dashed border-gray-400 p-2 text-gray-400 transition-colors',
           (isFocused || isDragAccept) && 'border-blue-300',
           fileRejected && 'border-red-400',
           isDragActive
@@ -67,27 +67,23 @@ export const FileUpload = ({
 
         <InboxInIcon
           className={clsx(
-            'h-10 w-10',
+            'h-4 w-4',
             isDragActive && 'animate-pulse text-white'
           )}
         />
 
         {isDragActive ? (
           <p className="animate-pulse text-xl font-semibold text-white">
-            Drop your file here
+            Upload
           </p>
         ) : (
           <div className="text-center">
             {file ? (
-              <>
-                <p>{truncate(file.name, 32)}</p>
-                <p>{formatBytes(file.size)}</p>
-              </>
+              <p>
+                {truncate(file.name, 16)} ({formatBytes(file.size)})
+              </p>
             ) : (
-              <>
-                <p>Upload a file or drag and drop</p>
-                <p>.c .cpp .py .java .rs up to 4MB</p>
-              </>
+              <p>Upload</p>
             )}
           </div>
         )}

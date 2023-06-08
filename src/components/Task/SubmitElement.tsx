@@ -1,3 +1,5 @@
+'use client'
+
 import { Suspense, useEffect, useState } from 'react'
 
 import dynamic from 'next/dynamic'
@@ -62,7 +64,7 @@ export const SubmitElement = ({
   }
 
   return (
-    <div className="flex w-full flex-col gap-6 rounded-md text-prog-gray-500 shadow-md dark:bg-slate-700 dark:text-gray-100">
+    <div className="flex w-full flex-col rounded-md text-prog-gray-500 shadow-md dark:bg-slate-700 dark:text-gray-100">
       <div className="bg-white px-8 py-4 dark:bg-slate-700">
         <div className="mb-6 flex items-center justify-between gap-4">
           <h2 className="text-lg ">Submit</h2>
@@ -90,16 +92,14 @@ export const SubmitElement = ({
           <DynamicCodeEditor
             setValue={setFileText}
             value={fileText}
-            height="42rem"
+            height="32rem"
           />
         </Suspense>
-        <div className="mt-8">
-          <FileUpload file={file} setFile={setFile} />
-        </div>
       </div>
 
       <div className="bg-prog-gray-100 px-8 py-4 dark:bg-slate-700">
-        <div className="flex justify-end">
+        <div className="flex justify-between">
+          <FileUpload file={file} setFile={setFile} />
           <button
             onClick={onSubmit}
             className={clsx(
