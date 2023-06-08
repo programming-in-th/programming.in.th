@@ -39,7 +39,7 @@ export default async function About() {
         เกี่ยวกับเรา
       </h1>
 
-      <section className="my-6 max-w-2xl text-xl text-gray-500 dark:text-gray-200">
+      <section className="my-6 max-w-2xl px-5 text-xl text-gray-500 dark:text-gray-200">
         <p>
           programming.in.th
           ถูกพัฒนาโดยกลุ่มนักเรียนค่ายโอลิมปิกวิชาการคอมพิวเตอร์
@@ -56,7 +56,7 @@ export default async function About() {
         <p>- team -</p>
       </section>
 
-      <section className="my-16">
+      <section className="my-16 px-5">
         <Image
           width="539"
           height="275"
@@ -82,9 +82,9 @@ export default async function About() {
         <h1 className="mt-20 text-2xl font-semibold text-gray-600 dark:text-white sm:text-4xl">
           Our team
         </h1>
-        <p className="text-xl text-gray-500 dark:text-gray-200">
+        {/* <p className="text-xl text-gray-500 dark:text-gray-200">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        </p>
+        </p> */}
         <CoreTeamSection coreTeam={coreTeam} />
         <ContributorSection contributors={contributors} />
       </section>
