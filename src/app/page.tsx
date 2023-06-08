@@ -15,7 +15,6 @@ import { FeatureCard } from '@/components/Landing/FeatureCard'
 import { IncrementalNumber } from '@/components/Landing/IncrementalNumber'
 import { TestimonyCard } from '@/components/Landing/TestimonyCard'
 import { getServerUser } from '@/lib/session'
-import { BGCurve } from '@/svg/BGCurve'
 import { PeopleVector } from '@/svg/Illustrations/People'
 
 async function JoinButton() {
@@ -74,15 +73,16 @@ export default function Landing() {
               alt="PROGRAMMING.IN.TH"
               width={50}
               height={50}
-              className="flex h-full w-full items-center justify-center rounded-3xl object-cover"
+              className="flex h-full w-full items-center justify-center rounded-3xl object-cover px-5"
               style={{
-                maxWidth: '45em',
+                maxWidth: '50vh',
                 height: 'auto'
               }}
             />
           </div>
 
-          <BGCurve className="absolute bottom-0 text-white dark:text-slate-800" />
+          <div className="absolute bottom-0 h-2/5 w-[120%] overflow-hidden rounded-[50%] bg-white dark:bg-slate-800 md:w-[110%]" />
+          <div className="absolute bottom-0 h-1/5 w-full bg-white dark:bg-slate-800" />
         </section>
 
         <section className="w-full bg-white pb-10 dark:bg-slate-800">
@@ -143,7 +143,7 @@ export default function Landing() {
           </div>
         </section>
 
-        <section className="w-full bg-white p-10 dark:bg-slate-800">
+        <section className="w-full bg-white p-5 dark:bg-slate-800 md:p-10">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2">
             <TestimonyCard
               title="เขมนันท์ มณีศรี (จอม)"
