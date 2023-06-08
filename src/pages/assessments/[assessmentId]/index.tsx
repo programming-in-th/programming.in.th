@@ -24,7 +24,8 @@ const TaskCard = ({
   scores: IScore[]
 }) => {
   const score = useMemo(
-    () => (scores ? scores.find(item => item.taskId === task.id)?.max || 0 : 0),
+    () =>
+      scores ? scores.find(item => item.task_id === task.id)?.max || 0 : 0,
     [scores, task.id]
   )
   return (

@@ -58,7 +58,7 @@ export default async function Tasks() {
 
   const score = (await prisma.$queryRaw(
     Prisma.sql`SELECT task_id, max(score) FROM submission WHERE user_id = ${user?.id} GROUP BY task_id;`
-  )) as Array<{ taskId: string; max: number }>
+  )) as Array<{ task_id: string; max: number }>
 
   const rawBookmark = await prisma.bookmark.findMany({
     where: {
@@ -68,9 +68,11 @@ export default async function Tasks() {
     }
   })
 
-  const bookmarks = rawBookmark.map(bookmark => {
-    return bookmark.taskId
-  })
+  const bookmarks = user
+    ? rawBookmark.map(bookmark => {
+        return bookmark.taskId
+      })
+    : []
 
   return (
     <div className="flex w-auto justify-center">
