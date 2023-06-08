@@ -81,7 +81,6 @@ export default function Landing() {
             />
           </div>
 
-          {/* <BGCurve className="absolute bottom-0 text-white dark:text-slate-800"/> */}
           <div className="absolute bottom-0 h-2/5 w-full rounded-t-[5vh] bg-white dark:bg-slate-800 md:rounded-t-full" />
         </section>
 
@@ -143,7 +142,7 @@ export default function Landing() {
           </div>
         </section>
 
-        <section className="w-full bg-white p-10 dark:bg-slate-800">
+        <section className="w-full bg-white p-5 dark:bg-slate-800 md:p-10">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2">
             <TestimonyCard
               title="เขมนันท์ มณีศรี (จอม)"
