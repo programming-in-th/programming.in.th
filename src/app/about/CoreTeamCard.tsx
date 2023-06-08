@@ -7,7 +7,7 @@ import { GitHubUser } from './types'
 
 export const CoreTeamCard = (member: GitHubUser) => {
   return (
-    <div className="my-4 flex w-1/4 flex-col">
+    <div className="my-4 flex w-1/2 flex-col sm:w-1/3 lg:w-1/4">
       <div className="relative h-[300px]">
         <Image
           alt={member.avatar_url}
