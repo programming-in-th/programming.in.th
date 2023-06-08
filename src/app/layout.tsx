@@ -54,7 +54,8 @@ export default async function RootLayout({
   )
 }
 
-export const metadata: Metadata = {
+export const metadata = {
+  metadataBase: new URL('https://staging.programming.in.th'),
   themeColor: '#000000',
   icons: {
     icon: '/assets/img/icon-512.png',
@@ -67,7 +68,7 @@ export const metadata: Metadata = {
     title: 'PROGRAMMING.IN.TH',
     description:
       'PROGRAMMING.IN.TH provides you with the fundamentals of algorithmic problem-solving, an important skill to differentiate yourself as a programmer in an increasingly technologically advanced world.',
-    url: 'https://beta.programming.in.th',
+    url: 'https://staging.programming.in.th',
     siteName: 'programming.in.th',
     images: [
       {
@@ -84,4 +85,4 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'programming.in.th'
   }
-}
+} satisfies Metadata
