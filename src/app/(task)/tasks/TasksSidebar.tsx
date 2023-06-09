@@ -71,7 +71,7 @@ export const TasksSidebar = () => {
         <select
           className="my-2 block w-full rounded-md border-gray-800 py-2 pl-3 text-base sm:text-sm"
           onChange={({ target: { value } }) => {
-            router.push(`/tasks${value === 'All' ? '' : `&type=${value}`}`)
+            router.push(`/tasks${value === 'All' ? '' : `?type=${value}`}`)
           }}
           value={type ?? 'All'}
         >
