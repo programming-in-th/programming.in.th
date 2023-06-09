@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useLocation } from '@/lib/useLocation'
 
 import { navigation } from './links'
+import { PopoverButton } from '../useClientMirror'
 
 export const DesktopLinks = () => {
   const location = useLocation()
@@ -34,7 +35,8 @@ export const MobileLinks = () => {
   return (
     <>
       {navigation.map(item => (
-        <Link
+        <PopoverButton
+          as={Link}
           href={item.href}
           key={item.name}
           className={`font-sm block rounded-md px-3 py-2 text-base ${
@@ -44,7 +46,7 @@ export const MobileLinks = () => {
           }`}
         >
           {item.name}
-        </Link>
+        </PopoverButton>
       ))}
     </>
   )
