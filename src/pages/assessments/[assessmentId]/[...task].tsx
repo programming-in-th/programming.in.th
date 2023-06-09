@@ -7,7 +7,7 @@ import { Loading } from '@/components/Loading'
 import { TaskLayout } from '@/components/Task/Layout'
 import StatementTab from '@/components/Task/Tabs/Statement'
 import SubmissionsTab from '@/components/Task/Tabs/Submissions'
-import SubmitTab from '@/components/Task/Tabs/Submit'
+import SubmitTab from '@/components/Task/Tabs/SubmitSync'
 import fetcher from '@/lib/fetcher'
 
 const component = (type: string, task: Task, assessmentId: string) => {

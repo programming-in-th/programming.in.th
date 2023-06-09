@@ -1,19 +1,23 @@
-import { Task } from '@prisma/client'
+'use client'
 
-import { getServerUser } from '@/lib/session'
+import { Task } from '@prisma/client'
+import { useSession } from 'next-auth/react'
 
 import { SubmitElement } from '../SubmitElement'
 
-const SubmitTab = async ({
+/**
+ * @deprecated For legacy page dir
+ */
+const SubmitTab = ({
   task,
   assessmentId
 }: {
   task: Task
   assessmentId?: string
 }) => {
-  const user = await getServerUser()
+  const { status } = useSession()
 
-  if (!user) {
+  if (status !== 'authenticated') {
     return (
       <div className="flex h-24 items-center justify-center">
         <p className="text-center text-prog-gray-500 dark:text-gray-200">
