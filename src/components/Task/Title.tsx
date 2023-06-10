@@ -60,7 +60,7 @@ export const Title = ({
       >
         <p
           className={clsx(
-            'w-full break-normal text-lg font-medium dark:text-white',
+            'w-full break-all text-lg font-medium dark:text-white',
             task === undefined && 'rounded bg-gray-200 dark:bg-slate-700'
           )}
         >
