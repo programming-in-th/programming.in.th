@@ -47,7 +47,7 @@ export default async function Tasks() {
   const tasks = await getTasks(user)
 
   const rawSolved = await prisma.$queryRaw(
-    Prisma.sql`SELECT COUNT(DISTINCT user_id), task_id FROM submission WHERE score = 100 GROUP BY task_id`
+    Prisma.sql`SELECT COUNT(DISTINCT submission.user_id), submission.task_id FROM submission INNER JOIN task ON submission.task_id = task.id WHERE submission.score = task.full_score GROUP BY submission.task_id`
   )
 
   const solved = JSON.parse(
