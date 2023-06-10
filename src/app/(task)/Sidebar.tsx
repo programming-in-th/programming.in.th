@@ -87,7 +87,7 @@ export const SideBar = ({
   }, [data])
 
   return (
-    <section className="w-full flex-none md:w-[14rem]">
+    <section className="w-full flex-none">
       <select
         className="mt-2 w-full px-4 py-2 md:hidden"
         onChange={({ target: { value } }) =>
@@ -143,7 +143,7 @@ export const SideBar = ({
       <div className="hidden flex-col items-center justify-center text-slate-500 dark:text-gray-300 md:flex">
         <p className="mb-4 font-light dark:text-gray-200">Your Score</p>
         {/* @TODO Login or show login button */}
-        <PieChart points={maxScore} />
+        <PieChart points={maxScore} fullScore={task.fullScore} />
       </div>
 
       <hr className="my-4 hidden md:block" />

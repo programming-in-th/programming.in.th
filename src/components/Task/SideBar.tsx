@@ -142,7 +142,7 @@ export const SideBar = ({
       <div className="hidden flex-col items-center justify-center text-slate-500 dark:text-gray-300 md:flex">
         <p className="mb-4 font-light dark:text-gray-200">Your Score</p>
         {/* @TODO Login or show login button */}
-        <PieChart points={maxScore} />
+        <PieChart points={maxScore} fullScore={task.fullScore} />
       </div>
 
       <hr className="my-4 hidden md:block" />

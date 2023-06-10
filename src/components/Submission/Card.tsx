@@ -56,7 +56,7 @@ const getColumn = (
                 sub.score === task.fullScore ? 'bg-blue-500' : 'bg-gray-500'
               }`}
               style={{
-                width: `${(sub.score / 100) * 100}%`
+                width: `${(sub.score / task.fullScore) * 100}%`
               }}
             />
           </div>
