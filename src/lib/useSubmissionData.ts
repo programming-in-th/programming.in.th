@@ -14,12 +14,21 @@ import {
 import fetcher from './fetcher'
 
 export const useSSESubmissionData = (id: number) => {
-  const { data, error, mutate } = useSWR<IGeneralSubmission>(
+  const { data, error, isLoading, mutate } = useSWR<IGeneralSubmission>(
     `/api/submissions/${id}`,
     fetcher
   )
 
   useEffect(() => {
+    if (
+      isLoading ||
+      data?.status === JUDGE_COMPLETED ||
+      data?.status === JUDGE_ERROR ||
+      data?.status === JUDGE_COMPILATION_ERROR
+    ) {
+      return
+    }
+
     const eventSource = new EventSource(
       `${process.env.NEXT_PUBLIC_REALTIME_URL}/${id}`
     )
@@ -51,7 +60,7 @@ export const useSSESubmissionData = (id: number) => {
     return () => {
       eventSource.close()
     }
-  }, [id, mutate])
+  }, [id, isLoading])
 
   return {
     submission: data,
