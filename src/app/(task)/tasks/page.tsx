@@ -76,7 +76,7 @@ export default async function Tasks() {
 
   return (
     <div className="flex w-auto justify-center">
-      <div className="flex min-h-screen w-full max-w-7xl flex-col items-center">
+      <div className="flex min-h-[calc(100vh-2.5rem)] w-full max-w-7xl flex-col items-center">
         <TaskSearch
           header={
             <>

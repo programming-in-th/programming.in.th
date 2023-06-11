@@ -7,7 +7,6 @@ import { useSearchParams } from 'next/navigation'
 import { IGeneralTask } from '@/types/tasks'
 
 import { Listing } from './All'
-import { Pagination } from './Pagination'
 
 interface ITab {
   condition: (_task: IGeneralTask) => boolean
@@ -38,12 +37,9 @@ const Tabs: ITab[] = [
   }
 ]
 
-const LIMIT = 7
-
 export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
   const searchParams = useSearchParams()
   const type = searchParams?.get('type')
-  const qPage = searchParams?.get('page')
 
   const [tag, setTag] = useState<boolean>(false)
 
@@ -62,22 +58,5 @@ export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
     [tasks, condition]
   )
 
-  const page = useMemo(() => parseInt(qPage as string) || 1, [qPage])
-
-  const pageLimit = useMemo(
-    () => Math.ceil(filteredTask.length / LIMIT),
-    [filteredTask]
-  )
-
-  const slicedTask = useMemo(
-    () => filteredTask.slice((page - 1) * LIMIT, page * LIMIT),
-    [filteredTask, page]
-  )
-
-  return (
-    <div className="flex w-full flex-col">
-      <Listing tasks={slicedTask} tag={tag} setTag={setTag} />
-      <Pagination page={page} pageLimit={pageLimit} />
-    </div>
-  )
+  return <Listing tasks={filteredTask} tag={tag} setTag={setTag} />
 }

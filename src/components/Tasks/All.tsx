@@ -37,9 +37,12 @@ export const Listing = ({
         </div>
         <div className="w-14 px-4" />
       </div>
-      {tasks.map(context => (
-        <TaskItem {...context} showTags={tag} key={`task-${context.id}`} />
-      ))}
+
+      <div className="no-scrollbar mt-4 max-h-[calc(100vh-17rem)] overflow-y-auto">
+        {tasks.map(context => (
+          <TaskItem {...context} showTags={tag} key={`task-${context.id}`} />
+        ))}
+      </div>
     </div>
   )
 }
