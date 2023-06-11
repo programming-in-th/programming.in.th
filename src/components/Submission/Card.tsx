@@ -154,7 +154,7 @@ export const Card = ({
       <>
         {columns.map(column => (
           <div
-            key={column.title}
+            key={column.field}
             className={clsx(
               'hidden min-w-0 items-center justify-center px-2 text-sm md:flex',
               column.width
