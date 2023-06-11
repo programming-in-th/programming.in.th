@@ -67,29 +67,11 @@ export const TaskItem = (
                   event.stopPropagation()
                   setBookmark(!bookmark)
 
-                  if (bookmark) {
-                    await fetch(`/api/bookmarks`, {
-                      method: 'DELETE',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        taskId: task.id
-                      })
-                    })
-                  } else {
-                    await fetch(`/api/bookmarks`, {
-                      method: 'POST',
-                      headers: {
-                        'Content-Type': 'application/json'
-                      },
-                      body: JSON.stringify({
-                        taskId: task.id
-                      })
-                    })
-                  }
+                  await fetch(`/api/bookmarks/${task.id}`, {
+                    method: bookmark ? 'DELETE' : 'POST'
+                  })
 
-                  mutate('/api/bookmarks')
+                  mutate(`/api/bookmarks/${task.id}`)
                 }}
                 className={`${
                   bookmark
@@ -181,29 +163,11 @@ export const TaskItem = (
             onClick={async () => {
               setBookmark(!bookmark)
 
-              if (bookmark) {
-                await fetch(`/api/bookmarks`, {
-                  method: 'DELETE',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    taskId: task.id
-                  })
-                })
-              } else {
-                await fetch(`/api/bookmarks`, {
-                  method: 'POST',
-                  headers: {
-                    'Content-Type': 'application/json'
-                  },
-                  body: JSON.stringify({
-                    taskId: task.id
-                  })
-                })
-              }
+              await fetch(`/api/bookmarks/${task.id}`, {
+                method: bookmark ? 'DELETE' : 'POST'
+              })
 
-              mutate('/api/bookmarks')
+              mutate(`/api/bookmarks/${task.id}`)
             }}
             className={`${
               bookmark

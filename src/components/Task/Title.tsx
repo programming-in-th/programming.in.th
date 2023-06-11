@@ -19,9 +19,7 @@ export const Title = ({
   const { status } = useSession()
 
   const { data: bookmark } = useSWR<boolean>(
-    task && status === 'authenticated'
-      ? `/api/bookmarks/task/${task.id}`
-      : null,
+    task && status === 'authenticated' ? `/api/bookmarks/${task.id}` : null,
     fetcher
   )
 
@@ -32,12 +30,10 @@ export const Title = ({
           className="mt-1 flex"
           onClick={async () => {
             mutate(
-              `/api/bookmarks/task/${task.id}`,
+              `/api/bookmarks/${task.id}`,
               async (state: boolean) => {
-                await fetch(`/api/bookmarks`, {
-                  method: state ? 'POST' : 'DELETE',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ taskId: task.id })
+                await fetch(`/api/bookmarks/${task.id}`, {
+                  method: state ? 'POST' : 'DELETE'
                 })
                 return state
               },
