@@ -1,5 +1,3 @@
-import React from 'react'
-
 import Highlight, { Prism } from 'prism-react-renderer'
 ;((typeof global !== 'undefined' ? global : window) as any).Prism = Prism
 
@@ -24,12 +22,7 @@ const Code = ({ code, language }: CodeBlockProps) => {
           <code className={`language-${language}`}>
             {tokens.map((line, i) => (
               <tr key={i} {...getLineProps({ line, key: i })}>
-                <td
-                  key={i + 'l'}
-                  className="w-8 select-none pr-2 text-gray-500"
-                >
-                  {i + 1}
-                </td>
+                <td className="w-8 select-none pr-2 text-gray-500">{i + 1}</td>
                 <td>
                   {line.map((token, key) => (
                     <span key={key} {...getTokenProps({ token, key })} />

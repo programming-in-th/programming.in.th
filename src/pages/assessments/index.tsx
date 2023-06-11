@@ -1,5 +1,3 @@
-import React from 'react'
-
 import useSWR from 'swr'
 
 import AssessmentCard from '@/components/Assessment/AssessmentCard'

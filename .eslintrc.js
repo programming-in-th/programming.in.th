@@ -8,6 +8,7 @@ const config = {
     'next/core-web-vitals',
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:react/jsx-runtime',
     'plugin:import/recommended',
     'plugin:import/typescript',
     'plugin:prettier/recommended'
@@ -45,6 +46,7 @@ const config = {
         }
       }
     ],
+    'import/no-cycle': 'warn',
     // TODO remove unused vars pls bruh
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
