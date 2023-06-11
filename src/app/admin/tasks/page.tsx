@@ -1,3 +1,5 @@
+'use client'
+
 import { useMemo, useState } from 'react'
 
 import { Task } from '@prisma/client'
@@ -6,7 +8,6 @@ import useSWR, { mutate } from 'swr'
 
 import EditTask from '@/components/Admin/Assessments/EditTask'
 import VerifyDelete from '@/components/Admin/Assessments/VerifyDelete'
-import { Layout } from '@/components/Admin/Layout'
 import fetcher from '@/lib/fetcher'
 
 const TaskCard = ({ task }: { task: Task }) => {
@@ -100,7 +101,7 @@ const TaskCard = ({ task }: { task: Task }) => {
   )
 }
 
-const Tasks = () => {
+export default function AdminTasks() {
   const { data: tasks } = useSWR<Task[]>('/api/tasks', fetcher)
 
   const [openNewTask, setOpenNewTask] = useState<boolean>(false)
@@ -109,63 +110,60 @@ const Tasks = () => {
     () => (tasks || []).filter(task => task.private),
     [tasks]
   )
+
   const publicTask = useMemo(
     () => (tasks || []).filter(task => !task.private),
     [tasks]
   )
 
   return (
-    <Layout current="tasks">
-      <>
-        <div className="flex w-full max-w-3xl flex-col">
-          <div
-            className="my-6 flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md border border-gray-100 py-10 shadow-md transition hover:bg-gray-50 dark:border-none dark:bg-slate-700 dark:hover:bg-slate-600"
-            onClick={() => setOpenNewTask(true)}
+    <>
+      <div className="flex w-full max-w-3xl flex-col">
+        <div
+          className="my-6 flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md border border-gray-100 py-10 shadow-md transition hover:bg-gray-50 dark:border-none dark:bg-slate-700 dark:hover:bg-slate-600"
+          onClick={() => setOpenNewTask(true)}
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth={1.5}
+            stroke="currentColor"
+            className="h-6 w-6"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="h-6 w-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M12 4.5v15m7.5-7.5h-15"
-              />
-            </svg>
-            <p>Create Task</p>
-          </div>
-          <div className="w-ful flex space-x-4">
-            {/* <div className="w-64 flex-none">
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M12 4.5v15m7.5-7.5h-15"
+            />
+          </svg>
+          <p>Create Task</p>
+        </div>
+        <div className="w-ful flex space-x-4">
+          {/* <div className="w-64 flex-none">
               <p className="font-semibold dark:text-gray-200">Tags</p>
             </div> */}
-            <div className="flex w-full flex-col space-y-6">
-              <div className="flex w-full flex-col space-y-2">
-                <p className="w-full border-b border-gray-200 pb-2 dark:border-slate-500 dark:text-gray-200">
-                  Private Tasks
-                </p>
-                {privateTask.map(task => (
-                  <TaskCard key={task.id} task={task} />
-                ))}
-              </div>
-              <div className="flex w-full flex-col space-y-2">
-                <p className="w-full border-b border-gray-200 pb-2 dark:border-slate-500 dark:text-gray-200">
-                  Public Tasks
-                </p>
-                {publicTask.map(task => (
-                  <TaskCard key={task.id} task={task} />
-                ))}
-              </div>
+          <div className="flex w-full flex-col space-y-6">
+            <div className="flex w-full flex-col space-y-2">
+              <p className="w-full border-b border-gray-200 pb-2 dark:border-slate-500 dark:text-gray-200">
+                Private Tasks
+              </p>
+              {privateTask.map(task => (
+                <TaskCard key={task.id} task={task} />
+              ))}
+            </div>
+            <div className="flex w-full flex-col space-y-2">
+              <p className="w-full border-b border-gray-200 pb-2 dark:border-slate-500 dark:text-gray-200">
+                Public Tasks
+              </p>
+              {publicTask.map(task => (
+                <TaskCard key={task.id} task={task} />
+              ))}
             </div>
           </div>
         </div>
-        <EditTask open={openNewTask} setOpen={setOpenNewTask} />
-      </>
-    </Layout>
+      </div>
+      <EditTask open={openNewTask} setOpen={setOpenNewTask} />
+    </>
   )
 }
-
-export default Tasks
