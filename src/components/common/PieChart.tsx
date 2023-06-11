@@ -17,7 +17,12 @@ const PieChart = memo(function PieChart({
       <div className="absolute flex w-full justify-center">
         <div
           className="pie animate inset-x-0 top-0 z-10 transition-all"
-          style={{ '--p': (points / fullScore) * 100 } as any}
+          style={
+            {
+              '--c': points > 0 ? '#3b82f6' : '#F1F5F9',
+              '--p': (points / fullScore) * 100
+            } as any
+          }
         >
           <div className="flex flex-col items-center">
             <p>
