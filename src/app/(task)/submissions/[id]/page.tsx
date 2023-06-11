@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation'
+
 import Submission from '@/components/Submission/Submission'
 import prisma from '@/lib/prisma'
 
@@ -20,7 +22,7 @@ export default async function Submissions({
   )?.task
 
   if (!task) {
-    return <div>Not found</div>
+    notFound()
   }
 
   return (

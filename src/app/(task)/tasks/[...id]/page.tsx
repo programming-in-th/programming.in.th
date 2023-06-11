@@ -1,3 +1,5 @@
+import { notFound } from 'next/navigation'
+
 import { TaskContent } from '@/components/Task/Content'
 import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
@@ -42,7 +44,7 @@ export default async function Tasks({ params }: { params: { id: string[] } }) {
   const tasks = await getTask(id[0], id[1])
 
   if (tasks === null) {
-    return <div>404</div>
+    notFound()
   }
 
   const { solution, task, type } = tasks
