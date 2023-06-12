@@ -42,24 +42,25 @@ async function getTasks(user: User) {
   })
 }
 
-export default async function Tasks() {
-  const user = (await getServerUser()) as User
-  const tasks = await getTasks(user)
-
+async function getSolved() {
   const rawSolved = await prisma.$queryRaw(
     Prisma.sql`SELECT COUNT(DISTINCT submission.user_id), submission.task_id FROM submission INNER JOIN task ON submission.task_id = task.id WHERE submission.score = task.full_score GROUP BY submission.task_id`
   )
 
-  const solved = JSON.parse(
+  return JSON.parse(
     JSON.stringify(rawSolved, (_, v) =>
       typeof v === 'bigint' ? `${v}n` : v
     ).replace(/"(-?\d+)n"/g, (_, a) => a)
   ) as ISolved[]
+}
 
-  const score = (await prisma.$queryRaw(
+async function getScore(user: User) {
+  return (await prisma.$queryRaw(
     Prisma.sql`SELECT task_id, max(score) FROM submission WHERE user_id = ${user?.id} GROUP BY task_id;`
   )) as Array<{ task_id: string; max: number }>
+}
 
+async function getBookmark(user: User) {
   const rawBookmark = await prisma.bookmark.findMany({
     where: {
       user: {
@@ -68,11 +69,20 @@ export default async function Tasks() {
     }
   })
 
-  const bookmarks = user
+  return user
     ? rawBookmark.map(bookmark => {
         return bookmark.taskId
       })
     : []
+}
+
+export default async function Tasks() {
+  const [user, solved] = await Promise.all([getServerUser(), getSolved()])
+  const [tasks, score, bookmarks] = await Promise.all([
+    getTasks(user as User),
+    getScore(user as User),
+    getBookmark(user as User)
+  ])
 
   return (
     <div className="flex w-auto justify-center">
