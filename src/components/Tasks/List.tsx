@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
@@ -53,10 +53,21 @@ export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
     [type]
   )
 
-  const filteredTask = useMemo(
-    () => tasks.filter(condition),
-    [tasks, condition]
-  )
+  const [initialRender, setInertialRender] = useState(true)
+
+  const filteredTask = useMemo(() => {
+    const filtered = tasks.filter(condition)
+
+    if (initialRender) {
+      return filtered.slice(0, 20)
+    } else {
+      return filtered
+    }
+  }, [tasks, condition, initialRender])
+
+  useEffect(() => {
+    setInertialRender(false)
+  }, [])
 
   return <Listing tasks={filteredTask} tag={tag} setTag={setTag} />
 }
