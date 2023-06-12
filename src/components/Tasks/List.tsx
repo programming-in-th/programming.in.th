@@ -53,7 +53,7 @@ export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
     [type]
   )
 
-  const [initialRender, setInertialRender] = useState(true)
+  const [initialRender, setInitialRender] = useState(true)
 
   const filteredTask = useMemo(() => {
     const filtered = tasks.filter(condition)
@@ -66,7 +66,7 @@ export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
   }, [tasks, condition, initialRender])
 
   useEffect(() => {
-    setInertialRender(false)
+    setInitialRender(false)
   }, [])
 
   return <Listing tasks={filteredTask} tag={tag} setTag={setTag} />
