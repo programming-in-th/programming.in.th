@@ -7,16 +7,14 @@
   "packageRules": [
     {
       "packagePatterns": ["*"],
-      "enabled": true
-    },
-    {
-      "packageNames": ["node"],
-      "enabled": false
-    },
-    {
-      "packagePatterns": ["*"],
       "matchUpdateTypes": ["patch", "minor"],
       "groupName": "dependencies (non-major)"
+    },
+    {
+      // TypeScript may have breaking changes (ex 5.1)
+      "groupName": "TypeScript",
+      "matchPackageNames": ["typescript"],
+      "matchUpdateTypes": ["minor", "major"]
     }
   ],
   "vulnerabilityAlerts": {
