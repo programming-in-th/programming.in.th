@@ -1,12 +1,13 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
+import dynamic from 'next/dynamic'
 import { useSearchParams } from 'next/navigation'
 
 import { IGeneralTask } from '@/types/tasks'
 
-import { Listing } from './All'
+const DynamicList = dynamic(() => import('./All'), { ssr: false })
 
 interface ITab {
   condition: (_task: IGeneralTask) => boolean
@@ -53,21 +54,10 @@ export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
     [type]
   )
 
-  const [initialRender, setInitialRender] = useState(true)
+  const filteredTask = useMemo(
+    () => tasks.filter(condition),
+    [tasks, condition]
+  )
 
-  const filteredTask = useMemo(() => {
-    const filtered = tasks.filter(condition)
-
-    if (initialRender) {
-      return filtered.slice(0, 20)
-    } else {
-      return filtered
-    }
-  }, [tasks, condition, initialRender])
-
-  useEffect(() => {
-    setInitialRender(false)
-  }, [])
-
-  return <Listing tasks={filteredTask} tag={tag} setTag={setTag} />
+  return <DynamicList tasks={filteredTask} tag={tag} setTag={setTag} />
 }
