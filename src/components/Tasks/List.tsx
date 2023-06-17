@@ -2,12 +2,11 @@
 
 import { useMemo, useState } from 'react'
 
-import dynamic from 'next/dynamic'
 import { useSearchParams } from 'next/navigation'
 
 import { IGeneralTask } from '@/types/tasks'
 
-const DynamicList = dynamic(() => import('./All'), { ssr: false })
+import List from './All'
 
 interface ITab {
   condition: (_task: IGeneralTask) => boolean
@@ -59,5 +58,5 @@ export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
     [tasks, condition]
   )
 
-  return <DynamicList tasks={filteredTask} tag={tag} setTag={setTag} />
+  return <List tasks={filteredTask} tag={tag} setTag={setTag} />
 }
