@@ -17,7 +17,7 @@ export default async function AdminLayout({
     redirect('/login')
   }
 
-  if (!user?.admin) {
+  if (!user.admin) {
     redirect('/')
   }
 
