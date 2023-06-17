@@ -2,7 +2,7 @@
 
 # programming.in.th
 
-[![Powered by Vercel](https://raw.githubusercontent.com/programming-in-th/programming.in.th/0.2/powered-by-vercel.svg)](https://vercel.com/?utm_source=proginth&utm_campaign=oss)
+[![Powered by Vercel](https://images.ctfassets.net/e5382hct74si/78Olo8EZRdUlcDUFQvnzG7/fa4cdb6dc04c40fceac194134788a0e2/1618983297-powered-by-vercel.svg)](https://vercel.com/?utm_source=proginth&utm_campaign=oss)
 
 ## What is programming.in.th
 
@@ -22,7 +22,7 @@ A website for practicing algorithms, data structures and competitive programming
 
 ## Stack
 
-React, Next.JS, Prisma and live on Vercel
+React, Next.js (App Router), Prisma and live on Vercel with Serverless Functions
 
 ## Getting started
 
@@ -30,8 +30,10 @@ This section provides a quick start guide for our project.
 
 ### Prerequisites
 
-- nodejs: Please refer to their [installation guide](https://nodejs.org/en/).
+- Node.js: Please refer to their [installation guide](https://nodejs.org/en/).
 - pnpm: Please refer to their [installation guide](https://pnpm.io/).
+
+Please install correct version of Node.js and pnpm, you can use nvm and corepack to manage versions easier.
 
 ### Installation
 
@@ -57,17 +59,19 @@ You too can help us improve our project by suggesting features, bug report, etc.
 
 ### Active
 
-- [@win11905](https://github.com/win11905)
+- [@pongsaphol](https://github.com/pongsaphol)
 - [@iammarkps](https://github.com/iammarkps)
-- [@betich](https://github.com/betich)
-- [@NakZaa](https://github.com/nakzaa)
-- [@nuyer](https://github.com/nuyer)
+- [@Leomotors](https://github.com/Leomotors)
+- [@MasterIceZ](https://github.com/MasterIceZ)
 
 ### Retired
 
 - [@szawinis](https://github.com/szawinis)
 - [@PeppaPigHS](https://github.com/PeppaPigHS)
+- [@betich](https://github.com/betich)
+- [@NakZaa](https://github.com/nakzaa)
+- [@nuyer](https://github.com/nuyer)
 
 ## License
 
-This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation. Please see the [LICENSE](https://github.com/programming-in-th/programming.in.th/blob/master/LICENSE) for more information.
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU Affero General Public License as published by the Free Software Foundation. Please see the [LICENSE](./LICENSE) for more information.
