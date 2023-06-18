@@ -42,7 +42,14 @@ async function JoinButton() {
   )
 }
 
-const getTasksCount = cache(async () => await prisma.task.count())
+const getTasksCount = cache(
+  async () =>
+    await prisma.task.count({
+      where: {
+        private: false
+      }
+    })
+)
 const getUsersCount = cache(async () => await prisma.user.count())
 
 export const revalidate = 3600 // 1 hour
