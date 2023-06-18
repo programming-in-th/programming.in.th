@@ -67,7 +67,8 @@ export default async function Landing() {
           </p>
 
           <p className="mt-4 text-sm leading-relaxed text-prog-gray-500 dark:text-slate-200 sm:text-base">
-            {`เว็บไซต์ที่ผู้ใช้มากมายเชื่อมั่น ด้วยโจทย์ฝึกเขียนโปรแกรมถึง ${tasksCount} ข้อ`}
+            เว็บไซต์ที่ผู้ใช้มากมายเชื่อมั่น ด้วยโจทย์ฝึกเขียนโปรแกรมถึง{' '}
+            {tasksCount} ข้อ
             <br />
             และบทเรียนเกี่ยวกับ Data Structure & Algorithms
           </p>
