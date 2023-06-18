@@ -1,3 +1,5 @@
+import { cache } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -12,10 +14,12 @@ import clsx from 'clsx'
 import { FeatureCard } from '@/components/Landing/FeatureCard'
 import { IncrementalNumber } from '@/components/Landing/IncrementalNumber'
 import { TestimonyCard } from '@/components/Landing/TestimonyCard'
+import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
 import { PeopleVector } from '@/svg/Illustrations/People'
 
 async function JoinButton() {
+  'use client'
   const user = await getServerUser()
 
   const isLoggedIn = user ? true : false
@@ -38,7 +42,24 @@ async function JoinButton() {
   )
 }
 
-export default function Landing() {
+const getTasksCount = cache(
+  async () =>
+    await prisma.task.count({
+      where: {
+        private: false
+      }
+    })
+)
+const getUsersCount = cache(async () => await prisma.user.count())
+
+export const revalidate = 3600 // 1 hour
+
+export default async function Landing() {
+  const [tasksCount, usersCount] = await Promise.all([
+    getTasksCount(),
+    getUsersCount()
+  ])
+
   return (
     <div>
       <div className="flex min-h-screen flex-col items-center justify-start pt-12">
@@ -53,7 +74,8 @@ export default function Landing() {
           </p>
 
           <p className="mt-4 text-sm leading-relaxed text-prog-gray-500 dark:text-slate-200 sm:text-base">
-            เว็บไซต์ที่ผู้ใช้มากมายเชื่อมั่น ด้วยโจทย์ฝึกเขียนโปรแกรมถึง 726 ข้อ
+            เว็บไซต์ที่ผู้ใช้มากมายเชื่อมั่น ด้วยโจทย์ฝึกเขียนโปรแกรมถึง{' '}
+            {tasksCount} ข้อ
             <br />
             และบทเรียนเกี่ยวกับ Data Structure & Algorithms
           </p>
@@ -132,7 +154,7 @@ export default function Landing() {
                 จำนวนผู้ใช้กว่า
               </p>
               <div className="text-6xl font-semibold text-prog-primary-500">
-                <IncrementalNumber start={1} end={18222} />
+                <IncrementalNumber start={1} end={usersCount} />
               </div>
               <p className="text-2xl font-semibold text-prog-gray-500 dark:text-gray-200">
                 คน
