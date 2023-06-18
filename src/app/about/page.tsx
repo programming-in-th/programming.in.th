@@ -29,9 +29,12 @@ export default async function About() {
   )
 
   const coreTeam = await coreteamPromise
-  const contributors = (await contributorsPromise).filter(
-    contributor => !coreTeam.find(member => member.login === contributor.login)
-  )
+  const contributors = (await contributorsPromise)
+    .filter(
+      contributor =>
+        !coreTeam.find(member => member.login === contributor.login)
+    )
+    .filter(contributor => contributor.type !== 'Bot')
 
   return (
     <main className="mt-24 flex min-h-screen flex-col items-center text-center">
