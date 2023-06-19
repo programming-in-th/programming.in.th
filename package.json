@@ -1,7 +1,7 @@
 {
   "name": "programming.in.th",
   "private": true,
-  "packageManager": "pnpm@8.6.2",
+  "packageManager": "pnpm@8.6.3",
   "engines": {
     "node": "^18.12"
   },
@@ -62,7 +62,7 @@
     "react-countup": "6.4.2",
     "react-dom": "18.2.0",
     "react-dropzone": "14.2.3",
-    "react-hook-form": "7.44.3",
+    "react-hook-form": "7.45.0",
     "react-hot-toast": "2.4.1",
     "react-infinite-scroll-component": "6.1.0",
     "react-table": "7.8.0",
@@ -79,7 +79,7 @@
     "@octokit/types": "10.0.0",
     "@tailwindcss/typography": "0.5.9",
     "@types/node": "20.3.1",
-    "@types/react": "18.2.12",
+    "@types/react": "18.2.13",
     "@types/react-table": "7.7.14",
     "@typescript-eslint/eslint-plugin": "5.59.11",
     "@typescript-eslint/parser": "5.59.11",
