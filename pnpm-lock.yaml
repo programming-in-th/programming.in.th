@@ -106,7 +106,7 @@ dependencies:
     version: 0.16.7
   next:
     specifier: 13.4.6
-    version: 13.4.6(@babel/core@7.22.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.4)
+    version: 13.4.6(@babel/core@7.22.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.5)
   next-auth:
     specifier: 4.22.1
     version: 4.22.1(next@13.4.6)(react-dom@18.2.0)(react@18.2.0)
@@ -239,8 +239,8 @@ devDependencies:
     specifier: 0.10.0
     version: 0.10.0
   sass:
-    specifier: 1.63.4
-    version: 1.63.4
+    specifier: 1.63.5
+    version: 1.63.5
   tailwindcss:
     specifier: 3.3.2
     version: 3.3.2(ts-node@10.9.1)
@@ -5910,7 +5910,7 @@ packages:
       '@panva/hkdf': 1.1.1
       cookie: 0.5.0
       jose: 4.14.4
-      next: 13.4.6(@babel/core@7.22.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.4)
+      next: 13.4.6(@babel/core@7.22.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.5)
       oauth: 0.9.15
       openid-client: 5.4.2
       preact: 10.15.1
@@ -5944,7 +5944,7 @@ packages:
       react: '*'
       react-dom: '*'
     dependencies:
-      next: 13.4.6(@babel/core@7.22.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.4)
+      next: 13.4.6(@babel/core@7.22.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.5)
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -5953,7 +5953,7 @@ packages:
     resolution: {integrity: sha512-CXdUiJembsNjuToQvxayPZF9Vqht7hewsvy2sOWafLvi2awflj9mOC6bHIg50orX8IJvWKY9wYQ/zB2kogPslQ==}
     dev: false
 
-  /next@13.4.6(@babel/core@7.22.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.4):
+  /next@13.4.6(@babel/core@7.22.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.5):
     resolution: {integrity: sha512-sjVqjxU+U2aXZnYt4Ud6CTLNNwWjdSfMgemGpIQJcN3Z7Jni9xRWbR0ie5fQzCg87aLqQVhKA2ud2gPoqJ9lGw==}
     engines: {node: '>=16.8.0'}
     hasBin: true
@@ -5979,7 +5979,7 @@ packages:
       postcss: 8.4.14
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
-      sass: 1.63.4
+      sass: 1.63.5
       styled-jsx: 5.1.1(@babel/core@7.22.5)(react@18.2.0)
       watchpack: 2.4.0
       zod: 3.21.4
@@ -7035,8 +7035,8 @@ packages:
       is-regex: 1.1.4
     dev: true
 
-  /sass@1.63.4:
-    resolution: {integrity: sha512-Sx/+weUmK+oiIlI+9sdD0wZHsqpbgQg8wSwSnGBjwb5GwqFhYNwwnI+UWZtLjKvKyFlKkatRK235qQ3mokyPoQ==}
+  /sass@1.63.5:
+    resolution: {integrity: sha512-Q6c5gs482oezdAp+0fWF9cRisvpy7yfYb64knID0OE8AnMgtkluRPfpGMFjeD4/+M4+6QpJZCU6JRSxbjiktkg==}
     engines: {node: '>=14.0.0'}
     hasBin: true
     dependencies:
