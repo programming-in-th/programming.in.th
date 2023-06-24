@@ -9,8 +9,8 @@ overrides:
 
 dependencies:
   '@aws-sdk/client-s3':
-    specifier: 3.358.0
-    version: 3.358.0
+    specifier: 3.359.0
+    version: 3.359.0
   '@codemirror/lang-cpp':
     specifier: 6.0.2
     version: 6.0.2
@@ -63,8 +63,8 @@ dependencies:
     specifier: 2.7.3
     version: 2.7.3
   '@tanstack/react-table':
-    specifier: 8.9.2
-    version: 8.9.2(react-dom@18.2.0)(react@18.2.0)
+    specifier: 8.9.3
+    version: 8.9.3(react-dom@18.2.0)(react@18.2.0)
   '@uiw/codemirror-theme-dracula':
     specifier: 4.21.4
     version: 4.21.4(@codemirror/language@6.8.0)(@codemirror/state@6.2.1)(@codemirror/view@6.14.0)
@@ -102,8 +102,8 @@ dependencies:
     specifier: 6.6.2
     version: 6.6.2
   katex:
-    specifier: 0.16.7
-    version: 0.16.7
+    specifier: 0.16.8
+    version: 0.16.8
   next:
     specifier: 13.4.7
     version: 13.4.7(@babel/core@7.22.5)(@opentelemetry/api@1.4.1)(react-dom@18.2.0)(react@18.2.0)(sass@1.63.6)
@@ -153,8 +153,8 @@ dependencies:
     specifier: 6.0.3
     version: 6.0.3
   rehype-prism-plus:
-    specifier: 1.5.1
-    version: 1.5.1
+    specifier: 1.6.0
+    version: 1.6.0
   rehype-slug:
     specifier: 5.1.0
     version: 5.1.0
@@ -182,8 +182,8 @@ devDependencies:
     specifier: 20.3.1
     version: 20.3.1
   '@types/react':
-    specifier: 18.2.13
-    version: 18.2.13
+    specifier: 18.2.14
+    version: 18.2.14
   '@types/react-table':
     specifier: 7.7.14
     version: 7.7.14
@@ -349,14 +349,14 @@ packages:
       tslib: 2.5.3
     dev: false
 
-  /@aws-sdk/client-s3@3.358.0:
-    resolution: {integrity: sha512-6YbCBd8m49vlYwOzIZv1l4OM3QTaSKrrL9p2qo9S68/4FSz0OWwm23b+UHQkMW7a5ipCPMPhCRfw/U1Sf0qWaw==}
+  /@aws-sdk/client-s3@3.359.0:
+    resolution: {integrity: sha512-Z/RRzM1o1uX0zs0ieBdaEIn9X5Jwl6Bk/fnTPmuWDHmgJUjv7OQ9Oa7BV4azBAW6JNQ6XW1SdJrrfsOdblJ8QA==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha1-browser': 3.0.0
       '@aws-crypto/sha256-browser': 3.0.0
       '@aws-crypto/sha256-js': 3.0.0
-      '@aws-sdk/client-sts': 3.358.0
+      '@aws-sdk/client-sts': 3.359.0
       '@aws-sdk/config-resolver': 3.357.0
       '@aws-sdk/credential-provider-node': 3.358.0
       '@aws-sdk/eventstream-serde-browser': 3.357.0
@@ -405,7 +405,7 @@ packages:
       '@aws-sdk/xml-builder': 3.310.0
       '@smithy/protocol-http': 1.0.1
       '@smithy/types': 1.0.0
-      fast-xml-parser: 4.2.4
+      fast-xml-parser: 4.2.5
       tslib: 2.5.3
     transitivePeerDependencies:
       - '@aws-sdk/signature-v4-crt'
@@ -494,8 +494,8 @@ packages:
       - aws-crt
     dev: false
 
-  /@aws-sdk/client-sts@3.358.0:
-    resolution: {integrity: sha512-lBtle7UMBXXxp9LHcmNDwsQZoz1B0sE4F6F63sTv+U4fT/Uo8m0AcxUE0WFxAP687w8rg7dSqxJCbMCKrfVQPA==}
+  /@aws-sdk/client-sts@3.359.0:
+    resolution: {integrity: sha512-zpyui8hXvEUvq8MwzZsm51ni0intvPjtV8dgx10nVJnm605nqrLlAMGqQ1S/UxO7CVmhqWbh5dnGHEc//UJlsw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-crypto/sha256-browser': 3.0.0
@@ -533,7 +533,7 @@ packages:
       '@aws-sdk/util-utf8': 3.310.0
       '@smithy/protocol-http': 1.0.1
       '@smithy/types': 1.0.0
-      fast-xml-parser: 4.2.4
+      fast-xml-parser: 4.2.5
       tslib: 2.5.3
     transitivePeerDependencies:
       - aws-crt
@@ -1788,7 +1788,7 @@ packages:
       react: '>=16'
     dependencies:
       '@types/mdx': 2.0.5
-      '@types/react': 18.2.13
+      '@types/react': 18.2.14
       react: 18.2.0
     dev: false
 
@@ -2232,20 +2232,20 @@ packages:
       tailwindcss: 3.3.2(ts-node@10.9.1)
     dev: true
 
-  /@tanstack/react-table@8.9.2(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-Irvw4wqVF9hhuYzmNrlae4IKdlmgSyoRWnApSLebvYzqHoi5tEsYzBj6YPd0hX78aB/L+4w/jgK2eBQVpGfThQ==}
+  /@tanstack/react-table@8.9.3(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-Ng9rdm3JPoSCi6cVZvANsYnF+UoGVRxflMb270tVj0+LjeT/ZtZ9ckxF6oLPLcKesza6VKBqtdF9mQ+vaz24Aw==}
     engines: {node: '>=12'}
     peerDependencies:
       react: '>=16'
       react-dom: '>=16'
     dependencies:
-      '@tanstack/table-core': 8.9.2
+      '@tanstack/table-core': 8.9.3
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@tanstack/table-core@8.9.2:
-    resolution: {integrity: sha512-ajc0OF+karBAdaSz7OK09rCoAHB1XI1+wEhu+tDNMPc+XcO+dTlXXN/Vc0a8vym4kElvEjXEDd9c8Zfgt4bekA==}
+  /@tanstack/table-core@8.9.3:
+    resolution: {integrity: sha512-NpHZBoHTfqyJk0m/s/+CSuAiwtebhYK90mDuf5eylTvgViNOujiaOaxNDxJkQQAsVvHWZftUGAx1EfO1rkKtLg==}
     engines: {node: '>=12'}
     dev: false
 
@@ -2402,11 +2402,11 @@ packages:
   /@types/react-table@7.7.14:
     resolution: {integrity: sha512-TYrv7onCiakaG1uAu/UpQ9FojNEt/4/ht87EgJQaEGFoWV606ZLWUZAcUHzMxgc3v1mywP1cDyz3qB4ho3hWOw==}
     dependencies:
-      '@types/react': 18.2.13
+      '@types/react': 18.2.14
     dev: true
 
-  /@types/react@18.2.13:
-    resolution: {integrity: sha512-vJ+zElvi/Zn9cVXB5slX2xL8PZodPCwPRDpittQdw43JR2AJ5k3vKdgJJyneV/cYgIbLQUwXa9JVDvUZXGba+Q==}
+  /@types/react@18.2.14:
+    resolution: {integrity: sha512-A0zjq+QN/O0Kpe30hA1GidzyFjatVvrpIvWLxD+xv67Vt91TWWgco9IvrJBkeyHm1trGaFS/FSGqPlhyeZRm0g==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
@@ -2648,7 +2648,7 @@ packages:
     peerDependencies:
       react: ^16.0.0-0 || ^17.0.0-0 || ^18.0.0-0
     dependencies:
-      '@types/react': 18.2.13
+      '@types/react': 18.2.14
       classnames: 2.3.2
       prop-types: 15.8.1
       react: 18.2.0
@@ -2673,7 +2673,7 @@ packages:
       '@types/d3-path': 1.0.9
       '@types/d3-shape': 1.3.8
       '@types/lodash': 4.14.195
-      '@types/react': 18.2.13
+      '@types/react': 18.2.14
       '@visx/curve': 3.0.0
       '@visx/group': 3.0.0(react@18.2.0)
       '@visx/scale': 3.0.0
@@ -2691,7 +2691,7 @@ packages:
       react: ^16.3.0-0 || ^17.0.0-0 || ^18.0.0-0
     dependencies:
       '@types/lodash': 4.14.195
-      '@types/react': 18.2.13
+      '@types/react': 18.2.14
       classnames: 2.3.2
       lodash: 4.17.21
       prop-types: 15.8.1
@@ -4177,8 +4177,8 @@ packages:
     resolution: {integrity: sha512-WvJe06IfNYlr+6cO3uQkdKdy3Cb1LlCJSF8zRs2eT8yuhdbSlR9nIt+TgQ92RUxiRrQm+/S7RARnMfCs5iuAjw==}
     dev: true
 
-  /fast-xml-parser@4.2.4:
-    resolution: {integrity: sha512-fbfMDvgBNIdDJLdLOwacjFAPYt67tr31H9ZhWSm45CDAxvd0I6WTlSOUo7K2P/K5sA5JgMKG64PI3DMcaFdWpQ==}
+  /fast-xml-parser@4.2.5:
+    resolution: {integrity: sha512-B9/wizE4WngqQftFPmdaMYlXoJlJOYxGQOanC77fq9k8+Z0v5dDSVh+3glErdIROP//s/jgb7ZuxKfB8nVyo0g==}
     hasBin: true
     dependencies:
       strnum: 1.0.5
@@ -5092,8 +5092,8 @@ packages:
       object.assign: 4.1.4
     dev: true
 
-  /katex@0.16.7:
-    resolution: {integrity: sha512-Xk9C6oGKRwJTfqfIbtr0Kes9OSv6IFsuhFGc7tW4urlpMJtuh+7YhzU6YEG9n8gmWKcMAFzkp7nr+r69kV0zrA==}
+  /katex@0.16.8:
+    resolution: {integrity: sha512-ftuDnJbcbOckGY11OO+zg3OofESlbR5DRl2cmN8HeWeeFIV7wTXvAOx8kEjZjobhA+9wh2fbKeO6cdcA9Mnovg==}
     hasBin: true
     dependencies:
       commander: 8.3.0
@@ -5543,7 +5543,7 @@ packages:
     resolution: {integrity: sha512-es0CcOV89VNS9wFmyn+wyFTKweXGW4CEvdaAca6SWRWPyYCbBisnjaHLjWO4Nszuiud84jCpkHsqAJoa768Pvg==}
     dependencies:
       '@types/katex': 0.16.0
-      katex: 0.16.7
+      katex: 0.16.8
       micromark-factory-space: 1.1.0
       micromark-util-character: 1.2.0
       micromark-util-symbol: 1.1.0
@@ -6832,7 +6832,7 @@ packages:
       '@types/katex': 0.14.0
       hast-util-from-html-isomorphic: 1.0.0
       hast-util-to-text: 3.1.2
-      katex: 0.16.7
+      katex: 0.16.8
       unist-util-visit: 4.1.2
     dev: false
 
@@ -6845,8 +6845,8 @@ packages:
       unified: 10.1.2
     dev: false
 
-  /rehype-prism-plus@1.5.1:
-    resolution: {integrity: sha512-mowYefSfrIkMMxkb0fwuEXlvc5nA9b1vQ6mzujM81Qx28RI0mo7jCHsBZ2tJ4eIJKXdFn+EdPkZZBGB10K02vg==}
+  /rehype-prism-plus@1.6.0:
+    resolution: {integrity: sha512-VxFC0cSWkCRhSGmYY5FZ7X7kb5BeoN8gVdpLQaOFyn0Brmf/bHFzJEFqZyhUyVyE+1oRIpsOT1dYgQmr8JmrjA==}
     dependencies:
       hast-util-to-string: 2.0.0
       parse-numeric-range: 1.3.0
