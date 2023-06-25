@@ -1,13 +1,8 @@
-import { Dispatch, SetStateAction, Suspense } from 'react'
-
-import dynamic from 'next/dynamic'
+import { Dispatch, SetStateAction } from 'react'
 
 import { IGeneralTask } from '@/types/tasks'
 
-const DynamicTaskItem = dynamic(() => import('./TaskItem'), {
-  suspense: true,
-  ssr: false
-})
+import { TaskItem } from './TaskItem'
 
 export const Listing = ({
   tasks,
@@ -45,9 +40,7 @@ export const Listing = ({
 
       <div className="no-scrollbar mt-4 max-h-[calc(100vh-17rem)] overflow-y-auto">
         {tasks.map(context => (
-          <Suspense fallback={<>hello</>} key={`task-${context.id}`}>
-            <DynamicTaskItem {...context} showTags={tag} />
-          </Suspense>
+          <TaskItem key={`task-${context.id}`} {...context} showTags={tag} />
         ))}
       </div>
     </div>

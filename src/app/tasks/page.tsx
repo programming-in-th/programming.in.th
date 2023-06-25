@@ -10,21 +10,7 @@ import { TaskSearch } from './TaskSearch'
 async function getTasks(user: User) {
   const rawTasks = await prisma.task.findMany({
     where: {
-      OR: [
-        {
-          taskOnAssessment: {
-            some: {
-              assessment: {
-                is: {
-                  users: { some: { userId: user?.id } },
-                  archived: false
-                }
-              }
-            }
-          }
-        },
-        { private: false }
-      ]
+      private: false
     }
   })
 
