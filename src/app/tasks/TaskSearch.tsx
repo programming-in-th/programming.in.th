@@ -4,29 +4,50 @@ import { FC, ReactNode, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
+// import useSWR from 'swr'
+
 import { TasksList } from '@/components/Tasks/List'
 import { IGeneralTask, IScore, ISolved } from '@/types/tasks'
 
 import { TasksSidebar } from './TasksSidebar'
+import useSWR from 'swr'
+import fetcher from '@/lib/fetcher'
 
 type TaskSearchProps = {
   header: ReactNode
   tasks: IGeneralTask[]
   solved: ISolved[]
-  score: IScore[]
-  bookmarks: string[]
 }
 
-export const TaskSearch: FC<TaskSearchProps> = ({
-  header,
-  tasks,
-  solved,
-  score,
-  bookmarks
-}) => {
+// async function getScore(user: User) {
+//   return (await prisma.$queryRaw(
+//     Prisma.sql`SELECT task_id, max(score) FROM submission WHERE user_id = ${user?.id} GROUP BY task_id;`
+//   )) as Array<{ task_id: string; max: number }>
+// }
+
+// async function getBookmark(user: User) {
+//   const rawBookmark = await prisma.bookmark.findMany({
+//     where: {
+//       user: {
+//         id: { equals: user?.id }
+//       }
+//     }
+//   })
+
+//   return user
+//     ? rawBookmark.map(bookmark => {
+//         return bookmark.taskId
+//       })
+//     : []
+// }
+
+export const TaskSearch: FC<TaskSearchProps> = ({ header, tasks, solved }) => {
   const router = useRouter()
 
   const [filteredTasks, setFilteredTasks] = useState<IGeneralTask[]>(tasks)
+
+  const score: IScore[] = []
+  const { data: bookmarks } = useSWR<string[]>('api/bookmarks', fetcher)
 
   const processedTasks = filteredTasks
     .map(task => ({
