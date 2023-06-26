@@ -3,7 +3,7 @@ export interface IGeneralTask {
   title: string
   tags: string[]
   solved: number
-  score: number
+  score: number | null
   fullScore: number
   tried: boolean
   bookmarked: boolean

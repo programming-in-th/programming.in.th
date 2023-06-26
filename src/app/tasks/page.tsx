@@ -1,30 +1,14 @@
 import { Prisma } from '@prisma/client'
-import { User } from 'next-auth'
 
 import prisma from '@/lib/prisma'
-import { getServerUser } from '@/lib/session'
 import { ISolved } from '@/types/tasks'
 
 import { TaskSearch } from './TaskSearch'
 
-async function getTasks(user: User) {
+async function getTasks() {
   const rawTasks = await prisma.task.findMany({
     where: {
-      OR: [
-        {
-          taskOnAssessment: {
-            some: {
-              assessment: {
-                is: {
-                  users: { some: { userId: user?.id } },
-                  archived: false
-                }
-              }
-            }
-          }
-        },
-        { private: false }
-      ]
+      private: false
     }
   })
 
@@ -54,35 +38,8 @@ async function getSolved() {
   ) as ISolved[]
 }
 
-async function getScore(user: User) {
-  return (await prisma.$queryRaw(
-    Prisma.sql`SELECT task_id, max(score) FROM submission WHERE user_id = ${user?.id} GROUP BY task_id;`
-  )) as Array<{ task_id: string; max: number }>
-}
-
-async function getBookmark(user: User) {
-  const rawBookmark = await prisma.bookmark.findMany({
-    where: {
-      user: {
-        id: { equals: user?.id }
-      }
-    }
-  })
-
-  return user
-    ? rawBookmark.map(bookmark => {
-        return bookmark.taskId
-      })
-    : []
-}
-
 export default async function Tasks() {
-  const [user, solved] = await Promise.all([getServerUser(), getSolved()])
-  const [tasks, score, bookmarks] = await Promise.all([
-    getTasks(user as User),
-    getScore(user as User),
-    getBookmark(user as User)
-  ])
+  const [tasks, solved] = await Promise.all([getTasks(), getSolved()])
 
   return (
     <div className="flex w-auto justify-center">
@@ -100,8 +57,6 @@ export default async function Tasks() {
           }
           tasks={tasks}
           solved={solved}
-          score={score}
-          bookmarks={bookmarks}
         />
       </div>
     </div>
