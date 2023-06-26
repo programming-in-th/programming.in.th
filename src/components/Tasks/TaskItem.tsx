@@ -42,22 +42,33 @@ export const TaskItem = (
               <p className="text-sm font-light text-gray-400">solved</p>
             </div>
             <div className="flex h-auto w-28 flex-col items-center justify-around">
-              <div className="relative w-full">
-                <div className="absolute h-1.5 w-full rounded-full bg-gray-200" />
-                <div
-                  className={`absolute h-1.5 rounded-full ${
-                    task.score === task.fullScore
-                      ? 'bg-blue-500'
-                      : 'bg-gray-500 dark:bg-slate-500'
-                  }`}
-                  style={{
-                    width: `${(task.score / task.fullScore) * 100}%`
-                  }}
-                />
-              </div>
-              <p className="text-sm text-gray-400 dark:text-gray-200">
-                {task.score} points
-              </p>
+              {task.score !== null ? (
+                <>
+                  <div className="relative w-full">
+                    <div className="absolute h-1.5 w-full rounded-full bg-gray-200" />
+                    <div
+                      className={`absolute h-1.5 rounded-full ${
+                        task.score === task.fullScore
+                          ? 'bg-blue-500'
+                          : 'bg-gray-500 dark:bg-slate-500'
+                      }`}
+                      style={{
+                        width: `${(task.score / task.fullScore) * 100}%`
+                      }}
+                    />
+                  </div>
+                  <p className="text-sm text-gray-400 dark:text-gray-200">
+                    {task.score} points
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="relative w-full">
+                    <div className="absolute h-1.5 w-full animate-pulse rounded-full bg-gray-400" />
+                  </div>
+                  <div className="h-4 w-20 animate-pulse rounded-sm bg-gray-400" />
+                </>
+              )}
             </div>
             <div className="-mr-6 w-14 p-4">
               <svg
@@ -71,7 +82,7 @@ export const TaskItem = (
                     method: bookmark ? 'DELETE' : 'POST'
                   })
 
-                  mutate(`/api/bookmarks/${task.id}`)
+                  mutate('api/bookmarks')
                 }}
                 className={`${
                   bookmark
@@ -138,22 +149,33 @@ export const TaskItem = (
           </div>
           <div className="mx-3 flex h-auto w-28 flex-none items-center justify-center">
             <div className="flex h-auto w-full flex-col items-center justify-around">
-              <div className="relative h-full w-full">
-                <div className="absolute h-1.5 w-full rounded-full bg-gray-200" />
-                <div
-                  className={`absolute h-1.5 rounded-full ${
-                    task.score === task.fullScore
-                      ? 'bg-blue-500'
-                      : 'bg-gray-500 dark:bg-slate-500'
-                  }`}
-                  style={{
-                    width: `${(task.score / task.fullScore) * 100}%`
-                  }}
-                />
-              </div>
-              <p className="mt-2 text-sm text-gray-500 dark:text-gray-200">
-                {task.score} points
-              </p>
+              {task.score !== null ? (
+                <>
+                  <div className="relative h-full w-full">
+                    <div className="absolute h-1.5 w-full rounded-full bg-gray-200" />
+                    <div
+                      className={`absolute h-1.5 rounded-full ${
+                        task.score === task.fullScore
+                          ? 'bg-blue-500'
+                          : 'bg-gray-500 dark:bg-slate-500'
+                      }`}
+                      style={{
+                        width: `${(task.score / task.fullScore) * 100}%`
+                      }}
+                    />
+                  </div>
+                  <p className="mt-2 text-sm text-gray-500 dark:text-gray-200">
+                    {task.score} points
+                  </p>
+                </>
+              ) : (
+                <>
+                  <div className="relative w-full">
+                    <div className="absolute h-1.5 w-full animate-pulse rounded-full bg-gray-400" />
+                  </div>
+                  <div className="mt-2 h-3.5 w-20 animate-pulse rounded-sm bg-gray-400" />
+                </>
+              )}
             </div>
           </div>
         </Link>
@@ -167,7 +189,7 @@ export const TaskItem = (
                 method: bookmark ? 'DELETE' : 'POST'
               })
 
-              mutate(`/api/bookmarks/${task.id}`)
+              mutate('api/bookmarks')
             }}
             className={`${
               bookmark
