@@ -7,7 +7,7 @@ export async function GET(_: NextRequest) {
   const user = await getServerUser()
 
   if (!user || !user.id) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    return NextResponse.json([], { status: 200 })
   }
 
   const rawBookmark = await prisma.bookmark.findMany({
