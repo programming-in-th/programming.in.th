@@ -93,6 +93,7 @@ export default async function Landing() {
               alt="PROGRAMMING.IN.TH"
               width={50}
               height={50}
+              priority={true}
               className="flex h-full w-full items-center justify-center rounded-3xl object-cover px-5"
               style={{
                 maxWidth: '50vh',
