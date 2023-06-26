@@ -1,7 +1,7 @@
 {
   "name": "programming.in.th",
   "private": true,
-  "packageManager": "pnpm@8.6.3",
+  "packageManager": "pnpm@8.6.4",
   "engines": {
     "node": "^18.12"
   },
