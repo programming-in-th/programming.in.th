@@ -87,21 +87,14 @@ export default async function Landing() {
         </section>
 
         <section className="relative flex w-full justify-center overflow-hidden py-6">
-          <div className="relative z-10">
-            <Image
-              src="/assets/img/landing/coding.svg"
-              alt="PROGRAMMING.IN.TH"
-              width={50}
-              height={50}
-              priority={true}
-              className="flex h-full w-full items-center justify-center rounded-3xl object-cover px-5"
-              style={{
-                maxWidth: '50vh',
-                height: 'auto'
-              }}
-            />
-          </div>
-
+          <Image
+            src="/assets/img/landing/coding.svg"
+            alt="PROGRAMMING.IN.TH"
+            width={786.81995}
+            height={572.25773}
+            priority={true}
+            className="z-10 min-w-0 max-w-[50vh] px-5"
+          />
           <div className="absolute bottom-0 h-2/5 w-[120%] overflow-hidden rounded-[50%] bg-white dark:bg-slate-800 md:w-[110%]" />
           <div className="absolute bottom-0 h-1/5 w-full bg-white dark:bg-slate-800" />
         </section>
