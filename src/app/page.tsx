@@ -17,6 +17,7 @@ import { TestimonyCard } from '@/components/Landing/TestimonyCard'
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
 import { PeopleVector } from '@/svg/Illustrations/People'
+import landingPic from '../../public/assets/img/landing/code.webp'
 
 async function JoinButton() {
   'use client'
@@ -88,11 +89,9 @@ export default async function Landing() {
 
         <section className="relative flex w-full justify-center overflow-hidden py-6">
           <Image
-            src="/assets/img/landing/coding.svg"
+            src={landingPic}
             alt="PROGRAMMING.IN.TH"
-            width={786.81995}
-            height={572.25773}
-            priority={true}
+            priority
             className="z-10 min-w-0 max-w-[50vh] px-5"
           />
           <div className="absolute bottom-0 h-2/5 w-[120%] overflow-hidden rounded-[50%] bg-white dark:bg-slate-800 md:w-[110%]" />
