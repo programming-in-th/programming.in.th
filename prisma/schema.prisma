@@ -207,3 +207,18 @@ model Tag {
   @@index([id])
   @@map("tag")
 }
+
+enum SyncStatus {
+  PENDING
+  SUCCESS
+  FAILED
+}
+
+model TestcaseSyncStatus {
+  taskId String @unique @map("task_id")
+
+  lastSynced DateTime   @map("last_synced")
+  syncStatus SyncStatus @map("sync_status")
+
+  @@map("testcase_sync_status")
+}

@@ -168,6 +168,12 @@ Table tag {
   tasks task [not null]
 }
 
+Table testcase_sync_status {
+  taskId String [unique, not null]
+  lastSynced DateTime [not null]
+  syncStatus SyncStatus [not null]
+}
+
 Enum StatementType {
   PDF
   MARKDOWN
@@ -177,6 +183,12 @@ Enum TaskType {
   NORMAL
   COMMUNICATION
   OUTPUT_ONLY
+}
+
+Enum SyncStatus {
+  PENDING
+  SUCCESS
+  FAILED
 }
 
 Ref: account.userId > user.id [delete: Cascade]
