@@ -1,21 +1,12 @@
 'use client'
 
-import { Suspense } from 'react'
-
-import dynamic from 'next/dynamic'
-
 import { Task } from '@prisma/client'
 
 import { Card, Header } from '@/components/Submission/Card'
 import { useSSESubmissionData } from '@/lib/useSubmissionData'
 
 import SubmissionGroup from './Group'
-import { CodeSkeleton } from '../Code'
-
-const DynamicCode = dynamic(() => import('../Code'), {
-  suspense: true,
-  ssr: false
-})
+import Code from '../Code'
 
 const Submission = ({
   task,
@@ -57,12 +48,7 @@ const Submission = ({
     <div className="w-full min-w-0">
       <Header />
       {submission && <Card sub={submission} task={task} />}
-      <Suspense fallback={<CodeSkeleton />}>
-        <DynamicCode
-          code={submission!.code[0]}
-          language={submission!.language}
-        />
-      </Suspense>
+      <Code code={submission!.code[0]} language={submission!.language} />
       {submission && <SubmissionGroup groups={submission.groups} />}
     </div>
   )
