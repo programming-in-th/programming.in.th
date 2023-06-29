@@ -1,5 +1,3 @@
-import { User } from '@prisma/client'
-
 export interface ITestCase {
   memory_usage: number
   message: string
@@ -33,7 +31,6 @@ export interface IListSubmission {
 }
 
 export interface IGeneralSubmission extends IListSubmission {
-  user: User
   groups: IGroup[]
   status: string
   code: string[]

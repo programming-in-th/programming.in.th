@@ -26,7 +26,6 @@ export const useSSESubmissionData = (id: number) => {
 
     eventSource.onmessage = event => {
       const realtimeData = JSON.parse(`${event.data}`)
-
       if (
         realtimeData.status === JUDGE_COMPLETED ||
         realtimeData.status === JUDGE_ERROR ||

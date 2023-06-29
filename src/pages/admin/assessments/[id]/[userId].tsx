@@ -101,8 +101,6 @@ const IndividualSubmission = () => {
     fetcher
   )
 
-  console.log(submissions)
-
   const currentUser = useMemo<IUser | undefined>(() => {
     return users?.find(user => user.id === userId)
   }, [users, userId])

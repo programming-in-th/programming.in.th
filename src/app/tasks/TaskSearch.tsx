@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, ReactNode, useEffect, useMemo, useState } from 'react'
+import { FC, ReactNode, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
@@ -53,10 +53,6 @@ export const TaskSearch: FC<TaskSearchProps> = ({ header, tasks, solved }) => {
         }),
     [bookmarks, score, filteredTasks, solved]
   )
-
-  useEffect(() => {
-    console.log(bookmarks)
-  }, [bookmarks])
 
   return (
     <>

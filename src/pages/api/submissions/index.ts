@@ -193,7 +193,21 @@ export default async function handler(
       }
     })
 
-    return ok(res, submission)
+    return ok(res, {
+      ...submission,
+      code,
+      taskId: undefined,
+      private: undefined,
+      userId: undefined,
+      user: {
+        username: session.user.username,
+        id: session.user.id
+      },
+      task: {
+        id: taskId,
+        private: submission.private
+      }
+    })
   }
 
   return methodNotAllowed(res, ['GET', 'POST'])
