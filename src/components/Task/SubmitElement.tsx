@@ -1,8 +1,7 @@
 'use client'
 
-import { Suspense, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 
-import dynamic from 'next/dynamic'
 import { useRouter } from 'next/navigation'
 
 import { Task } from '@prisma/client'
@@ -12,13 +11,8 @@ import { getFileExtension } from '@/utils/getFileExtension'
 import { getLanguageFromExtension, languageData } from '@/utils/language'
 
 import { FileUpload } from './FileUpload'
-import { CodeSkeleton } from '../Code'
 import { mutate } from 'swr'
-
-const DynamicCodeEditor = dynamic(() => import('../CodeEditor'), {
-  suspense: true,
-  ssr: false
-})
+import CodeEditor from '../CodeEditor'
 
 export const SubmitElement = ({
   task,
@@ -93,13 +87,7 @@ export const SubmitElement = ({
           </div>
         </div>
 
-        <Suspense fallback={<CodeSkeleton />}>
-          <DynamicCodeEditor
-            setValue={setFileText}
-            value={fileText}
-            height="32rem"
-          />
-        </Suspense>
+        <CodeEditor setValue={setFileText} value={fileText} height="32rem" />
       </div>
 
       <div className="bg-prog-gray-100 px-8 py-4 dark:bg-slate-700">
