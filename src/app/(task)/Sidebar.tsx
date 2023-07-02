@@ -151,7 +151,7 @@ export const SideBar = ({
       <div className="hidden flex-col items-center justify-center md:flex">
         <a
           target="_blank"
-          href="https://google.com"
+          href="https://forms.gle/HRuSQ14gEcHbcfVR8"
           rel="noreferrer"
           className="mb-4 w-full text-center font-light dark:text-white"
         >
