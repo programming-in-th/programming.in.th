@@ -64,9 +64,11 @@ const App: NextPage<AppProps> = ({ Component, pageProps }) => {
     toast(
       (t) => (
         <span>
-          เว็บไซต์นี้กำลังจะปิดให้บริการในวันที่ <b>8 ก.ค.</b>
+          ในวันที่ 8 ก.ค. เว็บไซต์ staging.programming.in.th จะมาแทนที่
+          programming.in.th
           {'\n'}
-          (ข้อมูลจะหายทั้งหมด)
+          สำหรับ beta.programming.in.th จะปิดให้บริการ
+          โดยข้อมูลผู้ใช้จะถูกลบทิ้งทั้งหมด
           <div
             style={{
               width: '100%',
