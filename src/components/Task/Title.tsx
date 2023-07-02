@@ -5,7 +5,7 @@ import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import { useSession } from 'next-auth/react'
-import useSWR, { mutate } from 'swr'
+import useSWR from 'swr'
 
 import fetcher from '@/lib/fetcher'
 
@@ -18,7 +18,7 @@ export const Title = ({
 }) => {
   const { status } = useSession()
 
-  const { data: bookmark } = useSWR<boolean>(
+  const { data: bookmark, mutate } = useSWR<boolean>(
     task && status === 'authenticated' ? `/api/bookmarks/${task.id}` : null,
     fetcher
   )
@@ -30,12 +30,11 @@ export const Title = ({
           className="mt-1 flex"
           onClick={async () => {
             mutate(
-              `/api/bookmarks/${task.id}`,
-              async (state: boolean) => {
+              async (state: boolean | undefined) => {
                 await fetch(`/api/bookmarks/${task.id}`, {
-                  method: state ? 'POST' : 'DELETE'
+                  method: state ? 'DELETE' : 'POST'
                 })
-                return state
+                return !state
               },
               { optimisticData: !bookmark }
             )
