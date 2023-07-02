@@ -1,9 +1,10 @@
+'use client'
 import { useMemo } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { User } from 'next-auth'
+import { useSession } from 'next-auth/react'
 
 import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
 
@@ -11,7 +12,8 @@ import { FooterLinks } from './Links/FooterLinks'
 import { PoweredByVercel } from './PoweredByVercel'
 import DarkMode from '../DarkMode'
 
-export const Footer = ({ user }: { user: User }) => {
+export const Footer = () => {
+  const { data: session } = useSession()
   const currentYear = useMemo(() => +new Date().getFullYear(), [])
 
   return (
@@ -29,7 +31,7 @@ export const Footer = ({ user }: { user: User }) => {
               โปรแกรมมิ่งอินทีเอช ศูนย์รวมของโจทย์และเนื้อหาสำหรับ
               การเขียนโปรแกรมเพื่อการแข่งขัน และวิทยาการคอมพิวเตอร์
             </p>
-            {user ? (
+            {session?.user ? (
               <Link
                 href="/tasks"
                 className="trasition-colors mt-4 rounded-md bg-prog-primary-500 px-9 py-2.5 text-white hover:bg-prog-primary-600"

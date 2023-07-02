@@ -4,7 +4,6 @@ import { Metadata } from 'next'
 
 import { Analytics } from '@vercel/analytics/react'
 import { Inter, Noto_Sans_Thai } from 'next/font/google'
-import { User } from 'next-auth'
 
 import '@/styles/index.css'
 import '@/styles/style.scss'
@@ -15,7 +14,6 @@ import {
   Navbar,
   Providers
 } from '@/components/RootLayout'
-import { getCurrentUser } from '@/lib/session'
 
 const inter = Inter({
   variable: '--font-inter',
@@ -34,17 +32,15 @@ export default async function RootLayout({
 }: {
   children: ReactNode
 }) {
-  const user = (await getCurrentUser()) as User
-
   return (
     <html lang="th" className={`${inter.variable} ${notoSans.variable}`}>
       <body>
         <body>
           <Providers>
             <LayoutWithTheme>
-              <Navbar user={user} />
+              <Navbar />
               {children}
-              <Footer user={user} />
+              <Footer />
             </LayoutWithTheme>
           </Providers>
         </body>
