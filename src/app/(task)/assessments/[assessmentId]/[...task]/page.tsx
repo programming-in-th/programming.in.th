@@ -20,7 +20,12 @@ export default async function AssessmentTask({
     <>
       {task ? (
         <TaskLayout task={task} type={type} assessmentId={assessmentId}>
-          <TaskContent task={task} type={type} solution={null} />
+          <TaskContent
+            task={task}
+            type={type}
+            solution={null}
+            assessmentId={assessmentId}
+          />
         </TaskLayout>
       ) : (
         <Loading />
