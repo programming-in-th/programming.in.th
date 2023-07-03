@@ -15,7 +15,6 @@ const component = (
     case 'statement':
       return <StatementTab task={task} />
     case 'submit':
-      // @ts-expect-error Async Server Component
       return <SubmitTab task={task} />
     case 'submissions':
       return <SubmissionsTab task={task} />

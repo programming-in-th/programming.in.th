@@ -17,6 +17,7 @@ import { TestimonyCard } from '@/components/Landing/TestimonyCard'
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
 import { PeopleVector } from '@/svg/Illustrations/People'
+
 import landingPic from '../../public/assets/img/landing/code.webp'
 
 async function JoinButton() {
@@ -83,7 +84,6 @@ export default async function Landing() {
         </section>
 
         <section className="flex items-center justify-center gap-4">
-          {/* @ts-expect-error Async Server Component */}
           <JoinButton />
         </section>
 
