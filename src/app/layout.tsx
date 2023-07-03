@@ -39,7 +39,9 @@ export default async function RootLayout({
           <Providers>
             <LayoutWithTheme>
               <Navbar />
-              {children}
+              <main className="flex min-h-screen w-screen flex-col">
+                {children}
+              </main>
               <Footer />
             </LayoutWithTheme>
           </Providers>
