@@ -94,7 +94,7 @@ export const TasksSidebar = ({
                   tagFilter.includes(tag)
                     ? 'font-bold text-gray-600 dark:text-gray-300'
                     : 'text-gray-500 dark:text-gray-400',
-                  'cursor-pointer'
+                  'cursor-pointer transition-all'
                 )}
                 onClick={() => {
                   if (tagFilter.includes(tag)) {
