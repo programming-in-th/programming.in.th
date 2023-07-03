@@ -7,13 +7,13 @@ import { useSWRConfig } from 'swr'
 import { IGeneralTask } from '@/types/tasks'
 
 export const TaskItem = (
-  task: IGeneralTask & { showTags: string[] | boolean } & {
+  task: IGeneralTask & { showTags: boolean } & {
     bookmarked: boolean
   }
 ) => {
   const { mutate } = useSWRConfig()
   const [bookmark, setBookmark] = useState<boolean>(false)
-  const [tagStatus, setTag] = useState<boolean>(false)
+  const [tagStatus, setTag] = useState<boolean>(task.showTags)
 
   useEffect(() => {
     setBookmark(task.bookmarked)
@@ -123,7 +123,7 @@ export const TaskItem = (
               ) {
                 return (
                   <div
-                    className="mx-1 rounded-lg bg-gray-100 px-2 text-sm text-gray-500"
+                    className="mx-1 rounded-2xl bg-gray-100 px-4 text-sm text-gray-500"
                     key={`tag-${task.id}-${tag}`}
                   >
                     {tag}
