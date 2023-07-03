@@ -119,12 +119,12 @@ export const TaskItem = (
             </p>
             <p className="text-sm text-gray-400">{task.id}</p>
           </div>
-          <div className="flex w-full items-center justify-center">
+          <div className="flex w-full flex-wrap items-center justify-center gap-1">
             {task.tags.map((tag: string) => {
               if (tagStatus || task.tagFilter.includes(tag)) {
                 return (
                   <div
-                    className="mx-1 rounded-xl bg-gray-100 px-4 py-0.5 text-sm text-gray-500 dark:bg-gray-800 dark:text-gray-300"
+                    className="rounded-xl bg-gray-100 px-4 py-0.5 text-sm text-gray-500 dark:bg-gray-800 dark:text-gray-300"
                     key={`tag-${task.id}-${tag}`}
                   >
                     {tag}
