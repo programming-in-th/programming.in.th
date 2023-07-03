@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { Task } from '@prisma/client'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 
