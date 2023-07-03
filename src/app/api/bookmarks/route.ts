@@ -1,10 +1,8 @@
-import { NextRequest } from 'next/server'
-
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
 import { json } from '@/utils/apiResponse'
 
-export async function GET(_: NextRequest) {
+export async function GET() {
   const user = await getServerUser()
 
   if (!user || !user.id) {
