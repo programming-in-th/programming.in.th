@@ -2,7 +2,8 @@ import { z } from 'zod'
 
 import { dateParser } from './helper'
 
-const MarkdownTypeEnum = z.enum(['RAW', 'RENDERED'])
+export const markdownTypeValues = ['RAW', 'RENDERED'] as const
+const MarkdownTypeEnum = z.enum(markdownTypeValues)
 
 export const IndividualAssessmentSchema = z.object({
   id: z.string(),

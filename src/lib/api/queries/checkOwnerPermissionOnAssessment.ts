@@ -3,16 +3,20 @@ import { Session } from 'next-auth'
 import prisma from '@/lib/prisma'
 
 const checkOwnerPermissionOnAssessment = async (
-  session: Session,
+  session: Session | Session['user'],
   assessmentId?: string | null
 ) => {
-  if (session.user.admin) return true
+  const user = 'user' in session ? session.user : session
+
+  if (user.admin) return true
   if (!assessmentId) return false
+
+  if (!user.id) return false
 
   const ownerOnAssessment = await prisma.ownerOnAssessment.findUnique({
     where: {
       userId_assessmentId: {
-        userId: session.user.id!,
+        userId: user.id,
         assessmentId: assessmentId
       }
     }
