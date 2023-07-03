@@ -9,6 +9,9 @@ async function getTasks() {
   const rawTasks = await prisma.task.findMany({
     where: {
       private: false
+    },
+    include: {
+      tags: true
     }
   })
 
@@ -16,7 +19,7 @@ async function getTasks() {
     return {
       id: item.id,
       title: item.title,
-      tags: [] as string[],
+      tags: item.tags.map(tag => tag.name),
       solved: 0,
       score: 0,
       fullScore: item.fullScore,
@@ -41,6 +44,8 @@ async function getSolved() {
 export default async function Tasks() {
   const [tasks, solved] = await Promise.all([getTasks(), getSolved()])
 
+  const tags: string[] = Array.from(new Set(tasks.flatMap(task => task.tags)))
+
   return (
     <div className="flex w-auto justify-center">
       <div className="flex min-h-[calc(100vh-2.5rem)] w-full max-w-7xl flex-col items-center">
@@ -57,6 +62,7 @@ export default async function Tasks() {
           }
           tasks={tasks}
           solved={solved}
+          tags={tags}
         />
       </div>
     </div>

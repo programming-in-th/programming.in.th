@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { useSearchParams } from 'next/navigation'
 
@@ -37,7 +37,13 @@ const Tabs: ITab[] = [
   }
 ]
 
-export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
+export const TasksList = ({
+  tasks,
+  tagFilter
+}: {
+  tasks: IGeneralTask[]
+  tagFilter: string[]
+}) => {
   const searchParams = useSearchParams()
   const type = searchParams?.get('type')
 
@@ -53,21 +59,16 @@ export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
     [type]
   )
 
-  const [initialRender, setInertialRender] = useState(true)
-
   const filteredTask = useMemo(() => {
-    const filtered = tasks.filter(condition)
+    return tasks.filter(condition)
+  }, [tasks, condition])
 
-    if (initialRender) {
-      return filtered.slice(0, 20)
-    } else {
-      return filtered
-    }
-  }, [tasks, condition, initialRender])
-
-  useEffect(() => {
-    setInertialRender(false)
-  }, [])
-
-  return <Listing tasks={filteredTask} tag={tag} setTag={setTag} />
+  return (
+    <Listing
+      tasks={filteredTask}
+      tag={tag}
+      tagFilter={tagFilter}
+      setTag={setTag}
+    />
+  )
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 
 import Link from 'next/link'
 
@@ -7,23 +7,27 @@ import { useSWRConfig } from 'swr'
 import { IGeneralTask } from '@/types/tasks'
 
 export const TaskItem = (
-  task: IGeneralTask & { showTags: string[] | boolean } & {
+  task: IGeneralTask & {
+    showTags: boolean
     bookmarked: boolean
+    tagFilter: string[]
   }
 ) => {
   const { mutate } = useSWRConfig()
-  const [bookmark, setBookmark] = useState<boolean>(false)
-  const [tagStatus, setTag] = useState<boolean>(false)
+  const [bookmark, setBookmark] = useState<boolean>(task.bookmarked)
+  const [tagStatus, setTag] = useState<boolean>(task.showTags)
 
   useEffect(() => {
     setBookmark(task.bookmarked)
   }, [task.bookmarked])
 
   useEffect(() => {
-    if (typeof task.showTags === 'boolean') {
-      setTag(task.showTags)
-    }
+    setTag(task.showTags)
   }, [task.showTags])
+
+  const showAllTagsVisible = useMemo(() => {
+    return !tagStatus && task.tags.some(tag => !task.tagFilter.includes(tag))
+  }, [tagStatus, task.tagFilter, task.tags])
 
   return (
     <>
@@ -115,15 +119,12 @@ export const TaskItem = (
             </p>
             <p className="text-sm text-gray-400">{task.id}</p>
           </div>
-          <div className="flex w-full items-center justify-center">
+          <div className="flex w-full flex-wrap items-center justify-center gap-1">
             {task.tags.map((tag: string) => {
-              if (
-                tagStatus === true ||
-                (Array.isArray(task.showTags) && task.showTags.includes(tag))
-              ) {
+              if (tagStatus || task.tagFilter.includes(tag)) {
                 return (
                   <div
-                    className="mx-1 rounded-lg bg-gray-100 px-2 text-sm text-gray-500"
+                    className="rounded-xl bg-gray-100 px-3 py-0.5 text-xs text-gray-500 dark:bg-gray-800 dark:text-gray-300"
                     key={`tag-${task.id}-${tag}`}
                   >
                     {tag}
@@ -131,7 +132,7 @@ export const TaskItem = (
                 )
               }
             })}
-            {tagStatus !== true && (
+            {showAllTagsVisible && (
               <p
                 className="text-sm text-gray-400 dark:text-gray-200"
                 onClick={event => {
@@ -139,7 +140,7 @@ export const TaskItem = (
                   event.stopPropagation()
                   setTag(true)
                 }}
-              >{`show all tag >`}</p>
+              >{`Show all tag >`}</p>
             )}
           </div>
           <div className="flex w-full items-center justify-center">

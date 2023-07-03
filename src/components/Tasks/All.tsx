@@ -7,11 +7,13 @@ import { TaskItem } from './TaskItem'
 export const Listing = ({
   tasks,
   tag,
-  setTag
+  setTag,
+  tagFilter
 }: {
   tasks: IGeneralTask[]
   tag: boolean
   setTag: Dispatch<SetStateAction<boolean>>
+  tagFilter: string[]
 }) => {
   return (
     <div className="h-full w-full">
@@ -25,8 +27,14 @@ export const Listing = ({
               type="checkbox"
               onChange={() => setTag(!tag)}
               className="h-4 w-4 rounded border-gray-300"
+              id="check-show-tag"
             />
-            <p className="ml-2 text-sm font-medium text-gray-400">Show tag</p>
+            <label
+              htmlFor="check-show-tag"
+              className="ml-2 text-sm font-medium text-gray-400"
+            >
+              Show tag
+            </label>
           </div>
           <div className="flex w-full shrink items-center justify-center">
             <p className="text-sm text-gray-400">Solved</p>
@@ -40,7 +48,12 @@ export const Listing = ({
 
       <div className="no-scrollbar mt-4 max-h-[calc(100vh-17rem)] overflow-y-auto">
         {tasks.map(context => (
-          <TaskItem key={`task-${context.id}`} {...context} showTags={tag} />
+          <TaskItem
+            key={`task-${context.id}`}
+            {...context}
+            tagFilter={tagFilter}
+            showTags={tag}
+          />
         ))}
       </div>
     </div>

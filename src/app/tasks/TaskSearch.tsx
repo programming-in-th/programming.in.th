@@ -16,12 +16,19 @@ type TaskSearchProps = {
   header: ReactNode
   tasks: IGeneralTask[]
   solved: ISolved[]
+  tags: string[]
 }
 
-export const TaskSearch: FC<TaskSearchProps> = ({ header, tasks, solved }) => {
+export const TaskSearch: FC<TaskSearchProps> = ({
+  header,
+  tasks,
+  solved,
+  tags
+}) => {
   const router = useRouter()
 
   const [filteredTasks, setFilteredTasks] = useState<IGeneralTask[]>(tasks)
+  const [tagFilter, setTagFilter] = useState<string[]>([])
 
   const { data: bookmarks } = useSWR<string[]>('api/bookmarks', fetcher)
   const { data: score } = useSWR<IScore[]>('api/score', fetcher)
@@ -42,6 +49,11 @@ export const TaskSearch: FC<TaskSearchProps> = ({ header, tasks, solved }) => {
             ? score.find(item => item.task_id === task.id) !== undefined
             : false
         }))
+        .filter(task =>
+          tagFilter.length > 0
+            ? task.tags.some(tag => tagFilter.includes(tag))
+            : true
+        )
         .sort((a, b) => {
           if (a.id < b.id) {
             return -1
@@ -51,7 +63,7 @@ export const TaskSearch: FC<TaskSearchProps> = ({ header, tasks, solved }) => {
             return 0
           }
         }),
-    [bookmarks, score, filteredTasks, solved]
+    [bookmarks, score, filteredTasks, solved, tagFilter]
   )
 
   return (
@@ -80,8 +92,12 @@ export const TaskSearch: FC<TaskSearchProps> = ({ header, tasks, solved }) => {
         />
       </div>
       <div className="flex w-full flex-col md:flex-row">
-        <TasksSidebar />
-        <TasksList tasks={processedTasks} />
+        <TasksSidebar
+          tags={tags}
+          tagFilter={tagFilter}
+          setTagFilter={setTagFilter}
+        />
+        <TasksList tagFilter={tagFilter} tasks={processedTasks} />
       </div>
     </>
   )
