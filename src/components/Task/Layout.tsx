@@ -1,33 +1,31 @@
+import { ReactNode } from 'react'
+
 import { Task } from '@prisma/client'
 
-import { PageLayout } from '@/components/Layout'
-import { SideBar } from '@/components/Task/SideBar'
 import { Title } from '@/components/Task/Title'
 
-export const TaskLayout = ({
+import { SideBar } from './SideBar'
+
+export function TaskLayout({
   task,
   type,
-  children,
-  assessmentId
+  assessmentId,
+  children
 }: {
   task: Task
   type: string
-  children: JSX.Element
   assessmentId?: string
-}) => (
-  <PageLayout>
-    <div>
-      <div className="align-center flex h-full w-screen justify-center px-4 pt-4">
-        <div className="flex h-full w-full max-w-6xl flex-col gap-2 md:flex-row md:gap-8">
-          <Title task={task} assessmentId={assessmentId} />
-        </div>
-      </div>
-      <div className="align-center flex h-full w-screen justify-center px-4 py-4">
-        <div className="flex h-full w-full max-w-6xl flex-col gap-2 md:flex-row md:gap-8">
+  children: ReactNode
+}) {
+  return (
+    <div className="align-center flex h-full w-screen justify-center px-4 py-4">
+      <div className="flex h-full w-full max-w-6xl flex-col gap-2 md:flex-row md:gap-8">
+        <div className="flex flex-col gap-4 md:w-[18rem]">
+          <Title task={task} />
           <SideBar task={task} type={type} assessmentId={assessmentId} />
-          {children}
         </div>
+        {children}
       </div>
     </div>
-  </PageLayout>
-)
+  )
+}

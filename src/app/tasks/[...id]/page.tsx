@@ -1,7 +1,6 @@
 import { TaskContent } from '@/components/Task/Content'
-
-import { getTask } from '../../getTask'
-import { TaskLayout } from '../../TaskLayout'
+import { TaskLayout } from '@/components/Task/Layout'
+import { getTask } from '@/lib/api/queries/getTask'
 
 export default async function Tasks({ params }: { params: { id: string[] } }) {
   const id = params.id

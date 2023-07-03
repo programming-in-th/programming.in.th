@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { notFound } from 'next/navigation'
 
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'

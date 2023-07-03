@@ -1,7 +1,7 @@
-import { getTask } from '@/app/(task)/getTask'
-import { TaskLayout } from '@/app/(task)/TaskLayout'
 import { Loading } from '@/components/Loading'
 import { TaskContent } from '@/components/Task/Content'
+import { TaskLayout } from '@/components/Task/Layout'
+import { getTask } from '@/lib/api/queries/getTask'
 
 export default async function AssessmentTask({
   params
