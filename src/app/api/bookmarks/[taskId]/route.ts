@@ -1,7 +1,8 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
+import { badRequest, json, unauthorized } from '@/utils/apiResponse'
 
 export async function GET(
   _: NextRequest,
@@ -10,13 +11,13 @@ export async function GET(
   const user = await getServerUser()
 
   if (!user || !user.id) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    return unauthorized()
   }
 
   const taskId = params.taskId
 
   if (!taskId) {
-    return NextResponse.json({ error: 'Bad Request' }, { status: 400 })
+    return badRequest()
   }
 
   const bookmark = await prisma.bookmark.findUnique({
@@ -28,7 +29,7 @@ export async function GET(
     }
   })
 
-  return NextResponse.json(bookmark !== null, { status: 200 })
+  return json(bookmark !== null)
 }
 
 export async function POST(
@@ -38,13 +39,13 @@ export async function POST(
   const user = await getServerUser()
 
   if (!user || !user.id) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    return unauthorized()
   }
 
   const taskId = params.taskId
 
   if (!taskId) {
-    return NextResponse.json({ error: 'Bad Request' }, { status: 400 })
+    return badRequest()
   }
 
   const bookmark = await prisma.bookmark.create({
@@ -54,7 +55,7 @@ export async function POST(
     }
   })
 
-  return NextResponse.json(bookmark, { status: 200 })
+  return json(bookmark)
 }
 
 export async function DELETE(
@@ -64,13 +65,13 @@ export async function DELETE(
   const user = await getServerUser()
 
   if (!user || !user.id) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    return unauthorized()
   }
 
   const taskId = params.taskId
 
   if (!taskId) {
-    return NextResponse.json({ error: 'Bad Request' }, { status: 400 })
+    return badRequest()
   }
 
   const bookmark = await prisma.bookmark.delete({
@@ -82,5 +83,5 @@ export async function DELETE(
     }
   })
 
-  return NextResponse.json(bookmark, { status: 200 })
+  return json(bookmark)
 }

@@ -1,13 +1,14 @@
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest } from 'next/server'
 
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
+import { json } from '@/utils/apiResponse'
 
 export async function GET(_: NextRequest) {
   const user = await getServerUser()
 
   if (!user || !user.id) {
-    return NextResponse.json([], { status: 200 })
+    return json([])
   }
 
   const rawBookmark = await prisma.bookmark.findMany({
@@ -18,8 +19,5 @@ export async function GET(_: NextRequest) {
     }
   })
 
-  return NextResponse.json(
-    rawBookmark.map(bookmark => bookmark.taskId),
-    { status: 200 }
-  )
+  return json(rawBookmark.map(bookmark => bookmark.taskId))
 }

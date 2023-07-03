@@ -1,18 +1,17 @@
-import { NextResponse } from 'next/server'
-
 import { checkOwnerPermission } from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
+import { forbidden, json, unauthorized } from '@/utils/apiResponse'
 
 export async function GET() {
   const user = await getServerUser()
 
   if (!user) {
-    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    return unauthorized()
   }
 
   if (!user.admin && !(user.id && (await checkOwnerPermission(user.id)))) {
-    return NextResponse.json({ error: 'Forbidden' }, { status: 403 })
+    return forbidden()
   }
 
   const pUser = await prisma.user.findMany({
@@ -23,5 +22,5 @@ export async function GET() {
     }
   })
 
-  return NextResponse.json(pUser)
+  return json(pUser)
 }
