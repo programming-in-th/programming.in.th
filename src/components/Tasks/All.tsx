@@ -27,8 +27,14 @@ export const Listing = ({
               type="checkbox"
               onChange={() => setTag(!tag)}
               className="h-4 w-4 rounded border-gray-300"
+              id="check-show-tag"
             />
-            <p className="ml-2 text-sm font-medium text-gray-400">Show tag</p>
+            <label
+              htmlFor="check-show-tag"
+              className="ml-2 text-sm font-medium text-gray-400"
+            >
+              Show tag
+            </label>
           </div>
           <div className="flex w-full shrink items-center justify-center">
             <p className="text-sm text-gray-400">Solved</p>

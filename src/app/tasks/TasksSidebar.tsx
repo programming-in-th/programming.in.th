@@ -74,9 +74,9 @@ export const TasksSidebar = ({
             )
           })}
         </div>
-        <div className="space-y-8 text-sm text-gray-500 dark:text-gray-200">
-          <div className="mt-4 flex items-baseline gap-4">
-            <p className="grow">Tag Filter</p>
+        <div className="space-y-6 text-sm text-gray-500 dark:text-gray-200">
+          <div className="mt-4 flex items-baseline">
+            <p className="grow text-base">Tag Filter</p>
             <p
               className="cursor-pointer hover:text-gray-400"
               onClick={() => {
@@ -88,22 +88,23 @@ export const TasksSidebar = ({
           </div>
           <div className="space-y-1">
             {tags.map(tag => (
-              <div key={tag}>
-                <input
-                  type="checkbox"
-                  id={`tag-${tag}`}
-                  checked={tagFilter.includes(tag)}
-                  onChange={e => {
-                    if (e.target.checked) {
-                      setTagFilter([...tagFilter, tag])
-                    } else {
-                      setTagFilter(tagFilter.filter(t => t !== tag))
-                    }
-                  }}
-                />
-                <label htmlFor={`tag-${tag}`} className="ml-1">
-                  {tag}
-                </label>
+              <div
+                key={tag}
+                className={clsx(
+                  tagFilter.includes(tag)
+                    ? 'font-bold text-gray-600 dark:text-gray-300'
+                    : 'text-gray-500 dark:text-gray-400',
+                  'cursor-pointer'
+                )}
+                onClick={() => {
+                  if (tagFilter.includes(tag)) {
+                    setTagFilter(tagFilter.filter(t => t !== tag))
+                  } else {
+                    setTagFilter([...tagFilter, tag])
+                  }
+                }}
+              >
+                {tag}
               </div>
             ))}
           </div>
