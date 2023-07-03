@@ -74,16 +74,16 @@ export const TasksSidebar = ({
             )
           })}
         </div>
-        <div className="space-y-6 text-sm text-gray-500 dark:text-gray-200">
+        <div className="space-y-2 text-sm text-gray-500 dark:text-gray-200">
           <div className="mt-4 flex items-baseline">
-            <p className="grow text-base">Tag Filter</p>
+            <p className="grow text-base font-bold">Tag Filter</p>
             <p
-              className="cursor-pointer hover:text-gray-400"
+              className="cursor-pointer hover:text-gray-400 dark:text-gray-300 dark:hover:text-white"
               onClick={() => {
                 setTagFilter([])
               }}
             >
-              Reset
+              clear
             </p>
           </div>
           <div className="space-y-1">
