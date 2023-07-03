@@ -124,7 +124,7 @@ export const TaskItem = (
               if (tagStatus || task.tagFilter.includes(tag)) {
                 return (
                   <div
-                    className="rounded-xl bg-gray-100 px-4 py-0.5 text-sm text-gray-500 dark:bg-gray-800 dark:text-gray-300"
+                    className="rounded-xl bg-gray-100 px-3 py-0.5 text-xs text-gray-500 dark:bg-gray-800 dark:text-gray-300"
                     key={`tag-${task.id}-${tag}`}
                   >
                     {tag}
