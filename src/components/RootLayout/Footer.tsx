@@ -10,7 +10,7 @@ import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
 
 import { FooterLinks } from './Links/FooterLinks'
 import { PoweredByVercel } from './PoweredByVercel'
-import DarkMode from '../DarkMode'
+import { ThemeSwitch } from './ThemeSwitch'
 
 export const Footer = () => {
   const { data: session } = useSession()
@@ -80,7 +80,7 @@ export const Footer = () => {
           </div>
           <div className="flex items-center space-x-2 md:space-x-4">
             <div className="flex h-full w-full items-center md:w-auto">
-              <DarkMode />
+              <ThemeSwitch />
             </div>
             <div className="my-4 flex items-center justify-center md:my-0">
               <PoweredByVercel />
