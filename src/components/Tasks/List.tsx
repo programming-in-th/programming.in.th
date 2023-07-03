@@ -37,7 +37,13 @@ const Tabs: ITab[] = [
   }
 ]
 
-export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
+export const TasksList = ({
+  tasks,
+  tagFilter
+}: {
+  tasks: IGeneralTask[]
+  tagFilter: string[]
+}) => {
   const searchParams = useSearchParams()
   const type = searchParams?.get('type')
 
@@ -57,5 +63,12 @@ export const TasksList = ({ tasks }: { tasks: IGeneralTask[] }) => {
     return tasks.filter(condition)
   }, [tasks, condition])
 
-  return <Listing tasks={filteredTask} tag={tag} setTag={setTag} />
+  return (
+    <Listing
+      tasks={filteredTask}
+      tag={tag}
+      tagFilter={tagFilter}
+      setTag={setTag}
+    />
+  )
 }

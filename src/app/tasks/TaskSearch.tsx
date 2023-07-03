@@ -97,7 +97,7 @@ export const TaskSearch: FC<TaskSearchProps> = ({
           tagFilter={tagFilter}
           setTagFilter={setTagFilter}
         />
-        <TasksList tasks={processedTasks} />
+        <TasksList tagFilter={tagFilter} tasks={processedTasks} />
       </div>
     </>
   )

@@ -7,11 +7,13 @@ import { TaskItem } from './TaskItem'
 export const Listing = ({
   tasks,
   tag,
-  setTag
+  setTag,
+  tagFilter
 }: {
   tasks: IGeneralTask[]
   tag: boolean
   setTag: Dispatch<SetStateAction<boolean>>
+  tagFilter: string[]
 }) => {
   return (
     <div className="h-full w-full">
@@ -40,7 +42,12 @@ export const Listing = ({
 
       <div className="no-scrollbar mt-4 max-h-[calc(100vh-17rem)] overflow-y-auto">
         {tasks.map(context => (
-          <TaskItem key={`task-${context.id}`} {...context} showTags={tag} />
+          <TaskItem
+            key={`task-${context.id}`}
+            {...context}
+            tagFilter={tagFilter}
+            showTags={tag}
+          />
         ))}
       </div>
     </div>
