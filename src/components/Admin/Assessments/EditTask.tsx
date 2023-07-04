@@ -115,7 +115,6 @@ const SubmitForm = ({
 
   const onSubmit = async (data: IAssessmentForm) => {
     try {
-      console.log(task ? `/api/tasks/${task.id}` : '/api/tasks')
       await toast.promise(
         fetch(task ? `/api/tasks/${task.id}` : '/api/tasks', {
           method: task ? 'PUT' : 'POST',
