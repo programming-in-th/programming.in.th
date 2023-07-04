@@ -96,8 +96,8 @@ export async function GET(req: NextRequest) {
       {
         taskId,
         userId: filterArr.includes(Filter.enum.own)
-          ? user!.id!
-          : user!.admin
+          ? user?.id!
+          : user?.admin
           ? userId
           : ''
       }
@@ -134,8 +134,8 @@ export async function GET(req: NextRequest) {
     cursor,
     {
       userId: filterArr.includes(Filter.enum.own)
-        ? user!.id!
-        : user!.admin
+        ? user?.id!
+        : user?.admin
         ? userId
         : undefined
     },
