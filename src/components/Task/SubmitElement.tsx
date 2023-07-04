@@ -6,12 +6,12 @@ import { useRouter } from 'next/navigation'
 
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
+import { mutate } from 'swr'
 
 import { getFileExtension } from '@/utils/getFileExtension'
 import { getLanguageFromExtension, languageData } from '@/utils/language'
 
 import { FileUpload } from './FileUpload'
-import { mutate } from 'swr'
 import CodeEditor from '../CodeEditor'
 
 export const SubmitElement = ({
