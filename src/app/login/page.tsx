@@ -28,7 +28,7 @@ const errors: Record<SignInErrorTypes, string> = {
 
 const Login: NextPage = () => {
   const searchParams = useSearchParams()
-  const errType = searchParams!.get('error')
+  const errType = searchParams.get('error')
 
   const error = (
     Array.isArray(errType) ? errType.pop() : errType
