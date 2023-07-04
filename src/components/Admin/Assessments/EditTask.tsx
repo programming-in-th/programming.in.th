@@ -68,7 +68,9 @@ const LeftBar = ({
         <div className="flex w-full min-w-0 flex-col">
           <p>Privacy</p>
           <select
-            {...register('private')}
+            {...register('private', {
+              setValueAs: v => v === 'true'
+            })}
             className="h-10 w-full rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
           >
             <option value="true">private</option>
@@ -113,6 +115,7 @@ const SubmitForm = ({
 
   const onSubmit = async (data: IAssessmentForm) => {
     try {
+      console.log(task ? `/api/tasks/${task.id}` : '/api/tasks')
       await toast.promise(
         fetch(task ? `/api/tasks/${task.id}` : '/api/tasks', {
           method: task ? 'PUT' : 'POST',
