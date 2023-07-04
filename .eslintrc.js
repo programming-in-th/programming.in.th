@@ -14,7 +14,6 @@ const config = {
     'plugin:prettier/recommended'
   ],
   rules: {
-    // TODO หยุดเกียน
     'prettier/prettier': 'warn',
     'import/order': [
       'warn',
@@ -46,11 +45,18 @@ const config = {
       }
     ],
     'import/no-cycle': 'warn',
-    // TODO remove unused vars pls bruh
     'no-unused-vars': 'off',
     '@typescript-eslint/no-unused-vars': 'off',
-    'unused-imports/no-unused-vars': 'off',
-    'unused-imports/no-unused-imports': 'error'
+    'unused-imports/no-unused-vars': [
+      'warn',
+      {
+        vars: 'all',
+        varsIgnorePattern: '^_',
+        args: 'after-used',
+        argsIgnorePattern: '^_'
+      }
+    ],
+    'unused-imports/no-unused-imports': 'warn'
   },
   overrides: [
     {
