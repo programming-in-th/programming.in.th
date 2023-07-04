@@ -42,14 +42,14 @@ const useSubmissionList = (taskId: string, assessmentId?: string) => {
     size,
     setSize,
     isValidating
-  } = useSWRInfinite(
+  } = useSWRInfinite<{ data: IListSubmission[] }>(
     (index, previousPageData) =>
       getKey(index, previousPageData, taskId, assessmentId),
     fetcher
   )
 
   const data = rawData ? rawData.map(data => data.data) : []
-  const submissions: IListSubmission[] = data ? [].concat(...data) : []
+  const submissions = data ? ([] as IListSubmission[]).concat(...data) : []
   const isLoadingInitialData = !data && !error
   const isLoadingMore =
     isLoadingInitialData ||
