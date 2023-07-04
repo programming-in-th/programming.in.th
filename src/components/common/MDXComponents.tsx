@@ -1,22 +1,13 @@
-import { PropsWithChildren } from 'react'
+import Image, { ImageProps } from 'next/image'
+import Link, { LinkProps } from 'next/link'
 
-import Image from 'next/image'
-import Link from 'next/link'
-
-type MDXComponentProps = PropsWithChildren & {
-  className: string
-  href: string
-  src: string
-  alt: string
-}
-
-const CustomLink = (props: MDXComponentProps) => {
+const CustomLink = (props: JSX.IntrinsicElements['a']) => {
   const href = props.href
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'))
 
   if (isInternalLink) {
     return (
-      <Link {...{ ...props, href, className: 'dark:text-white' }}>
+      <Link {...(props as LinkProps)} className="dark:text-white">
         {props.children}
       </Link>
     )
@@ -25,10 +16,11 @@ const CustomLink = (props: MDXComponentProps) => {
   return <a target="_blank" rel="noopener noreferrer" {...props} />
 }
 
-const CustomImage = (props: MDXComponentProps) => {
+const CustomImage = (props: JSX.IntrinsicElements['img']) => {
   return (
     <Image
-      {...{ ...props, alt: props.alt }}
+      {...(props as ImageProps)}
+      alt={props.alt ?? ''}
       style={{
         maxWidth: '100%',
         height: 'auto'
@@ -37,7 +29,7 @@ const CustomImage = (props: MDXComponentProps) => {
   )
 }
 
-const CustomCode = (props: MDXComponentProps) => {
+const CustomCode = (props: JSX.IntrinsicElements['code']) => {
   if (
     typeof props.className === 'string' &&
     props.className.includes('code-highlight')

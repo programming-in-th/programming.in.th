@@ -1,6 +1,6 @@
 import { IAssessmentwithTask } from '@/types/assessments'
 
-export type IAssessment = IAssessmentwithTask & {
+export type IAdminAssessment = IAssessmentwithTask & {
   users: { userId: string }[]
   owners: { userId: string }[]
 }

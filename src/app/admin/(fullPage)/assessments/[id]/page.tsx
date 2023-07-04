@@ -7,14 +7,14 @@ import Link from 'next/link'
 import useSWR from 'swr'
 
 import Card from '@/components/Admin/Assessments/Card'
-import { IAssessment } from '@/components/Admin/Assessments/EditAssessment/EditAssessment'
+import { IAdminAssessment } from '@/components/Admin/Assessments/EditAssessment/types'
 import fetcher from '@/lib/fetcher'
 import { IUser } from '@/types/users'
 
 export default function ViewAssessment({ params }: { params: { id: string } }) {
   const id = params.id
 
-  const { data: assessment } = useSWR<IAssessment>(
+  const { data: assessment } = useSWR<IAdminAssessment>(
     `/api/assessments/${id}`,
     fetcher
   )

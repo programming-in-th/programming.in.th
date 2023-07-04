@@ -27,12 +27,7 @@ const StatementTab = ({ task }: { task: Task }) => {
   } else if (task.statement === 'MARKDOWN' && mdStatement) {
     return (
       <div className="prose mt-4 w-full max-w-none dark:text-gray-100">
-        <MDXRemote
-          {...mdStatement}
-          components={{
-            ...components
-          }}
-        />
+        <MDXRemote {...mdStatement} components={components} />
       </div>
     )
   }

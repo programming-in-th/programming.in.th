@@ -7,7 +7,7 @@ import Link from 'next/link'
 import dayjs from 'dayjs'
 import useSWR from 'swr'
 
-import { IAssessment } from '@/components/Admin/Assessments/EditAssessment/EditAssessment'
+import { IAdminAssessment } from '@/components/Admin/Assessments/EditAssessment/types'
 import fetcher from '@/lib/fetcher'
 import { IUser } from '@/types/users'
 import { getDisplayNameFromGrader } from '@/utils/language'
@@ -89,7 +89,7 @@ export default function IndividualSubmission({
 }) {
   const { id, userId } = params
 
-  const { data: assessment } = useSWR<IAssessment>(
+  const { data: assessment } = useSWR<IAdminAssessment>(
     `/api/assessments/${id}`,
     fetcher
   )

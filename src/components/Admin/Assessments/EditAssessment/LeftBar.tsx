@@ -5,7 +5,7 @@ import { UseFormRegister } from 'react-hook-form'
 
 import { IUser } from '@/types/users'
 
-import { IAssessment, IAssessmentForm } from './types'
+import { IAdminAssessment, IAssessmentForm } from './types'
 
 export const LeftBar = ({
   register,
@@ -13,7 +13,7 @@ export const LeftBar = ({
   users
 }: {
   register: UseFormRegister<IAssessmentForm>
-  assessment?: IAssessment
+  assessment?: IAdminAssessment
   users: IUser[]
 }) => {
   const [assignUser, setAssignUser] = useState<IUser[]>(users)

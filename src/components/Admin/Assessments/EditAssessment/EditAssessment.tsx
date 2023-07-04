@@ -14,7 +14,7 @@ import { IUser } from '@/types/users'
 import { LeftBar } from './LeftBar'
 import { MiddleBar } from './MiddleBar'
 import { RightBar } from './RightBar'
-import { IAssessment, IAssessmentForm } from './types'
+import { IAdminAssessment, IAssessmentForm } from './types'
 
 const SubmitForm = ({
   assessment,
@@ -22,7 +22,7 @@ const SubmitForm = ({
   setOpen,
   users
 }: {
-  assessment: IAssessment | undefined
+  assessment: IAdminAssessment | undefined
   tasks: Task[]
   setOpen: (_: boolean) => void
   users: IUser[]
@@ -179,7 +179,7 @@ export default function EditAssessment({
   assessmentId?: string
   users: IUser[]
 }) {
-  const { data: assessment } = useSWR<IAssessment>(
+  const { data: assessment } = useSWR<IAdminAssessment>(
     assessmentId && `/api/assessments/${assessmentId}?mdType=RAW`,
     fetcher
   )

@@ -93,12 +93,7 @@ export default function Assessment({
         {assessment?.instruction && (
           <div className="prose mt-4 w-full max-w-none dark:text-gray-100">
             {typeof assessment?.instruction !== 'string' && (
-              <MDXRemote
-                {...assessment?.instruction}
-                components={{
-                  ...components
-                }}
-              />
+              <MDXRemote {...assessment?.instruction} components={components} />
             )}
           </div>
         )}
