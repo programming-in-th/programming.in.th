@@ -1,4 +1,5 @@
 'use client'
+
 import { Fragment } from 'react'
 
 import Image from 'next/image'
@@ -164,8 +165,10 @@ export const Navbar = () => {
                 <div className="flex items-center gap-4 p-4">
                   <div>
                     <Image
-                      src={session?.user.image!}
-                      alt={session?.user.name!}
+                      src={
+                        session?.user.image ?? '/assets/img/profile/default.svg'
+                      }
+                      alt={session?.user.name ?? 'Default profile image'}
                       width={40}
                       height={40}
                       className="h-10 w-10 rounded-full"

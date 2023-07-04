@@ -17,7 +17,7 @@ const Submission = ({
 }) => {
   const { submission, isLoading } = useSSESubmissionData(submissionID)
 
-  if (isLoading) {
+  if (isLoading || !submission) {
     return (
       <div className="flex w-full flex-col items-center justify-center">
         <svg
@@ -48,7 +48,7 @@ const Submission = ({
     <div className="w-full min-w-0">
       <Header />
       {submission && <Card sub={submission} task={task} />}
-      <Code code={submission!.code[0]} language={submission!.language} />
+      <Code code={submission.code[0]} language={submission.language} />
       {submission && <SubmissionGroup groups={submission.groups} />}
     </div>
   )

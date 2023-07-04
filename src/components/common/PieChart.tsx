@@ -1,4 +1,5 @@
 import { memo } from 'react'
+
 export interface IPieData {
   id: string
   value: number
@@ -17,12 +18,10 @@ const PieChart = memo(function PieChart({
       <div className="absolute flex w-full justify-center">
         <div
           className="pie animate inset-x-0 top-0 z-10 transition-all"
-          style={
-            {
-              '--c': points > 0 ? '#3b82f6' : '#F1F5F9',
-              '--p': (points / fullScore) * 100
-            } as any
-          }
+          style={{
+            '--c': points > 0 ? '#3b82f6' : '#F1F5F9',
+            '--p': (points / fullScore) * 100
+          }}
         >
           <div className="flex flex-col items-center">
             <p>
@@ -40,7 +39,7 @@ const PieChart = memo(function PieChart({
       <div className="absolute flex w-full justify-center">
         <div
           className="pie inset-x-0 top-0"
-          style={{ '--c': '#F1F5F9', '--p': 100 } as any}
+          style={{ '--c': '#F1F5F9', '--p': 100 }}
         ></div>
       </div>
     </div>

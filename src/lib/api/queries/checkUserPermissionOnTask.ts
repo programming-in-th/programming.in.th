@@ -18,10 +18,12 @@ const checkUserPermissionOnTask = async (
 
   if (!task?.private) return true
 
+  if (!user.id) return false
+
   if (interaction === 'WRITE') {
     const taskOnAssessment = await prisma.userOnAssessment.findMany({
       where: {
-        userId: user.id!,
+        userId: user.id,
         assessment: {
           AND: [
             {
@@ -51,7 +53,7 @@ const checkUserPermissionOnTask = async (
 
   const taskOnAssessment = await prisma.userOnAssessment.findMany({
     where: {
-      userId: user.id!,
+      userId: user.id,
       assessment: {
         archived: false,
         tasks: {

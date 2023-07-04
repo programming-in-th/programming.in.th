@@ -1,13 +1,22 @@
+import { PropsWithChildren } from 'react'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
-const CustomLink = (props: any) => {
+type MDXComponentProps = PropsWithChildren & {
+  className: string
+  href: string
+  src: string
+  alt: string
+}
+
+const CustomLink = (props: MDXComponentProps) => {
   const href = props.href
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'))
 
   if (isInternalLink) {
     return (
-      <Link href={href} className="dark:text-white" {...props}>
+      <Link {...{ ...props, href, className: 'dark:text-white' }}>
         {props.children}
       </Link>
     )
@@ -16,11 +25,10 @@ const CustomLink = (props: any) => {
   return <a target="_blank" rel="noopener noreferrer" {...props} />
 }
 
-const CustomImage = (props: any) => {
+const CustomImage = (props: MDXComponentProps) => {
   return (
     <Image
-      alt={props.alt}
-      {...props}
+      {...{ ...props, alt: props.alt }}
       style={{
         maxWidth: '100%',
         height: 'auto'
@@ -29,7 +37,7 @@ const CustomImage = (props: any) => {
   )
 }
 
-const CustomCode = (props: any) => {
+const CustomCode = (props: MDXComponentProps) => {
   if (
     typeof props.className === 'string' &&
     props.className.includes('code-highlight')

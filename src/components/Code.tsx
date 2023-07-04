@@ -1,5 +1,9 @@
-import Highlight, { Prism } from 'prism-react-renderer'
-;((typeof global !== 'undefined' ? global : window) as any).Prism = Prism
+import Highlight, { Language, Prism } from 'prism-react-renderer'
+;(
+  (typeof global !== 'undefined' ? global : window) as unknown as {
+    Prism: typeof Prism
+  }
+).Prism = Prism
 
 require('prismjs/components/prism-rust')
 require('prismjs/components/prism-java')
@@ -13,7 +17,7 @@ export interface CodeBlockProps {
 // May cause bug
 const Code = ({ code, language }: CodeBlockProps) => {
   return (
-    <Highlight Prism={Prism} code={code} language={language as any}>
+    <Highlight Prism={Prism} code={code} language={language as Language}>
       {({ style, tokens, getLineProps, getTokenProps }) => (
         <pre
           style={{ ...style }}

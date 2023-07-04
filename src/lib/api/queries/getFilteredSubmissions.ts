@@ -13,7 +13,7 @@ export const getFilteredSubmissions = async (
     return await prisma.submission.findMany({
       where: {
         ...(filter.includes(Filter.enum.own) && {
-          user: { id: { equals: session.user.id! } }
+          user: { id: { equals: session.user.id ?? '' } }
         }),
         ...(filter.includes(Filter.enum.task) && { taskId })
       },

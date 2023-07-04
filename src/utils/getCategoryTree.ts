@@ -50,7 +50,8 @@ const generateCategoryTree = async () => {
       taskIds: node.tasks.map(item => item.id)
     }
   }
-  categoryTree = getTree(
+
+  return getTree(
     {
       id: '',
       name: '',
@@ -70,14 +71,21 @@ const getCategoryTree = async (
   path: string[] = [],
   node?: ICategory
 ): Promise<ICategory> => {
-  if (!categoryTree) await generateCategoryTree()
-  if (!node) node = categoryTree!
+  if (!categoryTree) {
+    categoryTree = await generateCategoryTree()
+  }
+
+  if (!node) {
+    node = categoryTree
+  }
+
   if (path.length === 0) return node
   const [head, ...tail] = path
   if (isCategories(node.children)) {
     const child = node.children.find(child => child.title === head)
     if (child) return getCategoryTree(tail, child)
   }
+
   throw new Error('Category not found')
 }
 

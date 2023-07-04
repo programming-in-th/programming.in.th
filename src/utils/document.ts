@@ -20,7 +20,7 @@ export const useDetectOuside = (
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
-  }, [ref, dep])
+  }, [ref, dep, callback])
 }
 
 export function useWindowDimensions() {

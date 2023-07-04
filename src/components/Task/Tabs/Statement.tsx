@@ -29,11 +29,9 @@ const StatementTab = ({ task }: { task: Task }) => {
       <div className="prose mt-4 w-full max-w-none dark:text-gray-100">
         <MDXRemote
           {...mdStatement}
-          components={
-            {
-              ...components
-            } as any
-          }
+          components={{
+            ...components
+          }}
         />
       </div>
     )

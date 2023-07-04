@@ -50,11 +50,9 @@ const SolutionTab = ({
     <article className="prose mt-4 w-full max-w-none dark:prose-invert dark:prose-headings:text-white">
       <MDXRemote
         {...solution}
-        components={
-          {
-            ...components
-          } as any
-        }
+        components={{
+          ...components
+        }}
       />
     </article>
   )
