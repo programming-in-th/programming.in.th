@@ -107,6 +107,7 @@
   },
   "pnpm": {
     "overrides": {
+      "semver": ">=7.5.2",
       "undici": ">=5.19.1"
     }
   }
