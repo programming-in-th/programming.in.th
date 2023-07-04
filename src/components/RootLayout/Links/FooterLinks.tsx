@@ -10,7 +10,7 @@ import { navigation } from './links'
 export const FooterLinks = () => {
   const pathname = usePathname()
   const location = useMemo(() => {
-    return pathname?.split('/')[1]
+    return pathname.split('/')[1]
   }, [pathname])
 
   return (

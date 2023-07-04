@@ -45,7 +45,7 @@ export const TasksList = ({
   tagFilter: string[]
 }) => {
   const searchParams = useSearchParams()
-  const type = searchParams?.get('type')
+  const type = searchParams.get('type')
 
   const [tag, setTag] = useState<boolean>(false)
 

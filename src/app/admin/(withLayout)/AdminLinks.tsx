@@ -23,7 +23,7 @@ const adminTabs = [
 function useAdminLocation() {
   const pathname = usePathname()
 
-  return pathname?.split('/')?.[2]
+  return pathname.split('/')[2]
 }
 
 export const AdminLinks = () => {

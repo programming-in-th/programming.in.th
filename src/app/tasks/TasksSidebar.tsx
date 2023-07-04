@@ -40,7 +40,7 @@ export const TasksSidebar = ({
   const router = useRouter()
   const searchParams = useSearchParams()
 
-  const type = searchParams?.get('type')
+  const type = searchParams.get('type')
 
   return (
     <div>

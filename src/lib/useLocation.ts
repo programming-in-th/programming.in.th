@@ -10,7 +10,7 @@ export function useLocation() {
   const pathname = usePathname()
 
   const location = useMemo(() => {
-    return pathname?.split('/')[1]
+    return pathname.split('/')[1]
   }, [pathname])
 
   return location
