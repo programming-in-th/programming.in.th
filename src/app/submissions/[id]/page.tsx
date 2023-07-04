@@ -1,9 +1,8 @@
 import { notFound } from 'next/navigation'
 
 import Submission from '@/components/Submission/Submission'
+import { TaskLayout } from '@/components/Task/Layout'
 import prisma from '@/lib/prisma'
-
-import { TaskLayout } from '../../TaskLayout'
 
 export default async function Submissions({
   params

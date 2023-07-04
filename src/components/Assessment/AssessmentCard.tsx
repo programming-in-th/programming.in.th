@@ -37,11 +37,11 @@ const Card = ({
         <div className="flex divide-x">
           <div className="flex flex-col items-center px-4">
             <p className="text-sm text-gray-400 dark:text-gray-300">Solved</p>
-            <p className="text-base text-gray-500 dark:text-white">9/11</p>
+            <p className="text-base text-gray-500 dark:text-white">เกียน ❓</p>
           </div>
           <div className="flex flex-col items-center pl-4">
             <p className="text-sm text-gray-400 dark:text-gray-300">Score</p>
-            <p className="text-base text-gray-500 dark:text-white">9/100</p>
+            <p className="text-base text-gray-500 dark:text-white">TODO</p>
           </div>
         </div>
       </div>

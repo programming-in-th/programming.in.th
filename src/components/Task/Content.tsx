@@ -1,3 +1,5 @@
+import 'server-only'
+
 import { Task } from '@prisma/client'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
 
@@ -9,7 +11,8 @@ import SubmitTab from './Tabs/Submit'
 const component = (
   type: string,
   task: Task,
-  solution: MDXRemoteSerializeResult | null
+  solution: MDXRemoteSerializeResult | null,
+  assessmentId?: string
 ) => {
   switch (type) {
     case 'statement':
@@ -17,7 +20,7 @@ const component = (
     case 'submit':
       return <SubmitTab task={task} />
     case 'submissions':
-      return <SubmissionsTab task={task} />
+      return <SubmissionsTab task={task} assessmentId={assessmentId} />
     case 'solution':
       return <SolutionTab taskId={task.id} solution={solution} />
   }
@@ -26,15 +29,17 @@ const component = (
 export const TaskContent = ({
   task,
   type,
-  solution
+  solution,
+  assessmentId
 }: {
   task: Task
   type: string
   solution: MDXRemoteSerializeResult | null
+  assessmentId?: string
 }) => {
   return (
     <div className="flex w-full min-w-0 shrink flex-col gap-8">
-      {component(type, task, solution)}
+      {component(type, task, solution, assessmentId)}
     </div>
   )
 }

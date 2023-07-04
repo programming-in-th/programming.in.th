@@ -1,17 +1,18 @@
+'use client'
+
 import { useMemo } from 'react'
 
 import Link from 'next/link'
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 
+import { PieChart } from '@/components/common/PieChart'
 import fetcher from '@/lib/fetcher'
 import { IListSubmission } from '@/types/submissions'
-
-import { PieChart } from '../common/PieChart'
 
 const NormalTabs = [
   {
@@ -79,22 +80,22 @@ export const SideBar = ({
     [assessmentId]
   )
 
-  const { push } = useRouter()
+  const router = useRouter()
 
   const maxScore = useMemo(() => {
     return data ? Math.max(...data.data.map(sub => sub.score), 0) : 0
   }, [data])
 
   return (
-    <section className="w-full flex-none md:w-[14rem]">
+    <section className="w-full flex-none">
       <select
         className="mt-2 w-full px-4 py-2 md:hidden"
         onChange={({ target: { value } }) =>
-          push({
-            pathname: assessmentId
+          router.push(
+            assessmentId
               ? `/assessments/${assessmentId}/${task?.id}/${value}`
               : `/tasks/${task?.id}/${value}`
-          })
+          )
         }
         value={Tabs.find(tab => type === tab.value)?.url}
       >
@@ -150,7 +151,7 @@ export const SideBar = ({
       <div className="hidden flex-col items-center justify-center md:flex">
         <a
           target="_blank"
-          href="https://google.com"
+          href="https://forms.gle/HRuSQ14gEcHbcfVR8"
           rel="noreferrer"
           className="mb-4 w-full text-center font-light dark:text-white"
         >

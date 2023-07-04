@@ -72,6 +72,7 @@
     "rehype-slug": "5.1.0",
     "remark-gfm": "3.0.1",
     "remark-math": "5.1.1",
+    "server-only": "0.0.1",
     "sharp": "0.32.1",
     "swr": "2.2.0",
     "zod": "3.21.4"
