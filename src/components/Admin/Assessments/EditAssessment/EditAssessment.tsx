@@ -8,28 +8,13 @@ import toast from 'react-hot-toast'
 import useSWR, { mutate } from 'swr'
 
 import fetcher from '@/lib/fetcher'
-import { IAssessmentTask, IAssessmentwithTask } from '@/types/assessments'
+import { IAssessmentTask } from '@/types/assessments'
 import { IUser } from '@/types/users'
 
 import { LeftBar } from './LeftBar'
 import { MiddleBar } from './MiddleBar'
 import { RightBar } from './RightBar'
-
-export type IAssessment = IAssessmentwithTask & {
-  users: { userId: string }[]
-  owners: { userId: string }[]
-}
-
-export interface IAssessmentForm {
-  id: string
-  name: string
-  description: string
-  instruction: string
-  open: string
-  close: string
-  [assign: `assign-${string}`]: boolean
-  [assign: `assignOwn-${string}`]: boolean
-}
+import { IAssessment, IAssessmentForm } from './types'
 
 const SubmitForm = ({
   assessment,

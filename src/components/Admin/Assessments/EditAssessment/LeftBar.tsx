@@ -5,7 +5,7 @@ import { UseFormRegister } from 'react-hook-form'
 
 import { IUser } from '@/types/users'
 
-import { IAssessment, IAssessmentForm } from './EditAssessment'
+import { IAssessment, IAssessmentForm } from './types'
 
 export const LeftBar = ({
   register,
