@@ -4,11 +4,14 @@ const baseURL = process.env.BASE_URL || 'http://localhost:3000'
 
 export default defineConfig({
   testDir: 'tests',
-  webServer: {
-    command: 'pnpm run dev',
-    url: baseURL,
-    reuseExistingServer: !process.env.CI
-  },
+  webServer: process.env.CI
+    ? undefined
+    : {
+        command: 'pnpm run dev',
+        url: baseURL,
+        reuseExistingServer: true
+      },
+  workers: process.env.CI ? 1 : undefined,
   use: {
     baseURL
   }
