@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 import { useLocation } from '@/lib/useLocation'
 
-import { navigation } from './links'
+import { links } from './links'
 import { PopoverButton } from '../useClientMirror'
 
 export const DesktopLinks = () => {
@@ -12,7 +12,7 @@ export const DesktopLinks = () => {
 
   return (
     <>
-      {navigation.map(item => (
+      {links.map(item => (
         <Link
           href={item.href}
           key={item.name}
@@ -34,7 +34,7 @@ export const MobileLinks = () => {
 
   return (
     <>
-      {navigation.map(item => (
+      {links.map(item => (
         <PopoverButton
           as={Link}
           href={item.href}

@@ -5,7 +5,7 @@ import { useMemo } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 
-import { navigation } from './links'
+import { links } from './links'
 
 export const FooterLinks = () => {
   const pathname = usePathname()
@@ -15,7 +15,7 @@ export const FooterLinks = () => {
 
   return (
     <>
-      {navigation.map(item => (
+      {links.map(item => (
         <Link
           href={item.href}
           key={item.name}
