@@ -1,2 +1,7 @@
 # โดน husky เกียน
 pnpm-lock.yaml
+
+.next
+coverage
+node_modules
+test-results
