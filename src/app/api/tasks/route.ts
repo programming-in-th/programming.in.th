@@ -26,12 +26,6 @@ export async function GET() {
   return json(task)
 }
 
-export const config = {
-  api: {
-    bodyParser: false
-  }
-}
-
 export async function POST(req: NextRequest) {
   const user = await getServerUser()
 
