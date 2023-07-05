@@ -30,5 +30,14 @@ describe('searchParams', () => {
       filter: ['own', 'task'],
       taskId: '0009'
     })
+
+    expect(
+      getParams(
+        '/api/submissions?filter=own&filter=task&taskId=0009&filter=blackslex'
+      )
+    ).toStrictEqual({
+      filter: ['own', 'task', 'blackslex'],
+      taskId: '0009'
+    })
   })
 })
