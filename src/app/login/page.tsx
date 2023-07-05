@@ -1,7 +1,9 @@
 import { Suspense } from 'react'
 
+import { LoginGitHub } from '@/components/Login/GitHub'
+import { LoginGoogle } from '@/components/Login/Google'
+
 import { ErrorMessage } from './ErrorMessage'
-import { SignIn } from './SignIn'
 
 export default function Login() {
   return (
@@ -11,16 +13,15 @@ export default function Login() {
           Continue to PROGRAMMING.IN.TH
         </h2>
       </div>
-      <div className="sm:mx-auto sm:w-full sm:max-w-md">
+      <div className="my-6 sm:mx-auto sm:w-full sm:max-w-md">
         <Suspense>
           <ErrorMessage />
         </Suspense>
       </div>
-      <div className="mt-2 px-4 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white px-4 py-2 dark:bg-slate-800 sm:rounded-lg sm:px-10">
-          <div className="mt-12 flex flex-col gap-6">
-            <SignIn />
-          </div>
+      <div className="px-4 sm:mx-auto sm:w-full sm:max-w-md">
+        <div className="flex flex-col gap-6 bg-white px-4 py-2 dark:bg-slate-800 sm:rounded-lg sm:px-10">
+          <LoginGoogle />
+          <LoginGitHub />
         </div>
       </div>
     </div>

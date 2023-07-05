@@ -10,8 +10,9 @@ if (
   !process.env.GITHUB_SECRET ||
   !process.env.GOOGLE_CLIENT_ID ||
   !process.env.GOOGLE_CLIENT_SECRET
-)
+) {
   throw new Error('Failed to initialize authentication')
+}
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
