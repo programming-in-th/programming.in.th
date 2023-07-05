@@ -14,12 +14,13 @@
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"./src/**/*.{css,scss}\" && eslint src --fix",
+    "format": "prettier --write \"**/*.{js,mjs,json,css,scss,md,yml}\" && eslint src --fix",
     "prebuild": "prisma generate",
     "predev": "prisma generate",
     "prepare": "husky install",
     "test": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.363.0",
@@ -81,6 +82,7 @@
   },
   "devDependencies": {
     "@octokit/types": "10.0.0",
+    "@playwright/test": "1.35.1",
     "@tailwindcss/typography": "0.5.9",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "14.0.0",

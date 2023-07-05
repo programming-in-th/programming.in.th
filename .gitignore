@@ -31,3 +31,5 @@ package-lock.json
 bundles
 
 .env
+
+test-results

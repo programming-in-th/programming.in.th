@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: 'jsdom',
-    setupFiles: './test/setup.mjs',
+    setupFiles: './vitest.setup.mjs',
     coverage: {
       provider: 'v8',
       reporter: ['text', 'html', 'json-summary', 'json']

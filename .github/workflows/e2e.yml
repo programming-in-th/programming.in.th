@@ -1,0 +1,35 @@
+name: Automation Test
+
+on:
+  deployment_status:
+
+e2e-test:
+  name: E2E Test
+  runs-on: ubuntu-latest
+  if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
+
+  steps:
+    - name: Checkout Repo
+      uses: actions/checkout@v3
+
+    - name: Setup pnpm
+      uses: pnpm/action-setup@v2
+
+    - uses: actions/setup-node@v3
+      with:
+        node-version-file: '.nvmrc'
+        cache: pnpm
+
+    - name: Install dependencies
+      run: pnpm install
+
+    - name: Install Playwright Dependencies
+      run: pnpm playwright install --with-deps
+
+    - name: Print BASE_URL
+      run: echo Running on ${{ github.event.deployment_status.target_url }}
+
+    - name: Run Playwright Test
+      run: pnpm test
+      env:
+        BASE_URL: ${{ github.event.deployment_status.target_url }}
