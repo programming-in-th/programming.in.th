@@ -1,11 +1,11 @@
-name: Automation Test
+name: E2E Test
 
 on:
   deployment_status:
 
 jobs:
   e2e-test:
-    name: E2E Test
+    name: Playwright
     runs-on: ubuntu-latest
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
 
