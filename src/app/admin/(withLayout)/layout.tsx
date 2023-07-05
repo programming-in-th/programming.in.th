@@ -1,26 +1,8 @@
 import { ReactNode } from 'react'
 
-import { Forbidden } from '@/components/Forbidden'
-import { Unauthorized } from '@/components/Unauthorized'
-import { getServerUser } from '@/lib/session'
-
 import { AdminLinks } from './AdminLinks'
 
-export default async function AdminLayout({
-  children
-}: {
-  children: ReactNode
-}) {
-  const user = await getServerUser()
-
-  if (!user) {
-    return <Unauthorized />
-  }
-
-  if (!user.admin) {
-    return <Forbidden />
-  }
-
+export default function AdminLayout({ children }: { children: ReactNode }) {
   return (
     <div className="flex w-full justify-center">
       <div className="justify-cente r flex w-full flex-col items-center px-2 text-gray-500 dark:text-gray-50">
