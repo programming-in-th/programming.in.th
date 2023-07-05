@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useState } from 'react'
 
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
@@ -113,15 +113,19 @@ const SubmitForm = ({
     }
   })
 
+  const [file, setFile] = useState<File | null>(null)
+
   const onSubmit = async (data: IAssessmentForm) => {
     try {
+      const body = new FormData()
+      if (file) {
+        body.append('file', file)
+      }
+      body.append('json', JSON.stringify(data))
       await toast.promise(
         fetch(task ? `/api/tasks/${task.id}` : '/api/tasks', {
           method: task ? 'PUT' : 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify(data)
+          body
         }).then(res => {
           if (!res.ok) throw new Error('Failed to submit')
           return res.json()
@@ -151,7 +155,7 @@ const SubmitForm = ({
         <LeftBar task={task} register={register} />
         <div className="flex w-full flex-col dark:text-gray-200">
           <p>File</p>
-          <div className="flex h-full flex-col items-center justify-center rounded-md border border-dashed border-gray-400">
+          {/* <div className="flex h-full flex-col items-center justify-center rounded-md border border-dashed border-gray-400">
             <svg
               width="49"
               height="49"
@@ -170,7 +174,15 @@ const SubmitForm = ({
             </svg>
             <p>Upload a file or drag and drop</p>
             <p className="text-sm">.PDF up to 10MB</p>
-          </div>
+          </div> */}
+          <input
+            type="file"
+            onChange={event => {
+              if (event.target.files && event.target.files[0]) {
+                setFile(event.target.files[0])
+              }
+            }}
+          />
         </div>
       </div>
       <div className="flex justify-end space-x-2 py-2">

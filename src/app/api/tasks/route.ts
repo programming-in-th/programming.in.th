@@ -1,10 +1,12 @@
 import { revalidatePath } from 'next/cache'
 import { NextRequest } from 'next/server'
 
+import JSZip from 'jszip'
 import { ZodError } from 'zod'
 
 import { TaskSchema } from '@/lib/api/schema/tasks'
 import prisma from '@/lib/prisma'
+import { s3Client } from '@/lib/s3Client'
 import { getServerUser } from '@/lib/session'
 import {
   badRequest,
@@ -24,6 +26,12 @@ export async function GET() {
   return json(task)
 }
 
+export const config = {
+  api: {
+    bodyParser: false
+  }
+}
+
 export async function POST(req: NextRequest) {
   const user = await getServerUser()
 
@@ -31,7 +39,28 @@ export async function POST(req: NextRequest) {
   if (!user.admin) return forbidden()
 
   try {
-    const task = TaskSchema.parse(await req.json())
+    const formData = await req.formData()
+
+    const task = TaskSchema.parse(JSON.parse(formData.get('json') as string))
+
+    const file = formData.get('file') as Blob | null
+
+    if (file) {
+      const zip = new JSZip()
+      const buffer = Buffer.from(await file.arrayBuffer())
+      await zip.loadAsync(buffer).then(data => {
+        data.forEach(async (relPath, file) => {
+          const nbuffer = Buffer.from(await file.async('arraybuffer'))
+          s3Client.putObject({
+            Bucket: process.env.BUCKET_NAME,
+            Key: `testcases/${task.id}/${relPath}`,
+            Body: nbuffer
+          })
+        })
+      })
+    }
+
+    // TODO : check formatting of zip file
 
     // const path = task.categoryId.split('/')
     // for (let i = 0; i < path.length; i++) {

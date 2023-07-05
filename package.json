@@ -54,6 +54,7 @@
     "dayjs": "1.11.9",
     "framer-motion": "10.12.18",
     "fuse.js": "6.6.2",
+    "jszip": "3.10.1",
     "katex": "0.16.8",
     "next": "13.4.7",
     "next-auth": "4.22.1",
