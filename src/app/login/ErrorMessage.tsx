@@ -31,5 +31,14 @@ export const ErrorMessage = () => {
 
   const errorMessage = error && (errors[error] ?? errors.default)
 
-  return <>{errorMessage && <p>{errorMessage}</p>}</>
+  return (
+    <>
+      {errorMessage && (
+        <p className="text-center">
+          {errorMessage} <br />
+          (Code: {error})
+        </p>
+      )}
+    </>
+  )
 }
