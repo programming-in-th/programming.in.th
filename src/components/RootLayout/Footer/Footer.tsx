@@ -1,19 +1,16 @@
-'use client'
 import { useMemo } from 'react'
 
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { useSession } from 'next-auth/react'
-
 import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
 
-import { FooterLinks } from './Links/FooterLinks'
-import { PoweredByVercel } from './PoweredByVercel'
+import { FooterJoin } from './FooterJoin'
 import { ThemeSwitch } from './ThemeSwitch'
+import { FooterLinks } from '../Links/FooterLinks'
+import { PoweredByVercel } from '../PoweredByVercel'
 
 export const Footer = () => {
-  const { data: session } = useSession()
   const currentYear = useMemo(() => +new Date().getFullYear(), [])
 
   return (
@@ -31,21 +28,8 @@ export const Footer = () => {
               โปรแกรมมิ่งอินทีเอช ศูนย์รวมของโจทย์และเนื้อหาสำหรับ
               การเขียนโปรแกรมเพื่อการแข่งขัน และวิทยาการคอมพิวเตอร์
             </p>
-            {session?.user ? (
-              <Link
-                href="/tasks"
-                className="trasition-colors mt-4 rounded-md bg-prog-primary-500 px-9 py-2.5 text-white hover:bg-prog-primary-600"
-              >
-                ค้นหาโจทย์
-              </Link>
-            ) : (
-              <Link
-                href="/login"
-                className="trasition-colors mt-4 rounded-md bg-prog-primary-500 px-9 py-2.5 text-white hover:bg-prog-primary-600"
-              >
-                เข้าร่วม
-              </Link>
-            )}
+
+            <FooterJoin />
           </div>
         </div>
         <div className="flex w-full flex-col justify-between font-display md:flex-row md:justify-between md:py-10">
