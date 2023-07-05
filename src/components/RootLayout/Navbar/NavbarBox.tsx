@@ -13,10 +13,7 @@ import { useLocation } from '@/lib/useLocation'
 export const NavbarBox: FC<PropsWithChildren> = ({ children }) => {
   const location = useLocation()
   return (
-    <Popover
-      as="header"
-      className={clsx('relative', location !== '' && 'shadow-sm')}
-    >
+    <Popover className={clsx('relative', location !== '' && 'shadow-sm')}>
       {children}
     </Popover>
   )

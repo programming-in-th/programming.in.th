@@ -35,19 +35,17 @@ export default async function RootLayout({
   return (
     <html lang="th" className={`${inter.variable} ${notoSans.variable}`}>
       <body>
-        <body>
-          <Providers>
-            <LayoutWithTheme>
-              <Navbar />
-              <main className="flex min-h-screen w-screen flex-col">
-                {children}
-              </main>
-              <Footer />
-            </LayoutWithTheme>
-          </Providers>
-        </body>
-        <Analytics />
+        <Providers>
+          <LayoutWithTheme>
+            <Navbar />
+            <main className="flex min-h-screen w-screen flex-col">
+              {children}
+            </main>
+            <Footer />
+          </LayoutWithTheme>
+        </Providers>
       </body>
+      <Analytics />
     </html>
   )
 }
