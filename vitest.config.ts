@@ -8,7 +8,8 @@ export default defineConfig({
     environment: 'jsdom',
     setupFiles: './test/setup.mjs',
     coverage: {
-      provider: 'v8'
+      provider: 'v8',
+      reporter: ['text', 'html', 'json-summary', 'json']
     }
   }
 })

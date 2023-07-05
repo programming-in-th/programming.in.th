@@ -34,7 +34,7 @@ jobs:
         run: pnpm prisma generate
 
       - name: Run Unit Test
-        run: pnpm test:cov
+        run: pnpm test:coverage
 
       - name: Report Coverage
         if: github.event_name == 'pull_request'

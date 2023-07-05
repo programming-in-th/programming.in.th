@@ -19,7 +19,7 @@
     "predev": "prisma generate",
     "prepare": "husky install",
     "test": "vitest run",
-    "test:cov": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.363.0",
