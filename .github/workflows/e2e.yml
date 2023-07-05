@@ -31,6 +31,6 @@ jobs:
         run: echo Running on ${{ github.event.deployment_status.target_url }}
 
       - name: Run Playwright Test
-        run: pnpm test
+        run: pnpm test:e2e
         env:
           BASE_URL: ${{ github.event.deployment_status.target_url }}
