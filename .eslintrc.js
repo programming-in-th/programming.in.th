@@ -56,7 +56,8 @@ const config = {
         argsIgnorePattern: '^_'
       }
     ],
-    'unused-imports/no-unused-imports': 'warn'
+    'unused-imports/no-unused-imports': 'warn',
+    'react/no-unescaped-entities': 'off'
   },
   overrides: [
     {

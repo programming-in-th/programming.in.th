@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 
-import { redirect } from 'next/navigation'
-
+import { Forbidden } from '@/components/Forbidden'
+import { Unauthorized } from '@/components/Unauthorized'
 import { getServerUser } from '@/lib/session'
 
 import { AdminLinks } from './AdminLinks'
@@ -14,11 +14,11 @@ export default async function AdminLayout({
   const user = await getServerUser()
 
   if (!user) {
-    redirect('/login')
+    return <Unauthorized />
   }
 
   if (!user.admin) {
-    redirect('/')
+    return <Forbidden />
   }
 
   return (
