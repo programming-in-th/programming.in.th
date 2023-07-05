@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import { NextRequest } from 'next/server'
 
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
@@ -85,6 +86,7 @@ export async function PUT(
       }
     }
   })
+  revalidatePath('/tasks')
 
   return json(updatedTask)
 }
@@ -109,6 +111,7 @@ export async function DELETE(
     where: { id }
   })
 
+  revalidatePath('/tasks')
   // TODO: Remove unused categories
 
   return json(deletedTask)

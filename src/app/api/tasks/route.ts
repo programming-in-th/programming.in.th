@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import { NextRequest } from 'next/server'
 
 import { ZodError } from 'zod'
@@ -57,6 +58,7 @@ export async function POST(req: NextRequest) {
       }
     })
 
+    revalidatePath('/tasks')
     return json(createdTask)
   } catch (err) {
     if (err instanceof ZodError) {
