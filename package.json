@@ -17,7 +17,9 @@
     "format": "prettier --write \"./src/**/*.{css,scss}\" && eslint src --fix",
     "prebuild": "prisma generate",
     "predev": "prisma generate",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "3.363.0",
@@ -80,11 +82,15 @@
   "devDependencies": {
     "@octokit/types": "10.0.0",
     "@tailwindcss/typography": "0.5.9",
+    "@testing-library/jest-dom": "5.16.5",
+    "@testing-library/react": "14.0.0",
     "@types/node": "20.3.3",
     "@types/react": "18.2.14",
     "@types/react-table": "7.7.14",
     "@typescript-eslint/eslint-plugin": "5.60.1",
     "@typescript-eslint/parser": "5.60.1",
+    "@vitejs/plugin-react": "4.0.1",
+    "@vitest/coverage-v8": "0.32.4",
     "autoprefixer": "10.4.14",
     "eslint": "8.44.0",
     "eslint-config-next": "13.4.7",
@@ -94,6 +100,7 @@
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-unused-imports": "2.0.0",
     "husky": "8.0.3",
+    "jsdom": "22.1.0",
     "postcss": "8.4.24",
     "prettier": "2.8.8",
     "prettier-plugin-tailwindcss": "0.3.0",
@@ -103,7 +110,8 @@
     "sass": "1.63.6",
     "tailwindcss": "3.3.2",
     "ts-node": "10.9.1",
-    "typescript": "5.1.6"
+    "typescript": "5.1.6",
+    "vitest": "0.32.4"
   },
   "pnpm": {
     "overrides": {
