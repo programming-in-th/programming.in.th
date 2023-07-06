@@ -2,6 +2,8 @@
 
 import { FC, useState } from 'react'
 
+import { Toaster, toast } from 'react-hot-toast'
+
 type DisplayNameProps = {
   initialName: string
 }
@@ -9,11 +11,11 @@ type DisplayNameProps = {
 export const DisplayName: FC<DisplayNameProps> = ({ initialName }) => {
   const [name, setName] = useState(initialName)
   const [saving, setSaving] = useState(false)
-  const [error, setError] = useState('')
+  // const [error, setError] = useState('')
 
   async function handleSave() {
     setSaving(true)
-    setError('')
+    // setError('')
 
     const res = await fetch('/api/user', {
       method: 'POST',
@@ -24,18 +26,21 @@ export const DisplayName: FC<DisplayNameProps> = ({ initialName }) => {
 
     if (res.ok) {
       window.location.reload()
+      toast.success('เปลี่ยน username สำเร็จ')
     } else {
       const errorObj = await res.json()
-      setError(`${res.statusText}: ${errorObj?.error}`)
+      // setError(`${res.statusText}: ${errorObj?.error}`)
       setSaving(false)
+      toast.error('จำนวนตัวอักษรใน username ต้องอยู่ระหว่าง 3 - 32 ตัวอักษร')
     }
   }
 
   return (
     <section className="flex flex-col items-center gap-2">
+      <Toaster />
       <p className="text-xl">Display Name</p>
 
-      {error && <p className="text-red-500">{error}</p>}
+      {/* {error && <p className="text-red-500">{error}</p>} */}
 
       <div className="flex gap-2">
         <input
