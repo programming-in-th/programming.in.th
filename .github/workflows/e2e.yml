@@ -3,6 +3,10 @@ name: E2E Test
 on:
   deployment_status:
 
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   e2e-test:
     name: Playwright

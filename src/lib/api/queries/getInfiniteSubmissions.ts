@@ -44,6 +44,7 @@ export const getInfiniteSubmissions = async (
       user: {
         select: {
           username: true,
+          name: true,
           id: true
         }
       },

@@ -45,14 +45,29 @@ export const DesktopProfile = () => {
               leaveTo="opacity-0 scale-95"
             >
               <Popover.Panel className="absolute right-2 z-50 mt-2 rounded-lg bg-white shadow-md dark:bg-slate-800">
-                <div className="flex flex-col border-b border-gray-100 px-8 py-4 text-prog-gray-500 dark:border-slate-900 dark:text-gray-100">
-                  <p className="font-medium">{session?.user.username}</p>
-                  <p className="font-light">{session?.user.email}</p>
-                </div>
+                {({ close }) => (
+                  <>
+                    <div className="flex flex-col border-b border-gray-100 px-8 py-4 text-prog-gray-500 dark:border-slate-900 dark:text-gray-100">
+                      <p className="text-lg font-medium">
+                        {session?.user.name}
+                      </p>
+                      {session?.user.name !== session?.user.username && (
+                        <p className="font-medium">{session?.user.username}</p>
+                      )}
+                      <p className="font-light">{session?.user.email}</p>
+                    </div>
 
-                <div className="px-8 py-4">
-                  <SignoutButton className="text-prog-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-400" />
-                </div>
+                    <div className="border-b border-gray-100 px-8 py-4 text-prog-gray-500 hover:text-gray-700 dark:border-slate-900 dark:text-gray-100 dark:hover:text-gray-400">
+                      <Link href="/user" onClick={() => close()}>
+                        User Settings
+                      </Link>
+                    </div>
+
+                    <div className="px-8 py-4">
+                      <SignoutButton className="text-prog-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-400" />
+                    </div>
+                  </>
+                )}
               </Popover.Panel>
             </Transition>
           </Popover>
