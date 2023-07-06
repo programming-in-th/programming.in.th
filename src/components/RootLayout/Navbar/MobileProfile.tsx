@@ -41,7 +41,11 @@ export const MobileProfile = () => {
       </div>
 
       {session?.user ? (
-        <div className="mt-6 px-5">
+        <div className="mt-6 flex flex-col gap-4 px-5">
+          <button className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700">
+            <Link href="/user">User Settings</Link>
+          </button>
+
           <SignoutButton className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700" />
         </div>
       ) : (

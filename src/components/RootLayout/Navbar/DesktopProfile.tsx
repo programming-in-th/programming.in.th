@@ -59,7 +59,7 @@ export const DesktopProfile = () => {
 
                     <div className="border-b border-gray-100 px-8 py-4 text-prog-gray-500 hover:text-gray-700 dark:border-slate-900 dark:text-gray-100 dark:hover:text-gray-400">
                       <Link href="/user" onClick={() => close()}>
-                        User Dashboard
+                        User Settings
                       </Link>
                     </div>
 
