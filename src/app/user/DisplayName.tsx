@@ -26,12 +26,14 @@ export const DisplayName: FC<DisplayNameProps> = ({ initialName }) => {
 
     if (res.ok) {
       window.location.reload()
-      toast.success('เปลี่ยน username สำเร็จ')
+      toast.success('เปลี่ยน display name สำเร็จ')
     } else {
       // const errorObj = await res.json()
       // setError(`${res.statusText}: ${errorObj?.error}`)
       setSaving(false)
-      toast.error('จำนวนตัวอักษรใน username ต้องอยู่ระหว่าง 3 - 32 ตัวอักษร')
+      toast.error(
+        'จำนวนตัวอักษรใน display name ต้องอยู่ระหว่าง 3 - 32 ตัวอักษร'
+      )
     }
   }
 
