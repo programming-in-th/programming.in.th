@@ -4,6 +4,8 @@ import { Unauthorized } from '@/components/Unauthorized'
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
 
+import { DisplayName } from './DisplayName'
+
 export default async function User() {
   const user = await getServerUser()
 
@@ -27,10 +29,12 @@ export default async function User() {
   )
 
   return (
-    <div className="flex min-h-screen flex-col justify-center gap-4 pb-44 sm:px-6 lg:px-8">
+    <div className="flex min-h-screen flex-col justify-center gap-8 pb-44 sm:px-6 lg:px-8">
       <h2 className="mt-6 px-4 text-center text-3xl font-extrabold text-prog-gray-500 dark:text-prog-gray-100">
         User Dashboard
       </h2>
+
+      <DisplayName initialName={user.name ?? ''} />
 
       <div className="px-4 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex flex-col gap-6 bg-white px-4 py-2 dark:bg-slate-800 sm:rounded-lg sm:px-10">

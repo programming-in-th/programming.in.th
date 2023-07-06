@@ -38,7 +38,7 @@ const getColumn = (
     width: 'w-[18em]',
     child: sub => (
       <p className="truncate text-center text-sm font-medium text-gray-500 dark:text-white">
-        {sub.user?.username}
+        {sub.user?.name}
       </p>
     )
   },
