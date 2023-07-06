@@ -28,7 +28,7 @@ export const DisplayName: FC<DisplayNameProps> = ({ initialName }) => {
       window.location.reload()
       toast.success('เปลี่ยน username สำเร็จ')
     } else {
-      const errorObj = await res.json()
+      // const errorObj = await res.json()
       // setError(`${res.statusText}: ${errorObj?.error}`)
       setSaving(false)
       toast.error('จำนวนตัวอักษรใน username ต้องอยู่ระหว่าง 3 - 32 ตัวอักษร')
@@ -37,7 +37,11 @@ export const DisplayName: FC<DisplayNameProps> = ({ initialName }) => {
 
   return (
     <section className="flex flex-col items-center gap-2">
-      <Toaster />
+      <Toaster
+        toastOptions={{
+          className: 'dark:bg-slate-800 dark:text-white'
+        }}
+      />
       <p className="text-xl">Display Name</p>
 
       {/* {error && <p className="text-red-500">{error}</p>} */}
