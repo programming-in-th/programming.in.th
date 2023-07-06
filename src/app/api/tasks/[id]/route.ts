@@ -1,11 +1,22 @@
 import { revalidatePath } from 'next/cache'
 import { NextRequest } from 'next/server'
 
+import { DeleteObjectsCommandInput } from '@aws-sdk/client-s3'
+import JSZip from 'jszip'
+import { ZodError } from 'zod'
+
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import { TaskSchema } from '@/lib/api/schema/tasks'
 import prisma from '@/lib/prisma'
+import { s3Client } from '@/lib/s3Client'
 import { getServerUser } from '@/lib/session'
-import { badRequest, forbidden, json, unauthorized } from '@/utils/apiResponse'
+import {
+  badRequest,
+  forbidden,
+  internalServerError,
+  json,
+  unauthorized
+} from '@/utils/apiResponse'
 
 export async function GET(
   _: NextRequest,
@@ -40,14 +51,6 @@ export async function PUT(
 ) {
   const id = params.id
 
-  const parsedTask = TaskSchema.safeParse(await req.json())
-
-  if (!parsedTask.success) {
-    return badRequest()
-  }
-
-  const task = parsedTask.data
-
   const user = await getServerUser()
 
   if (!user) {
@@ -58,37 +61,70 @@ export async function PUT(
     return forbidden()
   }
 
-  // const path = task.categoryId.split('/')
-  // for (let i = 0; i < path.length; i++) {
-  //   await prisma.category.upsert({
-  //     where: { id: path.slice(0, i + 1).join('/') },
-  //     update: {},
-  //     create: {
-  //       id: path.slice(0, i + 1).join('/'),
-  //       name: path[i],
-  //       parentCategoryId: path.slice(0, i).join('/') || null
-  //     }
-  //   })
-  // }
+  try {
+    const formData = await req.formData()
 
-  // TODO: Remove unused categories
+    const task = TaskSchema.parse(JSON.parse(formData.get('json') as string))
 
-  const updatedTask = await prisma.task.update({
-    where: { id },
-    data: {
-      ...task,
-      id,
-      tags: {
-        connectOrCreate: task.tags.map(tag => ({
-          where: { name: tag },
-          create: { name: tag }
-        }))
-      }
+    if (id !== task.id) {
+      return badRequest()
     }
-  })
-  revalidatePath('/tasks')
 
-  return json(updatedTask)
+    const file = formData.get('file') as Blob | null
+
+    if (file) {
+      const zip = new JSZip()
+      const buffer = Buffer.from(await file.arrayBuffer())
+      await zip.loadAsync(buffer).then(data => {
+        data.forEach(async (relPath, file) => {
+          const nbuffer = Buffer.from(await file.async('arraybuffer'))
+          s3Client.putObject({
+            Bucket: process.env.BUCKET_NAME,
+            Key: `testcases/${task.id}/${relPath}`,
+            Body: nbuffer
+          })
+        })
+      })
+    }
+
+    // const path = task.categoryId.split('/')
+    // for (let i = 0; i < path.length; i++) {
+    //   await prisma.category.upsert({
+    //     where: { id: path.slice(0, i + 1).join('/') },
+    //     update: {},
+    //     create: {
+    //       id: path.slice(0, i + 1).join('/'),
+    //       name: path[i],
+    //       parentCategoryId: path.slice(0, i).join('/') || null
+    //     }
+    //   })
+    // }
+
+    // TODO: Remove unused categories
+
+    const updatedTask = await prisma.task.update({
+      where: { id },
+      data: {
+        ...task,
+        id,
+        tags: {
+          connectOrCreate: task.tags.map(tag => ({
+            where: { name: tag },
+            create: { name: tag }
+          }))
+        }
+      }
+    })
+    revalidatePath('/tasks')
+
+    return json(updatedTask)
+  } catch (err) {
+    if (err instanceof ZodError) {
+      return badRequest()
+    } else {
+      return internalServerError()
+    }
+  }
 }
 
 export async function DELETE(
@@ -99,18 +135,31 @@ export async function DELETE(
 
   const user = await getServerUser()
 
-  if (!user) {
-    return unauthorized()
-  }
+  if (!user) return unauthorized()
 
-  if (!user.admin) {
-    return forbidden()
-  }
+  if (!user.admin) return forbidden()
 
   const deletedTask = await prisma.task.delete({
     where: { id }
   })
 
+  const listedObjects = await s3Client.listObjects({
+    Bucket: process.env.BUCKET_NAME,
+    Prefix: `testcases/${id}/`
+  })
+
+  if (listedObjects.Contents) {
+    const deleteParams: DeleteObjectsCommandInput = {
+      Bucket: process.env.BUCKET_NAME,
+      Delete: { Objects: [] }
+    }
+
+    listedObjects.Contents.forEach(({ Key }) => {
+      if (Key) deleteParams?.Delete?.Objects?.push({ Key })
+    })
+
+    await s3Client.deleteObjects(deleteParams)
+  }
   revalidatePath('/tasks')
   // TODO: Remove unused categories
 
