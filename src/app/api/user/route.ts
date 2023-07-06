@@ -22,7 +22,11 @@ export async function POST(req: NextRequest) {
     return badRequest('displayName is required')
   }
 
-  if (body.displayName.length < 3 || body.displayName.length > 32) {
+  const displayName = body.displayName
+    .trim()
+    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+
+  if (displayName.length < 3 || displayName.length > 32) {
     return badRequest('displayName must be between 3 and 32 characters')
   }
 
@@ -31,7 +35,7 @@ export async function POST(req: NextRequest) {
       id: userId
     },
     data: {
-      name: body.displayName
+      name: displayName
     }
   })
 
