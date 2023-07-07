@@ -106,7 +106,6 @@ const useUploadFile = (
       for (const i in files) {
         const file = files[i]
         const url = response.find(r => r.path === getFilePath(file).path)?.url
-        console.log(url)
         if (url) {
           setMsg(`Uploading ${getFilePath(file).path}`)
           await fetch(url, {
@@ -117,7 +116,6 @@ const useUploadFile = (
               'Access-Control-Allow-Origin': '*'
             }
           })
-          console.log(progress, files.length, file)
           setProgress(p => p + 1)
         }
       }
@@ -214,26 +212,41 @@ const SubmitForm = ({
         }
       )
 
-      toast(
-        t => (
-          <ProgressBar
-            files={files}
-            response={result}
-            close={() => {
-              toast.success('Upload Successful', {
-                id: t.id,
-                duration: 2000
-              })
-            }}
-          />
-        ),
-        { duration: Infinity }
-      )
+      if (files.length > 0) {
+        await new Promise(resolve => {
+          toast(
+            t => (
+              <ProgressBar
+                files={files}
+                response={result}
+                close={async () => {
+                  toast.success('Upload Test Cases Successful', {
+                    id: t.id,
+                    duration: 2000
+                  })
+                  resolve(null)
+                }}
+              />
+            ),
+            { duration: Infinity }
+          )
+        })
+      }
 
       mutate('/api/tasks')
       mutate(`/api/tasks/${task?.id}`)
 
       setOpen(false)
+      if (files.length > 0) {
+        await toast.promise(
+          fetch(`/api/tasks/${data.id}/status`, { method: 'PATCH' }),
+          {
+            loading: 'Sending Pull Signal...',
+            success: `Successfully sent pull signal on ${data.id}`,
+            error: (err: Error) => `${err}`
+          }
+        )
+      }
     } catch {
       // do nothing
     }
