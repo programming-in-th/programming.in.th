@@ -97,8 +97,8 @@ const useUploadFile = (
   files: File[],
   response: { path: string; url: string }[]
 ) => {
-  const [msg, setMsg] = useState('Uploading...')
-  const [progress, setProgress] = useState(0)
+  const [msg, setMsg] = useState<string>('')
+  const [progress, setProgress] = useState<number>(0)
   const [uploaded, setUploaded] = useState<boolean>(false)
 
   useEffect(() => {
@@ -107,7 +107,7 @@ const useUploadFile = (
         const file = files[i]
         const url = response.find(r => r.path === getFilePath(file).path)?.url
         if (url) {
-          setMsg(`Uploading ${getFilePath(file).path}`)
+          setMsg(` ${getFilePath(file).path}`)
           await fetch(url, {
             method: 'PUT',
             body: file,
@@ -145,7 +145,7 @@ const ProgressBar = ({
     }
   }, [progress, files.length, close])
   return (
-    <div className="flex w-64 flex-col items-center justify-center">
+    <div className="flex w-72 flex-col items-center justify-center">
       <div className="relative w-full">
         <div className="absolute h-3 w-full rounded-full bg-gray-200"></div>
         <div
@@ -153,7 +153,9 @@ const ProgressBar = ({
           style={{ width: `${(progress / files.length) * 100}%` }}
         />
       </div>
-      <p className="mt-5">{msg}</p>
+      <p className="mt-5">
+        Uploading: <span className="font-bold">{msg}</span>
+      </p>
     </div>
   )
 }
@@ -242,7 +244,7 @@ const SubmitForm = ({
           fetch(`/api/tasks/${data.id}/status`, { method: 'PATCH' }),
           {
             loading: 'Sending Pull Signal...',
-            success: `Successfully sent pull signal on ${data.id}`,
+            success: `Successfully sent pull signal`,
             error: (err: Error) => `${err}`
           }
         )
