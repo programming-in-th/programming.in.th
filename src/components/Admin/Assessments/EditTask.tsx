@@ -1,4 +1,4 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 
 import { Dialog, Transition } from '@headlessui/react'
 import { XIcon } from '@heroicons/react/outline'
@@ -93,6 +93,82 @@ const LeftBar = ({
   )
 }
 
+const useUploadFile = (
+  files: File[],
+  response: { path: string; url: string }[]
+) => {
+  const [msg, setMsg] = useState('Uploading...')
+  const [progress, setProgress] = useState(0)
+  const [uploaded, setUploaded] = useState<boolean>(false)
+
+  useEffect(() => {
+    const upload = async () => {
+      for (const i in files) {
+        const file = files[i]
+        const url = response.find(r => r.path === getFilePath(file).path)?.url
+        console.log(url)
+        if (url) {
+          setMsg(`Uploading ${getFilePath(file).path}`)
+          await fetch(url, {
+            method: 'PUT',
+            body: file,
+            headers: {
+              'Content-Type': getFilePath(file).type,
+              'Access-Control-Allow-Origin': '*'
+            }
+          })
+          console.log(progress, files.length, file)
+          setProgress(p => p + 1)
+        }
+      }
+    }
+    if (uploaded == false) {
+      setUploaded(true)
+      upload()
+    }
+  }, [files, progress, response, uploaded])
+  return { msg, progress }
+}
+
+const ProgressBar = ({
+  files,
+  response,
+  close
+}: {
+  files: File[]
+  response: { path: string; url: string }[]
+  close: () => void
+}) => {
+  const { progress, msg } = useUploadFile(files, response)
+
+  useEffect(() => {
+    if (progress === files.length) {
+      close()
+    }
+  }, [progress, files.length, close])
+  return (
+    <div className="flex w-64 flex-col items-center justify-center">
+      <div className="relative w-full">
+        <div className="absolute h-3 w-full rounded-full bg-gray-200"></div>
+        <div
+          className="absolute h-3 rounded-full bg-green-500 "
+          style={{ width: `${(progress / files.length) * 100}%` }}
+        />
+      </div>
+      <p className="mt-5">{msg}</p>
+    </div>
+  )
+}
+
+const getFilePath = (file: File) => {
+  const segments = file.webkitRelativePath.split('/')
+  segments.shift()
+  return {
+    path: segments.join('/'),
+    type: file.type === '' ? 'text/plain' : file.type
+  }
+}
+
 const SubmitForm = ({
   task,
   setOpen
@@ -113,17 +189,22 @@ const SubmitForm = ({
     }
   })
 
+  const [files, setFiles] = useState<File[]>([])
+
   const onSubmit = async (data: IAssessmentForm) => {
     try {
-      await toast.promise(
+      const result = await toast.promise(
         fetch(task ? `/api/tasks/${task.id}` : '/api/tasks', {
           method: task ? 'PUT' : 'POST',
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify(data)
+          body: JSON.stringify({
+            ...data,
+            files: files?.map(f => getFilePath(f))
+          })
         }).then(res => {
-          if (!res.ok) throw new Error('Failed to submit')
+          if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
           return res.json()
         }),
         {
@@ -133,12 +214,45 @@ const SubmitForm = ({
         }
       )
 
+      toast(
+        t => (
+          <ProgressBar
+            files={files}
+            response={result}
+            close={() => {
+              toast.success('Upload Successful', {
+                id: t.id,
+                duration: 2000
+              })
+            }}
+          />
+        ),
+        { duration: Infinity }
+      )
+
       mutate('/api/tasks')
       mutate(`/api/tasks/${task?.id}`)
 
       setOpen(false)
     } catch {
       // do nothing
+    }
+  }
+
+  const ref = useRef<HTMLInputElement>(null)
+
+  useEffect(() => {
+    if (ref.current !== null) {
+      // 2. set attribute as JS does
+      ref.current.setAttribute('directory', '')
+      ref.current.setAttribute('webkitdirectory', '')
+    }
+    // 3. monitor change of your ref with useEffect
+  }, [ref])
+
+  const fileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setFiles(Array.from(e.target.files))
     }
   }
 
@@ -151,7 +265,8 @@ const SubmitForm = ({
         <LeftBar task={task} register={register} />
         <div className="flex w-full flex-col dark:text-gray-200">
           <p>File</p>
-          <div className="flex h-full flex-col items-center justify-center rounded-md border border-dashed border-gray-400">
+          <input type="file" ref={ref} multiple onChange={fileChange} />
+          {/* <div className="flex h-full flex-col items-center justify-center rounded-md border border-dashed border-gray-400">
             <svg
               width="49"
               height="49"
@@ -170,7 +285,7 @@ const SubmitForm = ({
             </svg>
             <p>Upload a file or drag and drop</p>
             <p className="text-sm">.PDF up to 10MB</p>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex justify-end space-x-2 py-2">

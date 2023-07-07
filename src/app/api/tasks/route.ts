@@ -1,10 +1,13 @@
 import { revalidatePath } from 'next/cache'
 import { NextRequest } from 'next/server'
 
+import { PutObjectCommand } from '@aws-sdk/client-s3'
+import { getSignedUrl } from '@aws-sdk/s3-request-presigner'
 import { ZodError } from 'zod'
 
 import { TaskSchema } from '@/lib/api/schema/tasks'
 import prisma from '@/lib/prisma'
+import { s3Client } from '@/lib/s3Client'
 import { getServerUser } from '@/lib/session'
 import {
   badRequest,
@@ -32,7 +35,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const task = TaskSchema.parse(await req.json())
-
+    // return forbidden()
     // const path = task.categoryId.split('/')
     // for (let i = 0; i < path.length; i++) {
     //   await prisma.category.upsert({
@@ -45,8 +48,25 @@ export async function POST(req: NextRequest) {
     //     }
     //   })
     // }
+    const uploadUrl = []
+    if (task.files) {
+      for (const file of task.files) {
+        const url = await getSignedUrl(
+          s3Client,
+          new PutObjectCommand({
+            Bucket: process.env.BUCKET_NAME,
+            Key: `testcases/${task.id}/${file.path}`,
+            ContentType: file.type
+          }),
+          { expiresIn: 15 * 60 }
+        )
+        uploadUrl.push({ path: file.path, url })
+      }
+    }
 
-    const createdTask = await prisma.task.create({
+    delete task['files']
+
+    await prisma.task.create({
       data: {
         ...task,
         tags: {
@@ -59,8 +79,9 @@ export async function POST(req: NextRequest) {
     })
 
     revalidatePath('/tasks')
-    return json(createdTask)
+    return json(uploadUrl)
   } catch (err) {
+    console.log(err)
     if (err instanceof ZodError) {
       return badRequest()
     } else {
