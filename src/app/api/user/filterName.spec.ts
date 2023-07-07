@@ -30,9 +30,17 @@ describe('filterName', () => {
     )
 
     expect(filterName('　　いち　　に　　さん　　')).toEqual('いち に さん')
+  })
 
-    const q = '❓❓❓'
-    expect(filterName(q)).toEqual(q)
+  it('Emoji', () => {
+    const e1 = '❓❓❓'
+    expect(filterName(e1)).toEqual(e1)
+
+    const e2 = '👍🏿'
+    expect(filterName(e2)).toEqual(e2)
+
+    const e3 = '👍🏿 👍🏿 👍🏿 👍🏿👍🏿'
+    expect(filterName(e3)).toEqual(e3)
   })
 
   it('Invisible characters', () => {
