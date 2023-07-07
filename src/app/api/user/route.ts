@@ -5,6 +5,7 @@ import { getServerUser } from '@/lib/session'
 import { badRequest, forbidden, json, unauthorized } from '@/utils/apiResponse'
 
 import { filterName } from './filterName'
+
 export async function POST(req: NextRequest) {
   const { searchParams } = new URL(req.url)
 
