@@ -3,6 +3,8 @@ import { NextRequest } from 'next/server'
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
 import { badRequest, forbidden, json, unauthorized } from '@/utils/apiResponse'
+
+import { filterName } from './filterName'
 export async function POST(req: NextRequest) {
   const { searchParams } = new URL(req.url)
 
@@ -22,9 +24,7 @@ export async function POST(req: NextRequest) {
     return badRequest('displayName is required')
   }
 
-  const displayName = body.displayName
-    .trim()
-    .replace(/[\u200B-\u200D\uFEFF]/g, '')
+  const displayName = filterName(body.displayName)
 
   if (displayName.length < 3 || displayName.length > 32) {
     return badRequest('displayName must be between 3 and 32 characters')
