@@ -31,6 +31,11 @@ const NormalTabs = [
     url: 'submissions'
   },
   {
+    label: 'My Submissions',
+    value: 'my-submissions',
+    url: 'my-submissions'
+  },
+  {
     label: 'Solution',
     value: 'solution',
     url: 'solution'

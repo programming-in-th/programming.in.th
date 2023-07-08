@@ -21,6 +21,8 @@ const component = (
       return <SubmitTab task={task} />
     case 'submissions':
       return <SubmissionsTab task={task} assessmentId={assessmentId} />
+    case 'my-submissions':
+      return <SubmissionsTab task={task} assessmentId={assessmentId} own />
     case 'solution':
       return <SolutionTab taskId={task.id} solution={solution} />
   }
