@@ -86,7 +86,7 @@
     "@tailwindcss/typography": "0.5.9",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "14.0.0",
-    "@types/node": "20.4.1",
+    "@types/node": "18.16.19",
     "@types/react": "18.2.14",
     "@types/react-table": "7.7.14",
     "@typescript-eslint/eslint-plugin": "5.61.0",
