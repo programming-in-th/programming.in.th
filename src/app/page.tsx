@@ -62,6 +62,8 @@ export default async function Landing() {
     getUsersCount()
   ])
 
+  const gean = 'หรือไม่'
+
   return (
     <div>
       <div className="flex min-h-screen flex-col items-center justify-start pt-12">
