@@ -831,10 +831,10 @@ packages:
       '@aws-sdk/signature-v4-multi-region': 3.363.0
       '@aws-sdk/types': 3.357.0
       '@aws-sdk/util-format-url': 3.363.0
-      '@smithy/middleware-endpoint': 1.0.2
-      '@smithy/protocol-http': 1.1.0
-      '@smithy/smithy-client': 1.0.3
-      '@smithy/types': 1.1.0
+      '@smithy/middleware-endpoint': 1.0.3
+      '@smithy/protocol-http': 1.1.1
+      '@smithy/smithy-client': 1.0.4
+      '@smithy/types': 1.1.1
       tslib: 2.6.0
     transitivePeerDependencies:
       - '@aws-sdk/signature-v4-crt'
@@ -913,8 +913,8 @@ packages:
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/types': 3.357.0
-      '@smithy/querystring-builder': 1.0.1
-      '@smithy/types': 1.1.0
+      '@smithy/querystring-builder': 1.0.2
+      '@smithy/types': 1.1.1
       tslib: 2.6.0
     dev: false
 
