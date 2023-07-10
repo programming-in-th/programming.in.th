@@ -128,9 +128,11 @@ export const SubmitContext: React.FC<{
       if (singleFile) {
         inputRef.current.removeAttribute('directory')
         inputRef.current.removeAttribute('webkitdirectory')
+        inputRef.current.removeAttribute('multiple')
       } else {
         inputRef.current.setAttribute('directory', '')
         inputRef.current.setAttribute('webkitdirectory', '')
+        inputRef.current.setAttribute('multiple', '')
       }
     }
   }, [inputRef, singleFile])
