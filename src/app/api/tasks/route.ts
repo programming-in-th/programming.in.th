@@ -54,7 +54,7 @@ export async function POST(req: NextRequest) {
         const Key =
           file.type === 'application/pdf'
             ? `statements/pdf/${task.id}.pdf`
-            : `statements/${task.id}/${file.path}`
+            : `testcases/${task.id}/${file.path}`
         const url = await getSignedUrl(
           s3Client,
           new PutObjectCommand({
