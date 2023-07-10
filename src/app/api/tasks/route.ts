@@ -35,19 +35,19 @@ export async function POST(req: NextRequest) {
 
   try {
     const task = TaskSchema.parse(await req.json())
-    // return forbidden()
-    // const path = task.categoryId.split('/')
-    // for (let i = 0; i < path.length; i++) {
-    //   await prisma.category.upsert({
-    //     where: { id: path.slice(0, i + 1).join('/') },
-    //     update: {},
-    //     create: {
-    //       id: path.slice(0, i + 1).join('/'),
-    //       name: path[i],
-    //       parentCategoryId: path.slice(0, i).join('/') || null
-    //     }
-    //   })
-    // }
+
+    const path = task.categoryId.split('/')
+    for (let i = 0; i < path.length; i++) {
+      await prisma.category.upsert({
+        where: { id: path.slice(0, i + 1).join('/') },
+        update: {},
+        create: {
+          id: path.slice(0, i + 1).join('/'),
+          name: path[i],
+          parentCategoryId: path.slice(0, i).join('/') || null
+        }
+      })
+    }
     const uploadUrl = []
     if (task.files) {
       for (const file of task.files) {
