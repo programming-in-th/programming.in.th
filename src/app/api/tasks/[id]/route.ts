@@ -78,11 +78,15 @@ export async function PUT(
   const uploadUrl = []
   if (task.files) {
     for (const file of task.files) {
+      const Key =
+        file.type === 'application/pdf'
+          ? `statements/pdf/${task.id}.pdf`
+          : `statements/${task.id}/${file.path}`
       const url = await getSignedUrl(
         s3Client,
         new PutObjectCommand({
           Bucket: process.env.BUCKET_NAME,
-          Key: `testcases/${task.id}/${file.path}`,
+          Key,
           ContentType: file.type
         }),
         { expiresIn: 15 * 60 }
@@ -108,6 +112,7 @@ export async function PUT(
       }
     }
   })
+  revalidatePath('/')
   revalidatePath('/tasks')
 
   return json(uploadUrl)
@@ -118,6 +123,8 @@ export async function DELETE(
   { params }: { params: { id: string } }
 ) {
   const id = params.id
+
+  console.log(id)
 
   const user = await getServerUser()
 
@@ -138,19 +145,20 @@ export async function DELETE(
     Prefix: `testcases/${id}/`
   })
 
-  if (listedObjects.Contents) {
-    const deleteParams: DeleteObjectsCommandInput = {
-      Bucket: process.env.BUCKET_NAME,
-      Delete: { Objects: [] }
-    }
+  const deleteParams: DeleteObjectsCommandInput = {
+    Bucket: process.env.BUCKET_NAME,
+    Delete: { Objects: [] }
+  }
 
+  if (listedObjects.Contents) {
     listedObjects.Contents.forEach(({ Key }) => {
       if (Key) deleteParams?.Delete?.Objects?.push({ Key })
     })
-
-    await s3Client.deleteObjects(deleteParams)
   }
+  deleteParams?.Delete?.Objects?.push({ Key: `statements/pdf/${id}.pdf` })
+  await s3Client.deleteObjects(deleteParams)
 
+  revalidatePath('/')
   revalidatePath('/tasks')
   // TODO: Remove unused categories
 

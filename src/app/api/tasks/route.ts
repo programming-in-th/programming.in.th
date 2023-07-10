@@ -51,11 +51,15 @@ export async function POST(req: NextRequest) {
     const uploadUrl = []
     if (task.files) {
       for (const file of task.files) {
+        const Key =
+          file.type === 'application/pdf'
+            ? `statements/pdf/${task.id}.pdf`
+            : `statements/${task.id}/${file.path}`
         const url = await getSignedUrl(
           s3Client,
           new PutObjectCommand({
             Bucket: process.env.BUCKET_NAME,
-            Key: `testcases/${task.id}/${file.path}`,
+            Key,
             ContentType: file.type
           }),
           { expiresIn: 15 * 60 }
@@ -78,6 +82,7 @@ export async function POST(req: NextRequest) {
       }
     })
 
+    revalidatePath('/')
     revalidatePath('/tasks')
     return json(uploadUrl)
   } catch (err) {
