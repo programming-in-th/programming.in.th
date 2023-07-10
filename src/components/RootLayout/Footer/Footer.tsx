@@ -33,7 +33,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className="flex w-full flex-col justify-between font-display md:flex-row md:justify-between md:py-10">
-          <div className="flex flex-col items-center justify-center space-x-4 space-y-4 border-b-[0.5px] py-6 md:flex-row md:justify-start md:space-y-0 md:border-none md:py-0">
+          <div className="flex flex-col items-center justify-center space-y-4 border-b-[0.5px] py-6 sm:space-x-4 md:flex-row md:justify-start md:space-y-0 md:border-none md:py-0">
             <div className="flex space-x-2">
               <Link
                 href="https://www.facebook.com/programming.in.th/"
@@ -50,10 +50,10 @@ export const Footer = () => {
                 <GitHubLogo className="text-[#64748B] dark:text-gray-100" />
               </Link>
             </div>
-            <p className="flex w-full flex-col text-center text-sm leading-4 text-gray-500 dark:text-gray-100 sm:w-80 md:text-left">
+            <p className="flex w-full flex-col justify-center text-center text-xs text-gray-500 dark:text-gray-100 sm:w-80 sm:text-sm sm:leading-4 md:text-left">
               <span>© 2019-{currentYear} the PROGRAMMING.IN.TH team</span>
               <span>
-                We are open source on
+                We are open source on{' '}
                 <Link
                   href="https://github.com/programming-in-th/programming.in.th"
                   target="_blank"
