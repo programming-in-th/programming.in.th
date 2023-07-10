@@ -25,22 +25,28 @@ const UploadBox = () => {
   const {
     isSubmitting,
     displayFiles,
-    getRootProps,
-    getInputProps,
-    singleFile
+    singleFile,
+    inputRef,
+    showSelectFile,
+    changeFile
   } = useSubmit()
-  if (!getRootProps || !getInputProps) return null
   return (
     <div
+      onClick={() => showSelectFile()}
       className={clsx(
-        'dropzone group/tc mt-4 h-full max-h-[calc(100vh-9rem)] rounded-md border border-dashed border-gray-400 p-6 transition hover:border-gray-500',
+        'group/tc mt-4 h-full max-h-[calc(100vh-9rem)] rounded-md border border-dashed border-gray-400 p-6 transition hover:border-gray-500',
         !isSubmitting && 'cursor-pointer'
       )}
-      {...getRootProps()}
     >
       <input
-        // onChange={fileChange}
-        {...getInputProps()}
+        type="file"
+        ref={inputRef}
+        className="hidden"
+        onChange={e => {
+          if (e.target.files) {
+            changeFile(Array.from(e.target.files))
+          }
+        }}
       />
       {displayFiles.length > 0 ? (
         <div className="no-scrollbar h-full overflow-y-scroll">

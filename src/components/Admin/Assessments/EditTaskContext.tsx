@@ -2,16 +2,12 @@ import {
   useState,
   createContext,
   useContext,
-  RefObject,
-  useEffect
+  useEffect,
+  useRef,
+  MutableRefObject
 } from 'react'
 
 import { Task } from '@prisma/client'
-import {
-  DropzoneInputProps,
-  DropzoneRootProps,
-  useDropzone
-} from 'react-dropzone'
 import { SubmitHandler, UseFormRegister, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { mutate } from 'swr'
@@ -33,19 +29,15 @@ export interface IAssessmentForm {
 interface ISubmitContext {
   register: UseFormRegister<IAssessmentForm> | undefined
   handleSubmit: () => Promise<void>
-  getRootProps:
-    | (<T extends DropzoneRootProps>(props?: T | undefined) => T)
-    | undefined
-  getInputProps:
-    | (<T extends DropzoneInputProps>(props?: T | undefined) => T)
-    | undefined
-  inputRef: RefObject<HTMLInputElement>
+  inputRef: MutableRefObject<HTMLInputElement | null>
   setSingleFile: (value: boolean) => void
   isSubmitting: boolean
   displayFiles: IDisplayFile[]
   task: Task | undefined
   singleFile: boolean
   closedBar: () => void
+  changeFile: (files: File[]) => void
+  showSelectFile: () => void
 }
 
 interface IUploadUrl {
@@ -63,8 +55,6 @@ export interface IDisplayFile {
 const Context = createContext<ISubmitContext>({
   register: undefined,
   handleSubmit: () => Promise.resolve(),
-  getRootProps: undefined,
-  getInputProps: undefined,
   inputRef: { current: null },
   setSingleFile: () => {
     // do nothing
@@ -74,6 +64,12 @@ const Context = createContext<ISubmitContext>({
   task: undefined,
   singleFile: false,
   closedBar: () => {
+    // do nothing
+  },
+  changeFile: (_files: File[]) => {
+    // do nothing
+  },
+  showSelectFile: () => {
     // do nothing
   }
 })
@@ -87,6 +83,8 @@ export const SubmitContext: React.FC<{
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
   const [singleFile, setSingleFile] = useState<boolean>(false)
   const [displayFiles, setDisplayFiles] = useState<IDisplayFile[]>([])
+  const [files, setFiles] = useState<File[]>([])
+  const inputRef = useRef<HTMLInputElement | null>(null)
 
   const { register, handleSubmit } = useForm<IAssessmentForm>({
     defaultValues: {
@@ -100,13 +98,6 @@ export const SubmitContext: React.FC<{
       tags: []
     }
   })
-
-  const {
-    acceptedFiles: files,
-    getRootProps,
-    getInputProps,
-    inputRef
-  } = useDropzone({ disabled: isSubmitting })
 
   useEffect(() => {
     if (files.length > 0) {
@@ -124,7 +115,7 @@ export const SubmitContext: React.FC<{
   // useEffect
 
   useEffect(() => {
-    if (inputRef.current !== null) {
+    if (inputRef && inputRef.current) {
       if (singleFile) {
         inputRef.current.removeAttribute('directory')
         inputRef.current.removeAttribute('webkitdirectory')
@@ -138,6 +129,16 @@ export const SubmitContext: React.FC<{
   }, [inputRef, singleFile])
 
   // functions
+
+  const changeFile = (files: File[]) => {
+    setFiles(files)
+  }
+
+  const showSelectFile = () => {
+    if (inputRef) {
+      inputRef.current?.click()
+    }
+  }
 
   const submitTaskToDatabase = async (data: IAssessmentForm) => {
     return await toast.promise(
@@ -214,15 +215,15 @@ export const SubmitContext: React.FC<{
       value={{
         register,
         handleSubmit: handleSubmit(onSubmit),
-        getRootProps,
-        getInputProps,
         inputRef,
         setSingleFile,
         isSubmitting,
         displayFiles,
         task,
         singleFile,
-        closedBar
+        closedBar,
+        changeFile,
+        showSelectFile
       }}
     >
       {children}
