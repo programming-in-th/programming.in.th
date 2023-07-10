@@ -2,7 +2,9 @@ import { notFound } from 'next/navigation'
 
 import Submission from '@/components/Submission/Submission'
 import { TaskLayout } from '@/components/Task/Layout'
+import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import prisma from '@/lib/prisma'
+import { getServerUser } from '@/lib/session'
 
 export default async function Submissions({
   params
@@ -22,6 +24,16 @@ export default async function Submissions({
 
   if (!task) {
     notFound()
+  }
+
+  if (task.private) {
+    const user = await getServerUser()
+
+    if (!user) notFound()
+
+    if (!(await checkUserPermissionOnTask(user, task.id))) {
+      notFound()
+    }
   }
 
   return (
