@@ -23,6 +23,7 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
+    "@aws-sdk/s3-request-presigner": "3.367.0",
     "@aws-sdk/client-s3": "3.367.0",
     "@codemirror/lang-cpp": "6.0.2",
     "@codemirror/lang-java": "6.0.1",
@@ -48,6 +49,7 @@
     "@visx/group": "3.0.0",
     "@visx/shape": "3.2.0",
     "@visx/text": "3.0.0",
+    "axios": "1.4.0",
     "clsx": "1.2.1",
     "concurrently": "8.2.0",
     "csstype": "3.1.2",
