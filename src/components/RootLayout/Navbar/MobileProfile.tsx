@@ -7,6 +7,7 @@ import { useSession } from 'next-auth/react'
 
 import { MobileLinks } from '../Links/NavbarLinks'
 import { SignoutButton } from '../SignoutButton'
+import { PopoverButton } from '../useClientMirror'
 
 export const MobileProfile = () => {
   const { data: session } = useSession()
@@ -42,20 +43,21 @@ export const MobileProfile = () => {
 
       {session?.user ? (
         <div className="mt-6 flex flex-col gap-4 px-5">
-          <button className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700">
-            <Link href="/user">User Settings</Link>
-          </button>
+          <PopoverButton as={Link} href="/user">
+            <button className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700">
+              User Settings
+            </button>
+          </PopoverButton>
 
           <SignoutButton className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700" />
         </div>
       ) : (
         <div className="mt-6 px-5">
-          <Link
-            href="/login"
-            className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700"
-          >
-            Login
-          </Link>
+          <PopoverButton as={Link} href="/login">
+            <button className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700">
+              Login
+            </button>
+          </PopoverButton>
         </div>
       )}
     </div>
