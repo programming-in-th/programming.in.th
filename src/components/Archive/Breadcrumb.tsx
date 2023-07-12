@@ -1,6 +1,16 @@
+'use client'
+
 import Link from 'next/link'
 
-export default function Breadcrumb({ slug }: { slug?: string[] }) {
+import { Popover } from '@headlessui/react'
+
+export default function Breadcrumb({
+  slug,
+  paths
+}: {
+  slug?: string[]
+  paths: string[][][]
+}) {
   return (
     <div className="mx-auto mt-9 flex max-w-5xl items-center gap-6 px-6">
       <Link href={slug ? `/archive/${slug.slice(0, -1).join('/')}` : '#'}>
@@ -19,13 +29,10 @@ export default function Breadcrumb({ slug }: { slug?: string[] }) {
           />
         </svg>
       </Link>
-      <div className="flex h-6 grow items-center gap-3 rounded-sm bg-gray-50 px-4 py-1">
+      <div className="box-content flex h-6 grow items-center gap-3 rounded-sm bg-gray-50 px-4 py-1">
         {slug?.map((path, index) => (
-          <>
-            <span className="text-gray-500" key={path}>
-              {path}
-            </span>
-            {index !== slug.length - 1 && (
+          <Popover key={path}>
+            <Popover.Button className="flex items-center gap-2 text-gray-500 hover:text-gray-400">
               <svg
                 width="6"
                 height="10"
@@ -33,10 +40,23 @@ export default function Breadcrumb({ slug }: { slug?: string[] }) {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="M1 9L5 5L1 1" stroke="#64748B" />
+                <path d="M1 9L5 5L1 1" stroke="currentColor" />
               </svg>
-            )}
-          </>
+              <span>{path}</span>
+            </Popover.Button>
+
+            <Popover.Panel className="absolute z-10 mt-2 flex flex-col gap-1 bg-white p-3 shadow-md dark:bg-slate-800">
+              {paths[index].map(path => (
+                <Link
+                  href={`/archive/${path.join('/')}`}
+                  key={path.join('/')}
+                  className="text-gray-500 hover:text-gray-400"
+                >
+                  {path[path.length - 1]}
+                </Link>
+              ))}
+            </Popover.Panel>
+          </Popover>
         ))}
       </div>
     </div>
