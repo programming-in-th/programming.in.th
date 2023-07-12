@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { ICategory } from '@/types/categories'
 
 async function getSolved(category: ICategory) {
-  return 0 //TODO: implement and refactor into api route
+  return category.taskIds.length //TODO: implement and refactor into api route
 }
 
 async function CategoryCard({ category }: { category: ICategory }) {
@@ -61,12 +61,13 @@ export default async function CategoryList({
   categories?: ICategory[]
 }) {
   return (
-    <div className="mx-auto p-5">
-      <div className="grid grid-cols-[minmax(0,20rem)] gap-3 sm:grid-cols-[repeat(2,minmax(0,20rem))] lg:grid-cols-[repeat(3,minmax(0,20rem))]">
-        {categories?.map(category => (
-          <CategoryCard key={category.id} category={category} />
-        ))}
-      </div>
+    <div className="grid grid-cols-[minmax(0,20rem)] gap-3 sm:grid-cols-[repeat(2,minmax(0,20rem))] lg:grid-cols-[repeat(3,minmax(0,20rem))]">
+      {categories?.map(
+        category =>
+          category.taskIds.length > 0 && (
+            <CategoryCard key={category.id} category={category} />
+          )
+      )}
     </div>
   )
 }
