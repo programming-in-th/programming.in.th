@@ -61,7 +61,7 @@ export default async function CategoryList({
   categories?: ICategory[]
 }) {
   return (
-    <div className="grid grid-cols-[minmax(0,20rem)] gap-3 sm:grid-cols-[repeat(2,minmax(0,20rem))] lg:grid-cols-[repeat(3,minmax(0,20rem))]">
+    <div className="grid grid-cols-[minmax(0,30rem)] gap-3 sm:grid-cols-[repeat(2,minmax(0,20rem))] lg:grid-cols-[repeat(3,minmax(0,20rem))]">
       {categories?.map(
         category =>
           category.taskIds.length > 0 && (
