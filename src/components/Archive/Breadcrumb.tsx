@@ -29,10 +29,10 @@ export default function Breadcrumb({
           />
         </svg>
       </Link>
-      <div className="box-content flex h-6 grow items-center gap-3 rounded-sm bg-gray-50 px-4 py-1">
+      <div className="box-content flex h-6 grow items-center gap-3 rounded-sm bg-gray-50 px-4 py-1 dark:bg-slate-700">
         {slug?.map((path, index) => (
           <Popover key={path}>
-            <Popover.Button className="flex items-center gap-2 text-gray-500 hover:text-gray-400">
+            <Popover.Button className="flex items-center gap-2 text-gray-500 hover:text-gray-400 dark:text-gray-200 dark:hover:text-gray-400">
               <svg
                 width="6"
                 height="10"
@@ -45,12 +45,12 @@ export default function Breadcrumb({
               <span>{path}</span>
             </Popover.Button>
 
-            <Popover.Panel className="absolute z-10 mt-2 flex flex-col gap-1 bg-white p-3 shadow-md dark:bg-slate-800">
+            <Popover.Panel className="absolute z-10 mt-2 flex flex-col gap-1 bg-white p-3 shadow-md dark:bg-slate-700 dark:shadow-slate-900">
               {paths[index].map(path => (
                 <Link
                   href={`/archive/${path.join('/')}`}
                   key={path.join('/')}
-                  className="text-gray-500 hover:text-gray-400"
+                  className="text-gray-500 hover:text-gray-400 dark:text-gray-200 dark:hover:text-gray-400"
                 >
                   {path[path.length - 1]}
                 </Link>

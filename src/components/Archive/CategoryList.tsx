@@ -12,7 +12,7 @@ async function CategoryCard({ category }: { category: ICategory }) {
   return (
     <Link key={category.id} href={`/archive/${category.path.join('/')}`}>
       <div
-        className="grid grid-cols-2 gap-6 rounded-lg p-5"
+        className="grid grid-cols-2 gap-6 rounded-lg p-5 dark:bg-slate-700"
         style={{
           boxShadow:
             '0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)'
@@ -33,7 +33,9 @@ async function CategoryCard({ category }: { category: ICategory }) {
             />
           </svg>
           <div>
-            <h1 className="font-semibold text-gray-500">{category.title}</h1>
+            <h1 className="font-semibold text-gray-500 dark:text-gray-200">
+              {category.title}
+            </h1>
             <p className="mt-1 text-sm text-gray-400">
               {(solved / total) * 100}% solved
             </p>
