@@ -4,7 +4,13 @@ import { IGeneralTask } from '@/types/tasks'
 
 let categoryTree: ICategory | null = null
 
-const generateCategoryTree = async () => {
+const getAfterSlash = (value: string): string => {
+  const tmp = value.split('/')
+  return tmp.pop() || value
+}
+
+export const generateCategoryTree = async () => {
+  if (categoryTree) return categoryTree
   const categories = await prisma.category.findMany({
     select: {
       id: true,
@@ -23,7 +29,8 @@ const generateCategoryTree = async () => {
       const children = node.childCategory.map(child => {
         const childNode = categories.find(category => category.id === child.id)
         if (!childNode) throw new Error('Category not found')
-        return getTree(childNode, [...path, childNode.name])
+        if (childNode.id === undefined) throw new Error('Category not found')
+        return getTree(childNode, [...path, getAfterSlash(childNode.id)])
       })
       return {
         id: node.id,
@@ -51,7 +58,7 @@ const generateCategoryTree = async () => {
     }
   }
 
-  return getTree(
+  return (categoryTree = getTree(
     {
       id: '',
       name: '',
@@ -60,10 +67,11 @@ const generateCategoryTree = async () => {
       tasks: []
     },
     []
-  )
+  ))
 }
 
-export function generatePath(category?: ICategory) {
+export async function generatePath() {
+  const categories = await generateCategoryTree()
   const paths: string[][] = []
   const genPaths = (cat?: ICategory) => {
     if (cat?.childCategories) {
@@ -73,27 +81,21 @@ export function generatePath(category?: ICategory) {
       }
     }
   }
-  genPaths(category)
+  genPaths(categories)
   return paths
 }
 
-const getCategoryTree = async (
+export const getCategory = async (
   path: string[] = [],
-  node?: ICategory
+  node?: ICategory,
+  ohead = ''
 ): Promise<ICategory | undefined> => {
-  if (!categoryTree) {
-    categoryTree = await generateCategoryTree()
-  }
-
-  if (!node) {
-    node = categoryTree
-  }
+  if (node === undefined) node = await generateCategoryTree()
 
   if (path.length === 0) return node
   const [head, ...tail] = path
-  const child = node.childCategories?.find(child => child.title === head)
-  if (child) return getCategoryTree(tail, child)
+  const nextPath = ohead === '' ? head : ohead.concat('/').concat(head)
+  const child = node.childCategories?.find(child => child.id === nextPath)
+  if (child) return getCategory(tail, child, nextPath)
   return undefined
 }
-
-export default getCategoryTree

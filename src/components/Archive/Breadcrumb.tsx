@@ -23,11 +23,11 @@ function PathPopover({ paths, index }: { paths: string[][][]; index: number }) {
       <Popover.Panel className="absolute z-10 mt-2 flex max-h-[calc(100vh-9rem)] flex-col gap-1 overflow-y-auto bg-white py-3 shadow-md dark:bg-slate-700 dark:shadow-slate-900">
         {paths[index].map(path => (
           <Link
-            href={`/archive/${path.join('/')}`}
+            href={`/archive/${path[0]}`}
             key={path.join('/')}
             className="py-1 pl-3 pr-6 text-gray-500 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-slate-600"
           >
-            {path[path.length - 1]}
+            {path[1]}
           </Link>
         ))}
       </Popover.Panel>
@@ -71,7 +71,11 @@ export default function Breadcrumb({
               href={`/archive/${slug.slice(0, index + 1).join('/')}`}
               className="rounded-md px-1 text-gray-500 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-slate-600"
             >
-              {path}
+              {
+                (paths[index].find(
+                  value => value[0] == slug.slice(0, index + 1).join('/')
+                ) || [])[1]
+              }
             </Link>
           </div>
         ))}

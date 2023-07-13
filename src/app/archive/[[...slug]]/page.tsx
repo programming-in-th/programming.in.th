@@ -7,14 +7,14 @@ import CategoryList from '@/components/Archive/CategoryList'
 import TaskList from '@/components/Archive/TaskList'
 import prisma from '@/lib/prisma'
 import { IGeneralTask, ISolved } from '@/types/tasks'
-import getCategoryTree, { generatePath } from '@/utils/getCategoryTree'
+import { generatePath, getCategory } from '@/utils/getCategoryTree'
 
 export default async function Archive({
   params
 }: {
   params: { slug?: string[] }
 }) {
-  const category = await getCategoryTree(params.slug)
+  const category = await getCategory(params.slug || [])
   if (!category) notFound()
   return (
     <div>
@@ -58,12 +58,12 @@ async function getTasksInfo(tasks: IGeneralTask[]) {
 async function generatePaths(slug: string[]) {
   const paths: string[][][] = []
   for (let i = 0; i <= slug.length; ++i) {
-    const category = await getCategoryTree(slug.slice(0, i))
+    const category = await getCategory(slug.slice(0, i))
     if (category?.childCategories) {
       paths.push(
         category.childCategories
           .filter(c => c.taskIds.length > 0)
-          .map(c => c.path)
+          .map(c => [c.id, c.title])
       )
     }
   }
@@ -71,7 +71,7 @@ async function generatePaths(slug: string[]) {
 }
 
 export async function generateStaticParams() {
-  const paths = generatePath(await getCategoryTree()).map(path => ({
+  const paths = (await generatePath()).map(path => ({
     slug: path
   }))
   return paths
