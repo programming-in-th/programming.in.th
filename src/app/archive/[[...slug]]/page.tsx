@@ -12,13 +12,16 @@ import getCategoryTree, { generatePath } from '@/utils/getCategoryTree'
 export default async function Archive({
   params
 }: {
-  params: { slug: string[] }
+  params: { slug?: string[] }
 }) {
   const category = await getCategoryTree(params.slug)
   if (!category) notFound()
   return (
     <div>
-      <Breadcrumb slug={params.slug} paths={await generatePaths(params.slug)} />
+      <Breadcrumb
+        slug={params.slug ?? []}
+        paths={await generatePaths(params.slug ?? [])}
+      />
       <div className="relative mx-auto flex justify-center p-5">
         {category?.childCategories && (
           <CategoryList categories={category.childCategories} />
@@ -52,10 +55,9 @@ async function getTasksInfo(tasks: IGeneralTask[]) {
   return { solved, tags: Array.from(new Set(tasks.flatMap(task => task.tags))) }
 }
 
-async function generatePaths(slug?: string[]) {
-  if (!slug) return []
+async function generatePaths(slug: string[]) {
   const paths: string[][][] = []
-  for (let i = 0; i < slug.length; ++i) {
+  for (let i = 0; i <= slug.length; ++i) {
     const category = await getCategoryTree(slug.slice(0, i))
     if (category?.childCategories) {
       paths.push(

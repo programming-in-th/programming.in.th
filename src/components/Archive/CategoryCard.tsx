@@ -46,11 +46,11 @@ export default function CategoryCard({
             viewBox="0 0 21 20"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="mt-0.5 flex-none"
+            className="mt-0.5 flex-none text-gray-500 dark:text-gray-200"
           >
             <path
               d="M2.57812 6C2.57812 4.89543 3.45635 4 4.5397 4H9.44365L11.4052 6H16.3092C17.3925 6 18.2707 6.89543 18.2707 8V14C18.2707 15.1046 17.3925 16 16.3092 16H4.5397C3.45635 16 2.57812 15.1046 2.57812 14V6Z"
-              fill="#64748B"
+              fill="currentColor"
             />
           </svg>
           <div>
