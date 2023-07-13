@@ -43,7 +43,7 @@ export default function Breadcrumb({
   paths: string[][][]
 }) {
   return (
-    <div className="mx-auto mt-9 flex max-w-5xl items-center gap-6 px-6">
+    <div className="mx-auto mt-9 flex max-w-7xl items-center gap-6 px-6">
       <Link
         href={`/archive/${slug.slice(0, -1).join('/')}`}
         className="text-gray-500 dark:text-gray-200"
@@ -64,6 +64,12 @@ export default function Breadcrumb({
         </svg>
       </Link>
       <div className="box-content flex h-6 grow items-center gap-1 rounded-sm bg-gray-50 px-2 py-1 dark:bg-slate-700">
+        <Link
+          href="/archive"
+          className="rounded-md px-1 text-gray-500 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-slate-600"
+        >
+          Archive
+        </Link>
         {slug.map((path, index) => (
           <div key={path} className="flex items-center ">
             <PathPopover paths={paths} index={index} />

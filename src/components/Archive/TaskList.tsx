@@ -51,7 +51,7 @@ const TaskList: FC<TaskSearchProps> = ({ tasks, solved }) => {
 
   return (
     <>
-      <div className="flex w-full flex-col items-center pb-6 pt-6">
+      <div className="flex w-full flex-col items-center pb-6">
         <input
           className="my-4 w-60 rounded-md border-gray-300 bg-gray-100 px-2 py-1 text-sm shadow-sm dark:border-slate-900 dark:bg-slate-700 dark:text-gray-100"
           placeholder="Search..."

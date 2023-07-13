@@ -4,11 +4,6 @@ import { IGeneralTask } from '@/types/tasks'
 
 let categoryTree: ICategory | null = null
 
-const getAfterSlash = (value: string): string => {
-  const tmp = value.split('/')
-  return tmp.pop() || value
-}
-
 export const generateCategoryTree = async () => {
   if (categoryTree) return categoryTree
   const categories = await prisma.category.findMany({
@@ -21,20 +16,17 @@ export const generateCategoryTree = async () => {
     }
   })
   if (categories.length === 0) throw new Error('No categories found')
-  const getTree = (
-    node: (typeof categories)[number],
-    path: string[]
-  ): ICategory => {
+  const getTree = (node: (typeof categories)[number]): ICategory => {
     if (node.childCategory?.length) {
       const children = node.childCategory.map(child => {
         const childNode = categories.find(category => category.id === child.id)
         if (!childNode) throw new Error('Category not found')
         if (childNode.id === undefined) throw new Error('Category not found')
-        return getTree(childNode, [...path, getAfterSlash(childNode.id)])
+        return getTree(childNode)
       })
       return {
         id: node.id,
-        path,
+        path: node.id.split('/'),
         title: node.name,
         childCategories: children,
         taskIds: children.map(child => child.taskIds).flat()
@@ -42,7 +34,7 @@ export const generateCategoryTree = async () => {
     }
     return {
       id: node.id,
-      path,
+      path: node.id.split('/'),
       title: node.name,
       childTasks: node.tasks.map<IGeneralTask>(task => ({
         id: task.id,
@@ -58,16 +50,13 @@ export const generateCategoryTree = async () => {
     }
   }
 
-  return (categoryTree = getTree(
-    {
-      id: '',
-      name: '',
-      childCategory: categories.filter(category => !category.parentCategoryId),
-      parentCategoryId: '',
-      tasks: []
-    },
-    []
-  ))
+  return (categoryTree = getTree({
+    id: '',
+    name: '',
+    childCategory: categories.filter(category => !category.parentCategoryId),
+    parentCategoryId: '',
+    tasks: []
+  }))
 }
 
 export async function generatePath() {
