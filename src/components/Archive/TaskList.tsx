@@ -7,18 +7,15 @@ import useSWR from 'swr'
 import fetcher from '@/lib/fetcher'
 import { IGeneralTask, IScore, ISolved } from '@/types/tasks'
 
-import TaskSidebar from './TaskSidebar'
 import { Listing } from '../Tasks/All'
 
 type TaskSearchProps = {
   tasks: IGeneralTask[]
   solved: ISolved[]
-  tags: string[]
 }
 
-const TaskList: FC<TaskSearchProps> = ({ tasks, solved, tags }) => {
+const TaskList: FC<TaskSearchProps> = ({ tasks, solved }) => {
   const [filteredTasks, setFilteredTasks] = useState<IGeneralTask[]>(tasks)
-  const [tagFilter, setTagFilter] = useState<string[]>([])
   const [tag, setTag] = useState<boolean>(false)
 
   const { data: bookmarks } = useSWR<string[]>('/api/bookmarks', fetcher)
@@ -40,11 +37,6 @@ const TaskList: FC<TaskSearchProps> = ({ tasks, solved, tags }) => {
             ? score.find(item => item.task_id === task.id) !== undefined
             : false
         }))
-        .filter(task =>
-          tagFilter.length > 0
-            ? task.tags.some(tag => tagFilter.includes(tag))
-            : true
-        )
         .sort((a, b) => {
           if (a.id < b.id) {
             return -1
@@ -54,7 +46,7 @@ const TaskList: FC<TaskSearchProps> = ({ tasks, solved, tags }) => {
             return 0
           }
         }),
-    [bookmarks, score, filteredTasks, solved, tagFilter]
+    [bookmarks, score, filteredTasks, solved]
   )
 
   return (
@@ -80,15 +72,10 @@ const TaskList: FC<TaskSearchProps> = ({ tasks, solved, tags }) => {
         />
       </div>
       <div className="flex w-full flex-col md:flex-row">
-        <TaskSidebar
-          tags={tags}
-          tagFilter={tagFilter}
-          setTagFilter={setTagFilter}
-        />
         <Listing
           tasks={processedTasks}
           tag={tag}
-          tagFilter={tagFilter}
+          tagFilter={[] as string[]}
           setTag={setTag}
         />
       </div>
