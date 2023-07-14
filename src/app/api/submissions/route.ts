@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
   const filterArr = filter ? (Array.isArray(filter) ? filter : [filter]) : []
 
   if (filterArr.includes(Filter.enum.own) && !user) {
-    return unauthorized()
+    return json({ data: [], nextCursor: null })
   }
 
   if (
