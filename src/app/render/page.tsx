@@ -28,7 +28,7 @@ export default function Render() {
     <div className="flex w-screen flex-col items-center gap-4 py-4">
       <div>
         <button
-          className="rounded-md bg-prog-primary-500 p-2 text-lg font-bold disabled:bg-gray-500"
+          className="trasition-colors mt-4 inline rounded-md bg-prog-primary-500 px-9 py-2.5 text-lg font-bold text-white hover:bg-prog-primary-600"
           onClick={() => render()}
           disabled={loading}
         >
