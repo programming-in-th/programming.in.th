@@ -4,12 +4,12 @@ import { useMemo } from 'react'
 
 import Link from 'next/link'
 
+import { User } from '@prisma/client'
 import dayjs from 'dayjs'
 import useSWR from 'swr'
 
 import { IAdminAssessment } from '@/components/Admin/Assessments/EditAssessment/types'
 import fetcher from '@/lib/fetcher'
-import { IUser } from '@/types/users'
 import { getDisplayNameFromGrader } from '@/utils/language'
 
 interface ISubmission {
@@ -94,7 +94,10 @@ export default function IndividualSubmission({
     fetcher
   )
 
-  const { data: users } = useSWR<IUser[]>('/api/users', fetcher)
+  const { data: currentUser } = useSWR<User>(
+    `/api/user?userId=${userId}`,
+    fetcher
+  )
 
   const { data: submissions } = useSWR<{
     data: ISubmission[]
@@ -102,16 +105,6 @@ export default function IndividualSubmission({
   }>(
     `/api/submissions?filter=assessment&filter=user&userId=${userId}&assessmentId=${id}`,
     fetcher
-  )
-
-  const currentUser = useMemo<IUser | undefined>(() => {
-    return users?.find(user => user.id === userId)
-  }, [users, userId])
-
-  console.log(
-    submissions?.data
-      .filter(submission => submission.taskId === '1')
-      .map(submission => submission.score)
   )
 
   const taskSubmission = useMemo<ITaskSubmission[]>(() => {
