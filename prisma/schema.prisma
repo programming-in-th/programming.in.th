@@ -152,6 +152,11 @@ model Submission {
   @@map("submission")
 }
 
+enum ScoringType {
+  BEST_SUBMISSION
+  SUM_SUBTASK
+}
+
 model Assessment {
   id          String              @id
   name        String              @unique
@@ -164,6 +169,9 @@ model Assessment {
   owners      OwnerOnAssessment[]
   open        DateTime            @default(now())
   close       DateTime
+
+  scoringType         ScoringType @default(BEST_SUBMISSION) @map("scoring_type")
+  isLeaderboardPublic Boolean     @default(false) @map("is_leaderboard_public")
 
   @@map("assessment")
 }
