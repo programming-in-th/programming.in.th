@@ -5,10 +5,14 @@ import { IAssessment } from '@/types/assessments'
 
 const Card = ({
   assessment,
-  isLink = false
+  isLink = false,
+  solved,
+  score
 }: {
   assessment: IAssessment
   isLink?: boolean
+  solved?: string
+  score?: number
 }) => (
   <IsLink
     href={`/assessments/${assessment.id}`}
@@ -37,11 +41,15 @@ const Card = ({
         <div className="flex divide-x">
           <div className="flex flex-col items-center px-4">
             <p className="text-sm text-gray-400 dark:text-gray-300">Solved</p>
-            <p className="text-base text-gray-500 dark:text-white">เกียน ❓</p>
+            <p className="text-base text-gray-500 dark:text-white">
+              {solved ?? 'เกียน ❓'}
+            </p>
           </div>
           <div className="flex flex-col items-center pl-4">
             <p className="text-sm text-gray-400 dark:text-gray-300">Score</p>
-            <p className="text-base text-gray-500 dark:text-white">TODO</p>
+            <p className="text-base text-gray-500 dark:text-white">
+              {score ?? '0'}
+            </p>
           </div>
         </div>
       </div>

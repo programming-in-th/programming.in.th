@@ -1,33 +1,24 @@
-'use client'
-
-import { useMemo } from 'react'
-
 import Link from 'next/link'
-
-import { useSession } from 'next-auth/react'
-import { MDXRemote } from 'next-mdx-remote'
-import useSWR from 'swr'
+import { notFound } from 'next/navigation'
 
 import AssessmentCard from '@/components/Assessment/AssessmentCard'
-import components from '@/components/common/MDXComponents'
-import fetcher from '@/lib/fetcher'
+import { MDXRemote } from '@/lib/mdx'
+import prisma from '@/lib/prisma'
+import { mdxToHtml } from '@/lib/renderMarkdown'
+import { getSubmissionsAndCalculateScore } from '@/lib/server/assessment'
+import { getServerUser } from '@/lib/session'
 import { IAssessmentTask, IAssessmentwithTask } from '@/types/assessments'
-import { IScore } from '@/types/tasks'
+import { unauthorized } from '@/utils/apiResponse'
 
 const TaskCard = ({
   task,
   id,
-  scores
+  score
 }: {
   task: IAssessmentTask
   id: string
-  scores: IScore[]
+  score: number
 }) => {
-  const score = useMemo(
-    () =>
-      scores ? scores.find(item => item.task_id === task.id)?.max || 0 : 0,
-    [scores, task.id]
-  )
   return (
     <Link
       href={`${id}/${task.id}`}
@@ -59,24 +50,46 @@ const TaskCard = ({
   )
 }
 
-export default function Assessment({
+export default async function Assessment({
   params
 }: {
   params: { assessmentId: string }
 }) {
-  const id = params.assessmentId
+  const { assessmentId } = params
 
-  const { status } = useSession()
+  const user = await getServerUser()
+  if (!user?.id) return unauthorized()
 
-  const { data: scores } = useSWR<IScore[]>(
-    status === 'authenticated' ? '/api/submissions/score' : null,
-    fetcher
-  )
+  const prismaAssessment = await prisma.assessment.findUnique({
+    where: { id: assessmentId },
+    include: {
+      tasks: {
+        select: {
+          task: { select: { id: true, title: true, fullScore: true } }
+        }
+      }
+    }
+  })
 
-  const { data: assessment } = useSWR<IAssessmentwithTask>(
-    `/api/assessments/${id}`,
-    fetcher
-  )
+  if (!prismaAssessment) return notFound()
+
+  const assessment = {
+    ...prismaAssessment,
+    instruction: prismaAssessment.instruction
+      ? await mdxToHtml(prismaAssessment.instruction)
+      : null,
+    tasks: prismaAssessment.tasks.map(edge => edge.task),
+    open: prismaAssessment.open.toISOString(),
+    close: prismaAssessment.close.toISOString()
+  } satisfies IAssessmentwithTask
+
+  const scores = await getSubmissionsAndCalculateScore(assessmentId, user.id)
+
+  const solved = `${scores.filter(sc => sc.score === 100).length}/${
+    scores.length
+  }`
+
+  const score = scores.reduce((acc, cur) => acc + cur.score, 0)
 
   return (
     <div className="flex w-full flex-col items-center">
@@ -85,15 +98,19 @@ export default function Assessment({
       </div>
       <div className="flex w-full max-w-4xl flex-col px-2">
         {assessment ? (
-          <AssessmentCard assessment={assessment} />
+          <AssessmentCard
+            assessment={assessment}
+            solved={solved}
+            score={score}
+          />
         ) : (
           <div className="h-48 w-full animate-pulse rounded-lg bg-gray-100 dark:bg-gray-500" />
         )}
 
-        {assessment?.instruction && (
-          <div className="prose mt-4 w-full max-w-none dark:text-gray-100">
-            {typeof assessment?.instruction !== 'string' && (
-              <MDXRemote {...assessment?.instruction} components={components} />
+        {assessment.instruction && (
+          <div className="prose mt-8 w-full max-w-none dark:text-gray-100">
+            {typeof assessment.instruction === 'object' && (
+              <MDXRemote {...assessment.instruction} />
             )}
           </div>
         )}
@@ -108,10 +125,13 @@ export default function Assessment({
         </div>
         <div className="flex w-full flex-col space-y-2">
           {assessment?.tasks.map(task => {
-            return scores ? (
-              <TaskCard task={task} key={task.id} id={id} scores={scores} />
-            ) : (
-              <div className="h-16 w-full animate-pulse rounded-lg bg-gray-100 dark:bg-gray-500" />
+            return (
+              <TaskCard
+                task={task}
+                key={task.id}
+                id={assessmentId}
+                score={scores.filter(sc => sc.id === task.id)[0]?.score}
+              />
             )
           })}
         </div>
