@@ -1,34 +1,12 @@
-'use client'
-
-import { useMemo } from 'react'
-
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
-import { User } from '@prisma/client'
 import dayjs from 'dayjs'
-import useSWR from 'swr'
 
-import { IAdminAssessment } from '@/components/Admin/Assessments/EditAssessment/types'
-import fetcher from '@/lib/fetcher'
+import prisma from '@/lib/prisma'
+import { getSubmissionsAndCalculateScore } from '@/lib/server/assessment'
+import { ISubmission } from '@/types/APITypes'
 import { getDisplayNameFromGrader } from '@/utils/language'
-
-interface ISubmission {
-  id: number
-  taskId: string
-  score: number
-  language: string
-  time: string
-  memory: string
-  submittedAt: string
-}
-
-interface ITaskSubmission {
-  id: string
-  title: string
-  score: number
-  fullScore: number
-  submissions: ISubmission[]
-}
 
 const SubmissionCard = ({
   submission,
@@ -88,56 +66,31 @@ const SubmissionCard = ({
   )
 }
 
-export default function IndividualSubmission({
+export default async function IndividualSubmission({
   params
 }: {
-  params: { id: string; userId: string }
+  params: { assessmentId: string; userId: string }
 }) {
-  const { id, userId } = params
+  const { assessmentId, userId } = params
 
-  const { data: assessment } = useSWR<IAdminAssessment>(
-    `/api/assessments/${id}`,
-    fetcher
+  const currentUser = await prisma.user.findUnique({
+    where: {
+      id: userId
+    }
+  })
+
+  if (!currentUser) return notFound()
+
+  const taskSubmission = await getSubmissionsAndCalculateScore(
+    assessmentId,
+    userId
   )
-
-  const { data: currentUser } = useSWR<User>(
-    `/api/user?userId=${userId}`,
-    fetcher
-  )
-
-  const { data: submissions } = useSWR<{
-    data: ISubmission[]
-    nextCursor: number | null
-  }>(
-    `/api/submissions?filter=assessment&filter=user&userId=${userId}&assessmentId=${id}`,
-    fetcher
-  )
-
-  const taskSubmission = useMemo<ITaskSubmission[]>(() => {
-    return (
-      assessment?.tasks.map(task => ({
-        id: task.id,
-        title: task.title,
-        score: Math.max(
-          ...(submissions?.data
-            .filter(submission => submission.taskId === task.id)
-            .map(submission => submission.score) || []),
-          0
-        ),
-        fullScore: task.fullScore,
-        submissions:
-          submissions?.data.filter(
-            submission => submission.taskId === task.id
-          ) || []
-      })) || []
-    )
-  }, [assessment?.tasks, submissions?.data])
 
   return (
     <div className="flex w-full justify-center">
       <div className="relative mt-8 w-full max-w-6xl">
         <Link
-          href={`/admin/assessments/${id}`}
+          href={`/admin/assessments/${assessmentId}`}
           className="absolute -left-8 top-0"
         >
           <svg
@@ -171,13 +124,9 @@ export default function IndividualSubmission({
                 fill="#64748B"
               />
             </svg>
-            {currentUser ? (
-              <p className="text-sm text-gray-500 dark:text-gray-300">
-                {currentUser.username}
-              </p>
-            ) : (
-              <div className="h-5 w-40 animate-pulse rounded-md bg-gray-100 dark:bg-gray-500" />
-            )}
+            <p className="text-sm text-gray-500 dark:text-gray-300">
+              {currentUser.username}
+            </p>
           </div>
           <div className="mt-8 flex w-full flex-col divide-y">
             <div className="text-md mb-1 flex w-full font-bold text-gray-500 dark:text-gray-300">
@@ -214,7 +163,6 @@ export default function IndividualSubmission({
                 )}
               </div>
             ))}
-            <div></div>
           </div>
         </div>
       </div>

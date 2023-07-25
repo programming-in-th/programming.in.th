@@ -11,8 +11,12 @@ import { IAdminAssessment } from '@/components/Admin/Assessments/EditAssessment/
 import fetcher from '@/lib/fetcher'
 import { IUser } from '@/types/users'
 
-export default function ViewAssessment({ params }: { params: { id: string } }) {
-  const id = params.id
+export default function ViewAssessment({
+  params
+}: {
+  params: { assessmentId: string }
+}) {
+  const id = params.assessmentId
 
   const { data: assessment } = useSWR<IAdminAssessment>(
     `/api/assessments/${id}`,
