@@ -133,7 +133,7 @@ export default async function IndividualSubmission({
               <p className="w-1/2 px-4">Tasks</p>
               <p className="w-1/2 px-4">Submissions</p>
             </div>
-            {taskSubmission?.map(task => (
+            {taskSubmission.map(task => (
               <div className="flex w-full py-5 pl-4 text-sm" key={task.id}>
                 <div className="flex w-1/2 justify-between pr-10">
                   <div className="flex w-full flex-col">
