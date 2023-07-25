@@ -45,15 +45,17 @@ export async function getSubmissionsAndCalculateScore(
           : bestSubmission(submissionsOnThisTask),
       fullScore: edge.task.fullScore,
       // Sending only neccessary data to client (Reduce payload size)
-      submissions: submissionsOnThisTask.map(sub => ({
-        id: sub.id,
-        taskId: sub.taskId,
-        score: sub.score,
-        language: sub.language,
-        time: sub.time,
-        memory: sub.memory,
-        submittedAt: sub.submittedAt.toISOString()
-      }))
+      submissions: submissionsOnThisTask
+        .sort((a, b) => b.id - a.id)
+        .map(sub => ({
+          id: sub.id,
+          taskId: sub.taskId,
+          score: sub.score,
+          language: sub.language,
+          time: sub.time,
+          memory: sub.memory,
+          submittedAt: sub.submittedAt.toISOString()
+        }))
     }
   })
 
