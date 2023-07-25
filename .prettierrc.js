@@ -2,7 +2,7 @@
 
 /** @satisfies {import('prettier').Config} */
 const config = {
-  plugins: [require('prettier-plugin-tailwindcss')],
+  plugins: ['prettier-plugin-tailwindcss'],
   semi: false,
   singleQuote: true,
   useTabs: false,
