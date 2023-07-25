@@ -191,12 +191,12 @@ export const SubmissionModal = ({
                 <div className="bg-white px-4 pb-4 pt-5 dark:bg-slate-700 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 flex flex-row text-center sm:ml-4 sm:mt-0 sm:text-left">
-                      <div className="w-1/2">
+                      <div className="w-1/3">
                         {submission && (
                           <SubmissionGroup groups={submission.groups} />
                         )}
                       </div>
-                      <div className="w-1/2">
+                      <div className="w-3/4">
                         <Code
                           code={submission.code[0]}
                           language={submission.language}
