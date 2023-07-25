@@ -41,7 +41,7 @@ const SubmissionCard = ({
 
   return (
     <Link href={`/submissions/${submission.id}`}>
-      <div className="flex w-full items-center rounded-lg border border-gray-100 px-6 py-3 shadow-md dark:bg-slate-700">
+      <div className="flex w-full items-center rounded-lg px-6 py-3 shadow-md dark:bg-slate-700">
         <div className="flex w-1/6 flex-col text-sm">
           <p className="font-medium text-gray-500 dark:text-white">
             {dayjs(dt).format('DD MMM YYYY')}
@@ -172,13 +172,15 @@ export default function IndividualSubmission({
               />
             </svg>
             {currentUser ? (
-              <p className="text-sm text-gray-500">{currentUser.username}</p>
+              <p className="text-sm text-gray-500 dark:text-gray-300">
+                {currentUser.username}
+              </p>
             ) : (
               <div className="h-5 w-40 animate-pulse rounded-md bg-gray-100 dark:bg-gray-500" />
             )}
           </div>
           <div className="mt-8 flex w-full flex-col divide-y">
-            <div className="mb-1 flex w-full text-sm text-gray-300">
+            <div className="text-md mb-1 flex w-full font-bold text-gray-500 dark:text-gray-300">
               <p className="w-1/2 px-4">Tasks</p>
               <p className="w-1/2 px-4">Submissions</p>
             </div>
@@ -186,13 +188,17 @@ export default function IndividualSubmission({
               <div className="flex w-full py-5 pl-4 text-sm" key={task.id}>
                 <div className="flex w-1/2 justify-between pr-10">
                   <div className="flex w-full flex-col">
-                    <p className="font-semibold text-gray-500">{task.title}</p>
-                    <p className="text-xs text-gray-400">{task.id}</p>
+                    <p className="font-semibold text-gray-500 dark:text-gray-300">
+                      {task.title}
+                    </p>
+                    <p className="text-xs text-gray-400 dark:text-gray-300">
+                      {task.id}
+                    </p>
                   </div>
                   <p className="text-xs text-gray-400">{`${task.score}/${task.fullScore}`}</p>
                 </div>
                 {task.submissions.length === 0 ? (
-                  <div className="flex h-20 w-1/2 items-center justify-center rounded-md bg-gray-50">
+                  <div className="flex h-20 w-1/2 items-center justify-center rounded-md bg-gray-50 dark:bg-slate-700">
                     <p className="text-gray-400">No submission for this task</p>
                   </div>
                 ) : (
