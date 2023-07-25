@@ -1,9 +1,10 @@
 import Link from 'next/link'
+import { notFound } from 'next/navigation'
 
 import dayjs from 'dayjs'
 
+import prisma from '@/lib/prisma'
 import { getSubmissionsAndCalculateScore } from '@/lib/server/assessment'
-import { getServerUser } from '@/lib/session'
 import { ISubmission } from '@/types/APITypes'
 import { getDisplayNameFromGrader } from '@/utils/language'
 
@@ -72,7 +73,13 @@ export default async function IndividualSubmission({
 }) {
   const { assessmentId, userId } = params
 
-  const currentUser = await getServerUser()
+  const currentUser = await prisma.user.findUnique({
+    where: {
+      id: userId
+    }
+  })
+
+  if (!currentUser) return notFound()
 
   const taskSubmission = await getSubmissionsAndCalculateScore(
     assessmentId,
@@ -117,13 +124,9 @@ export default async function IndividualSubmission({
                 fill="#64748B"
               />
             </svg>
-            {currentUser ? (
-              <p className="text-sm text-gray-500 dark:text-gray-300">
-                {currentUser.username}
-              </p>
-            ) : (
-              <div className="h-5 w-40 animate-pulse rounded-md bg-gray-100 dark:bg-gray-500" />
-            )}
+            <p className="text-sm text-gray-500 dark:text-gray-300">
+              {currentUser.username}
+            </p>
           </div>
           <div className="mt-8 flex w-full flex-col divide-y">
             <div className="text-md mb-1 flex w-full font-bold text-gray-500 dark:text-gray-300">
