@@ -40,45 +40,51 @@ const SubmissionCard = ({
   const dt = new Date(submission.submittedAt)
 
   return (
-    <div className="flex w-full items-center rounded-lg border border-gray-100 px-6 py-3 shadow-md dark:bg-slate-700">
-      <div className="flex w-1/6 flex-col text-sm">
-        <p className="font-medium text-gray-500 dark:text-white">
-          {dayjs(dt).format('DD MMM YYYY')}
-        </p>
-        <p className="text-gray-400 dark:text-gray-300">
-          {dayjs(dt).format('HH:mm:ss')}
-        </p>
-      </div>
-      <div className="flex h-auto w-1/3 items-center justify-center px-6 text-sm">
-        <div className="flex h-auto w-full flex-col items-center justify-around">
-          <div className="relative h-full w-full">
-            <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
-            <div
-              className={`absolute h-1.5 rounded-full ${
-                submission.score === fullScore ? 'bg-blue-500' : 'bg-gray-500'
-              }`}
-              style={{
-                width: `${(submission.score / 100) * 100}%`
-              }}
-            />
-          </div>
-          <p className="mt-2 text-xs text-gray-500 dark:text-gray-200">
-            {submission.score} points
+    <Link href={`/submissions/${submission.id}`}>
+      <div className="flex w-full items-center rounded-lg border border-gray-100 px-6 py-3 shadow-md dark:bg-slate-700">
+        <div className="flex w-1/6 flex-col text-sm">
+          <p className="font-medium text-gray-500 dark:text-white">
+            {dayjs(dt).format('DD MMM YYYY')}
+          </p>
+          <p className="text-gray-400 dark:text-gray-300">
+            {dayjs(dt).format('HH:mm:ss')}
           </p>
         </div>
+        <div className="flex h-auto w-1/3 items-center justify-center px-6 text-sm">
+          <div className="flex h-auto w-full flex-col items-center justify-around">
+            <div className="relative h-full w-full">
+              <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
+              <div
+                className={`absolute h-1.5 rounded-full ${
+                  submission.score === fullScore ? 'bg-blue-500' : 'bg-gray-500'
+                }`}
+                style={{
+                  width: `${(submission.score / 100) * 100}%`
+                }}
+              />
+            </div>
+            <p className="mt-2 text-xs text-gray-500 dark:text-gray-200">
+              {submission.score} points
+            </p>
+          </div>
+        </div>
+        <p className="w-1/6 text-center text-sm font-medium text-gray-500 dark:text-white">
+          {getDisplayNameFromGrader(submission.language)}
+        </p>
+        <p className="w-1/6 text-center text-sm font-medium text-gray-500 dark:text-white">
+          {submission.time}{' '}
+          <span className="font-light text-gray-400 dark:text-gray-300">
+            ms
+          </span>
+        </p>
+        <p className="w-1/6 text-center text-sm font-medium text-gray-500 dark:text-white">
+          {submission.memory}{' '}
+          <span className="font-light text-gray-400 dark:text-gray-300">
+            kB
+          </span>
+        </p>
       </div>
-      <p className="w-1/6 text-center text-sm font-medium text-gray-500 dark:text-white">
-        {getDisplayNameFromGrader(submission.language)}
-      </p>
-      <p className="w-1/6 text-center text-sm font-medium text-gray-500 dark:text-white">
-        {submission.time}{' '}
-        <span className="font-light text-gray-400 dark:text-gray-300">ms</span>
-      </p>
-      <p className="w-1/6 text-center text-sm font-medium text-gray-500 dark:text-white">
-        {submission.memory}{' '}
-        <span className="font-light text-gray-400 dark:text-gray-300">kB</span>
-      </p>
-    </div>
+    </Link>
   )
 }
 
