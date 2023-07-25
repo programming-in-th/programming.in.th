@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-interface ISubmission {
+export interface ISubmission {
   id: number
   taskId: string
   score: number
@@ -10,7 +10,7 @@ interface ISubmission {
   submittedAt: string
 }
 
-interface ITaskSubmission {
+export interface ITaskSubmission {
   id: string
   title: string
   score: number

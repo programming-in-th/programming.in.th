@@ -1,31 +1,11 @@
-'use client'
-
 import Link from 'next/link'
 
-import { User } from '@prisma/client'
 import dayjs from 'dayjs'
-import useSWR from 'swr'
 
-import fetcher from '@/lib/fetcher'
+import { getSubmissionsAndCalculateScore } from '@/lib/server/assessment'
+import { getServerUser } from '@/lib/session'
+import { ISubmission } from '@/types/APITypes'
 import { getDisplayNameFromGrader } from '@/utils/language'
-
-interface ISubmission {
-  id: number
-  taskId: string
-  score: number
-  language: string
-  time: string
-  memory: string
-  submittedAt: string
-}
-
-interface ITaskSubmission {
-  id: string
-  title: string
-  score: number
-  fullScore: number
-  submissions: ISubmission[]
-}
 
 const SubmissionCard = ({
   submission,
@@ -85,21 +65,18 @@ const SubmissionCard = ({
   )
 }
 
-export default function IndividualSubmission({
+export default async function IndividualSubmission({
   params
 }: {
   params: { assessmentId: string; userId: string }
 }) {
   const { assessmentId, userId } = params
 
-  const { data: currentUser } = useSWR<User>(
-    `/api/user?userId=${userId}`,
-    fetcher
-  )
+  const currentUser = await getServerUser()
 
-  const { data: taskSubmission } = useSWR<ITaskSubmission[]>(
-    `/api/submissions/assessment?userId=${userId}&assessmentId=${assessmentId}`,
-    fetcher
+  const taskSubmission = await getSubmissionsAndCalculateScore(
+    assessmentId,
+    userId
   )
 
   return (
