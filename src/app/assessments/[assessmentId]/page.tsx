@@ -2,13 +2,13 @@ import Link from 'next/link'
 import { notFound } from 'next/navigation'
 
 import AssessmentCard from '@/components/Assessment/AssessmentCard'
+import { Unauthorized } from '@/components/Unauthorized'
 import { MDXRemote } from '@/lib/mdx'
 import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
 import { getSubmissionsAndCalculateScore } from '@/lib/server/assessment'
 import { getServerUser } from '@/lib/session'
 import { IAssessmentTask, IAssessmentwithTask } from '@/types/assessments'
-import { unauthorized } from '@/utils/apiResponse'
 
 const TaskCard = ({
   task,
@@ -58,7 +58,7 @@ export default async function Assessment({
   const { assessmentId } = params
 
   const user = await getServerUser()
-  if (!user?.id) return unauthorized()
+  if (!user?.id) return <Unauthorized />
 
   const prismaAssessment = await prisma.assessment.findUnique({
     where: { id: assessmentId },
