@@ -184,7 +184,6 @@ export const Card = ({
           setOpen={setOpenModal}
           id={sub.id}
           task={task}
-          columns={columns.filter(column => column.field !== 'status')}
         />
       </>
     </div>
