@@ -1,14 +1,11 @@
 'use client'
 
-import { useMemo } from 'react'
-
 import Link from 'next/link'
 
 import { User } from '@prisma/client'
 import dayjs from 'dayjs'
 import useSWR from 'swr'
 
-import { IAdminAssessment } from '@/components/Admin/Assessments/EditAssessment/types'
 import fetcher from '@/lib/fetcher'
 import { getDisplayNameFromGrader } from '@/utils/language'
 
@@ -91,53 +88,25 @@ const SubmissionCard = ({
 export default function IndividualSubmission({
   params
 }: {
-  params: { id: string; userId: string }
+  params: { assessmentId: string; userId: string }
 }) {
-  const { id, userId } = params
-
-  const { data: assessment } = useSWR<IAdminAssessment>(
-    `/api/assessments/${id}`,
-    fetcher
-  )
+  const { assessmentId, userId } = params
 
   const { data: currentUser } = useSWR<User>(
     `/api/user?userId=${userId}`,
     fetcher
   )
 
-  const { data: submissions } = useSWR<{
-    data: ISubmission[]
-    nextCursor: number | null
-  }>(
-    `/api/submissions?filter=assessment&filter=user&userId=${userId}&assessmentId=${id}`,
+  const { data: taskSubmission } = useSWR<ITaskSubmission[]>(
+    `/api/submissions/assessment?userId=${userId}&assessmentId=${assessmentId}`,
     fetcher
   )
-
-  const taskSubmission = useMemo<ITaskSubmission[]>(() => {
-    return (
-      assessment?.tasks.map(task => ({
-        id: task.id,
-        title: task.title,
-        score: Math.max(
-          ...(submissions?.data
-            .filter(submission => submission.taskId === task.id)
-            .map(submission => submission.score) || []),
-          0
-        ),
-        fullScore: task.fullScore,
-        submissions:
-          submissions?.data.filter(
-            submission => submission.taskId === task.id
-          ) || []
-      })) || []
-    )
-  }, [assessment?.tasks, submissions?.data])
 
   return (
     <div className="flex w-full justify-center">
       <div className="relative mt-8 w-full max-w-6xl">
         <Link
-          href={`/admin/assessments/${id}`}
+          href={`/admin/assessments/${assessmentId}`}
           className="absolute -left-8 top-0"
         >
           <svg
@@ -184,7 +153,7 @@ export default function IndividualSubmission({
               <p className="w-1/2 px-4">Tasks</p>
               <p className="w-1/2 px-4">Submissions</p>
             </div>
-            {taskSubmission.map(task => (
+            {taskSubmission?.map(task => (
               <div className="flex w-full py-5 pl-4 text-sm" key={task.id}>
                 <div className="flex w-1/2 justify-between pr-10">
                   <div className="flex w-full flex-col">
@@ -214,7 +183,6 @@ export default function IndividualSubmission({
                 )}
               </div>
             ))}
-            <div></div>
           </div>
         </div>
       </div>

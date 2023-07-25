@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 
-export function json(data: unknown) {
+export function json<T = unknown>(data: T) {
   return NextResponse.json(data)
 }
 
