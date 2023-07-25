@@ -4,6 +4,7 @@ import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
 
+import IsLink from '@/components/common/IsLink'
 import { IGeneralSubmission, IListSubmission } from '@/types/submissions'
 import { getDisplayNameFromGrader } from '@/utils/language'
 
@@ -151,41 +152,80 @@ export const Card = ({
   const [openModal, setOpenModal] = useState<boolean>(false)
 
   return (
-    <div
-      onClick={() => setOpenModal(true)}
-      className="flex w-full flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex-row md:px-0"
-    >
-      <>
-        {columns.map(column => (
-          <div
-            key={column.field}
-            className={clsx(
-              'hidden min-w-0 items-center justify-center px-2 text-sm md:flex',
-              column.width
-            )}
-          >
-            {column.child(sub, task)}
+    <div>
+      <button
+        type="button"
+        onClick={() => setOpenModal(true)}
+        className="hidden w-full cursor-pointer flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex md:flex-row md:px-0"
+      >
+        <>
+          <div className="flex flex-row">
+            {columns.map(column => (
+              <div
+                key={column.field}
+                className={clsx(
+                  'hidden min-w-0 items-center justify-center px-2 text-sm md:flex',
+                  column.width
+                )}
+              >
+                {column.child(sub, task)}
+              </div>
+            ))}
           </div>
-        ))}
-        <div className="flex w-full justify-between border-b pb-2 md:hidden">
-          <div className="w-1/2">{stime}</div>
-          <div className="flex w-1/2 justify-end">{name}</div>
-        </div>
-        <div className="flex justify-between pt-2 md:hidden">
-          <div className="w-1/3">{score}</div>
-          <div className="flex w-2/3 pl-4">
-            <div className="w-1/3">{lang}</div>
-            <div className="w-1/3">{time}</div>
-            <div className="w-1/3">{mem}</div>
+          <div className="flex w-full justify-between border-b pb-2 md:hidden">
+            <div className="w-1/2">{stime}</div>
+            <div className="flex w-1/2 justify-end">{name}</div>
           </div>
-        </div>
-        <SubmissionModal
-          open={openModal}
-          setOpen={setOpenModal}
-          id={sub.id}
-          task={task}
-        />
-      </>
+          <div className="flex justify-between pt-2 md:hidden">
+            <div className="w-1/3">{score}</div>
+            <div className="flex w-2/3 pl-4">
+              <div className="w-1/3">{lang}</div>
+              <div className="w-1/3">{time}</div>
+              <div className="w-1/3">{mem}</div>
+            </div>
+          </div>
+          <div className="hidden md:flex">
+            <SubmissionModal
+              open={openModal}
+              setOpen={setOpenModal}
+              id={sub.id}
+              task={task}
+            />
+          </div>
+        </>
+      </button>
+
+      <IsLink
+        href={`/submissions/${sub.id}`}
+        isLink={isViewing}
+        className="flex w-full flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:hidden md:flex-row md:px-0"
+      >
+        <>
+          {columns.map(column => (
+            <div
+              key={column.field}
+              className={clsx(
+                'hidden min-w-0 items-center justify-center px-2 text-sm md:flex',
+                column.width
+              )}
+            >
+              {column.child(sub, task)}
+            </div>
+          ))}
+          <div className="flex w-full justify-between border-b pb-2 md:hidden">
+            <div className="w-1/2">{stime}</div>
+            <div className="flex w-1/2 justify-end">{name}</div>
+          </div>
+          <div className="flex justify-between pt-2 md:hidden">
+            <div className="w-1/3">{score}</div>
+            <div className="flex w-2/3 pl-4">
+              <div className="w-1/3">{lang}</div>
+              <div className="w-1/3">{time}</div>
+              <div className="w-1/3">{mem}</div>
+            </div>
+          </div>
+        </>
+      </IsLink>
     </div>
   )
 }
