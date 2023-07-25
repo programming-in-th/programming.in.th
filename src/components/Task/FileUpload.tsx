@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useCallback, useState } from 'react'
 
-import { InboxInIcon } from '@heroicons/react/solid'
+import { InboxArrowDownIcon } from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 import { useDropzone } from 'react-dropzone'
 
@@ -65,7 +65,7 @@ export const FileUpload = ({
       >
         <input {...getInputProps()} />
 
-        <InboxInIcon
+        <InboxArrowDownIcon
           className={clsx(
             'h-4 w-4',
             isDragActive && 'animate-pulse text-white'

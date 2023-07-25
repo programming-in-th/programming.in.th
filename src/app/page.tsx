@@ -4,11 +4,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import {
-  CollectionIcon,
-  DocumentSearchIcon,
+  RectangleStackIcon,
+  DocumentMagnifyingGlassIcon,
   FireIcon,
   HeartIcon
-} from '@heroicons/react/solid'
+} from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 
 import { FeatureCard } from '@/components/Landing/FeatureCard'
@@ -119,7 +119,7 @@ export default async function Landing() {
             <FeatureCard
               title="ระบบตรวจ Submission สุดทันสมัย"
               description={`สามารถทราบคะแนน\nของ Submission คุณแบบ Real Time\nด้วยระบบตรวจที่สร้างมาเพื่อเว็บนี้โดยเฉพาะ`}
-              Icon={DocumentSearchIcon}
+              Icon={DocumentMagnifyingGlassIcon}
             />
             <FeatureCard
               title="เชื่อมั่นโดยผู้ใช้มากมาย"
@@ -129,7 +129,7 @@ export default async function Landing() {
             <FeatureCard
               title="พัฒนาตนเองได้ทุกระดับ"
               description={`คลังโจทย์ขนาดใหญ่จากหลากหลายที่มา\nพัฒนาทักษะการแก้ปัญหาได้อย่างมีประสิทธิภาพ`}
-              Icon={CollectionIcon}
+              Icon={RectangleStackIcon}
             />
             <FeatureCard
               title="ประสบการณ์การฝึกฝนที่ลงตัว"
