@@ -1,10 +1,13 @@
+import { useState } from 'react'
+
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
 
-import IsLink from '@/components/common/IsLink'
 import { IGeneralSubmission, IListSubmission } from '@/types/submissions'
 import { getDisplayNameFromGrader } from '@/utils/language'
+
+import { SubmissionModal } from './SubmissionModal'
 
 const getColumn = (
   isViewing: boolean
@@ -145,10 +148,11 @@ export const Card = ({
     item.child(sub, task)
   )
 
+  const [openModal, setOpenModal] = useState<boolean>(false)
+
   return (
-    <IsLink
-      href={`/submissions/${sub.id}`}
-      isLink={isViewing}
+    <div
+      onClick={() => setOpenModal(true)}
       className="flex w-full flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex-row md:px-0"
     >
       <>
@@ -175,7 +179,14 @@ export const Card = ({
             <div className="w-1/3">{mem}</div>
           </div>
         </div>
+        <SubmissionModal
+          open={openModal}
+          setOpen={setOpenModal}
+          id={sub.id}
+          task={task}
+          columns={columns.filter(column => column.field !== 'status')}
+        />
       </>
-    </IsLink>
+    </div>
   )
 }
