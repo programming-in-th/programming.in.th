@@ -158,8 +158,8 @@ export const SubmissionModal = ({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all dark:bg-slate-700 sm:my-8">
-                <div className="flex w-full flex-col bg-gray-100 px-6 py-3 font-display transition hover:shadow-lg dark:bg-slate-600 md:flex-row md:px-0">
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-gray-200 text-left shadow-xl transition-all dark:bg-slate-700 sm:my-8">
+                <div className="flex w-full flex-col bg-white px-6 py-3 font-display transition hover:shadow-lg dark:bg-slate-600 md:flex-row md:px-0">
                   {columns.map(column => (
                     <div
                       key={column.field}
@@ -176,27 +176,62 @@ export const SubmissionModal = ({
                       type="button"
                       onClick={() => setOpen(false)}
                       ref={closeButtonRef}
-                      className="rounded-lg bg-red-400 p-2 text-gray-50 dark:bg-red-600"
                     >
-                      Close
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="text-gray-500 dark:text-white"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          clip-rule="evenodd"
+                          d="M4.29289 4.29289C4.68342 3.90237 5.31658 3.90237 5.70711 4.29289L10 8.58579L14.2929 4.29289C14.6834 3.90237 15.3166 3.90237 15.7071 4.29289C16.0976 4.68342 16.0976 5.31658 15.7071 5.70711L11.4142 10L15.7071 14.2929C16.0976 14.6834 16.0976 15.3166 15.7071 15.7071C15.3166 16.0976 14.6834 16.0976 14.2929 15.7071L10 11.4142L5.70711 15.7071C5.31658 16.0976 4.68342 16.0976 4.29289 15.7071C3.90237 15.3166 3.90237 14.6834 4.29289 14.2929L8.58579 10L4.29289 5.70711C3.90237 5.31658 3.90237 4.68342 4.29289 4.29289Z"
+                          fill="currentColor"
+                        />
+                      </svg>
                     </button>
                     <Link
                       href={`/submissions/${id}`}
-                      className="rounded-lg bg-gray-50 p-2 dark:bg-slate-700"
+                      className="flex items-center justify-center gap-2 rounded-lg bg-gray-100 p-2 dark:bg-slate-700"
                     >
-                      <p className="text-md">Open in new tab</p>
+                      <div className="w-full text-right text-xs text-gray-500 dark:text-white">
+                        <p className="flex flex-row justify-end font-bold">
+                          open
+                        </p>
+                        <p className="flex flex-row justify-end">in new tab</p>
+                      </div>
+                      <svg
+                        width="20"
+                        height="20"
+                        viewBox="0 0 20 20"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className="text-gray-500 dark:text-white"
+                      >
+                        <path
+                          d="M11 3C10.4477 3 10 3.44772 10 4C10 4.55228 10.4477 5 11 5H13.5858L7.29289 11.2929C6.90237 11.6834 6.90237 12.3166 7.29289 12.7071C7.68342 13.0976 8.31658 13.0976 8.70711 12.7071L15 6.41421V9C15 9.55228 15.4477 10 16 10C16.5523 10 17 9.55228 17 9V4C17 3.44772 16.5523 3 16 3H11Z"
+                          fill="currentColor"
+                        />
+                        <path
+                          d="M5 5C3.89543 5 3 5.89543 3 7V15C3 16.1046 3.89543 17 5 17H13C14.1046 17 15 16.1046 15 15V12C15 11.4477 14.5523 11 14 11C13.4477 11 13 11.4477 13 12V15H5V7L8 7C8.55228 7 9 6.55228 9 6C9 5.44772 8.55228 5 8 5H5Z"
+                          fill="currentColor"
+                        />
+                      </svg>
                     </Link>
                   </div>
                 </div>
                 <div className="bg-white px-4 pb-4 pt-5 dark:bg-slate-700 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
-                    <div className="mt-3 flex flex-row text-center sm:ml-4 sm:mt-0 sm:text-left">
-                      <div className="w-1/3">
+                    <div className="mt-3 flex w-full flex-row text-center sm:ml-4 sm:mt-0 sm:text-left">
+                      <div className="w-1/2">
                         {submission && (
                           <SubmissionGroup groups={submission.groups} />
                         )}
                       </div>
-                      <div className="w-3/4">
+                      <div className="w-1/2">
                         <Code
                           code={submission.code[0]}
                           language={submission.language}
