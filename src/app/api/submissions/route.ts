@@ -161,10 +161,8 @@ export async function POST(req: NextRequest) {
   const { assessmentId, taskId, language, code } = parsedBody.data
 
   if (
-    !(
-      (await checkUserPermissionOnTask(user, taskId, 'WRITE')) ||
-      !(await checkOwnerPermissionOnAssessment(user, assessmentId))
-    )
+    !(await checkUserPermissionOnTask(user, taskId, 'WRITE')) ||
+    !(await checkOwnerPermissionOnAssessment(user, assessmentId))
   ) {
     return forbidden()
   }
