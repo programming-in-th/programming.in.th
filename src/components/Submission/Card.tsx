@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
@@ -151,6 +151,10 @@ export const Card = ({
 
   const [openModal, setOpenModal] = useState<boolean>(false)
 
+  useEffect(() => {
+    console.log(openModal)
+  }, [openModal])
+
   return (
     <div>
       <button
@@ -184,16 +188,14 @@ export const Card = ({
               <div className="w-1/3">{mem}</div>
             </div>
           </div>
-          <div className="hidden md:flex">
-            <SubmissionModal
-              open={openModal}
-              setOpen={setOpenModal}
-              id={sub.id}
-              task={task}
-            />
-          </div>
         </>
       </button>
+      <SubmissionModal
+        open={openModal}
+        setOpen={setOpenModal}
+        id={sub.id}
+        task={task}
+      />
 
       <IsLink
         href={`/submissions/${sub.id}`}
