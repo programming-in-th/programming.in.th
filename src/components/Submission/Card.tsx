@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
@@ -150,10 +150,6 @@ export const Card = ({
   )
 
   const [openModal, setOpenModal] = useState<boolean>(false)
-
-  useEffect(() => {
-    console.log(openModal)
-  }, [openModal])
 
   return (
     <div>
