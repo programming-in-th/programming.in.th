@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 
-import { ExclamationCircleIcon } from '@heroicons/react/solid'
+import { ExclamationCircleIcon } from '@heroicons/react/24/solid'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 import components from '@/components/common/MDXComponents'
