@@ -6,8 +6,9 @@ import { Dialog, Transition } from '@headlessui/react'
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
+import useSWR from 'swr'
 
-import { useSSESubmissionData } from '@/lib/useSubmissionData'
+import fetcher from '@/lib/fetcher'
 import { IGeneralSubmission, IListSubmission } from '@/types/submissions'
 import { getDisplayNameFromGrader } from '@/utils/language'
 
@@ -107,6 +108,18 @@ const getColumn = (): {
   }
 ]
 
+const useSubmission = (id: number, enabled: boolean) => {
+  const { data, error } = useSWR<IGeneralSubmission>(
+    enabled && `/api/submissions/${id}`,
+    fetcher
+  )
+  return {
+    submission: data,
+    isLoading: !error && !data,
+    isError: error
+  }
+}
+
 export const SubmissionModal = ({
   open,
   setOpen,
@@ -120,7 +133,7 @@ export const SubmissionModal = ({
 }) => {
   const closeButtonRef = useRef(null)
 
-  const { submission, isLoading } = useSSESubmissionData(id)
+  const { submission, isLoading } = useSubmission(id, open)
 
   if (isLoading || !submission) {
     return <></>

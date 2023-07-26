@@ -13,13 +13,14 @@ import {
 } from './constant'
 import fetcher from './fetcher'
 
-export const useSSESubmissionData = (id: number) => {
+export const useSSESubmissionData = (id: number, enabled: boolean = true) => {
   const { data, error, mutate } = useSWR<IGeneralSubmission>(
-    `/api/submissions/${id}`,
+    enabled && `/api/submissions/${id}`,
     fetcher
   )
 
   useEffect(() => {
+    if (!enabled) return
     const eventSource = new EventSource(
       `${process.env.NEXT_PUBLIC_REALTIME_URL}/${id}`
     )
@@ -50,7 +51,7 @@ export const useSSESubmissionData = (id: number) => {
     return () => {
       eventSource.close()
     }
-  }, [id, mutate])
+  }, [id, mutate, enabled])
 
   return {
     submission: data,
