@@ -155,11 +155,11 @@ export const Card = ({
     <div>
       <button
         type="button"
-        onClick={() => setOpenModal(true)}
+        onClick={() => (isViewing ? setOpenModal(true) : null)}
         className="hidden w-full cursor-pointer flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex md:flex-row md:px-0"
       >
         <>
-          <div className="flex flex-row">
+          <div className="flex min-w-0 flex-row">
             {columns.map(column => (
               <div
                 key={column.field}

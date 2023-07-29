@@ -19,9 +19,9 @@ const ArrowVariants: Variants = {
 
 const DivVariants: Variants = {
   active: {
-    // height: 'auto',
     paddingTop: '16px',
     paddingBottom: '16px',
+    overflow: 'auto hidden',
     transition: { duration: 0.25, type: 'tween' }
   },
   hidden: {

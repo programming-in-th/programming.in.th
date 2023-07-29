@@ -85,6 +85,16 @@ const getColumn = (): {
     )
   },
   {
+    title: 'Status',
+    field: 'status',
+    width: 'w-[14rem]',
+    child: sub => (
+      <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
+        {'status' in sub && sub.status}
+      </p>
+    )
+  },
+  {
     title: 'Time',
     field: 'time',
     width: 'w-[7rem]',
@@ -239,15 +249,16 @@ export const SubmissionModal = ({
                 <div className="bg-white px-4 pb-4 pt-5 dark:bg-slate-700 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 flex w-full flex-row text-center sm:ml-4 sm:mt-0 sm:text-left">
-                      <div className="w-1/2">
+                      <div className="no-scrollbar max-h-[72vh] w-1/2 overflow-y-auto">
                         {submission && (
                           <SubmissionGroup groups={submission.groups} />
                         )}
                       </div>
-                      <div className="w-1/2">
+                      <div className="w-1/2 ">
                         <Code
                           code={submission.code[0]}
                           language={submission.language}
+                          maxHeight="72vh"
                         />
                       </div>
                     </div>
