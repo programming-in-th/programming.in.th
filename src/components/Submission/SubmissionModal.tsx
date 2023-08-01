@@ -1,4 +1,4 @@
-import { Fragment, useRef } from 'react'
+import { Fragment, useEffect, useRef, useState } from 'react'
 
 import Link from 'next/link'
 
@@ -142,17 +142,22 @@ export const SubmissionModal = ({
   task: Task
 }) => {
   const closeButtonRef = useRef(null)
+  const [closeDelay, setCloseDelay] = useState(open)
 
-  const { submission, isLoading } = useSubmission(id, open)
-
-  if (isLoading || !submission) {
-    return <></>
-  }
+  const { submission, isLoading } = useSubmission(id, closeDelay)
 
   const columns = getColumn()
 
+  useEffect(() => {
+    if (open) setCloseDelay(true)
+    else setTimeout(() => setCloseDelay(false), 300)
+  }, [open])
+
+  if (!submission || isLoading)
+    return <Transition.Root show={open} as="div"></Transition.Root>
+
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition.Root show={open} as="div">
       <Dialog
         as="div"
         className="relative z-10"
@@ -160,7 +165,7 @@ export const SubmissionModal = ({
         onClose={setOpen}
       >
         <Transition.Child
-          as={Fragment}
+          as="div"
           enter="ease-out duration-300"
           enterFrom="opacity-0"
           enterTo="opacity-100"
