@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { motion, Variants } from 'framer-motion'
 
@@ -21,7 +21,8 @@ const DivVariants: Variants = {
   active: {
     paddingTop: '16px',
     paddingBottom: '16px',
-    overflow: 'auto hidden',
+    height: 'auto',
+    overflow: 'hidden',
     transition: { duration: 0.25, type: 'tween' }
   },
   hidden: {
@@ -41,9 +42,13 @@ export const Accordion = ({
   open: boolean
 }) => {
   const [expanded, setExpand] = useState(false)
-  useEffect(() => {
-    setExpand(open)
-  }, [open])
+
+  // useEffect(() => {
+  //   setExpand(open)
+  // }, [open])
+
+  console.log('initial expand', expanded)
+
   return (
     <div className="my-1 w-full rounded-lg bg-white dark:bg-slate-600">
       <button
@@ -54,10 +59,7 @@ export const Accordion = ({
           <p className="mr-1">{`Subtask ${group.group_index}`}</p>
           <p className="text-sm">{`(${group.score}/${group.full_score})`}</p>
         </div>
-        <motion.span
-          animate={expanded ? 'active' : 'hidden'}
-          variants={ArrowVariants}
-        >
+        <motion.span initial="hidden" animate="hidden" variants={ArrowVariants}>
           <div className="text-[#94A3B8] dark:text-white">
             <svg
               width="14"
@@ -73,9 +75,10 @@ export const Accordion = ({
       </button>
       <motion.div
         role="region"
+        initial="hidden"
         animate={expanded ? 'active' : 'hidden'}
         variants={DivVariants}
-        className="h-auto w-full rounded-b-lg bg-white py-4 dark:bg-slate-600"
+        className="w-full rounded-b-lg bg-white py-4 dark:bg-slate-600"
       >
         <div className="space-y-1 px-2 font-light text-gray-400 dark:text-gray-200 md:px-10">
           <Header />

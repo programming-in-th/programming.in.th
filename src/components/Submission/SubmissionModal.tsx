@@ -142,6 +142,7 @@ export const SubmissionModal = ({
   task: Task
 }) => {
   const closeButtonRef = useRef(null)
+
   const [closeDelay, setCloseDelay] = useState(open)
 
   const { submission, isLoading } = useSubmission(id, closeDelay)
@@ -186,7 +187,7 @@ export const SubmissionModal = ({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-gray-200 text-left shadow-xl transition-all dark:bg-slate-700 sm:my-8">
+              <Dialog.Panel className="relative max-w-7xl transform overflow-hidden rounded-lg bg-gray-200 text-left shadow-xl transition-all dark:bg-slate-700 sm:my-8">
                 <div className="flex w-full flex-col bg-white px-6 py-3 font-display transition hover:shadow-lg dark:bg-slate-600 md:flex-row md:px-0">
                   {columns.map(column => (
                     <div
@@ -254,7 +255,7 @@ export const SubmissionModal = ({
                 <div className="bg-white px-4 pb-4 pt-5 dark:bg-slate-700 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 flex w-full flex-row text-center sm:ml-4 sm:mt-0 sm:text-left">
-                      <div className="no-scrollbar max-h-[72vh] w-1/2 overflow-y-auto">
+                      <div className="no-scrollbar max-h-[530px] w-1/2 overflow-y-auto">
                         {submission && (
                           <SubmissionGroup groups={submission.groups} />
                         )}
@@ -263,7 +264,7 @@ export const SubmissionModal = ({
                         <Code
                           code={submission.code[0]}
                           language={submission.language}
-                          maxHeight="72vh"
+                          maxHeight="530px"
                         />
                       </div>
                     </div>
