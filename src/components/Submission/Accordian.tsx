@@ -19,17 +19,16 @@ const ArrowVariants: Variants = {
 
 const DivVariants: Variants = {
   active: {
-    // height: 'auto',
-    paddingTop: '16px',
-    paddingBottom: '16px',
-    transition: { duration: 0.25, type: 'tween' }
+    height: 'auto',
+    overflow: 'auto hidden',
+    transition: { duration: 0.25, type: 'tween', ease: 'easeInOut' }
   },
   hidden: {
     height: 0,
     paddingTop: 0,
     paddingBottom: 0,
     overflow: 'hidden',
-    transition: { duration: 0.25, type: 'tween' }
+    transition: { duration: 0.25, type: 'tween', ease: 'easeInOut' }
   }
 }
 
@@ -41,9 +40,13 @@ export const Accordion = ({
   open: boolean
 }) => {
   const [expanded, setExpand] = useState(false)
+
   useEffect(() => {
     setExpand(open)
   }, [open])
+
+  console.log('initial expand', expanded)
+
   return (
     <div className="my-1 w-full rounded-lg bg-white dark:bg-slate-600">
       <button
@@ -55,6 +58,7 @@ export const Accordion = ({
           <p className="text-sm">{`(${group.score}/${group.full_score})`}</p>
         </div>
         <motion.span
+          initial="hidden"
           animate={expanded ? 'active' : 'hidden'}
           variants={ArrowVariants}
         >
@@ -73,11 +77,12 @@ export const Accordion = ({
       </button>
       <motion.div
         role="region"
+        initial="hidden"
         animate={expanded ? 'active' : 'hidden'}
         variants={DivVariants}
         className="h-auto w-full rounded-b-lg bg-white py-4 dark:bg-slate-600"
       >
-        <div className="space-y-1 px-2 font-light text-gray-400 dark:text-gray-200 md:px-10">
+        <div className="space-y-1 px-2 py-4 font-light text-gray-400 dark:text-gray-200 md:px-10">
           <Header />
           {group.run_result.map((result: ITestCase) => (
             <Card {...result} key={result.test_index} />
