@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import { motion, Variants } from 'framer-motion'
 
@@ -19,18 +19,16 @@ const ArrowVariants: Variants = {
 
 const DivVariants: Variants = {
   active: {
-    paddingTop: '16px',
-    paddingBottom: '16px',
     height: 'auto',
-    overflow: 'hidden',
-    transition: { duration: 0.25, type: 'tween' }
+    overflow: 'auto hidden',
+    transition: { duration: 0.25, type: 'tween', ease: 'easeInOut' }
   },
   hidden: {
     height: 0,
     paddingTop: 0,
     paddingBottom: 0,
     overflow: 'hidden',
-    transition: { duration: 0.25, type: 'tween' }
+    transition: { duration: 0.25, type: 'tween', ease: 'easeInOut' }
   }
 }
 
@@ -43,9 +41,9 @@ export const Accordion = ({
 }) => {
   const [expanded, setExpand] = useState(false)
 
-  // useEffect(() => {
-  //   setExpand(open)
-  // }, [open])
+  useEffect(() => {
+    setExpand(open)
+  }, [open])
 
   console.log('initial expand', expanded)
 
@@ -78,9 +76,9 @@ export const Accordion = ({
         initial="hidden"
         animate={expanded ? 'active' : 'hidden'}
         variants={DivVariants}
-        className="w-full rounded-b-lg bg-white py-4 dark:bg-slate-600"
+        className="h-auto w-full rounded-b-lg bg-white py-4 dark:bg-slate-600"
       >
-        <div className="space-y-1 px-2 font-light text-gray-400 dark:text-gray-200 md:px-10">
+        <div className="space-y-1 px-2 py-4 font-light text-gray-400 dark:text-gray-200 md:px-10">
           <Header />
           {group.run_result.map((result: ITestCase) => (
             <Card {...result} key={result.test_index} />
