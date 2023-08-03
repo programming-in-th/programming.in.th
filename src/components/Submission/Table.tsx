@@ -65,7 +65,7 @@ const Status = ({ msg }: { msg: string }) => {
 
 export const Header = () => (
   <div className="flex w-full space-x-2">
-    <p className="w-[2rem] min-w-[2rem] shrink-0 text-sm font-light">#</p>
+    <p className="w-[2rem] min-w-[2rem] text-sm font-light">#</p>
     <p className="w-[6rem] min-w-[4.5rem] shrink-0 text-sm font-light">Time</p>
     <p className="w-[6rem] min-w-[5rem] shrink-0 text-sm font-light">Memory</p>
     <p className="shrink-0 text-sm font-light">Message</p>

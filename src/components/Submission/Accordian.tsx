@@ -57,7 +57,11 @@ export const Accordion = ({
           <p className="mr-1">{`Subtask ${group.group_index}`}</p>
           <p className="text-sm">{`(${group.score}/${group.full_score})`}</p>
         </div>
-        <motion.span initial="hidden" animate="hidden" variants={ArrowVariants}>
+        <motion.span
+          initial="hidden"
+          animate={expanded ? 'active' : 'hidden'}
+          variants={ArrowVariants}
+        >
           <div className="text-[#94A3B8] dark:text-white">
             <svg
               width="14"

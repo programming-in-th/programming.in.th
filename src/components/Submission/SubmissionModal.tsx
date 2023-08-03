@@ -254,7 +254,7 @@ export const SubmissionModal = ({
                 </div>
                 <div className="bg-white px-4 pb-4 pt-5 dark:bg-slate-700 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
-                    <div className="mt-3 flex w-full flex-row text-center sm:ml-4 sm:mt-0 sm:text-left">
+                    <div className="mt-3 flex w-full flex-row text-center sm:mt-0 sm:text-left">
                       <div className="no-scrollbar max-h-[530px] w-1/2 overflow-y-auto">
                         {submission && (
                           <SubmissionGroup groups={submission.groups} />
