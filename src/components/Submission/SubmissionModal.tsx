@@ -224,6 +224,8 @@ export const SubmissionModal = ({
                     </button>
                     <Link
                       href={`/submissions/${id}`}
+                      rel="noopener noreferrer"
+                      target="_blank"
                       className="flex items-center justify-center gap-2 rounded-lg bg-gray-100 p-2 dark:bg-slate-700"
                     >
                       <div className="w-full text-right text-xs text-gray-500 dark:text-white">
