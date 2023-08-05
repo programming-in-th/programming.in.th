@@ -152,7 +152,7 @@ export const Card = ({
   const [openModal, setOpenModal] = useState<boolean>(false)
 
   return (
-    <div>
+    <a href={`/submissions/${sub.id}`} onClick={e => e.preventDefault()}>
       <button
         type="button"
         onClick={() => (isViewing ? setOpenModal(true) : null)}
@@ -224,6 +224,6 @@ export const Card = ({
           </div>
         </>
       </IsLink>
-    </div>
+    </a>
   )
 }
