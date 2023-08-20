@@ -3,10 +3,6 @@ name: E2E Test
 on:
   deployment_status:
 
-concurrency:
-  group: e2e-${{ github.event.pull_request.number || github.ref }}
-  cancel-in-progress: true
-
 jobs:
   e2e-test:
     name: Playwright
@@ -14,11 +10,6 @@ jobs:
     if: github.event_name == 'deployment_status' && github.event.deployment_status.state == 'success'
 
     steps:
-      - name: Debug
-        run: |
-          echo "github.event_name: ${{ github.event_name }}"
-          echo "github.event.pull_request.number: ${{ github.event.pull_request.number }}"
-          echo "github.ref: ${{ github.ref }}"
       - name: Checkout Repo
         uses: actions/checkout@v3
 
