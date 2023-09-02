@@ -51,7 +51,7 @@ export default async function RootLayout({
 }
 
 export const metadata = {
-  metadataBase: new URL('https://staging.programming.in.th'),
+  metadataBase: new URL('https://programming.in.th'),
   themeColor: '#000000',
   icons: {
     icon: '/assets/img/icon-512.png',
@@ -64,7 +64,7 @@ export const metadata = {
     title: 'PROGRAMMING.IN.TH',
     description:
       'PROGRAMMING.IN.TH provides you with the fundamentals of algorithmic problem-solving, an important skill to differentiate yourself as a programmer in an increasingly technologically advanced world.',
-    url: 'https://staging.programming.in.th',
+    url: 'https://programming.in.th',
     siteName: 'programming.in.th',
     images: [
       {

@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
@@ -5,6 +7,8 @@ import dayjs from 'dayjs'
 import IsLink from '@/components/common/IsLink'
 import { IGeneralSubmission, IListSubmission } from '@/types/submissions'
 import { getDisplayNameFromGrader } from '@/utils/language'
+
+import { SubmissionModal } from './SubmissionModal'
 
 const getColumn = (
   isViewing: boolean
@@ -145,37 +149,81 @@ export const Card = ({
     item.child(sub, task)
   )
 
+  const [openModal, setOpenModal] = useState<boolean>(false)
+
   return (
-    <IsLink
-      href={`/submissions/${sub.id}`}
-      isLink={isViewing}
-      className="flex w-full flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex-row md:px-0"
-    >
-      <>
-        {columns.map(column => (
-          <div
-            key={column.field}
-            className={clsx(
-              'hidden min-w-0 items-center justify-center px-2 text-sm md:flex',
-              column.width
-            )}
-          >
-            {column.child(sub, task)}
+    <a href={`/submissions/${sub.id}`} onClick={e => e.preventDefault()}>
+      <button
+        type="button"
+        onClick={() => (isViewing ? setOpenModal(true) : null)}
+        className="hidden w-full cursor-pointer flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex md:flex-row md:px-0"
+      >
+        <>
+          <div className="flex min-w-0 flex-row">
+            {columns.map(column => (
+              <div
+                key={column.field}
+                className={clsx(
+                  'hidden min-w-0 items-center justify-center px-2 text-sm md:flex',
+                  column.width
+                )}
+              >
+                {column.child(sub, task)}
+              </div>
+            ))}
           </div>
-        ))}
-        <div className="flex w-full justify-between border-b pb-2 md:hidden">
-          <div className="w-1/2">{stime}</div>
-          <div className="flex w-1/2 justify-end">{name}</div>
-        </div>
-        <div className="flex justify-between pt-2 md:hidden">
-          <div className="w-1/3">{score}</div>
-          <div className="flex w-2/3 pl-4">
-            <div className="w-1/3">{lang}</div>
-            <div className="w-1/3">{time}</div>
-            <div className="w-1/3">{mem}</div>
+          <div className="flex w-full justify-between border-b pb-2 md:hidden">
+            <div className="w-1/2">{stime}</div>
+            <div className="flex w-1/2 justify-end">{name}</div>
           </div>
-        </div>
-      </>
-    </IsLink>
+          <div className="flex justify-between pt-2 md:hidden">
+            <div className="w-1/3">{score}</div>
+            <div className="flex w-2/3 pl-4">
+              <div className="w-1/3">{lang}</div>
+              <div className="w-1/3">{time}</div>
+              <div className="w-1/3">{mem}</div>
+            </div>
+          </div>
+        </>
+      </button>
+      <SubmissionModal
+        open={openModal}
+        setOpen={setOpenModal}
+        id={sub.id}
+        task={task}
+      />
+
+      <IsLink
+        href={`/submissions/${sub.id}`}
+        isLink={isViewing}
+        className="flex w-full flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:hidden md:flex-row md:px-0"
+      >
+        <>
+          {columns.map(column => (
+            <div
+              key={column.field}
+              className={clsx(
+                'hidden min-w-0 items-center justify-center px-2 text-sm md:flex',
+                column.width
+              )}
+            >
+              {column.child(sub, task)}
+            </div>
+          ))}
+          <div className="flex w-full justify-between border-b pb-2 md:hidden">
+            <div className="w-1/2">{stime}</div>
+            <div className="flex w-1/2 justify-end">{name}</div>
+          </div>
+          <div className="flex justify-between pt-2 md:hidden">
+            <div className="w-1/3">{score}</div>
+            <div className="flex w-2/3 pl-4">
+              <div className="w-1/3">{lang}</div>
+              <div className="w-1/3">{time}</div>
+              <div className="w-1/3">{mem}</div>
+            </div>
+          </div>
+        </>
+      </IsLink>
+    </a>
   )
 }

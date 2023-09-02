@@ -17,7 +17,13 @@ code[class*='language-'],
 pre[class*='language-'] {
   color: white;
   background: #011627;
-  font-family: Fira Code, Menlo, Monaco, source-code-pro, Courier New, monospace;
+  font-family:
+    Fira Code,
+    Menlo,
+    Monaco,
+    source-code-pro,
+    Courier New,
+    monospace;
   font-variant-ligatures: none;
   font-size: 1em;
   font-feature-settings: normal;
@@ -197,8 +203,9 @@ pre[class*='language-'] ::selection {
 }
 .pie:before {
   inset: 0;
-  background: radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b)
-      var(--b) no-repeat,
+  background:
+    radial-gradient(farthest-side, var(--c) 98%, #0000) top/var(--b) var(--b)
+      no-repeat,
     conic-gradient(var(--c) calc(var(--p) * 1%), #0000 0);
   -webkit-mask: radial-gradient(
     farthest-side,

@@ -39,7 +39,7 @@ export const MobileLinks = () => {
           as={Link}
           href={item.href}
           key={item.name}
-          className={`font-sm block rounded-md px-3 py-2 text-base ${
+          className={`font-sm block rounded-md px-5 py-2 text-base ${
             `/${location}` == item.href
               ? 'bg-gray-200 text-gray-700 dark:bg-slate-500 dark:text-prog-gray-100'
               : 'text-gray-400 dark:text-gray-300'

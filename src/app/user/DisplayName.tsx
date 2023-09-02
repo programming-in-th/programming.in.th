@@ -58,7 +58,7 @@ export const DisplayName: FC<DisplayNameProps> = ({ initialName }) => {
         />
 
         <button
-          className="rounded-lg bg-prog-primary-500 p-2 enabled:hover:bg-prog-primary-600 disabled:bg-prog-primary-500/80"
+          className="rounded-lg bg-prog-primary-500 p-2 text-white enabled:hover:bg-prog-primary-600 disabled:bg-prog-primary-500/80"
           disabled={saving || initialName === name}
           onClick={() => handleSave()}
         >

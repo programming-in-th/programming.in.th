@@ -7,10 +7,35 @@ on:
     branches: [main]
 
 concurrency:
-  group: test-${{ github.ref }}
+  group: test-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
 
 jobs:
+  lint:
+    name: ESLint and Prettier
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v2
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version-file: '.nvmrc'
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Generate Prisma client
+        run: pnpm prisma generate
+
+      - name: Run Lint
+        run: pnpm lint
+
   unit-test:
     name: Unit Test
     runs-on: ubuntu-latest

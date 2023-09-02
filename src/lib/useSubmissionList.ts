@@ -10,7 +10,8 @@ const getKey = (
   pageIndex: number,
   previousPageData: { data: IListSubmission[]; nextCursor: number | null },
   taskId: string,
-  assessmentId?: string
+  assessmentId?: string,
+  own?: boolean
 ) => {
   // reached the end
   if (previousPageData && !previousPageData.data) return null
@@ -20,6 +21,8 @@ const getKey = (
     return `/api/submissions?limit=10&filter=task&taskId=${taskId}${
       assessmentId
         ? `&filter=own&filter=assessment&assessmentId=${assessmentId}`
+        : own
+        ? '&filter=own'
         : ''
     }`
 
@@ -29,12 +32,18 @@ const getKey = (
   }&limit=10&filter=task&taskId=${taskId}${
     assessmentId
       ? `&filter=own&filter=assessment&assessmentId=${assessmentId}`
+      : own
+      ? '&filter=own'
       : ''
   }`
 }
 
 // get submission list from server with infinite loading
-const useSubmissionList = (taskId: string, assessmentId?: string) => {
+const useSubmissionList = (
+  taskId: string,
+  assessmentId?: string,
+  own?: boolean
+) => {
   const {
     data: rawData,
     error,
@@ -44,7 +53,7 @@ const useSubmissionList = (taskId: string, assessmentId?: string) => {
     isValidating
   } = useSWRInfinite<{ data: IListSubmission[] }>(
     (index, previousPageData) =>
-      getKey(index, previousPageData, taskId, assessmentId),
+      getKey(index, previousPageData, taskId, assessmentId, own),
     fetcher
   )
 

@@ -7,13 +7,15 @@ import useSubmissionList from '@/lib/useSubmissionList'
 
 const SubmissionsTab = ({
   task,
-  assessmentId
+  assessmentId,
+  own
 }: {
   task: Task
   assessmentId?: string
+  own?: boolean
 }) => {
   const { submissions, isLoadingMore, isReachingEnd, size, setSize } =
-    useSubmissionList(task.id, assessmentId)
+    useSubmissionList(task.id, assessmentId, own)
 
   return (
     <div className="flex flex-shrink flex-col">
