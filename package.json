@@ -91,7 +91,7 @@
     "zod": "3.22.2"
   },
   "devDependencies": {
-    "@octokit/types": "11.1.0",
+    "@octokit/types": "12.0.0",
     "@playwright/test": "1.38.0",
     "@tailwindcss/typography": "0.5.10",
     "@testing-library/jest-dom": "6.1.3",
