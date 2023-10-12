@@ -4,89 +4,88 @@ import { IGeneralTask } from '@/types/tasks'
 
 let categoryTree: ICategory | null = null
 
-const generateCategoryTree = async () => {
+export const generateCategoryTree = async () => {
+  if (categoryTree) return categoryTree
   const categories = await prisma.category.findMany({
     select: {
       id: true,
       name: true,
       parentCategoryId: true,
-      childCategory: { select: { id: true } },
-      tasks: { where: { private: false } }
-    }
+      childCategory: { select: { id: true }, orderBy: { name: 'asc' } },
+      tasks: { where: { private: false }, include: { tags: true } }
+    },
+    orderBy: { name: 'asc' }
   })
   if (categories.length === 0) throw new Error('No categories found')
-  const getTree = (
-    node: (typeof categories)[number],
-    path: string[]
-  ): ICategory => {
+  const getTree = (node: (typeof categories)[number]): ICategory => {
     if (node.childCategory?.length) {
       const children = node.childCategory.map(child => {
         const childNode = categories.find(category => category.id === child.id)
         if (!childNode) throw new Error('Category not found')
-        return getTree(childNode, [...path, childNode.name])
+        if (childNode.id === undefined) throw new Error('Category not found')
+        return getTree(childNode)
       })
       return {
-        path,
+        id: node.id,
+        path: node.id.split('/'),
         title: node.name,
-        children,
+        childCategories: children,
         taskIds: children.map(child => child.taskIds).flat()
       }
     }
     return {
-      path,
+      id: node.id,
+      path: node.id.split('/'),
       title: node.name,
-      children: node.tasks.map<IGeneralTask>(item => {
-        return {
-          id: item.id,
-          title: item.title,
-          tags: [],
-          solved: 0,
-          score: 0,
-          fullScore: item.fullScore,
-          tried: false,
-          bookmarked: false
-        }
-      }),
+      childTasks: node.tasks.map<IGeneralTask>(task => ({
+        id: task.id,
+        title: task.title,
+        tags: task.tags.map(tag => tag.name),
+        solved: 0,
+        score: 0,
+        fullScore: task.fullScore,
+        tried: false,
+        bookmarked: false
+      })),
       taskIds: node.tasks.map(item => item.id)
     }
   }
 
-  return getTree(
-    {
-      id: '',
-      name: '',
-      childCategory: categories.filter(category => !category.parentCategoryId),
-      parentCategoryId: '',
-      tasks: []
-    },
-    []
-  )
+  return (categoryTree = getTree({
+    id: '',
+    name: '',
+    childCategory: categories.filter(category => !category.parentCategoryId),
+    parentCategoryId: '',
+    tasks: []
+  }))
 }
 
-const isCategories = (
-  node: ICategory[] | IGeneralTask[]
-): node is ICategory[] => 'children' in node[0]
+export async function generatePath() {
+  const categories = await generateCategoryTree()
+  const paths: string[][] = []
+  const genPaths = (cat?: ICategory) => {
+    if (cat?.childCategories) {
+      for (const c of cat.childCategories) {
+        if (c.taskIds.length > 0) paths.push(c.path)
+        genPaths(c)
+      }
+    }
+  }
+  genPaths(categories)
+  return paths
+}
 
-const getCategoryTree = async (
+export const getCategory = async (
   path: string[] = [],
-  node?: ICategory
-): Promise<ICategory> => {
-  if (!categoryTree) {
-    categoryTree = await generateCategoryTree()
-  }
-
-  if (!node) {
-    node = categoryTree
-  }
+  node?: ICategory,
+  ohead = ''
+): Promise<ICategory | undefined> => {
+  if (node === undefined) node = await generateCategoryTree()
 
   if (path.length === 0) return node
   const [head, ...tail] = path
-  if (isCategories(node.children)) {
-    const child = node.children.find(child => child.title === head)
-    if (child) return getCategoryTree(tail, child)
-  }
-
-  throw new Error('Category not found')
+  const nextPath = ohead === '' ? head : ohead.concat('/').concat(head)
+  const child = node.childCategories?.find(child => child.id === nextPath)
+  if (child) return getCategory(tail, child, nextPath)
+  return undefined
 }
-
-export default getCategoryTree
