@@ -11,9 +11,10 @@ export const generateCategoryTree = async () => {
       id: true,
       name: true,
       parentCategoryId: true,
-      childCategory: { select: { id: true } },
+      childCategory: { select: { id: true }, orderBy: { name: 'asc' } },
       tasks: { where: { private: false }, include: { tags: true } }
-    }
+    },
+    orderBy: { name: 'asc' }
   })
   if (categories.length === 0) throw new Error('No categories found')
   const getTree = (node: (typeof categories)[number]): ICategory => {
