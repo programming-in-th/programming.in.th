@@ -18,7 +18,7 @@ const component = (
     case 'statement':
       return <StatementTab task={task} />
     case 'submit':
-      return <SubmitTab task={task} />
+      return <SubmitTab task={task} assessmentId={assessmentId} />
     case 'submissions':
       return <SubmissionsTab task={task} assessmentId={assessmentId} />
     case 'my-submissions':

@@ -5,6 +5,8 @@ import { ISolved } from '@/types/tasks'
 
 import { TaskSearch } from './TaskSearch'
 
+export const revalidate = 3600 // 1 hour
+
 async function getTasks() {
   const rawTasks = await prisma.task.findMany({
     where: {

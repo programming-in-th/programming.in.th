@@ -13,14 +13,16 @@ export default async function Submissions({
 }) {
   const id = +params.id
 
-  const task = (
-    await prisma.submission.findUnique({
-      where: { id },
-      select: {
-        task: true
-      }
-    })
-  )?.task
+  const submission = await prisma.submission.findUnique({
+    where: { id },
+    select: {
+      task: true,
+      assessmentId: true
+    }
+  })
+  const task = submission?.task
+  const assessmentId =
+    submission?.assessmentId === null ? undefined : submission?.assessmentId
 
   if (!task) {
     notFound()
@@ -37,7 +39,7 @@ export default async function Submissions({
   }
 
   return (
-    <TaskLayout task={task} type="submission">
+    <TaskLayout task={task} type="submission" assessmentId={assessmentId}>
       <Submission task={task} submissionID={id} />
     </TaskLayout>
   )

@@ -1,3 +1,4 @@
+import { notFound } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
 import prisma from '@/lib/prisma'
@@ -5,6 +6,27 @@ import { getServerUser } from '@/lib/session'
 import { badRequest, forbidden, json, unauthorized } from '@/utils/apiResponse'
 
 import { filterName } from './filterName'
+
+export async function GET(req: NextRequest) {
+  const reqUser = await getServerUser()
+
+  if (!reqUser || !reqUser.id) return unauthorized()
+  if (!reqUser.admin) return forbidden()
+
+  const { searchParams } = new URL(req.url)
+
+  const userId = searchParams.get('userId') ?? reqUser.id
+
+  const user = await prisma.user.findUnique({
+    where: {
+      id: userId
+    }
+  })
+
+  if (!user) return notFound()
+
+  return json(user)
+}
 
 export async function POST(req: NextRequest) {
   const { searchParams } = new URL(req.url)

@@ -41,7 +41,7 @@ const FormBox = () => {
           <input
             type="number"
             className="h-10 w-full rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
-            {...register('fullScore')}
+            {...register('fullScore', { valueAsNumber: true })}
           />
         </div>
         <div className="flex w-full min-w-0 flex-col">
