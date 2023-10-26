@@ -83,7 +83,7 @@
     "rehype-katex": "6.0.3",
     "rehype-prism-plus": "1.6.3",
     "rehype-slug": "6.0.0",
-    "remark-gfm": "4.0.0",
+    "remark-gfm": "3.0.1",
     "remark-math": "5.1.1",
     "server-only": "0.0.1",
     "sharp": "0.32.6",
