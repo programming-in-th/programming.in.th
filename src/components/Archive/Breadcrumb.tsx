@@ -43,7 +43,7 @@ export default function Breadcrumb({
   paths: string[][][]
 }) {
   return (
-    <div className="mx-auto mt-9 flex max-w-7xl items-center gap-6 px-6">
+    <div className="mx-auto mt-9 flex max-w-7xl items-center gap-6 px-6 md:pr-20">
       <Link
         href={`/archive/${slug.slice(0, -1).join('/')}`}
         className="text-gray-500 dark:text-gray-200"
