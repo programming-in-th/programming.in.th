@@ -1,6 +1,6 @@
 import { ReactNode } from 'react'
 
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 
 import { Analytics } from '@vercel/analytics/react'
 import { Inter, Noto_Sans_Thai } from 'next/font/google'
@@ -50,7 +50,6 @@ export default async function RootLayout({
 
 export const metadata = {
   metadataBase: new URL('https://programming.in.th'),
-  themeColor: '#000000',
   icons: {
     icon: '/assets/img/icon-512.png',
     apple: '/assets/img/icon-apple.png'
@@ -80,3 +79,7 @@ export const metadata = {
     title: 'programming.in.th'
   }
 } satisfies Metadata
+
+export const viewport = {
+  themeColor: '#000000'
+} satisfies Viewport
