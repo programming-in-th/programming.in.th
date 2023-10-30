@@ -31,9 +31,13 @@ export default function CategoryCard({
   }, [score, category.taskIds, fullScores])
   const total = category.taskIds.length
   return (
-    <Link key={category.id} href={`/archive/${category.path.join('/')}`}>
+    <Link
+      key={category.id}
+      href={`/archive/${category.path.join('/')}`}
+      className="flex"
+    >
       <div
-        className="grid grid-cols-2 gap-6 rounded-lg p-5 dark:bg-slate-700"
+        className="grid flex-1 grid-cols-2 items-center gap-6 rounded-lg p-5 dark:bg-slate-700"
         style={{
           boxShadow:
             '0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)'
