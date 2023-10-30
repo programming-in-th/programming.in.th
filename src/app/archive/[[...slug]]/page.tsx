@@ -21,6 +21,7 @@ export default async function Archive({
       <Breadcrumb
         slug={params.slug ?? []}
         paths={await generatePaths(params.slug ?? [])}
+        tasksPage={(category.childTasks?.length ?? 0) > 0}
       />
       <div className="relative mx-auto flex justify-center p-5">
         {category?.childCategories && (

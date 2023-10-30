@@ -3,6 +3,7 @@
 import Link from 'next/link'
 
 import { Popover } from '@headlessui/react'
+import clsx from 'clsx'
 
 function PathPopover({ paths, index }: { paths: string[][][]; index: number }) {
   return (
@@ -37,13 +38,20 @@ function PathPopover({ paths, index }: { paths: string[][][]; index: number }) {
 
 export default function Breadcrumb({
   slug,
-  paths
+  paths,
+  tasksPage
 }: {
   slug: string[]
   paths: string[][][]
+  tasksPage?: boolean
 }) {
   return (
-    <div className="mx-auto mt-9 flex max-w-7xl items-center gap-6 px-6 md:pr-20">
+    <div
+      className={clsx(
+        'mx-auto mt-9 flex max-w-7xl items-center gap-6 px-6',
+        tasksPage && 'md:pr-20'
+      )}
+    >
       <Link
         href={`/archive/${slug.slice(0, -1).join('/')}`}
         className="text-gray-500 dark:text-gray-200"
