@@ -1,3 +1,5 @@
+import { unstable_cache } from 'next/cache'
+
 import { Prisma } from '@prisma/client'
 
 import prisma from '@/lib/prisma'
@@ -31,6 +33,8 @@ async function getTasks() {
   })
 }
 
+const getCachedTasks = unstable_cache(async () => getTasks(), ['tasks'])
+
 async function getSolved() {
   const rawSolved = await prisma.$queryRaw(
     Prisma.sql`SELECT COUNT(DISTINCT submission.user_id), submission.task_id FROM submission INNER JOIN task ON submission.task_id = task.id WHERE submission.score = task.full_score GROUP BY submission.task_id`
@@ -43,8 +47,13 @@ async function getSolved() {
   ) as ISolved[]
 }
 
+const getCachedSolved = unstable_cache(async () => getSolved(), ['solved'])
+
 export default async function Tasks() {
-  const [tasks, solved] = await Promise.all([getTasks(), getSolved()])
+  const [tasks, solved] = await Promise.all([
+    getCachedTasks(),
+    getCachedSolved()
+  ])
 
   const tags: string[] = Array.from(new Set(tasks.flatMap(task => task.tags)))
 
