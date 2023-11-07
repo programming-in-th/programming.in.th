@@ -18,7 +18,7 @@
   },
   "scripts": {
     "preinstall": "npx only-allow pnpm",
-    "dev": "next dev",
+    "dev": "next dev --turbo",
     "build": "prisma generate && next build",
     "start": "next start",
     "lint": "next lint",

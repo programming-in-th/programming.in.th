@@ -3,6 +3,7 @@ import { defineConfig } from 'vitest/config'
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  // @ts-expect-error idk what happen
   plugins: [react()],
   test: {
     environment: 'jsdom',
