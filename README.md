@@ -51,6 +51,10 @@ If you only want to contribute to our UI, just fill in database URL, which can b
 
 Simply run `pnpm dev` will do the job.
 
+### Run E2E test
+
+Start dev server first, then run `pnpm test:e2e`
+
 ## Contributing
 
 You too can help us improve our project by suggesting features, bug report, etc. by [opening an issue](https://github.com/programming-in-th/programming.in.th/issues), or [create a pull request](https://github.com/programming-in-th/programming.in.th/pulls). If you want to contribute to submission related module (e.g. realtime view) and need live data, please, don't hesitate to contact us.

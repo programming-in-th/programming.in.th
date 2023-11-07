@@ -18,3 +18,16 @@ test('Can navigate to about page', async ({ page }) => {
   await expect(page).toHaveURL('/about')
   await expect(page.locator('h1').first()).toContainText('เกี่ยวกับเรา')
 })
+
+test('Can load archive page', async ({ page }) => {
+  await page.goto('/')
+  await page
+    .getByRole('navigation', { name: 'Global' })
+    .getByRole('link', { name: 'Archive' })
+    .click()
+
+  await expect(page).toHaveURL('/archive')
+  await expect(
+    page.locator('h1', { hasText: "Crack 'n' Code" })
+  ).toBeInViewport()
+})
