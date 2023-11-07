@@ -1,9 +1,9 @@
 {
   "name": "programming.in.th",
   "private": true,
-  "packageManager": "pnpm@8.8.0",
+  "packageManager": "pnpm@8.10.2",
   "engines": {
-    "node": "^18.12"
+    "node": "^18.17"
   },
   "lint-staged": {
     "*.{json,md,yaml,css,scss}": [
