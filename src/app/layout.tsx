@@ -3,6 +3,7 @@ import { ReactNode } from 'react'
 import { Metadata, Viewport } from 'next'
 
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter, Noto_Sans_Thai } from 'next/font/google'
 
 import '@/styles/index.css'
@@ -42,6 +43,7 @@ export default async function RootLayout({
             <Footer />
           </LayoutWithTheme>
         </Providers>
+        <SpeedInsights />
       </body>
       <Analytics />
     </html>
