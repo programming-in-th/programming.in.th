@@ -113,7 +113,7 @@
     "eslint-plugin-react": "7.33.2",
     "eslint-plugin-unused-imports": "3.0.0",
     "husky": "8.0.3",
-    "jsdom": "22.1.0",
+    "jsdom": "23.2.0",
     "lint-staged": "15.0.2",
     "postcss": "8.4.31",
     "prettier": "3.0.3",
