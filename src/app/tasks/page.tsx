@@ -1,3 +1,5 @@
+import { Metadata } from 'next'
+
 import { Prisma } from '@prisma/client'
 
 import prisma from '@/lib/prisma'
@@ -6,6 +8,10 @@ import { ISolved } from '@/types/tasks'
 import { TaskSearch } from './TaskSearch'
 
 export const revalidate = 3600 // 1 hour
+
+export const metadata: Metadata = {
+  title: 'Tasks - programming.in.th'
+}
 
 async function getTasks() {
   const rawTasks = await prisma.task.findMany({

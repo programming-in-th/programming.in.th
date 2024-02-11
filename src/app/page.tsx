@@ -1,5 +1,7 @@
 import { cache } from 'react'
 
+import { Metadata } from 'next'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -19,6 +21,10 @@ import { getServerUser } from '@/lib/session'
 import { PeopleVector } from '@/svg/Illustrations/People'
 
 import landingPic from '../../public/assets/img/landing/code.webp'
+
+export const metadata: Metadata = {
+  title: 'programming.in.th'
+}
 
 async function JoinButton() {
   'use client'

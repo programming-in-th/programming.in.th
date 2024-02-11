@@ -1,3 +1,5 @@
+import { Metadata } from 'next'
+
 import { notFound } from 'next/navigation'
 
 import Submission from '@/components/Submission/Submission'
@@ -5,6 +7,10 @@ import { TaskLayout } from '@/components/Task/Layout'
 import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
+
+export const metadata: Metadata = {
+  title: 'Submission - programming.in.th'
+}
 
 export default async function Submissions({
   params
