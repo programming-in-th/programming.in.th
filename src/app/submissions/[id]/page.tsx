@@ -9,7 +9,7 @@ import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
 
 export const metadata: Metadata = {
-  title: 'Submission - programming.in.th'
+  title: 'Submission | programming.in.th'
 }
 
 export default async function Submissions({

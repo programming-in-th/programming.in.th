@@ -15,7 +15,7 @@ export default function Assessments() {
   return (
     <>
       <head>
-        <title>Assesments - programming.in.th</title>
+        <title>Assesments | programming.in.th</title>
       </head>
       <div className="flex w-full flex-col items-center">
         <div className="flex flex-col items-center space-y-1 py-10 text-gray-500 dark:text-gray-300">

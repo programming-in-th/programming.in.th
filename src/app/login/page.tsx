@@ -8,7 +8,7 @@ import { LoginGoogle } from '@/components/Login/Google'
 import { ErrorMessage } from './ErrorMessage'
 
 export const metadata: Metadata = {
-  title: 'Login - programming.in.th'
+  title: 'Login | programming.in.th'
 }
 
 export default function Login() {

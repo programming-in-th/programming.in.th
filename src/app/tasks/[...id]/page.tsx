@@ -19,7 +19,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { task } = await fetchTask({ params })
   return {
-    title: `${task.title} - programming.in.th`
+    title: `${task.title} | programming.in.th`
   }
 }
 

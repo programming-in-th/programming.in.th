@@ -12,7 +12,7 @@ import { ISolved } from '@/types/tasks'
 import { generatePath, getCategory } from '@/utils/getCategoryTree'
 
 export const metadata: Metadata = {
-  title: 'Archive - programming.in.th'
+  title: 'Archive | programming.in.th'
 }
 
 export default async function Archive({

@@ -3,7 +3,7 @@ import { Metadata, type NextPage } from 'next'
 import Link from 'next/link'
 
 export const metadata: Metadata = {
-  title: 'Learn - programming.in.th'
+  title: 'Learn | programming.in.th'
 }
 
 const Learn: NextPage = () => {

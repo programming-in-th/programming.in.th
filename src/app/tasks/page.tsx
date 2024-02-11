@@ -10,7 +10,7 @@ import { TaskSearch } from './TaskSearch'
 export const revalidate = 3600 // 1 hour
 
 export const metadata: Metadata = {
-  title: 'Tasks - programming.in.th'
+  title: 'Tasks | programming.in.th'
 }
 
 async function getTasks() {

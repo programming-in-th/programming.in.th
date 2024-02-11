@@ -9,7 +9,7 @@ import { getServerUser } from '@/lib/session'
 import { DisplayName } from './DisplayName'
 
 export const metadata: Metadata = {
-  title: 'User Dashboard - programming.in.th'
+  title: 'Dashboard | programming.in.th'
 }
 
 export default async function User() {

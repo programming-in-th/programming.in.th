@@ -9,7 +9,7 @@ import { CoreTeamSection } from './CoreTeamSection'
 import { Contributor, OrgMember } from './types'
 
 export const metadata: Metadata = {
-  title: 'About - programming.in.th'
+  title: 'About | programming.in.th'
 }
 
 async function fetchData<T>(url: string, defaultValue: T) {
