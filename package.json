@@ -3,7 +3,7 @@
   "private": true,
   "packageManager": "pnpm@8.10.2",
   "engines": {
-    "node": "^18.17"
+    "node": "^20.0.0"
   },
   "lint-staged": {
     "*.{json,md,yaml,css,scss}": [
@@ -97,7 +97,7 @@
     "@tailwindcss/typography": "0.5.10",
     "@testing-library/jest-dom": "6.1.4",
     "@testing-library/react": "14.0.0",
-    "@types/node": "18.18.8",
+    "@types/node": "20.11.19",
     "@types/react": "18.2.36",
     "@types/react-table": "7.7.17",
     "@typescript-eslint/eslint-plugin": "6.10.0",
