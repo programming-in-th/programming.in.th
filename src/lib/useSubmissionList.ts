@@ -22,8 +22,8 @@ const getKey = (
       assessmentId
         ? `&filter=own&filter=assessment&assessmentId=${assessmentId}`
         : own
-        ? '&filter=own'
-        : ''
+          ? '&filter=own'
+          : ''
     }`
 
   // add the cursor to the API endpoint
@@ -33,8 +33,8 @@ const getKey = (
     assessmentId
       ? `&filter=own&filter=assessment&assessmentId=${assessmentId}`
       : own
-      ? '&filter=own'
-      : ''
+        ? '&filter=own'
+        : ''
   }`
 }
 
