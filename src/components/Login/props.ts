@@ -9,8 +9,8 @@ export function getProps(providerName: string, type: SignInType = 'signIn') {
     type === 'signIn'
       ? `Sign in with ${providerName}`
       : type === 'linked'
-      ? 'Account Linked'
-      : `Link ${providerName} account`
+        ? 'Account Linked'
+        : `Link ${providerName} account`
 
   const disabled = type === 'linked'
 

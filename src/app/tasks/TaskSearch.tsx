@@ -1,6 +1,6 @@
 'use client'
 
-import { FC, ReactNode, useMemo, useState } from 'react'
+import { FC, ReactNode, Suspense, useMemo, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
@@ -92,12 +92,14 @@ export const TaskSearch: FC<TaskSearchProps> = ({
         />
       </div>
       <div className="flex w-full flex-col md:flex-row">
-        <TasksSidebar
-          tags={tags}
-          tagFilter={tagFilter}
-          setTagFilter={setTagFilter}
-        />
-        <TasksList tagFilter={tagFilter} tasks={processedTasks} />
+        <Suspense>
+          <TasksSidebar
+            tags={tags}
+            tagFilter={tagFilter}
+            setTagFilter={setTagFilter}
+          />
+          <TasksList tagFilter={tagFilter} tasks={processedTasks} />
+        </Suspense>
       </div>
     </>
   )
