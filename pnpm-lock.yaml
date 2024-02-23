@@ -1625,7 +1625,7 @@ packages:
       react: ^16 || ^17 || ^18
       react-dom: ^16 || ^17 || ^18
     dependencies:
-      '@tanstack/react-virtual': 3.0.4(react-dom@18.2.0)(react@18.2.0)
+      '@tanstack/react-virtual': 3.1.0(react-dom@18.2.0)(react@18.2.0)
       client-only: 0.0.1
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
@@ -2938,13 +2938,13 @@ packages:
       react-dom: 18.2.0(react@18.2.0)
     dev: false
 
-  /@tanstack/react-virtual@3.0.4(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-tiqKW/e2MJVCr7/pRUXulpkyxllaOclkHNfhKTo4pmHjJIqnhMfwIjc1Q1R0Un3PI3kQywywu/791c8z9u0qeA==}
+  /@tanstack/react-virtual@3.1.0(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-nT/LvcBHrkVIpmQIYoCBOY89cuG00v8VBIwOFRMW95Id+ksVEAj8PHto2/VKh0PsVUIVxEpphjv7fQN+IWBTRw==}
     peerDependencies:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
       react-dom: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
-      '@tanstack/virtual-core': 3.0.0
+      '@tanstack/virtual-core': 3.1.0
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
     dev: false
@@ -2954,8 +2954,8 @@ packages:
     engines: {node: '>=12'}
     dev: false
 
-  /@tanstack/virtual-core@3.0.0:
-    resolution: {integrity: sha512-SYXOBTjJb05rXa2vl55TTwO40A6wKu0R5i1qQwhJYNDIqaIGF7D0HsLw+pJAyi2OvntlEIVusx3xtbbgSUi6zg==}
+  /@tanstack/virtual-core@3.1.0:
+    resolution: {integrity: sha512-1aEM1ikiHRFq5mc5pFBfSNT5CdwT8uI7HOVzv/Iyu55Zc2OF9YZHBTpkCiyaFyAoLrwuJGxwByWgiDWhUXG70A==}
     dev: false
 
   /@testing-library/dom@9.3.4:
