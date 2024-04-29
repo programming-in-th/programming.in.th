@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 
-import { FacebookLogo, GitHubLogo } from '@/svg/Socials'
+import { DiscordLogo, FacebookLogo, GitHubLogo } from '@/svg/Socials'
 
 import { FooterJoin } from './FooterJoin'
 import { ThemeSwitch } from './ThemeSwitch'
@@ -48,6 +48,13 @@ export const Footer = () => {
                 rel="noreferrer"
               >
                 <GitHubLogo className="text-[#64748B] dark:text-gray-100" />
+              </Link>
+              <Link
+                href="https://discord.gg/yrtrJ5rQm2"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <DiscordLogo className="text-[#64748B] dark:text-gray-100" />
               </Link>
             </div>
             <p className="flex w-full flex-col justify-center text-center text-xs text-gray-500 dark:text-gray-100 sm:w-80 sm:text-sm sm:leading-4 md:text-left">

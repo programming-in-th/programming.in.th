@@ -64,7 +64,7 @@ export default async function Tasks() {
                 Tasks
               </p>
               <p className="text-md text-gray-500 dark:text-gray-300">
-                Browse over 700+ tasks
+                Browse Over 800+ Tasks
               </p>
             </>
           }
