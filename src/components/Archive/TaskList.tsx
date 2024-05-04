@@ -1,37 +1,25 @@
 'use client'
 
-import { FC, ReactNode, Suspense, useMemo, useState } from 'react'
-
-import { useRouter } from 'next/navigation'
+import { FC, useMemo, useState } from 'react'
 
 import useSWR from 'swr'
 
-import { TasksList } from '@/components/Tasks/List'
 import fetcher from '@/lib/fetcher'
 import { IGeneralTask, IScore, ISolved } from '@/types/tasks'
 
-import { TasksSidebar } from './TasksSidebar'
+import { Listing } from '../Tasks/All'
 
 type TaskSearchProps = {
-  header: ReactNode
   tasks: IGeneralTask[]
   solved: ISolved[]
-  tags: string[]
 }
 
-export const TaskSearch: FC<TaskSearchProps> = ({
-  header,
-  tasks,
-  solved,
-  tags
-}) => {
-  const router = useRouter()
-
+const TaskList: FC<TaskSearchProps> = ({ tasks, solved }) => {
   const [filteredTasks, setFilteredTasks] = useState<IGeneralTask[]>(tasks)
-  const [tagFilter, setTagFilter] = useState<string[]>([])
+  const [tag, setTag] = useState<boolean>(false)
 
-  const { data: bookmarks } = useSWR<string[]>('api/bookmarks', fetcher)
-  const { data: score } = useSWR<IScore[]>('api/score', fetcher)
+  const { data: bookmarks } = useSWR<string[]>('/api/bookmarks', fetcher)
+  const { data: score } = useSWR<IScore[]>('/api/score', fetcher)
 
   const processedTasks = useMemo(
     () =>
@@ -49,11 +37,6 @@ export const TaskSearch: FC<TaskSearchProps> = ({
             ? score.find(item => item.task_id === task.id) !== undefined
             : false
         }))
-        .filter(task =>
-          tagFilter.length > 0
-            ? task.tags.some(tag => tagFilter.includes(tag))
-            : true
-        )
         .sort((a, b) => {
           if (a.id < b.id) {
             return -1
@@ -63,19 +46,16 @@ export const TaskSearch: FC<TaskSearchProps> = ({
             return 0
           }
         }),
-    [bookmarks, score, filteredTasks, solved, tagFilter]
+    [bookmarks, score, filteredTasks, solved]
   )
 
   return (
     <>
-      <div className="flex w-full flex-col items-center pb-6 pt-6">
-        {header}
+      <div className="flex w-full flex-col items-center pb-6">
         <input
           className="my-4 w-60 rounded-md border-gray-300 bg-gray-100 px-2 py-1 text-sm shadow-sm dark:border-slate-900 dark:bg-slate-700 dark:text-gray-100"
           placeholder="Search..."
           onChange={async e => {
-            router.replace('/tasks')
-
             const { value } = e.currentTarget
             if (value) {
               const Fuse = (await import('fuse.js')).default
@@ -92,15 +72,15 @@ export const TaskSearch: FC<TaskSearchProps> = ({
         />
       </div>
       <div className="flex w-full flex-col md:flex-row">
-        <Suspense>
-          <TasksSidebar
-            tags={tags}
-            tagFilter={tagFilter}
-            setTagFilter={setTagFilter}
-          />
-          <TasksList tagFilter={tagFilter} tasks={processedTasks} />
-        </Suspense>
+        <Listing
+          tasks={processedTasks}
+          tag={tag}
+          tagFilter={[] as string[]}
+          setTag={setTag}
+        />
       </div>
     </>
   )
 }
+
+export default TaskList

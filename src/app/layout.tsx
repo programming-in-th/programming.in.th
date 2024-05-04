@@ -1,8 +1,9 @@
 import { ReactNode } from 'react'
 
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter, Noto_Sans_Thai } from 'next/font/google'
 
 import '@/styles/index.css'
@@ -38,12 +39,11 @@ export default async function RootLayout({
         <Providers>
           <LayoutWithTheme>
             <Navbar />
-            <main className="flex min-h-screen w-screen flex-col">
-              {children}
-            </main>
+            <main className="flex min-h-screen flex-col">{children}</main>
             <Footer />
           </LayoutWithTheme>
         </Providers>
+        <SpeedInsights />
       </body>
       <Analytics />
     </html>
@@ -52,7 +52,6 @@ export default async function RootLayout({
 
 export const metadata = {
   metadataBase: new URL('https://programming.in.th'),
-  themeColor: '#000000',
   icons: {
     icon: '/assets/img/icon-512.png',
     apple: '/assets/img/icon-apple.png'
@@ -82,3 +81,7 @@ export const metadata = {
     title: 'programming.in.th'
   }
 } satisfies Metadata
+
+export const viewport = {
+  themeColor: '#000000'
+} satisfies Viewport

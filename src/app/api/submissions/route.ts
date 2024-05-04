@@ -81,8 +81,8 @@ export async function GET(req: NextRequest) {
           userId: filterArr.includes(Filter.enum.own)
             ? user.id
             : isAdminOrOwner
-            ? userId
-            : ''
+              ? userId
+              : ''
         }
       )
 
@@ -98,8 +98,8 @@ export async function GET(req: NextRequest) {
         userId: filterArr.includes(Filter.enum.own)
           ? user?.id ?? ''
           : user?.admin
-          ? userId
-          : ''
+            ? userId
+            : ''
       }
     )
 
@@ -136,8 +136,8 @@ export async function GET(req: NextRequest) {
       userId: filterArr.includes(Filter.enum.own)
         ? user?.id ?? ''
         : user?.admin
-        ? userId
-        : undefined
+          ? userId
+          : undefined
     },
     {
       ...(!user?.admin && { private: false })

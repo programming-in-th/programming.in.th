@@ -1,9 +1,15 @@
 import { Suspense } from 'react'
 
+import { Metadata } from 'next'
+
 import { LoginGitHub } from '@/components/Login/GitHub'
 import { LoginGoogle } from '@/components/Login/Google'
 
 import { ErrorMessage } from './ErrorMessage'
+
+export const metadata: Metadata = {
+  title: 'Login | programming.in.th'
+}
 
 export default function Login() {
   return (

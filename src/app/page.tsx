@@ -1,5 +1,7 @@
 import { cache } from 'react'
 
+import { Metadata } from 'next'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
@@ -19,6 +21,10 @@ import { getServerUser } from '@/lib/session'
 import { PeopleVector } from '@/svg/Illustrations/People'
 
 import landingPic from '../../public/assets/img/landing/code.webp'
+
+export const metadata: Metadata = {
+  title: 'programming.in.th'
+}
 
 async function JoinButton() {
   'use client'
@@ -77,7 +83,7 @@ export default async function Landing() {
 
           <p className="mt-4 text-sm leading-relaxed text-prog-gray-500 dark:text-slate-200 sm:text-base">
             เว็บไซต์ที่ผู้ใช้มากมายเชื่อมั่น ด้วยโจทย์ฝึกเขียนโปรแกรมถึง{' '}
-            {tasksCount} ข้อ
+            <b>{tasksCount}</b> ข้อ
             <br />
             และบทเรียนเกี่ยวกับ Data Structure & Algorithms
           </p>
