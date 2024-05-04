@@ -25,7 +25,7 @@
     "format": "prettier --write \"**/*.{js,mjs,json,css,scss,md,yml}\" && eslint src --fix",
     "prebuild": "prisma generate",
     "predev": "prisma generate",
-    "prepare": "husky install",
+    "prepare": "husky",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "playwright test"
