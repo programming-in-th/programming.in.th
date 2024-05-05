@@ -1,7 +1,7 @@
 'use client'
 
-import { StarIcon as StarIconOutline } from '@heroicons/react/outline'
-import { StarIcon as StarIconSolid } from '@heroicons/react/solid'
+import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
+import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid'
 import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import { useSession } from 'next-auth/react'

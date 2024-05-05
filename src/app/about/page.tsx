@@ -1,3 +1,5 @@
+import { Metadata } from 'next'
+
 import Image from 'next/image'
 
 import { PoweredByVercel } from '@/components/RootLayout/PoweredByVercel'
@@ -5,6 +7,10 @@ import { PoweredByVercel } from '@/components/RootLayout/PoweredByVercel'
 import { ContributorSection } from './ContributorSection'
 import { CoreTeamSection } from './CoreTeamSection'
 import { Contributor, OrgMember } from './types'
+
+export const metadata: Metadata = {
+  title: 'About | programming.in.th'
+}
 
 async function fetchData<T>(url: string, defaultValue: T) {
   const res = await fetch(url, { next: { revalidate: 3600 } })

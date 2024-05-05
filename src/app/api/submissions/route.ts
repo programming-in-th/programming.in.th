@@ -34,7 +34,7 @@ export async function GET(req: NextRequest) {
   const filterArr = filter ? (Array.isArray(filter) ? filter : [filter]) : []
 
   if (filterArr.includes(Filter.enum.own) && !user) {
-    return unauthorized()
+    return json({ data: [], nextCursor: null })
   }
 
   if (
@@ -81,8 +81,8 @@ export async function GET(req: NextRequest) {
           userId: filterArr.includes(Filter.enum.own)
             ? user.id
             : isAdminOrOwner
-            ? userId
-            : ''
+              ? userId
+              : ''
         }
       )
 
@@ -98,8 +98,8 @@ export async function GET(req: NextRequest) {
         userId: filterArr.includes(Filter.enum.own)
           ? user?.id ?? ''
           : user?.admin
-          ? userId
-          : ''
+            ? userId
+            : ''
       }
     )
 
@@ -136,8 +136,8 @@ export async function GET(req: NextRequest) {
       userId: filterArr.includes(Filter.enum.own)
         ? user?.id ?? ''
         : user?.admin
-        ? userId
-        : undefined
+          ? userId
+          : undefined
     },
     {
       ...(!user?.admin && { private: false })
@@ -160,7 +160,7 @@ export async function POST(req: NextRequest) {
   }
   const { assessmentId, taskId, language, code } = parsedBody.data
 
-  if (!(await checkUserPermissionOnTask(user, taskId, 'WRITE'))) {
+  if (!(await checkUserPermissionOnTask(user, taskId))) {
     return forbidden()
   }
 

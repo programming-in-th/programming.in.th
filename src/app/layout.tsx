@@ -1,8 +1,9 @@
 import { ReactNode } from 'react'
 
-import { Metadata } from 'next'
+import { Metadata, Viewport } from 'next'
 
 import { Analytics } from '@vercel/analytics/react'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Inter, Noto_Sans_Thai } from 'next/font/google'
 
 import '@/styles/index.css'
@@ -38,12 +39,11 @@ export default async function RootLayout({
         <Providers>
           <LayoutWithTheme>
             <Navbar />
-            <main className="flex min-h-screen w-screen flex-col">
-              {children}
-            </main>
+            <main className="flex min-h-screen flex-col">{children}</main>
             <Footer />
           </LayoutWithTheme>
         </Providers>
+        <SpeedInsights />
       </body>
       <Analytics />
     </html>
@@ -51,8 +51,7 @@ export default async function RootLayout({
 }
 
 export const metadata = {
-  metadataBase: new URL('https://staging.programming.in.th'),
-  themeColor: '#000000',
+  metadataBase: new URL('https://programming.in.th'),
   icons: {
     icon: '/assets/img/icon-512.png',
     apple: '/assets/img/icon-apple.png'
@@ -64,7 +63,7 @@ export const metadata = {
     title: 'PROGRAMMING.IN.TH',
     description:
       'PROGRAMMING.IN.TH provides you with the fundamentals of algorithmic problem-solving, an important skill to differentiate yourself as a programmer in an increasingly technologically advanced world.',
-    url: 'https://staging.programming.in.th',
+    url: 'https://programming.in.th',
     siteName: 'programming.in.th',
     images: [
       {
@@ -82,3 +81,7 @@ export const metadata = {
     title: 'programming.in.th'
   }
 } satisfies Metadata
+
+export const viewport = {
+  themeColor: '#000000'
+} satisfies Viewport

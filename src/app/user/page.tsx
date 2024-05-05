@@ -1,3 +1,5 @@
+import { Metadata } from 'next'
+
 import { LoginGitHub } from '@/components/Login/GitHub'
 import { LoginGoogle } from '@/components/Login/Google'
 import { Unauthorized } from '@/components/Unauthorized'
@@ -5,6 +7,10 @@ import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
 
 import { DisplayName } from './DisplayName'
+
+export const metadata: Metadata = {
+  title: 'Dashboard | programming.in.th'
+}
 
 export default async function User() {
   const user = await getServerUser()

@@ -63,6 +63,14 @@ export const DesktopProfile = () => {
                       </Link>
                     </div>
 
+                    {session.user.admin && (
+                      <div className="border-b border-gray-100 px-8 py-4 text-prog-gray-500 hover:text-gray-700 dark:border-slate-900 dark:text-gray-100 dark:hover:text-gray-400">
+                        <Link href="/admin" onClick={() => close()}>
+                          Admin Home
+                        </Link>
+                      </div>
+                    )}
+
                     <div className="px-8 py-4">
                       <SignoutButton className="text-prog-gray-500 hover:text-gray-700 dark:text-gray-100 dark:hover:text-gray-400" />
                     </div>

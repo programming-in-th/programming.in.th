@@ -7,9 +7,13 @@
   "schedule": ["before 4am on sunday"],
   "packageRules": [
     {
-      "packagePatterns": ["*"],
+      "matchPackagePatterns": ["*"],
       "matchUpdateTypes": ["patch", "minor"],
       "groupName": "dependencies (non-major)"
+    },
+    {
+      "matchPackageNames": ["next", "eslint-config-next"],
+      "groupName": "Next.js"
     }
   ],
   "vulnerabilityAlerts": {

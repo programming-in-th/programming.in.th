@@ -3,7 +3,7 @@ import { ITestCase } from '@/types/submissions'
 const Status = ({ msg }: { msg: string }) => {
   if (msg === 'Correct') {
     return (
-      <div className="flex items-center space-x-1">
+      <div className="flex items-center space-x-1 pr-2">
         <svg
           width="16"
           height="16"
@@ -24,7 +24,7 @@ const Status = ({ msg }: { msg: string }) => {
   }
   if (msg === '' || msg === 'Partially Correct') {
     return (
-      <div className="flex items-center space-x-1">
+      <div className="flex items-center space-x-1 pr-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="16"
@@ -43,7 +43,7 @@ const Status = ({ msg }: { msg: string }) => {
     )
   }
   return (
-    <div className="flex items-center space-x-1">
+    <div className="flex items-center space-x-1 pr-2">
       <svg
         width="16"
         height="16"
@@ -58,8 +58,7 @@ const Status = ({ msg }: { msg: string }) => {
           fill="#F87171"
         />
       </svg>
-
-      <p className="text-red-400">{msg}</p>
+      <p className="whitespace-nowrap text-red-400">{msg}</p>
     </div>
   )
 }
@@ -67,9 +66,9 @@ const Status = ({ msg }: { msg: string }) => {
 export const Header = () => (
   <div className="flex w-full space-x-2">
     <p className="w-[2rem] min-w-[2rem] text-sm font-light">#</p>
-    <p className="w-[6rem] min-w-[4.5rem] text-sm font-light">Time</p>
-    <p className="w-[6rem] min-w-[5rem] text-sm font-light">Memory</p>
-    <p className="text-sm font-light">Message</p>
+    <p className="w-[6rem] min-w-[4.5rem] shrink-0 text-sm font-light">Time</p>
+    <p className="w-[6rem] min-w-[5rem] shrink-0 text-sm font-light">Memory</p>
+    <p className="shrink-0 text-sm font-light">Message</p>
   </div>
 )
 
@@ -80,14 +79,16 @@ export const Card = ({
   time_usage
 }: ITestCase) => (
   <div className="flex w-full space-x-2">
-    <p className="w-[2rem] min-w-[2rem] text-base font-light">{test_index}</p>
-    <p className="w-[6rem] min-w-[4.5rem] text-sm font-light">
+    <p className="w-[2rem] min-w-[2rem] shrink-0 text-base font-light">
+      {test_index}
+    </p>
+    <p className="w-[6rem] min-w-[4.5rem] shrink-0 text-sm font-light">
       <span className="text-base font-medium text-gray-500 dark:text-white">{`${Math.floor(
         time_usage * 1000
       )} `}</span>
       ms
     </p>
-    <p className="w-[6rem] min-w-[5rem] text-sm font-light">
+    <p className="w-[6rem] min-w-[5rem] shrink-0 text-sm font-light">
       <span className="text-base font-medium text-gray-500 dark:text-white">{`${memory_usage} `}</span>
       kB
     </p>

@@ -1,14 +1,16 @@
 import { cache } from 'react'
 
+import { Metadata } from 'next'
+
 import Image from 'next/image'
 import Link from 'next/link'
 
 import {
-  CollectionIcon,
-  DocumentSearchIcon,
+  RectangleStackIcon,
+  DocumentMagnifyingGlassIcon,
   FireIcon,
   HeartIcon
-} from '@heroicons/react/solid'
+} from '@heroicons/react/24/solid'
 import clsx from 'clsx'
 
 import { FeatureCard } from '@/components/Landing/FeatureCard'
@@ -19,6 +21,10 @@ import { getServerUser } from '@/lib/session'
 import { PeopleVector } from '@/svg/Illustrations/People'
 
 import landingPic from '../../public/assets/img/landing/code.webp'
+
+export const metadata: Metadata = {
+  title: 'programming.in.th'
+}
 
 async function JoinButton() {
   'use client'
@@ -77,7 +83,7 @@ export default async function Landing() {
 
           <p className="mt-4 text-sm leading-relaxed text-prog-gray-500 dark:text-slate-200 sm:text-base">
             เว็บไซต์ที่ผู้ใช้มากมายเชื่อมั่น ด้วยโจทย์ฝึกเขียนโปรแกรมถึง{' '}
-            {tasksCount} ข้อ
+            <b>{tasksCount}</b> ข้อ
             <br />
             และบทเรียนเกี่ยวกับ Data Structure & Algorithms
           </p>
@@ -119,7 +125,7 @@ export default async function Landing() {
             <FeatureCard
               title="ระบบตรวจ Submission สุดทันสมัย"
               description={`สามารถทราบคะแนน\nของ Submission คุณแบบ Real Time\nด้วยระบบตรวจที่สร้างมาเพื่อเว็บนี้โดยเฉพาะ`}
-              Icon={DocumentSearchIcon}
+              Icon={DocumentMagnifyingGlassIcon}
             />
             <FeatureCard
               title="เชื่อมั่นโดยผู้ใช้มากมาย"
@@ -129,7 +135,7 @@ export default async function Landing() {
             <FeatureCard
               title="พัฒนาตนเองได้ทุกระดับ"
               description={`คลังโจทย์ขนาดใหญ่จากหลากหลายที่มา\nพัฒนาทักษะการแก้ปัญหาได้อย่างมีประสิทธิภาพ`}
-              Icon={CollectionIcon}
+              Icon={RectangleStackIcon}
             />
             <FeatureCard
               title="ประสบการณ์การฝึกฝนที่ลงตัว"

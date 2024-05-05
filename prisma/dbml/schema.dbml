@@ -127,6 +127,8 @@ Table assessment {
   owners owner_on_assessment [not null]
   open DateTime [default: `now()`, not null]
   close DateTime [not null]
+  scoringType ScoringType [not null, default: 'BEST_SUBMISSION']
+  isLeaderboardPublic Boolean [not null, default: false]
 }
 
 Table task_on_assessment {
@@ -174,6 +176,11 @@ Table testcase_sync_status {
   syncStatus SyncStatus [not null]
 }
 
+Table TagToTask {
+  tagsId Int [ref: > tag.id]
+  tasksId String [ref: > task.id]
+}
+
 Enum StatementType {
   PDF
   MARKDOWN
@@ -183,6 +190,11 @@ Enum TaskType {
   NORMAL
   COMMUNICATION
   OUTPUT_ONLY
+}
+
+Enum ScoringType {
+  BEST_SUBMISSION
+  SUM_SUBTASK
 }
 
 Enum SyncStatus {
