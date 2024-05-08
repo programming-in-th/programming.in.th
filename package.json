@@ -105,7 +105,7 @@
     "@vitejs/plugin-react": "4.2.1",
     "@vitest/coverage-v8": "1.6.0",
     "autoprefixer": "10.4.19",
-    "eslint": "8.57.0",
+    "eslint": "9.2.0",
     "eslint-config-next": "14.1.4",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.29.1",
