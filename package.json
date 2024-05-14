@@ -1,7 +1,7 @@
 {
   "name": "programming.in.th",
   "private": true,
-  "packageManager": "pnpm@9.1.0",
+  "packageManager": "pnpm@9.1.1",
   "engines": {
     "node": "^20.8"
   },
@@ -31,8 +31,8 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.569.0",
-    "@aws-sdk/s3-request-presigner": "3.569.0",
+    "@aws-sdk/client-s3": "3.575.0",
+    "@aws-sdk/s3-request-presigner": "3.575.0",
     "@codemirror/lang-cpp": "6.0.2",
     "@codemirror/lang-java": "6.0.1",
     "@codemirror/lang-python": "6.1.6",
@@ -50,7 +50,7 @@
     "@next/bundle-analyzer": "14.2.3",
     "@prisma/client": "5.13.0",
     "@supabase/realtime-js": "2.9.5",
-    "@tanstack/react-table": "8.16.0",
+    "@tanstack/react-table": "8.17.0",
     "@uiw/codemirror-theme-dracula": "4.22.0",
     "@uiw/react-codemirror": "4.22.0",
     "@vercel/analytics": "1.2.2",
@@ -89,7 +89,7 @@
     "server-only": "0.0.1",
     "sharp": "0.33.3",
     "swr": "2.2.5",
-    "zod": "3.23.7"
+    "zod": "3.23.8"
   },
   "devDependencies": {
     "@octokit/types": "13.5.0",
@@ -97,11 +97,11 @@
     "@tailwindcss/typography": "0.5.13",
     "@testing-library/jest-dom": "6.4.5",
     "@testing-library/react": "15.0.7",
-    "@types/node": "20.12.10",
-    "@types/react": "18.3.1",
+    "@types/node": "20.12.11",
+    "@types/react": "18.3.2",
     "@types/react-table": "7.7.20",
-    "@typescript-eslint/eslint-plugin": "7.8.0",
-    "@typescript-eslint/parser": "7.8.0",
+    "@typescript-eslint/eslint-plugin": "7.9.0",
+    "@typescript-eslint/parser": "7.9.0",
     "@vitejs/plugin-react": "4.2.1",
     "@vitest/coverage-v8": "1.6.0",
     "autoprefixer": "10.4.19",
@@ -120,7 +120,7 @@
     "prettier-plugin-tailwindcss": "0.5.14",
     "prisma": "5.13.0",
     "prisma-dbml-generator": "0.12.0",
-    "sass": "1.77.0",
+    "sass": "1.77.1",
     "tailwindcss": "3.4.3",
     "ts-node": "10.9.2",
     "typescript": "5.4.5",
