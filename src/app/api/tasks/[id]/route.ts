@@ -81,7 +81,9 @@ export async function PUT(
       const Key =
         file.type === 'application/pdf'
           ? `statements/pdf/${task.id}.pdf`
-          : `testcases/${task.id}/${file.path}`
+          : file.type === 'application/zip'
+            ? `statements/attachments/${task.id}.zip`
+            : `testcases/${task.id}/${file.path}`
       const url = await getSignedUrl(
         s3Client,
         new PutObjectCommand({

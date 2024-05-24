@@ -26,6 +26,10 @@ const SubmitComponent = () => {
               <label>Is single file?</label>
             </div>
           </div>
+          <p>
+            You can also upload statements by uploading pdf file and public
+            attachments by uploading zip file
+          </p>
           <UploadBox />
         </div>
       </div>
