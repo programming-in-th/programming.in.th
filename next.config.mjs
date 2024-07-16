@@ -15,5 +15,6 @@ export default withBundleAnalyzer({
         hostname: 'avatars.githubusercontent.com'
       }
     ]
-  }
+  },
+  output: 'standalone'
 })

@@ -1,0 +1,9 @@
+# For Local Testing
+services:
+  progin:
+    image: test/progin:latest
+    container_name: progin
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
