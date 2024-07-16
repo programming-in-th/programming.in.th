@@ -96,7 +96,7 @@ export async function GET(req: NextRequest) {
       {
         taskId,
         userId: filterArr.includes(Filter.enum.own)
-          ? user?.id ?? ''
+          ? (user?.id ?? '')
           : user?.admin
             ? userId
             : ''
@@ -121,7 +121,7 @@ export async function GET(req: NextRequest) {
       {
         taskId,
         assessmentId,
-        userId: filterArr.includes(Filter.enum.own) ? user.id ?? '' : userId
+        userId: filterArr.includes(Filter.enum.own) ? (user.id ?? '') : userId
       }
     )
 
@@ -134,7 +134,7 @@ export async function GET(req: NextRequest) {
     cursor,
     {
       userId: filterArr.includes(Filter.enum.own)
-        ? user?.id ?? ''
+        ? (user?.id ?? '')
         : user?.admin
           ? userId
           : undefined

@@ -38,7 +38,7 @@ export const TaskItem = (
         >
           <div className="flex flex-col p-2">
             <p className="text-gray-500 dark:text-gray-200">{task.title}</p>
-            <p className="text-sm font-light text-gray-400 ">{task.id}</p>
+            <p className="text-sm font-light text-gray-400">{task.id}</p>
           </div>
           <div className="flex w-full justify-between p-2">
             <div className="mt-1 flex flex-col">

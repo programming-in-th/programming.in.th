@@ -79,7 +79,7 @@ export default function Breadcrumb({
           Archive
         </Link>
         {slug.map((path, index) => (
-          <div key={path} className="flex items-center ">
+          <div key={path} className="flex items-center">
             <PathPopover paths={paths} index={index} />
             <Link
               href={`/archive/${slug.slice(0, index + 1).join('/')}`}

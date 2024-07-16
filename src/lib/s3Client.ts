@@ -1,7 +1,7 @@
 import { S3 } from '@aws-sdk/client-s3'
 
 if (!process.env.BUCKET_KEY_ID || !process.env.BUCKET_KEY_SECRET)
-  throw new Error('Failed to initialize bucket')
+  throw new Error('Failed to initialize bucket: Environment Variable Missing')
 
 export const s3Client = new S3({
   endpoint: process.env.BUCKET_ENDPOINT,

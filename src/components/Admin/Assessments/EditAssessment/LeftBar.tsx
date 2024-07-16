@@ -72,7 +72,7 @@ export const LeftBar = ({
       </div>
       <div className="flex flex-col">
         <p>Assign to</p>
-        <div className="flex h-52 flex-col rounded-md border border-gray-200 p-0.5 dark:border-slate-700 ">
+        <div className="flex h-52 flex-col rounded-md border border-gray-200 p-0.5 dark:border-slate-700">
           <input
             type="text"
             className="rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
@@ -110,7 +110,7 @@ export const LeftBar = ({
       </div>
       <div className="flex flex-col">
         <p>Assign owner to</p>
-        <div className="flex h-52 flex-col rounded-md border border-gray-200 p-0.5 dark:border-slate-700 ">
+        <div className="flex h-52 flex-col rounded-md border border-gray-200 p-0.5 dark:border-slate-700">
           <input
             type="text"
             className="rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"

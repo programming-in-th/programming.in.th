@@ -66,7 +66,7 @@ export const SubmitElement = ({
     <div className="flex w-full flex-col rounded-md text-prog-gray-500 shadow-md dark:bg-slate-700 dark:text-gray-100">
       <div className="bg-white px-8 py-4 dark:bg-slate-700">
         <div className="mb-6 flex items-center justify-between gap-4">
-          <h2 className="text-lg ">Submit</h2>
+          <h2 className="text-lg">Submit</h2>
           <div className="flex flex-wrap justify-end gap-2">
             {languageData.map(language => {
               return (

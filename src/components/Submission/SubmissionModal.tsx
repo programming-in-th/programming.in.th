@@ -262,7 +262,7 @@ export const SubmissionModal = ({
                           <SubmissionGroup groups={submission.groups} />
                         )}
                       </div>
-                      <div className="w-1/2 ">
+                      <div className="w-1/2">
                         <Code
                           code={submission.code[0]}
                           language={submission.language}

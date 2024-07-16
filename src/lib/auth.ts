@@ -11,7 +11,9 @@ if (
   !process.env.GOOGLE_CLIENT_ID ||
   !process.env.GOOGLE_CLIENT_SECRET
 ) {
-  throw new Error('Failed to initialize authentication')
+  throw new Error(
+    'Failed to initialize authentication: Environment Variable Missing'
+  )
 }
 
 export const authOptions: NextAuthOptions = {

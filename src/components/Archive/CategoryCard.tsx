@@ -73,7 +73,7 @@ export default function CategoryCard({
         <div>
           <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-gray-100">
             <div
-              className="h-2  rounded-full bg-prog-primary-500"
+              className="h-2 rounded-full bg-prog-primary-500"
               style={{ width: `${Math.round(((solved ?? 0) / total) * 100)}%` }}
             ></div>
           </div>

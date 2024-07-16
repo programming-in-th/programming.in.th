@@ -10,7 +10,7 @@ const DisplayFileCard = ({ data }: { data: IDisplayFile }) => {
         <div className="relative h-full w-full">
           <div className="absolute h-full w-full rounded-full bg-gray-200"></div>
           <div
-            className="absolute h-full rounded-full bg-green-500 "
+            className="absolute h-full rounded-full bg-green-500"
             style={{
               width: `${data.percentage}%`
             }}
