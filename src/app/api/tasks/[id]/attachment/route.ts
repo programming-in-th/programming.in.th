@@ -53,6 +53,6 @@ export async function GET(
       }
     })
   } catch {
-    return notFound()
+    return new NextResponse(null, { status: 204 })
   }
 }
