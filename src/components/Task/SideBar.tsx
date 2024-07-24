@@ -14,6 +14,8 @@ import { PieChart } from '@/components/common/PieChart'
 import fetcher from '@/lib/fetcher'
 import { IListSubmission } from '@/types/submissions'
 
+import { Attachment } from './Attachment'
+
 const NormalTabs = [
   {
     label: 'Statement',
@@ -152,6 +154,8 @@ export const SideBar = ({
       </div>
 
       <hr className="my-4 hidden md:block" />
+
+      <Attachment id={task.id} />
 
       <div className="hidden flex-col items-center justify-center md:flex">
         <a
