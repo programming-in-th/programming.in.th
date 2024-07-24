@@ -1,16 +1,19 @@
 'use client'
 
+import useSWR from 'swr'
+
+import zipFetcher from '@/lib/zipFetcher'
 import { DownloadIcon } from '@/svg/Illustrations/DownloadIcon'
 
-export const Attachment = ({
-  attachmentData,
-  id
-}: {
-  attachmentData: Blob | JSON | undefined
-  id: string
-}) => {
+export const Attachment = ({ id }: { id: string }) => {
+  const { data: attachment } = useSWR(`/api/tasks/${id}/attachment`, zipFetcher)
+
+  if (!(attachment instanceof Blob)) {
+    return null
+  }
+
   const downloadAttachment = () => {
-    const url = URL.createObjectURL(attachmentData as Blob)
+    const url = URL.createObjectURL(attachment as Blob)
     const a = document.createElement('a')
     a.href = url
     a.download = `${id}.zip`
@@ -18,10 +21,6 @@ export const Attachment = ({
     a.click()
     document.body.removeChild(a)
     URL.revokeObjectURL(url)
-  }
-
-  if (!(attachmentData instanceof Blob)) {
-    return null
   }
 
   return (

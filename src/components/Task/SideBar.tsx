@@ -12,7 +12,6 @@ import useSWR from 'swr'
 
 import { PieChart } from '@/components/common/PieChart'
 import fetcher from '@/lib/fetcher'
-import zipFetcher from '@/lib/zipFetcher'
 import { IListSubmission } from '@/types/submissions'
 
 import { Attachment } from './Attachment'
@@ -81,12 +80,6 @@ export const SideBar = ({
         }`
       : null,
     fetcher
-  )
-
-  // TODO: Find a better way to fetch attachment
-  const { data: attachment } = useSWR<Blob | JSON>(
-    `/api/tasks/${task.id}/attachment`,
-    zipFetcher
   )
 
   const Tabs = useMemo(
@@ -162,7 +155,7 @@ export const SideBar = ({
 
       <hr className="my-4 hidden md:block" />
 
-      <Attachment attachmentData={attachment} id={task.id} />
+      <Attachment id={task.id} />
 
       <div className="hidden flex-col items-center justify-center md:flex">
         <a
