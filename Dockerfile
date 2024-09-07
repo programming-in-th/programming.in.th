@@ -41,8 +41,6 @@ COPY next.config.mjs postcss.config.js tailwind.config.js tsconfig.json ./
 COPY prisma ./prisma
 RUN pnpm prisma generate
 
-COPY .env ./
-
 RUN pnpm build
 
 # ? -------------------------
