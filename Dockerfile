@@ -41,6 +41,9 @@ COPY next.config.mjs postcss.config.js tailwind.config.js tsconfig.json ./
 COPY prisma ./prisma
 RUN pnpm prisma generate
 
+ARG DATABASE_URL
+ENV DATABASE_URL ${DATABASE_URL}
+
 RUN pnpm build
 
 # ? -------------------------
