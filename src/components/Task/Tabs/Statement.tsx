@@ -1,6 +1,10 @@
 'use client'
 // TODO Convert to Server Component
 
+import { useEffect, useState } from 'react'
+
+import Link from 'next/link'
+
 import { Task } from '@prisma/client'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import useSWR from 'swr'
@@ -14,14 +18,32 @@ const StatementTab = ({ task }: { task: Task }) => {
     fetcher
   )
 
+  const [enablePDF, setEnablePDF] = useState<boolean>(true)
+
+  useEffect(() => {
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent)
+    const isMobile = /Mobi/.test(navigator.userAgent)
+
+    if (isSafari && isMobile) {
+      setEnablePDF(false)
+    }
+  }, [])
+
   if (task.statement === 'PDF') {
     return (
       <article className="h-screen">
-        <embed
-          src={`/api/tasks/${task.id}/statement`}
-          width="100%"
-          height="100%"
-        />
+        {!enablePDF ? (
+          <p>
+            This browser does not support inline PDFs. Please view the PDF by
+            clicking <Link href={`/api/tasks/${task.id}/statement`}>here</Link>.
+          </p>
+        ) : (
+          <embed
+            src={`/api/tasks/${task.id}/statement`}
+            width="100%"
+            height="100%"
+          />
+        )}
       </article>
     )
   } else if (task.statement === 'MARKDOWN' && mdStatement) {
