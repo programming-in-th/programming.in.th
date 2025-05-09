@@ -44,7 +44,7 @@
     "@dnd-kit/modifiers": "7.0.0",
     "@dnd-kit/sortable": "8.0.0",
     "@dnd-kit/utilities": "3.2.2",
-    "@headlessui/react": "1.7.19",
+    "@headlessui/react": "2.2.2",
     "@heroicons/react": "2.1.5",
     "@next-auth/prisma-adapter": "1.0.7",
     "@next/bundle-analyzer": "14.2.5",
