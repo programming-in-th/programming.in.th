@@ -14,7 +14,7 @@ svg {
  * Based on copypasta from Remy Bach and Sarah Drasner
  */
 code[class*='language-'],
-pre[class*='language-'] {
+div[class*='language-'] {
   color: white;
   background: #011627;
   font-family:
@@ -46,32 +46,32 @@ pre[class*='language-'] {
 }
 
 /* Code blocks */
-pre[class*='language-'] {
+div[class*='language-'] {
   overflow: auto;
   margin: 0.5em 0;
   padding: 1.3125rem;
   font-size: 14px;
 }
 
-pre[class*='language-']::-moz-selection {
+div[class*='language-']::-moz-selection {
   /* Firefox */
   background: hsl(207, 4%, 16%);
 }
 
-pre[class*='language-']::selection {
+div[class*='language-']::selection {
   /* Safari */
   background: hsl(207, 4%, 16%);
 }
 
 /* Text Selection colour */
-pre[class*='language-']::-moz-selection,
-pre[class*='language-'] ::-moz-selection {
+div[class*='language-']::-moz-selection,
+div[class*='language-'] ::-moz-selection {
   text-shadow: none;
   background: hsla(0, 0%, 100%, 0.15);
 }
 
-pre[class*='language-']::selection,
-pre[class*='language-'] ::selection {
+div[class*='language-']::selection,
+div[class*='language-'] ::selection {
   text-shadow: none;
   background: hsla(0, 0%, 100%, 0.15);
 }
