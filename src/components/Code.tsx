@@ -14,32 +14,34 @@ export interface CodeBlockProps {
   maxHeight?: string
 }
 
-// Direct port of https://github.com/programming-in-th/programming.in.th/blob/main/src/components/Code.tsx
-// May cause bug
 const Code = ({ code, language, maxHeight = 'auto' }: CodeBlockProps) => {
   return (
     <div className="py-2">
       <Highlight Prism={Prism} code={code} language={language as Language}>
         {({ style, tokens, getLineProps, getTokenProps }) => (
-          <pre
+          <div
             style={{ ...style, maxHeight }}
             className={`language-${language} overflow-y-auto rounded-lg text-[13.6px]`}
           >
             <code className={`language-${language}`}>
               {tokens.map((line, i) => (
-                <tr key={i} {...getLineProps({ line, key: i })}>
-                  <td className="w-8 select-none pr-2 text-gray-500">
+                <div
+                  key={i}
+                  {...getLineProps({ line, key: i })}
+                  className="flex"
+                >
+                  <span className="w-8 select-none pr-2 text-gray-500">
                     {i + 1}
-                  </td>
-                  <td>
+                  </span>
+                  <span className="flex-1">
                     {line.map((token, key) => (
                       <span key={key} {...getTokenProps({ token, key })} />
                     ))}
-                  </td>
-                </tr>
+                  </span>
+                </div>
               ))}
             </code>
-          </pre>
+          </div>
         )}
       </Highlight>
     </div>
