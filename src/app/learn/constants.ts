@@ -1,10 +1,12 @@
-type LearnSectionType = {
+export type LearnContentType = {
   label: string
   value: string
-  content: {
-    label: string
-    value: string
-  }[]
+}
+
+export type LearnSectionType = {
+  label: string
+  value: string
+  content: LearnContentType[]
 }
 
 export type LearnLevelType = {

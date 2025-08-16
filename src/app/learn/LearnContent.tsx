@@ -1,49 +1,65 @@
 'use client'
 
+import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 
-import { learnLevels, LearnLevelType } from './constants'
+import { learnLevels, LearnLevelType, LearnContentType } from './constants'
 
-// const ContentList = ({ level }: { level: LearnLevelType }) => {
-//   return (
-//     <>
-//       <div> {level.label} </div>
-//     </>
-//   )
-// }
+const ContentItem = ({
+  index,
+  id,
+  content
+}: {
+  index: number
+  id: string
+  content: LearnContentType
+}) => {
+  return (
+    <>
+      <div className="group w-full items-center justify-between py-1">
+        <Link
+          href={{
+            pathname: '/learn/content',
+            query: { id: `${id}_${content.value}` }
+          }}
+          className="flex w-full rounded-xl px-6 py-3 font-display shadow-md transition group-hover:shadow-lg dark:bg-slate-700"
+        >
+          <span className="flex w-full flex-col">
+            <p className="py-1 text-sm font-medium text-gray-500 dark:text-gray-100">
+              {index}. {content.label}
+            </p>
+          </span>
+        </Link>
+      </div>
+    </>
+  )
+}
 
 const ContentList = ({ level }: { level: LearnLevelType }) => {
   return (
     <div className="m-6 flex gap-6">
-      {/* Left column */}
-      <div className="w-64">
-        <h2 className="text-lg font-semibold">{level.label}</h2>
-      </div>
-
-      {/* Right column */}
       <div className="relative flex-1">
-        <div className="absolute bottom-0 left-[7px] top-0 w-px bg-gray-300"></div>
+        <h2 className="my-5 text-3xl text-gray-500">{level.label}</h2>
         <div className="space-y-6">
           {level.sections.map(section => {
             return (
               <div key={section.value} className="relative pl-6">
-                {/* Timeline dot */}
-                <div className="absolute left-[-2px] top-1 h-3 w-3 rounded-full border border-gray-400 bg-white"></div>
-
                 {/* Section header */}
-                <h3 className="font-medium">{section.label}</h3>
+                <h3 className="text-2xl text-gray-500">{section.label}</h3>
 
                 {/* Section items */}
                 {true && (
                   <ul className="mt-2 space-y-1">
-                    {section.content.map((item, idx) => (
+                    {section.content.map((content, idx) => (
                       <li
-                        key={item.value}
+                        key={content.value}
                         className="flex items-center gap-2 text-sm"
                       >
-                        <span>
-                          {idx + 1} {item.label}
-                        </span>
+                        <ContentItem
+                          index={idx + 1}
+                          id={`${level.value}_${section.value}`}
+                          content={content}
+                        />
                       </li>
                     ))}
                   </ul>
@@ -63,20 +79,14 @@ export const LearnContent = () => {
 
   return (
     <div className="h-full w-full">
-      <div className="group flex w-full items-center justify-between px-2">
-        <div className="hidden w-full px-6 font-display md:flex">
-          <div className="flex w-full flex-col">
-            <p className="text-sm font-medium text-gray-400">
-              {learnLevels.map(learnLevel => {
-                return !level || level == learnLevel.value ? (
-                  <ContentList key={learnLevel.value} level={learnLevel} />
-                ) : (
-                  <></>
-                )
-              })}
-            </p>
-          </div>
-        </div>
+      <div className="w-full px-6 font-display">
+        {learnLevels.map(learnLevel => {
+          return !level || level == learnLevel.value ? (
+            <ContentList key={learnLevel.value} level={learnLevel} />
+          ) : (
+            <></>
+          )
+        })}
       </div>
     </div>
   )
