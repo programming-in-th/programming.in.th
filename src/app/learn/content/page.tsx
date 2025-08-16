@@ -1,3 +1,5 @@
+import { Suspense } from 'react'
+
 import { Metadata, type NextPage } from 'next'
 
 import { RenderContent } from './RenderContent'
@@ -7,7 +9,11 @@ export const metadata: Metadata = {
 }
 
 const Page: NextPage = () => {
-  return <RenderContent />
+  return (
+    <Suspense>
+      <RenderContent />
+    </Suspense>
+  )
 }
 
 export default Page
