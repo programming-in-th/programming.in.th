@@ -14,20 +14,21 @@ import { mdxToHtml } from '@/lib/renderMarkdown'
 export async function getLearnMaterial(
   id: string
 ): Promise<MDXRemoteSerializeResult | null> {
-  if (!id) {
-    return notFound()
-  }
+  if (!id) return notFound()
 
   let solution = null
 
-  const solutionRes = await fetch(
-    `${process.env.NEXT_PUBLIC_AWS_URL}/learnmat/md/${id}.md`
-  )
+  try {
+    const solutionRes = await fetch(
+      `${process.env.NEXT_PUBLIC_AWS_URL}/learnmat/md/${id}.md`
+    )
 
-  if (solutionRes.status === 200) {
-    const raw = await solutionRes.text()
-    solution = await mdxToHtml(raw)
+    if (solutionRes.status === 200) {
+      const raw = await solutionRes.text()
+      solution = await mdxToHtml(raw)
+    }
+  } catch (error) {
+    console.log(error)
   }
-
   return solution
 }

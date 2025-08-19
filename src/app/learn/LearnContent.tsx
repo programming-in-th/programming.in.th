@@ -16,8 +16,7 @@ const LearnItem = ({
     <div className="group w-full items-center justify-between py-1">
       <Link
         href={{
-          pathname: '/learn/content',
-          query: { id: `${id}_${content.value}` }
+          pathname: `/learn/content/${id}_${content.value}`
         }}
         className="flex w-full rounded-xl px-6 py-3 font-display shadow-md transition group-hover:shadow-lg dark:bg-slate-700"
       >
