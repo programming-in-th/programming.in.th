@@ -1,13 +1,19 @@
 'use client'
 
+import { ExclamationCircleIcon } from '@heroicons/react/24/solid'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 
 import components from '@/components/common/MDXComponents'
 
 const RenderUnderConstruction = () => {
   return (
-    <div className="group w-full items-center justify-between py-1">
-      Under Construction
+    <div className="flex w-full flex-col items-center justify-center gap-2 pt-10">
+      <ExclamationCircleIcon className="my-4 h-8 w-8 text-gray-500 dark:text-gray-100" />
+
+      <h1 className="font-bold text-gray-600 dark:text-gray-50">
+        เนื้อหาส่วนนี้ยังไม่สมบูรณ์
+      </h1>
+      <p className="text-gray-400 dark:text-gray-100">ขออภัยในความไม่สะดวก</p>
     </div>
   )
 }

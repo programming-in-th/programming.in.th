@@ -18,7 +18,7 @@ export type LearnLevelType = {
 export const learnLevels: LearnLevelType[] = [
   {
     label: 'เตรียมตัวก่อนเข้าค่าย',
-    value: 'prePosn',
+    value: 'pre-posn',
     sections: [
       {
         label: 'คณิตศาสตร์',
