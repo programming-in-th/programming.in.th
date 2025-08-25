@@ -20,7 +20,7 @@ export async function getLearnMaterial(
 
   try {
     const solutionRes = await fetch(
-      `${process.env.NEXT_PUBLIC_AWS_URL}/solutions/md/${id}.md`
+      `${process.env.NEXT_PUBLIC_AWS_URL}/tutorial/${id.replaceAll('_', '/')}.md`
     )
 
     if (solutionRes.status === 200) {

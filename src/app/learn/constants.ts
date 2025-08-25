@@ -25,6 +25,10 @@ export const learnLevels: LearnLevelType[] = [
         value: 'math',
         content: [
           {
+            label: 'บทนำ',
+            value: 'intro'
+          },
+          {
             label: 'จำนวน ระบบจำนวน การดำเนินการของจำนวน',
             value: 'number-operation'
           },
@@ -89,20 +93,16 @@ export const learnLevels: LearnLevelType[] = [
         value: 'programming',
         content: [
           {
-            label: 'พื้นฐานภาษา C และ C++',
-            value: 'cpp-basic'
+            label: 'ทำไมถึงใช้ C++',
+            value: 'why-cpp'
           },
           {
             label: 'การติดตั้งโปรแกรม',
             value: 'installation'
           },
           {
-            label: 'การเขียนโปรแกรมรับข้อมูลเข้าและการแสดงผลข้อมูล',
-            value: 'io'
-          },
-          {
-            label: 'ชนิดของข้อมูล',
-            value: 'datatype'
+            label: 'พื้นฐานภาษา C และ C++',
+            value: 'cpp-basic'
           }
         ]
       }
@@ -119,6 +119,70 @@ export const learnLevels: LearnLevelType[] = [
           {
             label: 'เวกเตอร์และระบบพิกัดคาร์ทีเซียน',
             value: 'vector-cartesian'
+          },
+          {
+            label: 'การนับ',
+            value: 'counting'
+          },
+          {
+            label: 'ทฤษฎีกราฟ',
+            value: 'graph'
+          }
+        ]
+      },
+      {
+        label: 'Data Structure',
+        value: 'datastructure',
+        content: [
+          {
+            label: 'Intro To DS',
+            value: 'intro'
+          },
+          {
+            label: 'Primitive',
+            value: 'primitive'
+          },
+          {
+            label: 'Array and Vector',
+            value: 'array-vector'
+          },
+          {
+            label: 'string',
+            value: 'string'
+          },
+          {
+            label: 'pair',
+            value: 'pair'
+          },
+          {
+            label: 'stack and queue',
+            value: 'stack-queue'
+          },
+          {
+            label: 'priority queue',
+            value: 'priority-queue'
+          },
+          {
+            label: 'set and map',
+            value: 'set-map'
+          },
+          {
+            label: 'choosing datastructure',
+            value: 'choosing-ds'
+          }
+        ]
+      },
+      {
+        label: 'Algorithm',
+        value: 'algorithm',
+        content: [
+          {
+            label: 'intro',
+            value: 'intro'
+          },
+          {
+            label: 'bruteforce',
+            value: 'bruteforce'
           }
         ]
       }
@@ -133,8 +197,8 @@ export const learnLevels: LearnLevelType[] = [
         value: 'math',
         content: [
           {
-            label: 'เวกเตอร์และระบบพิกัดคาร์ทีเซียน',
-            value: 'vector-cartesian'
+            label: 'คณิตศาสตร์ระดับสูง',
+            value: 'advanced-math'
           }
         ]
       }
@@ -149,8 +213,8 @@ export const learnLevels: LearnLevelType[] = [
         value: 'math',
         content: [
           {
-            label: 'เวกเตอร์และระบบพิกัดคาร์ทีเซียน',
-            value: 'vector-cartesian'
+            label: 'คณิตศาสตร์ระดับสูง',
+            value: 'advanced-math'
           }
         ]
       }
