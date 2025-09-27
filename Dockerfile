@@ -1,7 +1,6 @@
 # check=skip=SecretsUsedInArgOrEnv
 
-
-FROM node:22-alpine AS builder
+FROM node:22-trixie AS builder
 
 ENV DOCKER_BUILD=1
 ENV NEXT_PUBLIC_REALTIME_URL=https://rtss.crackncode.org
@@ -38,7 +37,7 @@ ENV DATABASE_URL=${DATABASE_URL}
 
 RUN pnpm build
 
-FROM node:22-alpine AS runner
+FROM node:22-trixie AS runner
 
 WORKDIR /app
 
