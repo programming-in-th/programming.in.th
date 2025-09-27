@@ -9,7 +9,7 @@ import CategoryList from '@/components/Archive/CategoryList'
 import TaskList from '@/components/Archive/TaskList'
 import prisma from '@/lib/prisma'
 import { ISolved } from '@/types/tasks'
-import { generatePath, getCategory } from '@/utils/getCategoryTree'
+import { getCategory } from '@/utils/getCategoryTree'
 
 export const metadata: Metadata = {
   title: 'Archive | programming.in.th'
@@ -70,9 +70,9 @@ async function generatePaths(slug: string[]) {
   return paths
 }
 
-export async function generateStaticParams() {
-  const paths = (await generatePath()).map(path => ({
-    slug: path
-  }))
-  return paths
-}
+// export async function generateStaticParams() {
+//   const paths = (await generatePath()).map(path => ({
+//     slug: path
+//   }))
+//   return paths
+// }

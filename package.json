@@ -1,9 +1,9 @@
 {
   "name": "programming.in.th",
   "private": true,
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@10.17.1",
   "engines": {
-    "node": "^20.8"
+    "node": "^22.12"
   },
   "lint-staged": {
     "*.{json,md,yaml,css,scss}": [
@@ -19,8 +19,8 @@
   "scripts": {
     "preinstall": "npx only-allow pnpm",
     "dev": "next dev --turbo",
-    "build": "prisma generate && next build",
-    "start": "next start",
+    "build": "prisma generate && rm -rf .next/standalone && next build && cp -r public .next/standalone/ && cp -r .next/static .next/standalone/.next/",
+    "start": "cd .next/standalone && dotenv -e ../../.env -- node server.js",
     "lint": "next lint",
     "format": "prettier --write \"**/*.{js,mjs,json,css,scss,md,yml}\" && eslint src --fix",
     "prebuild": "prisma generate",
@@ -105,6 +105,7 @@
     "@vitejs/plugin-react": "4.3.1",
     "@vitest/coverage-v8": "2.0.3",
     "autoprefixer": "10.4.19",
+    "dotenv-cli": "10.0.0",
     "eslint": "8.57.0",
     "eslint-config-next": "14.2.5",
     "eslint-config-prettier": "9.1.0",
