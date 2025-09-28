@@ -1,3 +1,5 @@
+import type { JSX } from 'react'
+
 import Image, { ImageProps } from 'next/image'
 import Link, { LinkProps } from 'next/link'
 

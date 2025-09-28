@@ -8,8 +8,9 @@ import { forbidden, json, unauthorized } from '@/utils/apiResponse'
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  ctx: RouteContext<'/api/submissions/[id]/realtime'>
 ) {
+  const params = await ctx.params
   const id = params.id
 
   const submission = await prisma.submission.findUnique({

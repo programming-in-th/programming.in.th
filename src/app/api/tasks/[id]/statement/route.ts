@@ -15,8 +15,9 @@ import streamToString from '@/utils/streamToString'
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  ctx: RouteContext<'/api/tasks/[id]/statement'>
 ) {
+  const params = await ctx.params
   const id = params.id
 
   const task = await prisma.task.findUnique({

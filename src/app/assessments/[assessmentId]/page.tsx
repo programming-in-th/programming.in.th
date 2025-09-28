@@ -50,11 +50,10 @@ const TaskCard = ({
   )
 }
 
-export default async function Assessment({
-  params
-}: {
-  params: { assessmentId: string }
-}) {
+export default async function Assessment(
+  props: PageProps<'/assessments/[assessmentId]'>
+) {
+  const params = await props.params
   const { assessmentId } = params
 
   const user = await getServerUser()

@@ -17,11 +17,10 @@ export const metadata: Metadata = {
 
 export const revalidate = 3600 // 1 hour
 
-export default async function Archive({
-  params
-}: {
-  params: { slug?: string[] }
-}) {
+export default async function Archive(
+  props: PageProps<'/archive/[[...slug]]'>
+) {
+  const params = await props.params
   const category = await getCategory(params.slug || [])
   if (!category) notFound()
   return (

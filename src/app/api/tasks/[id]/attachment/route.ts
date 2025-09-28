@@ -11,8 +11,9 @@ import { forbidden, unauthorized } from '@/utils/apiResponse'
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  ctx: RouteContext<'/api/tasks/[id]/attachment'>
 ) {
+  const params = await ctx.params
   const id = params.id
 
   const task = await prisma.task.findUnique({

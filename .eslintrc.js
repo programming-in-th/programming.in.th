@@ -65,6 +65,12 @@ const config = {
       rules: {
         '@typescript-eslint/no-var-requires': 'off'
       }
+    },
+    {
+      files: ['*.d.ts'],
+      rules: {
+        '@typescript-eslint/triple-slash-reference': 'off'
+      }
     }
   ]
 }

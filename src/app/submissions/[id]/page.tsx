@@ -12,11 +12,10 @@ export const metadata: Metadata = {
   title: 'Submission | programming.in.th'
 }
 
-export default async function Submissions({
-  params
-}: {
-  params: { id: string }
-}) {
+export default async function Submissions(
+  props: PageProps<'/submissions/[id]'>
+) {
+  const params = await props.params
   const id = +params.id
 
   const submission = await prisma.submission.findUnique({

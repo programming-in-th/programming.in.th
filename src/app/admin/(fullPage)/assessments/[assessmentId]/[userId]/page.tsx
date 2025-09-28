@@ -66,11 +66,10 @@ const SubmissionCard = ({
   )
 }
 
-export default async function IndividualSubmission({
-  params
-}: {
-  params: { assessmentId: string; userId: string }
-}) {
+export default async function IndividualSubmission(
+  props: PageProps<'/admin/assessments/[assessmentId]/[userId]'>
+) {
+  const params = await props.params
   const { assessmentId, userId } = params
 
   const currentUser = await prisma.user.findUnique({

@@ -1,3 +1,5 @@
+import type { JSX } from 'react'
+
 import Link from 'next/link'
 
 const LinkComponent = ({

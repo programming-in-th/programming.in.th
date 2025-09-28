@@ -7,8 +7,3 @@ export async function getServerUser() {
 
   return session?.user
 }
-
-/**
- * @deprecated Use `getServerUser` instead
- */
-export const getCurrentUser = getServerUser

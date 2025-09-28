@@ -1,7 +1,7 @@
 import { RefObject, useEffect, useState } from 'react'
 
 export const useDetectOuside = (
-  ref: RefObject<HTMLElement>,
+  ref: RefObject<HTMLElement | null>,
   dep: boolean,
   callback: () => void
 ) => {

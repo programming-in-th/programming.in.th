@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useState, use } from 'react'
 
 import Link from 'next/link'
 
@@ -11,11 +11,10 @@ import { IAdminAssessment } from '@/components/Admin/Assessments/EditAssessment/
 import fetcher from '@/lib/fetcher'
 import { IUser } from '@/types/users'
 
-export default function ViewAssessment({
-  params
-}: {
-  params: { assessmentId: string }
-}) {
+export default function ViewAssessment(
+  props: PageProps<'/admin/assessments/[assessmentId]'>
+) {
+  const params = use(props.params)
   const id = params.assessmentId
 
   const { data: assessment } = useSWR<IAdminAssessment>(

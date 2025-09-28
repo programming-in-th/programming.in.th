@@ -14,8 +14,9 @@ import dedupeAndMap from '@/utils/dedupeAndMap'
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  ctx: RouteContext<'/api/assessments/[id]'>
 ) {
+  const params = await ctx.params
   const { searchParams } = new URL(req.url)
 
   const id = params.id
@@ -105,8 +106,9 @@ export async function GET(
 
 export async function DELETE(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  ctx: RouteContext<'/api/assessments/[id]'>
 ) {
+  const params = await ctx.params
   const id = params.id
   const user = await getServerUser()
 

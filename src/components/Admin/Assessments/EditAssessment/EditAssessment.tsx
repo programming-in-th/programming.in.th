@@ -106,7 +106,7 @@ const SubmitForm = ({
       instruction:
         typeof assessment?.instruction === 'string'
           ? assessment.instruction
-          : '' || '',
+          : '',
       open: assessment?.open.slice(0, -1) || '',
       close: assessment?.close.slice(0, -1) || '',
       ...users.reduce(

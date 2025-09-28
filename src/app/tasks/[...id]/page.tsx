@@ -12,18 +12,20 @@ const fetchTask = cache(async ({ params }: { params: { id: string[] } }) => {
   return { solution, task, type }
 })
 
-export async function generateMetadata({
-  params
-}: {
-  params: { id: string[] }
-}): Promise<Metadata> {
+export async function generateMetadata(
+  props: PageProps<'/tasks/[...id]'>
+): Promise<Metadata> {
+  const params = await props.params
   const { task } = await fetchTask({ params })
   return {
     title: `${task.title} | programming.in.th`
   }
 }
 
-export default async function Tasks({ params }: { params: { id: string[] } }) {
+export default async function Tasks(props: {
+  params: Promise<{ id: string[] }>
+}) {
+  const params = await props.params
   const { solution, task, type } = await fetchTask({ params })
   return (
     <TaskLayout task={task} type={type}>

@@ -13,8 +13,9 @@ import { badRequest, forbidden, json, unauthorized } from '@/utils/apiResponse'
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  ctx: RouteContext<'/api/tasks/[id]'>
 ) {
+  const params = await ctx.params
   const id = params.id
 
   const task = await prisma.task.findUnique({
@@ -40,8 +41,9 @@ export async function GET(
 
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  props: { params: Promise<{ id: string }> }
 ) {
+  const params = await props.params
   const id = params.id
 
   const parsedTask = TaskSchema.safeParse(await req.json())
@@ -122,8 +124,9 @@ export async function PUT(
 
 export async function DELETE(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  props: { params: Promise<{ id: string }> }
 ) {
+  const params = await props.params
   const id = params.id
 
   console.log(id)

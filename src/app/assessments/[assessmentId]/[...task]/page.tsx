@@ -3,11 +3,10 @@ import { TaskContent } from '@/components/Task/Content'
 import { TaskLayout } from '@/components/Task/Layout'
 import { getTask } from '@/lib/api/queries/getTask'
 
-export default async function AssessmentTask({
-  params
-}: {
-  params: { assessmentId: string; task: string[] }
-}) {
+export default async function AssessmentTask(
+  props: PageProps<'/assessments/[assessmentId]/[...task]'>
+) {
+  const params = await props.params
   const assessmentId = params.assessmentId
   const taskPath = params.task
 

@@ -6,8 +6,9 @@ import { badRequest, json, unauthorized } from '@/utils/apiResponse'
 
 export async function GET(
   _: NextRequest,
-  { params }: { params: { taskId: string } }
+  ctx: RouteContext<'/api/bookmarks/[taskId]'>
 ) {
+  const params = await ctx.params
   const user = await getServerUser()
 
   if (!user || !user.id) {
@@ -34,8 +35,9 @@ export async function GET(
 
 export async function POST(
   _: NextRequest,
-  { params }: { params: { taskId: string } }
+  ctx: RouteContext<'/api/bookmarks/[taskId]'>
 ) {
+  const params = await ctx.params
   const user = await getServerUser()
 
   if (!user || !user.id) {
@@ -60,8 +62,9 @@ export async function POST(
 
 export async function DELETE(
   _: NextRequest,
-  { params }: { params: { taskId: string } }
+  ctx: RouteContext<'/api/bookmarks/[taskId]'>
 ) {
+  const params = await ctx.params
   const user = await getServerUser()
 
   if (!user || !user.id) {

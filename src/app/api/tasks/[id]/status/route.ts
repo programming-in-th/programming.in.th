@@ -11,8 +11,9 @@ import {
 
 export async function PATCH(
   _: NextRequest,
-  { params }: { params: { id: string } }
+  ctx: RouteContext<'/api/tasks/[id]/status'>
 ) {
+  const params = await ctx.params
   const user = await getServerUser()
 
   if (!user) {
