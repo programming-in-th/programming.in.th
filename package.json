@@ -124,6 +124,6 @@
     "tailwindcss": "3.4.5",
     "ts-node": "10.9.2",
     "typescript": "5.5.3",
-    "vitest": "2.0.3"
+    "vitest": "2.1.9"
   }
 }
