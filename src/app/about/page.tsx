@@ -2,8 +2,6 @@ import { Metadata } from 'next'
 
 import Image from 'next/image'
 
-import { PoweredByVercel } from '@/components/RootLayout/PoweredByVercel'
-
 import { ContributorSection } from './ContributorSection'
 import { CoreTeamSection } from './CoreTeamSection'
 import { Contributor, OrgMember } from './types'
@@ -74,7 +72,6 @@ export default async function About() {
         />
 
         <div className="flex items-center justify-center gap-8">
-          <PoweredByVercel />
           <Image
             src="/assets/img/IPST_Logo.png"
             height="34"

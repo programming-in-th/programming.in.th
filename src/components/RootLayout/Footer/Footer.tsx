@@ -8,7 +8,6 @@ import { DiscordLogo, FacebookLogo, GitHubLogo } from '@/svg/Socials'
 import { FooterJoin } from './FooterJoin'
 import { ThemeSwitch } from './ThemeSwitch'
 import { FooterLinks } from '../Links/FooterLinks'
-import { PoweredByVercel } from '../PoweredByVercel'
 
 export const Footer = () => {
   const currentYear = useMemo(() => +new Date().getFullYear(), [])
@@ -86,7 +85,6 @@ export const Footer = () => {
               <ThemeSwitch />
             </div>
             <div className="my-4 flex items-center justify-center md:my-0">
-              <PoweredByVercel />
               <div className="flex h-full items-center">
                 <Image
                   src="/assets/img/IPST_Logo.png"

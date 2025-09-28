@@ -2,8 +2,6 @@
 
 # programming.in.th
 
-[![Powered by Vercel](https://images.ctfassets.net/e5382hct74si/78Olo8EZRdUlcDUFQvnzG7/fa4cdb6dc04c40fceac194134788a0e2/1618983297-powered-by-vercel.svg)](https://vercel.com/?utm_source=proginth&utm_campaign=oss)
-
 ## What is programming.in.th
 
 A website for practicing algorithms, data structures and competitive programming. Includes all the resources you need to go from 0 to 1 in algorithms and data structures.
