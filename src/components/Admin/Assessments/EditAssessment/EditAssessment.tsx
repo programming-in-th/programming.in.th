@@ -1,6 +1,11 @@
 import { Fragment, useEffect, useState } from 'react'
 
-import { Dialog, Transition } from '@headlessui/react'
+import {
+  Dialog,
+  DialogPanel,
+  Transition,
+  TransitionChild
+} from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Task } from '@prisma/client'
 import { useForm } from 'react-hook-form'
@@ -113,7 +118,7 @@ const SubmitForm = ({
         (pre, user) => ({
           ...pre,
           [`assign-${user.id}`]:
-            assessment?.users.map(user => user.userId).includes(user.id) ||
+            assessment?.users.map(asUser => asUser.userId).includes(user.id) ||
             false
         }),
         {}
@@ -122,7 +127,7 @@ const SubmitForm = ({
         (pre, user) => ({
           ...pre,
           [`assignOwn-${user.id}`]:
-            assessment?.owners.map(user => user.userId).includes(user.id) ||
+            assessment?.owners.map(owner => owner.userId).includes(user.id) ||
             false
         }),
         {}
@@ -185,9 +190,9 @@ export default function EditAssessment({
   )
 
   return (
-    <Transition.Root show={open} as={Fragment}>
+    <Transition show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
-        <Transition.Child
+        <TransitionChild
           as={Fragment}
           enter="ease-in-out duration-500"
           enterFrom="opacity-0"
@@ -197,12 +202,12 @@ export default function EditAssessment({
           leaveTo="opacity-0"
         >
           <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity dark:bg-slate-700 dark:bg-opacity-75" />
-        </Transition.Child>
+        </TransitionChild>
 
         <div className="fixed inset-0 overflow-hidden">
           <div className="absolute inset-0 overflow-hidden">
             <div className="pointer-events-none fixed inset-y-0 right-0 flex max-w-full pl-10">
-              <Transition.Child
+              <TransitionChild
                 as={Fragment}
                 enter="transform transition ease-in-out duration-500 sm:duration-700"
                 enterFrom="translate-x-full"
@@ -211,8 +216,8 @@ export default function EditAssessment({
                 leaveFrom="translate-x-0"
                 leaveTo="translate-x-full"
               >
-                <Dialog.Panel className="pointer-events-auto relative w-screen max-w-7xl">
-                  <Transition.Child
+                <DialogPanel className="pointer-events-auto relative w-screen max-w-7xl">
+                  <TransitionChild
                     as={Fragment}
                     enter="ease-in-out duration-500"
                     enterFrom="opacity-0"
@@ -231,19 +236,19 @@ export default function EditAssessment({
                         <XMarkIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
                     </div>
-                  </Transition.Child>
+                  </TransitionChild>
                   <SubmitForm
                     assessment={assessment}
                     tasks={tasks}
                     setOpen={setOpen}
                     users={users}
                   />
-                </Dialog.Panel>
-              </Transition.Child>
+                </DialogPanel>
+              </TransitionChild>
             </div>
           </div>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
   )
 }

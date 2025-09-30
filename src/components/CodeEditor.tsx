@@ -4,12 +4,10 @@ import { cpp } from '@codemirror/lang-cpp'
 import { java } from '@codemirror/lang-java'
 import { python } from '@codemirror/lang-python'
 import { rust } from '@codemirror/lang-rust'
-import { StreamLanguage } from '@codemirror/language'
-import { go } from '@codemirror/legacy-modes/mode/go'
 import { dracula } from '@uiw/codemirror-theme-dracula'
 import { ReactCodeMirrorProps, useCodeMirror } from '@uiw/react-codemirror'
 
-const extensions = [cpp(), python(), java(), rust(), StreamLanguage.define(go)]
+const extensions = [cpp(), python(), java(), rust()]
 
 const CodeEditor = (
   props: {
