@@ -135,8 +135,8 @@ importers:
         specifier: 14.3.8
         version: 14.3.8(react@19.1.1)
       react-hook-form:
-        specifier: 7.52.1
-        version: 7.52.1(react@19.1.1)
+        specifier: 7.63.0
+        version: 7.63.0(react@19.1.1)
       react-hot-toast:
         specifier: 2.6.0
         version: 2.6.0(react-dom@19.1.1(react@19.1.1))(react@19.1.1)
@@ -4651,9 +4651,9 @@ packages:
     peerDependencies:
       react: '>= 16.8 || 18.0.0'
 
-  react-hook-form@7.52.1:
-    resolution: {integrity: sha512-uNKIhaoICJ5KQALYZ4TOaOLElyM+xipord+Ha3crEFhTntdLvWZqVY49Wqd/0GiVCA/f9NjemLeiNPjG7Hpurg==}
-    engines: {node: '>=12.22.0'}
+  react-hook-form@7.63.0:
+    resolution: {integrity: sha512-ZwueDMvUeucovM2VjkCf7zIHcs1aAlDimZu2Hvel5C5907gUzMpm4xCrQXtRzCvsBqFjonB4m3x4LzCFI1ZKWA==}
+    engines: {node: '>=18.0.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18 || ^19
 
@@ -11022,7 +11022,7 @@ snapshots:
       prop-types: 15.8.1
       react: 19.1.1
 
-  react-hook-form@7.52.1(react@19.1.1):
+  react-hook-form@7.63.0(react@19.1.1):
     dependencies:
       react: 19.1.1
 
