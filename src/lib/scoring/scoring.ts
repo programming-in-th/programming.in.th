@@ -1,12 +1,11 @@
-import { Submission } from '@prisma/client'
-
+import { SubmissionModel } from '@/prisma/models'
 import { IGroup } from '@/types/submissions'
 
-export function bestSubmission(submissions: Submission[]) {
+export function bestSubmission(submissions: SubmissionModel[]) {
   return Math.max(...submissions.map(submission => submission.score), 0)
 }
 
-export function sumSubtask(submissions: Submission[]) {
+export function sumSubtask(submissions: SubmissionModel[]) {
   if (submissions.length === 0) return 0
 
   const bestSubtask = (submissions[0].groups as unknown as IGroup[]).map(

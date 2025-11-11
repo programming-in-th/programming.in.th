@@ -1,7 +1,7 @@
-import { Prisma, PrismaClient } from '@prisma/client'
-const prisma = new PrismaClient()
+import prisma from '@/lib/prisma'
+import { TaskCreateManyInput } from '@/prisma/models'
 
-const data: Prisma.TaskCreateManyInput[] = [
+const data: TaskCreateManyInput[] = [
   {
     fullScore: 100,
     private: false,

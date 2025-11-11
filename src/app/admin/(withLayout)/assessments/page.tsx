@@ -2,12 +2,12 @@
 
 import { useState } from 'react'
 
-import { Task } from '@prisma/client'
 import useSWR from 'swr'
 
 import Card from '@/components/Admin/Assessments/Card'
 import EditAssessment from '@/components/Admin/Assessments/EditAssessment/EditAssessment'
 import fetcher from '@/lib/fetcher'
+import { TaskModel } from '@/prisma/models'
 import { IAssessment } from '@/types/assessments'
 import { IUser } from '@/types/users'
 
@@ -18,7 +18,7 @@ export default function Assessments() {
   )
 
   const [openCreate, setOpenCreate] = useState<boolean>(false)
-  const { data: tasks } = useSWR<Task[]>('/api/tasks', fetcher)
+  const { data: tasks } = useSWR<TaskModel[]>('/api/tasks', fetcher)
   const { data: users } = useSWR<IUser[]>('/api/users', fetcher)
 
   return (

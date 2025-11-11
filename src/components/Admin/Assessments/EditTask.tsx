@@ -2,7 +2,8 @@ import { Fragment } from 'react'
 
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { Task } from '@prisma/client'
+
+import { TaskModel } from '@/prisma/models'
 
 import { SubmitContext } from './EditTaskContext'
 import SubmitComponent from './SubmitComponent'
@@ -14,7 +15,7 @@ export default function EditTask({
 }: {
   open: boolean
   setOpen: (_: boolean) => void
-  task?: Task
+  task?: TaskModel
 }) {
   return (
     <Transition.Root show={open} as={Fragment}>

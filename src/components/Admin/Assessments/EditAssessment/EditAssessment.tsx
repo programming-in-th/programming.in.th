@@ -7,12 +7,12 @@ import {
   TransitionChild
 } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { Task } from '@prisma/client'
 import { useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import useSWR, { mutate } from 'swr'
 
 import fetcher from '@/lib/fetcher'
+import { TaskModel } from '@/prisma/models'
 import { IAssessmentTask } from '@/types/assessments'
 import { IUser } from '@/types/users'
 
@@ -28,7 +28,7 @@ const SubmitForm = ({
   users
 }: {
   assessment: IAdminAssessment | undefined
-  tasks: Task[]
+  tasks: TaskModel[]
   setOpen: (_: boolean) => void
   users: IUser[]
 }) => {
@@ -180,7 +180,7 @@ export default function EditAssessment({
 }: {
   open: boolean
   setOpen: (_: boolean) => void
-  tasks: Task[]
+  tasks: TaskModel[]
   assessmentId?: string
   users: IUser[]
 }) {

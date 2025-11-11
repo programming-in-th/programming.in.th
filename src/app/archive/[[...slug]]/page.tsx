@@ -2,8 +2,6 @@ import { Metadata } from 'next'
 
 import { notFound } from 'next/navigation'
 
-import { Prisma } from '@prisma/client'
-
 import Breadcrumb from '@/components/Archive/Breadcrumb'
 import CategoryList from '@/components/Archive/CategoryList'
 import TaskList from '@/components/Archive/TaskList'
@@ -45,9 +43,8 @@ export default async function Archive(
 }
 
 async function getSolved() {
-  const rawSolved = await prisma.$queryRaw(
-    Prisma.sql`SELECT COUNT(DISTINCT submission.user_id), submission.task_id FROM submission INNER JOIN task ON submission.task_id = task.id WHERE submission.score = task.full_score GROUP BY submission.task_id`
-  )
+  const rawSolved =
+    await prisma.$queryRaw`SELECT COUNT(DISTINCT submission.user_id), submission.task_id FROM submission INNER JOIN task ON submission.task_id = task.id WHERE submission.score = task.full_score GROUP BY submission.task_id`
 
   return JSON.parse(
     JSON.stringify(rawSolved, (_, v) =>

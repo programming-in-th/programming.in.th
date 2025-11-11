@@ -1,8 +1,8 @@
 import { useMemo, useState } from 'react'
 
-import { Task } from '@prisma/client'
 import clsx from 'clsx'
 
+import { TaskModel } from '@/prisma/models'
 import { IAssessmentTask } from '@/types/assessments'
 
 const TaskCard = ({
@@ -37,11 +37,11 @@ export const MiddleBar = ({
   selectedTasks,
   toggleTask
 }: {
-  tasks: Task[]
+  tasks: TaskModel[]
   selectedTasks: Omit<IAssessmentTask, 'fullScore'>[]
   toggleTask: (_id: string, _title: string) => void
 }) => {
-  const [filteredTasks, setFilteredTasks] = useState<Task[]>(tasks)
+  const [filteredTasks, setFilteredTasks] = useState<TaskModel[]>(tasks)
   const privateTask = useMemo(
     () => filteredTasks.filter(task => task.private),
     [filteredTasks]

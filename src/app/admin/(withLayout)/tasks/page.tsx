@@ -4,15 +4,15 @@ import { useMemo, useState } from 'react'
 
 import Link from 'next/link'
 
-import { Task } from '@prisma/client'
 import toast from 'react-hot-toast'
 import useSWR, { mutate } from 'swr'
 
 import EditTask from '@/components/Admin/Assessments/EditTask'
 import VerifyDelete from '@/components/Admin/Assessments/VerifyDelete'
 import fetcher from '@/lib/fetcher'
+import { TaskModel } from '@/prisma/models'
 
-const TaskCard = ({ task }: { task: Task }) => {
+const TaskCard = ({ task }: { task: TaskModel }) => {
   const [openEdit, setOpenEdit] = useState<boolean>(false)
   const [openDelete, setOpenDelete] = useState<boolean>(false)
   return (
@@ -129,7 +129,7 @@ const TaskCard = ({ task }: { task: Task }) => {
 }
 
 export default function AdminTasks() {
-  const { data: tasks } = useSWR<Task[]>('/api/tasks', fetcher)
+  const { data: tasks } = useSWR<TaskModel[]>('/api/tasks', fetcher)
 
   const [openNewTask, setOpenNewTask] = useState<boolean>(false)
 

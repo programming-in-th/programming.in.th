@@ -68,7 +68,7 @@ export async function GET(
 
   const payload = {
     ...submission,
-    code: await decompressCode(submission.code)
+    code: await decompressCode(Buffer.from(submission.code))
   }
 
   return json(payload)

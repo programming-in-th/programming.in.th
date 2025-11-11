@@ -7,11 +7,11 @@ import {
   MutableRefObject
 } from 'react'
 
-import { Task } from '@prisma/client'
 import { SubmitHandler, UseFormRegister, useForm } from 'react-hook-form'
 import toast from 'react-hot-toast'
 import { mutate } from 'swr'
 
+import { TaskModel } from '@/prisma/models'
 import getFilePath from '@/utils/getFilePath'
 import uploadFile from '@/utils/uploadFile'
 
@@ -33,7 +33,7 @@ interface ISubmitContext {
   setSingleFile: (value: boolean) => void
   isSubmitting: boolean
   displayFiles: IDisplayFile[]
-  task: Task | undefined
+  task: TaskModel | undefined
   singleFile: boolean
   closedBar: () => void
   changeFile: (files: File[]) => void
@@ -75,7 +75,7 @@ const Context = createContext<ISubmitContext>({
 })
 
 export const SubmitContext: React.FC<{
-  task: Task | undefined
+  task: TaskModel | undefined
   children?: React.ReactNode
   closedBar: () => void
 }> = ({ children, task, closedBar }) => {

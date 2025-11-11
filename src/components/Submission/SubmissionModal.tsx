@@ -3,12 +3,12 @@ import { Fragment, useEffect, useRef, useState, type JSX } from 'react'
 import Link from 'next/link'
 
 import { Dialog, Transition } from '@headlessui/react'
-import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import dayjs from 'dayjs'
 import useSWR from 'swr'
 
 import fetcher from '@/lib/fetcher'
+import { TaskModel } from '@/prisma/models'
 import { IGeneralSubmission, IListSubmission } from '@/types/submissions'
 import { getDisplayNameFromGrader } from '@/utils/language'
 
@@ -19,7 +19,10 @@ const getColumn = (): {
   title: string
   field: string
   width: string
-  child: (sub: IGeneralSubmission | IListSubmission, task: Task) => JSX.Element
+  child: (
+    sub: IGeneralSubmission | IListSubmission,
+    task: TaskModel
+  ) => JSX.Element
 }[] => [
   {
     title: 'Time',
@@ -139,7 +142,7 @@ export const SubmissionModal = ({
   open: boolean
   setOpen: (_open: boolean) => void
   id: number
-  task: Task
+  task: TaskModel
 }) => {
   const closeButtonRef = useRef(null)
 

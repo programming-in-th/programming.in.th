@@ -5,14 +5,14 @@ import { useEffect, useState } from 'react'
 
 import Link from 'next/link'
 
-import { Task } from '@prisma/client'
 import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote'
 import useSWR from 'swr'
 
 import components from '@/components/common/MDXComponents'
 import fetcher from '@/lib/fetcher'
+import { TaskModel } from '@/prisma/models'
 
-const StatementTab = ({ task }: { task: Task }) => {
+const StatementTab = ({ task }: { task: TaskModel }) => {
   const { data: mdStatement } = useSWR<MDXRemoteSerializeResult>(
     task.statement === 'MARKDOWN' ? `/api/tasks/${task.id}/statement` : null,
     fetcher

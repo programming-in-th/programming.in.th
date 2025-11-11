@@ -5,13 +5,13 @@ import { useMemo } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
-import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 
 import { PieChart } from '@/components/common/PieChart'
 import fetcher from '@/lib/fetcher'
+import { TaskModel } from '@/prisma/models'
 import { IListSubmission } from '@/types/submissions'
 
 import { Attachment } from './Attachment'
@@ -67,7 +67,7 @@ export const SideBar = ({
   type,
   assessmentId
 }: {
-  task: Task
+  task: TaskModel
   type: string
   assessmentId?: string
 }) => {

@@ -1,6 +1,5 @@
-import { Task } from '@prisma/client'
-
 import { getServerUser } from '@/lib/session'
+import { TaskModel } from '@/prisma/models'
 
 import { SubmitElement } from '../SubmitElement'
 
@@ -8,7 +7,7 @@ const SubmitTab = async ({
   task,
   assessmentId
 }: {
-  task: Task
+  task: TaskModel
   assessmentId?: string
 }) => {
   const user = await getServerUser()

@@ -4,10 +4,10 @@ import { useEffect, useState } from 'react'
 
 import { useRouter } from 'next/navigation'
 
-import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import { mutate } from 'swr'
 
+import { TaskModel } from '@/prisma/models'
 import { getFileExtension } from '@/utils/getFileExtension'
 import { getLanguageFromExtension, languageData } from '@/utils/language'
 
@@ -18,7 +18,7 @@ export const SubmitElement = ({
   task,
   assessmentId
 }: {
-  task: Task
+  task: TaskModel
   assessmentId?: string
 }) => {
   const [file, setFile] = useState<File>()

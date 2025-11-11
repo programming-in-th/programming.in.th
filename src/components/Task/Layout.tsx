@@ -1,8 +1,7 @@
 import { ReactNode } from 'react'
 
-import { Task } from '@prisma/client'
-
 import { Title } from '@/components/Task/Title'
+import { TaskModel } from '@/prisma/models'
 
 import { SideBar } from './SideBar'
 
@@ -12,7 +11,7 @@ export function TaskLayout({
   assessmentId,
   children
 }: {
-  task: Task
+  task: TaskModel
   type: string
   assessmentId?: string
   children: ReactNode

@@ -1,0 +1,5 @@
+node_modules
+build
+.next
+out
+src/generated

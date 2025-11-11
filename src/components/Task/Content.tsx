@@ -1,7 +1,8 @@
 import 'server-only'
 
-import { Task } from '@prisma/client'
 import { MDXRemoteSerializeResult } from 'next-mdx-remote'
+
+import { TaskModel } from '@/prisma/models'
 
 import SolutionTab from './Tabs/Solution'
 import StatementTab from './Tabs/Statement'
@@ -10,7 +11,7 @@ import SubmitTab from './Tabs/Submit'
 
 const component = (
   type: string,
-  task: Task,
+  task: TaskModel,
   solution: MDXRemoteSerializeResult | null,
   assessmentId?: string
 ) => {
@@ -34,7 +35,7 @@ export const TaskContent = ({
   solution,
   assessmentId
 }: {
-  task: Task
+  task: TaskModel
   type: string
   solution: MDXRemoteSerializeResult | null
   assessmentId?: string

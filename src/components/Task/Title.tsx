@@ -2,18 +2,18 @@
 
 import { StarIcon as StarIconOutline } from '@heroicons/react/24/outline'
 import { StarIcon as StarIconSolid } from '@heroicons/react/24/solid'
-import { Task } from '@prisma/client'
 import clsx from 'clsx'
 import { useSession } from 'next-auth/react'
 import useSWR from 'swr'
 
 import fetcher from '@/lib/fetcher'
+import { TaskModel } from '@/prisma/models'
 
 export const Title = ({
   task,
   assessmentId
 }: {
-  task: Task
+  task: TaskModel
   assessmentId?: string
 }) => {
   const { status } = useSession()

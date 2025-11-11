@@ -1,9 +1,8 @@
 'use client'
 
-import { Task } from '@prisma/client'
-
 import { Card, Header } from '@/components/Submission/Card'
 import { useSSESubmissionData } from '@/lib/useSubmissionData'
+import { TaskModel } from '@/prisma/models'
 
 import SubmissionGroup from './Group'
 import Code from '../Code'
@@ -12,7 +11,7 @@ const Submission = ({
   task,
   submissionID
 }: {
-  task: Task
+  task: TaskModel
   submissionID: number
 }) => {
   const { submission, isLoading } = useSSESubmissionData(submissionID)

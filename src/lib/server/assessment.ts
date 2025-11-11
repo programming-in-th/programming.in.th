@@ -1,9 +1,8 @@
 import { notFound } from 'next/navigation'
 
-import { ScoringType } from '@prisma/client'
-
 import prisma from '@/lib/prisma'
 import { bestSubmission, sumSubtask } from '@/lib/scoring'
+import { ScoringType } from '@/prisma/enums'
 
 export async function getSubmissionsAndCalculateScore(
   assessmentId: string,

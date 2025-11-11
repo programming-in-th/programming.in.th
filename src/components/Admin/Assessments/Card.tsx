@@ -1,12 +1,12 @@
 import { useState } from 'react'
 
-import { Task } from '@prisma/client'
 import dayjs from 'dayjs'
 import toast from 'react-hot-toast'
 import useSWR, { mutate } from 'swr'
 
 import IsLink from '@/components/common/IsLink'
 import fetcher from '@/lib/fetcher'
+import { TaskModel } from '@/prisma/models'
 import { IAssessment } from '@/types/assessments'
 import { IUser } from '@/types/users'
 
@@ -20,7 +20,7 @@ const Card = ({
   assessment: IAssessment
   isLink?: boolean
 }) => {
-  const { data: tasks } = useSWR<Task[]>('/api/tasks', fetcher)
+  const { data: tasks } = useSWR<TaskModel[]>('/api/tasks', fetcher)
   const { data: users } = useSWR<IUser[]>('/api/users', fetcher)
 
   const [openEdit, setOpenEdit] = useState<boolean>(false)

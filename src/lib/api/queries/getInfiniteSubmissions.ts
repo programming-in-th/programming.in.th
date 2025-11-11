@@ -1,6 +1,5 @@
-import { Prisma } from '@prisma/client'
-
 import prisma from '@/lib/prisma'
+import { SubmissionWhereInput } from '@/prisma/models'
 import { IListSubmission } from '@/types/submissions'
 
 import { SubmissionFilterEnum as Filter } from '../schema/submissions'
@@ -16,7 +15,7 @@ export const getInfiniteSubmissions = async (
   limit?: number,
   cursor?: number,
   options?: filterOptions,
-  where?: Prisma.SubmissionWhereInput
+  where?: SubmissionWhereInput
 ): Promise<{ data: IListSubmission[]; nextCursor: number | null }> => {
   const submissions = await prisma.submission.findMany({
     take: limit,

@@ -1,16 +1,15 @@
 'use client'
 
-import { Task } from '@prisma/client'
-
 import { Card, Header } from '@/components/Submission/Card'
 import useSubmissionList from '@/lib/useSubmissionList'
+import { TaskModel } from '@/prisma/models'
 
 const SubmissionsTab = ({
   task,
   assessmentId,
   own
 }: {
-  task: Task
+  task: TaskModel
   assessmentId?: string
   own?: boolean
 }) => {
