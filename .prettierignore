@@ -5,3 +5,4 @@ pnpm-lock.yaml
 coverage
 node_modules
 test-results
+src/prisma
