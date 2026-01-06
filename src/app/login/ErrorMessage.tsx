@@ -2,9 +2,19 @@
 
 import { useSearchParams } from 'next/navigation'
 
-import { SignInErrorTypes } from 'next-auth/core/pages/signin'
+type SignInErrorTypes =
+  | 'Signin'
+  | 'OAuthSignin'
+  | 'OAuthCallback'
+  | 'OAuthCreateAccount'
+  | 'EmailCreateAccount'
+  | 'Callback'
+  | 'OAuthAccountNotLinked'
+  | 'EmailSignin'
+  | 'CredentialsSignin'
+  | 'SessionRequired'
+  | 'default'
 
-// Direct copy from https://github.com/nextauthjs/next-auth/blob/main/packages/next-auth/src/core/pages/signin.tsx
 const errors: Record<SignInErrorTypes, string> = {
   Signin: 'Try signing in with a different account.',
   OAuthSignin: 'Try signing in with a different account.',
