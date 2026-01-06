@@ -34,7 +34,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash -c 'cd /home/user/programming.in.th && if git diff --name-only HEAD 2>/dev/null | grep -qE \"\\.(ts|tsx)$\"; then echo \"[Reminder] TypeScript files changed. Consider running: pnpm check-types && pnpm lint && pnpm test\"; fi'"
+            "command": "bash -c 'cd \"$(git rev-parse --show-toplevel)\" && if git diff --name-only HEAD 2>/dev/null | grep -qE \"\\.(ts|tsx)$\"; then echo \"[Reminder] TypeScript files changed. Consider running: pnpm check-types && pnpm lint && pnpm test\"; fi'"
           }
         ]
       }
