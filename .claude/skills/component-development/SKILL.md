@@ -182,12 +182,18 @@ export function UserAvatar({ src, name }: { src: string; name: string }) {
 
 2. **Keyboard navigation**
 ```tsx
-<button
+{/* Native buttons handle Enter/Space automatically - just use onClick */}
+<button onClick={handleClick}>Submit</button>
+
+{/* For custom interactive elements, handle both Enter and Space */}
+<div
+  role="button"
+  tabIndex={0}
   onClick={handleClick}
-  onKeyDown={(e) => e.key === 'Enter' && handleClick()}
+  onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleClick()}
 >
-  Submit
-</button>
+  Custom Button
+</div>
 ```
 
 3. **ARIA attributes**
