@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(pnpm:*)",
+      "Bash(npm:*)",
+      "Bash(npx:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(git show:*)",
+      "Read",
+      "Glob",
+      "Grep",
+      "Skill"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'FILE=\"$CLAUDE_TOOL_ARG_file_path\"; if [[ \"$FILE\" == *.ts || \"$FILE\" == *.tsx ]]; then echo \"[Hook] TypeScript file modified: $FILE\"; fi'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash -c 'cd /home/user/programming.in.th && if git diff --name-only HEAD 2>/dev/null | grep -qE \"\\.(ts|tsx)$\"; then echo \"[Reminder] TypeScript files changed. Consider running: pnpm check-types && pnpm lint && pnpm test\"; fi'"
+          }
+        ]
+      }
+    ]
+  }
+}
