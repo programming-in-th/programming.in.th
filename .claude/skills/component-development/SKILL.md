@@ -216,7 +216,7 @@ export function UserAvatar({ src, name }: { src: string; name: string }) {
 ## Examples in Codebase
 
 Reference these existing components:
-- `src/components/TaskCard.tsx` - Basic component
 - `src/components/Code.tsx` - CodeMirror integration
-- `src/components/SubmitModal.tsx` - Form with React Hook Form
-- `src/components/NavBar.tsx` - Navigation with auth state
+- `src/components/Tasks/TaskItem.tsx` - Basic task card component
+- `src/components/Submission/SubmissionModal.tsx` - Modal with submission details
+- `src/components/RootLayout/Navbar/Navbar.tsx` - Navigation with auth state
