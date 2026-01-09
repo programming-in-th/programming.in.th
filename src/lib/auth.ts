@@ -1,7 +1,7 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import type { NextAuthOptions } from 'next-auth'
-import GithubProvider from 'next-auth/providers/github'
-import GoogleProvider from 'next-auth/providers/google'
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import NextAuth from 'next-auth'
+import GitHub from 'next-auth/providers/github'
+import Google from 'next-auth/providers/google'
 
 import prisma from '@/lib/prisma'
 
@@ -16,10 +16,10 @@ if (
   )
 }
 
-export const authOptions: NextAuthOptions = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    GithubProvider({
+    GitHub({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
       profile(profile) {
@@ -32,7 +32,7 @@ export const authOptions: NextAuthOptions = {
         }
       }
     }),
-    GoogleProvider({
+    Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       profile(profile) {
@@ -56,9 +56,9 @@ export const authOptions: NextAuthOptions = {
       user: {
         ...session.user,
         id: user.id,
-        username: user.username,
-        admin: user.admin
+        username: (user as { username?: string }).username,
+        admin: (user as { admin?: boolean }).admin
       }
     })
   }
-}
+})

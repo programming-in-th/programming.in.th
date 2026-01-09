@@ -1,23 +1,22 @@
 import { useEffect } from 'react'
 
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/navigation'
 
 import { useSession } from 'next-auth/react'
 
 function useRequireAdmin() {
-  const { data: session } = useSession()
+  const { data: session, status } = useSession()
 
   const router = useRouter()
 
-  // If auth.user is false that means we're not
-  // logged in and should redirect.
+  // Redirect based on auth status and admin role
   useEffect(() => {
-    if (!session && typeof session != 'undefined') {
-      router.push(`/login`)
-    } else if (session && !session.user.admin) {
-      router.push(`/`)
+    if (status === 'unauthenticated') {
+      router.push('/login')
+    } else if (status === 'authenticated' && !session?.user.admin) {
+      router.push('/')
     }
-  }, [session, router])
+  }, [status, session, router])
 
   return session
 }
