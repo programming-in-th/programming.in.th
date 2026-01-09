@@ -9,7 +9,8 @@ if (
   !process.env.GITHUB_ID ||
   !process.env.GITHUB_SECRET ||
   !process.env.GOOGLE_CLIENT_ID ||
-  !process.env.GOOGLE_CLIENT_SECRET
+  !process.env.GOOGLE_CLIENT_SECRET ||
+  !process.env.AUTH_SECRET
 ) {
   throw new Error(
     'Failed to initialize authentication: Environment Variable Missing'
@@ -56,8 +57,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       user: {
         ...session.user,
         id: user.id,
-        username: (user as { username?: string }).username,
-        admin: (user as { admin?: boolean }).admin
+        username: user.username,
+        admin: user.admin
       }
     })
   }
