@@ -1,7 +1,7 @@
-import { PrismaAdapter } from '@next-auth/prisma-adapter'
-import type { NextAuthOptions } from 'next-auth'
-import GithubProvider from 'next-auth/providers/github'
-import GoogleProvider from 'next-auth/providers/google'
+import { PrismaAdapter } from '@auth/prisma-adapter'
+import NextAuth from 'next-auth'
+import GitHub from 'next-auth/providers/github'
+import Google from 'next-auth/providers/google'
 
 import prisma from '@/lib/prisma'
 
@@ -9,17 +9,18 @@ if (
   !process.env.GITHUB_ID ||
   !process.env.GITHUB_SECRET ||
   !process.env.GOOGLE_CLIENT_ID ||
-  !process.env.GOOGLE_CLIENT_SECRET
+  !process.env.GOOGLE_CLIENT_SECRET ||
+  !process.env.AUTH_SECRET
 ) {
   throw new Error(
     'Failed to initialize authentication: Environment Variable Missing'
   )
 }
 
-export const authOptions: NextAuthOptions = {
+export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    GithubProvider({
+    GitHub({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
       profile(profile) {
@@ -32,7 +33,7 @@ export const authOptions: NextAuthOptions = {
         }
       }
     }),
-    GoogleProvider({
+    Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
       profile(profile) {
@@ -61,4 +62,4 @@ export const authOptions: NextAuthOptions = {
       }
     })
   }
-}
+})
