@@ -1,37 +1,51 @@
 ---
 name: api-development
-description: Use when creating or modifying Next.js API routes. Ensures proper Zod validation, auth checks, error handling, and performance patterns.
+description: Use when creating or modifying Elysia API routes. Ensures proper validation with t schema, auth guards, error handling, and performance patterns.
 allowed-tools: Read, Edit, Write, Glob, Grep, Bash
 ---
 
-API routes in `src/app/api/` must follow these patterns:
+API routes use [Elysia](https://elysiajs.com) with TypeBox validation:
 
 ```typescript
-import { z } from 'zod'
-import { getServerUser } from '@/lib/session'
+import { Elysia, t } from 'elysia'
 import { prisma } from '@/lib/prisma'
 
-const Schema = z.object({ id: z.string(), limit: z.coerce.number().default(10) })
-
-export async function GET(request: Request) {
-  // 1. Auth check
-  const user = await getServerUser()
-  if (!user) return Response.json({ error: 'Unauthorized' }, { status: 401 })
-  if (!user.admin) return Response.json({ error: 'Forbidden' }, { status: 403 })
-
-  // 2. Validate input
-  const result = Schema.safeParse(Object.fromEntries(new URL(request.url).searchParams))
-  if (!result.success) return Response.json({ error: 'Invalid' }, { status: 400 })
-
-  // 3. Query with selective fields + pagination
-  const data = await prisma.task.findMany({
-    where: { private: false },
-    select: { id: true, title: true },
-    take: result.data.limit
+const app = new Elysia()
+  .get('/tasks/:id', async ({ params, query, status }) => {
+    const task = await prisma.task.findUnique({
+      where: { id: params.id },
+      select: { id: true, title: true }
+    })
+    if (!task) return status(404, { error: 'Not found' })
+    return task
+  }, {
+    params: t.Object({ id: t.String() }),
+    query: t.Object({
+      limit: t.Optional(t.Numeric({ default: 10 }))
+    })
   })
-
-  return Response.json(data)
-}
+  .post('/tasks', async ({ body, status }) => {
+    const task = await prisma.task.create({ data: body })
+    return status(201, task)
+  }, {
+    body: t.Object({
+      title: t.String({ minLength: 1 }),
+      fullScore: t.Number({ minimum: 0 })
+    })
+  })
 ```
 
-**Checklist**: Zod validation, auth check, selective fields, pagination, consistent errors (400/401/403/404/500).
+**Auth guard pattern**:
+```typescript
+.derive(async ({ headers, status }) => {
+  const user = await getUser(headers.authorization)
+  if (!user) return status(401, { error: 'Unauthorized' })
+  return { user }
+})
+.get('/admin', ({ user, status }) => {
+  if (!user.admin) return status(403, { error: 'Forbidden' })
+  return 'admin only'
+})
+```
+
+**Checklist**: `t.Object` validation, auth derive/guard, selective Prisma fields, pagination, `status()` for errors.
