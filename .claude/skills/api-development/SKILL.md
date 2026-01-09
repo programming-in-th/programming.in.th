@@ -12,6 +12,7 @@ import { prisma } from '@/lib/prisma'
 
 const app = new Elysia()
   .get('/tasks/:id', async ({ params, query, status }) => {
+    const limit = query.limit ?? 10
     const task = await prisma.task.findUnique({
       where: { id: params.id },
       select: { id: true, title: true }
@@ -20,9 +21,7 @@ const app = new Elysia()
     return task
   }, {
     params: t.Object({ id: t.String() }),
-    query: t.Object({
-      limit: t.Optional(t.Numeric({ default: 10 }))
-    })
+    query: t.Object({ limit: t.Optional(t.Numeric()) })
   })
   .post('/tasks', async ({ body, status }) => {
     const task = await prisma.task.create({ data: body })
