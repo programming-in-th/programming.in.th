@@ -4,32 +4,18 @@ description: Use when modifying Prisma schema or database queries. Ensures prope
 allowed-tools: Read, Edit, Write, Glob, Grep, Bash
 ---
 
-Schema at `prisma/schema.prisma`. Always import from `@/lib/prisma`.
+See [Database patterns](../../docs/database-patterns.md) for full reference.
 
 **Schema changes**:
 ```bash
-# Edit schema, then:
 pnpm prisma migrate dev --name descriptive_name
 pnpm check-types
 ```
 
-**Query patterns**:
-```typescript
-// Always select specific fields
-const tasks = await prisma.task.findMany({
-  where: { private: false },
-  select: { id: true, title: true },
-  take: 10, skip: 0  // Always paginate
-})
+**Query rules**:
+- Always `import { prisma } from '@/lib/prisma'`
+- Always use `select` for specific fields
+- Always paginate with `take`/`skip`
+- Avoid N+1: use `include` or batch with `where: { id: { in: ids } }`
 
-// Avoid N+1 - use include or batch queries
-const tasks = await prisma.task.findMany({ include: { tags: true } })
-// OR
-const submissions = await prisma.submission.findMany({
-  where: { taskId: { in: taskIds } }
-})
-```
-
-**Indexes**: Add `@@index([field])` for WHERE/ORDER BY columns.
-
-**Models**: User, Task, Submission, Assessment, Category, Tag, Bookmark.
+**Models**: User, Task, Submission, Assessment, Category, Tag, Bookmark
