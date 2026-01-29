@@ -106,7 +106,7 @@
     "@vitest/coverage-v8": "3.2.4",
     "autoprefixer": "10.4.21",
     "dotenv-cli": "10.0.0",
-    "eslint": "8.57.0",
+    "eslint": "9.26.0",
     "eslint-config-next": "15.5.5",
     "eslint-config-prettier": "9.1.0",
     "eslint-plugin-import": "2.32.0",
