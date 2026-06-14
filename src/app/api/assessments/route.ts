@@ -3,7 +3,7 @@ import { NextRequest } from 'next/server'
 import { CreateAssessmentSchema } from '@/lib/api/schema/assessment'
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
-import { badRequest, json, unauthorized } from '@/utils/apiResponse'
+import { badRequest, forbidden, json, unauthorized } from '@/utils/apiResponse'
 import removeArrDup from '@/utils/removeArrDup'
 
 export async function GET() {
@@ -35,6 +35,7 @@ export async function POST(req: NextRequest) {
 
   if (!user) return unauthorized()
   if (!user.id) return unauthorized('User ID not found')
+  if (!user.admin) return forbidden()
 
   const parsedBody = CreateAssessmentSchema.safeParse(await req.json())
 

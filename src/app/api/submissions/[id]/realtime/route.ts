@@ -20,6 +20,7 @@ export async function GET(
       status: true,
       score: true,
       groups: true,
+      userId: true,
 
       task: {
         select: {
@@ -43,11 +44,16 @@ export async function GET(
     if (!(await checkUserPermissionOnTask(user, submission.task.id))) {
       return forbidden()
     }
+
+    if (!user.admin && submission.userId !== user.id) {
+      return forbidden()
+    }
   }
 
   const payload: DeepPartial<typeof submission> = submission
 
   delete payload.task
+  delete payload.userId
 
   return json(payload)
 }
