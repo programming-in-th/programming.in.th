@@ -29,7 +29,7 @@ export default withBundleAnalyzer({
             key: 'Content-Security-Policy',
             value: [
               "default-src 'self'",
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+              "script-src 'self' 'unsafe-inline'",
               "style-src 'self' 'unsafe-inline'",
               "img-src 'self' data: https://lh3.googleusercontent.com https://avatars.githubusercontent.com",
               "connect-src 'self'",
