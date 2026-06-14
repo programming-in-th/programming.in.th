@@ -7,7 +7,13 @@ export const IndividualTaskSchema = z.object({ id: z.string().min(1) })
 
 export type IndividualTaskSchema = z.infer<typeof IndividualTaskSchema>
 
-const FilePath = z.object({ path: z.string().min(1), type: z.string() })
+const FilePath = z.object({
+  path: z
+    .string()
+    .min(1)
+    .regex(/^[a-zA-Z0-9._-]+$/, 'Invalid file path'),
+  type: z.string()
+})
 
 export const TaskSchema = z.object({
   id: z.string().min(1),

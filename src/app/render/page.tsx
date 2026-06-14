@@ -20,6 +20,10 @@ export default function Render() {
       method: 'POST',
       body: JSON.stringify({ content: md })
     })
+    if (!res.ok) {
+      setLoading(false)
+      return
+    }
     setRendered(await res.json())
     setLoading(false)
   }
