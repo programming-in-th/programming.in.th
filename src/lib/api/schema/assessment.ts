@@ -28,3 +28,9 @@ export const CreateAssessmentSchema = z.object({
 })
 
 export type CreateAssessmentSchema = z.infer<typeof CreateAssessmentSchema>
+
+// The id is used as a URL path segment; only enforced on create so existing
+// assessments stay editable.
+export const NewAssessmentSchema = CreateAssessmentSchema.extend({
+  id: z.string().regex(/^[\w-]+$/)
+})
