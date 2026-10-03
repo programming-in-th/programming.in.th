@@ -129,8 +129,6 @@ export async function DELETE(
   const params = await props.params
   const id = params.id
 
-  console.log(id)
-
   const user = await getServerUser()
 
   if (!user) {
