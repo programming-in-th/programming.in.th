@@ -28,7 +28,7 @@ export interface IAssessmentForm {
 
 interface ISubmitContext {
   register: UseFormRegister<IAssessmentForm> | undefined
-  handleSubmit: () => Promise<void>
+  handleSubmit: () => Promise<unknown>
   inputRef: MutableRefObject<HTMLInputElement | null>
   setSingleFile: (value: boolean) => void
   isSubmitting: boolean

@@ -54,14 +54,12 @@ export async function GET(
     if (!user) return unauthorized()
     if (!user.id) return unauthorized('User ID not found')
 
-    if (
-      !(
-        ((await checkUserPermissionOnTask(user, submission.task.id)) &&
-          submission?.user?.id === user.id) ||
-        user.admin ||
-        (await checkOwnerPermissionOnAssessment(user, submission.assessmentId))
-      )
-    ) {
+    if (!(
+      ((await checkUserPermissionOnTask(user, submission.task.id)) &&
+        submission?.user?.id === user.id) ||
+      user.admin ||
+      (await checkOwnerPermissionOnAssessment(user, submission.assessmentId))
+    )) {
       return forbidden()
     }
   }
