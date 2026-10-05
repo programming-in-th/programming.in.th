@@ -1,8 +1,7 @@
 import { notFound } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
-import checkOwnerPermissionOnAssessment from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
-import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
+import checkUserPermissionOnSubmission from '@/lib/api/queries/checkUserPermissionOnSubmission'
 import { decompressCode } from '@/lib/codeTransformer'
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
@@ -40,7 +39,8 @@ export async function GET(
         }
       },
       code: true,
-      assessmentId: true
+      assessmentId: true,
+      private: true
     }
   })
 
@@ -48,25 +48,27 @@ export async function GET(
     return notFound()
   }
 
-  if (submission.task?.private) {
+  if (submission.task.private || submission.private) {
     const user = await getServerUser()
 
     if (!user) return unauthorized()
     if (!user.id) return unauthorized('User ID not found')
 
-    if (!(
-      ((await checkUserPermissionOnTask(user, submission.task.id)) &&
-        submission?.user?.id === user.id) ||
-      user.admin ||
-      (await checkOwnerPermissionOnAssessment(user, submission.assessmentId))
-    )) {
+    if (
+      !(await checkUserPermissionOnSubmission(user, {
+        userId: submission.user?.id,
+        taskId: submission.task.id,
+        assessmentId: submission.assessmentId
+      }))
+    ) {
       return forbidden()
     }
   }
 
+  const { private: _private, ...rest } = submission
   const payload = {
-    ...submission,
-    code: await decompressCode(Buffer.from(submission.code))
+    ...rest,
+    code: await decompressCode(Buffer.from(rest.code))
   }
 
   return json(payload)

@@ -56,6 +56,7 @@ const checkUserPermissionOnTask = async (
       userId: user.id,
       assessment: {
         archived: false,
+        open: { lte: new Date() },
         tasks: {
           some: { taskId: { equals: taskId } }
         }

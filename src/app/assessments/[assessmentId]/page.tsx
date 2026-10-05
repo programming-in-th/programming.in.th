@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation'
 
 import AssessmentCard from '@/components/Assessment/AssessmentCard'
 import { Unauthorized } from '@/components/Unauthorized'
+import { checkUserPermissionOnAssessment } from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
 import { MDXRemote } from '@/lib/mdx'
 import prisma from '@/lib/prisma'
 import { mdxToHtml } from '@/lib/renderMarkdown'
@@ -58,6 +59,10 @@ export default async function Assessment(
 
   const user = await getServerUser()
   if (!user?.id) return <Unauthorized />
+
+  if (!(await checkUserPermissionOnAssessment(user, assessmentId))) {
+    return notFound()
+  }
 
   const prismaAssessment = await prisma.assessment.findUnique({
     where: { id: assessmentId },

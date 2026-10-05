@@ -83,7 +83,8 @@ export async function GET(req: NextRequest) {
             : isAdminOrOwner
               ? userId
               : ''
-        }
+        },
+        isAdminOrOwner ? undefined : { userId: user.id }
       )
 
       return json(infiniteSubmission)
@@ -100,7 +101,10 @@ export async function GET(req: NextRequest) {
           : user?.admin
             ? userId
             : ''
-      }
+      },
+      user?.admin || filterArr.includes(Filter.enum.own)
+        ? undefined
+        : { private: false }
     )
 
     return json(infiniteSubmissions)
@@ -140,7 +144,12 @@ export async function GET(req: NextRequest) {
           : undefined
     },
     {
-      ...(!user?.admin && { private: false })
+      ...(!user?.admin && {
+        private: false,
+        ...(!filterArr.includes(Filter.enum.own) && {
+          task: { private: false }
+        })
+      })
     }
   )
 
@@ -162,6 +171,24 @@ export async function POST(req: NextRequest) {
 
   if (!(await checkUserPermissionOnTask(user, taskId))) {
     return forbidden()
+  }
+
+  if (assessmentId && !user.admin) {
+    const now = new Date()
+    const enrollment = await prisma.userOnAssessment.findUnique({
+      where: {
+        userId_assessmentId: { userId: user.id, assessmentId },
+        assessment: {
+          archived: false,
+          open: { lte: now },
+          close: { gte: now },
+          tasks: { some: { taskId } }
+        }
+      },
+      select: { userId: true }
+    })
+
+    if (!enrollment) return forbidden()
   }
 
   const compressedCode = await compressCode(JSON.stringify(code))

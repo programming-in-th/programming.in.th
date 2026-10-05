@@ -1,5 +1,6 @@
 import { NextRequest } from 'next/server'
 
+import { checkUserPermissionOnAssessment } from '@/lib/api/queries/checkOwnerPermissionOnAssessment'
 import { getSubmissionsAndCalculateScore } from '@/lib/server/assessment'
 import { getServerUser } from '@/lib/session'
 import { APIResponse } from '@/types/APITypes'
@@ -21,6 +22,9 @@ export async function GET(
   }
 
   if (!reqUser.admin && reqUser.id !== userId) return forbidden()
+  if (!(await checkUserPermissionOnAssessment(reqUser, assessmentId))) {
+    return forbidden()
+  }
 
   return json(await getSubmissionsAndCalculateScore(assessmentId, userId))
 }

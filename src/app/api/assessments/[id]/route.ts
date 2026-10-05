@@ -129,6 +129,7 @@ export async function PUT(req: NextRequest) {
   const user = await getServerUser()
 
   if (!user) return unauthorized()
+  if (!user.id) return unauthorized('User ID not found')
 
   const parsedBody = CreateAssessmentSchema.safeParse(await req.json())
 
@@ -169,6 +170,24 @@ export async function PUT(req: NextRequest) {
 
     const addTasksId = tasks?.filter(taskId => !oldTasksId?.includes(taskId))
     const removeTaskId = oldTasksId.filter(taskId => !tasks?.includes(taskId))
+
+    if (addTasksId?.length && !user.admin) {
+      const allowedCount = await prisma.task.count({
+        where: {
+          id: { in: addTasksId },
+          OR: [
+            { private: false },
+            {
+              taskOnAssessment: {
+                some: { assessment: { owners: { some: { userId: user.id } } } }
+              }
+            }
+          ]
+        }
+      })
+
+      if (allowedCount !== new Set(addTasksId).size) return forbidden()
+    }
 
     const addUsersId = users?.filter(userId => !oldUsersId?.includes(userId))
     const removeUsersId = oldUsersId.filter(userId => !users?.includes(userId))

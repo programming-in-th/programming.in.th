@@ -3,8 +3,11 @@ import { notFound } from 'next/navigation'
 
 import dayjs from 'dayjs'
 
+import { Forbidden } from '@/components/Forbidden'
+import { Unauthorized } from '@/components/Unauthorized'
 import prisma from '@/lib/prisma'
 import { getSubmissionsAndCalculateScore } from '@/lib/server/assessment'
+import { getServerUser } from '@/lib/session'
 import { ISubmission } from '@/types/APITypes'
 import { getDisplayNameFromGrader } from '@/utils/language'
 
@@ -71,6 +74,11 @@ export default async function IndividualSubmission(
 ) {
   const params = await props.params
   const { assessmentId, userId } = params
+
+  // The admin layout's check does not stop this page from rendering.
+  const user = await getServerUser()
+  if (!user) return <Unauthorized />
+  if (!user.admin) return <Forbidden />
 
   const currentUser = await prisma.user.findUnique({
     where: {

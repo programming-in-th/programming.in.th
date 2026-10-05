@@ -1,7 +1,7 @@
 import { notFound } from 'next/navigation'
 import { NextRequest } from 'next/server'
 
-import checkUserPermissionOnTask from '@/lib/api/queries/checkUserPermissionOnTask'
+import checkUserPermissionOnSubmission from '@/lib/api/queries/checkUserPermissionOnSubmission'
 import prisma from '@/lib/prisma'
 import { getServerUser } from '@/lib/session'
 import { forbidden, json, unauthorized } from '@/utils/apiResponse'
@@ -20,7 +20,9 @@ export async function GET(
       status: true,
       score: true,
       groups: true,
-
+      userId: true,
+      assessmentId: true,
+      private: true,
       task: {
         select: {
           id: true,
@@ -34,20 +36,25 @@ export async function GET(
     return notFound()
   }
 
-  if (submission.task?.private) {
+  if (submission.task.private || submission.private) {
     const user = await getServerUser()
 
     if (!user) return unauthorized()
     if (!user.id) return unauthorized('User ID not found')
 
-    if (!(await checkUserPermissionOnTask(user, submission.task.id))) {
+    if (
+      !(await checkUserPermissionOnSubmission(user, {
+        userId: submission.userId,
+        taskId: submission.task.id,
+        assessmentId: submission.assessmentId
+      }))
+    ) {
       return forbidden()
     }
   }
 
-  const payload: DeepPartial<typeof submission> = submission
-
-  delete payload.task
+  const { id: submissionId, status, score, groups } = submission
+  const payload = { id: submissionId, status, score, groups }
 
   return json(payload)
 }

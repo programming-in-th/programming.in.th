@@ -27,6 +27,23 @@ const checkOwnerPermissionOnAssessment = async (
 
 export default checkOwnerPermissionOnAssessment
 
+export const checkUserPermissionOnAssessment = async (
+  session: Session | Session['user'],
+  assessmentId: string
+) => {
+  const user = 'user' in session ? session.user : session
+
+  if (await checkOwnerPermissionOnAssessment(user, assessmentId)) return true
+  if (!user.id) return false
+
+  const userOnAssessment = await prisma.userOnAssessment.findUnique({
+    where: { userId_assessmentId: { userId: user.id, assessmentId } },
+    select: { userId: true }
+  })
+
+  return userOnAssessment !== null
+}
+
 export const checkOwnerPermission = async (userId: string) => {
   const ownerOnAssessment = await prisma.ownerOnAssessment.findFirst({
     where: { userId },
