@@ -3,7 +3,7 @@
 FROM node:24-alpine AS builder
 
 ENV DOCKER_BUILD=1
-ENV NEXT_PUBLIC_REALTIME_URL=https://rtss.crackncode.org
+ENV NEXT_PUBLIC_REALTIME_URL=https://rtss.programming.in.th
 ENV NEXT_PUBLIC_AWS_URL=https://prginth01.sgp1.cdn.digitaloceanspaces.com
 
 ENV GITHUB_ID=mockvalue
