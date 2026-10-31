@@ -63,7 +63,8 @@ export const FileUpload = ({
             : 'hover:bg-slate-50 dark:hover:bg-slate-600'
         )}
       >
-        <input {...getInputProps()} />
+        {/* v20's zero-width input would still take a flex gap. */}
+        <input {...getInputProps({ style: { display: 'none' } })} />
 
         <InboxArrowDownIcon
           className={clsx(

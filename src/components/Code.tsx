@@ -1,15 +1,17 @@
-import Highlight, { Language, Prism } from 'prism-react-renderer'
+import { Highlight, Prism, type PrismTheme } from 'prism-react-renderer'
 ;(
   (typeof global !== 'undefined' ? global : window) as unknown as {
     Prism: typeof Prism
   }
 ).Prism = Prism
 
-// Must run after the global Prism above is set, which imports would hoist past.
-/* eslint-disable @typescript-eslint/no-require-imports */
-require('prismjs/components/prism-rust')
+// Java isn't bundled; must run after the global Prism above is set, which
+// imports would hoist past.
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 require('prismjs/components/prism-java')
-/* eslint-enable @typescript-eslint/no-require-imports */
+
+// Colors come from the .token rules in index.css, not a theme.
+const noTheme: PrismTheme = { plain: {}, styles: [] }
 
 export interface CodeBlockProps {
   code: string
@@ -20,7 +22,7 @@ export interface CodeBlockProps {
 const Code = ({ code, language, maxHeight = 'auto' }: CodeBlockProps) => {
   return (
     <div className="py-2">
-      <Highlight Prism={Prism} code={code} language={language as Language}>
+      <Highlight theme={noTheme} code={code} language={language}>
         {({ style, tokens, getLineProps, getTokenProps }) => (
           <div
             style={{ ...style, maxHeight }}
@@ -28,17 +30,13 @@ const Code = ({ code, language, maxHeight = 'auto' }: CodeBlockProps) => {
           >
             <code className={`language-${language}`}>
               {tokens.map((line, i) => (
-                <div
-                  key={i}
-                  {...getLineProps({ line, key: i })}
-                  className="flex"
-                >
+                <div key={i} {...getLineProps({ line })} className="flex">
                   <span className="w-8 pr-2 text-gray-500 select-none">
                     {i + 1}
                   </span>
                   <span className="flex-1">
                     {line.map((token, key) => (
-                      <span key={key} {...getTokenProps({ token, key })} />
+                      <span key={key} {...getTokenProps({ token })} />
                     ))}
                   </span>
                 </div>

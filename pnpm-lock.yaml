@@ -6,8 +6,8 @@ settings:
 
 overrides:
   next>postcss: 8.5.32
-  cross-spawn@<7.0.6: 7.0.6
-  tmp@<0.2.7: 0.2.7
+  katex: 0.19.1
+  '@tailwindcss/typography>postcss-selector-parser': 6.1.5
 
 importers:
 
@@ -95,11 +95,11 @@ importers:
         specifier: 7.5.0
         version: 7.5.0
       katex:
-        specifier: 0.16.47
-        version: 0.16.47
+        specifier: 0.19.1
+        version: 0.19.1
       motion:
-        specifier: 12.43.0
-        version: 12.43.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+        specifier: 14.7.1
+        version: 14.7.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       next:
         specifier: 16.4.3
         version: 16.4.3(@babel/core@7.29.7)(@opentelemetry/api@1.9.0)(@playwright/test@1.64.1)(@types/node@24.19.2)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(sass@1.107.0)
@@ -113,8 +113,8 @@ importers:
         specifier: 0.4.6
         version: 0.4.6(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       prism-react-renderer:
-        specifier: 1.3.5
-        version: 1.3.5(react@19.3.1)
+        specifier: 2.4.1
+        version: 2.4.1(react@19.3.1)
       prismjs:
         specifier: 1.30.0
         version: 1.30.0
@@ -128,8 +128,8 @@ importers:
         specifier: 19.3.1
         version: 19.3.1(react@19.3.1)
       react-dropzone:
-        specifier: 14.4.1
-        version: 14.4.1(react@19.3.1)
+        specifier: 20.1.4
+        version: 20.1.4(@types/react@19.3.0)(react@19.3.1)
       react-hook-form:
         specifier: 7.91.0
         version: 7.91.0(@types/react@19.3.0)(react@19.3.1)
@@ -174,8 +174,8 @@ importers:
         specifier: 16.4.3
         version: 16.4.3
       '@octokit/types':
-        specifier: 15.0.2
-        version: 15.0.2
+        specifier: 18.0.0
+        version: 18.0.0
       '@playwright/test':
         specifier: 1.64.1
         version: 1.64.1
@@ -207,8 +207,8 @@ importers:
         specifier: 5.0.5
         version: 5.0.5(vitest@5.0.5)
       dotenv-cli:
-        specifier: 10.0.0
-        version: 10.0.0
+        specifier: 11.1.0
+        version: 11.1.0
       eslint:
         specifier: 9.39.5
         version: 9.39.5(jiti@2.7.0)
@@ -1153,11 +1153,11 @@ packages:
     resolution: {integrity: sha512-nn5ozdjYQpUCZlWGuxcJY/KpxkWQs4DcbMCmKojjyrYDEAGy4Ce19NN4v5MduafTwJlbKc99UA8YhSVqq9yPZA==}
     engines: {node: '>=12.4.0'}
 
-  '@octokit/openapi-types@26.0.0':
-    resolution: {integrity: sha512-7AtcfKtpo77j7Ts73b4OWhOZHTKo/gGY8bB3bNBQz4H+GRSWqx2yvj8TXRsbdTE0eRmYmXOEY66jM7mJ7LzfsA==}
+  '@octokit/openapi-types@29.0.1':
+    resolution: {integrity: sha512-9qWOMFNxxLokERcms42rU0PTLqQmVs7g5E41TI4mCOxmpFayD1rfC7XxOL55cG9MBZLFlC31BrR37myMKardwg==}
 
-  '@octokit/types@15.0.2':
-    resolution: {integrity: sha512-rR+5VRjhYSer7sC51krfCctQhVTmjyUMAaShfPB8mscVa8tSoLyon3coxQmXu0ahJoLVWl8dSGD/3OGZlFV44Q==}
+  '@octokit/types@18.0.0':
+    resolution: {integrity: sha512-l6bAF43PNxkJp6g+W4PjoUSSkxHomXw2nOum5CTftJz1NlV3vu93NImgOYtLf6CbBUb5j+fiuzW0PPQ5JTSvZA==}
 
   '@opentelemetry/api@1.9.0':
     resolution: {integrity: sha512-3giAOQvZiH5F9bMlMiv8+GSPMeqg0dbaeo58/0SlA9sxSqZhnUtxzX9/2FzyhS9sWQf5S0GJE0AKBrFqjpeYcg==}
@@ -2195,9 +2195,9 @@ packages:
   asynckit@0.4.0:
     resolution: {integrity: sha512-Oei9OH4tRh0YqU3GxhX79dM/mwVgvbZJaSNaRk+bshkj0S5cfHcgYakreBjrHwatXKbz+IoIdYLxrKim2MjW0Q==}
 
-  attr-accept@2.2.5:
-    resolution: {integrity: sha512-0bDNnY/u6pPwHDMoF0FieU354oBi0a8rD9FcsLwzcGWbc8KS8KPIi7y+s13OlVY+gMWc/9xEMUgNE6Qm8ZllYQ==}
-    engines: {node: '>=4'}
+  attr-accept@4.0.1:
+    resolution: {integrity: sha512-rOKAGOwbnTUvwTL8rNA0hWnU3uX9tOI20di4KjR5I1ez/RJmnA37W3zz4EMxGC2YnI289yPjRy63CdAZeQFZ4Q==}
+    engines: {node: '>= 22'}
 
   available-typed-arrays@1.0.7:
     resolution: {integrity: sha512-wvUjBtSGN7+7SjNpq/9M2Tg350UZD3q62IFZLbRAR1bSMlCo1ZaeW+BJ+D090e4hIIZLBcTDWe4Mh4jvUDajzQ==}
@@ -2342,13 +2342,13 @@ packages:
   comma-separated-tokens@2.0.3:
     resolution: {integrity: sha512-Fu4hJdvzeylCfQPp9SGWidpzrMs7tTrlu6Vb8XGaRGck8QSNZJJp538Wrb60Lax4fPwR64ViY468OIUTbRlGZg==}
 
+  commander@15.0.0:
+    resolution: {integrity: sha512-z67u4ZhzCL/Tydu1lJARtEZYWbWaN7oYLHbsuzocr6y4N6WZAagG3RQ4FW61V1/0+jImpj293XfrcYnd1qxtPg==}
+    engines: {node: '>=22.12.0'}
+
   commander@7.2.0:
     resolution: {integrity: sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==}
     engines: {node: '>= 10'}
-
-  commander@8.3.0:
-    resolution: {integrity: sha512-OkTL9umf+He2DZkUq8f8J9of7yL6RJKI24dVITBmNfZBmri9zYZQrKkuXiKhyfPSu8tUhnVBB1iKXevvnlR4Ww==}
-    engines: {node: '>= 12'}
 
   concat-map@0.0.1:
     resolution: {integrity: sha512-/Srv4dswyQNBfohGpz9o6Yb3Gz3SrUDqBH5rTuhGR7ahtlbYKnVxw2bCFMRljaA7EXHaXZ8wsHdodFvbkhKmqg==}
@@ -2536,12 +2536,12 @@ packages:
   dom-accessibility-api@0.6.3:
     resolution: {integrity: sha512-7ZgogeTnjuHbo+ct10G9Ffp0mif17idi0IyWNVA/wcwcm7NPOD/WEHVP3n7n3MhXqxoIYm8d6MuZohYWIZ4T3w==}
 
-  dotenv-cli@10.0.0:
-    resolution: {integrity: sha512-lnOnttzfrzkRx2echxJHQRB6vOAMSCzzZg79IxpC00tU42wZPuZkQxNNrrwVAxaQZIIh001l4PxVlCrBxngBzA==}
+  dotenv-cli@11.1.0:
+    resolution: {integrity: sha512-YUBODAS0puvSc9bGdu07o1GSouVn63xDazqZqvT99Hta4nPqZ1jTdBcz12dDdxSC9jYbVlpWlnu0IJaMR8TIEQ==}
     hasBin: true
 
-  dotenv-expand@11.0.7:
-    resolution: {integrity: sha512-zIHwmZPRshsCdpMDyVsqGmgyP0yT8GAgXUnkdAoJisxvf33k7yO6OuoKmcTGuXPWSsm8Oh88nZicRLA9Y0rUeA==}
+  dotenv-expand@12.0.3:
+    resolution: {integrity: sha512-uc47g4b+4k/M/SeaW1y4OApx+mtLWl92l5LMPP0GNXctZqELk+YGgOPIIC5elYmUH4OuoK3JLhuRUYegeySiFA==}
     engines: {node: '>=12'}
 
   dotenv@16.6.1:
@@ -2879,9 +2879,9 @@ packages:
     resolution: {integrity: sha512-XXTUwCvisa5oacNGRP9SfNtYBNAMi+RPwBFmblZEF7N7swHYQS6/Zfk7SRwx4D5j3CH211YNRco1DEMNVfZCnQ==}
     engines: {node: '>=16.0.0'}
 
-  file-selector@2.1.2:
-    resolution: {integrity: sha512-QgXo+mXTe8ljeqUFaX3QVHc5osSItJ/Km+xpocx0aSqWGMSCf6qYs/VnzZgS864Pjn5iceMRFigeAV7AfTlaig==}
-    engines: {node: '>= 12'}
+  file-selector@5.0.1:
+    resolution: {integrity: sha512-v0g/PTeuQgvKCBrVRsfVudvwXlRHSWHEQkVgKawgCGHkEpKA1clp3Om5jvEVhz8G9W/mOYjJH9FhkH4C888PgQ==}
+    engines: {node: '>= 22'}
 
   fill-range@7.1.1:
     resolution: {integrity: sha512-YsGpe3WHLK8ZYi4tWDg2Jy3ebRz2rXowDxnld4bkQB00cc/1Zw9AWnC0i9ztDJitivtQvaI9KaLyKrc+hBW0yg==}
@@ -2923,15 +2923,12 @@ packages:
     resolution: {integrity: sha512-vKatAh4SlVfgbv+YtmhiRjhEMJsYpsG1Y2rMQtR+SVSbytsSD1YGzDIcrAJmdFec88u/+VoGmxnl+80gL1tRCQ==}
     engines: {node: '>= 6'}
 
-  framer-motion@12.43.0:
-    resolution: {integrity: sha512-1eaL3RvR/kAlbG7UYcpMptEyzPoENO0c6w7ZnB3/hh2vSAz/6uGAFn6fdoqTBguNstf3MsFhJHsD/0DHiclG+g==}
+  framer-motion@14.7.1:
+    resolution: {integrity: sha512-mFDYZxyfeZnpvL/zEQEqLZNYVA/ya47c9TBfZb/PEoNBBVSVvCLkMrCv9U38cuw72W161XENZwZB0+4nIBLEJg==}
     peerDependencies:
-      '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
-      '@emotion/is-prop-valid':
-        optional: true
       react:
         optional: true
       react-dom:
@@ -3359,8 +3356,8 @@ packages:
     resolution: {integrity: sha512-ZZow9HBI5O6EPgSJLUb8n2NKgmVWTwCvHGwFuJlMjvLFqlGG6pjirPhtdsseaLZjSibD8eegzmYpUZwoIlj2cQ==}
     engines: {node: '>=4.0'}
 
-  katex@0.16.47:
-    resolution: {integrity: sha512-Eeo8Ys1doU1z+x8AZsPpQu+p/QcZBI5PeOo7QGQdy2x2m0MU/hYagBbGOmXwr5KVbEfVuWv9LpnQWeehogurjg==}
+  katex@0.19.1:
+    resolution: {integrity: sha512-jG8uKntjSEcm2EpQOh0XturpPuuC9r3Sq5HLHdsFdWZT27E672SF19QEi+of0/YeOy15lDgRhKvr5614uRrEfA==}
     hasBin: true
 
   keyv@4.5.4:
@@ -3784,21 +3781,18 @@ packages:
   minimist@1.2.8:
     resolution: {integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==}
 
-  motion-dom@12.43.0:
-    resolution: {integrity: sha512-azKON4d9S65PEoFUiQTMTgPheEmzf2QngdRc50AKfJp9Q9mmcBVw22c8eMq9k8kxOFHdL7+WZY7N/5F/lwiDag==}
+  motion-dom@14.7.1:
+    resolution: {integrity: sha512-p9q9F7+HoijbQjUG/cSGNmWS2t1OaAKxkd2RG5gQJRoDwoTap/Khb7K1P5rLW90crnSmx0rcRXzh3Jd5UNrpEw==}
 
-  motion-utils@12.39.0:
-    resolution: {integrity: sha512-8nadJAJjTtqRkmRF36FoJTrywK9nnFmnPwnSMyxaOCU7GDjN9RTMJIxx9De8ErM+vpPhMccr/6fo5WciyQLnMQ==}
+  motion-utils@14.7.0:
+    resolution: {integrity: sha512-woO0/Nb7ys75f94fjvQi/6leiHGvZUYkeHUPEZ3vxsV+9OpEVhkxp01x8MlRwX0zt31EqgXsKDAoBoJLC148Tw==}
 
-  motion@12.43.0:
-    resolution: {integrity: sha512-BQgQbSa9Hn3/mtbib0MK53y6JSANa+YKUKlaYnWzAVDH424RYQ5LVpV3pNiWH00BA2z4ojsSdMzqT7g2FQwjuQ==}
+  motion@14.7.1:
+    resolution: {integrity: sha512-o+q7MExUC0RuCUF62HxF9v+fNVX7pUMYZqlyigQJJFAgAsmnnSlAOYeG41hGYkamxFR0rdBA0KXpaBJ28/GGAw==}
     peerDependencies:
-      '@emotion/is-prop-valid': '*'
       react: ^18.0.0 || ^19.0.0
       react-dom: ^18.0.0 || ^19.0.0
     peerDependenciesMeta:
-      '@emotion/is-prop-valid':
-        optional: true
       react:
         optional: true
       react-dom:
@@ -4060,8 +4054,8 @@ packages:
     resolution: {integrity: sha512-/+5VFTchJDoVj3bhoqi6UeymcD00DAwb1nJwamzPvHEszJ4FpF6SNNbUbOS8yI56qHzdV8eK0qEfOSiodkTdxg==}
     engines: {node: '>= 0.4'}
 
-  postcss-selector-parser@6.0.10:
-    resolution: {integrity: sha512-IQ7TZdoaqbT+LCpShg46jnZVlhWD2w6iQYAcYXfHARZ7X1t/UGhhceQDs5X0cGqKvYlHNOuv7Oa1xmb0oQuA3w==}
+  postcss-selector-parser@6.1.5:
+    resolution: {integrity: sha512-TEHFzb5KRDKaOgJ4TYE+0jyJtFbjLvkdVOu0fZ2b6MTWzoqZd4Le+61aEppWkvTlYePgOX4ATL1wsAIPMLTw6Q==}
     engines: {node: '>=4'}
 
   postcss@8.5.32:
@@ -4180,10 +4174,10 @@ packages:
   pretty-format@3.8.0:
     resolution: {integrity: sha512-WuxUnVtlWL1OfZFQFuqvnvs6MiAGk9UNsBostyBOB0Is9wb5uRESevA6rnl/rkksXaGX3GzZhPup5d6Vp1nFew==}
 
-  prism-react-renderer@1.3.5:
-    resolution: {integrity: sha512-IJ+MSwBWKG+SM3b2SUfdrhC+gu01QkV2KmRQgREThBfSQRoufqRfxfHUxpG1WcaFjP+kojcFyO9Qqtpgt3qLCg==}
+  prism-react-renderer@2.4.1:
+    resolution: {integrity: sha512-ey8Ls/+Di31eqzUxC46h8MksNuGx/n0AAC8uKpwFau4RPDYLuE3EXTp8N8G2vX2N7UC/+IXeNUnlWBGGcAG+Ig==}
     peerDependencies:
-      react: '>=0.14.9'
+      react: '>=16.0.0'
 
   prisma@7.10.1:
     resolution: {integrity: sha512-GoVeErHGGtsSjsflQ1r2BA3RKTXtxNraQJz8OLkLhoLr7OgCscdx4qw4WMM4HnERYc+a1cq2VnMNbep+vOjNcQ==}
@@ -4244,11 +4238,15 @@ packages:
     peerDependencies:
       react: ^19.3.1
 
-  react-dropzone@14.4.1:
-    resolution: {integrity: sha512-QDuV76v3uKbHiH34SpwifZ+gOLi1+RdsCO1kl5vxMT4wW8R82+sthjvBw4th3NHF/XX6FBsqDYZVNN+pnhaw0g==}
-    engines: {node: '>= 10.13'}
+  react-dropzone@20.1.4:
+    resolution: {integrity: sha512-LyjT9iQySNkJGC6yL+XTlmfTRxHhPx0eSoTh+WlR0Ge+W35rLcRH/oH7w5bzijfPHeCFcLnO9G7i+hX+LINAAA==}
+    engines: {node: '>= 22'}
     peerDependencies:
-      react: '>= 16.8 || 18.0.0'
+      '@types/react': '*'
+      react: '>= 18'
+    peerDependenciesMeta:
+      '@types/react':
+        optional: true
 
   react-hook-form@7.91.0:
     resolution: {integrity: sha512-5BEBUnCBwa28AFXYTYmOaB/+CSpJ/+CWVASHEvIGUzFdHyUiPHeRhG7r5hOZ8nZi0yP7pbHdFNXO/p31EKTJFQ==}
@@ -5933,11 +5931,11 @@ snapshots:
 
   '@nolyfill/is-core-module@1.0.39': {}
 
-  '@octokit/openapi-types@26.0.0': {}
+  '@octokit/openapi-types@29.0.1': {}
 
-  '@octokit/types@15.0.2':
+  '@octokit/types@18.0.0':
     dependencies:
-      '@octokit/openapi-types': 26.0.0
+      '@octokit/openapi-types': 29.0.1
 
   '@opentelemetry/api@1.9.0':
     optional: true
@@ -6358,7 +6356,7 @@ snapshots:
 
   '@tailwindcss/typography@0.5.20(tailwindcss@4.3.3)':
     dependencies:
-      postcss-selector-parser: 6.0.10
+      postcss-selector-parser: 6.1.5
       tailwindcss: 4.3.3
 
   '@tanstack/react-virtual@3.14.24(react-dom@19.3.1(react@19.3.1))(react@19.3.1)':
@@ -6952,7 +6950,7 @@ snapshots:
 
   asynckit@0.4.0: {}
 
-  attr-accept@2.2.5: {}
+  attr-accept@4.0.1: {}
 
   available-typed-arrays@1.0.7:
     dependencies:
@@ -7100,9 +7098,9 @@ snapshots:
 
   comma-separated-tokens@2.0.3: {}
 
-  commander@7.2.0: {}
+  commander@15.0.0: {}
 
-  commander@8.3.0: {}
+  commander@7.2.0: {}
 
   concat-map@0.0.1: {}
 
@@ -7268,14 +7266,14 @@ snapshots:
 
   dom-accessibility-api@0.6.3: {}
 
-  dotenv-cli@10.0.0:
+  dotenv-cli@11.1.0:
     dependencies:
       cross-spawn: 7.0.6
       dotenv: 17.4.2
-      dotenv-expand: 11.0.7
+      dotenv-expand: 12.0.3
       minimist: 1.2.8
 
-  dotenv-expand@11.0.7:
+  dotenv-expand@12.0.3:
     dependencies:
       dotenv: 16.6.1
 
@@ -7780,9 +7778,7 @@ snapshots:
     dependencies:
       flat-cache: 4.0.1
 
-  file-selector@2.1.2:
-    dependencies:
-      tslib: 2.8.1
+  file-selector@5.0.1: {}
 
   fill-range@7.1.1:
     dependencies:
@@ -7825,10 +7821,10 @@ snapshots:
       hasown: 2.0.4
       mime-types: 2.1.35
 
-  framer-motion@12.43.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+  framer-motion@14.7.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
-      motion-dom: 12.43.0
-      motion-utils: 12.39.0
+      motion-dom: 14.7.1
+      motion-utils: 14.7.0
       tslib: 2.8.1
     optionalDependencies:
       react: 19.3.1
@@ -8319,9 +8315,9 @@ snapshots:
       object.assign: 4.1.7
       object.values: 1.2.1
 
-  katex@0.16.47:
+  katex@0.19.1:
     dependencies:
-      commander: 8.3.0
+      commander: 15.0.0
 
   keyv@4.5.4:
     dependencies:
@@ -8757,7 +8753,7 @@ snapshots:
     dependencies:
       '@types/katex': 0.16.8
       devlop: 1.1.0
-      katex: 0.16.47
+      katex: 0.19.1
       micromark-factory-space: 2.1.0
       micromark-util-character: 2.1.1
       micromark-util-symbol: 2.0.1
@@ -8978,15 +8974,15 @@ snapshots:
 
   minimist@1.2.8: {}
 
-  motion-dom@12.43.0:
+  motion-dom@14.7.1:
     dependencies:
-      motion-utils: 12.39.0
+      motion-utils: 14.7.0
 
-  motion-utils@12.39.0: {}
+  motion-utils@14.7.0: {}
 
-  motion@12.43.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
+  motion@14.7.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1):
     dependencies:
-      framer-motion: 12.43.0(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
+      framer-motion: 14.7.1(react-dom@19.3.1(react@19.3.1))(react@19.3.1)
       tslib: 2.8.1
     optionalDependencies:
       react: 19.3.1
@@ -9265,7 +9261,7 @@ snapshots:
 
   possible-typed-array-names@1.1.0: {}
 
-  postcss-selector-parser@6.0.10:
+  postcss-selector-parser@6.1.5:
     dependencies:
       cssesc: 3.0.0
       util-deprecate: 1.0.2
@@ -9319,8 +9315,10 @@ snapshots:
 
   pretty-format@3.8.0: {}
 
-  prism-react-renderer@1.3.5(react@19.3.1):
+  prism-react-renderer@2.4.1(react@19.3.1):
     dependencies:
+      '@types/prismjs': 1.26.6
+      clsx: 2.1.1
       react: 19.3.1
 
   prisma@7.10.1(@types/node@24.19.2)(@types/react-dom@19.3.0(@types/react@19.3.0))(@types/react@19.3.0)(magicast@0.5.5)(react-dom@19.3.1(react@19.3.1))(react@19.3.1)(typescript@6.0.3):
@@ -9394,12 +9392,13 @@ snapshots:
       react: 19.3.1
       scheduler: 0.28.0
 
-  react-dropzone@14.4.1(react@19.3.1):
+  react-dropzone@20.1.4(@types/react@19.3.0)(react@19.3.1):
     dependencies:
-      attr-accept: 2.2.5
-      file-selector: 2.1.2
-      prop-types: 15.8.1
+      attr-accept: 4.0.1
+      file-selector: 5.0.1
       react: 19.3.1
+    optionalDependencies:
+      '@types/react': 19.3.0
 
   react-hook-form@7.91.0(@types/react@19.3.0)(react@19.3.1):
     dependencies:
@@ -9511,7 +9510,7 @@ snapshots:
       '@types/katex': 0.16.8
       hast-util-from-html-isomorphic: 2.0.0
       hast-util-to-text: 4.0.3
-      katex: 0.16.47
+      katex: 0.19.1
       unist-util-visit-parents: 6.1.0
       vfile: 6.0.3
 
