@@ -11,7 +11,7 @@ const FormBox = () => {
         <p>Task Name</p>
         <input
           type="text"
-          className="h-10 rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+          className="h-10 rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
           {...register('title')}
         />
       </div>
@@ -20,7 +20,7 @@ const FormBox = () => {
         <input
           type="text"
           className={clsx(
-            'h-10 rounded-md border px-4 py-1 backdrop-blur-sm dark:border-gray-900 dark:bg-gray-900 dark:focus:outline',
+            'h-10 rounded-md border px-4 py-1 backdrop-blur-xs dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid',
             task && 'cursor-not-allowed text-gray-500'
           )}
           {...register('id', { required: true })}
@@ -31,7 +31,7 @@ const FormBox = () => {
         <p>Category Path</p>
         <input
           type="text"
-          className="h-10 rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+          className="h-10 rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
           {...register('categoryId')}
         />
       </div>
@@ -40,7 +40,7 @@ const FormBox = () => {
           <p>Full Score</p>
           <input
             type="number"
-            className="h-10 w-full rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+            className="h-10 w-full rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
             {...register('fullScore', { valueAsNumber: true })}
           />
         </div>
@@ -48,7 +48,7 @@ const FormBox = () => {
           <p>Privacy</p>
           <select
             {...register('private')}
-            className="h-10 w-full rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+            className="h-10 w-full rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
           >
             <option value="true">private</option>
             <option value="false">public</option>
@@ -59,7 +59,7 @@ const FormBox = () => {
         <p>Type</p>
         <select
           {...register('type')}
-          className="h-10 w-full rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+          className="h-10 w-full rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
         >
           <option value="NORMAL">Normal</option>
           <option value="COMMUNICATION">Communication</option>

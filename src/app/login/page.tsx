@@ -25,7 +25,7 @@ export default function Login() {
         </Suspense>
       </div>
       <div className="px-4 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="flex flex-col gap-6 bg-white px-4 py-2 dark:bg-slate-800 sm:rounded-lg sm:px-10">
+        <div className="flex flex-col gap-6 bg-white px-4 py-2 sm:rounded-lg sm:px-10 dark:bg-slate-800">
           <LoginGoogle />
           <LoginGitHub />
         </div>

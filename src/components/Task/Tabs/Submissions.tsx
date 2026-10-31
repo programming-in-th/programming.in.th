@@ -17,7 +17,7 @@ const SubmissionsTab = ({
     useSubmissionList(task.id, assessmentId, own)
 
   return (
-    <div className="flex flex-shrink flex-col">
+    <div className="flex shrink flex-col">
       <Header isViewing />
       <div className="flex flex-col space-y-2 md:mt-2">
         {submissions.map(sub => (
@@ -31,7 +31,7 @@ const SubmissionsTab = ({
         {isLoadingMore ? (
           <div className="mt-4 flex w-full justify-center">
             <svg
-              className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
+              className="mr-3 -ml-1 h-5 w-5 animate-spin text-white"
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"

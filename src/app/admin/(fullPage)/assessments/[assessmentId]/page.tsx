@@ -68,13 +68,13 @@ export default function ViewAssessment(
           ) : (
             <div className="h-48 w-full animate-pulse rounded-lg bg-gray-100 dark:bg-gray-500" />
           )}
-          <div className="mb-2 mt-6 flex items-center justify-start space-x-4">
+          <div className="mt-6 mb-2 flex items-center justify-start space-x-4">
             <p className="text-sm font-semibold text-gray-500 dark:text-white">
               Assigned Students
             </p>
             <input
               type="text"
-              className="rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+              className="rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
               placeholder="Search..."
               onChange={async e => {
                 const { value } = e.currentTarget

@@ -56,7 +56,7 @@ export const MiddleBar = ({
         <p>Choose Tasks</p>
         <input
           type="text"
-          className="my-3 rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+          className="my-3 rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
           placeholder="Search..."
           onChange={async e => {
             const { value } = e.currentTarget

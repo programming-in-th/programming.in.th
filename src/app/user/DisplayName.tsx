@@ -50,7 +50,7 @@ export const DisplayName: FC<DisplayNameProps> = ({ initialName }) => {
 
       <div className="flex gap-2">
         <input
-          className="w-72 rounded-md border-gray-300 bg-gray-100 px-2 py-1 text-lg shadow-sm dark:border-slate-900 dark:bg-slate-700 dark:text-gray-100"
+          className="w-72 rounded-md border-gray-300 bg-gray-100 px-2 py-1 text-lg shadow-xs dark:border-slate-900 dark:bg-slate-700 dark:text-gray-100"
           type="text"
           maxLength={32}
           value={name}

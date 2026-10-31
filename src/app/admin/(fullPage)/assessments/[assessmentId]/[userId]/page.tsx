@@ -98,7 +98,7 @@ export default async function IndividualSubmission(
       <div className="relative mt-8 w-full max-w-6xl">
         <Link
           href={`/admin/assessments/${assessmentId}`}
-          className="absolute -left-8 top-0"
+          className="absolute top-0 -left-8"
         >
           <svg
             width="20"

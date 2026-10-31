@@ -16,7 +16,7 @@ export const Pagination = ({
   // const searchParams = useSearchParams()
 
   return (
-    <div className="justfiy-between mt-4 flex w-full items-center pl-4 pr-4 md:pr-20">
+    <div className="justfiy-between mt-4 flex w-full items-center pr-4 pl-4 md:pr-20">
       <div className="w-28">
         {page > 1 && (
           <Link

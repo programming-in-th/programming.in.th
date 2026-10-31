@@ -26,7 +26,7 @@ export const Listing = ({
             <input
               type="checkbox"
               onChange={() => setTag(!tag)}
-              className="h-4 w-4 rounded border-gray-300"
+              className="h-4 w-4 rounded-sm border-gray-300"
               id="check-show-tag"
             />
             <label
@@ -46,7 +46,7 @@ export const Listing = ({
         <div className="w-14 px-4" />
       </div>
 
-      <div className="no-scrollbar mt-4 max-h-[calc(100vh-17rem)] overflow-y-auto">
+      <div className="mt-4 no-scrollbar max-h-[calc(100vh-17rem)] overflow-y-auto">
         {tasks.map(context => (
           <TaskItem
             key={`task-${context.id}`}

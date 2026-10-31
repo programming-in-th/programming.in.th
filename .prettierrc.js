@@ -3,6 +3,7 @@
 /** @satisfies {import('prettier').Config} */
 const config = {
   plugins: ['prettier-plugin-tailwindcss'],
+  tailwindStylesheet: './src/styles/tailwind.css',
   semi: false,
   singleQuote: true,
   useTabs: false,

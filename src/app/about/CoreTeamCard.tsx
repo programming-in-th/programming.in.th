@@ -21,7 +21,7 @@ export const CoreTeamCard = (member: GitHubUser) => {
           {member.login}
         </p>
         <Link href={member.html_url}>
-          <GitHubLogo className="text-[#64748B] dark:text-gray-100" />
+          <GitHubLogo className="text-prog-gray-500 dark:text-gray-100" />
         </Link>
       </div>
     </div>

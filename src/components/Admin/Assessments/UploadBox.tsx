@@ -6,7 +6,7 @@ const DisplayFileCard = ({ data }: { data: IDisplayFile }) => {
   return (
     <div className="flex" key={data.path}>
       <p className="w-64 truncate pr-4">{data.path}</p>
-      <div className="w-full pb-1 pt-2">
+      <div className="w-full pt-2 pb-1">
         <div className="relative h-full w-full">
           <div className="absolute h-full w-full rounded-full bg-gray-200"></div>
           <div

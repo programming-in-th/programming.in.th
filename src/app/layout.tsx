@@ -5,7 +5,7 @@ import { Metadata, Viewport } from 'next'
 import { Inter, Noto_Sans_Thai } from 'next/font/google'
 
 import '@/styles/index.css'
-import '@/styles/style.scss'
+import '@/styles/tailwind.css'
 
 import {
   LayoutWithTheme,

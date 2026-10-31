@@ -24,7 +24,7 @@ const Code = ({ code, language, maxHeight = 'auto' }: CodeBlockProps) => {
         {({ style, tokens, getLineProps, getTokenProps }) => (
           <div
             style={{ ...style, maxHeight }}
-            className={`language-${language} overflow-y-auto rounded-lg text-[13.6px]`}
+            className={`language-${language} overflow-y-auto rounded-lg`}
           >
             <code className={`language-${language}`}>
               {tokens.map((line, i) => (
@@ -33,7 +33,7 @@ const Code = ({ code, language, maxHeight = 'auto' }: CodeBlockProps) => {
                   {...getLineProps({ line, key: i })}
                   className="flex"
                 >
-                  <span className="w-8 select-none pr-2 text-gray-500">
+                  <span className="w-8 pr-2 text-gray-500 select-none">
                     {i + 1}
                   </span>
                   <span className="flex-1">
@@ -54,5 +54,5 @@ const Code = ({ code, language, maxHeight = 'auto' }: CodeBlockProps) => {
 export default Code
 
 export const CodeSkeleton = () => (
-  <div className="my-[0.5em] h-[48rem] w-full overflow-y-auto rounded-lg bg-[#011627]"></div>
+  <div className="my-[0.5em] h-192 w-full overflow-y-auto rounded-lg bg-[#011627]"></div>
 )

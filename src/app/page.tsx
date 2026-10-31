@@ -35,7 +35,7 @@ async function JoinButton() {
   return (
     <>
       {isLoggedIn || (
-        <Link href="/login" className="landing-btn --primary">
+        <Link href="/login" className="--primary landing-btn">
           เข้าร่วม
         </Link>
       )}
@@ -72,7 +72,7 @@ export default async function Landing() {
     <div>
       <div className="flex min-h-screen flex-col items-center justify-start pt-12">
         <section className="mb-8 px-10 text-center">
-          <p className="text-2xl font-semibold leading-[1] sm:text-4xl">
+          <p className="text-2xl leading-none font-semibold sm:text-4xl sm:leading-10">
             <span className="mb-3 block text-prog-primary-500">
               ฝึกฝนทักษะการเขียนโปรแกรม
             </span>
@@ -81,7 +81,7 @@ export default async function Landing() {
             </span>
           </p>
 
-          <p className="mt-4 text-sm leading-relaxed text-prog-gray-500 dark:text-slate-200 sm:text-base">
+          <p className="mt-4 text-sm leading-relaxed text-prog-gray-500 sm:text-base sm:leading-6 dark:text-slate-200">
             เว็บไซต์ที่ผู้ใช้มากมายเชื่อมั่น ด้วยโจทย์ฝึกเขียนโปรแกรมถึง{' '}
             <b>{tasksCount}</b> ข้อ
             <br />
@@ -98,9 +98,9 @@ export default async function Landing() {
             src={landingPic}
             alt="PROGRAMMING.IN.TH"
             priority
-            className="z-10 min-w-0 max-w-[50vh] px-5"
+            className="z-10 max-w-[50vh] min-w-0 px-5"
           />
-          <div className="absolute bottom-0 h-2/5 w-[120%] overflow-hidden rounded-[50%] bg-white dark:bg-slate-800 md:w-[110%]" />
+          <div className="absolute bottom-0 h-2/5 w-[120%] overflow-hidden rounded-[50%] bg-white md:w-[110%] dark:bg-slate-800" />
           <div className="absolute bottom-0 h-1/5 w-full bg-white dark:bg-slate-800" />
         </section>
 
@@ -120,7 +120,7 @@ export default async function Landing() {
           </p>
         </section>
 
-        <section className="w-full bg-white p-6 dark:bg-slate-800 sm:p-16">
+        <section className="w-full bg-white p-6 sm:p-16 dark:bg-slate-800">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-x-6 gap-y-14 sm:grid-cols-2">
             <FeatureCard
               title="ระบบตรวจ Submission สุดทันสมัย"
@@ -145,10 +145,10 @@ export default async function Landing() {
           </div>
         </section>
 
-        <section className="w-full bg-white px-6 py-10 dark:bg-slate-800 sm:px-10 sm:py-24">
-          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center justify-center bg-gradient-to-b from-prog-white-100 to-prog-white-500 dark:bg-none sm:grid-cols-2 lg:px-8 xl:px-36">
+        <section className="w-full bg-white px-6 py-10 sm:px-10 sm:py-24 dark:bg-slate-800">
+          <div className="mx-auto grid max-w-6xl grid-cols-1 items-center justify-center bg-linear-to-b from-prog-white-100 to-prog-white-500 sm:grid-cols-2 lg:px-8 xl:px-36 dark:bg-none">
             <PeopleVector className="mx-auto w-full px-12" />
-            <div className="flex flex-col items-center justify-center pb-6 text-center sm:pb-0 sm:pt-20">
+            <div className="flex flex-col items-center justify-center pb-6 text-center sm:pt-20 sm:pb-0">
               <p className="font-light text-prog-gray-500 dark:text-gray-200">
                 จำนวนผู้ใช้กว่า
               </p>
@@ -162,7 +162,7 @@ export default async function Landing() {
           </div>
         </section>
 
-        <section className="w-full bg-white p-5 dark:bg-slate-800 md:p-10">
+        <section className="w-full bg-white p-5 md:p-10 dark:bg-slate-800">
           <div className="mx-auto grid max-w-6xl grid-cols-1 gap-4 sm:grid-cols-2">
             <TestimonyCard
               title="เขมนันท์ มณีศรี (จอม)"
@@ -193,8 +193,8 @@ export default async function Landing() {
         </section>
 
         <section className="flex w-full flex-col justify-center px-16 py-20 text-center">
-          <p className="font-semibold leading-tight">
-            <span className="mb-1 block text-xl text-prog-gray-500 dark:text-gray-200 sm:text-2xl">
+          <p className="leading-tight font-semibold">
+            <span className="mb-1 block text-xl text-prog-gray-500 sm:text-2xl dark:text-gray-200">
               วันนี้
             </span>
             <span className="text-2xl text-prog-primary-500 sm:text-4xl">

@@ -20,7 +20,7 @@ const Submission = ({
     return (
       <div className="flex w-full flex-col items-center justify-center">
         <svg
-          className="-ml-1 mr-3 h-5 w-5 animate-spin text-white"
+          className="mr-3 -ml-1 h-5 w-5 animate-spin text-white"
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
           viewBox="0 0 24 24"

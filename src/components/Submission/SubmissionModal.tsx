@@ -27,7 +27,7 @@ const getColumn = (): {
   {
     title: 'Time',
     field: 'submittedAt',
-    width: 'w-[10rem]',
+    width: 'w-40',
     child: sub => {
       const dt = new Date(sub.submittedAt)
       return (
@@ -55,7 +55,7 @@ const getColumn = (): {
   {
     title: 'Score',
     field: 'score',
-    width: 'w-[10rem]',
+    width: 'w-40',
     child: (sub, task) => (
       <div className="flex h-auto w-full items-center justify-center text-sm">
         <div className="flex h-auto w-full flex-col items-center justify-around">
@@ -80,7 +80,7 @@ const getColumn = (): {
   {
     title: 'Language',
     field: 'language',
-    width: 'w-[7rem]',
+    width: 'w-28',
     child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {getDisplayNameFromGrader(sub.language)}
@@ -90,7 +90,7 @@ const getColumn = (): {
   {
     title: 'Status',
     field: 'status',
-    width: 'w-[14rem]',
+    width: 'w-56',
     child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {'status' in sub && sub.status}
@@ -100,7 +100,7 @@ const getColumn = (): {
   {
     title: 'Time',
     field: 'time',
-    width: 'w-[7rem]',
+    width: 'w-28',
     child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {sub.time}{' '}
@@ -111,7 +111,7 @@ const getColumn = (): {
   {
     title: 'Memory',
     field: 'memory',
-    width: 'w-[7rem]',
+    width: 'w-28',
     child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {sub.memory}{' '}
@@ -177,7 +177,7 @@ export const SubmissionModal = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+          <div className="bg-opacity-75 fixed inset-0 bg-gray-500 transition-opacity" />
         </Transition.Child>
         <div className="fixed inset-0 z-10 overflow-y-auto">
           <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
@@ -190,8 +190,8 @@ export const SubmissionModal = ({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative max-w-7xl transform overflow-hidden rounded-lg bg-gray-200 text-left shadow-xl transition-all dark:bg-slate-700 sm:my-8">
-                <div className="flex w-full flex-col bg-white px-6 py-3 font-display transition hover:shadow-lg dark:bg-slate-600 md:flex-row md:px-0">
+              <Dialog.Panel className="relative max-w-7xl transform overflow-hidden rounded-lg bg-gray-200 text-left shadow-xl transition-all sm:my-8 dark:bg-slate-700">
+                <div className="flex w-full flex-col bg-white px-6 py-3 font-display transition hover:shadow-lg md:flex-row md:px-0 dark:bg-slate-600">
                   {columns.map(column => (
                     <div
                       key={column.field}
@@ -203,7 +203,7 @@ export const SubmissionModal = ({
                       {column.child(submission, task)}
                     </div>
                   ))}
-                  <div className="ml-auto mr-4 flex flex-row-reverse gap-2">
+                  <div className="mr-4 ml-auto flex flex-row-reverse gap-2">
                     <button
                       type="button"
                       onClick={() => setOpen(false)}
@@ -257,7 +257,7 @@ export const SubmissionModal = ({
                     </Link>
                   </div>
                 </div>
-                <div className="bg-white px-4 pb-4 pt-5 dark:bg-slate-700 sm:p-6 sm:pb-4">
+                <div className="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4 dark:bg-slate-700">
                   <div className="sm:flex sm:items-start">
                     <div className="mt-3 flex w-full flex-row text-center sm:mt-0 sm:text-left">
                       <div className="no-scrollbar max-h-[530px] w-1/2 overflow-y-auto">

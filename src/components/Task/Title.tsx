@@ -55,8 +55,8 @@ export const Title = ({
       >
         <p
           className={clsx(
-            'w-full break-all text-lg font-medium dark:text-white',
-            task === undefined && 'rounded bg-gray-200 dark:bg-slate-700'
+            'w-full text-lg font-medium break-all dark:text-white',
+            task === undefined && 'rounded-sm bg-gray-200 dark:bg-slate-700'
           )}
         >
           {task?.title}
@@ -64,7 +64,7 @@ export const Title = ({
         <p
           className={clsx(
             'mt-1 h-5 w-full font-light dark:text-white',
-            task === undefined && 'rounded bg-gray-200 dark:bg-slate-700'
+            task === undefined && 'rounded-sm bg-gray-200 dark:bg-slate-700'
           )}
         >
           {task?.id}

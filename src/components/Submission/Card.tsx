@@ -24,7 +24,7 @@ const getColumn = (
   {
     title: 'Time',
     field: 'submittedAt',
-    width: 'w-[10rem]',
+    width: 'w-40',
     child: sub => {
       const dt = new Date(sub.submittedAt)
       return (
@@ -52,7 +52,7 @@ const getColumn = (
   {
     title: 'Score',
     field: 'score',
-    width: 'w-[10rem]',
+    width: 'w-40',
     child: (sub, task) => (
       <div className="flex h-auto w-full items-center justify-center text-sm">
         <div className="flex h-auto w-full flex-col items-center justify-around">
@@ -77,7 +77,7 @@ const getColumn = (
   {
     title: 'Status',
     field: 'status',
-    width: isViewing ? 'hidden -mx-2' : 'w-[14rem]',
+    width: isViewing ? 'hidden -mx-2' : 'w-56',
     child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {'status' in sub && sub.status}
@@ -87,7 +87,7 @@ const getColumn = (
   {
     title: 'Language',
     field: 'language',
-    width: 'w-[7rem]',
+    width: 'w-28',
     child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {getDisplayNameFromGrader(sub.language)}
@@ -97,7 +97,7 @@ const getColumn = (
   {
     title: 'Time',
     field: 'time',
-    width: 'w-[7rem]',
+    width: 'w-28',
     child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {sub.time}{' '}
@@ -108,7 +108,7 @@ const getColumn = (
   {
     title: 'Memory',
     field: 'memory',
-    width: 'w-[7rem]',
+    width: 'w-28',
     child: sub => (
       <p className="text-center text-sm font-medium text-gray-500 dark:text-white">
         {sub.memory}{' '}
@@ -159,7 +159,7 @@ export const Card = ({
       <button
         type="button"
         onClick={() => (isViewing ? setOpenModal(true) : null)}
-        className="hidden w-full cursor-pointer flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:flex md:flex-row md:px-0"
+        className="hidden w-full cursor-pointer flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg md:flex md:flex-row md:px-0 dark:bg-slate-700"
       >
         <>
           <div className="flex min-w-0 flex-row">
@@ -199,7 +199,7 @@ export const Card = ({
       <IsLink
         href={`/submissions/${sub.id}`}
         isLink={isViewing}
-        className="flex w-full flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700 md:hidden md:flex-row md:px-0"
+        className="flex w-full flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg md:hidden md:flex-row md:px-0 dark:bg-slate-700"
       >
         <>
           {columns.map(column => (

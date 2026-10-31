@@ -119,11 +119,11 @@ export default async function Assessment(
           </div>
         )}
 
-        <div className="mb-2 mt-10 flex justify-between px-6">
+        <div className="mt-10 mb-2 flex justify-between px-6">
           <p className="text-sm font-medium text-gray-500 dark:text-gray-100">
             Problem Title
           </p>
-          <p className="flex w-[8.5rem] justify-center text-sm font-medium text-gray-500 dark:text-gray-100">
+          <p className="flex w-34 justify-center text-sm font-medium text-gray-500 dark:text-gray-100">
             Score
           </p>
         </div>

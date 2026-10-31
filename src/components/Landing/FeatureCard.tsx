@@ -16,7 +16,7 @@ export const FeatureCard = ({
       </div>
       <div className="flex flex-col items-center justify-center px-12 py-6 text-center">
         <h3 className="mb-4 pt-4 font-semibold dark:text-gray-100">{title}</h3>
-        <p className="whitespace-pre-wrap font-light dark:text-slate-200">
+        <p className="font-light whitespace-pre-wrap dark:text-slate-200">
           {description}
         </p>
       </div>

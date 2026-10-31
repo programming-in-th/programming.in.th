@@ -82,7 +82,7 @@ export const Accordion = ({
         variants={DivVariants}
         className="h-auto w-full rounded-b-lg bg-white py-4 dark:bg-slate-600"
       >
-        <div className="space-y-1 px-2 py-4 font-light text-gray-400 dark:text-gray-200 md:px-10">
+        <div className="space-y-1 px-2 py-4 font-light text-gray-400 md:px-10 dark:text-gray-200">
           <Header />
           {group.run_result.map((result: ITestCase) => (
             <Card {...result} key={result.test_index} />

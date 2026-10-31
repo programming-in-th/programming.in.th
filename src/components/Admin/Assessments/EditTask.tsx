@@ -29,7 +29,7 @@ export default function EditTask({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity dark:bg-slate-700 dark:bg-opacity-75" />
+          <div className="bg-opacity-75 dark:bg-opacity-75 fixed inset-0 bg-gray-500 transition-opacity dark:bg-slate-700" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">
@@ -54,7 +54,7 @@ export default function EditTask({
                     leaveFrom="opacity-100"
                     leaveTo="opacity-0"
                   >
-                    <div className="absolute left-0 top-0 -ml-8 flex pr-2 pt-4 sm:-ml-8 sm:pr-2">
+                    <div className="absolute top-0 left-0 -ml-8 flex pt-4 pr-2 sm:-ml-8 sm:pr-2">
                       <button
                         type="button"
                         className="rounded-md text-gray-300 hover:text-white dark:text-white dark:hover:text-gray-300"

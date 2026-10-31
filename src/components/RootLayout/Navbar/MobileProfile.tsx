@@ -13,7 +13,7 @@ export const MobileProfile = () => {
   const { data: session } = useSession()
 
   return (
-    <div className="pb-6 pt-5">
+    <div className="pt-5 pb-6">
       {session?.user && (
         <div className="flex items-center gap-4 p-4">
           <div>
@@ -44,25 +44,25 @@ export const MobileProfile = () => {
       {session?.user ? (
         <div className="mt-6 flex flex-col gap-4 px-5">
           <PopoverButton as={Link} href="/user">
-            <button className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700">
+            <button className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow-sm hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700">
               User Settings
             </button>
           </PopoverButton>
 
           {session.user.admin && (
             <PopoverButton as={Link} href="/admin">
-              <button className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700">
+              <button className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow-sm hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700">
                 Admin Home
               </button>
             </PopoverButton>
           )}
 
-          <SignoutButton className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700" />
+          <SignoutButton className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow-sm hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700" />
         </div>
       ) : (
         <div className="mt-6 px-5">
           <PopoverButton as={Link} href="/login">
-            <button className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700">
+            <button className="block w-full rounded-md bg-gray-600 px-4 py-3 text-center font-medium text-white shadow-sm hover:bg-gray-700 dark:bg-slate-600 dark:hover:bg-slate-700">
               Login
             </button>
           </PopoverButton>

@@ -28,7 +28,7 @@ export const Navbar = () => {
                 <LogoDark />
               </Link>
               <div className="-mr-2 flex items-center md:hidden">
-                <PopoverButton className="focus-ring-inset inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-white dark:text-white">
+                <PopoverButton className="focus-ring-inset inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-200 focus:ring-2 focus:ring-white focus:outline-hidden dark:text-white">
                   <span className="sr-only">Open main menu</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -69,7 +69,7 @@ export const Navbar = () => {
           focus
           className="absolute inset-x-0 top-0 z-50 origin-top transform p-2 transition md:hidden"
         >
-          <div className="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black ring-opacity-5 dark:bg-slate-800 dark:drop-shadow-2xl">
+          <div className="ring-opacity-5 overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black dark:bg-slate-800 dark:drop-shadow-2xl">
             <div className="flex items-center justify-between px-5 pt-4">
               <div className="dark:hidden">
                 <Logo />
@@ -78,7 +78,7 @@ export const Navbar = () => {
                 <LogoDark />
               </div>
               <div className="-mr-2">
-                <PopoverButton className="inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-cyan-600 dark:text-gray-100">
+                <PopoverButton className="inline-flex items-center justify-center rounded-md bg-transparent p-2 text-gray-400 hover:bg-gray-100 focus:ring-2 focus:ring-cyan-600 focus:outline-hidden focus:ring-inset dark:text-gray-100">
                   <span className="sr-only">Close menu</span>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"

@@ -29,7 +29,7 @@ export const TestimonyCard = (props: {
 
         <div className="mb-4 flex flex-col pt-2 text-left">
           <h3 className="mb-1 font-semibold">{title}</h3>
-          <span className="w-48 whitespace-pre-wrap text-sm text-prog-primary-500">
+          <span className="w-48 text-sm whitespace-pre-wrap text-prog-primary-500">
             {role}
           </span>
         </div>

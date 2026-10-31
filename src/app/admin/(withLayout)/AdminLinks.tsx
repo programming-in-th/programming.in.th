@@ -39,7 +39,7 @@ export const AdminLinks = () => {
             'flex w-full justify-center rounded-lg py-2 transition',
             adminLocation == tab.url
               ? 'bg-gray-200 dark:bg-gray-700'
-              : 'hover:bg-gray-200 hover:dark:bg-gray-700'
+              : 'hover:bg-gray-200 dark:hover:bg-gray-700'
           )}
         >
           <p className="text-sm">{tab.title}</p>

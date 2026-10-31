@@ -19,12 +19,12 @@ export const LeftBar = ({
   const [assignUser, setAssignUser] = useState<IUser[]>(users)
   const [assignOwnUser, setAssignOwnUser] = useState<IUser[]>(users)
   return (
-    <div className="flex h-full w-full flex-col space-y-3 overflow-y-auto border-r-[1px] border-gray-300 px-6 py-4 dark:border-slate-700">
+    <div className="flex h-full w-full flex-col space-y-3 overflow-y-auto border-r border-gray-300 px-6 py-4 dark:border-slate-700">
       <div className="flex flex-col">
         <p>Assessment Name</p>
         <input
           type="text"
-          className="rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+          className="rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
           {...register('name')}
         />
       </div>
@@ -33,7 +33,7 @@ export const LeftBar = ({
         <input
           type="text"
           className={clsx(
-            'rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline',
+            'rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid',
             assessment && 'cursor-not-allowed text-gray-500'
           )}
           {...register('id', { required: true })}
@@ -43,14 +43,14 @@ export const LeftBar = ({
       <div className="flex flex-col">
         <p>Description</p>
         <textarea
-          className="h-28 rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+          className="h-28 rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
           {...register('description')}
         />
       </div>
       <div className="flex flex-col">
         <p>Instruction</p>
         <textarea
-          className="h-28 rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+          className="h-28 rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
           {...register('instruction')}
         />
       </div>
@@ -58,7 +58,7 @@ export const LeftBar = ({
         <p>Open At</p>
         <input
           type="datetime-local"
-          className="rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+          className="rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
           {...register('open', { required: true })}
         ></input>
       </div>
@@ -66,7 +66,7 @@ export const LeftBar = ({
         <p>Closed At</p>
         <input
           type="datetime-local"
-          className="rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+          className="rounded-md border px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
           {...register('close', { required: true })}
         ></input>
       </div>
@@ -75,7 +75,7 @@ export const LeftBar = ({
         <div className="flex h-52 flex-col rounded-md border border-gray-200 p-0.5 dark:border-slate-700">
           <input
             type="text"
-            className="rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+            className="rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
             placeholder="Search..."
             onChange={async e => {
               const { value } = e.currentTarget
@@ -100,7 +100,7 @@ export const LeftBar = ({
                 <input
                   type="checkbox"
                   {...register(`assign-${user.id}`)}
-                  className="h-4 w-4 rounded border-gray-300"
+                  className="h-4 w-4 rounded-sm border-gray-300"
                 />
                 <p>{user.username}</p>
               </div>
@@ -113,7 +113,7 @@ export const LeftBar = ({
         <div className="flex h-52 flex-col rounded-md border border-gray-200 p-0.5 dark:border-slate-700">
           <input
             type="text"
-            className="rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline"
+            className="rounded-md bg-gray-100 px-4 py-1 dark:border-gray-900 dark:bg-gray-900 dark:focus:outline-solid"
             placeholder="Search..."
             onChange={async e => {
               const { value } = e.currentTarget
@@ -138,7 +138,7 @@ export const LeftBar = ({
                 <input
                   type="checkbox"
                   {...register(`assignOwn-${user.id}`)}
-                  className="h-4 w-4 rounded border-gray-300"
+                  className="h-4 w-4 rounded-sm border-gray-300"
                 />
                 <p>{user.username}</p>
               </div>

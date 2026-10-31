@@ -29,7 +29,7 @@ const GroupTable = ({ groups }: { groups: IGroup[] }) => {
             }}
           >
             <p className="dark:text-white">{title}</p>
-            <div className="flex h-full items-center justify-center text-[#64748B] dark:text-white">
+            <div className="flex h-full items-center justify-center text-prog-gray-500 dark:text-white">
               <i>{open === false ? <ExpandAll /> : <CollapseAll />}</i>
             </div>
           </button>

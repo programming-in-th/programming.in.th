@@ -39,24 +39,24 @@ export const Footer = () => {
                 target="_blank"
                 rel="noreferrer"
               >
-                <FacebookLogo className="text-[#64748B] dark:text-gray-100" />
+                <FacebookLogo className="text-prog-gray-500 dark:text-gray-100" />
               </Link>
               <Link
                 href="https://github.com/programming-in-th/"
                 target="_blank"
                 rel="noreferrer"
               >
-                <GitHubLogo className="text-[#64748B] dark:text-gray-100" />
+                <GitHubLogo className="text-prog-gray-500 dark:text-gray-100" />
               </Link>
               <Link
                 href="https://discord.gg/yrtrJ5rQm2"
                 target="_blank"
                 rel="noreferrer"
               >
-                <DiscordLogo className="text-[#64748B] dark:text-gray-100" />
+                <DiscordLogo className="text-prog-gray-500 dark:text-gray-100" />
               </Link>
             </div>
-            <p className="flex w-full flex-col justify-center text-center text-xs text-gray-500 dark:text-gray-100 sm:w-80 sm:text-sm sm:leading-4 md:text-left">
+            <p className="flex w-full flex-col justify-center text-center text-xs text-gray-500 sm:w-80 sm:text-sm sm:leading-4 md:text-left dark:text-gray-100">
               <span>© 2019-{currentYear} the PROGRAMMING.IN.TH team</span>
               <span>
                 We are open source on{' '}

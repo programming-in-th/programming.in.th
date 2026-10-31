@@ -26,7 +26,7 @@ function PathPopover({ paths, index }: { paths: string[][][]; index: number }) {
           <Link
             href={`/archive/${path[0]}`}
             key={path.join('/')}
-            className="py-1 pl-3 pr-6 text-gray-500 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-slate-600"
+            className="py-1 pr-6 pl-3 text-gray-500 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-slate-600"
           >
             {path[1]}
           </Link>
@@ -71,7 +71,7 @@ export default function Breadcrumb({
           />
         </svg>
       </Link>
-      <div className="box-content flex h-6 grow items-center gap-1 rounded-sm bg-gray-50 px-2 py-1 dark:bg-slate-700">
+      <div className="box-content flex h-6 grow items-center gap-1 rounded-xs bg-gray-50 px-2 py-1 dark:bg-slate-700">
         <Link
           href="/archive"
           className="rounded-md px-1 text-gray-500 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-slate-600"

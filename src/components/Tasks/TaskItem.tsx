@@ -70,7 +70,7 @@ export const TaskItem = (
                   <div className="relative w-full">
                     <div className="absolute h-1.5 w-full animate-pulse rounded-full bg-gray-400" />
                   </div>
-                  <div className="h-4 w-20 animate-pulse rounded-sm bg-gray-400" />
+                  <div className="h-4 w-20 animate-pulse rounded-xs bg-gray-400" />
                 </>
               )}
             </div>
@@ -174,7 +174,7 @@ export const TaskItem = (
                   <div className="relative w-full">
                     <div className="absolute h-1.5 w-full animate-pulse rounded-full bg-gray-400" />
                   </div>
-                  <div className="mt-2 h-3.5 w-20 animate-pulse rounded-sm bg-gray-400" />
+                  <div className="mt-2 h-3.5 w-20 animate-pulse rounded-xs bg-gray-400" />
                 </>
               )}
             </div>
