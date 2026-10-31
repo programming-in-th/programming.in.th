@@ -16,5 +16,6 @@ export default withBundleAnalyzer({
       }
     ]
   },
-  output: 'standalone'
+  output: 'standalone',
+  transpilePackages: ['next-mdx-remote']
 })
