@@ -66,7 +66,7 @@ export async function GET(
         instruction:
           mdType === 'RAW'
             ? assessment?.instruction
-            : await mdxToHtml(assessment?.instruction)
+            : await mdxToHtml(assessment?.instruction, 'md')
       }),
       tasks: assessment?.tasks.map(task => task.task)
     })
@@ -98,7 +98,7 @@ export async function GET(
       instruction:
         mdType === 'RAW'
           ? assessment?.instruction
-          : await mdxToHtml(assessment?.instruction)
+          : await mdxToHtml(assessment?.instruction, 'md')
     }),
     tasks: assessment?.tasks.map(task => task.task)
   })

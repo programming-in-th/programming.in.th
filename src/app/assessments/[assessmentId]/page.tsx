@@ -80,7 +80,7 @@ export default async function Assessment(
   const assessment = {
     ...prismaAssessment,
     instruction: prismaAssessment.instruction
-      ? await mdxToHtml(prismaAssessment.instruction)
+      ? await mdxToHtml(prismaAssessment.instruction, 'md')
       : null,
     tasks: prismaAssessment.tasks.map(edge => edge.task),
     open: prismaAssessment.open.toISOString(),

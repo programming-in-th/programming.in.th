@@ -6,7 +6,8 @@ import slug from 'rehype-slug'
 import gfm from 'remark-gfm'
 import math from 'remark-math'
 
-export async function mdxToHtml(source: string) {
+// Use 'md' for content non-admins write: 'mdx' also compiles raw JSX/HTML.
+export async function mdxToHtml(source: string, format: 'mdx' | 'md' = 'mdx') {
   const mdxSource = await serialize(source, {
     mdxOptions: {
       remarkPlugins: [gfm, math],
@@ -23,7 +24,7 @@ export async function mdxToHtml(source: string) {
         katex,
         highlight
       ],
-      format: 'mdx'
+      format
     }
   })
 
