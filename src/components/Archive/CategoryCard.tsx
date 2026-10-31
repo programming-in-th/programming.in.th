@@ -37,7 +37,7 @@ export default function CategoryCard({
       className="flex"
     >
       <div
-        className="grid flex-1 grid-cols-2 items-center gap-6 rounded-lg p-5 dark:bg-slate-700"
+        className="grid flex-1 grid-cols-2 items-center gap-6 rounded-lg border border-gray-200 p-5 dark:border-transparent dark:bg-slate-700"
         style={{
           boxShadow:
             '0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.06)'
@@ -71,7 +71,7 @@ export default function CategoryCard({
           </div>
         </div>
         <div>
-          <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-gray-100">
+          <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-gray-200">
             <div
               className="h-2 rounded-full bg-prog-primary-500"
               style={{ width: `${Math.round(((solved ?? 0) / total) * 100)}%` }}

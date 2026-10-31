@@ -156,7 +156,7 @@ const SubmitForm = ({
       <div className="flex justify-end space-x-2 border-t px-4 py-2 dark:border-t-slate-700">
         <button
           type="button"
-          className="rounded-md border border-gray-100 px-9 py-2 text-gray-400 transition hover:bg-gray-100 dark:border-slate-700 dark:text-gray-200 dark:hover:bg-slate-700"
+          className="rounded-md border border-gray-200 px-9 py-2 text-gray-400 transition hover:bg-gray-100 dark:border-slate-700 dark:text-gray-200 dark:hover:bg-slate-700"
           onClick={() => setOpen(false)}
         >
           Cancel
@@ -201,7 +201,7 @@ export default function EditAssessment({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="bg-opacity-75 dark:bg-opacity-75 fixed inset-0 bg-gray-500 transition-opacity dark:bg-slate-700" />
+          <div className="fixed inset-0 bg-gray-500/75 transition-opacity dark:bg-slate-700/75" />
         </TransitionChild>
 
         <div className="fixed inset-0 overflow-hidden">

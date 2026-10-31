@@ -123,7 +123,7 @@ export default function ViewAssessment(
           {assessment?.tasks.map(({ title, id }) => (
             <div
               key={id}
-              className="flex w-full rounded-xl border border-gray-100 bg-white px-6 py-3 font-display shadow-md transition dark:border-2 dark:border-slate-700 dark:bg-slate-700"
+              className="flex w-full rounded-xl border border-gray-200 bg-white px-6 py-3 font-display shadow-md transition dark:border-2 dark:border-slate-700 dark:bg-slate-700"
             >
               <div className="flex w-full flex-col items-start">
                 <p className="text-sm font-medium text-gray-500 dark:text-gray-200">

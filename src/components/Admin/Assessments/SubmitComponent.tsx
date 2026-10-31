@@ -36,7 +36,7 @@ const SubmitComponent = () => {
       <div className="flex justify-end space-x-2 py-2">
         <button
           type="button"
-          className="rounded-md border border-gray-100 px-9 py-2 text-gray-400 transition hover:bg-gray-100 dark:border-slate-700 dark:text-gray-200 dark:hover:bg-slate-700"
+          className="rounded-md border border-gray-200 px-9 py-2 text-gray-400 transition hover:bg-gray-100 dark:border-slate-700 dark:text-gray-200 dark:hover:bg-slate-700"
           disabled={isSubmitting}
           onClick={closedBar}
         >

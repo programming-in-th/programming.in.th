@@ -34,7 +34,7 @@ export const TaskItem = (
       <div className="px-4 py-2 md:hidden">
         <Link
           href={`/tasks/${task.id}`}
-          className="flex w-full flex-col divide-y divide-gray-200 rounded-xl px-6 py-1 shadow-md transition dark:bg-slate-700"
+          className="flex w-full flex-col divide-y divide-gray-200 rounded-xl border border-gray-200 px-6 py-1 shadow-md transition dark:divide-slate-600 dark:border-transparent dark:bg-slate-700"
         >
           <div className="flex flex-col p-2">
             <p className="text-gray-500 dark:text-gray-200">{task.title}</p>
@@ -111,7 +111,7 @@ export const TaskItem = (
       <div className="group hidden w-full items-center justify-between py-1.5 md:flex">
         <Link
           href={`/tasks/${task.id}`}
-          className="flex w-full rounded-xl px-6 py-3 font-display shadow-md transition group-hover:shadow-lg dark:bg-slate-700"
+          className="flex w-full rounded-xl border border-gray-200 px-6 py-3 font-display shadow-md transition group-hover:shadow-lg dark:border-transparent dark:bg-slate-700"
         >
           <div className="flex w-full flex-col">
             <p className="text-sm font-medium text-gray-500 dark:text-gray-100">

@@ -71,7 +71,7 @@ export default function Breadcrumb({
           />
         </svg>
       </Link>
-      <div className="box-content flex h-6 grow items-center gap-1 rounded-xs bg-gray-50 px-2 py-1 dark:bg-slate-700">
+      <div className="box-content flex h-6 grow items-center gap-1 rounded-xs bg-gray-100 px-2 py-1 dark:bg-slate-700">
         <Link
           href="/archive"
           className="rounded-md px-1 text-gray-500 hover:bg-gray-200 dark:text-gray-200 dark:hover:bg-slate-600"

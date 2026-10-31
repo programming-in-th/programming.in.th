@@ -23,7 +23,7 @@ const TaskCard = ({
   return (
     <Link
       href={`${id}/${task.id}`}
-      className="flex w-full rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:bg-slate-700"
+      className="flex w-full rounded-xl border border-gray-200 px-6 py-3 font-display shadow-md transition hover:shadow-lg dark:border-transparent dark:bg-slate-700"
     >
       <div className="flex w-full flex-col">
         <p className="text-sm font-medium text-gray-500 dark:text-gray-100">
@@ -112,7 +112,7 @@ export default async function Assessment(
         )}
 
         {assessment.instruction && (
-          <div className="prose mt-8 w-full max-w-none dark:text-gray-100">
+          <div className="prose mt-8 w-full max-w-none dark:prose-invert dark:prose-headings:text-white">
             {typeof assessment.instruction === 'object' && (
               <MDXRemote {...assessment.instruction} />
             )}

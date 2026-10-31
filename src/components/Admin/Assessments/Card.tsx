@@ -27,7 +27,7 @@ const Card = ({
   const [openDelete, setOpenDelete] = useState<boolean>(false)
   return (
     <IsLink
-      className="flex flex-col justify-between space-y-2 rounded-lg border border-gray-100 shadow-md dark:border-none dark:bg-slate-700"
+      className="flex flex-col justify-between space-y-2 rounded-lg border border-gray-200 shadow-md dark:border-none dark:bg-slate-700"
       href={`/admin/assessments/${assessment.id}`}
       isLink={isLink}
     >
@@ -43,7 +43,7 @@ const Card = ({
             {assessment.description}
           </p>
         </div>
-        <div className="flex w-full justify-between rounded-b-lg bg-gray-50 px-10 py-4 dark:bg-slate-600">
+        <div className="flex w-full justify-between rounded-b-lg bg-gray-100 px-10 py-4 dark:bg-slate-600">
           <div className="flex space-x-6">
             <div className="flex h-auto flex-col justify-between">
               <p className="text-sm text-gray-400 dark:text-gray-300">{`Open: ${dayjs(

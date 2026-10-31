@@ -57,7 +57,7 @@ const getColumn = (
       <div className="flex h-auto w-full items-center justify-center text-sm">
         <div className="flex h-auto w-full flex-col items-center justify-around">
           <div className="relative h-full w-full">
-            <div className="absolute h-1.5 w-full rounded-full bg-gray-100" />
+            <div className="absolute h-1.5 w-full rounded-full bg-gray-200" />
             <div
               className={`absolute h-1.5 rounded-full ${
                 sub.score === task.fullScore ? 'bg-blue-500' : 'bg-gray-500'
@@ -159,7 +159,7 @@ export const Card = ({
       <button
         type="button"
         onClick={() => (isViewing ? setOpenModal(true) : null)}
-        className="hidden w-full cursor-pointer flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg md:flex md:flex-row md:px-0 dark:bg-slate-700"
+        className="hidden w-full cursor-pointer flex-col rounded-xl border border-gray-200 px-6 py-3 font-display shadow-md transition hover:shadow-lg md:flex md:flex-row md:px-0 dark:border-transparent dark:bg-slate-700"
       >
         <>
           <div className="flex min-w-0 flex-row">
@@ -199,7 +199,7 @@ export const Card = ({
       <IsLink
         href={`/submissions/${sub.id}`}
         isLink={isViewing}
-        className="flex w-full flex-col rounded-xl px-6 py-3 font-display shadow-md transition hover:shadow-lg md:hidden md:flex-row md:px-0 dark:bg-slate-700"
+        className="flex w-full flex-col rounded-xl border border-gray-200 px-6 py-3 font-display shadow-md transition hover:shadow-lg md:hidden md:flex-row md:px-0 dark:border-transparent dark:bg-slate-700"
       >
         <>
           {columns.map(column => (

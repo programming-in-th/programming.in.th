@@ -24,7 +24,7 @@ export default function Assessments() {
   return (
     <div className="flex w-full max-w-3xl flex-col space-y-4 py-4">
       <button
-        className="flex h-40 items-center justify-center space-x-2 rounded-lg border border-gray-100 shadow-md transition hover:bg-gray-100 dark:border-none dark:bg-slate-700 dark:hover:bg-slate-600"
+        className="flex h-40 items-center justify-center space-x-2 rounded-lg border border-gray-200 shadow-md transition hover:bg-gray-50 dark:border-none dark:bg-slate-700 dark:hover:bg-slate-600"
         onClick={() => setOpenCreate(true)}
       >
         <svg

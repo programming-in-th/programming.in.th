@@ -17,7 +17,7 @@ const TaskCard = ({ task }: { task: TaskModel }) => {
   const [openDelete, setOpenDelete] = useState<boolean>(false)
   return (
     <>
-      <div className="flex w-full rounded-xl border border-gray-100 px-6 py-3 font-display shadow-md transition group-hover:shadow-lg dark:border-0 dark:border-slate-600 dark:bg-slate-700">
+      <div className="flex w-full rounded-xl border border-gray-200 px-6 py-3 font-display shadow-md transition group-hover:shadow-lg dark:border-0 dark:border-slate-600 dark:bg-slate-700">
         <div className="flex w-full flex-col">
           <p className="text-sm font-medium text-gray-500 dark:text-gray-100">
             {task.title}
@@ -147,7 +147,7 @@ export default function AdminTasks() {
     <>
       <div className="flex w-full max-w-3xl flex-col">
         <div
-          className="my-6 flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md border border-gray-100 py-10 shadow-md transition hover:bg-gray-50 dark:border-none dark:bg-slate-700 dark:hover:bg-slate-600"
+          className="my-6 flex w-full cursor-pointer items-center justify-center space-x-2 rounded-md border border-gray-200 py-10 shadow-md transition hover:bg-gray-50 dark:border-none dark:bg-slate-700 dark:hover:bg-slate-600"
           onClick={() => setOpenNewTask(true)}
         >
           <svg

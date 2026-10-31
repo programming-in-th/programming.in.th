@@ -69,7 +69,7 @@ export const Navbar = () => {
           focus
           className="absolute inset-x-0 top-0 z-50 origin-top transform p-2 transition md:hidden"
         >
-          <div className="ring-opacity-5 overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black dark:bg-slate-800 dark:drop-shadow-2xl">
+          <div className="overflow-hidden rounded-lg bg-white shadow-md ring-1 ring-black/5 dark:bg-slate-800 dark:drop-shadow-2xl">
             <div className="flex items-center justify-between px-5 pt-4">
               <div className="dark:hidden">
                 <Logo />

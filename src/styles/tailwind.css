@@ -19,6 +19,15 @@
     border-color: var(--color-gray-200, currentcolor);
   }
 
+  /* gray-200 reads as a harsh white line on slate dark surfaces. */
+  [data-theme='dark'] *,
+  [data-theme='dark'] ::after,
+  [data-theme='dark'] ::before,
+  [data-theme='dark'] ::backdrop,
+  [data-theme='dark'] ::file-selector-button {
+    border-color: var(--color-slate-600, currentcolor);
+  }
+
   /* v4 preflight makes these transparent; v3 kept the browser's field color. */
   input,
   select,

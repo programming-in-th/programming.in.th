@@ -21,7 +21,7 @@ export const DesktopProfile = () => {
       {status !== 'loading' &&
         (session?.user ? (
           <Popover className="relative hidden md:block">
-            <Popover.Button className="hover:bg-opacity-50 flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-slate-300 transition-colors hover:bg-slate-300 active:ring-1">
+            <Popover.Button className="flex h-10 w-10 items-center justify-center rounded-full bg-transparent ring-slate-300 transition-colors hover:bg-slate-300/50 active:ring-1">
               <Image
                 src={session?.user.image ?? '/assets/img/profile/default.svg'}
                 alt={session?.user.name ?? 'Default profile image'}

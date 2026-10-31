@@ -18,7 +18,7 @@ export const Footer = () => {
         <div className="flex w-full max-w-md flex-col items-center justify-between space-y-6 p-8 font-display md:flex-row md:space-y-0">
           <FooterLinks />
         </div>
-        <div className="flex w-full justify-center border-y-[0.5px]">
+        <div className="flex w-full justify-center border-y-[0.5px] dark:border-slate-500">
           <div className="flex max-w-sm flex-col items-center py-12">
             <p className="my-2 font-bold text-gray-500 dark:text-gray-100">
               PROGRAMMING.IN.TH
@@ -32,7 +32,7 @@ export const Footer = () => {
           </div>
         </div>
         <div className="flex w-full flex-col justify-between font-display md:flex-row md:justify-between md:py-10">
-          <div className="flex flex-col items-center justify-center space-y-4 border-b-[0.5px] py-6 sm:space-x-4 md:flex-row md:justify-start md:space-y-0 md:border-none md:py-0">
+          <div className="flex flex-col items-center justify-center space-y-4 border-b-[0.5px] py-6 sm:space-x-4 md:flex-row md:justify-start md:space-y-0 md:border-none md:py-0 dark:border-slate-500">
             <div className="flex space-x-2">
               <Link
                 href="https://www.facebook.com/programming.in.th/"

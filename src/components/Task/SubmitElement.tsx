@@ -63,7 +63,7 @@ export const SubmitElement = ({
   }
 
   return (
-    <div className="flex w-full flex-col rounded-md text-prog-gray-500 shadow-md dark:bg-slate-700 dark:text-gray-100">
+    <div className="flex w-full flex-col overflow-hidden rounded-md border border-gray-200 text-prog-gray-500 shadow-md dark:border-transparent dark:bg-slate-700 dark:text-gray-100">
       <div className="bg-white px-8 py-4 dark:bg-slate-700">
         <div className="mb-6 flex items-center justify-between gap-4">
           <h2 className="text-lg">Submit</h2>

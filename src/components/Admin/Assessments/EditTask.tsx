@@ -29,7 +29,7 @@ export default function EditTask({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="bg-opacity-75 dark:bg-opacity-75 fixed inset-0 bg-gray-500 transition-opacity dark:bg-slate-700" />
+          <div className="fixed inset-0 bg-gray-500/75 transition-opacity dark:bg-slate-700/75" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-hidden">

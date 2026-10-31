@@ -10,7 +10,7 @@ export const FeatureCard = ({
   Icon: (_props: { className: string }) => ReactNode
 }) => {
   return (
-    <article className="relative rounded-lg bg-white py-6 text-center text-prog-gray-500 shadow-lg dark:bg-slate-700">
+    <article className="relative rounded-lg border border-gray-200 bg-white py-6 text-center text-prog-gray-500 shadow-lg dark:border-transparent dark:bg-slate-700">
       <div className="absolute -top-6 left-1/2 inline-block -translate-x-1/2 rounded-md bg-prog-primary-500 p-4 shadow-lg">
         <Icon className="h-6 w-6 text-white" />
       </div>

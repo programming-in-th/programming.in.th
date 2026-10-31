@@ -50,7 +50,7 @@ export const Accordion = ({
   return (
     <div className="my-1 w-full rounded-lg bg-white dark:bg-slate-600">
       <button
-        className="flex w-full items-center justify-between rounded-lg border-b border-gray-300 bg-white px-8 py-2 dark:border-slate-600 dark:bg-slate-500"
+        className="flex w-full items-center justify-between rounded-lg border-b border-gray-300 bg-gray-50 px-8 py-2 dark:border-slate-600 dark:bg-slate-500"
         onClick={() => setExpand(e => !e)}
       >
         <div className="flex items-center dark:text-gray-100">

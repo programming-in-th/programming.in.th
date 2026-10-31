@@ -16,7 +16,7 @@ const Card = ({
 }) => (
   <IsLink
     href={`/assessments/${assessment.id}`}
-    className="flex flex-col justify-between space-y-2 rounded-lg shadow-md dark:bg-slate-700"
+    className="flex flex-col justify-between space-y-2 rounded-lg border border-gray-200 shadow-md dark:border-transparent dark:bg-slate-700"
     isLink={isLink}
   >
     <>
@@ -29,7 +29,7 @@ const Card = ({
         </div>
         <p className="w-2/3">{assessment.description}</p>
       </div>
-      <div className="flex w-full justify-between rounded-b-lg bg-gray-50 px-10 py-4 dark:bg-slate-600">
+      <div className="flex w-full justify-between rounded-b-lg bg-gray-100 px-10 py-4 dark:bg-slate-600">
         <div className="flex h-auto flex-col justify-between">
           <p className="text-sm text-gray-400 dark:text-gray-300">{`Open: ${dayjs(
             assessment.open
@@ -38,7 +38,7 @@ const Card = ({
             assessment.close
           ).format('DD MMM YYYY HH:mm:ss')}`}</p>
         </div>
-        <div className="flex divide-x">
+        <div className="flex divide-x dark:divide-slate-500">
           <div className="flex flex-col items-center px-4">
             <p className="text-sm text-gray-400 dark:text-gray-300">Solved</p>
             <p className="text-base text-gray-500 dark:text-white">

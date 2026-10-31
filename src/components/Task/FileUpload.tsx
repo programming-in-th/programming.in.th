@@ -59,7 +59,7 @@ export const FileUpload = ({
           (isFocused || isDragAccept) && 'border-blue-300',
           fileRejected && 'border-red-400',
           isDragActive
-            ? 'bg-opacity-50 bg-slate-800 backdrop-blur-xs'
+            ? 'bg-slate-800/50 backdrop-blur-xs'
             : 'hover:bg-slate-50 dark:hover:bg-slate-600'
         )}
       >
