@@ -125,7 +125,7 @@
     "tailwindcss": "3.4.19",
     "ts-node": "10.9.2",
     "typescript": "5.9.3",
-    "vitest": "3.2.7"
+    "vitest": "4.1.11"
   },
   "pnpm": {
     "overrides": {
