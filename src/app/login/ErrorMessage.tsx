@@ -2,10 +2,8 @@
 
 import { useSearchParams } from 'next/navigation'
 
-import { SignInErrorTypes } from 'next-auth/core/pages/signin'
-
 // Direct copy from https://github.com/nextauthjs/next-auth/blob/main/packages/next-auth/src/core/pages/signin.tsx
-const errors: Record<SignInErrorTypes, string> = {
+const errors = {
   Signin: 'Try signing in with a different account.',
   OAuthSignin: 'Try signing in with a different account.',
   OAuthCallback: 'Try signing in with a different account.',
@@ -20,6 +18,8 @@ const errors: Record<SignInErrorTypes, string> = {
   SessionRequired: 'Please sign in to access this page.',
   default: 'Unable to sign in.'
 }
+
+type SignInErrorTypes = keyof typeof errors
 
 export const ErrorMessage = () => {
   const searchParams = useSearchParams()
