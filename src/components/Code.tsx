@@ -5,8 +5,11 @@ import Highlight, { Language, Prism } from 'prism-react-renderer'
   }
 ).Prism = Prism
 
+// Must run after the global Prism above is set, which imports would hoist past.
+/* eslint-disable @typescript-eslint/no-require-imports */
 require('prismjs/components/prism-rust')
 require('prismjs/components/prism-java')
+/* eslint-enable @typescript-eslint/no-require-imports */
 
 export interface CodeBlockProps {
   code: string
