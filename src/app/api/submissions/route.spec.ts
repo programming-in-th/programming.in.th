@@ -88,8 +88,22 @@ describe('GET /api/submissions', () => {
     await get('filter=task&taskId=t1')
 
     expect(whereArg()).toEqual({ userId: 'u1' })
+  })
 
+  it('limits owners of a private task to the assessments they own', async () => {
+    prisma.task.findUnique.mockResolvedValue({ id: 't1', private: true })
+    getServerUser.mockResolvedValue({ id: 'u1' })
     perms.ownerOnTask.mockResolvedValue(true)
+    await get('filter=task&taskId=t1&filter=assessment&assessmentId=other')
+
+    expect(whereArg()).toEqual({
+      OR: [
+        { userId: 'u1' },
+        { assessment: { owners: { some: { userId: 'u1' } } } }
+      ]
+    })
+
+    getServerUser.mockResolvedValue({ id: 'admin', admin: true })
     await get('filter=task&taskId=t1')
 
     expect(whereArg()).toBeUndefined()

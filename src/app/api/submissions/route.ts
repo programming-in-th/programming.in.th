@@ -71,6 +71,19 @@ export async function GET(req: NextRequest) {
       const isAdminOrOwner =
         user.admin || (await checkOwnerPermissionOnTask(user.id, task.id))
 
+      // Owners share private tasks across assessments; only show them the
+      // assessments they own, plus their own submissions.
+      const scope = user.admin
+        ? undefined
+        : isAdminOrOwner
+          ? {
+              OR: [
+                { userId: user.id },
+                { assessment: { owners: { some: { userId: user.id } } } }
+              ]
+            }
+          : { userId: user.id }
+
       const infiniteSubmission = await getInfiniteSubmissions(
         filterArr,
         limit,
@@ -84,7 +97,7 @@ export async function GET(req: NextRequest) {
               ? userId
               : ''
         },
-        isAdminOrOwner ? undefined : { userId: user.id }
+        scope
       )
 
       return json(infiniteSubmission)
