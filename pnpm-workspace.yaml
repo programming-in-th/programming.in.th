@@ -1,0 +1,2 @@
+# Skip versions published less than 2 days ago (minutes).
+minimumReleaseAge: 2880
