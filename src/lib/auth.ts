@@ -39,7 +39,9 @@ export const authOptions: NextAuthOptions = {
         return {
           id: profile.sub,
           name: profile.name,
-          username: profile.name,
+          // The display name is free text and username is unique across
+          // providers, so derive it from the stable Google id instead.
+          username: `google-${profile.sub}`,
           email: profile.email,
           image: profile.picture
         }

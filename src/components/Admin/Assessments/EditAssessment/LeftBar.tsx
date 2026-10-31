@@ -7,6 +7,16 @@ import { IUser } from '@/types/users'
 
 import { IAdminAssessment, IAssessmentForm } from './types'
 
+// Usernames of newer Google accounts are opaque ids, so show the name too.
+const UserLabel = ({ user }: { user: IUser }) => (
+  <p>
+    {user.username}
+    {user.name && user.name !== user.username && (
+      <span className="text-gray-500"> ({user.name})</span>
+    )}
+  </p>
+)
+
 export const LeftBar = ({
   register,
   assessment,
@@ -82,7 +92,7 @@ export const LeftBar = ({
               if (value) {
                 const Fuse = (await import('fuse.js')).default
                 const fuse = new Fuse(users, {
-                  keys: ['username'],
+                  keys: ['username', 'name'],
                   threshold: 0.25
                 })
                 setAssignUser(fuse.search(value).map(val => val.item))
@@ -102,7 +112,7 @@ export const LeftBar = ({
                   {...register(`assign-${user.id}`)}
                   className="h-4 w-4 rounded-sm border-gray-300"
                 />
-                <p>{user.username}</p>
+                <UserLabel user={user} />
               </div>
             ))}
           </div>
@@ -120,7 +130,7 @@ export const LeftBar = ({
               if (value) {
                 const Fuse = (await import('fuse.js')).default
                 const fuse = new Fuse(users, {
-                  keys: ['username'],
+                  keys: ['username', 'name'],
                   threshold: 0.25
                 })
                 setAssignOwnUser(fuse.search(value).map(val => val.item))
@@ -140,7 +150,7 @@ export const LeftBar = ({
                   {...register(`assignOwn-${user.id}`)}
                   className="h-4 w-4 rounded-sm border-gray-300"
                 />
-                <p>{user.username}</p>
+                <UserLabel user={user} />
               </div>
             ))}
           </div>
