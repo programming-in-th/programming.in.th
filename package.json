@@ -1,7 +1,7 @@
 {
   "name": "programming.in.th",
   "private": true,
-  "packageManager": "pnpm@10.21.0",
+  "packageManager": "pnpm@10.34.9",
   "engines": {
     "node": "^24.11"
   },
@@ -32,8 +32,8 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.1159.0",
-    "@aws-sdk/s3-request-presigner": "3.1159.0",
+    "@aws-sdk/client-s3": "3.1161.0",
+    "@aws-sdk/s3-request-presigner": "3.1161.0",
     "@codemirror/lang-cpp": "6.0.3",
     "@codemirror/lang-java": "6.0.2",
     "@codemirror/lang-python": "6.2.1",
@@ -63,7 +63,7 @@
     "csstype": "3.2.3",
     "dayjs": "1.11.23",
     "fuse.js": "7.5.0",
-    "katex": "0.16.47",
+    "katex": "0.19.1",
     "motion": "12.43.0",
     "next": "15.5.28",
     "next-auth": "4.24.15",
@@ -117,10 +117,10 @@
     "lint-staged": "17.6.0",
     "postcss": "8.5.32",
     "prettier": "3.9.10",
-    "prettier-plugin-tailwindcss": "0.6.14",
+    "prettier-plugin-tailwindcss": "0.8.1",
     "prisma": "6.19.3",
     "prisma-dbml-generator": "0.12.0",
-    "sass": "1.107.0",
+    "sass": "1.107.1",
     "tailwindcss": "3.4.19",
     "ts-node": "10.9.2",
     "typescript": "6.0.3",
