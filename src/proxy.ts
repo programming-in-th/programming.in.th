@@ -1,7 +1,7 @@
 import type { NextRequest } from 'next/server'
 import { NextResponse } from 'next/server'
 
-export default function middleware(req: NextRequest) {
+export default function proxy(req: NextRequest) {
   if (
     req.cookies.get('next-auth.session-token') ||
     req.cookies.get('__Secure-next-auth.session-token')
