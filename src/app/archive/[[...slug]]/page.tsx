@@ -44,7 +44,7 @@ export default async function Archive(
 
 async function getSolved() {
   const rawSolved =
-    await prisma.$queryRaw`SELECT COUNT(DISTINCT submission.user_id), submission.task_id FROM submission INNER JOIN task ON submission.task_id = task.id WHERE submission.score = task.full_score GROUP BY submission.task_id`
+    await prisma.$queryRaw`SELECT COUNT(DISTINCT submission.user_id), submission.task_id FROM submission INNER JOIN task ON submission.task_id = task.id WHERE submission.score = task.full_score AND NOT task.private GROUP BY submission.task_id`
 
   return JSON.parse(
     JSON.stringify(rawSolved, (_, v) =>
