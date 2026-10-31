@@ -92,7 +92,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.5",
-    "@octokit/types": "15.0.2",
+    "@octokit/types": "18.0.0",
     "@playwright/test": "1.64.1",
     "@tailwindcss/typography": "0.5.20",
     "@testing-library/jest-dom": "7.0.1",
