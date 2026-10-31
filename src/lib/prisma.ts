@@ -1,3 +1,5 @@
+import { PrismaPg } from '@prisma/adapter-pg'
+
 import { PrismaClient } from '@/prisma/client'
 
 declare global {
@@ -7,11 +9,7 @@ declare global {
 const prisma =
   global.prisma ||
   new PrismaClient({
-    datasources: {
-      db: {
-        url: process.env.DATABASE_URL
-      }
-    }
+    adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
   })
 
 if (process.env.NODE_ENV !== 'production') global.prisma = prisma

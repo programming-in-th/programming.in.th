@@ -3,7 +3,6 @@
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 generator client {
@@ -14,10 +13,6 @@ generator client {
   moduleFormat           = "esm"
   generatedFileExtension = "ts"
   importFileExtension    = "ts"
-}
-
-generator dbml {
-  provider = "prisma-dbml-generator"
 }
 
 model Account {

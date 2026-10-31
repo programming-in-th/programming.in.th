@@ -25,6 +25,7 @@ COPY package.json pnpm-lock.yaml* pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 
 COPY prisma ./prisma
+COPY prisma.config.ts ./
 RUN pnpm prisma generate
 
 COPY next.config.mjs postcss.config.js tailwind.config.js tsconfig.json ./
