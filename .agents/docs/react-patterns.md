@@ -12,6 +12,7 @@ export function TaskCard({ task }: { task: Task }) {
 ```
 
 **Use `'use client'` only when required**:
+
 - Event handlers (`onClick`, `onSubmit`)
 - React hooks (`useState`, `useEffect`)
 - Browser APIs (`localStorage`, `window`)

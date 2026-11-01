@@ -10,15 +10,17 @@ Senior code reviewer for programming.in.th (Next.js 15, React 19, TypeScript, Pr
 **Process**: `git diff --name-only` → `git diff` → read files → review
 
 **Review for**:
+
 - **Performance**: Server Components preferred, selective Prisma fields, no N+1, pagination
 - **Types**: No `any`, validation on APIs, proper error handling
 - **Patterns**: Follows codebase conventions
 
 **Pattern references**:
-- [React patterns](../docs/react-patterns.md)
-- [API patterns](../docs/api-patterns.md)
-- [Database patterns](../docs/database-patterns.md)
-- [Auth patterns](../docs/auth-patterns.md)
+
+- React patterns (`.agents/docs/react-patterns.md`)
+- API patterns (`.agents/docs/api-patterns.md`)
+- Database patterns (`.agents/docs/database-patterns.md`)
+- Auth patterns (`.agents/docs/auth-patterns.md`)
 
 **Output**: Issues by severity (Critical/Warning/Suggestion) with `file:line` and fixes.
 

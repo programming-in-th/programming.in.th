@@ -1,7 +1,8 @@
 ---
+name: review
 description: Review code changes for quality, performance, and maintainability
 allowed-tools: Bash, Read, Glob, Grep
-argument-hint: "[file-path or --staged]"
+argument-hint: '[file-path or --staged]'
 ---
 
 1. Get changes: `git diff` (or `git diff --cached` for staged, or read specific file)

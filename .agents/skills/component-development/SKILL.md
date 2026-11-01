@@ -4,15 +4,17 @@ description: Use when creating or modifying React components. Ensures proper Ser
 allowed-tools: Read, Edit, Write, Glob, Grep
 ---
 
-See [React patterns](../../docs/react-patterns.md) for full reference.
+See React patterns (`.agents/docs/react-patterns.md`) for full reference.
 
 **Quick rules**:
+
 - Default to Server Components (no directive)
 - Use `'use client'` only for: `onClick`, `useState`, `useEffect`, browser APIs
 - Push client boundary to smallest component
 - Tailwind only, use `dark:` variants
 
 **Example**:
+
 ```tsx
 // Server Component (default)
 export function TaskCard({ task }: { task: Task }) {

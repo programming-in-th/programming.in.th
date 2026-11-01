@@ -12,26 +12,34 @@ import { Elysia, t } from 'elysia'
 import { prisma } from '@/lib/prisma'
 
 const app = new Elysia()
-  .get('/tasks/:id', async ({ params, query, status }) => {
-    const task = await prisma.task.findUnique({
-      where: { id: params.id },
-      select: { id: true, title: true }
-    })
-    if (!task) return status(404, { error: 'Not found' })
-    return task
-  }, {
-    params: t.Object({ id: t.String() }),
-    query: t.Object({ limit: t.Optional(t.Numeric()) })
-  })
-  .post('/tasks', async ({ body, status }) => {
-    const task = await prisma.task.create({ data: body })
-    return status(201, task)
-  }, {
-    body: t.Object({
-      title: t.String({ minLength: 1 }),
-      fullScore: t.Number({ minimum: 0 })
-    })
-  })
+  .get(
+    '/tasks/:id',
+    async ({ params, query, status }) => {
+      const task = await prisma.task.findUnique({
+        where: { id: params.id },
+        select: { id: true, title: true }
+      })
+      if (!task) return status(404, { error: 'Not found' })
+      return task
+    },
+    {
+      params: t.Object({ id: t.String() }),
+      query: t.Object({ limit: t.Optional(t.Numeric()) })
+    }
+  )
+  .post(
+    '/tasks',
+    async ({ body, status }) => {
+      const task = await prisma.task.create({ data: body })
+      return status(201, task)
+    },
+    {
+      body: t.Object({
+        title: t.String({ minLength: 1 }),
+        fullScore: t.Number({ minimum: 0 })
+      })
+    }
+  )
 ```
 
 ## Legacy Next.js Routes (Zod)
@@ -50,6 +58,7 @@ if (!result.success) {
 ## Error Responses
 
 Use consistent HTTP status codes:
+
 - `400` - Invalid input
 - `401` - Unauthorized (not logged in)
 - `403` - Forbidden (logged in but not allowed)

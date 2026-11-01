@@ -4,15 +4,17 @@ description: Use when modifying Prisma schema or database queries. Ensures prope
 allowed-tools: Read, Edit, Write, Glob, Grep, Bash
 ---
 
-See [Database patterns](../../docs/database-patterns.md) for full reference.
+See Database patterns (`.agents/docs/database-patterns.md`) for full reference.
 
 **Schema changes**:
+
 ```bash
 pnpm prisma migrate dev --name descriptive_name
 pnpm check-types
 ```
 
 **Query rules**:
+
 - Always `import { prisma } from '@/lib/prisma'`
 - Always use `select` for specific fields
 - Always paginate with `take`/`skip`

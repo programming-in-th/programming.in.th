@@ -61,6 +61,7 @@ const submissions = await prisma.submission.findMany({
 ## Indexes
 
 Add `@@index([field])` for columns used in:
+
 - `WHERE` clauses
 - `ORDER BY` clauses
 - Foreign key lookups

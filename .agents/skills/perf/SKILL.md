@@ -1,10 +1,12 @@
 ---
+name: perf
 description: Analyze a component or page for performance issues
 allowed-tools: Read, Glob, Grep, Bash
-argument-hint: "<file-path>"
+argument-hint: '<file-path>'
 ---
 
-Analyze `$1` for:
+Analyze the file passed as the argument (`$ARGUMENTS`) for:
+
 - **React**: Unnecessary `'use client'`? Missing memoization? Re-render issues?
 - **Data**: Selective fields? N+1 queries? Pagination? Caching (ISR/SWR)?
 - **Bundle**: Optimized imports? Next.js `<Image>`?
