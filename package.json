@@ -1,7 +1,7 @@
 {
   "name": "programming.in.th",
   "private": true,
-  "packageManager": "pnpm@10.21.0",
+  "packageManager": "pnpm@10.34.9",
   "engines": {
     "node": "^24.11"
   },
@@ -29,8 +29,8 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@aws-sdk/client-s3": "3.1159.0",
-    "@aws-sdk/s3-request-presigner": "3.1159.0",
+    "@aws-sdk/client-s3": "3.1161.0",
+    "@aws-sdk/s3-request-presigner": "3.1161.0",
     "@codemirror/lang-cpp": "6.0.3",
     "@codemirror/lang-java": "6.0.2",
     "@codemirror/lang-python": "6.2.1",
@@ -57,7 +57,7 @@
     "dayjs": "1.11.23",
     "fuse.js": "7.5.0",
     "katex": "0.19.1",
-    "motion": "14.7.1",
+    "motion": "14.9.0",
     "next": "16.4.3",
     "next-auth": "4.24.15",
     "next-mdx-remote": "6.0.0",
